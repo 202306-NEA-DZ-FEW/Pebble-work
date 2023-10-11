@@ -19,16 +19,18 @@
         "prepare": "husky install"
     },
     "dependencies": {
+        "autoprefixer": "^10.4.16",
         "clsx": "^1.2.1",
         "date-fns": "^2.29.1",
         "eslint-plugin-jest": "^26.6.0",
         "i18next": "^21.9.0",
-        "next": "^13.2.4",
+        "next": "13.5.2",
         "next-i18next": "^11.2.2",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-router-dom": "^6.3.0",
-        "react-test-renderer": "^18.2.0"
+        "react-test-renderer": "^18.2.0",
+        "tailwindcss": "^3.3.3"
     },
     "devDependencies": {
         "@commitlint/cli": "^16.3.0",
@@ -38,6 +40,7 @@
         "@testing-library/react": "^13.3.0",
         "@types/react": "^18.0.15",
         "cz-conventional-changelog": "^3.3.0",
+        "daisyui": "^3.9.2",
         "eslint": "^8.19.0",
         "eslint-config-next": "^13.2.4",
         "eslint-config-prettier": "^8.5.0",
@@ -48,7 +51,7 @@
         "jest": "^27.5.1",
         "lint-staged": "^12.5.0",
         "next-sitemap": "^2.5.28",
-        "postcss": "^8.4.14",
+        "postcss": "^8.4.31",
         "postcss-loader": "^7.0.1",
         "postcss-nesting": "^10.1.10",
         "prettier": "^2.7.1",
