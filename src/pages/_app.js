@@ -1,4 +1,5 @@
 import { appWithTranslation } from "next-i18next";
+import "typeface-rubik";
 
 import "@/styles/globals.css";
 
