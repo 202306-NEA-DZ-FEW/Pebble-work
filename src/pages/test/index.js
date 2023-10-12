@@ -8,9 +8,9 @@ function index() {
         e.preventDefault();
 
         await addDoc(cookiesCollectionRef, {
-            cookie: "baked",
-            frosting: "white",
-            children: "in jail",
+            cookie: "delicious",
+            frosting: "bee",
+            children: "happy?",
         });
     };
 
