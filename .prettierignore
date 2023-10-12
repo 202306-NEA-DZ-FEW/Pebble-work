@@ -42,4 +42,4 @@ postcss.config.js
 tailwind.config.js
 
 # workflow
-/.github/workflow/lint.yml
+.github/workflows/lint.yml
