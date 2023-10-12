@@ -116,7 +116,7 @@ const Navbar = () => {
                         data-collapse-toggle='navbar-language'
                         type='button'
                         onClick={menuDropdown}
-                        className='inline-flex items-center p-2 ml-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'
+                        className='inline-flex z-50 items-center p-2 ml-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'
                         aria-controls='navbar-language'
                         aria-expanded='false'
                     >
@@ -151,7 +151,7 @@ const Navbar = () => {
                     id='navbar-language'
                 >
                     <ul
-                        className='md:static text-center gap-3 absolute w-full bottom-2 flex flex-col font-medium  md:p-0 border border-gray-300 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 dark:border-gray-700 left-[0px]'
+                        className='md:static text-center md:bg-transparent bg-white gap-3 absolute w-full flex flex-col font-medium  md:p-0 border border-gray-300 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 dark:border-gray-700 left-[0px] top-0 z-10'
                         role='menu'
                     >
                         <li>
