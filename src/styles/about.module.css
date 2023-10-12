@@ -1,0 +1,201 @@
+.techText {
+    color: #878787;
+    font-size: 15px;
+    font-family: Rubik;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0.07px;
+    word-wrap: break-word;
+}
+.techText1 {
+    color: #1a1a1a;
+    font-size: 36px;
+    font-family: Rubik;
+    font-weight: 500;
+    line-height: 44px;
+    letter-spacing: 0.18px;
+    word-wrap: break-word;
+}
+.techText2 {
+    color: #878787;
+    font-size: 25.77px;
+    font-family: Rubik;
+    font-weight: 400;
+    line-height: 38.66px;
+    letter-spacing: 0.13px;
+    word-wrap: break-word;
+}
+
+.teamText {
+    color: #1a1a1a;
+    font-size: 40px;
+    font-family: Rubik;
+    font-weight: 500;
+    line-height: 46.84px;
+    letter-spacing: 0.19px;
+    word-wrap: break-word;
+}
+
+.text0 {
+    color: #1a1a1a;
+    font-size: 46.39px;
+    font-family: Rubik;
+    font-weight: 500;
+    line-height: 56.7px;
+    letter-spacing: 0.23px;
+    word-wrap: break-word;
+}
+
+.text1 {
+    color: #878787;
+    font-size: 25.77px;
+    font-family: Rubik;
+    font-weight: 400;
+    line-height: 38.66px;
+    letter-spacing: 0.13px;
+    word-wrap: break-word;
+}
+
+@media (max-width: 500px) {
+    .text1 {
+        color: black;
+        font-size: 15px;
+        font-family: Rubik;
+        font-weight: 400;
+        line-height: 22px;
+        letter-spacing: 0.2px;
+        word-wrap: break-word;
+    }
+    .text0 {
+        color: #1a1a1a;
+        font-size: 28px;
+        font-family: Rubik;
+        font-weight: 500;
+        line-height: 46.67px;
+        letter-spacing: 0.19px;
+        word-wrap: break-word;
+    }
+    .teamText {
+        color: #1a1a1a;
+        font-size: 22px;
+        font-family: Rubik;
+        font-weight: 500;
+        line-height: 46.84px;
+        letter-spacing: 0.19px;
+        word-wrap: break-word;
+    }
+    .techText {
+        margin-top: 40px;
+        color: #878787;
+        font-size: 10px;
+        font-family: Rubik;
+        font-weight: 400;
+        line-height: 23.33px;
+        letter-spacing: 0.08px;
+        word-wrap: break-word;
+    }
+    .techText1 {
+        color: #1a1a1a;
+        font-size: 21px;
+        font-family: Rubik;
+        font-weight: 500;
+        line-height: 29px;
+        letter-spacing: 0.19px;
+        word-wrap: break-word;
+    }
+    .techText2 {
+        color: #878787;
+        font-size: 17px;
+        font-family: Rubik;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: 0.11px;
+        word-wrap: break-word;
+        margin-bottom: 40px;
+    }
+    .topImage {
+        width: 390px;
+        height: 233px;
+    }
+}
+@media (min-width: 500px) and (max-width: 834px) {
+    .text1 {
+        color: black;
+        font-size: 21.21px;
+        font-family: Rubik;
+        font-weight: 400;
+        line-height: 31.82px;
+        letter-spacing: 0.11px;
+        word-wrap: break-word;
+    }
+    .text0 {
+        margin-top: 90px;
+        color: #1a1a1a;
+        font-size: 38.18px;
+        font-family: Rubik;
+        font-weight: 500;
+        line-height: 46.67px;
+        letter-spacing: 0.19px;
+        word-wrap: break-word;
+    }
+    .teamText {
+        color: #1a1a1a;
+        font-size: 30px;
+        font-family: Rubik;
+        font-weight: 500;
+        line-height: 46.84px;
+        letter-spacing: 0.19px;
+        word-wrap: break-word;
+    }
+    .techText {
+        margin-top: 40px;
+        margin-bottom: 10px;
+        color: #878787;
+        font-size: 15.91px;
+        font-family: Rubik;
+        font-weight: 400;
+        line-height: 23.33px;
+        letter-spacing: 0.08px;
+        word-wrap: break-word;
+    }
+    .techText1 {
+        color: #1a1a1a;
+        font-size: 35px;
+        font-family: Rubik;
+        font-weight: 500;
+        line-height: 46.67px;
+        letter-spacing: 0.19px;
+        word-wrap: break-word;
+        margin-bottom: 10px;
+    }
+    .techText2 {
+        color: #878787;
+        font-size: 21.21px;
+        font-family: Rubik;
+        font-weight: 400;
+        line-height: 31.82px;
+        letter-spacing: 0.11px;
+        word-wrap: break-word;
+        margin-bottom: 40px;
+    }
+}
+@media (min-width: 768px) and (max-width: 1280px) {
+    .text1 {
+        padding-bottom: 200px;
+    }
+    .text0 {
+        margin-top: 200px;
+        margin-bottom: 10px;
+    }
+
+    .techText {
+        margin-top: 140px;
+        margin-bottom: 10px;
+    }
+    .techText1 {
+        margin-bottom: 10px;
+    }
+    .techText2 {
+        margin-bottom: 140px;
+    }
+}
