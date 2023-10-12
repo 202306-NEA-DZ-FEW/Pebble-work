@@ -7,7 +7,11 @@ jobs:
     issue-links:
         runs-on: ubuntu-latest
         steps:
-            - uses: tkt-actions/add-issue-links@v1.6.0
+            - uses: tkt-actions/add-issue-links@v1.8.1
               with:
                   repo-token: "${{ secrets.GITHUB_TOKEN }}"
                   resolve: "true"
+name: 'Issue Links'
+on:
+  pull_request:
+    types: [opened]
