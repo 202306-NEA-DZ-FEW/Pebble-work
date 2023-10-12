@@ -10,4 +10,6 @@ jobs:
             - uses: tkt-actions/add-issue-links@v1.8.1
               with:
                   repo-token: "${{ secrets.GITHUB_TOKEN }}"
+
                   resolve: "true"
+
