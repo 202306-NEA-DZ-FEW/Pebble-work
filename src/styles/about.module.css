@@ -198,3 +198,18 @@
         margin-bottom: 140px;
     }
 }
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.slideInFromRight1 {
+    animation: slideInFromRight 2s ease-in-out;
+}
