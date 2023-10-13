@@ -6,9 +6,9 @@ const AboutPage = () => {
     return (
         <>
             <div
-                className={` grid grid-rows-1 content-center place-items-center`}
+                className={` grid grid-rows-1 content-center place-items-center xl:pt-20 xl:pb-[150px] lg:pb-[250px]`}
             >
-                <div className='absolute xl:static top-0 pb-40 z-[-90]'>
+                <div className='absolute xl:static top-0 pb-40'>
                     <Image
                         className={`${styles.topImage} xl:w-[1440px] object-cover xl:object-cover lg:object-cover md:object-cover xl:h-[780px] lg:w-[1233px] lg:h-[630px] md:h-[516px] h-[363px]`}
                         src='/images/AboutPebble.png'
@@ -17,7 +17,7 @@ const AboutPage = () => {
                         height={780}
                     />
                 </div>
-                <div className='flex flex-col flex-wrap items-center pb-[200px] xl:pb-40'>
+                <div className='flex flex-col flex-wrap items-center pb-[200px] xl:pb-40 z-[1]'>
                     <h1
                         style={{
                             fontFamily: "Rubik",
@@ -99,7 +99,7 @@ const AboutPage = () => {
                         </div>
                     </div>
                 </div>
-                <div className='flex flex-col items-center text-center xl:mb-40'>
+                <div className='flex flex-col items-center text-center xl:mb-40 md:pb-40 pb-[222px]'>
                     <h6 className={`${styles.techText} text-[#878787] xl:mb-4`}>
                         Tech Stack
                     </h6>
