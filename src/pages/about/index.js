@@ -13,7 +13,7 @@ const AboutPage = () => {
             >
                 <div className='absolute xl:static top-0 pb-40'>
                     <Image
-                        className={`${styles.topImage} xl:w-[1440px] object-cover xl:object-cover lg:object-cover md:object-cover xl:h-[780px] lg:w-[1233px] lg:h-[630px] md:h-[516px] h-[363px]`}
+                        className={`${styles.topImage} xl:w-[1440px] object-cover xl:object-cover lg:object-cover md:object-cover xl:h-[780px] lg:w-[1233px] lg:h-[630px] md:h-[575px] h-[363px]`}
                         src='/images/AboutPebble.png'
                         alt='Pebbles'
                         width={1440}
@@ -38,9 +38,16 @@ const AboutPage = () => {
                     <p
                         className={`${styles.text1} ${styles.slideInFromRight1} flex text-center text-[#878787] px-4`}
                     >
-                        Body placeholder for text paragraph. A paragraph is a
-                        self-contained unit of text dealing with a particular
-                        point or idea.
+                        Experience the power of PebbleWork with its cutting-edge
+                        technologies. Utilizing Next.js, Firebase, DaisyUI, and
+                        Tailwind CSS, we have crafted a responsive and
+                        interactive platform. Seamlessly navigate through our
+                        server-side rendered pages, while Firebase handles
+                        secure user authentication and real-time data storage.
+                        With visually stunning designs powered by DaisyUI and
+                        Tailwind CSS, PebbleWork offers a user-friendly
+                        experience. Join us today and make a meaningful impact
+                        in your community.
                     </p>
                 </div>
                 <div className='rounded-[20px] flex flex-col items-center bg-[#fbc495] xl:mb-40'>
@@ -109,9 +116,17 @@ const AboutPage = () => {
                         Technologies Used and Project Structure
                     </h2>
                     <p className={`${styles.techText2} text-[#878787] px-3`}>
-                        Body placeholder for text paragraph. A paragraph is a
-                        self-contained unit of text dealing with a particular
-                        point or idea.
+                        For the PebbleWork project, we utilized Next.js,
+                        Firebase, DaisyUI, and Tailwind CSS to create a
+                        responsive and interactive platform. Next.js provided
+                        server-side rendering and seamless routing, while
+                        Firebase handled user authentication and real-time data
+                        storage. DaisyUI and Tailwind CSS ensured a visually
+                        appealing and modern design. The project structure
+                        followed modular components for easy maintenance and
+                        scalability. Together, these technologies created a
+                        user-friendly and engaging experience for volunteers to
+                        connect and make a positive impact.
                     </p>
                 </div>
             </div>
