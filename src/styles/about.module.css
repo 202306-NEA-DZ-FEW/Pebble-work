@@ -114,7 +114,7 @@
         margin-bottom: 40px;
     }
     .topImage {
-        height: 233px;
+        height: 333px;
     }
 }
 @media (min-width: 500px) and (max-width: 834px) {
@@ -177,6 +177,9 @@
         word-wrap: break-word;
         margin-bottom: 40px;
     }
+    .topImage {
+        height: 533px;
+    }
 }
 @media (min-width: 768px) and (max-width: 1280px) {
     .text1 {
@@ -197,4 +200,19 @@
     .techText2 {
         margin-bottom: 140px;
     }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.slideInFromRight1 {
+    animation: slideInFromRight 2s ease-in-out;
 }
