@@ -4,7 +4,10 @@ import Image from "next/image";
 
 const MembersCard = ({ imageSrc, name, google, linkedin, github }) => {
     return (
-        <div className='card flex xl:p-[20px] pt-2 xl:bg-[#BDD6D0] bg-[#29C5E6] flex-col xl:gap-5 gap-1 items-center xl:w-[300px] xl:h-[300px] md:w-[220px] md:h-[220px] h-[125px] w-[125px]'>
+        <div
+            data-testid='members-card'
+            className='card flex xl:p-[20px] pt-2 xl:bg-[#BDD6D0] bg-[#29C5E6] flex-col xl:gap-5 gap-1 items-center xl:w-[300px] xl:h-[300px] md:w-[220px] md:h-[220px] h-[125px] w-[125px]'
+        >
             <div className='rounded-image'>
                 <img
                     className='md:object-contain xl:object-cover xl:w-[150px] xl:h-[150px] md:h-[125px] md:w-[125px] h-[50px] w-[50px] '
