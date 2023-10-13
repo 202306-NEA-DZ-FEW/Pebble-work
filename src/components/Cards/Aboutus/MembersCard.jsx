@@ -48,7 +48,7 @@ const MembersCard = ({ imageSrc, name, google, linkedin, github }) => {
 
             <style jsx>{`
                 .card {
-                    border-radius: 25px;
+                    border-radius: 24px;
                     text-align: center;
                 }
 
