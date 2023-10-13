@@ -11,7 +11,3 @@ jobs:
               with:
                   repo-token: "${{ secrets.GITHUB_TOKEN }}"
                   resolve: "true"
-name: 'Issue Links'
-on:
-  pull_request:
-    types: [opened]
