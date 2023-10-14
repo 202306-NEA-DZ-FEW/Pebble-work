@@ -23,6 +23,14 @@ const EventCard = () => {
                     </h1>
 
                     <p
+                        style={{
+                            color: "#1A1A1A",
+                            fontFamily: "Rubik",
+                            fontWeight: " 400",
+                            lineHeight: "17.6px",
+                            letterSpacing: "0.06px",
+                            wordWrap: "break-word",
+                        }}
                         className={`${styles.information} xl:w-[520px] xl:h-[63px] md:w-[297px] md:h-[37px] overflow-y-scroll xl:text-[15px] md:text-[10.20px]`}
                     >
                         Let s spread the joy, here is Christmas, the most
