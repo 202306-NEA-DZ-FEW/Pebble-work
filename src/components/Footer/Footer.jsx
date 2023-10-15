@@ -10,7 +10,7 @@ const Footer = () => {
                 position: "fixed",
                 width: "100%",
                 height: "180px",
-                zIndex: "9999",
+                zIndex: "90",
             }}
         >
             <div className='md:flex md:flex-row md:justify-between flex flex-col items-center md:xl:gap-72 md:gap-20 md:items-center'>
