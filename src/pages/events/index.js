@@ -54,7 +54,7 @@ const EventsPage = (user) => {
     }, []);
     return (
         <>
-            <main className='flex flex-col justify-center sm:pb-[200px] mt-32 items-center xl:mt-32 xl:pb-[200px]'>
+            <main className='flex flex-col justify-center sm:pb-[200px] mt-32 pb-[200px] items-center xl:mt-32 xl:pb-[200px]'>
                 <div>
                     <h1>Walecome, {user.name}!</h1>
                     <p>This is the events page</p>
@@ -101,7 +101,6 @@ const EventsPage = (user) => {
                             <p
                                 style={{
                                     color: "black",
-                                    fontSize: "20px",
                                     fontFamily: "Rubik",
                                     fontWeight: "400",
                                     textDecoration: "underline",
@@ -109,7 +108,7 @@ const EventsPage = (user) => {
                                     letterSpacing: "0.10px",
                                     wordWrap: "break-word",
                                 }}
-                                className='pt-10 cursor-pointer'
+                                className='sm:pt-10 sm:bg-transparent cursor-pointer sm:text-[20px] text-[16px]'
                                 onClick={handleLocationClick}
                             >
                                 Change Location
@@ -144,7 +143,7 @@ const EventsPage = (user) => {
                                             : ""
                                     }`,
                                 }}
-                                className={`flex sm:static sm:bg-transparent sm:z-0 sm:h-96  fixed bottom-0 left-0 h-64 w-full bg-gray-900 text-white transform transition-transform z-[999] flex-col gap-4 sm:border-x-0 sm:border-b-0 sm:pt-4 items-center sm:border sm:border-t-black overflow-y-scroll`}
+                                className={`${styles.information} flex sm:static sm:bg-transparent sm:z-0 sm:h-[700px]  fixed bottom-0 left-0 h-64 w-full bg-gray-900 text-white z-[999] flex-col gap-4 sm:border-x-0 sm:border-b-0 sm:pt-4 items-center sm:border sm:border-t-black overflow-y-scroll`}
                             >
                                 <button className='bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg'>
                                     All
