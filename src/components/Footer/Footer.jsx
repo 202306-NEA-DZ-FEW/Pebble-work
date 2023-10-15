@@ -5,9 +5,8 @@ const Footer = () => {
     return (
         <footer
             data-testid='footer'
-            className='bottom-0 md:flex md:items-center md:justify-center flex items-center justify-center bg-[#FDA855]'
+            className=' md:flex md:items-center md:justify-center flex items-center justify-center bg-[#FDA855]'
             style={{
-                position: "fixed",
                 width: "100%",
                 height: "180px",
                 zIndex: "90",

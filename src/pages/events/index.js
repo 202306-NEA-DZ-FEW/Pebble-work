@@ -4,12 +4,14 @@ import Calendar from "@/components/Events/Calendar";
 import EventCard from "@/components/Events/EventCard";
 import EventCardLeft from "@/components/Events/EventCardLeft";
 import styles from "@/styles/Events.module.css";
+import FilterByType from "@/components/Filter/FilterByType";
 
 const EventsPage = (user) => {
     const [inputValue, setInputValue] = useState("");
     const [isCalendarOpen, setCalendarOpen] = useState(false);
-    const [isInterestOpen, setInterestOpen] = useState(false);
     const [isLocationOpen, setLocationOpen] = useState(false);
+    const [filteredTypes, setFilteredTypes] = useState([]);
+    const [events, setEvents] = useState([]);
 
     const handleLocationClick = () => {
         setLocationOpen(!isLocationOpen);
@@ -17,10 +19,6 @@ const EventsPage = (user) => {
 
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
-    };
-
-    const handleInterestClick = () => {
-        setInterestOpen(!isInterestOpen);
     };
 
     const handleTestClick = () => {
@@ -31,11 +29,11 @@ const EventsPage = (user) => {
         const handleResize = () => {
             if (window.innerWidth > 640) {
                 setCalendarOpen(true);
-                setInterestOpen(true);
+                true;
                 setLocationOpen(true);
             } else {
                 setCalendarOpen(false);
-                setInterestOpen(false);
+                false;
                 setLocationOpen(false);
             }
         };
@@ -43,7 +41,7 @@ const EventsPage = (user) => {
         // Set initial state based on window size
         if (window.innerWidth > 640) {
             setCalendarOpen(true);
-            setInterestOpen(true);
+            true;
             setLocationOpen(true);
         }
 
@@ -52,23 +50,60 @@ const EventsPage = (user) => {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
+    useEffect(() => {
+        // Simulating fetching events from an API
+        const fetchEvents = async () => {
+            // Simulating API response delay
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+
+            // Generate random events
+            const randomEvents = [
+                { id: 1, type: "Reduced Inequalities" },
+                { id: 2, type: "No Poverty" },
+                { id: 3, type: "Gender Equality" },
+                { id: 4, type: "Quality Education" },
+                { id: 5, type: "No Poverty" },
+                { id: 6, type: "Life on Land" },
+                { id: 7, type: "Quality Education" },
+            ];
+
+            setEvents(randomEvents);
+        };
+
+        fetchEvents();
+    }, []);
     return (
         <>
             <main className='flex flex-col justify-center sm:pb-[200px] mt-32 pb-[200px] items-center xl:mt-32 xl:pb-[200px]'>
                 <div>
-                    <h1>Walecome, {user.name}!</h1>
+                    <h1>Welcome, {user.name}!</h1>
                     <p>This is the events page</p>
                 </div>
                 <div className='flex flex-col-reverse sm:flex sm:flex-row-reverse sm:items-center sm:justify-evenly sm:gap-8 sm:h-full sm:w-full'>
                     <ul className='flex flex-col items gap-2'>
-                        <EventCard />
-                        <EventCardLeft />
-                        <EventCard />
-                        <EventCardLeft />
-                        <EventCard />
-                        <EventCardLeft />
-                        <EventCard />
-                        <EventCardLeft />
+                        {events
+                            .filter((event) =>
+                                filteredTypes.length === 0
+                                    ? true
+                                    : filteredTypes.includes(event.type)
+                            )
+                            .map((event, index) => {
+                                if (index % 2 === 0) {
+                                    return (
+                                        <EventCard
+                                            key={event.id}
+                                            type={event.type}
+                                        />
+                                    );
+                                } else {
+                                    return (
+                                        <EventCardLeft
+                                            key={event.id}
+                                            type={event.type}
+                                        />
+                                    );
+                                }
+                            })}
                     </ul>
                     <div className='flex flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7'>
                         <div className='sm:flex s:flex-col sm:items-center sm:justify-center'>
@@ -128,76 +163,8 @@ const EventsPage = (user) => {
                                 />
                             )}
                         </div>
-                        <button
-                            className='sm:hidden'
-                            onClick={handleInterestClick}
-                        >
-                            Change Interest
-                        </button>
-                        {isInterestOpen && (
-                            <ul
-                                style={{
-                                    animation: `${
-                                        isInterestOpen
-                                            ? `${styles.fadeIn} 0.7s ease-in-out`
-                                            : ""
-                                    }`,
-                                }}
-                                className={`${styles.information} flex sm:static sm:bg-transparent sm:z-0 sm:h-[700px]  fixed bottom-0 left-0 h-64 w-full bg-gray-900 text-white z-[999] flex-col gap-4 sm:border-x-0 sm:border-b-0 sm:pt-4 items-center sm:border sm:border-t-black overflow-y-scroll`}
-                            >
-                                <button className='bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg'>
-                                    All
-                                </button>
-                                <button className='bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg'>
-                                    No Poverty
-                                </button>
-                                <button className='bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg'>
-                                    Zero Hunger
-                                </button>
-                                <button className='bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg'>
-                                    Good Heakth and Well Being
-                                </button>
-                                <button className='bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg'>
-                                    Quality Education
-                                </button>
-                                <button className='bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg'>
-                                    Gender Equality
-                                </button>
-                                <button className='bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg'>
-                                    Clean Water and Sanitation
-                                </button>
-                                <button className='bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg'>
-                                    Affordable and Clean Energy
-                                </button>
-                                <button className='bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg'>
-                                    Decent Work and Economic Growth
-                                </button>
-                                <button className='bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg'>
-                                    Industry, Innovation and Infrastructure
-                                </button>
-                                <button className='bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg'>
-                                    Reduced Inequalities
-                                </button>
-                                <button className='bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg'>
-                                    Sustainable Cities and Communities
-                                </button>
-                                <button className='bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg'>
-                                    Responsible Consumption/Production
-                                </button>
-                                <button className='bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg'>
-                                    Life Bellow Water
-                                </button>
-                                <button className='bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg'>
-                                    Life on Land
-                                </button>
-                                <button className='bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg'>
-                                    Peace, Justice and Strong institutions
-                                </button>
-                                <button className='bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg'>
-                                    Climate Action
-                                </button>
-                            </ul>
-                        )}
+
+                        <FilterByType setFilteredTypes={setFilteredTypes} />
                     </div>
                 </div>
             </main>
