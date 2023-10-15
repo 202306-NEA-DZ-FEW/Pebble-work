@@ -7,4 +7,7 @@ module.exports = {
         dirs: ["src"],
     },
     reactStrictMode: true,
+    images: {
+        domains: ['firebasestorage.googleapis.com'], // Add the Firebase Cloud Storage hostname
+    },
 };
