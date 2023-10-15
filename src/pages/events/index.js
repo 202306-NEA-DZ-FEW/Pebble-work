@@ -3,18 +3,26 @@ import React, { useState, useEffect } from "react";
 import Calendar from "@/components/Events/Calendar";
 import EventCard from "@/components/Events/EventCard";
 import EventCardLeft from "@/components/Events/EventCardLeft";
+import styles from "@/styles/Events.module.css";
 
 const EventsPage = (user) => {
     const [inputValue, setInputValue] = useState("");
     const [isCalendarOpen, setCalendarOpen] = useState(false);
     const [isInterestOpen, setInterestOpen] = useState(false);
+    const [isLocationOpen, setLocationOpen] = useState(false);
+
+    const handleLocationClick = () => {
+        setLocationOpen(!isLocationOpen);
+    };
 
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
     };
+
     const handleInterestClick = () => {
         setInterestOpen(!isInterestOpen);
     };
+
     const handleTestClick = () => {
         setCalendarOpen(!isCalendarOpen);
     };
@@ -24,11 +32,20 @@ const EventsPage = (user) => {
             if (window.innerWidth > 640) {
                 setCalendarOpen(true);
                 setInterestOpen(true);
+                setLocationOpen(true);
             } else {
                 setCalendarOpen(false);
                 setInterestOpen(false);
+                setLocationOpen(false);
             }
         };
+
+        // Set initial state based on window size
+        if (window.innerWidth > 640) {
+            setCalendarOpen(true);
+            setInterestOpen(true);
+            setLocationOpen(true);
+        }
 
         window.addEventListener("resize", handleResize);
         return () => {
@@ -53,7 +70,7 @@ const EventsPage = (user) => {
                         <EventCard />
                         <EventCardLeft />
                     </ul>
-                    <div className='flex flex-row  sm:flex sm:flex-col sm:items-center text-black sm:gap-7'>
+                    <div className='flex flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7'>
                         <div className='sm:flex s:flex-col sm:items-center sm:justify-center'>
                             <button
                                 className='sm:hidden'
@@ -62,7 +79,20 @@ const EventsPage = (user) => {
                                 Change Date
                             </button>
                             {isCalendarOpen && (
-                                <div className='border border-black rounded-[8px]'>
+                                <div
+                                    style={{
+                                        animation: `${
+                                            isCalendarOpen
+                                                ? `${styles.fadeIn} 0.7s ease-in-out`
+                                                : ""
+                                        }`,
+                                    }}
+                                    className={`${
+                                        isCalendarOpen ? "open" : ""
+                                    } ${
+                                        styles.calendarContainer
+                                    } border border-black rounded-[8px] bg-white sm:bg-transparent`}
+                                >
                                     <Calendar />
                                 </div>
                             )}
@@ -79,22 +109,25 @@ const EventsPage = (user) => {
                                     letterSpacing: "0.10px",
                                     wordWrap: "break-word",
                                 }}
-                                className='pt-10'
+                                className='pt-10 cursor-pointer'
+                                onClick={handleLocationClick}
                             >
                                 Change Location
                             </p>
-                            <input
-                                className='border rounded-[5px] text-center'
-                                type='text'
-                                value={inputValue}
-                                onChange={handleInputChange}
-                                style={{
-                                    backgroundColor: inputValue
-                                        ? "#FBC495"
-                                        : "white",
-                                    border: `2px solid `,
-                                }}
-                            />
+                            {isLocationOpen && (
+                                <input
+                                    className={`${styles.locationChange} border rounded-[5px] text-center`}
+                                    type='text'
+                                    value={inputValue}
+                                    onChange={handleInputChange}
+                                    style={{
+                                        backgroundColor: inputValue
+                                            ? "#FBC495"
+                                            : "white",
+                                        border: `2px solid `,
+                                    }}
+                                />
+                            )}
                         </div>
                         <button
                             className='sm:hidden'
@@ -103,7 +136,16 @@ const EventsPage = (user) => {
                             Change Interest
                         </button>
                         {isInterestOpen && (
-                            <ul className='flex flex-col gap-4 border-x-0 border-b-0 pt-4 items-center border border-t-black'>
+                            <ul
+                                style={{
+                                    animation: `${
+                                        isInterestOpen
+                                            ? `${styles.fadeIn} 0.7s ease-in-out`
+                                            : ""
+                                    }`,
+                                }}
+                                className={`flex sm:static sm:bg-transparent sm:z-0 sm:h-96  fixed bottom-0 left-0 h-64 w-full bg-gray-900 text-white transform transition-transform z-[999] flex-col gap-4 sm:border-x-0 sm:border-b-0 sm:pt-4 items-center sm:border sm:border-t-black overflow-y-scroll`}
+                            >
                                 <button className='bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg'>
                                     All
                                 </button>

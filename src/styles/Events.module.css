@@ -1,0 +1,27 @@
+@media (max-width: 640px) {
+    .calendarContainer {
+        position: fixed;
+        bottom: 0; /* Initially hide the calendar below the screen */
+        left: 0;
+        right: 0;
+        height: 250px;
+        z-index: 9999;
+    }
+
+    .locationChange {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
