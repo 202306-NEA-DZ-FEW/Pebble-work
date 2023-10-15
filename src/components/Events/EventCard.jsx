@@ -5,16 +5,15 @@ const EventCard = () => {
     return (
         <>
             <div
-                className={`${styles.container} xl:w-[816px] xl:h-[210px] w-[466px] h-[140px] flex flex-row items-center justify-center border border-black rounded-[20px] gap-2`}
+                className={`${styles.container} overflow-hidden w-[335px] h-[86px] xl:w-[816px] xl:h-[210px] sm:w-[466px] sm:h-[140px] flex flex-row items-center justify-center border border-black rounded-[20px] gap-2`}
             >
-                <div className={`flex flex-col gap-4 items-end `}>
+                <div className={`flex flex-col gap-1 sm:gap-4 items-end `}>
                     <h1
-                        className='xl:text-[25.70px] md:text-[15px]'
+                        className='xl:text-[25.70px] sm:text-[15px] text-[10.55px]'
                         style={{
                             color: "#1A1A1A",
                             fontFamily: "Rubik",
                             fontWeight: " 500",
-                            lineHeight: "25.82px",
                             letterSpacing: "0.11px",
                             wordWrap: "break-word",
                         }}
@@ -23,7 +22,14 @@ const EventCard = () => {
                     </h1>
 
                     <p
-                        className={`${styles.information} xl:w-[520px] xl:h-[63px] md:w-[297px] md:h-[37px] overflow-y-scroll xl:text-[15px] md:text-[10.20px]`}
+                        style={{
+                            color: "#1A1A1A",
+                            fontFamily: "Rubik",
+                            fontWeight: " 400",
+                            letterSpacing: "0.06px",
+                            wordWrap: "break-word",
+                        }}
+                        className={`${styles.information} xl:leading-[17px] md:leading-[14px] leading-[10px] h-[26.2px] w-[214px] xl:w-[520px] xl:h-[63px] sm:w-[297px] sm:h-[37px] overflow-y-scroll xl:text-[15px] sm:text-[10.20px] text-[10px]`}
                     >
                         Let s spread the joy, here is Christmas, the most
                         awaited day of the year. Christmas Tree is what one
@@ -31,22 +37,17 @@ const EventCard = () => {
                         enhance your Christmas
                     </p>
 
-                    <button
-                        className={`${styles.btn} ${styles.control} xl:w-[127px] xl:h-[41px] md:w-[72.23px] md:h-[25.5px]`}
-                    >
-                        <span className={`${styles.infor} text-red-600 pl-2`}>
-                            avatar
-                        </span>
-
-                        <span
-                            className={`${styles.buy} xl:text-[20.66px] md:text-[15px]`}
+                    <div className='flex'>
+                        <p>avatars</p>
+                        <button
+                            className={`w-[52px] bg-blue-400 text-white text-[10px] xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px]`}
                         >
-                            attendees
-                        </span>
-                    </button>
+                            Join
+                        </button>
+                    </div>
                 </div>
                 <div
-                    className={`${styles.productImage} xl:w-[244px] xl:h-[143px] md:w-[139px] md:h-[82px]`}
+                    className={`${styles.productImage} w-[100px] h-[58px] xl:w-[244px] xl:h-[143px] sm:w-[139px] sm:h-[82px]`}
                 >
                     <img
                         className={`{${styles.contaiImg}`}
@@ -54,10 +55,12 @@ const EventCard = () => {
                         alt='Product Image'
                     />
                     <div className={`${styles.info}`}>
-                        <h2 className='md:text-[13px] xl:text-[22.22px]'>
+                        <h2 className='sm:text-[13px] text-[10px] xl:text-[22.22px] underline'>
                             Description
                         </h2>
-                        <ul className={`xl:text-[18.20px] md:text-[10.20px]`}>
+                        <ul
+                            className={`xl:text-[18.20px] text-[8px] leading-[10px] md:leading-[15px] xl:leading-[20px] sm:text-[10.20px]`}
+                        >
                             <li>
                                 <strong>Location:</strong> 5 Ft
                             </li>
