@@ -134,7 +134,7 @@ const EventsPage = ({ event }) => {
 };
 
 export async function getServerSideProps(context) {
-    // Get the event ID from the URL
+    // Get the event ID from the URL uwu
     const eventId = context.params.eventId;
 
     console.log("hiii");
