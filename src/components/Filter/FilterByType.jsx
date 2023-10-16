@@ -1,27 +1,38 @@
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/Events.module.css";
 
+// Component for filtering events by type
 const FilterByType = ({ setFilteredTypes }) => {
+    // State for controlling the open/close state of the interest filter
     const [isInterestOpen, setInterestOpen] = useState(false);
+    // State for storing the selected types
     const [selectedTypes, setSelectedTypes] = useState([]);
 
+    // Effect for setting the initial open/close state of the interest filter and adding a resize event listener
     useEffect(() => {
+        // Function to handle the screen resize
         const handleResize = () => {
             setInterestOpen(window.innerWidth > 640);
         };
 
+        // Set the initial open/close state of the interest filter
         setInterestOpen(window.innerWidth > 640);
 
+        // Add resize event listener
         window.addEventListener("resize", handleResize);
+
+        // Clean up by removing the resize event listener
         return () => {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
 
+    // Function to handle the click event of the interest filter
     const handleInterestClick = () => {
         setInterestOpen(!isInterestOpen);
     };
 
+    // Function to handle the click event of a type
     const handleTypeClick = (type) => {
         if (selectedTypes.includes(type)) {
             setSelectedTypes(selectedTypes.filter((t) => t !== type));
@@ -30,6 +41,7 @@ const FilterByType = ({ setFilteredTypes }) => {
         }
     };
 
+    // Effect for updating the filtered types when the selected types change
     useEffect(() => {
         setFilteredTypes(selectedTypes);
     }, [selectedTypes]);
