@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap");
+
 body {
     background-color: white;
+    font-family: "Rubik";
+    overflow-x: hidden;
+}
+
+.tinyText {
+    font-size: 0.95rem;
 }

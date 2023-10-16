@@ -1,13 +1,15 @@
 import React from "react";
 import Image from "next/image";
 import { Rubik } from "next/font/google";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/util/firebase";
 
 const rubik = Rubik({
     subsets: ["latin"],
     variable: "--font-rubik",
 });
 
-const EventsPage = () => {
+const EventsPage = ({ event }) => {
     const cellData = [
         "Mona M.",
         "Aether M.",
@@ -19,14 +21,14 @@ const EventsPage = () => {
     return (
         <>
             <div
-                style={{ margin: "auto", width: "60%" }}
+                style={{ margin: "auto", width: "60%", paddingTop: "6rem" }}
                 className={`${rubik.variable} font-sans`}
             >
                 <h2
                     className='text-2xl font-bold'
                     style={{ marginBottom: "2rem" }}
                 >
-                    Event long and nice title
+                    {event.title}
                 </h2>
                 <div
                     style={{ marginBottom: "6rem", gap: "4rem" }}
@@ -36,20 +38,43 @@ const EventsPage = () => {
                         style={{ margin: "auto", width: "100%" }}
                         className={`sm:w-2/5 mx-auto`}
                     >
-                        <Image
-                            src={"/event_image.png"}
-                            width={450}
-                            height={450}
-                        />
+                        {event.image ? (
+                            <Image
+                                src={event.image}
+                                width={450}
+                                height={450}
+                                alt='event pic'
+                            />
+                        ) : (
+                            <Image
+                                src={"/event_image.png"}
+                                width={450}
+                                height={450}
+                                alt='event pic'
+                            />
+                        )}
                     </div>
                     <div style={{ width: "100%" }}>
                         <p>
-                            <b>Location</b>
+                            <b>Location:</b> <br />
+                            {event.location}
                             <br />
-                            Time and date
+                            <br />
+                            <b>Date and time:</b>
+                            <br />
+                            {event.date ? (
+                                <span> {event.date}</span>
+                            ) : (
+                                <span> undefined</span>
+                            )}{" "}
+                            at
+                            {event.time ? (
+                                <span> {event.time}</span>
+                            ) : (
+                                <span> undefined</span>
+                            )}
                             <br />
                             <br />
-                            <b>Attendees</b>
                             <br />
                             Organized by <b>Dude&apos;s name</b>
                         </p>
@@ -69,26 +94,19 @@ const EventsPage = () => {
                     </div>
                 </div>
                 <div style={{ display: "flex", gap: "3rem" }}>
-                    <div style={{ maxWidth: "500px" }}>
+                    <div style={{ width: "500px" }}>
                         <h3 className='text-2xl font-bold'>
                             Event Description:
                         </h3>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Suspendisse in vestibulum ligula. Sed quis mi
-                            auctor, congue tortor in, tincidunt justo. Nullam
-                            nec purus a ex rhoncus suscipit. Aenean vel
-                            tristique massa, ac fermentum tortor. <br />
-                            Duis eleifend, quam in congue viverra, urna massa
-                            bibendum nulla, non tincidunt justo ex eget sapien.
-                            Nulla facilisi. Vestibulum nec ex in orci accumsan
-                            condimentum. <br />
-                            Integer hendrerit bibendum nisl, nec interdum
-                            libero. Sed vel tincidunt lorem, vel malesuada est.
-                            Proin et est a orci scelerisque scelerisque. <br />
-                            Phasellus euismod purus vel urna condimentum, a
-                            bibendum mi faucibus.
-                        </p>
+
+                        {event ? (
+                            <p>{event.description}</p>
+                        ) : (
+                            <p>
+                                Loading... there might be no event description{" "}
+                                {"):"}
+                            </p>
+                        )}
                     </div>
 
                     <div>
@@ -123,8 +141,25 @@ const EventsPage = () => {
                     </div>
                 </div>
             </div>
+            <div style={{ height: "200px", marginTop: "4rem" }}></div>
         </>
     );
 };
+
+export async function getServerSideProps(context) {
+    // Get the event ID from the URL uwu
+    const eventId = context.params.eventId;
+
+    // Fetch the event data from Firebase
+    const eventRef = doc(db, "events", eventId);
+    const eventDoc = await getDoc(eventRef);
+    const event = eventDoc.data();
+
+    return {
+        props: {
+            event,
+        },
+    };
+}
 
 export default EventsPage;
