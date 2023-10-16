@@ -5,35 +5,41 @@ import EventCard from "@/components/Events/EventCard";
 import EventCardLeft from "@/components/Events/EventCardLeft";
 import styles from "@/styles/Events.module.css";
 import FilterByType from "@/components/Filter/FilterByType";
+import { db } from "@/util/firebase";
+
+import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 
 const EventsPage = (user) => {
+    // State variables
     const [inputValue, setInputValue] = useState("");
     const [isCalendarOpen, setCalendarOpen] = useState(false);
     const [isLocationOpen, setLocationOpen] = useState(false);
     const [filteredTypes, setFilteredTypes] = useState([]);
     const [events, setEvents] = useState([]);
 
+    // Handle location click
     const handleLocationClick = () => {
         setLocationOpen(!isLocationOpen);
     };
 
+    // Handle input change
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
     };
 
+    // Handle test click
     const handleTestClick = () => {
         setCalendarOpen(!isCalendarOpen);
     };
 
+    // Resize event listener
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth > 640) {
                 setCalendarOpen(true);
-                true;
                 setLocationOpen(true);
             } else {
                 setCalendarOpen(false);
-                false;
                 setLocationOpen(false);
             }
         };
@@ -41,7 +47,6 @@ const EventsPage = (user) => {
         // Set initial state based on window size
         if (window.innerWidth > 640) {
             setCalendarOpen(true);
-            true;
             setLocationOpen(true);
         }
 
@@ -50,37 +55,32 @@ const EventsPage = (user) => {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
+
+    // Fetch events from Firebase
     useEffect(() => {
-        // Simulating fetching events from an API
         const fetchEvents = async () => {
-            // Simulating API response delay
-            await new Promise((resolve) => setTimeout(resolve, 1000));
+            const eventsCollectionRef = collection(db, "events"); // Assuming the collection name is "events"
+            const eventsSnapshot = await getDocs(eventsCollectionRef);
+            const eventsData = eventsSnapshot.docs.map((doc) => doc.data());
 
-            // Generate random events
-            const randomEvents = [
-                { id: 1, type: "Reduced Inequalities" },
-                { id: 2, type: "No Poverty" },
-                { id: 3, type: "Gender Equality" },
-                { id: 4, type: "Quality Education" },
-                { id: 5, type: "No Poverty" },
-                { id: 6, type: "Life on Land" },
-                { id: 7, type: "Quality Education" },
-            ];
-
-            setEvents(randomEvents);
+            setEvents(eventsData);
         };
 
         fetchEvents();
     }, []);
     return (
         <>
-            <main className='flex flex-col justify-center sm:pb-[200px] mt-32 pb-[200px] items-center xl:mt-32 xl:pb-[200px]'>
+            <main
+                className={` flex flex-col justify-center sm:pb-[200px] mt-32 pb-[200px] items-center xl:mt-32 xl:pb-[200px]`}
+            >
                 <div>
                     <h1>Welcome, {user.name}!</h1>
                     <p>This is the events page</p>
                 </div>
-                <div className='flex flex-col-reverse sm:flex sm:flex-row-reverse sm:items-center sm:justify-evenly sm:gap-8 sm:h-full sm:w-full'>
-                    <ul className='flex flex-col items gap-2'>
+                <div
+                    className={`flex flex-col-reverse sm:flex sm:flex-row-reverse sm:items-center sm:justify-evenly sm:gap-8 sm:h-full sm:w-full`}
+                >
+                    <ul className={` flex flex-col items gap-2 `}>
                         {events
                             .filter((event) =>
                                 filteredTypes.length === 0
@@ -92,14 +92,28 @@ const EventsPage = (user) => {
                                     return (
                                         <EventCard
                                             key={event.id}
+                                            title={event.title}
                                             type={event.type}
+                                            images={event.image}
+                                            location={event.location}
+                                            description={event.description}
+                                            organizer={event.organizer}
+                                            time={event.time}
+                                            date={event.date}
                                         />
                                     );
                                 } else {
                                     return (
                                         <EventCardLeft
                                             key={event.id}
+                                            title={event.title}
                                             type={event.type}
+                                            image={event.image}
+                                            location={event.location}
+                                            description={event.description}
+                                            organizer={event.organizer}
+                                            time={event.time}
+                                            date={event.date}
                                         />
                                     );
                                 }
@@ -126,7 +140,7 @@ const EventsPage = (user) => {
                                         isCalendarOpen ? "open" : ""
                                     } ${
                                         styles.calendarContainer
-                                    } border border-black rounded-[8px] bg-white sm:bg-transparent`}
+                                    } border border-black rounded-[8px] z-10 bg-white sm:bg-transparent`}
                                 >
                                     <Calendar />
                                 </div>
@@ -136,7 +150,6 @@ const EventsPage = (user) => {
                             <p
                                 style={{
                                     color: "black",
-                                    fontFamily: "Rubik",
                                     fontWeight: "400",
                                     textDecoration: "underline",
                                     lineHeight: "30px",
