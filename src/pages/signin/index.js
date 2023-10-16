@@ -5,13 +5,58 @@ import { RiTwitterXFill } from "react-icons/ri";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 import Link from "next/link";
 import { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../util/firebase";
+import { useRouter } from "next/router";
+import {
+    GoogleAuthProvider,
+    signInWithPopup,
+    TwitterAuthProvider,
+} from "firebase/auth";
 
 const SignInPage = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const router = useRouter();
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
+    const handleLogin = async (e) => {
+        e.preventDefault();
+
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            //
+            router.push("/events");
+        } catch (error) {
+            console.error("Error logging in", error);
+        }
+    };
+    const handelGoogle = async (e) => {
+        e.preventDefault();
+        try {
+            const provider = new GoogleAuthProvider();
+            await signInWithPopup(auth, provider);
+            //  hna tkon Redirect
+            router.push("/events");
+        } catch (error) {
+            console.error("Error signing up with Google", error);
+        }
+    };
+
+    const handelTwitter = async (e) => {
+        e.preventDefault();
+        try {
+            const provider = new TwitterAuthProvider();
+            await signInWithPopup(auth, provider);
+            router.push("/events");
+        } catch (error) {
+            console.error("Error signing up with Google", error);
+        }
+    };
+
     return (
         <div className='flex justify-center items-center h-screen'>
             <div className='flex items-center w-1/2'>
@@ -33,6 +78,7 @@ const SignInPage = () => {
                         <button
                             className=' border px-4 py-2 mb-2 rounded-md shadow-md flex items-center justify-center'
                             style={{ height: "40px", width: "300px" }}
+                            onClick={handelTwitter}
                         >
                             <RiTwitterXFill className='ml-2 mr-1' />
                             <span>Continue with Twitter</span>
@@ -40,6 +86,7 @@ const SignInPage = () => {
                         <button
                             className=' border px-4 py-2 mb-2 rounded-md shadow-md flex items-center justify-center'
                             style={{ height: "40px", width: "300px" }}
+                            onClick={handelGoogle}
                         >
                             <FcGoogle className='ml-2 mr-1' />
                             <span>Continue with Google</span>
@@ -52,7 +99,7 @@ const SignInPage = () => {
                             <div className='   shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25  border-t flex-grow'></div>
                         </div>
                     </div>
-                    <form>
+                    <form onSubmit={handleLogin}>
                         <div className='mb-4'>
                             <label
                                 className="block mb-2 text-stone-500 text-base font-normal font-['Rubik']"
@@ -65,6 +112,8 @@ const SignInPage = () => {
                                 type='email'
                                 id='email'
                                 name='email'
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 required
                                 style={{ height: "40px", width: "300px" }}
                             />
@@ -81,6 +130,8 @@ const SignInPage = () => {
                                 type={showPassword ? "text" : "password"}
                                 id='password'
                                 name='password'
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 required
                                 style={{ height: "40px", width: "300px" }}
                             />
@@ -106,7 +157,7 @@ const SignInPage = () => {
                         </div>
                         <div className='flex justify-start'>
                             <button
-                                className='px-4 py-2 bg-orange-400 text-white rounded hover:bg-orange-400'
+                                className=' px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 '
                                 type='submit'
                             >
                                 Sign In
