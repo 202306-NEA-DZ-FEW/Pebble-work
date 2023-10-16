@@ -5,35 +5,41 @@ import EventCard from "@/components/Events/EventCard";
 import EventCardLeft from "@/components/Events/EventCardLeft";
 import styles from "@/styles/Events.module.css";
 import FilterByType from "@/components/Filter/FilterByType";
+import { db } from "@/util/firebase";
+
+import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 
 const EventsPage = (user) => {
+    // State variables
     const [inputValue, setInputValue] = useState("");
     const [isCalendarOpen, setCalendarOpen] = useState(false);
     const [isLocationOpen, setLocationOpen] = useState(false);
     const [filteredTypes, setFilteredTypes] = useState([]);
     const [events, setEvents] = useState([]);
 
+    // Handle location click
     const handleLocationClick = () => {
         setLocationOpen(!isLocationOpen);
     };
 
+    // Handle input change
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
     };
 
+    // Handle test click
     const handleTestClick = () => {
         setCalendarOpen(!isCalendarOpen);
     };
 
+    // Resize event listener
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth > 640) {
                 setCalendarOpen(true);
-                true;
                 setLocationOpen(true);
             } else {
                 setCalendarOpen(false);
-                false;
                 setLocationOpen(false);
             }
         };
@@ -41,7 +47,6 @@ const EventsPage = (user) => {
         // Set initial state based on window size
         if (window.innerWidth > 640) {
             setCalendarOpen(true);
-            true;
             setLocationOpen(true);
         }
 
@@ -50,24 +55,15 @@ const EventsPage = (user) => {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
+
+    // Fetch events from Firebase
     useEffect(() => {
-        // Simulating fetching events from an API
         const fetchEvents = async () => {
-            // Simulating API response delay
-            await new Promise((resolve) => setTimeout(resolve, 1000));
+            const eventsCollectionRef = collection(db, "events"); // Assuming the collection name is "events"
+            const eventsSnapshot = await getDocs(eventsCollectionRef);
+            const eventsData = eventsSnapshot.docs.map((doc) => doc.data());
 
-            // Generate random events
-            const randomEvents = [
-                { id: 1, type: "Reduced Inequalities" },
-                { id: 2, type: "No Poverty" },
-                { id: 3, type: "Gender Equality" },
-                { id: 4, type: "Quality Education" },
-                { id: 5, type: "No Poverty" },
-                { id: 6, type: "Life on Land" },
-                { id: 7, type: "Quality Education" },
-            ];
-
-            setEvents(randomEvents);
+            setEvents(eventsData);
         };
 
         fetchEvents();
