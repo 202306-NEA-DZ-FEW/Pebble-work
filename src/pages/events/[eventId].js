@@ -58,7 +58,18 @@ const EventsPage = ({ event }) => {
                         <p>
                             <b>Location:</b> {event.location}
                             <br />
-                            Time and date
+                            <b>Date and time:</b>
+                            {event.date ? (
+                                <span> {event.date}</span>
+                            ) : (
+                                <span> undefined</span>
+                            )}{" "}
+                            at
+                            {event.time ? (
+                                <span> {event.time}</span>
+                            ) : (
+                                <span> undefined</span>
+                            )}
                             <br />
                             <br />
                             <b>Attendees</b>

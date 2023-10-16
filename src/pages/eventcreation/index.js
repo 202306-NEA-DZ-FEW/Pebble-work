@@ -9,6 +9,8 @@ const EventCreationPage = () => {
         location: "",
         type: "",
         title: "",
+        time: "",
+        date: "",
         description: "",
         attendees: [],
         organizer: "",
@@ -69,20 +71,46 @@ const EventCreationPage = () => {
         console.log(input.location, input.type);
     };
 
+    const arrEventType = [
+        "No Poverty",
+        "Zero Hunger",
+        "Good Health and Well-being",
+        "Gender Equality",
+        "Clean Water and Sanitation",
+        "Affordable and Clean Energy",
+        "Decent Work and Economic Growth",
+        "Industry, Innovation, and Infrastructure",
+        "Reduced Inequalities",
+        "Sustainable Cities and Communitiese",
+        "Quality Education",
+        "Responsible Consumption/Production",
+        "Climate Action",
+        "Life Below Water",
+        "Life on Land",
+        "Peace, Justice and Strong Institutions",
+        "Other",
+    ];
+
     return (
-        <div className='container ml-3  max-w-6xl mt-2 flex flex-col bg-white mx-auto '>
-            {/* <form>
-                <input type='file'
-                    onChange={(e) => setImg(e.target.files[0])}
-                    id='testimage' className='mt-3'></input>
-                <button style={{ backgroundColor: 'orange', color: 'white' }} onClick={imgUpload}>test</button>
-    </form> */}
+        <div
+            className='container ml-auto mr-auto max-w-6xl mt-2 flex flex-col bg-white mx-auto'
+            style={{ fontFamily: "Rubik" }}
+        >
+            <div style={{ height: "6rem" }}></div>
             <div className='flex flex-col  md:space-x-20  md:flex-row'>
                 <div>
-                    <h3 className='mt-5 font-semibold align-left'>
+                    <h3
+                        className='mt-5 font-semibold align-left'
+                        style={{
+                            fontWeight: "500",
+                            lineHeight: "56.70px",
+                            letterSpacing: "0.23px",
+                            wordWrap: "break-word",
+                        }}
+                    >
                         Choose Location:
                     </h3>
-                    <p className='max-w-sm mt-2 text-gray-500'>
+                    <p className='max-w-sm mt-2 tinyText text-gray-400'>
                         Pebble events can be both local or online. Choose where
                         you want to host your event.
                     </p>
@@ -93,12 +121,59 @@ const EventCreationPage = () => {
                             onChange={handleInputChange}
                             placeholder='Set Location'
                             className='p-1  mt-4  rounded-md focus:outline-2 outline outline-1 w-2/4'
+                            style={{
+                                borderRadius: "8px",
+                                border: "1px solid var(--container-border, #1A1A1A)",
+                                background: "var(--fill-white, #FFF)",
+                                width: "300px",
+                                height: "55px",
+                            }}
+                        ></input>
+                    </form>
+
+                    <h3
+                        className='mt-5 font-semibold align-left'
+                        style={{
+                            fontWeight: "500",
+                            lineHeight: "56.70px",
+                            letterSpacing: "0.23px",
+                            wordWrap: "break-word",
+                        }}
+                    >
+                        Choose Time:
+                    </h3>
+                    <p className='max-w-sm mt-2 tinyText text-gray-400'>
+                        Select the starting time of the event.
+                    </p>
+                    <form className='max-w-1/2'>
+                        <input
+                            id='time'
+                            value={input.time}
+                            onChange={handleInputChange}
+                            placeholder='Use the 12 hour time format (AM/PM)'
+                            className='p-1  mt-4  rounded-md focus:outline-2 outline outline-1 w-2/4'
+                            style={{
+                                borderRadius: "8px",
+                                border: "1px solid var(--container-border, #1A1A1A)",
+                                background: "var(--fill-white, #FFF)",
+                                width: "300px",
+                                height: "55px",
+                            }}
                         ></input>
                     </form>
                 </div>
 
-                <div className='my-auto lg:flex lg:flex-col md:flex-col md:bt-5 sm:flex sm:flex-col sm:flex-wrap sm:mt-5 md:mt-3 '>
-                    <p className='font-bold text-5xl sm:inline-block '>Izmir</p>
+                <div
+                    className='my-auto lg:flex lg:flex-col md:flex-col md:bt-5 sm:flex sm:flex-col sm:flex-wrap sm:mt-5 md:mt-3 '
+                    style={{ paddingTop: "2rem" }}
+                >
+                    {input.location ? (
+                        <p className='font-bold text-5xl sm:inline-block '>
+                            {input.location}
+                        </p>
+                    ) : (
+                        <p className='italic mt-2'>Location will appear here</p>
+                    )}
                     <a
                         href='#'
                         className='mt-2 underline text-md text-blue-600 font-bold decoration-inherit'
@@ -111,64 +186,74 @@ const EventCreationPage = () => {
                 <h1 className='mt-5 text-xl font-semibold  '>
                     Choose Event Type:
                 </h1>
-                <p className='max-w-4xl mt-2 text-gray-500  '>
+                <p className='max-w-4xl mt-2 tinyText text-gray-400  mb-8'>
                     Every pebble event should serve at least one of the
                     sustainable development goals of United Nations. Which goal
                     do you want to help in? Select all that apply.
                 </p>
 
-                <select
+                <div
+                    className='grid-container'
+                    style={{
+                        display: "grid",
+                        gridTemplateColumns: "1fr 1fr 1fr 1fr",
+                        gridAutoRows: "1fr",
+                        gap: "1rem",
+                    }}
+                >
+                    {arrEventType.map((type, index) => (
+                        <button
+                            value={type}
+                            onClick={(e) => {
+                                const buttons =
+                                    document.querySelectorAll(".grid-item");
+                                buttons.forEach((button) => {
+                                    button.style.backgroundColor = "#FFF";
+                                    button.style.color = "#FDA855"; // Change the text color back to the default color
+                                });
+
+                                setInput({ ...input, type: e.target.value });
+                                e.target.style.backgroundColor = "#FDA855";
+                                e.target.style.color = "#fff";
+                            }}
+                            key={index}
+                            className='grid-item'
+                            style={{
+                                borderRadius: "8px",
+                                border: "1px solid #FDA855",
+                                background: "#FFF",
+                                display: "flex",
+                                color: "#FDA855",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                padding: "6px 16px",
+                            }}
+                        >
+                            {type}
+                        </button>
+                    ))}
+                </div>
+
+                {/* <select
                     id='type'
                     value={input.type}
                     onChange={(e) =>
                         setInput({ ...input, type: e.target.value })
                     }
                     className='mt-3 required outline outline-2 rounded outline-orange-600 font-semibold text-orange-600 text-md max-w-2xl'
-                >
-                    <option value='No Poverty'>No Poverty</option>
-                    <option value='Zero Hunger'>Zero Hunger</option>
-                    <option value='Good Health and Well-being'>
-                        Good Health and Well-being
-                    </option>
-                    <option value='Gender Equality'>Gender Equality</option>
-                    <option value='Clean Water and Sanitation'>
-                        Clean Water and Sanitation
-                    </option>
-                    <option value='Affordable and Clean Energy'>
-                        Affordable and Clean Energy
-                    </option>
-                    <option value='Decent Work and Economic Growth'>
-                        Decent Work and Economic Growth
-                    </option>
-                    <option value='Industry, Innovation, and Infrastructure'>
-                        Industry, Innovation, and Infrastructure
-                    </option>
-                    <option value='Reduced Inequalities'>
-                        Reduced Inequalities
-                    </option>
-                    <option value='Sustainable Cities and Communitiese'>
-                        Sustainable Cities and Communitiese
-                    </option>
-                    <option value='Responsible Consumption/Production'>
-                        Responsible Consumption/Production
-                    </option>
-                    <option value='Climate Action'>Climate Action</option>
-                    <option value='Life Below Water'>Life Below Water</option>
-                    <option value='Life on Land'>Life on Land</option>
-                    <option value='Peace, Justice and Strong Institutions'>
-                        Peace, Justice and Strong Institutions
-                    </option>
-                    <option value='Other'>Other</option>
-                </select>
+                > {arrEventType.map((type, index) => (
+                    <option key={index} value={type}>{type}</option>
+                ))}
+                </select>*/}
             </div>
 
             <div className='flex l flex-col  mx-auto   flex-wrap sm:flex sm:flex-col  sm:ml-3 sm:items-center   md:flex md:flex-col md:ml-3 md:items-center lg:flex lg:flex-col lg:mt-3 lg:mx-0 lg:items-start'>
                 <h1 className='mt-5 text-xl font-semibold align-left '>
                     Event Title:
                 </h1>
-                <p className='max-w-4xl mt-2 text-gray-500'>
+                <p className='max-w-4xl mt-2 tinyText text-gray-400'>
                     Choose a title that will give people a clear idea of what
-                    the event is about. Feel free to be creative! You canedit
+                    the event is about. Feel free to be creative! You can edit
                     this later if you change your mind.
                 </p>
                 <form className=''>
@@ -177,7 +262,7 @@ const EventCreationPage = () => {
                         value={input.title}
                         onChange={handleInputChange}
                         placeholder='Choose a title'
-                        className=' p-1 font-semibold  mt-4   rounded-md focus:outline-2 outline outline-1   '
+                        className=' p-1 font-semibold  mt-4 w-96 rounded-md focus:outline-2 outline outline-1   '
                     ></input>
                 </form>
             </div>
@@ -186,7 +271,7 @@ const EventCreationPage = () => {
                 <h1 className='mt-5 text-xl font-semibold align-left '>
                     Event Description:
                 </h1>
-                <p className='max-w-4xl mt-2 text-gray-500'>
+                <p className='max-w-4xl mt-2 tinyText text-gray-400'>
                     Describe the purpose of your event. Who should join and what
                     will you do at the event?
                 </p>
@@ -205,7 +290,7 @@ const EventCreationPage = () => {
                 <h1 className='mt-5 text-xl font-semibold align-left '>
                     Event Image:
                 </h1>
-                <p className='max-w-4xl mt-3 text-gray-500'>
+                <p className='max-w-4xl mt-3 tinyText text-gray-400'>
                     We have found that listings with a photo attract more
                     interest.
                 </p>
@@ -213,15 +298,15 @@ const EventCreationPage = () => {
                     type='file'
                     onChange={(e) => setImg(e.target.files[0])}
                     id='eventimage'
-                    className='mt-3'
+                    className='mt-3 file-input file-input-bordered w-full max-w-3xl border-2 border-black'
                 ></input>
             </div>
 
-            <div className='flex flex-col flex-wrap mt-0 w-screen'>
+            <div className='flex flex-col flex-wrap mt-8 w-screen'>
                 <h1 className='mt-5 text-xl font-semibold align-left '>
                     Almost Done! Just take a minute to review our guidlines.
                 </h1>
-                <p className='max-w-4xl mt-1 text-gray-500'>
+                <p className='max-w-4xl mt-1 tinyText text-gray-400'>
                     Pebble is all about helping people with the help of
                     volunteers like you. This means that all events should:
                 </p>
@@ -232,7 +317,7 @@ const EventCreationPage = () => {
                     </li>
                     <li>Have the host present in all events</li>
                 </ul>
-                <p className='max-w-4xl mt-1 text-gray-500'>
+                <p className='max-w-4xl mt-1 tinyText text-gray-400'>
                     You can read more about all of this in our{" "}
                     <a href='#' className='underline text-md text-blue-600'>
                         community guidelines.
@@ -240,10 +325,19 @@ const EventCreationPage = () => {
                 </p>
             </div>
 
-            <div className='flex items-center flex-row mt-3 rounded max-w-3xl'>
+            <div className='flex items-center flex-row mt-3 rounded '>
                 <button
                     onClick={addAndGoToEvent}
-                    className='px-8 py-3 outline outline-1 rounded font-semibold mx-auto my-8'
+                    className='px-8 py-3 outline outline-1 rounded font-semibold mx-auto my-28'
+                    style={{
+                        display: "flex",
+                        width: "570px",
+                        height: "99px",
+                        padding: "11px 16px",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        boxShadow: "2px 2px 0px 0px #1A1A1A",
+                    }}
                 >
                     Agree with terms and Create Event!
                 </button>
