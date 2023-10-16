@@ -25,6 +25,7 @@
         opacity: 1;
     }
 }
+
 .information {
     overflow-y: scroll;
     scrollbar-color: rgba(0, 0, 0, 0.3);
