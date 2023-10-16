@@ -56,9 +56,12 @@ const EventsPage = ({ event }) => {
                     </div>
                     <div style={{ width: "100%" }}>
                         <p>
-                            <b>Location:</b> {event.location}
+                            <b>Location:</b> <br />
+                            {event.location}
+                            <br />
                             <br />
                             <b>Date and time:</b>
+                            <br />
                             {event.date ? (
                                 <span> {event.date}</span>
                             ) : (
@@ -72,7 +75,6 @@ const EventsPage = ({ event }) => {
                             )}
                             <br />
                             <br />
-                            <b>Attendees</b>
                             <br />
                             Organized by <b>Dude&apos;s name</b>
                         </p>
@@ -92,7 +94,7 @@ const EventsPage = ({ event }) => {
                     </div>
                 </div>
                 <div style={{ display: "flex", gap: "3rem" }}>
-                    <div style={{ maxWidth: "500px" }}>
+                    <div style={{ width: "500px" }}>
                         <h3 className='text-2xl font-bold'>
                             Event Description:
                         </h3>
@@ -148,7 +150,6 @@ export async function getServerSideProps(context) {
     // Get the event ID from the URL uwu
     const eventId = context.params.eventId;
 
-    console.log("hiii");
     // Fetch the event data from Firebase
     const eventRef = doc(db, "events", eventId);
     const eventDoc = await getDoc(eventRef);

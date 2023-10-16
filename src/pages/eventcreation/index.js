@@ -20,10 +20,9 @@ const EventCreationPage = () => {
     const [img, setImg] = useState("");
 
     const addEvent = async (input) => {
-        // Create a new event document in Firestore
         const docRef = await addDoc(formCollectionRef, input);
 
-        return docRef.id; // Return the ID of the created document
+        return docRef.id;
     };
 
     const imgUpload = async (eventId) => {
@@ -38,6 +37,12 @@ const EventCreationPage = () => {
     };
 
     const addAndGoToEvent = async () => {
+        if (!input.location || !input.type || !input.title || !input.date) {
+            // Check if required fields are empty
+            alert("Please fill in all required fields.");
+            return;
+        }
+
         const eventId = await addEvent(input);
 
         await imgUpload(eventId);
@@ -48,19 +53,6 @@ const EventCreationPage = () => {
 
         window.location.href = `/events/${eventId}`;
     };
-
-    {
-        /*const imgUpload = async (e) => {
-        const imgRef = ref(storage, `images/img${eventId}`)
-        await uploadBytes(imgRef, img)
-
-        const imageUrl = await getDownloadURL(imgRef);
-
-        await updateDoc(doc(db, "events", eventId), {
-            image: imageUrl
-        })
-    } */
-    }
 
     const handleInputChange = (e) => {
         const { id, value } = e.target;
@@ -108,7 +100,10 @@ const EventCreationPage = () => {
                             wordWrap: "break-word",
                         }}
                     >
-                        Choose Location:
+                        Choose Location:{" "}
+                        <span className='font-light text-xs align-left text-[red]'>
+                            required
+                        </span>
                     </h3>
                     <p className='max-w-sm mt-2 tinyText text-gray-400'>
                         Pebble events can be both local or online. Choose where
@@ -116,6 +111,7 @@ const EventCreationPage = () => {
                     </p>
                     <form className='max-w-1/2'>
                         <input
+                            required
                             id='location'
                             value={input.location}
                             onChange={handleInputChange}
@@ -140,27 +136,48 @@ const EventCreationPage = () => {
                             wordWrap: "break-word",
                         }}
                     >
-                        Choose Time:
+                        Choose Date & Time:{" "}
+                        <span className='font-light text-xs align-left text-[red]'>
+                            required
+                        </span>
                     </h3>
-                    <p className='max-w-sm mt-2 tinyText text-gray-400'>
-                        Select the starting time of the event.
+                    <p className='max-w-sm mt-2 tinyText text-gray-400 mb-2'>
+                        Select the day and starting time of the event.
                     </p>
-                    <form className='max-w-1/2'>
-                        <input
-                            id='time'
-                            value={input.time}
-                            onChange={handleInputChange}
-                            placeholder='Use the 12 hour time format (AM/PM)'
-                            className='p-1  mt-4  rounded-md focus:outline-2 outline outline-1 w-2/4'
-                            style={{
-                                borderRadius: "8px",
-                                border: "1px solid var(--container-border, #1A1A1A)",
-                                background: "var(--fill-white, #FFF)",
-                                width: "300px",
-                                height: "55px",
-                            }}
-                        ></input>
-                    </form>
+                    <input
+                        required
+                        type='date'
+                        id='date'
+                        name='trip-start'
+                        onChange={(e) =>
+                            setInput({ ...input, date: e.target.value })
+                        }
+                        className='border'
+                        style={{
+                            height: "3rem",
+                            borderRadius: "8%",
+                            paddingLeft: "0.5rem",
+                            paddingRight: "0.5rem",
+                            marginRight: "1rem",
+                        }}
+                        value={input.date}
+                        min='2023-17-10'
+                        max='2035-12-31'
+                    />
+                    <input
+                        type='time'
+                        id='time'
+                        value={input.time}
+                        onChange={(e) =>
+                            setInput({ ...input, time: e.target.value })
+                        }
+                        style={{
+                            height: "3rem",
+                            borderRadius: "8%",
+                            paddingLeft: "0.5rem",
+                            paddingRight: "0.5rem",
+                        }}
+                    />
                 </div>
 
                 <div
@@ -184,7 +201,10 @@ const EventCreationPage = () => {
             </div>
             <div className=' flex flex-col items-center ml-3 flex-wrap sm:flex sm:flex-col  sm:ml-3 sm:items-center   md:flex md:flex-col md:ml-3 md:items-center lg:flex lg:flex-col lg:mt-3 lg:mx-0 lg:items-start '>
                 <h1 className='mt-5 text-xl font-semibold  '>
-                    Choose Event Type:
+                    Choose Event Type:{" "}
+                    <span className='align-top font-light text-xs align-left text-[red]'>
+                        required
+                    </span>
                 </h1>
                 <p className='max-w-4xl mt-2 tinyText text-gray-400  mb-8'>
                     Every pebble event should serve at least one of the
@@ -233,23 +253,14 @@ const EventCreationPage = () => {
                         </button>
                     ))}
                 </div>
-
-                {/* <select
-                    id='type'
-                    value={input.type}
-                    onChange={(e) =>
-                        setInput({ ...input, type: e.target.value })
-                    }
-                    className='mt-3 required outline outline-2 rounded outline-orange-600 font-semibold text-orange-600 text-md max-w-2xl'
-                > {arrEventType.map((type, index) => (
-                    <option key={index} value={type}>{type}</option>
-                ))}
-                </select>*/}
             </div>
 
             <div className='flex l flex-col  mx-auto   flex-wrap sm:flex sm:flex-col  sm:ml-3 sm:items-center   md:flex md:flex-col md:ml-3 md:items-center lg:flex lg:flex-col lg:mt-3 lg:mx-0 lg:items-start'>
                 <h1 className='mt-5 text-xl font-semibold align-left '>
-                    Event Title:
+                    Event Title:{" "}
+                    <span className='align-top font-light text-xs align-left text-[red]'>
+                        required
+                    </span>
                 </h1>
                 <p className='max-w-4xl mt-2 tinyText text-gray-400'>
                     Choose a title that will give people a clear idea of what
@@ -258,11 +269,14 @@ const EventCreationPage = () => {
                 </p>
                 <form className=''>
                     <input
+                        required
                         id='title'
                         value={input.title}
                         onChange={handleInputChange}
                         placeholder='Choose a title'
-                        className=' p-1 font-semibold  mt-4 w-96 rounded-md focus:outline-2 outline outline-1   '
+                        className={`p-1 font-semibold  mt-4 w-96 rounded-md focus:outline-2 outline outline-1 ${
+                            !input.title && "required"
+                        } `}
                     ></input>
                 </form>
             </div>
@@ -319,9 +333,13 @@ const EventCreationPage = () => {
                 </ul>
                 <p className='max-w-4xl mt-1 tinyText text-gray-400'>
                     You can read more about all of this in our{" "}
-                    <a href='#' className='underline text-md text-blue-600'>
-                        community guidelines.
+                    <a
+                        href='#'
+                        className='text-[#FDA855] no-underline hover:underline text-md text-blue-600'
+                    >
+                        community guidelines
                     </a>
+                    .
                 </p>
             </div>
 
