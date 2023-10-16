@@ -28,7 +28,7 @@
 }
 
 .productImage {
-    transition: all 0.3s ease-out;
+    transition: all 0.4s ease-out;
     position: relative;
     overflow: hidden;
     float: right;
@@ -44,6 +44,8 @@
     color: #fff;
     left: 0;
     top: 0;
+    right: 0;
+    bottom: 0;
 }
 .productImage:hover .info1 {
     transform: translateX(0);
@@ -68,19 +70,60 @@
     color: #fff;
     right: 0;
     top: 0;
+    right: 0;
+    bottom: 0;
 }
 
 .productImage:hover .info {
     transform: translateX(0);
 }
+@keyframes fade {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
 
-/* .info ul li {
-    transition: 0.5s ease;
+    100% {
+        transform: translateX(0);
+        opacity: 0.2;
+    }
 }
 
-.info ul li:hover {
-    transform: translateX(10px) scale(1.1);
-} */
+.fading {
+    animation: fade linear;
+    animation-timeline: view(block);
+    animation-range: entry 0% cover 30% !important;
+}
+@media (max-width: 1280px) {
+    @keyframes fade {
+        0% {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        25% {
+            transform: translateX(-75%);
+            opacity: 0.1;
+        }
+        50% {
+            transform: translateX(-50%);
+            opacity: 0.1;
+        }
+        75% {
+            transform: translateX(-25%);
+            opacity: 0.2;
+        }
+        100% {
+            transform: translateX(0);
+            opacity: 0.5;
+        }
+    }
+
+    .fading {
+        animation: fade linear;
+        animation-timeline: view(block);
+        animation-range: entry 0% cover 44% !important;
+    }
+}
 
 .productImage:hover img {
     transition: all 0.3s ease-out;
