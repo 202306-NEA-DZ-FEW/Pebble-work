@@ -14,15 +14,15 @@ const Navbar = () => {
     };
 
     return (
-        <nav className='border border-gray-200 dark:bg-gray-900 xl:flex xl:flex-col xl:items-center'>
+        <nav className='border xl:flex xl:flex-col xl:items-center'>
             <div
                 style={{
-                    filter: "drop-shadow(5px 25px 60px #000000)",
                     position: "fixed",
                     width: "100%",
+                    height: "8%",
                     zIndex: "9999",
                 }}
-                className='max-w-screen-xl rounded-b-[45px] bg-opacity-30 bg-white flex flex-wrap items-center justify-between p-4 xl:gap-40'
+                className='bg-gray-200 top-0 flex flex-wrap items-center justify-between p-4 xl:gap-40'
             >
                 <Link href='./' className='flex items-center'>
                     <img
@@ -33,10 +33,14 @@ const Navbar = () => {
                 </Link>
                 <div className='flex items-center md:order-2'>
                     <div className='flex gap-4'>
-                        <button className='inline-flex items-center px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md'>
+                        <button
+                            className={`w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px]`}
+                        >
                             Sign in
                         </button>
-                        <button className='inline-flex items-center px-4 py-2 bg-[#2F7DA9] hover:bg-[#62b1de] text-white text-sm font-medium rounded-md'>
+                        <button
+                            className={`w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px]`}
+                        >
                             Sign up
                         </button>
                     </div>
