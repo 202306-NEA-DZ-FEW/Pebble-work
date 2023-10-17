@@ -8,7 +8,7 @@ import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: process.env.NEXT_PUBLIC_APP_API_KEY,
+    apiKey: String(process.env.NEXT_APP_FIREBASE_API_KEY),
     authDomain: "pebble-work.firebaseapp.com",
     projectId: "pebble-work",
     storageBucket: "pebble-work.appspot.com",
