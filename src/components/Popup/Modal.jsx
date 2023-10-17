@@ -17,6 +17,7 @@ const Modal = ({ message, onClose, className }) => {
                 viewBox='0 0 24 24'
             >
                 <path
+                
                     strokeLinecap='round'
                     strokeLinejoin='round'
                     strokeWidth='2'

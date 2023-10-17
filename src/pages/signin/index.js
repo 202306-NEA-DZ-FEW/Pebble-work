@@ -71,6 +71,7 @@ const SignInPage = () => {
 
     return (
         <>
+        
             <div className='flex justify-center items-center h-screen'>
                 <div className='flex items-center w-1/2'>
                     <div className='mr-10'>
