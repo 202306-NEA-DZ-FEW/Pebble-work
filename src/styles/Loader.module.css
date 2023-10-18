@@ -191,7 +191,7 @@
 
 .candle2Fire {
     position: absolute;
-    top: 54%;
+    top: 56%;
     left: 40%;
     display: block;
     width: 16px;
@@ -199,7 +199,7 @@
     background-color: rgb(255, 166, 0);
     border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
     background: #ff9800;
-    transform: translate(-75%, -100%);
+    transform: translate(-85%, -100%);
     animation: danceFire 3050ms infinite linear;
 }
 

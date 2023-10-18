@@ -1,13 +1,26 @@
+import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import * as React from "react";
 
-import EventCreationPage from "@/pages/eventcreation/index";
+import Layout from "@/layout/Layout";
 
 export default function HomePage() {
     const { t } = useTranslation("common");
 
-    return <EventCreationPage />;
+    return (
+        <>
+            <p>{t("test")}</p>
+            <div style={{ display: "flex", flexDirection: "row", gap: "20px" }}>
+                <Link href='/' locale='en'>
+                    English
+                </Link>
+                <Link href='/' locale='ar'>
+                    العربية
+                </Link>
+            </div>
+        </>
+    );
 }
 
 export async function getStaticProps({ locale }) {

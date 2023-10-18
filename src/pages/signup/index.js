@@ -5,7 +5,7 @@ import { RiTwitterXFill } from "react-icons/ri";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 import Link from "next/link";
 import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../util/firebase";
 import { db } from "../../util/firebase";
 import { addDoc, collection } from "firebase/firestore";
@@ -35,7 +35,8 @@ const SignUpPage = () => {
             const userCredential = await createUserWithEmailAndPassword(
                 auth,
                 email,
-                password
+                password,
+                Name
             );
 
             await addDoc(collection(db, "users"), {
@@ -43,6 +44,12 @@ const SignUpPage = () => {
                 Surename: Surename,
                 email: email,
             });
+
+            const user = userCredential.user;
+
+            // Add display name to the user
+            await updateProfile(user, { displayName: Name });
+
             setShowPopup(true);
             setModalContent("Congrats! You signed in/up successfully.");
             setModalClassName(
@@ -64,6 +71,7 @@ const SignUpPage = () => {
         try {
             const provider = new GoogleAuthProvider();
             await signInWithPopup(auth, provider);
+
             setShowPopup(true);
             setModalContent("Congrats! You signed in/up successfully.");
             setModalClassName(

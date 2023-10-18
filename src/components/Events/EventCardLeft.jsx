@@ -44,7 +44,7 @@ const EventCardLeft = ({
                     </p>
 
                     <button
-                        className={`w-[52px] xl:text-[15px] md:text-[12px] bg-blue-400 text-white text-[10px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px]`}
+                        className={`w-[45px] bg-blue-400 hover:bg-blue-500 text-white text-[10px] xl:text-[15px] md:text-[12px] rounded-[4px] h-[14px] xl:w-[80px] xl:h-[30px] sm:w-[60px] sm:h-[18px]`}
                     >
                         Join
                     </button>

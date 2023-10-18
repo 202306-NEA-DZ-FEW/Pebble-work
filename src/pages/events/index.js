@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import Calendar from "@/components/Events/Calendar";
 import EventCard from "@/components/Events/EventCard";
@@ -6,8 +6,7 @@ import EventCardLeft from "@/components/Events/EventCardLeft";
 import styles from "@/styles/Events.module.css";
 import FilterByType from "@/components/Filter/FilterByType";
 import { db } from "@/util/firebase";
-
-import { doc, getDoc, collection, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 const EventsPage = (user) => {
     // State variables
@@ -16,6 +15,22 @@ const EventsPage = (user) => {
     const [isLocationOpen, setLocationOpen] = useState(false);
     const [filteredTypes, setFilteredTypes] = useState([]);
     const [events, setEvents] = useState([]);
+    const dropdownRef = useRef(null);
+
+    const handleClickOutside = (event) => {
+        if (
+            dropdownRef.current &&
+            !dropdownRef.current.contains(event.target)
+        ) {
+            setFilteredTypes(false);
+        }
+    };
+    useEffect(() => {
+        window.addEventListener("click", handleClickOutside);
+        return () => {
+            window.removeEventListener("click", handleClickOutside);
+        };
+    }, []);
 
     // Handle location click
     const handleLocationClick = () => {
@@ -71,7 +86,7 @@ const EventsPage = (user) => {
     return (
         <>
             <main
-                className={` flex flex-col justify-center sm:pb-[200px] mt-32 pb-[200px] items-center xl:mt-32 xl:pb-[200px]`}
+                className={` flex flex-col justify-center pt-24 items-center pb-12`}
             >
                 <div>
                     <h1>Welcome, {user.name}!</h1>
@@ -177,7 +192,10 @@ const EventsPage = (user) => {
                             )}
                         </div>
 
-                        <FilterByType setFilteredTypes={setFilteredTypes} />
+                        <FilterByType
+                            ref={dropdownRef}
+                            setFilteredTypes={setFilteredTypes}
+                        />
                     </div>
                 </div>
             </main>

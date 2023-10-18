@@ -1,3 +1,6 @@
 {
-    "test": "Hello"
+    "test": "Hello",
+    "player": "Player",
+    "about": "About",
+    "contact": "Contact"
 }
