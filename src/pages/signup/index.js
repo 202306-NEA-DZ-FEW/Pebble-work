@@ -10,11 +10,8 @@ import { auth } from "../../util/firebase";
 import { db } from "../../util/firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { useRouter } from "next/router";
-import {
-    GoogleAuthProvider,
-    signInWithPopup,
-    TwitterAuthProvider,
-} from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import Modal from "@/components/Popup/Modal";
 const SignUpPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
@@ -22,24 +19,52 @@ const SignUpPage = () => {
     const [Surename, setSurename] = useState("");
     const [password, setPassword] = useState("");
     const router = useRouter();
+    const [showPopup, setShowPopup] = useState(false);
+    const [modalContent, setModalContent] = useState("");
+    const [modalClassName, setModalClassName] = useState("");
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
-
+    const handleSuccess = () => {
+        setShowPopup(true);
+    };
     const handleSignup = async (e) => {
         e.preventDefault();
-        createUserWithEmailAndPassword(auth, email, password, Name)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                updateProfile(user, {
-                    displayName: Name,
-                });
-                console.log(user);
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
+
+        try {
+            const userCredential = await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password,
+                Name
+            );
+
+            await addDoc(collection(db, "users"), {
+                Name: Name,
+                Surename: Surename,
+                email: email,
             });
+
+            const user = userCredential.user;
+
+            // Add display name to the user
+            await updateProfile(user, { displayName: Name });
+
+            setShowPopup(true);
+            setModalContent("Congrats! You signed in/up successfully.");
+            setModalClassName(
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+            );
+            setTimeout(() => {
+                router.push("/editprofile");
+            }, 3000);
+        } catch (error) {
+            setShowPopup(true);
+            setModalContent("Sign in/up failed.");
+            setModalClassName(
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+            );
+        }
     };
     const handelGoogle = async (e) => {
         e.preventDefault();
@@ -47,21 +72,23 @@ const SignUpPage = () => {
             const provider = new GoogleAuthProvider();
             await signInWithPopup(auth, provider);
 
-            router.push("/editprofile");
+            setShowPopup(true);
+            setModalContent("Congrats! You signed in/up successfully.");
+            setModalClassName(
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+            );
+            setTimeout(() => {
+                router.push("/editprofile");
+            }, 3000);
         } catch (error) {
-            console.error("Error signing up with Google", error);
+            setShowPopup(true);
+            setModalContent("Sign in/up failed.");
+            setModalClassName(
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+            );
         }
     };
-    const handelTwitter = async (e) => {
-        e.preventDefault();
-        try {
-            const provider = new TwitterAuthProvider();
-            await signInWithPopup(auth, provider);
-            router.push("/editprofile");
-        } catch (error) {
-            console.error("Error signing up with Google", error);
-        }
-    };
+
     return (
         <div className='flex justify-center items-center h-screen'>
             <div className='flex items-center w-1/2'>
@@ -83,7 +110,6 @@ const SignUpPage = () => {
                         <button
                             className=' border px-4 py-2 mb-2 rounded-md shadow-md flex items-center justify-center'
                             style={{ height: "40px", width: "300px" }}
-                            onClick={handelTwitter}
                         >
                             <RiTwitterXFill className='ml-2 mr-1' />
                             <span>Continue with Twitter</span>
@@ -187,6 +213,13 @@ const SignUpPage = () => {
                     </form>
                 </div>
             </div>
+            {showPopup && (
+                <Modal
+                    message={modalContent}
+                    onClose={handleSuccess}
+                    className={modalClassName}
+                />
+            )}
         </div>
     );
 };
