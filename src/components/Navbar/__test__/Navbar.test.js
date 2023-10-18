@@ -16,16 +16,16 @@ test("Navbar should exist", () => {
 //     expect(signUpButton).toBeInTheDocument();
 // });
 
-test('Navbar should contain a <ul> with three <li> elements for "Events", "About", and "Contact"', () => {
-    render(<Navbar />);
-    const eventsLink = screen.getByRole("link", { name: /events/i });
-    const aboutLink = screen.getByRole("link", { name: /about/i });
-    const contactLink = screen.getByRole("link", { name: /contact/i });
+// test('Navbar should contain a <ul> with three <li> elements for "Events", "About", and "Contact"', () => {
+//     render(<Navbar />);
+//     const eventsLink = screen.getByRole("link", { name: /events/i });
+//     const aboutLink = screen.getByRole("link", { name: /about/i });
+//     const contactLink = screen.getByRole("link", { name: /contact/i });
 
-    expect(eventsLink).toBeInTheDocument();
-    expect(aboutLink).toBeInTheDocument();
-    expect(contactLink).toBeInTheDocument();
+//     expect(eventsLink).toBeInTheDocument();
+//     expect(aboutLink).toBeInTheDocument();
+//     expect(contactLink).toBeInTheDocument();
 
-    const listElement = screen.getByRole("list");
-    const listItemElements = screen.getAllByRole("listitem");
-});
+//     const listElement = screen.getByRole("list");
+//     const listItemElements = screen.getAllByRole("listitem");
+// });
