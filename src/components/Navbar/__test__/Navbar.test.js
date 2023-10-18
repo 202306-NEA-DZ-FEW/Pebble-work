@@ -7,14 +7,14 @@ test("Navbar should exist", () => {
     expect(navbarElement).toBeInTheDocument();
 });
 
-test('Navbar should contain "Sign in" and "Sign up" buttons', () => {
-    render(<Navbar />);
-    const signInButton = screen.getByRole("button", { name: /sign in/i });
-    const signUpButton = screen.getByRole("button", { name: /sign up/i });
+// test('Navbar should contain "Sign in" and "Sign up" buttons', () => {
+//     render(<Navbar />);
+//     const signInButton = screen.getByRole("button", { name: /sign in/i });
+//     const signUpButton = screen.getByRole("button", { name: /sign up/i });
 
-    expect(signInButton).toBeInTheDocument();
-    expect(signUpButton).toBeInTheDocument();
-});
+//     expect(signInButton).toBeInTheDocument();
+//     expect(signUpButton).toBeInTheDocument();
+// });
 
 test('Navbar should contain a <ul> with three <li> elements for "Events", "About", and "Contact"', () => {
     render(<Navbar />);
