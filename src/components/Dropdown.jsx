@@ -60,10 +60,10 @@ const Dropdown = () => {
                 <Signup />
             </div>
             <div className='relative ' ref={dropdownRef}>
-                <div className='flex'>
-                    <div
+                <div className='flex gap-1 items-center justify-center'>
+                    <button
                         onMouseEnter={handleMouseEnter}
-                        className='font-bold hover:text-blue-500 hover:underline text-black bg-transparent'
+                        className={`w-[52px] xl:mb-0 md:mb-2 md:mt-0 sm:mt-[2px] mt-[5px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px]`}
                     >
                         {user
                             ? // if the screen width is below 640px limit the display name to 5 characters
@@ -76,7 +76,7 @@ const Dropdown = () => {
                                 ? user.displayName.slice(0, 10) + "..."
                                 : user.displayName
                             : "Account"}
-                    </div>
+                    </button>
 
                     <img
                         className='rounded-full md:w-8 md:h-8 w-6 h-6'
@@ -94,9 +94,9 @@ const Dropdown = () => {
                 {isOpen && (
                     <div
                         onMouseLeave={handleMouseLeave}
-                        className='absolute cursor-pointer right-0 mt-2 mr-4 bg-white rounded-md shadow-lg overflow-hidden'
+                        className='absolute cursor-pointer right-0 xl:mr-11 md:mt-2 md:mr-10 sm:mt-1 sm:mr-4 mr-7 mt-1 bg-white rounded-md shadow-lg overflow-hidden'
                     >
-                        <ul className='text-[10px] lg:text-[14px] xl:text-[16px] md:text-[12px] py-2 h-full flex items-center justify-center sm:w-[90px] lg:w-[100px] xl:w-[110px]'>
+                        <ul className='text-[10px] lg:text-[14px] xl:text-[16px] md:text-[12px] h-full flex items-center justify-center sm:w-[90px] lg:w-[100px] xl:w-[110px]'>
                             {user ? (
                                 <div className='flex flex-col pl-1'>
                                     <Link

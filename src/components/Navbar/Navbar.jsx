@@ -2,6 +2,7 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import Signin from "@/components/Signin/Signin";
 import Pebble from "../Pebble";
+import Language from "../Language/Language";
 
 import Dropdown from "../Dropdown";
 import { auth } from "@/util/firebase";
@@ -54,51 +55,7 @@ const Navbar = () => {
                     <div className='flex gap-4'>
                         <Dropdown />
                     </div>
-                    <button
-                        type='button'
-                        onClick={toggleDropdown}
-                        className='inline-flex items-center font-medium justify-center px-4 text-sm text-gray-900  rounded-lg cursor-pointer'
-                    >
-                        <div className='flex items-center'>
-                            <img src='/icons/Web.png' alt='Pebble Logo' />
-                            <p className='text-black'>(EN)</p>
-                        </div>
-                    </button>
-                    <div
-                        className={`z-50 ${
-                            isDropdownOpen ? "block" : "hidden"
-                        } my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700`}
-                        id='language-dropdown-menu'
-                    >
-                        <ul className='py-10 font-medium flex absolute right-[3px]'>
-                            <li>
-                                <Link
-                                    href='#'
-                                    className='block px-4 py-2 text-sm text-gray-700 hover:border hover:rounded-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
-                                >
-                                    <div className='inline-flex items-center'>
-                                        English (EN)
-                                    </div>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    href='#'
-                                    className='block px-4 py-2 text-sm text-gray-700 hover:border hover:rounded-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
-                                >
-                                    <div className='inline-flex items-center'>
-                                        <img
-                                            className='mr-1'
-                                            src='/Palestine.png'
-                                            width='20px'
-                                            height='20px'
-                                        />
-                                        Arabic (AR)
-                                    </div>
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
+                    <Language />
                     <button
                         data-collapse-toggle='navbar-language'
                         type='button'
