@@ -1,9 +1,15 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Signin from "@/components/Signin/Signin";
+import Pebble from "../Pebble";
+
+import Dropdown from "../Dropdown";
+import { auth } from "@/util/firebase";
 
 const Navbar = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [menuDropdownOpen, setMenuDropdownOpen] = useState(false);
+    const [user, setUser] = useState(null);
 
     const menuDropdown = () => {
         setMenuDropdownOpen(!menuDropdownOpen);
@@ -12,9 +18,21 @@ const Navbar = () => {
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
     };
+    useEffect(() => {
+        const logged = auth.onAuthStateChanged((user) => {
+            if (user) {
+                setUser(user);
+            } else {
+                setUser(null);
+            }
+        });
+        return () => {
+            logged();
+        };
+    }, []);
 
     return (
-        <nav className='border xl:flex xl:flex-col xl:items-center'>
+        <nav className='xl:flex xl:flex-col xl:items-center'>
             <div
                 style={{
                     position: "fixed",
@@ -30,19 +48,11 @@ const Navbar = () => {
                         className='h-8 mr-3'
                         alt='Pebble Logo'
                     />
+                    <Pebble />
                 </Link>
                 <div className='flex items-center md:order-2'>
                     <div className='flex gap-4'>
-                        <button
-                            className={`w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px]`}
-                        >
-                            Sign in
-                        </button>
-                        <button
-                            className={`w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px]`}
-                        >
-                            Sign up
-                        </button>
+                        <Dropdown />
                     </div>
                     <button
                         type='button'
@@ -67,29 +77,6 @@ const Navbar = () => {
                                     className='block px-4 py-2 text-sm text-gray-700 hover:border hover:rounded-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
                                 >
                                     <div className='inline-flex items-center'>
-                                        <svg
-                                            aria-hidden='true'
-                                            className='h-3.5 w-3.5 rounded-full mr-2'
-                                            xmlns='http://www.w3.org/2000/svg'
-                                            id='flag-icon-css-us'
-                                            viewBox='0 0 512 512'
-                                        >
-                                            <path
-                                                fill='#3c3b6e'
-                                                d='M0 0h247v10H0zm0 20h247v10H0zm0 20h247v10H0z'
-                                                transform='scale(3.9385)'
-                                            />
-                                            <path
-                                                fill='#192f5d'
-                                                d='M0 0h247v10H0zm0 20h247v10H0zm0 20h247v10H0z'
-                                                transform='scale(3.9385)'
-                                            />
-                                            <path
-                                                fill='#fff'
-                                                d='M0 0h247v10H0zm0 20h247v10H0zm0 20h247v10H0z'
-                                                transform='scale(3.9385)'
-                                            />
-                                        </svg>
                                         English (EN)
                                     </div>
                                 </Link>

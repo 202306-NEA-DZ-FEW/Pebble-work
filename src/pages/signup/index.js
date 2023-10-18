@@ -5,7 +5,7 @@ import { RiTwitterXFill } from "react-icons/ri";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 import Link from "next/link";
 import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../util/firebase";
 import { db } from "../../util/firebase";
 import { addDoc, collection } from "firebase/firestore";
@@ -28,33 +28,25 @@ const SignUpPage = () => {
 
     const handleSignup = async (e) => {
         e.preventDefault();
-
-        try {
-            const userCredential = await createUserWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
-            const user = userCredential.user;
-            // Add user information to Firestore
-            await addDoc(collection(db, "users"), {
-                Name: Name,
-                Surename: Surename,
-                email: email,
+        createUserWithEmailAndPassword(auth, email, password, Name)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                updateProfile(user, {
+                    displayName: Name,
+                });
+                console.log(user);
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
             });
-
-            console.log("User created!", user);
-            router.push("/editprofile");
-        } catch (error) {
-            console.error("Error creating user", error);
-        }
     };
     const handelGoogle = async (e) => {
         e.preventDefault();
         try {
             const provider = new GoogleAuthProvider();
             await signInWithPopup(auth, provider);
-            //  hna tkon Redirect
+
             router.push("/editprofile");
         } catch (error) {
             console.error("Error signing up with Google", error);
