@@ -65,17 +65,18 @@ const Dropdown = () => {
                         onMouseEnter={handleMouseEnter}
                         className={`w-[52px] xl:mb-0 md:mb-2 md:mt-0 sm:mt-[2px] mt-[5px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px]`}
                     >
-                        {user
+                        {auth?.currentUser?.email}
+                        {/* user
                             ? // if the screen width is below 640px limit the display name to 5 characters
-                              isMobile
+                            isMobile
                                 ? user.displayName.length > 5
                                     ? user.displayName.slice(0, 5) + "..."
                                     : user.displayName
                                 : // if the screen width is above 640px limit the display name to 10 characters
                                 user.displayName.length > 10
-                                ? user.displayName.slice(0, 10) + "..."
-                                : user.displayName
-                            : "Account"}
+                                    ? user.displayName.slice(0, 10) + "..."
+                                    : user.displayName
+    : "Account"*/}
                     </button>
 
                     <img

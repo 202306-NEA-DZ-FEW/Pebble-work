@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
-import { db, storage } from "@/util/firebase";
+import { db, storage, auth } from "@/util/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const EventCreationPage = () => {
@@ -13,7 +13,7 @@ const EventCreationPage = () => {
         date: "",
         description: "",
         attendees: [],
-        organizer: "",
+        organizer: auth?.currentUser?.uid,
         image: "",
     });
 

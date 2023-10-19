@@ -8,7 +8,7 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../util/firebase";
 import { db } from "../../util/firebase";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, setDoc, doc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import Modal from "@/components/Popup/Modal";
@@ -38,14 +38,20 @@ const SignUpPage = () => {
                 password,
                 Name
             );
+            const user = userCredential.user;
+            const usersCollection = collection(db, "users");
 
-            await addDoc(collection(db, "users"), {
+            //user's UID becomes the doc's ID
+            const userDocRef = doc(usersCollection, user.uid);
+
+            await setDoc(userDocRef, {
                 Name: Name,
                 Surename: Surename,
                 email: email,
+                interests: [],
+                eventsCreated: [],
+                eventsJoined: [],
             });
-
-            const user = userCredential.user;
 
             // Add display name to the user
             await updateProfile(user, { displayName: Name });

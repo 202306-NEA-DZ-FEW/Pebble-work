@@ -9,7 +9,7 @@ const rubik = Rubik({
     variable: "--font-rubik",
 });
 
-const EventsPage = ({ event }) => {
+const EventsPage = ({ event, organizer }) => {
     const cellData = [
         "Mona M.",
         "Aether M.",
@@ -76,7 +76,10 @@ const EventsPage = ({ event }) => {
                             <br />
                             <br />
                             <br />
-                            Organized by <b>Dude&apos;s name</b>
+                            Organized by{" "}
+                            <b>
+                                {organizer.Name} {organizer.Surename}
+                            </b>
                         </p>
 
                         <button
@@ -155,9 +158,16 @@ export async function getServerSideProps(context) {
     const eventDoc = await getDoc(eventRef);
     const event = eventDoc.data();
 
+    const userId = event.organizer;
+
+    const organizerRef = doc(db, "users", userId);
+    const organizerDoc = await getDoc(organizerRef);
+    const organizer = organizerDoc.data();
+
     return {
         props: {
             event,
+            organizer,
         },
     };
 }
