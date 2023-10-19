@@ -1,0 +1,52 @@
+@keyframes slideInRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate3d(1, 1, 0, 0deg);
+    }
+    100% {
+        transform: rotate3d(1, 1, 0, 360deg);
+    }
+}
+
+.text {
+    animation: slideInRight 1.5s ease-in-out;
+}
+.slideleft {
+    animation: slideInLeft 1.5s ease-in-out;
+    animation-fill-mode: both;
+    transform-origin: center center;
+}
+
+.img {
+    animation-name: spin;
+    animation-duration: 1.5s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+}
+@media (max-width: 490px) {
+    .image {
+        width: 144px;
+        height: 144px;
+    }
+}
