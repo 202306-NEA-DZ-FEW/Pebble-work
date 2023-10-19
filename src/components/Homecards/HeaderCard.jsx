@@ -3,7 +3,9 @@ import styles from "@/styles/Homepage.module.css";
 export default function HeaderCard() {
     return (
         <>
-            <div className='flex flex-row items-center justify-center gap-2 mb-8'>
+            <div
+                className={`${styles.change} flex flex-row bg-white shadow-lg items-center justify-center gap-2 mb-8 xl:w-[1222px] xl:h-[750px] lg:w-[960px] lg:h-[500px] md:w-[777px] md:h-[370px] sm:w-[666px] sm:h-[330px] w-[466px] h-[300px] `}
+            >
                 <div className={`${styles.text}`}>
                     <div
                         style={{ wordWrap: "break-word" }}
