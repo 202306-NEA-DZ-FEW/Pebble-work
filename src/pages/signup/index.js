@@ -12,7 +12,10 @@ import { addDoc, collection } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import Modal from "@/components/Popup/Modal";
-const SignUpPage = () => {
+import Translat from "../../util/Translat";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
+const SignUpPage = (props) => {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
     const [Name, setName] = useState("");
@@ -22,6 +25,8 @@ const SignUpPage = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [modalContent, setModalContent] = useState("");
     const [modalClassName, setModalClassName] = useState("");
+    const { t, dir } = Translat(props._nextI18Next.initialLocale);
+
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
@@ -90,7 +95,7 @@ const SignUpPage = () => {
     };
 
     return (
-        <div className='flex justify-center items-center h-screen'>
+        <div className='flex justify-center items-center h-screen' dir={dir}>
             <div className='flex items-center w-1/2'>
                 <div className='mr-10'>
                     <Image
@@ -225,3 +230,11 @@ const SignUpPage = () => {
 };
 
 export default SignUpPage;
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ["common"])),
+            // Will be passed to the page component as props
+        },
+    };
+}

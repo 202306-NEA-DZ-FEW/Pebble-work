@@ -1,14 +1,18 @@
 import Image from "next/image";
 import React from "react";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Translat from "@/util/Translat";
 
 import styles from "@/styles/about.module.css";
 
 import MembersCard from "@/components/Cards/Aboutus/MembersCard";
 
-const AboutPage = () => {
+const AboutPage = (props) => {
+    const { t, dir } = Translat(props._nextI18Next.initialLocale);
     return (
         <>
             <div
+                dir={dir}
                 className={` grid grid-rows-1 content-center place-items-center xl:pt-20  lg:pb-[250px] overflow-x-hidden`}
             >
                 <div className='absolute xl:static top-0 pb-40'>
@@ -135,3 +139,11 @@ const AboutPage = () => {
 };
 
 export default AboutPage;
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ["common"])),
+            // Will be passed to the page component as props
+        },
+    };
+}

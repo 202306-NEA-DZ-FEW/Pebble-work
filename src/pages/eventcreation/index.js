@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 import { db, storage } from "@/util/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Translat from "@/util/Translat";
 
-const EventCreationPage = () => {
+const EventCreationPage = (props) => {
+    const { t, dir } = Translat(props._nextI18Next.initialLocale);
+
     const formCollectionRef = collection(db, "events");
     const [input, setInput] = useState({
         location: "",
@@ -85,6 +89,7 @@ const EventCreationPage = () => {
 
     return (
         <div
+            dir={dir}
             className='container ml-auto mr-auto max-w-6xl mt-2 flex flex-col bg-white mx-auto'
             style={{ fontFamily: "Rubik" }}
         >
@@ -366,3 +371,12 @@ const EventCreationPage = () => {
 };
 
 export default EventCreationPage;
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ["common"])),
+            // Will be passed to the page component as props
+        },
+    };
+}

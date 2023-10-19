@@ -1,5 +1,5 @@
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import Translat from "../../util/Translat";
+import Translat from "@/util/Translat";
 
 const HomePage = (props) => {
     const { t, dir } = Translat(props._nextI18Next.initialLocale);

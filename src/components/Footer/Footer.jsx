@@ -1,7 +1,9 @@
 import React from "react";
 import Link from "next/link";
+import Translat from "@/util/Translat";
 
-const Footer = () => {
+const Footer = (props) => {
+    const { t } = Translat(props);
     return (
         <footer
             data-testid='footer'
