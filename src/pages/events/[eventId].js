@@ -1,8 +1,9 @@
-import React from "react";
-import Image from "next/image";
+import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 import { Rubik } from "next/font/google";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "@/util/firebase";
+import Image from "next/image";
+import React from "react";
+
+import { auth, db } from "@/util/firebase";
 
 const rubik = Rubik({
     subsets: ["latin"],
@@ -18,6 +19,30 @@ const EventsPage = ({ event, organizer }) => {
         "Diluc M.",
         "Dori S.",
     ];
+
+    const joinEvent = async (eventId) => {
+        const userId = auth?.currentUser?.uid;
+        const userDocRef = doc(db, "users", userId);
+        const eventDocRef = doc(db, "events", eventId);
+
+        const userDoc = await getDoc(userDocRef);
+        const eventDoc = await getDoc(eventDocRef);
+
+        const eventObject = eventDoc.data();
+        const userObject = userDoc.data();
+
+        const eventInfo = { ...eventObject, uid: eventId };
+
+        await updateDoc(userDocRef, {
+            eventsJoined: arrayUnion(eventInfo),
+        });
+
+        await updateDoc(eventDocRef, {
+            attendees: arrayUnion(userObject),
+        });
+
+        alert("Event joined successfully");
+    };
     return (
         <>
             <div
@@ -36,7 +61,7 @@ const EventsPage = ({ event, organizer }) => {
                 >
                     <div
                         style={{ margin: "auto", width: "100%" }}
-                        className={`sm:w-2/5 mx-auto`}
+                        className='sm:w-2/5 mx-auto'
                     >
                         {event.image ? (
                             <Image
@@ -47,7 +72,7 @@ const EventsPage = ({ event, organizer }) => {
                             />
                         ) : (
                             <Image
-                                src={"/event_image.png"}
+                                src='/event_image.png'
                                 width={450}
                                 height={450}
                                 alt='event pic'
@@ -77,13 +102,18 @@ const EventsPage = ({ event, organizer }) => {
                             <br />
                             <br />
                             Organized by{" "}
-                            <b>
-                                {organizer.Name} {organizer.Surename}
-                            </b>
+                            {organizer.Name ? (
+                                <b>
+                                    {organizer.Name} {organizer.Surename}
+                                </b>
+                            ) : (
+                                <b>Dude McGee</b>
+                            )}
                         </p>
 
                         <button
                             className='btn btn-sm btn-wide'
+                            onClick={() => joinEvent(event.eventId)}
                             style={{
                                 marginTop: "1rem",
                                 borderRadius: "8px",
@@ -107,7 +137,6 @@ const EventsPage = ({ event, organizer }) => {
                         ) : (
                             <p>
                                 Loading... there might be no event description{" "}
-                                {"):"}
                             </p>
                         )}
                     </div>
@@ -166,7 +195,10 @@ export async function getServerSideProps(context) {
 
     return {
         props: {
-            event,
+            event: {
+                ...event,
+                eventId: eventId,
+            },
             organizer,
         },
     };

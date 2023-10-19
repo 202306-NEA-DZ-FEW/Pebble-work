@@ -1,8 +1,16 @@
-import React, { useState, useEffect } from "react";
+import {
+    addDoc,
+    arrayUnion,
+    collection,
+    doc,
+    getDoc,
+    updateDoc,
+} from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import Link from "next/link";
-import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
-import { db, storage, auth } from "@/util/firebase";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import React, { useEffect, useState } from "react";
+
+import { auth, db, storage } from "@/util/firebase";
 
 const EventCreationPage = () => {
     const formCollectionRef = collection(db, "events");
@@ -37,6 +45,19 @@ const EventCreationPage = () => {
         });
     };
 
+    const updateUser = async (eventId) => {
+        const userId = auth?.currentUser?.uid;
+        const userDocRef = doc(db, "users", userId);
+
+        const eventDoc = await getDoc(doc(db, "events", eventId));
+
+        const eventObject = eventDoc.data();
+        const eventInfo = { ...eventObject, uid: eventId };
+
+        await updateDoc(userDocRef, {
+            eventsCreated: arrayUnion(eventInfo),
+        });
+    };
     const addAndGoToEvent = async () => {
         if (!input.location || !input.type || !input.title || !input.date) {
             // Check if required fields are empty
@@ -51,6 +72,7 @@ const EventCreationPage = () => {
         //use getDownloadURL to get the url of the newly uploaded image
 
         //updateDoc to add the url to the docRef in image:''
+        await updateUser(eventId);
 
         window.location.href = `/events/${eventId}`;
     };
