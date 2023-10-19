@@ -7,7 +7,7 @@ import { useMediaQuery } from "react-responsive";
 import Signin from "./Signin/Signin";
 import styles from "@/styles/DropMenu.module.css";
 
-const Dropdown = () => {
+const Dropdown = (t) => {
     const isMobile = useMediaQuery({ maxWidth: 640 });
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);

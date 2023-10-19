@@ -19,6 +19,7 @@
         "prepare": "husky install"
     },
     "dependencies": {
+        "@headlessui/react": "^1.7.17",
         "@uidotdev/usehooks": "^2.4.0",
         "autoprefixer": "^10.4.16",
         "clsx": "^1.2.1",

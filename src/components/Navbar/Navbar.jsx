@@ -3,14 +3,17 @@ import React, { useState, useEffect } from "react";
 import Signin from "@/components/Signin/Signin";
 import Pebble from "../Pebble";
 import Language from "../Language/Language";
+import Translat from "@/util/Translat";
 
 import Dropdown from "../Dropdown";
 import { auth } from "@/util/firebase";
 
-const Navbar = () => {
+const Navbar = (props) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [menuDropdownOpen, setMenuDropdownOpen] = useState(false);
     const [user, setUser] = useState(null);
+
+    const { t } = Translat(props);
 
     const menuDropdown = () => {
         setMenuDropdownOpen(!menuDropdownOpen);
@@ -53,7 +56,7 @@ const Navbar = () => {
                 </Link>
                 <div className='flex items-center md:order-2'>
                     <div className='flex gap-4'>
-                        <Dropdown />
+                        <Dropdown t='t' />
                     </div>
                     <Language />
                     <button
@@ -104,7 +107,7 @@ const Navbar = () => {
                                 href='/events'
                                 className='block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700'
                             >
-                                Events
+                                {t.events}
                             </Link>
                         </li>
                         <li>
@@ -112,7 +115,7 @@ const Navbar = () => {
                                 href='/about'
                                 className='block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700'
                             >
-                                About
+                                {t.about}
                             </Link>
                         </li>
                         <li>
@@ -120,7 +123,7 @@ const Navbar = () => {
                                 href='#'
                                 className='block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700'
                             >
-                                Contact
+                                {t.contact}
                             </Link>
                         </li>
                     </ul>

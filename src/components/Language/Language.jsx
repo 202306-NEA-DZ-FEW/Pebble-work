@@ -1,12 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
-import styles from "@/styles/Events.module.css";
-import Link from "next/link";
+
+import { useRouter } from "next/router";
 
 const Language = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [menuDropdownOpen, setMenuDropdownOpen] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
+    const router = useRouter();
+    const { locale } = router;
+
+    const changeLanguage = (selectedLocale) => {
+        const currentPath = router.pathname;
+        const newPath = `/${selectedLocale}${currentPath}`;
+        router.push(newPath).then(() => {
+            router.replace(router.asPath); // Reset the path state
+        });
+    };
 
     const handleClickOutside = (event) => {
         if (
@@ -16,6 +24,7 @@ const Language = () => {
             setIsDropdownOpen(false);
         }
     };
+
     useEffect(() => {
         window.addEventListener("click", handleClickOutside);
         return () => {
@@ -23,20 +32,10 @@ const Language = () => {
         };
     }, []);
 
-    const handleMouseEnter = () => {
-        setIsOpen(true);
-    };
-    const handleMouseLeave = () => {
-        setIsOpen(false);
-    };
-
-    const menuDropdown = () => {
-        setMenuDropdownOpen(!menuDropdownOpen);
-    };
-
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
     };
+
     return (
         <>
             <div
@@ -46,7 +45,7 @@ const Language = () => {
                 <button
                     type='button'
                     onClick={toggleDropdown}
-                    className='inline-flex items-center font-medium justify-center text-sm text-gray-900  rounded-lg cursor-pointer'
+                    className='inline-flex items-center font-medium justify-center text-sm text-gray-900 rounded-lg cursor-pointer'
                 >
                     <div className='flex items-center z-[444]'>
                         <img src='/icons/Web.png' alt='Pebble Logo' />
@@ -64,9 +63,12 @@ const Language = () => {
                         className='font-medium overflow-hidden flex flex-col gap-2 fixed bottom-10 right-20 sm:right-40'
                     >
                         <li>
-                            <Link
+                            <button
                                 href='#'
-                                className='block text-sm text-gray-700 hover:border hover:rounded-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
+                                onClick={() => changeLanguage("en")}
+                                className={`block text-sm text-gray-700 hover:border hover:rounded-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white ${
+                                    locale === "en" ? "bg-gray-200" : ""
+                                }`}
                             >
                                 <div className='inline-flex items-center'>
                                     <img
@@ -77,12 +79,15 @@ const Language = () => {
                                     />
                                     English (EN)
                                 </div>
-                            </Link>
+                            </button>
                         </li>
                         <li>
-                            <Link
+                            <button
                                 href='#'
-                                className='block text-sm text-gray-700 hover:border hover:rounded-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
+                                onClick={() => changeLanguage("ar")}
+                                className={`block text-sm text-gray-700 hover:border hover:rounded-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white ${
+                                    locale === "ar" ? "bg-gray-200" : ""
+                                }`}
                             >
                                 <div className='inline-flex items-center'>
                                     <img
@@ -93,7 +98,7 @@ const Language = () => {
                                     />
                                     Arabic (AR)
                                 </div>
-                            </Link>
+                            </button>
                         </li>
                     </ul>
                 </div>

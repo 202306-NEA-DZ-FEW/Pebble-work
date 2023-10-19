@@ -1,25 +1,25 @@
-import { useTranslation } from "next-i18next";
-import { useEffect, useState } from "react";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Translat from "../../util/Translat";
 
-function HomePage() {
-    const { t } = useTranslation();
-    const [isClient, setIsClient] = useState(false);
-
-    useEffect(() => {
-        setIsClient(true);
-    }, []);
+const HomePage = (props) => {
+    const { t, dir } = Translat(props._nextI18Next.initialLocale);
 
     return (
-        <div className='pt-40'>
-            <h1>{isClient ? "This is never prerendered" : "Prerendered"}</h1>
-            <nav>
-                <ul>
-                    <li>{t("about")}</li>
-                    <li>{t("contact")}</li>
-                </ul>
-            </nav>
+        <div className='pt-40' dir={dir}>
+            <p className='text-3xl font-futuraBlack'>{t.test}</p>
+            <p className='text-3xl font-futuraBlack'>{t.player}</p>
+            <p className='text-3xl font-futuraBlack'>{t.about}</p>
         </div>
     );
-}
+};
 
 export default HomePage;
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ["common"])),
+            // Will be passed to the page component as props
+        },
+    };
+}
