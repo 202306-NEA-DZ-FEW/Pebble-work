@@ -49,7 +49,7 @@ export default function HeaderCard() {
                 <div className='w-100'>
                     <img
                         className='h-full w-full rounded-none rounded-4-xl'
-                        src='https://media.discordapp.net/attachments/1133546889762054286/1162163860539715604/Screenshot_2023-10-13_000245.png?ex=653af070&is=65287b70&hm=f3c34570a0de3e824cbdf21dca8b332e677295a6779544b6fac54d74ef1be7b9&=&width=567&height=556'
+                        src='https://s3-alpha-sig.figma.com/img/27d2/e137/8586fde64402db7f3c226adc7af9fe51?Expires=1698624000&Signature=DDB2wxBlKV77PTODVG9DJVvF3zqwvF0zOYb18VjrA9NeZFtz4ayIbO1QjsLQULj0fwpgDhdGFDAs7~H393B0h35d65C8bFdepBiwv4erKgi68FCumuf0~fcOFUjfhKeIQFNWjIZi3di8-tviz52sDAgzL6AFJezy0BWvLQx8U2Km9iRJOQHJZN4qnEXZyJQv8-VZ1DZcgLWoSMZ501wmX4yze~jUbEIomfXmZixoMl8ujIp8RYnn7mxv6--MJ7eQph-x-wbLc-xTgFxenAec~SYMikpgqsbKvVKUdcxuUAQh2q3u6IxfaHM9~veNa91U0F~nsVf4WGjdSX4uo9y8sQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4'
                         alt=''
                         style={imageStyle}
                     />

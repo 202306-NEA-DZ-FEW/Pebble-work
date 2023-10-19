@@ -1,11 +1,11 @@
 import React from "react";
 
-import GalleryCard from "./HomeCards/GalleryCard";
-import HeaderCard from "./HomeCards/HeaderCard";
-import HeroCard from "./HomeCards/HeroCard";
-import ImageSquareCard from "./HomeCards/ImageSquareCard";
-import MainCard from "./HomeCards/MainCard";
-import SocialCard from "./HomeCards/SocialCard";
+import GalleryCard from "@/components/Homecards/GalleryCard";
+import HeaderCard from "@/components/Homecards/HeaderCard";
+import HeroCard from "@/components/Homecards/HeroCard";
+import ImageSquareCard from "@/components/Homecards/ImageSquareCard";
+import MainCard from "@/components/Homecards/MainCard";
+import SocialCard from "@/components/Homecards/SocialCard";
 
 const CardContainer = ({ children }) => (
     <div className='mb-8 sm:mb-12 md:mb-16 lg:mb-20'>{children}</div>
@@ -17,7 +17,7 @@ const Heading = ({ text }) => (
 
 const HomeCards = () => {
     return (
-        <div className='container mx-auto'>
+        <div className='container xl:mt-20 md:pt-20 flex flex-col items-center justify-center mx-auto'>
             <HeaderCard />
 
             <Heading text='How It Works' />

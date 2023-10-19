@@ -1,35 +1,13 @@
 import Link from "next/link";
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
 import * as React from "react";
 
 import HomeCards from "@/components/HomeCards";
 
-import Layout from "@/layout/Layout";
-
 export default function HomePage() {
-    const { t } = useTranslation("common");
-
     return (
-        <Layout>
-            <p>{t("test")}</p>
+        <main>
             <HomeCards /> {/* Render the HomeCards component here */}
-            <div style={{ display: "flex", flexDirection: "row", gap: "20px" }}>
-                <Link href='/' locale='en'>
-                    English
-                </Link>
-                <Link href='/' locale='ar'>
-                    العربية
-                </Link>
-            </div>
-        </Layout>
+        </main>
     );
-}
-
-export async function getStaticProps({ locale }) {
-    return {
-        props: {
-            ...(await serverSideTranslations(locale, ["common"])),
-        },
-    };
 }
