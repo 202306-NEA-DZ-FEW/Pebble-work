@@ -44,7 +44,7 @@ const FeatureCard = ({ title, description, buttonText, imageUrl, link }) => {
     return (
         <div
             id='featuredCard'
-            className={`w-1/3 sm:w-1/2 md:w-1/3 flex flex-col justify-evenly items-center ${
+            className={`w-1/3 sm:w-1/2 md:w-1/3 flex flex-col justify-evenly items-center shadow-md ${
                 styles.featuredCard
             } ${isVisible ? styles.visible : styles.invisible}`}
         >
@@ -55,19 +55,19 @@ const FeatureCard = ({ title, description, buttonText, imageUrl, link }) => {
             </div>
             <div className='w-full text-center px-2'>
                 <div
-                    className={`text-zinc-900 w- lg:text-[32px] md:text-[24px] sm:text-[20px] font-medium ... ... ... font-['Rubik'] sm:leading-[44px] tracking-[0.10px] ${styles.title}`}
+                    className={`text-zinc-900 w- lg:text-[32px] md:text-[24px] sm:text-[20px] font-medium font-['Rubik'] sm:leading-[44px] tracking-[0.10px] ${styles.title}`}
                 >
                     {title}
                 </div>
                 <div
-                    className={`text-zinc-500 lg:text-[18px] md:text-[15px] sm:text-[13px] ... ... ... text-[10px] font-normal font-['Rubik'] sm:leading-[30px] tracking-[0.10px] ${styles.description}`}
+                    className={`text-zinc-500 lg:text-[18px] md:text-[15px] sm:text-[13px] text-[10px] font-normal font-['Rubik'] sm:leading-[30px] tracking-[0.10px] ${styles.description}`}
                 >
                     {description}
                 </div>
             </div>
             <Link
                 href=''
-                className={`xl:w-[163px] ... ... ... xl:h-[52px] justify-start items-center gap-2.5 inline-flex text-zinc-900 lg:text-[22px] sm:text-[16px] font-medium font-['Rubik'] leading-[30px] tracking-tight ${styles.button}`}
+                className={`xl:w-[163px] xl:h-[52px] justify-start items-center gap-2.5 inline-flex text-zinc-900 lg:text-[22px] sm:text-[16px] font-medium font-['Rubik'] leading-[30px] tracking-tight ${styles.button}`}
                 onClick={handleButtonClick}
             >
                 {buttonText}
@@ -80,14 +80,14 @@ const MainCard = () => (
     <div className='w-full bg-white flex flex-wrap justify-start items-start'>
         <FeatureCard
             title='Join the community!'
-            description='Body placeholder for text paragraph, a ... paragraph ... is ... a self-contained unit of text description.'
+            description='Body placeholder for text paragraph, a paragraph is a self-contained unit of text description.'
             buttonText='Sign up'
             imageUrl='/Homepage/ManTop.png'
             link='/signup'
         />
         <FeatureCard
             title='Attend events'
-            description='Body placeholder for text paragraph, a paragraph is a self-contained unit of text ... description.'
+            description='Body placeholder for text paragraph, a paragraph is a self-contained unit of text description.'
             buttonText='View events'
             imageUrl='/Homepage/attend.png'
             link='/events'
