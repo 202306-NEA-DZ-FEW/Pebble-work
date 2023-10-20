@@ -37,6 +37,7 @@ const EventsPage = ({ event, organizer }) => {
     }, []);
 
     const attendeesArr = event.attendees;
+    console.log(event.eventId, 456);
     //console.log(userMail, attendeesArr[0].email, 160)
 
     const findUser = attendeesArr.find((item) => {
