@@ -179,7 +179,7 @@ const EventsPage = ({ event, organizer }) => {
 
                     <div>
                         <h3 className='text-xl font-bold'>Attendees:</h3>
-                        {event.attendees.length > 0 ? (
+                        {attendeesArr.length > 0 ? (
                             <div
                                 style={{
                                     display: "grid",
@@ -188,7 +188,7 @@ const EventsPage = ({ event, organizer }) => {
                                     marginTop: "1rem",
                                 }}
                             >
-                                {event.attendees.map((attendee, index) => (
+                                {attendeesArr.map((attendee, index) => (
                                     <div key={index}>
                                         <div
                                             style={{
