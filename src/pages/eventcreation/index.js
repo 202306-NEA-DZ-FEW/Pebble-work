@@ -14,6 +14,8 @@ import { auth, db, storage } from "@/util/firebase";
 
 const EventCreationPage = () => {
     const formCollectionRef = collection(db, "events");
+
+    //creates the event object to be sent to firestore
     const [input, setInput] = useState({
         location: "",
         type: "",
