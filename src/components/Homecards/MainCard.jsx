@@ -21,7 +21,7 @@ const FeatureCard = ({ title, description, buttonText, imageUrl, link }) => {
                 const elementPosition = element.offsetTop;
 
                 // Check if the scroll position is greater than half of the window height from the top of the element
-                if (scrollPosition > elementPosition - windowHeight / 2) {
+                if (scrollPosition > elementPosition - windowHeight / 1.7) {
                     // Set the visibility of the featured card to true
                     setIsVisible(true);
                 }

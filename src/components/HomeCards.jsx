@@ -17,7 +17,7 @@ const Heading = ({ text }) => (
 
 const HomeCards = () => {
     return (
-        <div className='container xl:mt-24 xl:pt-0 pt-20 flex flex-col items-center justify-center mx-auto'>
+        <div className='container overflow-hidden xl:mt-24 xl:pt-0 pt-20 flex flex-col items-center justify-center mx-auto'>
             <HeaderCard />
 
             <Heading text='How It Works' />

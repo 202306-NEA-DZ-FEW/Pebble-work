@@ -35,7 +35,7 @@
     animation-timing-function: linear;
 }
 .visible {
-    animation: slideInLeft 1.5s ease-in-out;
+    animation: slideInRight 1.5s ease-in-out;
     animation-fill-mode: both;
     transform-origin: center center;
 }
@@ -50,6 +50,11 @@
     animation: slideInLeft 1.3s ease-in-out;
     animation-fill-mode: both;
     transform-origin: center center;
+}
+.gallerySlide {
+    animation: slideInLeft 1.3s ease-in-out;
+    animation-fill-mode: both;
+    animation-duration: 1.3s;
 }
 
 .img {

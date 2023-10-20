@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import styles from "@/styles/Homepage.module.css";
 
 const GalleryCard = () => {
+    const [isGallery, setIsGallery] = useState(false);
     const images = [
         "IMG1.png",
         "IMG2.png",
@@ -21,22 +23,57 @@ const GalleryCard = () => {
         "IMG17.png",
         "IMG18.png",
     ];
+    useEffect(() => {
+        const handleScroll = () => {
+            // Get the current scroll position
+            const scrollPosition = window.scrollY;
+            // Get the height of the window
+            const windowHeight = window.innerHeight;
+            // Get the gallery element by its ID
+            const element = document.getElementById("gallery");
+
+            // Check if the element exists
+            if (element) {
+                // Get the position of the element relative to the top of the document
+                const elementPosition = element.offsetTop;
+
+                // Check if the scroll position is greater than half of the window height from the top of the element
+                if (scrollPosition > elementPosition - windowHeight / 1.4) {
+                    // Set the visibility of the featured card to true
+                    setIsGallery(true);
+                }
+            }
+        };
+
+        // Add scroll event listener and call the handleScroll function
+        window.addEventListener("scroll", handleScroll);
+
+        // Clean up by removing the scroll event listener when the component is unmounted
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
 
     return (
-        <div
-            className='flex justify-center items-center'
-            style={{ maxWidth: "100%", margin: "0 auto" }}
-        >
+        <div className='flex justify-center items-center shadow-md'>
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4'>
                 {images.map((image, index) => (
                     <div
+                        id='gallery'
                         key={index}
-                        className='bg-gray-100 p-2 md:p-4 flex items-center justify-center'
+                        className={`bg-gray-100 xl:w-[190px] xl:h-[172px] lg:w-[156px] lg:h-[154px] sm:w-[138px] sm:h-[132px] w-[112px] h-[106px] p-2 md:p-4 flex items-center justify-center ${
+                            styles.gallery
+                        } ${
+                            isGallery ? styles.gallerySlide : styles.invisible
+                        }`}
+                        style={{
+                            animationDelay: `${index * 0.1}s`,
+                        }}
                     >
                         <img
                             src={`/images/${image}`}
                             alt={`Image ${index + 1}`}
-                            className='max-w-full h-auto'
+                            className='xl:w-[180px] xl:h-[142px] lg:w-[146px] lg:h-[124px] sm:w-[108px] sm:h-[102px] w-[92px] h-[86px]'
                         />
                     </div>
                 ))}
