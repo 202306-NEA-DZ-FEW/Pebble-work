@@ -44,7 +44,7 @@ const FeatureCard = ({ title, description, buttonText, imageUrl, link }) => {
     return (
         <div
             id='featuredCard'
-            className={`w-1/3 sm:w-1/2 md:w-1/3 flex flex-col justify-evenly items-center shadow-md ${
+            className={`w-1/2 md:w-1/2 flex flex-col justify-evenly items-center shadow-md ${
                 styles.featuredCard
             } ${isVisible ? styles.visible : styles.invisible}`}
         >
@@ -77,7 +77,7 @@ const FeatureCard = ({ title, description, buttonText, imageUrl, link }) => {
 };
 
 const MainCard = () => (
-    <div className='w-full bg-white flex flex-wrap justify-start items-start'>
+    <div className='w-full bg-white lg:flex lg:flex-wrap lg:flex-row lg:gap-0 flex flex-col items-center gap-8 sm:gap-5 lg:justify-start lg:items-start'>
         <FeatureCard
             title='Join the community!'
             description='Body placeholder for text paragraph, a paragraph is a self-contained unit of text description.'

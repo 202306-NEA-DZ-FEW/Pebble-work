@@ -38,7 +38,7 @@ const GalleryCard = () => {
                 const elementPosition = element.offsetTop;
 
                 // Check if the scroll position is greater than half of the window height from the top of the element
-                if (scrollPosition > elementPosition - windowHeight / 1.4) {
+                if (scrollPosition > elementPosition - windowHeight / 1.3) {
                     // Set the visibility of the featured card to true
                     setIsGallery(true);
                 }

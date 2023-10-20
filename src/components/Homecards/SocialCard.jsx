@@ -26,7 +26,7 @@ const SocialCardData = [
 
 const SocialCardSection = () => {
     return (
-        <div className='w-full max-w-[1440px] px-5 md:px-[123px] lg:px-[127px] bg-white flex flex-wrap justify-center items-center gap-10'>
+        <div className='shadow-md w-full max-w-[1440px] px-5 md:px-[123px] lg:px-[127px] bg-white flex flex-wrap justify-center items-center gap-10'>
             <div className='w-full text-center text-zinc-900 text-4xl font-medium font-rubik leading-[44px] tracking-tight'>
                 Hear it from volunteers
             </div>
