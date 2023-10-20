@@ -28,12 +28,26 @@
         transform: rotate3d(1, 1, 0, 360deg);
     }
 }
+.animateSpin {
+    animation: slidInLeft 1s;
+    animation-duration: 1.5s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+}
+.visible {
+    animation: slideInLeft 1.5s ease-in-out;
+    animation-fill-mode: both;
+    transform-origin: center center;
+}
 
+.invisible {
+    visibility: hidden;
+}
 .text {
     animation: slideInRight 1.5s ease-in-out;
 }
 .slideleft {
-    animation: slideInLeft 1.5s ease-in-out;
+    animation: slideInLeft 1.3s ease-in-out;
     animation-fill-mode: both;
     transform-origin: center center;
 }
