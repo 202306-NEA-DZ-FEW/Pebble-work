@@ -5,7 +5,7 @@ module.exports = {
         defaultLocale: "en",
         locales: ["en", "ar"],
         localePath: path.resolve("./public/locales"),
-        defaultNS: "app",
+        defaultNS: "common",
         serializeConfig: false,
     },
 };
