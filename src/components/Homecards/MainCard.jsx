@@ -45,8 +45,8 @@ const FeatureCard = ({ title, description, buttonText, imageUrl, link }) => {
         <div
             id='featuredCard'
             className={`w-1/2 lg:w-1/3 md:w-1/2 flex flex-col justify-evenly items-center shadow-md ${
-                styles.featuredCard
-            } ${isVisible ? styles.visible : styles.invisible}`}
+                isVisible ? styles.visible : styles.invisible
+            }`}
         >
             <div
                 className={`xl:w-[216px] xl:h-[245.75px] lg:w-[177px] lg:h-[200px] md:w-[131px] md:h-[145px] sm:w-[100px] sm:h-[110px] w-[80px] h-[80px] ${styles.cardImage}`}
