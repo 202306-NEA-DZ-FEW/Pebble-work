@@ -12,12 +12,14 @@ const CardContainer = ({ children }) => (
 );
 
 const Heading = ({ text }) => (
-    <h2 className='text-center mt-4 sm:mt-8 md:mt-12 lg:mt-16'>{text}</h2>
+    <h2 className='text-center lg:text-[36px] md:text-[28px] sm:text-[22px] text-[18px] mt-4 sm:mt-8 md:mt-12 lg:mt-16 text-black font-[500]'>
+        {text}
+    </h2>
 );
 
 const HomeCards = () => {
     return (
-        <div className='container xl:mt-20 md:pt-20 flex flex-col items-center justify-center mx-auto'>
+        <div className='container overflow-hidden xl:mt-24 xl:pt-0 pt-20 flex flex-col items-center justify-center mx-auto'>
             <HeaderCard />
 
             <Heading text='How It Works' />

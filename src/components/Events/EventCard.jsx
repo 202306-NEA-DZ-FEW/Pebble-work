@@ -14,7 +14,7 @@ const EventCard = ({
     return (
         <>
             <div
-                className={`${styles.container} ${styles.fading} relative overflow-hidden w-[335px] h-[86px] xl:w-[816px] xl:h-[210px] sm:w-[466px] sm:h-[140px] flex flex-row items-center justify-center border border-black rounded-[20px] gap-2`}
+                className={`${styles.contai} ${styles.fading} border relative w-[335px] h-[86px] xl:w-[816px] xl:h-[210px] sm:w-[466px] sm:h-[140px] flex flex-row items-center justify-center gap-2`}
             >
                 <div className={`flex flex-col gap-1 sm:gap-4 items-end `}>
                     <h1

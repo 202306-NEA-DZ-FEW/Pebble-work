@@ -86,7 +86,7 @@ const EventsPage = (user) => {
     return (
         <>
             <main
-                className={` flex flex-col justify-center pt-24 items-center pb-12`}
+                className={` flex flex-col justify-center md:pt-24 pt-14 items-center pb-12`}
             >
                 <div>
                     <h1>Welcome, {user.name}!</h1>
@@ -95,46 +95,50 @@ const EventsPage = (user) => {
                 <div
                     className={`flex flex-col-reverse sm:flex sm:flex-row-reverse sm:items-center sm:justify-evenly sm:gap-8 sm:h-full sm:w-full`}
                 >
-                    <ul className={` flex flex-col items gap-2 `}>
-                        {events
-                            .filter((event) =>
-                                filteredTypes.length === 0
-                                    ? true
-                                    : filteredTypes.includes(event.type)
-                            )
-                            .map((event, index) => {
-                                if (index % 2 === 0) {
-                                    return (
-                                        <EventCard
-                                            key={event.id}
-                                            title={event.title}
-                                            type={event.type}
-                                            images={event.image}
-                                            location={event.location}
-                                            description={event.description}
-                                            organizer={event.organizer}
-                                            time={event.time}
-                                            date={event.date}
-                                        />
-                                    );
-                                } else {
-                                    return (
-                                        <EventCardLeft
-                                            key={event.id}
-                                            title={event.title}
-                                            type={event.type}
-                                            image={event.image}
-                                            location={event.location}
-                                            description={event.description}
-                                            organizer={event.organizer}
-                                            time={event.time}
-                                            date={event.date}
-                                        />
-                                    );
-                                }
-                            })}
-                    </ul>
-                    <div className='flex flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7'>
+                    <div
+                        className={`md:h-[800px] h-[400px] xl:w-[840px] pb-[140px] md:pb-[140px] md:w-[480px] lg:w-[490px] ${styles.information}`}
+                    >
+                        <ul className={` flex flex-col items gap-2 `}>
+                            {events
+                                .filter((event) =>
+                                    filteredTypes.length === 0
+                                        ? true
+                                        : filteredTypes.includes(event.type)
+                                )
+                                .map((event, index) => {
+                                    if (index % 2 === 0) {
+                                        return (
+                                            <EventCard
+                                                key={event.id}
+                                                title={event.title}
+                                                type={event.type}
+                                                images={event.image}
+                                                location={event.location}
+                                                description={event.description}
+                                                organizer={event.organizer}
+                                                time={event.time}
+                                                date={event.date}
+                                            />
+                                        );
+                                    } else {
+                                        return (
+                                            <EventCardLeft
+                                                key={event.id}
+                                                title={event.title}
+                                                type={event.type}
+                                                image={event.image}
+                                                location={event.location}
+                                                description={event.description}
+                                                organizer={event.organizer}
+                                                time={event.time}
+                                                date={event.date}
+                                            />
+                                        );
+                                    }
+                                })}
+                        </ul>
+                    </div>
+                    <div className='flex bg-white z-10 flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7'>
                         <div className='sm:flex s:flex-col sm:items-center sm:justify-center'>
                             <button
                                 className='sm:hidden'
