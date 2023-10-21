@@ -79,7 +79,7 @@
 }
 @keyframes fade {
     0% {
-        transform: translateX(-100%);
+        transform: translate(-100%);
         opacity: 0;
     }
 
@@ -92,7 +92,7 @@
 .fading {
     animation: fade linear;
     animation-timeline: view(block);
-    animation-range: entry 0% cover 30% !important;
+    animation-range: entry 0% cover 20%;
 }
 @media (max-width: 1280px) {
     @keyframes fade {
@@ -121,7 +121,7 @@
     .fading {
         animation: fade linear;
         animation-timeline: view(block);
-        animation-range: entry 0% cover 44% !important;
+        animation-range: entry 0% cover 44%;
     }
 }
 

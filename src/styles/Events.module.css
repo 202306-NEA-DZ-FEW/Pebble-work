@@ -16,6 +16,9 @@
         z-index: 9999;
     }
 }
+.selectedType {
+    background-color: #e53e3e;
+}
 
 @keyframes fadeIn {
     from {

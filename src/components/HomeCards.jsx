@@ -12,7 +12,9 @@ const CardContainer = ({ children }) => (
 );
 
 const Heading = ({ text }) => (
-    <h2 className='text-center mt-4 sm:mt-8 md:mt-12 lg:mt-16'>{text}</h2>
+    <h2 className='text-center lg:text-[36px] md:text-[28px] sm:text-[22px] text-[18px] mt-4 sm:mt-8 md:mt-12 lg:mt-16 text-black font-[500]'>
+        {text}
+    </h2>
 );
 
 const HomeCards = () => {

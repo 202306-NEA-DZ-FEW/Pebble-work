@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Signin from "@/components/Signin/Signin";
 import Pebble from "../Pebble";
 import Language from "../Language/Language";
+import styles from "@/styles/Navbar.module.css";
 
 import Dropdown from "../Dropdown";
 import { auth } from "@/util/firebase";
@@ -64,7 +65,7 @@ const Navbar = () => {
                         aria-controls='navbar-language'
                         aria-expanded='false'
                     >
-                        <svg viewBox='0 0 100 80' width='40' height='40'>
+                        <svg viewBox='0 0 100 80' width='20' height='20'>
                             <rect
                                 fill='grey'
                                 width='100'
@@ -96,7 +97,7 @@ const Navbar = () => {
                 >
                     <ul
                         style={{ fontFamily: "Rubik" }}
-                        className='md:static text-center md:bg-transparent bg-white gap-3 absolute w-full flex flex-col font-medium  md:p-0 border border-gray-300 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 dark:border-gray-700 left-[0px] top-0 z-10'
+                        className={`' md:static text-center md:bg-transparent bg-white gap-3 fixed w-full flex flex-col font-medium  md:p-0 border border-gray-300  md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 dark:border-gray-700 left-[0px] top-0 z-10 ${styles.tiltIn}`}
                         role='menu'
                     >
                         <li>

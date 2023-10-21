@@ -2,10 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from "@/styles/Events.module.css";
 
 const FilterByType = ({ setFilteredTypes }) => {
-    // removing the interest event listener
     const dropdownRef = useRef(null);
+    const [isInterestOpen, setInterestOpen] = useState(false);
+    const [selectedTypes, setSelectedTypes] = useState([]);
 
-    // handle clicking out of the type list
+    // Handle click outside the dropdown to close it
     const handleClickOutside = (event) => {
         if (
             dropdownRef.current &&
@@ -14,42 +15,50 @@ const FilterByType = ({ setFilteredTypes }) => {
             setInterestOpen(false);
         }
     };
+
     useEffect(() => {
-        window.addEventListener("click", handleClickOutside);
+        // Add event listener for click outside the dropdown
+        if (typeof window !== "undefined") {
+            window.addEventListener("click", handleClickOutside);
+        }
         return () => {
-            window.removeEventListener("click", handleClickOutside);
+            // Remove event listener on component unmount
+            if (typeof window !== "undefined") {
+                window.removeEventListener("click", handleClickOutside);
+            }
         };
     }, []);
-    // controlling the open/close state of the interest filter
-    const [isInterestOpen, setInterestOpen] = useState(false);
-    // storing the selected types
-    const [selectedTypes, setSelectedTypes] = useState([]);
 
-    // setting the initial open/close state of the interest filter and adding a resize event listener
     useEffect(() => {
-        // handle the screen resize
+        // Handle resize event to update dropdown visibility
         const handleResize = () => {
             setInterestOpen(window.innerWidth > 640);
         };
 
-        // initial open/close state of the interest filter
-        setInterestOpen(window.innerWidth > 640);
+        // Set initial dropdown visibility based on window width
+        if (typeof window !== "undefined") {
+            setInterestOpen(window.innerWidth > 640);
+        }
 
-        // resize event listener
-        window.addEventListener("resize", handleResize);
+        // Add event listener for resize
+        if (typeof window !== "undefined") {
+            window.addEventListener("resize", handleResize);
+        }
 
-        // Clean up by removing the resize event listener
         return () => {
-            window.removeEventListener("resize", handleResize);
+            // Remove event listener on component unmount
+            if (typeof window !== "undefined") {
+                window.removeEventListener("resize", handleResize);
+            }
         };
     }, []);
 
-    // handle the click event of the interest filter
+    // Handle click on the interest button to toggle dropdown visibility
     const handleInterestClick = () => {
         setInterestOpen(!isInterestOpen);
     };
 
-    // handle the click event of a type
+    // Handle click on a type button to select/deselect it
     const handleTypeClick = (type) => {
         if (selectedTypes.includes(type)) {
             setSelectedTypes(selectedTypes.filter((t) => t !== type));
@@ -58,242 +67,81 @@ const FilterByType = ({ setFilteredTypes }) => {
         }
     };
 
-    // updating the filtered types when the selected types change
     useEffect(() => {
+        // Update filtered types when selected types change
         setFilteredTypes(selectedTypes);
     }, [selectedTypes]);
 
+    const types = [
+        "All",
+        "Affordable and Clean Energy",
+        "Clean Water and Sanitation",
+        "Climate Action",
+        "Decent Work and Economic Growth",
+        "Gender Equality",
+        "Good Health and Well Being",
+        "Industry, Innovation and Infrastructure",
+        "Life Below Water",
+        "Life on Land",
+        "No Poverty",
+        "Peace, Justice and Strong Institutions",
+        "Quality Education",
+        "Reduced Inequalities",
+        "Responsible Consumption/Production",
+        "Sustainable Cities and Communities",
+        "Zero Hunger",
+    ];
+
     return (
         <>
-            {/* <div ref={dropdownRef}> */} {/*to close the types menu */}
-            <div>
-                {" "}
+            <div
+                ref={
+                    typeof window !== "undefined" && window.innerWidth <= 640
+                        ? dropdownRef
+                        : null
+                }
+            >
                 <button className='sm:hidden' onClick={handleInterestClick}>
                     Change Interest
                 </button>
                 {isInterestOpen && (
                     <ul
                         style={{
+                            // borderRadius:
+                            //     typeof window !== "undefined" && window.innerWidth <= 640
+                            //         ? "0% 100% 100% 0% / 0% 100% 0% 100%"
+                            //         : "",
+
                             animation: `${
                                 isInterestOpen
                                     ? `${styles.fadeIn} 0.7s ease-in-out`
                                     : ""
                             }`,
                         }}
-                        className={`${styles.information} flex sm:relative sm:bg-transparent sm:h-[700px]  fixed bottom-0 left-0 h-64 w-full bg-gray-900 text-white z-[999] flex-col gap-4 sm:border-x-0 sm:border-b-0 sm:pt-4 items-center sm:border sm:border-t-black overflow-y-scroll`}
+                        className={`${styles.information} flex sm:static sm:bg-transparent sm:h-[700px]  fixed bottom-0 left-0 h-64 w-full pt-8  bg-gray-900 text-white z-[999] flex-col items-start sm:pl-0 pl-4  gap-4 sm:border-x-0 sm:border-b-0 sm:pt-4 sm:items-center sm:border sm:border-t-black overflow-y-scroll`}
                     >
-                        <button
-                            className={`bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg ${
-                                selectedTypes.length === 0 ? "bg-blue-700" : ""
-                            }`}
-                            onClick={() => setSelectedTypes([])}
-                        >
-                            All
-                        </button>
-                        <button
-                            className={`bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg ${
-                                selectedTypes.includes("No Poverty")
-                                    ? "bg-red-700"
-                                    : ""
-                            }`}
-                            onClick={() => handleTypeClick("No Poverty")}
-                        >
-                            No Poverty
-                        </button>
-                        <button
-                            className={`bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg ${
-                                selectedTypes.includes("Zero Hunger")
-                                    ? "bg-red-700"
-                                    : ""
-                            }`}
-                            onClick={() => handleTypeClick("Zero Hunger")}
-                        >
-                            Zero Hunger
-                        </button>
-                        <button
-                            className={`bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg ${
-                                selectedTypes.includes(
-                                    "Good Health and Well Being"
-                                )
-                                    ? "bg-red-700"
-                                    : ""
-                            }`}
-                            onClick={() =>
-                                handleTypeClick("Good Health and Well Being")
-                            }
-                        >
-                            Good Health and Well Being
-                        </button>
-                        <button
-                            className={`bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg ${
-                                selectedTypes.includes("Quality Education")
-                                    ? "bg-red-700"
-                                    : ""
-                            }`}
-                            onClick={() => handleTypeClick("Quality Education")}
-                        >
-                            Quality Education
-                        </button>
-                        <button
-                            className={`bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg ${
-                                selectedTypes.includes("Gender Equality")
-                                    ? "bg-red-700"
-                                    : ""
-                            }`}
-                            onClick={() => handleTypeClick("Gender Equality")}
-                        >
-                            Gender Equality
-                        </button>
-                        <button
-                            className={`bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg ${
-                                selectedTypes.includes(
-                                    "Clean Water and Sanitation"
-                                )
-                                    ? "bg-red-700"
-                                    : ""
-                            }`}
-                            onClick={() =>
-                                handleTypeClick("Clean Water and Sanitation")
-                            }
-                        >
-                            Clean Water and Sanitation
-                        </button>
-                        <button
-                            className={`bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg ${
-                                selectedTypes.includes(
-                                    "Affordable and Clean Energy"
-                                )
-                                    ? "bg-red-700"
-                                    : ""
-                            }`}
-                            onClick={() =>
-                                handleTypeClick("Affordable and Clean Energy")
-                            }
-                        >
-                            Affordable and Clean Energy
-                        </button>
-                        <button
-                            className={`bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg ${
-                                selectedTypes.includes(
-                                    "Decent Work and Economic Growth"
-                                )
-                                    ? "bg-red-700"
-                                    : ""
-                            }`}
-                            onClick={() =>
-                                handleTypeClick(
-                                    "Decent Work and Economic Growth"
-                                )
-                            }
-                        >
-                            Decent Work and Economic Growth
-                        </button>
-                        <button
-                            className={`bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg ${
-                                selectedTypes.includes(
-                                    "Industry, Innovation and Infrastructure"
-                                )
-                                    ? "bg-red-700"
-                                    : ""
-                            }`}
-                            onClick={() =>
-                                handleTypeClick(
-                                    "Industry, Innovation and Infrastructure"
-                                )
-                            }
-                        >
-                            Industry, Innovation and Infrastructure
-                        </button>
-                        <button
-                            className={`bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg ${
-                                selectedTypes.includes("Reduced Inequalities")
-                                    ? "bg-red-700"
-                                    : ""
-                            }`}
-                            onClick={() =>
-                                handleTypeClick("Reduced Inequalities")
-                            }
-                        >
-                            Reduced Inequalities
-                        </button>
-                        <button
-                            className={`bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg ${
-                                selectedTypes.includes(
-                                    "Sustainable Cities and Communities"
-                                )
-                                    ? "bg-red-700"
-                                    : ""
-                            }`}
-                            onClick={() =>
-                                handleTypeClick(
-                                    "Sustainable Cities and Communities"
-                                )
-                            }
-                        >
-                            Sustainable Cities and Communities
-                        </button>
-                        <button
-                            className={`bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg ${
-                                selectedTypes.includes(
-                                    "Responsible Consumption/Production"
-                                )
-                                    ? "bg-red-700"
-                                    : ""
-                            }`}
-                            onClick={() =>
-                                handleTypeClick(
-                                    "Responsible Consumption/Production"
-                                )
-                            }
-                        >
-                            Responsible Consumption/Production
-                        </button>
-                        <button
-                            className={`bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg ${
-                                selectedTypes.includes("Life Below Water")
-                                    ? "bg-red-700"
-                                    : ""
-                            }`}
-                            onClick={() => handleTypeClick("Life Below Water")}
-                        >
-                            Life Below Water
-                        </button>
-                        <button
-                            className={`bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg ${
-                                selectedTypes.includes("Life on Land")
-                                    ? "bg-red-700"
-                                    : ""
-                            }`}
-                            onClick={() => handleTypeClick("Life on Land")}
-                        >
-                            Life on Land
-                        </button>
-                        <button
-                            className={`bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg ${
-                                selectedTypes.includes(
-                                    "Peace, Justice and Strong Institutions"
-                                )
-                                    ? "bg-red-700"
-                                    : ""
-                            }`}
-                            onClick={() =>
-                                handleTypeClick(
-                                    "Peace, Justice and Strong Institutions"
-                                )
-                            }
-                        >
-                            Peace, Justice and Strong Institutions
-                        </button>
-                        <button
-                            className={`bg-blue-500 text-center xl:w-[281px] xl:h-[52px] text-white font-medium px-4 py-2 rounded-lg ${
-                                selectedTypes.includes("Climate Action")
-                                    ? "bg-red-700"
-                                    : ""
-                            }`}
-                            onClick={() => handleTypeClick("Climate Action")}
-                        >
-                            Climate Action
-                        </button>
+                        {types.map((type) => (
+                            <button
+                                key={type}
+                                className={`sm:bg-blue-500 sm:text-center flex lg:items-center sm:gap-0 gap-2 sm:justify-center lg:w-[281px] lg:h-[52px] sm:w-[149px] sm:h-[30px] text-white font-[500] lg:text-[18px] lg:tracking-[0.10px] sm:text-[12px] sm:px-4 sm:py-2 rounded-lg ${
+                                    selectedTypes.includes(type)
+                                        ? styles.selectedType
+                                        : ""
+                                }`}
+                                onClick={() => handleTypeClick(type)}
+                            >
+                                {selectedTypes.includes(type) ? (
+                                    <span className='visible sm:hidden mr-2'>
+                                        &#10003;
+                                    </span>
+                                ) : (
+                                    <span className='visible sm:hidden mr-2'>
+                                        &#9634;
+                                    </span>
+                                )}
+                                {type}
+                            </button>
+                        ))}
                     </ul>
                 )}
             </div>
