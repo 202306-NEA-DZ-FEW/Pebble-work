@@ -1,15 +1,11 @@
-import React from "react";
+import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 import Image from "next/image";
-import { Rubik } from "next/font/google";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "@/util/firebase";
+import React from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, db } from "@/util/firebase";
+import { useEffect, useState } from "react";
 
-const rubik = Rubik({
-    subsets: ["latin"],
-    variable: "--font-rubik",
-});
-
-const EventsPage = ({ event }) => {
+const EventsPage = ({ event, organizer }) => {
     const cellData = [
         "Mona M.",
         "Aether M.",
@@ -18,12 +14,64 @@ const EventsPage = ({ event }) => {
         "Diluc M.",
         "Dori S.",
     ];
+
+    const [joined, setJoined] = useState();
+    const [userMail, setUserMail] = useState(null);
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in
+                setUserMail(user.email);
+                console.log(user.email);
+            } else {
+                // User is signed out
+                setUserMail(null); // Reset to null when signed out
+            }
+        });
+
+        return () => {
+            // Unsubscribe from the observer when the component is unmounted
+            unsubscribe();
+        };
+    }, []);
+
+    const attendeesArr = event.attendees;
+    console.log(event.eventId, 456);
+    //console.log(userMail, attendeesArr[0].email, 160)
+
+    const findUser = attendeesArr.find((item) => {
+        return item.email === userMail;
+    });
+
+    const joinEvent = async (eventId) => {
+        const userId = auth?.currentUser?.uid;
+        const userDocRef = doc(db, "users", userId);
+        const eventDocRef = doc(db, "events", eventId);
+
+        const userDoc = await getDoc(userDocRef);
+        const eventDoc = await getDoc(eventDocRef);
+
+        const eventObject = eventDoc.data();
+        const userObject = userDoc.data();
+
+        const eventInfo = { ...eventObject, uid: eventId };
+
+        await updateDoc(userDocRef, {
+            eventsJoined: arrayUnion(eventInfo),
+        });
+
+        await updateDoc(eventDocRef, {
+            attendees: arrayUnion(userObject),
+        });
+
+        alert("Event joined successfully");
+
+        window.location.reload();
+    };
     return (
         <>
-            <div
-                style={{ margin: "auto", width: "60%", paddingTop: "6rem" }}
-                className={`${rubik.variable} font-sans`}
-            >
+            <div style={{ margin: "auto", width: "60%", paddingTop: "6rem" }}>
                 <h2
                     className='text-2xl font-bold'
                     style={{ marginBottom: "2rem" }}
@@ -36,7 +84,7 @@ const EventsPage = ({ event }) => {
                 >
                     <div
                         style={{ margin: "auto", width: "100%" }}
-                        className={`sm:w-2/5 mx-auto`}
+                        className='sm:w-2/5 mx-auto'
                     >
                         {event.image ? (
                             <Image
@@ -47,7 +95,7 @@ const EventsPage = ({ event }) => {
                             />
                         ) : (
                             <Image
-                                src={"/event_image.png"}
+                                src='/event_image.png'
                                 width={450}
                                 height={450}
                                 alt='event pic'
@@ -76,21 +124,43 @@ const EventsPage = ({ event }) => {
                             <br />
                             <br />
                             <br />
-                            Organized by <b>Dude&apos;s name</b>
+                            Organized by{" "}
+                            {organizer.Name ? (
+                                <b>
+                                    {organizer.Name} {organizer.Surename}
+                                </b>
+                            ) : (
+                                <b>Dude McGee</b>
+                            )}
                         </p>
-
-                        <button
-                            className='btn btn-sm btn-wide'
-                            style={{
-                                marginTop: "1rem",
-                                borderRadius: "8px",
-                                background: "#FDA855",
-                                border: 0,
-                                color: "white",
-                            }}
-                        >
-                            Join now
-                        </button>
+                        {findUser ? (
+                            <button
+                                className='btn btn-sm btn-wide opacity-50 cursor-default'
+                                style={{
+                                    marginTop: "1rem",
+                                    borderRadius: "8px",
+                                    background: "#FDA855",
+                                    border: 0,
+                                    color: "white",
+                                }}
+                            >
+                                Already joined
+                            </button>
+                        ) : (
+                            <button
+                                className='btn btn-sm btn-wide'
+                                onClick={() => joinEvent(event.eventId)}
+                                style={{
+                                    marginTop: "1rem",
+                                    borderRadius: "8px",
+                                    background: "#FDA855",
+                                    border: 0,
+                                    color: "white",
+                                }}
+                            >
+                                Join now
+                            </button>
+                        )}
                     </div>
                 </div>
                 <div style={{ display: "flex", gap: "3rem" }}>
@@ -104,40 +174,45 @@ const EventsPage = ({ event }) => {
                         ) : (
                             <p>
                                 Loading... there might be no event description{" "}
-                                {"):"}
                             </p>
                         )}
                     </div>
 
                     <div>
                         <h3 className='text-xl font-bold'>Attendees:</h3>
-                        <div
-                            style={{
-                                display: "grid",
-                                gridTemplateColumns: "repeat(4, 20px)",
-                                gap: "3rem",
-                                marginTop: "1rem",
-                            }}
-                        >
-                            {cellData.map((name, index) => (
-                                <div key={index}>
-                                    <div
-                                        style={{
-                                            width: "40px",
-                                            height: "40px",
-                                            borderRadius: "50%",
-                                            background: "black",
-                                            color: "white",
-                                            textAlign: "center",
-                                            padding: "8px",
-                                        }}
-                                    >
-                                        {index + 1}
+                        {attendeesArr.length > 0 ? (
+                            <div
+                                style={{
+                                    display: "grid",
+                                    gridTemplateColumns: "repeat(4, 20px)",
+                                    gap: "3rem",
+                                    marginTop: "1rem",
+                                }}
+                            >
+                                {attendeesArr.map((attendee, index) => (
+                                    <div key={index}>
+                                        <div
+                                            style={{
+                                                width: "40px",
+                                                height: "40px",
+                                                borderRadius: "50%",
+                                                background: "black",
+                                                color: "white",
+                                                textAlign: "center",
+                                                padding: "8px",
+                                            }}
+                                        >
+                                            {attendee.Surename.charAt(0)}.
+                                        </div>
+                                        <div>{attendee.Name}</div>
                                     </div>
-                                    <div>{name}</div>
-                                </div>
-                            ))}
-                        </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className='italic pt-3'>
+                                No participant yet. Be the first to join!
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
@@ -155,9 +230,19 @@ export async function getServerSideProps(context) {
     const eventDoc = await getDoc(eventRef);
     const event = eventDoc.data();
 
+    const userId = event.organizer;
+
+    const organizerRef = doc(db, "users", userId);
+    const organizerDoc = await getDoc(organizerRef);
+    const organizer = organizerDoc.data();
+
     return {
         props: {
-            event,
+            event: {
+                ...event,
+                eventId: eventId,
+            },
+            organizer,
         },
     };
 }
