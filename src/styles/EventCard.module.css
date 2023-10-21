@@ -1,10 +1,9 @@
 .contai {
-    box-shadow: 0 15px 30px 1px grey;
+    box-shadow: -20px 10px 20px -20px grey;
     background: rgba(255, 255, 255, 0.9);
     text-align: center;
     border-radius: 5px;
-    overflow: hidden;
-    margin: 5em auto;
+    margin-bottom: 15px;
 }
 
 .btn {
@@ -77,41 +76,73 @@
 .productImage:hover .info {
     transform: translateX(0);
 }
-@keyframes fade {
+/* @keyframes fade {
     0% {
-        transform: translate(-100%);
+        transform: translateY(-100%);
         opacity: 0;
     }
-
+    90% {
+        transform: translateY(-100%);
+        opacity:0;
+    }
     100% {
         transform: translateX(0);
+        opacity: 1;
+    }
+} */
+
+@-webkit-keyframes fading {
+    0% {
+        -webkit-transform: rotateY(-80deg);
+        transform: rotateY(-80deg);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: rotateY(0);
+        transform: rotateY(0);
+        opacity: 1;
+    }
+}
+@keyframes fading {
+    0% {
+        -webkit-transform: rotateY(-80deg);
+        transform: rotateY(-80deg);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: rotateY(0);
+        transform: rotateY(0);
         opacity: 1;
     }
 }
 
 .fading {
-    animation: fade linear;
+    animation: fading cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    -webkit-animation: fading cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
     animation-timeline: view(block);
-    animation-range: entry 0% cover 20%;
+    animation-range: entry 20% cover 40%;
+    /* -webkit-animation: fading 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: fading 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both; */
 }
 @media (max-width: 1280px) {
+    .contai {
+        box-shadow: 0 0px 0px 0px;
+        background: rgba(255, 255, 255, 0.9);
+        text-align: center;
+        border-radius: 5px;
+        margin-bottom: 0px;
+    }
+
     @keyframes fade {
         0% {
-            transform: translateX(-100%);
+            transform: translateY(-100%);
             opacity: 0;
         }
-        25% {
-            transform: translateX(-75%);
-            opacity: 0.25;
+        95% {
+            transform: translateY(-100%);
+            opacity: 0;
         }
-        50% {
-            transform: translateX(-50%);
-            opacity: 0.5;
-        }
-        75% {
-            transform: translateX(-25%);
-            opacity: 0.75;
-        }
+
         100% {
             transform: translateX(0);
             opacity: 1;
@@ -121,7 +152,7 @@
     .fading {
         animation: fade linear;
         animation-timeline: view(block);
-        animation-range: entry 0% cover 44%;
+        animation-range: entry 0% cover 30%;
     }
 }
 

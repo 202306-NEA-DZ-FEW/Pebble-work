@@ -113,9 +113,7 @@ const FilterByType = ({ setFilteredTypes }) => {
                             //         : "",
 
                             animation: `${
-                                isInterestOpen
-                                    ? `${styles.fadeIn} 0.7s ease-in-out`
-                                    : ""
+                                isInterestOpen ? `${styles.fadeIn}` : ""
                             }`,
                         }}
                         className={`${styles.information} flex sm:static sm:bg-transparent sm:h-[700px]  fixed bottom-0 left-0 h-64 w-full pt-8  bg-gray-900 text-white z-[999] flex-col items-start sm:pl-0 pl-4  gap-4 sm:border-x-0 sm:border-b-0 sm:pt-4 sm:items-center sm:border sm:border-t-black overflow-y-scroll`}

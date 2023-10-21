@@ -86,7 +86,7 @@ const EventsPage = (user) => {
     return (
         <>
             <main
-                className={` flex flex-col justify-center pt-24 items-center pb-12`}
+                className={` flex flex-col justify-center md:pt-24 pt-14 items-center pb-12`}
             >
                 <div>
                     <h1>Welcome, {user.name}!</h1>
@@ -96,7 +96,7 @@ const EventsPage = (user) => {
                     className={`flex flex-col-reverse sm:flex sm:flex-row-reverse sm:items-center sm:justify-evenly sm:gap-8 sm:h-full sm:w-full`}
                 >
                     <div
-                        className={`h-[800px] xl:w-[840px] md:w-[480px] lg:w-[490px] ${styles.information}`}
+                        className={`md:h-[800px] h-[400px] xl:w-[840px] pb-[140px] md:pb-[140px] md:w-[480px] lg:w-[490px] ${styles.information}`}
                     >
                         <ul className={` flex flex-col items gap-2 `}>
                             {events
