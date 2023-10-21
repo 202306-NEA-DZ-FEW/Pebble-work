@@ -40,3 +40,4 @@ sitemap.xml
 sitemap-*.xml
 
 #i18nex
+next-i18next.config.js
