@@ -17,7 +17,7 @@ const ImageSquareCard = () => {
                 const elementPosition = element1.offsetTop;
 
                 // Check if the scroll position is greater than half of the window height from the top of the element
-                if (scrollPosition > elementPosition - windowHeight / 1.8) {
+                if (scrollPosition > elementPosition - windowHeight / 1.2) {
                     // Set the visibility of the featured card to true
                     setIsImage1(true);
                 }
@@ -29,7 +29,7 @@ const ImageSquareCard = () => {
                 const elementPosition = element.offsetTop;
 
                 // Check if the scroll position is greater than half of the window height from the top of the element
-                if (scrollPosition > elementPosition - windowHeight / 1.8) {
+                if (scrollPosition > elementPosition - windowHeight / 2.3) {
                     // Set the visibility of the featured card to true
                     setIsImage(true);
                 }
@@ -49,9 +49,9 @@ const ImageSquareCard = () => {
         <div className={`${styles.container}`}>
             <div className={`${styles.gridContainer}`}>
                 <div
-                    id='imagecard'
+                    id=''
                     className={`${styles.imageWrapper} ${
-                        isImage ? styles.bottomLeft : styles.invisible
+                        isImage1 ? styles.bottomRight : styles.invisible
                     }`}
                 >
                     <img
@@ -73,9 +73,9 @@ const ImageSquareCard = () => {
                     />
                 </div>
                 <div
-                    id='imagecard1'
+                    id=''
                     className={`${styles.imageWrapper} ${
-                        isImage1 ? styles.bottomLeft : styles.invisible
+                        isImage ? styles.bottomLeft : styles.invisible
                     }`}
                 >
                     <img
