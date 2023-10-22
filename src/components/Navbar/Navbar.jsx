@@ -34,15 +34,14 @@ const Navbar = () => {
     }, []);
 
     return (
-        <nav className='xl:flex xl:flex-col xl:items-center'>
+        <nav className='sticky z-[9999] md:mb-10 mb-4 bg-gray-200 top-0 xl:flex xl:flex-col xl:items-center'>
             <div
                 style={{
-                    position: "fixed",
                     width: "100%",
                     height: "8%",
                     zIndex: "9999",
                 }}
-                className='bg-gray-200 top-0 flex flex-wrap items-center justify-between p-4 xl:gap-40'
+                className='flex flex-wrap items-center justify-between p-4 xl:gap-40'
             >
                 <Link href='./' className='flex items-center'>
                     <img
@@ -122,6 +121,14 @@ const Navbar = () => {
                                 className='block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700'
                             >
                                 Contact
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                href='/'
+                                className='block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700'
+                            >
+                                Home
                             </Link>
                         </li>
                     </ul>
