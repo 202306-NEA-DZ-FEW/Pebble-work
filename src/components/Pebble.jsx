@@ -17,7 +17,7 @@ const Pebble = () => {
         <div
             className={`${
                 isWaveVisible ? styles.wave : styles.nowave
-            } flex flex-row gap-1`}
+            } flex flex-row gap-1 lg:text-[18px] sm:text-[16px] text-[14px]`}
         >
             <span style={{ "--i": 1 }} className={styles.letter}>
                 P

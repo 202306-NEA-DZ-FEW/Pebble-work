@@ -7,9 +7,7 @@ import ImageSquareCard from "@/components/Homecards/ImageSquareCard";
 import MainCard from "@/components/Homecards/MainCard";
 import SocialCard from "@/components/Homecards/SocialCard";
 
-const CardContainer = ({ children }) => (
-    <div className='mb-8 sm:mb-12 md:mb-16 lg:mb-20'>{children}</div>
-);
+const CardContainer = ({ children }) => <div className=''>{children}</div>;
 
 const Heading = ({ text }) => (
     <h2 className='text-center lg:text-[36px] md:text-[28px] sm:text-[22px] text-[18px] mt-4 sm:mt-8 md:mt-12 lg:mt-16 text-black font-[500]'>
@@ -19,7 +17,7 @@ const Heading = ({ text }) => (
 
 const HomeCards = () => {
     return (
-        <div className='container overflow-hidden xl:mt-24 xl:pt-0 pt-20 flex flex-col items-center justify-center mx-auto'>
+        <div className='container overflow-hidden flex flex-col items-center justify-center mx-auto'>
             <HeaderCard />
 
             <Heading text='How It Works' />
@@ -31,11 +29,11 @@ const HomeCards = () => {
             <Heading text='Hear It from Volunteers' />
             <p className='mt-4 sm:mt-8 md:mt-12 lg:mt-16'>sentences here...</p>
 
-            <div className='mb-8 sm:mb-12 md:mb-16 lg:mb-20'>
+            <div className='xl:h-[420px] lg:h-[420px] sm:mb-20 '>
                 <SocialCard />
             </div>
 
-            <div className='mb-8 sm:mb-12 md:mb-16 lg:mb-20'>
+            <div className='lg:pt-20 overflow-hidden sm:mt-[-80px] pt-40 sm:pt-0 pb-40'>
                 <ImageSquareCard />
             </div>
 

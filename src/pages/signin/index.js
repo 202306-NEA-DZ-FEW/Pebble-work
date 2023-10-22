@@ -1,15 +1,17 @@
-import React from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React from "react";
+import { useState } from "react";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import { RiTwitterXFill } from "react-icons/ri";
-import { BsEyeSlash, BsEye } from "react-icons/bs";
-import Link from "next/link";
-import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../util/firebase";
-import { useRouter } from "next/router";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+
 import Modal from "@/components/Popup/Modal";
+
+import { auth } from "../../util/firebase";
 const SignInPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");

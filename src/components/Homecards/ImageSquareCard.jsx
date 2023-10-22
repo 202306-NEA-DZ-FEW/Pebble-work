@@ -46,10 +46,10 @@ const ImageSquareCard = () => {
     }, []);
 
     return (
-        <div className={`${styles.container}`}>
+        <div className={`${styles.container} `}>
             <div className={`${styles.gridContainer}`}>
                 <div
-                    id=''
+                    id='imagecard1'
                     className={`${styles.imageWrapper} ${
                         isImage1 ? styles.bottomRight : styles.invisible
                     }`}
@@ -85,7 +85,6 @@ const ImageSquareCard = () => {
                     />
                 </div>
                 <div
-                    id='imagecard1'
                     className={`${styles.imageWrapper} ${
                         isImage1 ? styles.bottomRight : styles.invisible
                     }`}
