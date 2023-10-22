@@ -86,7 +86,7 @@ const EventsPage = (user) => {
     return (
         <>
             <main
-                className={` flex flex-col justify-center md:pt-24 pt-14 items-center pb-12`}
+                className={` flex flex-col justify-center items-center pb-12`}
             >
                 <div>
                     <h1>Welcome, {user.name}!</h1>
