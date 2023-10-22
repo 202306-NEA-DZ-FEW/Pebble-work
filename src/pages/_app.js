@@ -13,3 +13,5 @@ function MyApp({ Component, pageProps }) {
         </Layout>
     );
 }
+
+export default appWithTranslation(MyApp, { i18n });
