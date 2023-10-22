@@ -11,6 +11,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 import { auth, db, storage } from "@/util/firebase";
+import EventCreation from "@/components/Events/EventCreation";
 
 const EventCreationPage = () => {
     const formCollectionRef = collection(db, "events");
@@ -128,7 +129,7 @@ const EventCreationPage = () => {
     }, []);
 
     return (
-        <div
+        <dDiv
             className='container ml-auto mr-auto max-w-6xl mt-2 flex flex-col bg-white mx-auto'
             style={{ fontFamily: "Rubik" }}
         >
@@ -422,20 +423,9 @@ const EventCreationPage = () => {
                     <div style={{ height: "200px", marginTop: "4rem" }}></div>
                 </>
             ) : (
-                <div>
-                    <div style={{ height: "6rem" }}></div>
-                    <p style={{ color: "red" }}>
-                        You need an account to create an event!
-                    </p>
-                    <Link href='/signin'>
-                        <button>Sign In</button>
-                    </Link>
-                    <Link href='/signup'>
-                        <button>Sign Up</button>
-                    </Link>
-                </div>
+                <EventCreation />
             )}
-        </div>
+        </dDiv>
     );
 };
 
