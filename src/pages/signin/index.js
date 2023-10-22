@@ -41,7 +41,9 @@ const SignInPage = () => {
             }, 3000);
         } catch (error) {
             setShowPopup(true);
-            setModalContent("Sign in/up failed.");
+            setModalContent(
+                "Error: Login failed. Invalid credentials or password requirements not met"
+            );
             setModalClassName(
                 "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
             );

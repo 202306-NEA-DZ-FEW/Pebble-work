@@ -8,7 +8,15 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../util/firebase";
 import { db } from "../../util/firebase";
-import { addDoc, collection, setDoc, doc } from "firebase/firestore";
+import {
+    addDoc,
+    collection,
+    setDoc,
+    doc,
+    query,
+    where,
+    getDocs,
+} from "firebase/firestore";
 import { useRouter } from "next/router";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import Modal from "@/components/Popup/Modal";
@@ -18,6 +26,7 @@ const SignUpPage = () => {
     const [Name, setName] = useState("");
     const [Surename, setSurename] = useState("");
     const [password, setPassword] = useState("");
+    const [formSubmitted, setFormSubmitted] = useState(false);
     const router = useRouter();
     const [showPopup, setShowPopup] = useState(false);
     const [modalContent, setModalContent] = useState("");
@@ -28,8 +37,34 @@ const SignUpPage = () => {
     const handleSuccess = () => {
         setShowPopup(true);
     };
+    const checkIfEmailExists = async (email) => {
+        const users = collection(db, "users");
+        const queryEmail = query(users, where("email", "==", email));
+        const result = await getDocs(queryEmail);
+        return !result.empty;
+    };
+
     const handleSignup = async (e) => {
         e.preventDefault();
+        setFormSubmitted(true);
+        const emailExists = await checkIfEmailExists(email);
+        if (emailExists) {
+            setShowPopup(true);
+            setModalContent("Sign in/up failed.");
+            setModalContent("This email is already in use.");
+            setModalClassName(
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4   "
+            );
+            return;
+        }
+        if (password.length < 6) {
+            setShowPopup(true);
+            setModalContent("6 characters needed for password.");
+            setModalClassName(
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4   "
+            );
+            return;
+        }
 
         try {
             const userCredential = await createUserWithEmailAndPassword(
@@ -53,13 +88,12 @@ const SignUpPage = () => {
                 eventsJoined: [],
             });
 
-            // Add display name to the user
             await updateProfile(user, { displayName: Name });
 
             setShowPopup(true);
             setModalContent("Congrats! You signed in/up successfully.");
             setModalClassName(
-                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4 "
             );
             setTimeout(() => {
                 router.push("/editprofile");
@@ -68,7 +102,7 @@ const SignUpPage = () => {
             setShowPopup(true);
             setModalContent("Sign in/up failed.");
             setModalClassName(
-                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4 "
             );
         }
     };
@@ -81,7 +115,7 @@ const SignUpPage = () => {
             setShowPopup(true);
             setModalContent("Congrats! You signed in/up successfully.");
             setModalClassName(
-                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  "
             );
             setTimeout(() => {
                 router.push("/editprofile");
@@ -90,7 +124,7 @@ const SignUpPage = () => {
             setShowPopup(true);
             setModalContent("Sign in/up failed.");
             setModalClassName(
-                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  "
             );
         }
     };
@@ -161,6 +195,7 @@ const SignUpPage = () => {
                                 onChange={(e) => setSurename(e.target.value)}
                             />
                         </div>
+
                         <div className='mb-4'>
                             <input
                                 className='w-full px-3 py-2 border rounded'
@@ -176,7 +211,11 @@ const SignUpPage = () => {
                         </div>
                         <div className='mb-4 relative'>
                             <input
-                                className='w-full px-3 py-2 border rounded'
+                                className={`w-full px-3 py-2 border rounded ${
+                                    formSubmitted && password.length < 6
+                                        ? "border-red-500"
+                                        : ""
+                                }`}
                                 type={showPassword ? "text" : "password"}
                                 id='password'
                                 name='password'
