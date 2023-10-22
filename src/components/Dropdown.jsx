@@ -107,7 +107,7 @@ const Dropdown = () => {
                                         Profile
                                     </Link>
                                     <Link
-                                        href='/eventcreation'
+                                        href='/events/create'
                                         className={`hover:text-red-600 ${styles.listItem}`}
                                     >
                                         Host Event
