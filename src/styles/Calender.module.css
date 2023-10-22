@@ -1,0 +1,9 @@
+.calendarDay {
+    text-decoration: none;
+    color: #000000;
+}
+
+.calendarDay:hover {
+    background-color: #f2f2f2;
+    text-decoration-line: underline;
+}

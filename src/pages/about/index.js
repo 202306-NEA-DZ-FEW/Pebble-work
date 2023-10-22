@@ -9,7 +9,7 @@ const AboutPage = () => {
     return (
         <>
             <div
-                className={` grid grid-rows-1 content-center place-items-center xl:pt-20 xl:pb-[150px] lg:pb-[250px]`}
+                className={` grid grid-rows-1 content-center place-items-center xl:pt-20  lg:pb-[250px] overflow-x-hidden`}
             >
                 <div className='absolute xl:static top-0 pb-40'>
                     <Image

@@ -1,17 +1,15 @@
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
+import Link from "next/link";
+
 import * as React from "react";
 
-import Profile from "@/pages/profile/index";
+import HomeCards from "@/components/HomeCards";
 
 export default function HomePage() {
-    return <Profile />;
-}
+    return (
+        <main>
+            <HomeCards /> {/* Render the HomeCards component here */}
+        </main>
+    );
 
-export async function getStaticProps({ locale }) {
-    return {
-        props: {
-            ...(await serverSideTranslations(locale, ["common"])),
-            // Will be passed to the page component as props
-        },
-    };
 }
