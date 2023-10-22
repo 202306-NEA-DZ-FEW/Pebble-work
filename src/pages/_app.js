@@ -4,8 +4,12 @@ import { i18n } from "next-i18next.config";
 
 import "@/styles/globals.css";
 
-function MyApp({ Component, pageProps }) {
-    return <Component {...pageProps} />;
-}
+import Layout from "@/layout/Layout";
 
-export default appWithTranslation(MyApp, { i18n });
+function MyApp({ Component, pageProps }) {
+    return (
+        <Layout>
+            <Component {...pageProps} />
+        </Layout>
+    );
+}

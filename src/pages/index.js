@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 
 import * as React from "react";
@@ -11,5 +10,4 @@ export default function HomePage() {
             <HomeCards /> {/* Render the HomeCards component here */}
         </main>
     );
-
 }
