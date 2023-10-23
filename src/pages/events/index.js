@@ -7,6 +7,7 @@ import styles from "@/styles/Events.module.css";
 import FilterByType from "@/components/Filter/FilterByType";
 import { db } from "@/util/firebase";
 import { collection, getDocs } from "firebase/firestore";
+import LocationFilter from "@/components/Filter/LocationFilter";
 
 const EventsPage = (user) => {
     // State variables
@@ -16,6 +17,23 @@ const EventsPage = (user) => {
     const [filteredTypes, setFilteredTypes] = useState([]);
     const [events, setEvents] = useState([]);
     const dropdownRef = useRef(null);
+    const locationRef = useRef(null);
+
+    const handleLocationOutside = (event) => {
+        if (
+            locationRef.current &&
+            !locationRef.current.contains(event.target)
+        ) {
+            setLocationOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener("click", handleLocationOutside);
+        return () => {
+            document.removeEventListener("click", handleLocationOutside);
+        };
+    }, []);
 
     const handleClickOutside = (event) => {
         if (
@@ -165,35 +183,14 @@ const EventsPage = (user) => {
                                 </div>
                             )}
                         </div>
-                        <div className='flex flex-col items-center gap-4 border border-x-0 border-b-0 border-t-black'>
-                            <p
-                                style={{
-                                    color: "black",
-                                    fontWeight: "400",
-                                    textDecoration: "underline",
-                                    lineHeight: "30px",
-                                    letterSpacing: "0.10px",
-                                    wordWrap: "break-word",
-                                }}
-                                className='sm:pt-10 sm:bg-transparent cursor-pointer sm:text-[20px] text-[16px]'
-                                onClick={handleLocationClick}
-                            >
-                                Change Location
-                            </p>
-                            {isLocationOpen && (
-                                <input
-                                    className={`${styles.locationChange} border rounded-[5px] text-center`}
-                                    type='text'
-                                    value={inputValue}
-                                    onChange={handleInputChange}
-                                    style={{
-                                        backgroundColor: inputValue
-                                            ? "#FBC495"
-                                            : "white",
-                                        border: `2px solid `,
-                                    }}
-                                />
-                            )}
+                        <div className='h-66'>
+                            <LocationFilter
+                                refLocation={locationRef}
+                                HandleClick={handleLocationClick}
+                                HandleOpen={isLocationOpen}
+                                InputChange={handleInputChange}
+                                inputValue={inputValue}
+                            />
                         </div>
 
                         <FilterByType
