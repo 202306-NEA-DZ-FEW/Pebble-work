@@ -31,6 +31,9 @@ const SignUpPage = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [modalContent, setModalContent] = useState("");
     const [modalClassName, setModalClassName] = useState("");
+    const [isLengthValid, setIsLengthValid] = useState(false);
+    const [hasSpecialChars, setHasSpecialChars] = useState(false);
+
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
@@ -42,6 +45,16 @@ const SignUpPage = () => {
         const queryEmail = query(users, where("email", "==", email));
         const result = await getDocs(queryEmail);
         return !result.empty;
+    };
+
+    const handlePasswordChange = (e) => {
+        const newPassword = e.target.value;
+        const passwordRegex =
+            /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
+
+        setIsLengthValid(newPassword.length >= 6);
+        setHasSpecialChars(passwordRegex.test(newPassword));
+        setPassword(newPassword);
     };
 
     const handleSignup = async (e) => {
@@ -63,6 +76,11 @@ const SignUpPage = () => {
             setModalClassName(
                 "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4   "
             );
+            return;
+        }
+
+        const emailRegex = /^(.+)@(gmail|yahoo|outlook)\.(com|co\.uk|fr)$/;
+        if (!emailRegex.test(email)) {
             return;
         }
 
@@ -223,7 +241,7 @@ const SignUpPage = () => {
                                 required
                                 style={{ height: "40px", width: "320px" }}
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={handlePasswordChange}
                             />
 
                             <div
@@ -233,7 +251,25 @@ const SignUpPage = () => {
                                 {showPassword ? <BsEye /> : <BsEyeSlash />}
                             </div>
                         </div>
-
+                        <div>
+                            <span
+                                style={{
+                                    color: isLengthValid ? "green" : "red",
+                                }}
+                            >
+                                {isLengthValid ? "✓" : "✗"} At least 6
+                                characters
+                            </span>
+                            <br />
+                            <span
+                                style={{
+                                    color: hasSpecialChars ? "green" : "red",
+                                }}
+                            >
+                                {hasSpecialChars ? "✓" : "✗"} Contains special
+                                characters
+                            </span>
+                        </div>
                         <div>
                             <div className="text-stone-500 text-sm font-normal font-['Rubik'] mt-4">
                                 Dont have an account?
