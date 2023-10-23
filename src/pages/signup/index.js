@@ -1,7 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import { FcGoogle } from "react-icons/fc";
-import { RiTwitterXFill } from "react-icons/ri";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 import Link from "next/link";
 import { useState } from "react";
@@ -18,8 +16,14 @@ import {
     getDocs,
 } from "firebase/firestore";
 import { useRouter } from "next/router";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+    GoogleAuthProvider,
+    signInWithPopup,
+    TwitterAuthProvider,
+} from "firebase/auth";
 import Modal from "@/components/Popup/Modal";
+import ButtonTwitter from "@/components/BtnTwitter&Google/ButtonTwitter";
+import BtnGoogle from "@/components/BtnTwitter&Google/ButtonGoogle";
 const SignUpPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
@@ -146,6 +150,27 @@ const SignUpPage = () => {
             );
         }
     };
+    const handelTwitter = async (e) => {
+        e.preventDefault();
+        try {
+            const provider = new TwitterAuthProvider();
+            await signInWithPopup(auth, provider);
+            setShowPopup(true);
+            setModalContent("Congrats! You signed in/up successfully.");
+            setModalClassName(
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  "
+            );
+            setTimeout(() => {
+                router.push("/editprofile");
+            }, 3000);
+        } catch (error) {
+            setShowPopup(true);
+            setModalContent("Sign in/up failed.");
+            setModalClassName(
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+            );
+        }
+    };
 
     return (
         <div className='flex justify-center items-center h-screen'>
@@ -165,21 +190,9 @@ const SignUpPage = () => {
                         Sign Up
                     </h2>
                     <div className='mb-4'>
-                        <button
-                            className=' border px-4 py-2 mb-2 rounded-md shadow-md flex items-center justify-center'
-                            style={{ height: "40px", width: "300px" }}
-                        >
-                            <RiTwitterXFill className='ml-2 mr-1' />
-                            <span>Continue with Twitter</span>
-                        </button>
-                        <button
-                            className=' border px-4 py-2 mb-2 rounded-md shadow-md flex items-center justify-center'
-                            style={{ height: "40px", width: "300px" }}
-                            onClick={handelGoogle}
-                        >
-                            <FcGoogle className='ml-2 mr-1' />
-                            <span>Continue with Google</span>
-                        </button>
+                        <ButtonTwitter onClick={handelTwitter} />
+                        <BtnGoogle onClick={handelGoogle} />
+
                         <div className='flex items-center mb-4 mt-4'>
                             <div className='   shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25 border-t flex-grow'></div>
                             <div className="text-stone-500 text-lg font-normal font-['Rubik'] px-4">
