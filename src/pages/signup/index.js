@@ -155,9 +155,20 @@ const SignUpPage = () => {
         try {
             const provider = new TwitterAuthProvider();
             await signInWithPopup(auth, provider);
-            router.push("/events");
+            setShowPopup(true);
+            setModalContent("Congrats! You signed in/up successfully.");
+            setModalClassName(
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  "
+            );
+            setTimeout(() => {
+                router.push("/editprofile");
+            }, 3000);
         } catch (error) {
-            console.error("Error signing up with Google", error);
+            setShowPopup(true);
+            setModalContent("Sign in/up failed.");
+            setModalClassName(
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+            );
         }
     };
 
