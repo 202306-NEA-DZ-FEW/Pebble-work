@@ -92,7 +92,6 @@ const SignInPage = () => {
                         <div className='mb-4'>
                             {/* hna */}
                             <ButtonTwitter />
-
                             <BtnGoogle onClick={handelGoogle} />
 
                             <div className='flex items-center mb-4 mt-4'>

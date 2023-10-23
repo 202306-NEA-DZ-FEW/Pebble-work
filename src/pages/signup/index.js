@@ -168,7 +168,6 @@ const SignUpPage = () => {
                     </h2>
                     <div className='mb-4'>
                         <ButtonTwitter />
-
                         <BtnGoogle onClick={handelGoogle} />
 
                         <div className='flex items-center mb-4 mt-4'>
