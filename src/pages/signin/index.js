@@ -105,7 +105,7 @@ const SignInPage = () => {
                             src='/images/Sitting.png'
                             alt='Sitting'
                             width={1920}
-                            height={1080}
+                            height={1081}
                             layout='responsive'
                             objectFit='cover'
                         />
