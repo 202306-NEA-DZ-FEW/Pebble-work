@@ -92,9 +92,11 @@ const EventsPage = (user) => {
     // Fetch events from Firebase
     useEffect(() => {
         const fetchEvents = async () => {
-            const eventsCollectionRef = collection(db, "events"); // Assuming the collection name is "events"
+            const eventsCollectionRef = collection(db, "events");
             const eventsSnapshot = await getDocs(eventsCollectionRef);
-            const eventsData = eventsSnapshot.docs.map((doc) => doc.data());
+            const eventsData = eventsSnapshot.docs.map((doc) => {
+                return { id: doc.id, ...doc.data() };
+            });
 
             setEvents(eventsData);
         };
@@ -128,6 +130,7 @@ const EventsPage = (user) => {
                                         return (
                                             <EventCard
                                                 key={event.id}
+                                                eventId={event.id}
                                                 title={event.title}
                                                 type={event.type}
                                                 images={event.image}
@@ -141,6 +144,7 @@ const EventsPage = (user) => {
                                     } else {
                                         return (
                                             <EventCardLeft
+                                                eventId={event.id}
                                                 key={event.id}
                                                 title={event.title}
                                                 type={event.type}

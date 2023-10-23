@@ -1,7 +1,9 @@
 import React from "react";
 import styles from "@/styles/EventCard.module.css";
+import { useRouter } from "next/router";
 
 const EventCardLeft = ({
+    eventId,
     title,
     type,
     image,
@@ -11,6 +13,11 @@ const EventCardLeft = ({
     organizer,
     description,
 }) => {
+    const router = useRouter();
+    const handleReviewClick = () => {
+        router.push(`/events/${eventId}`);
+    };
+
     return (
         <>
             <div
@@ -45,8 +52,9 @@ const EventCardLeft = ({
 
                     <button
                         className={`w-[45px] bg-blue-400 hover:bg-blue-500 text-white text-[10px] xl:text-[15px] md:text-[12px] rounded-[4px] h-[14px] xl:w-[80px] xl:h-[30px] sm:w-[60px] sm:h-[18px]`}
+                        onClick={handleReviewClick}
                     >
-                        Join
+                        Review
                     </button>
                 </div>
                 <div

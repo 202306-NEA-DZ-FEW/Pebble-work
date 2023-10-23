@@ -44,7 +44,6 @@ const Dropdown = () => {
         const logged = auth.onAuthStateChanged((user) => {
             if (user) {
                 setUser(user);
-                console.log("Name:", user);
             } else {
                 setUser(null);
             }
@@ -81,13 +80,7 @@ const Dropdown = () => {
                     <img
                         className='rounded-full md:w-8 md:h-8 w-6 h-6'
                         src={user ? user.photoURL : "/logo/Logo.png"}
-                        alt={
-                            user
-                                ? user.email.length > 2
-                                    ? user.email.slice(0, 2) + "..."
-                                    : user.email
-                                : "Account"
-                        }
+                        alt='Profile'
                     />
                 </div>
 

@@ -24,7 +24,6 @@ const EventsPage = ({ event, organizer }) => {
             if (user) {
                 // User is signed in
                 setUserMail(user.email);
-                console.log(user.email);
             } else {
                 // User is signed out
                 setUserMail(null); // Reset to null when signed out
@@ -38,8 +37,6 @@ const EventsPage = ({ event, organizer }) => {
     }, []);
 
     const attendeesArr = event.attendees;
-    console.log(event.eventId, 456);
-    //console.log(userMail, attendeesArr[0].email, 160)
 
     const findUser = attendeesArr.find((item) => {
         return item.email === userMail;
@@ -56,14 +53,20 @@ const EventsPage = ({ event, organizer }) => {
         const eventObject = eventDoc.data();
         const userObject = userDoc.data();
 
-        const eventInfo = { ...eventObject, uid: eventId };
+        const { Name, Surename, email } = userObject;
+        // Create a new object with the desired event details
+        const eventInfo = {
+            eventId: eventId,
+            title: eventObject.title,
+        };
 
+        // Update the user document to include the joined event
         await updateDoc(userDocRef, {
             eventsJoined: arrayUnion(eventInfo),
         });
 
         await updateDoc(eventDocRef, {
-            attendees: arrayUnion(userObject),
+            attendees: arrayUnion({ Name, Surename, email }),
         });
 
         alert("Event joined successfully");
