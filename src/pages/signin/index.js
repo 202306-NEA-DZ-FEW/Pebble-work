@@ -1,5 +1,9 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+    GoogleAuthProvider,
+    signInWithPopup,
+    TwitterAuthProvider,
+} from "firebase/auth";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -70,6 +74,16 @@ const SignInPage = () => {
             );
         }
     };
+    const handelTwitter = async (e) => {
+        e.preventDefault();
+        try {
+            const provider = new TwitterAuthProvider();
+            await signInWithPopup(auth, provider);
+            router.push("/events");
+        } catch (error) {
+            console.error("Error signing up with Google", error);
+        }
+    };
 
     return (
         <>
@@ -90,8 +104,7 @@ const SignInPage = () => {
                             Sign In
                         </h2>
                         <div className='mb-4'>
-                            {/* hna */}
-                            <ButtonTwitter />
+                            <ButtonTwitter onClick={handelTwitter} />
                             <BtnGoogle onClick={handelGoogle} />
 
                             <div className='flex items-center mb-4 mt-4'>
