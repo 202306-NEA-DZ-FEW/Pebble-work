@@ -83,7 +83,7 @@ const Dropdown = () => {
                         src={user ? user.photoURL : "/logo/Logo.png"}
                         alt={
                             user
-                                ? user.email.length > 2
+                                ? user.email?.length > 2
                                     ? user.email.slice(0, 2) + "..."
                                     : user.email
                                 : "Account"

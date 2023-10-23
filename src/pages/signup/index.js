@@ -20,6 +20,8 @@ import {
 import { useRouter } from "next/router";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import Modal from "@/components/Popup/Modal";
+import ButtonTwitter from "@/components/BtnTwitter&Google/ButtonTwitter";
+import BtnGoogle from "@/components/BtnTwitter&Google/ButtonGoogle";
 const SignUpPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
@@ -165,21 +167,10 @@ const SignUpPage = () => {
                         Sign Up
                     </h2>
                     <div className='mb-4'>
-                        <button
-                            className=' border px-4 py-2 mb-2 rounded-md shadow-md flex items-center justify-center'
-                            style={{ height: "40px", width: "300px" }}
-                        >
-                            <RiTwitterXFill className='ml-2 mr-1' />
-                            <span>Continue with Twitter</span>
-                        </button>
-                        <button
-                            className=' border px-4 py-2 mb-2 rounded-md shadow-md flex items-center justify-center'
-                            style={{ height: "40px", width: "300px" }}
-                            onClick={handelGoogle}
-                        >
-                            <FcGoogle className='ml-2 mr-1' />
-                            <span>Continue with Google</span>
-                        </button>
+                        <ButtonTwitter />
+
+                        <BtnGoogle onClick={handelGoogle} />
+
                         <div className='flex items-center mb-4 mt-4'>
                             <div className='   shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25 border-t flex-grow'></div>
                             <div className="text-stone-500 text-lg font-normal font-['Rubik'] px-4">
