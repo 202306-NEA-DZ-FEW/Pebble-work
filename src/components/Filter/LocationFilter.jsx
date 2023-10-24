@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from "@/styles/Events.module.css";
 import { debounce } from "lodash";
 
-const LocationFilter = ({ HandleClick, HandleOpen, refLocation }) => {
+const LocationFilter = ({ HandleClick, HandleOpen, refLocation ,onInputChange }) => {
     const [inputValue, setInputValue] = useState("");
     const [places, setPlaces] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -11,7 +11,10 @@ const LocationFilter = ({ HandleClick, HandleOpen, refLocation }) => {
     const inputRef = useRef(null);
 
     const InputChange = (e) => {
-        setInputValue(e.target.value);
+        const value = e.target.value;
+        setInputValue(value);
+        onInputChange(value); 
+        console.log("Input value in LocationFilter:", value);
     };
 
     const fetchPlaces = async () => {
@@ -81,16 +84,18 @@ const LocationFilter = ({ HandleClick, HandleOpen, refLocation }) => {
                 </p>
                 {HandleOpen && (
                     <input
-                        ref={inputRef}
-                        className={`${styles.locationChange} border rounded-[5px] text-center`}
-                        type='text'
-                        value={inputValue}
-                        onChange={InputChange}
-                        style={{
-                            backgroundColor: inputValue ? "#FBC495" : "white",
-                            border: `2px solid `,
-                        }}
-                    />
+    ref={inputRef}
+    className={`${styles.locationChange} border rounded-[5px] text-center`}
+    type='text'
+    value={inputValue}
+    onChange={InputChange}
+    onClick={() => setPlaces([])} // Close the dropdown when input is clicked
+    style={{
+        backgroundColor: inputValue ? "#FBC495" : "white",
+        border: `2px solid `,
+    }}
+/>
+
                 )}
                 {loading && <p>Loading...</p>}
                 {error && <p>{error}</p>}
@@ -99,9 +104,16 @@ const LocationFilter = ({ HandleClick, HandleOpen, refLocation }) => {
                         ref={listRef}
                         className='bg-white w-[150px] overflow-x-hidden h-[150px] overflow-y-scroll flex flex-col items-center justify-center'
                     >
-                        {places.map((place) => (
-                            <li key={place.place_id}>{place.display_name}</li>
-                        ))}
+                       {places.map((place) => (
+    <li 
+        key={place.place_id} 
+        onClick={() => setInputValue(place.display_name)}
+    >
+        {place.display_name}
+    </li>
+))}
+
+
                     </ul>
                 )}
             </div>

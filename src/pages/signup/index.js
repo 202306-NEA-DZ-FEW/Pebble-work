@@ -51,10 +51,7 @@ const SignUpPage = () => {
 
     const handlePasswordChange = (e) => {
         const newPassword = e.target.value;
-        const passwordRegex =
-            /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
-
-        setIsLengthValid(newPassword.length >= 6);
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&()+\-=[\]{};':"\\|,.<>/?])[A-Za-z\d!@#$%^&()+\-=[\]{};':"\\|,.<>/?]*$/;
         setHasSpecialChars(passwordRegex.test(newPassword));
         setPassword(newPassword);
     };

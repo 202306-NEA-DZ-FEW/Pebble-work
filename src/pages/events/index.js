@@ -8,6 +8,16 @@ import FilterByType from "@/components/Filter/FilterByType";
 import { db } from "@/util/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import LocationFilter from "@/components/Filter/LocationFilter";
+import {
+    collection,
+    query,
+    where,
+    getDocs,
+} from "firebase/firestore";
+
+
+
+
 
 const EventsPage = (user) => {
     // State variables
@@ -16,8 +26,40 @@ const EventsPage = (user) => {
     const [isLocationOpen, setLocationOpen] = useState(false);
     const [filteredTypes, setFilteredTypes] = useState([]);
     const [events, setEvents] = useState([]);
+    const [filteredEvents, setFilteredEvents] = useState([]);
+
     const dropdownRef = useRef(null);
     const locationRef = useRef(null);
+
+    const handleLocationInputChange = (value) => {
+        setInputValue(value); 
+        console.log("Input value updated:", value);
+    };
+
+    const checkIfEventsExists = async (inputValue) => {
+        const events = collection(db, "events");
+        const queryLocation = query(events, where("location", "==", inputValue));
+        const result = await getDocs(queryLocation);
+        return !result.empty;
+    };
+const handelFilterbyLoction =async(location)=>{
+
+    const locationExists = await checkIfEventsExists(inputValue);
+    if (locationExists) {
+    
+        const filteredEvents = events.filter(event => event.location === location);
+        setFilteredEvents(filteredEvents);
+    } else {
+        setFilteredEvents([]); 
+    }
+console.log(filteredEvents);
+}
+
+
+
+
+
+
 
     const handleLocationOutside = (event) => {
         if (
@@ -189,7 +231,8 @@ const EventsPage = (user) => {
                                 HandleClick={handleLocationClick}
                                 HandleOpen={isLocationOpen}
                                 InputChange={handleInputChange}
-                                inputValue={inputValue}
+                                 inputValue={inputValue}
+                                onInputChange={handleLocationInputChange}
                             />
                         </div>
 
