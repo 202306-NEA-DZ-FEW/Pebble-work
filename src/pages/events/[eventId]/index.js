@@ -1,5 +1,6 @@
 import {
     arrayUnion,
+    arrayRemove,
     doc,
     getDoc,
     updateDoc,
@@ -63,6 +64,9 @@ const EventsPage = ({ event, organizer }) => {
         const docSnapshot = await getDoc(documentRef);
         const docData = docSnapshot.data();
 
+        const userId = auth?.currentUser?.uid;
+        const userDocRef = doc(db, "users", userId);
+
         // Filter the array to remove the object where the email matches
         const updatedAttendees = docData.attendees.filter(
             (attendee) => attendee.email !== userMail
@@ -72,6 +76,17 @@ const EventsPage = ({ event, organizer }) => {
         await updateDoc(documentRef, {
             attendees: updatedAttendees,
         });
+
+        const eventInfo = {
+            eventId: event.eventId,
+            title: docData.title,
+        };
+
+        // Update the user document to include the joined event
+        await updateDoc(userDocRef, {
+            eventsJoined: arrayRemove(eventInfo),
+        });
+
         alert("Event unjoined");
 
         location.reload();
