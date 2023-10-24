@@ -15,18 +15,36 @@
         right: 0;
         z-index: 9999;
     }
+    .fadeIn {
+        -webkit-animation: fadeIn 1s cubic-bezier(0.25, 0.77, 0.45, 0.94) both;
+        animation: fadeIn 1s cubic-bezier(0.25, 0.77, 0.45, 0.94) both;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+    @-webkit-keyframes fadeIn {
+        0% {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    @keyframes fadeIn {
+        0% {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
 }
 .selectedType {
     background-color: #e53e3e;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
 }
 
 .information {

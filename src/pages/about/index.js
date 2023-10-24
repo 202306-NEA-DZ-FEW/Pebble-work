@@ -50,9 +50,11 @@ const AboutPage = () => {
                         in your community.
                     </p>
                 </div>
-                <div className='rounded-[20px] flex flex-col items-center bg-[#fbc495] xl:mb-40'>
+                <div
+                    className={`${styles.teamContainer} rounded-[20px] flex flex-col items-center bg-[#fbc495] bg-opacity-70 xl:mb-40`}
+                >
                     <h2
-                        className={`${styles.teamText} text-[40px] text-[#1A1A1A] md:mt-10 md:mb-10`}
+                        className={`${styles.teamText} text-[40px] text-[#1A1A1A] md:mt-10 pt-2 md:mb-10`}
                     >
                         Our Team
                     </h2>
