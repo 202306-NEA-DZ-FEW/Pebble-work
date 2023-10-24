@@ -4,6 +4,7 @@ import React from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "@/util/firebase";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const EventsPage = ({ event, organizer }) => {
     const cellData = [
@@ -23,7 +24,6 @@ const EventsPage = ({ event, organizer }) => {
             if (user) {
                 // User is signed in
                 setUserMail(user.email);
-                console.log(user.email);
             } else {
                 // User is signed out
                 setUserMail(null); // Reset to null when signed out
@@ -37,8 +37,6 @@ const EventsPage = ({ event, organizer }) => {
     }, []);
 
     const attendeesArr = event.attendees;
-    console.log(event.eventId, 456);
-    //console.log(userMail, attendeesArr[0].email, 160)
 
     const findUser = attendeesArr.find((item) => {
         return item.email === userMail;
@@ -55,14 +53,20 @@ const EventsPage = ({ event, organizer }) => {
         const eventObject = eventDoc.data();
         const userObject = userDoc.data();
 
-        const eventInfo = { ...eventObject, uid: eventId };
+        const { Name, Surename, email } = userObject;
+        // Create a new object with the desired event details
+        const eventInfo = {
+            eventId: eventId,
+            title: eventObject.title,
+        };
 
+        // Update the user document to include the joined event
         await updateDoc(userDocRef, {
             eventsJoined: arrayUnion(eventInfo),
         });
 
         await updateDoc(eventDocRef, {
-            attendees: arrayUnion(userObject),
+            attendees: arrayUnion({ Name, Surename, email }),
         });
 
         alert("Event joined successfully");
@@ -133,7 +137,41 @@ const EventsPage = ({ event, organizer }) => {
                                 <b>Dude McGee</b>
                             )}
                         </p>
-                        {findUser ? (
+                        {userMail === organizer.email ? (
+                            <>
+                                <Link href={`/events/${event.eventId}/edit`}>
+                                    <button
+                                        className='btn btn-sm btn-wide opacity-80 hover:opacity-100'
+                                        style={{
+                                            marginTop: "1rem",
+                                            borderRadius: "8px",
+                                            background: "grey",
+                                            border: 0,
+                                            color: "white",
+                                        }}
+                                    >
+                                        Edit event
+                                    </button>
+                                </Link>{" "}
+                                <button
+                                    className='btn btn-sm btn-wide hover:opacity-60'
+                                    onClick={() =>
+                                        document
+                                            .getElementById("cancel_modal")
+                                            .showModal()
+                                    }
+                                    style={{
+                                        marginTop: "1rem",
+                                        borderRadius: "8px",
+                                        background: "red",
+                                        border: 0,
+                                        color: "white",
+                                    }}
+                                >
+                                    Cancel event
+                                </button>
+                            </>
+                        ) : findUser ? (
                             <button
                                 className='btn btn-sm btn-wide opacity-50 cursor-default'
                                 style={{
@@ -217,6 +255,33 @@ const EventsPage = ({ event, organizer }) => {
                 </div>
             </div>
             <div style={{ height: "200px", marginTop: "4rem" }}></div>
+
+            <dialog id='cancel_modal' className='modal'>
+                <div className='modal-box'>
+                    <h3 className='font-bold text-lg'>Warning</h3>
+                    <p className='py-4'>You are about to cancel this event.</p>
+                    <p>
+                        This action will permanently delete all associated data.
+                        Are you sure you want to proceed?
+                    </p>
+                    <div className='modal-action'>
+                        <form method='dialog'>
+                            {/* if there is a button in form, it will close the modal */}
+                            <button
+                                className='btn'
+                                style={{
+                                    background: "red",
+                                    color: "white",
+                                    marginRight: "1rem",
+                                }}
+                            >
+                                Cancel event
+                            </button>
+                            <button className='btn'>Close</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
         </>
     );
 };
