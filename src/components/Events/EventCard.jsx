@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "@/styles/EventCard.module.css";
-
+import { useRouter } from "next/router";
 const EventCard = ({
+    eventId,
     title,
     type,
     image,
@@ -11,6 +12,10 @@ const EventCard = ({
     organizer,
     description,
 }) => {
+    const router = useRouter();
+    const handleReviewClick = () => {
+        router.push(`/events/${eventId}`);
+    };
     return (
         <>
             <div
@@ -46,9 +51,10 @@ const EventCard = ({
                     <div className='flex'>
                         <p>avatars</p>
                         <button
+                            onClick={handleReviewClick}
                             className={`w-[45px] bg-blue-400 hover:bg-blue-500 text-white text-[10px] xl:text-[15px] md:text-[12px] rounded-[4px] h-[14px] xl:w-[80px] xl:h-[30px] sm:w-[60px] sm:h-[18px]`}
                         >
-                            Join
+                            Review
                         </button>
                     </div>
                 </div>

@@ -79,7 +79,7 @@ const ImageSquareCard = () => {
                     }`}
                 >
                     <img
-                        src='/Homepage/Image (1).png'
+                        src='/Homepage/Image (1).jpg'
                         className={`${styles.imageSquare}`}
                         alt='Image 3'
                     />
