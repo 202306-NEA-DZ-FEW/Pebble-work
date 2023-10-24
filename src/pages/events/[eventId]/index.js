@@ -1,4 +1,10 @@
-import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
+import {
+    arrayUnion,
+    doc,
+    getDoc,
+    updateDoc,
+    deleteDoc,
+} from "firebase/firestore";
 import Image from "next/image";
 import React from "react";
 import { onAuthStateChanged } from "firebase/auth";
@@ -36,6 +42,14 @@ const EventsPage = ({ event, organizer }) => {
             unsubscribe();
         };
     }, []);
+
+    const deleteEvent = async () => {
+        await deleteDoc(doc(db, "events", event.eventId));
+
+        alert("Event successfully deleted");
+
+        window.location.href = `/events/`;
+    };
 
     const attendeesArr = event.attendees;
     console.log(event.eventId, 456);
@@ -271,6 +285,7 @@ const EventsPage = ({ event, organizer }) => {
                                     color: "white",
                                     marginRight: "1rem",
                                 }}
+                                onClick={deleteEvent}
                             >
                                 Cancel event
                             </button>
