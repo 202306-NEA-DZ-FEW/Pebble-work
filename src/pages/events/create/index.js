@@ -405,7 +405,11 @@ const EventCreationPage = () => {
 
                     <div className='flex items-center flex-row mt-3 rounded '>
                         <button
-                            onClick={addAndGoToEvent}
+                            onClick={() =>
+                                document
+                                    .getElementById("confirmcreate_modal")
+                                    .showModal()
+                            }
                             className='px-8 py-3 outline outline-1 rounded font-semibold mx-auto my-28'
                             style={{
                                 display: "flex",
@@ -425,6 +429,45 @@ const EventCreationPage = () => {
             ) : (
                 <EventCreation />
             )}
+            <dialog id='confirmcreate_modal' className='modal'>
+                <div className='modal-box'>
+                    <h3 className='font-bold text-lg text-[#FDA855]'>
+                        Confirmation
+                    </h3>
+                    <p className='py-4'>
+                        <span className='font-bold'>Event:</span> {input.title}.
+                        <br />{" "}
+                        <span className='italic text-sm'>{input.type}</span>
+                    </p>
+                    <p>
+                        The following information cannot be changed later on:
+                        <ul className='font-bold text-sm pt-2'>
+                            <li>Location</li>
+                            <li>Event type</li>
+                            <li>Day</li>
+                        </ul>
+                    </p>
+                    <p className='pt-2'>Do you wish to proceed?</p>
+
+                    <div className='modal-action'>
+                        <form method='dialog'>
+                            {/* if there is a button in form, it will close the modal */}
+                            <button
+                                className='btn'
+                                onClick={addAndGoToEvent}
+                                style={{
+                                    background: "#FDA855",
+                                    color: "white",
+                                    marginRight: "1rem",
+                                }}
+                            >
+                                Create event
+                            </button>
+                            <button className='btn'>Return</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
         </dDiv>
     );
 };
