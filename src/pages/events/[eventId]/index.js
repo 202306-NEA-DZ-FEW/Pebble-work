@@ -1,4 +1,11 @@
-import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
+import {
+    arrayUnion,
+    arrayRemove,
+    doc,
+    getDoc,
+    updateDoc,
+    deleteDoc,
+} from "firebase/firestore";
 import Image from "next/image";
 import React from "react";
 import { onAuthStateChanged } from "firebase/auth";
@@ -7,6 +14,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 const EventsPage = ({ event, organizer }) => {
+    const [isHovered, setIsHovered] = useState(false);
+
     const cellData = [
         "Mona M.",
         "Aether M.",
@@ -36,11 +45,52 @@ const EventsPage = ({ event, organizer }) => {
         };
     }, []);
 
+    const deleteEvent = async () => {
+        await deleteDoc(doc(db, "events", event.eventId));
+
+        alert("Event successfully deleted");
+
+        window.location.href = `/events/`;
+    };
+
     const attendeesArr = event.attendees;
 
     const findUser = attendeesArr.find((item) => {
         return item.email === userMail;
     });
+
+    const cancelJoin = async () => {
+        const documentRef = doc(db, "events", event.eventId);
+        const docSnapshot = await getDoc(documentRef);
+        const docData = docSnapshot.data();
+
+        const userId = auth?.currentUser?.uid;
+        const userDocRef = doc(db, "users", userId);
+
+        // Filter the array to remove the object where the email matches
+        const updatedAttendees = docData.attendees.filter(
+            (attendee) => attendee.email !== userMail
+        );
+
+        // Update the document with the modified attendees array
+        await updateDoc(documentRef, {
+            attendees: updatedAttendees,
+        });
+
+        const eventInfo = {
+            eventId: event.eventId,
+            title: docData.title,
+        };
+
+        // Update the user document to include the joined event
+        await updateDoc(userDocRef, {
+            eventsJoined: arrayRemove(eventInfo),
+        });
+
+        alert("Event unjoined");
+
+        location.reload();
+    };
 
     const joinEvent = async (eventId) => {
         const userId = auth?.currentUser?.uid;
@@ -173,16 +223,23 @@ const EventsPage = ({ event, organizer }) => {
                             </>
                         ) : findUser ? (
                             <button
-                                className='btn btn-sm btn-wide opacity-50 cursor-default'
+                                className='btn btn-sm btn-wide opacity-50 hover:opacity-80 cursor-default hover:cursor-pointer'
                                 style={{
                                     marginTop: "1rem",
                                     borderRadius: "8px",
-                                    background: "#FDA855",
+                                    background: isHovered ? "red" : "#FDA855",
                                     border: 0,
                                     color: "white",
                                 }}
+                                onMouseOver={() => setIsHovered(true)}
+                                onMouseOut={() => setIsHovered(false)}
+                                onClick={() =>
+                                    document
+                                        .getElementById("canceljoin_modal")
+                                        .showModal()
+                                }
                             >
-                                Already joined
+                                {isHovered ? "Cancel join" : "Already joined"}
                             </button>
                         ) : (
                             <button
@@ -274,8 +331,32 @@ const EventsPage = ({ event, organizer }) => {
                                     color: "white",
                                     marginRight: "1rem",
                                 }}
+                                onClick={deleteEvent}
                             >
                                 Cancel event
+                            </button>
+                            <button className='btn'>Close</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
+            <dialog id='canceljoin_modal' className='modal'>
+                <div className='modal-box'>
+                    <h3 className='font-bold text-lg'>Warning</h3>
+                    <p className='py-4'>You are about to leave this event.</p>
+                    <p>Are you sure you want to proceed?</p>
+                    <div className='modal-action'>
+                        <form method='dialog'>
+                            <button
+                                className='btn'
+                                style={{
+                                    background: "red",
+                                    color: "white",
+                                    marginRight: "1rem",
+                                }}
+                                onClick={cancelJoin}
+                            >
+                                Leave
                             </button>
                             <button className='btn'>Close</button>
                         </form>
