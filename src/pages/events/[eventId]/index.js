@@ -390,7 +390,10 @@ export async function getServerSideProps(context) {
 
     return {
         props: {
-            event,
+            event: {
+                ...event,
+                eventId: eventId,
+            },
             organizer,
             notFound: false,
         },
