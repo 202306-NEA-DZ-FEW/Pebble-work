@@ -3,8 +3,12 @@ import {
     arrayRemove,
     doc,
     getDoc,
+    getDocs,
     updateDoc,
     deleteDoc,
+    query,
+    where,
+    collection,
 } from "firebase/firestore";
 import Image from "next/image";
 import React from "react";
@@ -37,9 +41,50 @@ const EventsPage = ({ event, organizer, notFound }) => {
     }, []);
 
     const deleteEvent = async () => {
+        //removing event info from the organizer's doc
+
+        const organizerDocRef = doc(db, "users", event.organizer);
+        const organizerDoc = await getDoc(organizerDocRef);
+
+        const organizerData = organizerDoc.data();
+        const updatedEventsCreated = organizerData.eventsCreated.filter(
+            (eventInfo) => eventInfo.uid !== event.eventId
+        );
+
+        await updateDoc(organizerDocRef, {
+            eventsCreated: updatedEventsCreated,
+        });
+
+        // removing event info from the attendees' docs
+
+        for (const attendee of event.attendees) {
+            const attendeeEmail = attendee.email;
+            const userQuery = query(
+                collection(db, "users"),
+                where("email", "==", attendeeEmail)
+            );
+            const userQuerySnapshot = await getDocs(userQuery);
+
+            userQuerySnapshot.forEach(async (userDoc) => {
+                const userData = userDoc.data();
+                if (userData.eventsJoined) {
+                    const updatedEventsJoined = userData.eventsJoined.filter(
+                        (eventInfo) => eventInfo.eventId !== event.eventId
+                    );
+
+                    await updateDoc(userDoc.ref, {
+                        eventsJoined: updatedEventsJoined,
+                    });
+                }
+            });
+        }
+
+        //Finally, delete the event doc
         await deleteDoc(doc(db, "events", event.eventId));
 
         alert("Event successfully deleted");
+
+        //Send them back to the shadowrealm
 
         window.location.href = `/events/`;
     };
