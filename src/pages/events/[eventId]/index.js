@@ -16,20 +16,11 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "@/util/firebase";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import NoEvent from "@/components/Events/NoEvent";
 
-const EventsPage = ({ event, organizer }) => {
+const EventsPage = ({ event, organizer, notFound }) => {
     const [isHovered, setIsHovered] = useState(false);
 
-    const cellData = [
-        "Mona M.",
-        "Aether M.",
-        "Jangis M.",
-        "Lisa M.",
-        "Diluc M.",
-        "Dori S.",
-    ];
-
-    const [joined, setJoined] = useState();
     const [userMail, setUserMail] = useState(null);
 
     useEffect(() => {
@@ -98,9 +89,9 @@ const EventsPage = ({ event, organizer }) => {
         window.location.href = `/events/`;
     };
 
-    const attendeesArr = event.attendees;
+    const attendeesArr = event?.attendees || [];
 
-    const findUser = attendeesArr.find((item) => {
+    const findUser = attendeesArr?.find((item) => {
         return item.email === userMail;
     });
 
@@ -168,6 +159,13 @@ const EventsPage = ({ event, organizer }) => {
 
         window.location.reload();
     };
+    if (notFound) {
+        return <NoEvent />;
+    }
+    if (!event) {
+        return <p>Loading...</p>;
+    }
+
     return (
         <>
             <div style={{ margin: "auto", width: "60%", paddingTop: "6rem" }}>
@@ -413,14 +411,22 @@ const EventsPage = ({ event, organizer }) => {
 };
 
 export async function getServerSideProps(context) {
-    // Get the event ID from the URL uwu
     const eventId = context.params.eventId;
 
-    // Fetch the event data from Firebase
     const eventRef = doc(db, "events", eventId);
     const eventDoc = await getDoc(eventRef);
-    const event = eventDoc.data();
 
+    if (!eventDoc.exists()) {
+        return {
+            props: {
+                event: null,
+                organizer: null,
+                notFound: true, // Flag to indicate event not found
+            },
+        };
+    }
+
+    const event = eventDoc.data();
     const userId = event.organizer;
 
     const organizerRef = doc(db, "users", userId);
@@ -434,6 +440,7 @@ export async function getServerSideProps(context) {
                 eventId: eventId,
             },
             organizer,
+            notFound: false,
         },
     };
 }
