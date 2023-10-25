@@ -52,13 +52,12 @@ const EventCreationPage = () => {
         const userId = auth?.currentUser?.uid;
         const userDocRef = doc(db, "users", userId);
 
-        const eventDoc = await getDoc(doc(db, "events", eventId));
-
-        const eventObject = eventDoc.data();
-        const eventInfo = { ...eventObject, uid: eventId };
+        const eventData = {
+            eventId: eventId,
+        };
 
         await updateDoc(userDocRef, {
-            eventsCreated: arrayUnion(eventInfo),
+            eventsCreated: arrayUnion(eventData),
         });
     };
     const addAndGoToEvent = async () => {
@@ -86,7 +85,6 @@ const EventCreationPage = () => {
             ...prevInput,
             [id]: value,
         }));
-        console.log(input.location, input.type);
     };
 
     const arrEventType = [

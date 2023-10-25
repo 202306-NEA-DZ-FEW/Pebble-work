@@ -48,7 +48,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
 
         const organizerData = organizerDoc.data();
         const updatedEventsCreated = organizerData.eventsCreated.filter(
-            (eventInfo) => eventInfo.uid !== event.eventId
+            (eventInfo) => eventInfo.eventId !== event.eventId
         );
 
         await updateDoc(organizerDocRef, {
@@ -115,7 +115,6 @@ const EventsPage = ({ event, organizer, notFound }) => {
 
         const eventInfo = {
             eventId: event.eventId,
-            title: docData.title,
         };
 
         // Update the user document to include the joined event

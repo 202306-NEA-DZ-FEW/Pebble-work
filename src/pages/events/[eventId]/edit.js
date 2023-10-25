@@ -96,7 +96,6 @@ function EditEvent({ event, organizer }) {
             if (user) {
                 // User is signed in
                 setUserMail(user.email);
-                console.log(user.email);
             } else {
                 // User is signed out
                 setUserMail(null); // Reset to null when signed out
