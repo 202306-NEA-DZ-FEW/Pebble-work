@@ -1,12 +1,15 @@
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
-import Signin from "@/components/Signin/Signin";
-import Pebble from "../Pebble";
-import Language from "../Language/Language";
+import React, { useEffect, useState } from "react";
+
 import styles from "@/styles/Navbar.module.css";
 
-import Dropdown from "../Dropdown";
+import Signin from "@/components/Signin/Signin";
+
 import { auth } from "@/util/firebase";
+
+import Dropdown from "../Dropdown";
+import Language from "../Language/Language";
+import Pebble from "../Pebble";
 
 const Navbar = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);

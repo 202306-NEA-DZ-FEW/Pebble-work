@@ -3,7 +3,13 @@ import Image from "next/image";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 import Link from "next/link";
 import { useState } from "react";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+    createUserWithEmailAndPassword,
+    updateProfile,
+    sendSignInLinkToEmail,
+    isSignInWithEmailLink,
+    signInWithEmailLink,
+} from "firebase/auth";
 import { auth } from "../../util/firebase";
 import { db } from "../../util/firebase";
 import {
@@ -24,6 +30,7 @@ import {
 import Modal from "@/components/Popup/Modal";
 import ButtonTwitter from "@/components/BtnTwitter&Google/ButtonTwitter";
 import BtnGoogle from "@/components/BtnTwitter&Google/ButtonGoogle";
+
 const SignUpPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
@@ -132,10 +139,33 @@ const SignUpPage = () => {
         e.preventDefault();
         try {
             const provider = new GoogleAuthProvider();
-            await signInWithPopup(auth, provider);
+            const result = await signInWithPopup(auth, provider);
+
+            // Extract first and last names from displayName
+            const displayName = result.user.displayName;
+            const [firstName, lastName] = displayName.split(" ");
+
+            // Create user object with name, surename, and email
+            const user = {
+                Name: firstName,
+                Surename: lastName,
+                email: result.user.email,
+                interests: [],
+                eventsCreated: [],
+                eventsJoined: [],
+            };
+
+            // Get the user UID
+            const userUID = result.user.uid;
+
+            // Get a reference to the "users" collection
+            const usersCollectionRef = collection(db, "users");
+
+            // Add the user object to the "users" collection with the user UID as the document ID
+            await setDoc(doc(usersCollectionRef, userUID), user);
 
             setShowPopup(true);
-            setModalContent("Congrats! You signed in/up successfully.");
+            setModalContent("Congrats! Sign-in link sent to your email.");
             setModalClassName(
                 "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  "
             );
@@ -150,15 +180,42 @@ const SignUpPage = () => {
             );
         }
     };
+
     const handelTwitter = async (e) => {
         e.preventDefault();
         try {
             const provider = new TwitterAuthProvider();
-            await signInWithPopup(auth, provider);
+            const result = await signInWithPopup(auth, provider);
+
+            // Extract first and last names from displayName
+            const displayName = result.user.displayName;
+            const [firstName, lastName] = displayName.split(" ");
+
+            // Retrieve email from additionalUserInfo
+            const email = result._tokenResponse.email;
+
+            // Create user object with name, surename, and email
+            const user = {
+                Name: firstName,
+                Surename: lastName,
+                email: email,
+                interests: [],
+                eventsCreated: [],
+                eventsJoined: [],
+            };
+
+            const userUID = result.user.uid;
+
+            // Get a reference to the "users" collection
+            const usersCollectionRef = collection(db, "users");
+
+            // Add the user object to the "users" collection with the user UID as the document ID
+            await setDoc(doc(usersCollectionRef, userUID), user);
+
             setShowPopup(true);
             setModalContent("Congrats! You signed in/up successfully.");
             setModalClassName(
-                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  "
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4"
             );
             setTimeout(() => {
                 router.push("/editprofile");
