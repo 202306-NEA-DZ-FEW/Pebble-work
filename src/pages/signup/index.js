@@ -33,6 +33,8 @@ const SignUpPage = () => {
     const [isLengthValid, setIsLengthValid] = useState(false);
     const [hasSpecialChars, setHasSpecialChars] = useState(false);
     const [hasalphabetValid, setalphabetValid] = useState(false);
+    const [isSignUpDisabled, setIsSignUpDisabled] = useState(true);
+    const [isAllconditionMet, setisAllconditionMet] = useState(true); // New state
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -58,6 +60,10 @@ const SignUpPage = () => {
         setIsLengthValid(lengthValid);
         setHasSpecialChars(specialCharsValid);
         setalphabetValid(alphabetValid);
+        const allConditionsMet =
+            lengthValid && specialCharsValid && alphabetValid;
+        setIsSignUpDisabled(!allConditionsMet);
+        setisAllconditionMet(allConditionsMet);
     };
 
     const handleSignup = async (e) => {
@@ -222,7 +228,7 @@ const SignUpPage = () => {
                         <div className='mb-4 relative'>
                             <input
                                 className={`w-full px-3 py-2 border rounded ${
-                                    formSubmitted && password.length < 6
+                                    formSubmitted && isAllconditionMet
                                         ? "border-red-500"
                                         : ""
                                 }`}
@@ -286,8 +292,7 @@ const SignUpPage = () => {
                             <button
                                 className=' px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 '
                                 type='submit'
-
-                                // onClick={handleSignup}
+                                disabled={isSignUpDisabled}
                             >
                                 Sign Up
                             </button>
