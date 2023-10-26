@@ -144,7 +144,6 @@ const SignUpPage = () => {
             // Extract first and last names from displayName
             const displayName = result.user.displayName;
             const [firstName, lastName] = displayName.split(" ");
-            console.log(result);
 
             // Create user object with name, surname, and email
             const user = {
@@ -156,17 +155,23 @@ const SignUpPage = () => {
                 eventsJoined: [],
             };
 
-            // Store user object in Firestore
-            await addDoc(collection(db, "users"), user);
+            // Get the user UID
+            const userUID = result.user.uid;
 
-            // Send sign-in link to the user's email address
-            await sendSignInLinkToEmail(email);
+            // Get a reference to the "users" collection
+            const usersCollectionRef = collection(db, "users");
+
+            // Add the user object to the "users" collection with the user UID as the document ID
+            await setDoc(doc(usersCollectionRef, userUID), user);
 
             setShowPopup(true);
             setModalContent("Congrats! Sign-in link sent to your email.");
             setModalClassName(
                 "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  "
             );
+            setTimeout(() => {
+                router.push("/editprofile");
+            }, 3000);
         } catch (error) {
             setShowPopup(true);
             setModalContent("Sign in/up failed.");
@@ -194,10 +199,18 @@ const SignUpPage = () => {
                 Name: firstName,
                 Surname: lastName,
                 email: email,
+                interests: [],
+                eventsCreated: [],
+                eventsJoined: [],
             };
 
-            // Store user object in Firestore
-            await addDoc(collection(db, "users"), user);
+            const userUID = result.user.uid;
+
+            // Get a reference to the "users" collection
+            const usersCollectionRef = collection(db, "users");
+
+            // Add the user object to the "users" collection with the user UID as the document ID
+            await setDoc(doc(usersCollectionRef, userUID), user);
 
             setShowPopup(true);
             setModalContent("Congrats! You signed in/up successfully.");
