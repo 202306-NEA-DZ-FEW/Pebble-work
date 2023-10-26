@@ -4,7 +4,7 @@ import { BsEyeSlash, BsEye } from "react-icons/bs";
 import { GrStatusGood } from "react-icons/gr";
 import { TiDeleteOutline } from "react-icons/ti";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
     createUserWithEmailAndPassword,
     updateProfile,
@@ -49,6 +49,17 @@ const SignUpPage = () => {
     const [hasalphabetValid, setalphabetValid] = useState(false);
     const [isSignUpDisabled, setIsSignUpDisabled] = useState(true);
     const [isAllconditionMet, setisAllconditionMet] = useState(true); // New state
+
+    useEffect(() => {
+        const checkUserAuth = () => {
+            const user = auth.currentUser;
+            if (user) {
+                router.replace("/profile");
+            }
+        };
+
+        checkUserAuth();
+    }, []);
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -138,7 +149,7 @@ const SignUpPage = () => {
             );
             setTimeout(() => {
                 router.push("/editprofile");
-            }, 3000);
+            }, 1500);
         } catch (error) {
             setShowPopup(true);
             setModalContent("Sign in/up failed.");
@@ -183,7 +194,7 @@ const SignUpPage = () => {
             );
             setTimeout(() => {
                 router.push("/editprofile");
-            }, 3000);
+            }, 1500);
         } catch (error) {
             setShowPopup(true);
             setModalContent("Sign in/up failed.");
@@ -231,7 +242,7 @@ const SignUpPage = () => {
             );
             setTimeout(() => {
                 router.push("/editprofile");
-            }, 3000);
+            }, 1500);
         } catch (error) {
             setShowPopup(true);
             setModalContent("Sign in/up failed.");
