@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
+import { GrStatusGood } from "react-icons/gr";
+import { TiDeleteOutline } from "react-icons/ti";
 import Link from "next/link";
 import { useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
@@ -14,6 +16,7 @@ import {
     where,
     getDocs,
 } from "firebase/firestore";
+
 import { useRouter } from "next/router";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import Modal from "@/components/Popup/Modal";
@@ -250,39 +253,74 @@ const SignUpPage = () => {
                         <div>
                             <span
                                 style={{
-                                    color: isLengthValid ? "green" : "red",
+                                    color: isLengthValid ? "green" : "#FB923C",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    margin: "0",
+                                    padding: "0",
                                 }}
                             >
-                                {isLengthValid ? "✓" : "✗"} At least 6
-                                characters
+                                {isLengthValid ? (
+                                    <GrStatusGood size={20} />
+                                ) : (
+                                    <TiDeleteOutline size={20} />
+                                )}
+                                <span style={{ marginLeft: "0.5rem" }}>
+                                    At least 6 characters
+                                </span>
                             </span>
                             <br />
                             <span
                                 style={{
-                                    color: hasSpecialChars ? "green" : "red",
+                                    color: hasSpecialChars
+                                        ? "green"
+                                        : "#FB923C",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    margin: "0",
+                                    padding: "0",
                                 }}
                             >
-                                {hasSpecialChars ? "✓" : "✗"} Contains special
-                                characters
+                                {hasSpecialChars ? (
+                                    <GrStatusGood size={20} />
+                                ) : (
+                                    <TiDeleteOutline size={20} />
+                                )}
+                                <span style={{ marginLeft: "0.5rem" }}>
+                                    Contains special characters
+                                </span>
                             </span>
                             <br />
                             <span
                                 style={{
-                                    color: hasalphabetValid ? "green" : "red",
+                                    color: hasalphabetValid
+                                        ? "green"
+                                        : "#FB923C",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    margin: "0",
+                                    padding: "0",
                                 }}
                             >
-                                {hasalphabetValid ? "✓" : "✗"} Contains
-                                alphabets
+                                {hasalphabetValid ? (
+                                    <GrStatusGood size={20} />
+                                ) : (
+                                    <TiDeleteOutline size={20} />
+                                )}
+                                <span style={{ marginLeft: "0.5rem" }}>
+                                    Contains alphabets
+                                </span>
                             </span>
                         </div>
+
                         <div>
                             <div className="text-stone-500 text-sm font-normal font-['Rubik'] mt-4">
                                 Dont have an account?
                                 <Link
-                                    href='/signup'
+                                    href='/signin'
                                     className='text-orange-400 ml-1'
                                 >
-                                    Sign up
+                                    Sign
                                 </Link>
                             </div>
                         </div>
