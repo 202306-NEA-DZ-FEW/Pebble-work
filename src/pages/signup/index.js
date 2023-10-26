@@ -79,14 +79,14 @@ const SignUpPage = () => {
             );
             return;
         }
-        if (password.length < 6) {
-            setShowPopup(true);
-            setModalContent("6 characters needed for password.");
-            setModalClassName(
-                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4   "
-            );
-            return;
-        }
+        // if (password.length < 6) {
+        //     setShowPopup(true);
+        //     setModalContent("6 characters needed for password.");
+        //     setModalClassName(
+        //         "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4   "
+        //     );
+        //     return;
+        // }
 
         const emailRegex = /^(.+)@(gmail|yahoo|outlook)\.(com|co\.uk|fr)$/;
         if (!emailRegex.test(email)) {
@@ -214,7 +214,9 @@ const SignUpPage = () => {
 
                         <div className='mb-4'>
                             <input
-                                className='w-full px-3 py-2 border rounded'
+                                className={`w-full px-3 py-2 border rounded ${
+                                    formSubmitted ? "border-red-500" : ""
+                                }`}
                                 type='email'
                                 id='email'
                                 name='email'
@@ -227,11 +229,7 @@ const SignUpPage = () => {
                         </div>
                         <div className='mb-4 relative'>
                             <input
-                                className={`w-full px-3 py-2 border rounded ${
-                                    formSubmitted && isAllconditionMet
-                                        ? "border-red-500"
-                                        : ""
-                                }`}
+                                className='w-full px-3 py-2 border rounded'
                                 type={showPassword ? "text" : "password"}
                                 id='password'
                                 name='password'
