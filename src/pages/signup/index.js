@@ -145,10 +145,10 @@ const SignUpPage = () => {
             const displayName = result.user.displayName;
             const [firstName, lastName] = displayName.split(" ");
 
-            // Create user object with name, surname, and email
+            // Create user object with name, surename, and email
             const user = {
                 Name: firstName,
-                Surname: lastName,
+                Surename: lastName,
                 email: result.user.email,
                 interests: [],
                 eventsCreated: [],
@@ -194,10 +194,10 @@ const SignUpPage = () => {
             // Retrieve email from additionalUserInfo
             const email = result._tokenResponse.email;
 
-            // Create user object with name, surname, and email
+            // Create user object with name, surename, and email
             const user = {
                 Name: firstName,
-                Surname: lastName,
+                Surename: lastName,
                 email: email,
                 interests: [],
                 eventsCreated: [],
