@@ -137,11 +137,14 @@ const SignUpPage = () => {
             // Extract first and last names from displayName
             const displayName = result.user.displayName;
             const [firstName, lastName] = displayName.split(" ");
+            // const email = result._tokenResponse.email;
+            console.log(result);
 
             // Create user object with name, surname, and email
             const user = {
                 Name: firstName,
                 Surname: lastName,
+                // email: email,
             };
 
             // Store user object in Firestore
@@ -167,11 +170,29 @@ const SignUpPage = () => {
         e.preventDefault();
         try {
             const provider = new TwitterAuthProvider();
-            await signInWithPopup(auth, provider);
+            const result = await signInWithPopup(auth, provider);
+
+            // Extract first and last names from displayName
+            const displayName = result.user.displayName;
+            const [firstName, lastName] = displayName.split(" ");
+
+            // Retrieve email from additionalUserInfo
+            const email = result._tokenResponse.email;
+
+            // Create user object with name, surname, and email
+            const user = {
+                Name: firstName,
+                Surname: lastName,
+                email: email,
+            };
+
+            // Store user object in Firestore
+            await addDoc(collection(db, "users"), user);
+
             setShowPopup(true);
             setModalContent("Congrats! You signed in/up successfully.");
             setModalClassName(
-                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  "
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4"
             );
             setTimeout(() => {
                 router.push("/editprofile");
