@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
+import { GrStatusGood } from "react-icons/gr";
+import { TiDeleteOutline } from "react-icons/ti";
 import Link from "next/link";
 import { useState } from "react";
 import {
@@ -13,7 +15,6 @@ import {
 import { auth } from "../../util/firebase";
 import { db } from "../../util/firebase";
 import {
-    addDoc,
     collection,
     setDoc,
     doc,
@@ -21,6 +22,7 @@ import {
     where,
     getDocs,
 } from "firebase/firestore";
+
 import { useRouter } from "next/router";
 import {
     GoogleAuthProvider,
@@ -44,6 +46,9 @@ const SignUpPage = () => {
     const [modalClassName, setModalClassName] = useState("");
     const [isLengthValid, setIsLengthValid] = useState(false);
     const [hasSpecialChars, setHasSpecialChars] = useState(false);
+    const [hasalphabetValid, setalphabetValid] = useState(false);
+    const [isSignUpDisabled, setIsSignUpDisabled] = useState(true);
+    const [isAllconditionMet, setisAllconditionMet] = useState(true); // New state
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -60,12 +65,19 @@ const SignUpPage = () => {
 
     const handlePasswordChange = (e) => {
         const newPassword = e.target.value;
-        const passwordRegex =
-            /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
-
-        setIsLengthValid(newPassword.length >= 6);
-        setHasSpecialChars(passwordRegex.test(newPassword));
         setPassword(newPassword);
+
+        const lengthValid = newPassword.length >= 6;
+        const specialCharsValid =
+            /[!@#$%^&*(),.?": '; = `{}|<>_ ~ \- +/ [\]]/.test(newPassword);
+        const alphabetValid = /[a-zA-Z]/.test(newPassword);
+        setIsLengthValid(lengthValid);
+        setHasSpecialChars(specialCharsValid);
+        setalphabetValid(alphabetValid);
+        const allConditionsMet =
+            lengthValid && specialCharsValid && alphabetValid;
+        setIsSignUpDisabled(!allConditionsMet);
+        setisAllconditionMet(allConditionsMet);
     };
 
     const handleSignup = async (e) => {
@@ -81,14 +93,14 @@ const SignUpPage = () => {
             );
             return;
         }
-        if (password.length < 6) {
-            setShowPopup(true);
-            setModalContent("6 characters needed for password.");
-            setModalClassName(
-                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4   "
-            );
-            return;
-        }
+        // if (password.length < 6) {
+        //     setShowPopup(true);
+        //     setModalContent("6 characters needed for password.");
+        //     setModalClassName(
+        //         "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4   "
+        //     );
+        //     return;
+        // }
 
         const emailRegex = /^(.+)@(gmail|yahoo|outlook)\.(com|co\.uk|fr)$/;
         if (!emailRegex.test(email)) {
@@ -286,7 +298,9 @@ const SignUpPage = () => {
 
                         <div className='mb-4'>
                             <input
-                                className='w-full px-3 py-2 border rounded'
+                                className={`w-full px-3 py-2 border rounded ${
+                                    formSubmitted ? "border-red-500" : ""
+                                }`}
                                 type='email'
                                 id='email'
                                 name='email'
@@ -299,11 +313,7 @@ const SignUpPage = () => {
                         </div>
                         <div className='mb-4 relative'>
                             <input
-                                className={`w-full px-3 py-2 border rounded ${
-                                    formSubmitted && password.length < 6
-                                        ? "border-red-500"
-                                        : ""
-                                }`}
+                                className='w-full px-3 py-2 border rounded'
                                 type={showPassword ? "text" : "password"}
                                 id='password'
                                 name='password'
@@ -324,30 +334,95 @@ const SignUpPage = () => {
                         <div>
                             <span
                                 style={{
-                                    color: isLengthValid ? "green" : "red",
+                                    color: isLengthValid ? "green" : "#FB923C",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    margin: "0",
+                                    padding: "0",
+                                    lineHeight: "0.05",
+                                    fontSize: "0.9rem",
                                 }}
                             >
-                                {isLengthValid ? "✓" : "✗"} At least 6
-                                characters
+                                {isLengthValid ? (
+                                    <GrStatusGood size={20} />
+                                ) : (
+                                    <TiDeleteOutline size={20} />
+                                )}
+                                <span
+                                    style={{
+                                        marginLeft: "0.5rem",
+                                        marginRight: "-0.2rem",
+                                    }}
+                                >
+                                    At least 6 characters
+                                </span>
                             </span>
                             <br />
                             <span
                                 style={{
-                                    color: hasSpecialChars ? "green" : "red",
+                                    color: hasSpecialChars
+                                        ? "green"
+                                        : "#FB923C",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    margin: "0",
+                                    padding: "0",
+                                    lineHeight: "0.05",
+                                    fontSize: "0.9rem",
                                 }}
                             >
-                                {hasSpecialChars ? "✓" : "✗"} Contains special
-                                characters
+                                {hasSpecialChars ? (
+                                    <GrStatusGood size={20} />
+                                ) : (
+                                    <TiDeleteOutline size={20} />
+                                )}
+                                <span
+                                    style={{
+                                        marginLeft: "0.5rem",
+                                        marginRight: "-0.2rem",
+                                    }}
+                                >
+                                    Contains special characters
+                                </span>
+                            </span>
+                            <br />
+                            <span
+                                style={{
+                                    color: hasalphabetValid
+                                        ? "green"
+                                        : "#FB923C",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    margin: "0",
+                                    padding: "0",
+                                    lineHeight: "0.05",
+                                    fontSize: "0.9rem",
+                                }}
+                            >
+                                {hasalphabetValid ? (
+                                    <GrStatusGood size={20} />
+                                ) : (
+                                    <TiDeleteOutline size={20} />
+                                )}
+                                <span
+                                    style={{
+                                        marginLeft: "0.5rem",
+                                        marginRight: "-0.2rem",
+                                    }}
+                                >
+                                    Contains alphabets
+                                </span>
                             </span>
                         </div>
+
                         <div>
                             <div className="text-stone-500 text-sm font-normal font-['Rubik'] mt-4">
                                 Dont have an account?
                                 <Link
-                                    href='/signup'
+                                    href='/signin'
                                     className='text-orange-400 ml-1'
                                 >
-                                    Sign up
+                                    Sign
                                 </Link>
                             </div>
                         </div>
@@ -355,8 +430,7 @@ const SignUpPage = () => {
                             <button
                                 className=' px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 '
                                 type='submit'
-
-                                // onClick={handleSignup}
+                                disabled={isSignUpDisabled}
                             >
                                 Sign Up
                             </button>
