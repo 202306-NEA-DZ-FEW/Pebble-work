@@ -32,6 +32,13 @@ import {
 import Modal from "@/components/Popup/Modal";
 import ButtonTwitter from "@/components/BtnTwitter&Google/ButtonTwitter";
 import BtnGoogle from "@/components/BtnTwitter&Google/ButtonGoogle";
+const checkUserAuth = (router) => {
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            router.replace("/profile");
+        }
+    });
+};
 
 const SignUpPage = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -51,14 +58,7 @@ const SignUpPage = () => {
     const [isAllconditionMet, setisAllconditionMet] = useState(true); // New state
 
     useEffect(() => {
-        const checkUserAuth = () => {
-            const user = auth.currentUser;
-            if (user) {
-                router.push("/profile");
-            }
-        };
-
-        checkUserAuth();
+        checkUserAuth(router);
     }, []);
 
     const togglePasswordVisibility = () => {
