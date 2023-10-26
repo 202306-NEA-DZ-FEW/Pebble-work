@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import Calendar from "@/components/Events/Calendar";
+import Calendar from "@/components/Filter/Calendar";
 import EventCard from "@/components/Events/EventCard";
 import EventCardLeft from "@/components/Events/EventCardLeft";
 import styles from "@/styles/Events.module.css";
