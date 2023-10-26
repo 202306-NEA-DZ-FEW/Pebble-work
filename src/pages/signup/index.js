@@ -1,7 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import { FcGoogle } from "react-icons/fc";
-import { RiTwitterXFill } from "react-icons/ri";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 import Link from "next/link";
 import { useState } from "react";
@@ -9,7 +7,6 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../util/firebase";
 import { db } from "../../util/firebase";
 import {
-    addDoc,
     collection,
     setDoc,
     doc,
@@ -35,6 +32,7 @@ const SignUpPage = () => {
     const [modalClassName, setModalClassName] = useState("");
     const [isLengthValid, setIsLengthValid] = useState(false);
     const [hasSpecialChars, setHasSpecialChars] = useState(false);
+    const [hasalphabetValid, setalphabetValid] = useState(false);
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -51,10 +49,15 @@ const SignUpPage = () => {
 
     const handlePasswordChange = (e) => {
         const newPassword = e.target.value;
-        
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&()+\-=[\]{};':"\\|,.<>/?])[A-Za-z\d!@#$%^&()+\-=[\]{};':"\\|,.<>/?]*$/;
-        setHasSpecialChars(passwordRegex.test(newPassword));
         setPassword(newPassword);
+
+        const lengthValid = newPassword.length >= 6;
+        const specialCharsValid =
+            /[!@#$%^&*(),.?": '; = `{}|<>_ ~ \- +/ [\]]/.test(newPassword);
+        const alphabetValid = /[a-zA-Z]/.test(newPassword);
+        setIsLengthValid(lengthValid);
+        setHasSpecialChars(specialCharsValid);
+        setalphabetValid(alphabetValid);
     };
 
     const handleSignup = async (e) => {
@@ -257,6 +260,15 @@ const SignUpPage = () => {
                             >
                                 {hasSpecialChars ? "✓" : "✗"} Contains special
                                 characters
+                            </span>
+                            <br />
+                            <span
+                                style={{
+                                    color: hasalphabetValid ? "green" : "red",
+                                }}
+                            >
+                                {hasalphabetValid ? "✓" : "✗"} Contains
+                                alphabets
                             </span>
                         </div>
                         <div>
