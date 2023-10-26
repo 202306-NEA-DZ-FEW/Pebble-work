@@ -132,7 +132,20 @@ const SignUpPage = () => {
         e.preventDefault();
         try {
             const provider = new GoogleAuthProvider();
-            await signInWithPopup(auth, provider);
+            const result = await signInWithPopup(auth, provider);
+
+            // Extract first and last names from displayName
+            const displayName = result.user.displayName;
+            const [firstName, lastName] = displayName.split(" ");
+
+            // Create user object with name, surname, and email
+            const user = {
+                Name: firstName,
+                Surname: lastName,
+            };
+
+            // Store user object in Firestore
+            await addDoc(collection(db, "users"), user);
 
             setShowPopup(true);
             setModalContent("Congrats! You signed in/up successfully.");
