@@ -258,6 +258,8 @@ const SignUpPage = () => {
                                     alignItems: "center",
                                     margin: "0",
                                     padding: "0",
+                                    lineHeight: "0.05",
+                                    fontSize: "0.9rem",
                                 }}
                             >
                                 {isLengthValid ? (
@@ -265,7 +267,12 @@ const SignUpPage = () => {
                                 ) : (
                                     <TiDeleteOutline size={20} />
                                 )}
-                                <span style={{ marginLeft: "0.5rem" }}>
+                                <span
+                                    style={{
+                                        marginLeft: "0.5rem",
+                                        marginRight: "-0.2rem",
+                                    }}
+                                >
                                     At least 6 characters
                                 </span>
                             </span>
@@ -279,6 +286,8 @@ const SignUpPage = () => {
                                     alignItems: "center",
                                     margin: "0",
                                     padding: "0",
+                                    lineHeight: "0.05",
+                                    fontSize: "0.9rem",
                                 }}
                             >
                                 {hasSpecialChars ? (
@@ -286,7 +295,12 @@ const SignUpPage = () => {
                                 ) : (
                                     <TiDeleteOutline size={20} />
                                 )}
-                                <span style={{ marginLeft: "0.5rem" }}>
+                                <span
+                                    style={{
+                                        marginLeft: "0.5rem",
+                                        marginRight: "-0.2rem",
+                                    }}
+                                >
                                     Contains special characters
                                 </span>
                             </span>
@@ -300,6 +314,8 @@ const SignUpPage = () => {
                                     alignItems: "center",
                                     margin: "0",
                                     padding: "0",
+                                    lineHeight: "0.05",
+                                    fontSize: "0.9rem",
                                 }}
                             >
                                 {hasalphabetValid ? (
@@ -307,7 +323,12 @@ const SignUpPage = () => {
                                 ) : (
                                     <TiDeleteOutline size={20} />
                                 )}
-                                <span style={{ marginLeft: "0.5rem" }}>
+                                <span
+                                    style={{
+                                        marginLeft: "0.5rem",
+                                        marginRight: "-0.2rem",
+                                    }}
+                                >
                                     Contains alphabets
                                 </span>
                             </span>
