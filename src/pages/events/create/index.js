@@ -134,7 +134,7 @@ const EventCreationPage = () => {
             {isAuthenticated ? (
                 <>
                     <div style={{ height: "6rem" }}></div>
-                    <div className='flex flex-col  md:space-x-20  md:flex-row'>
+                    <div className='flex flex-col  md:space-x-20  md:flex-row md:center-content md:ml-4 pl-2 sm:ml-4'>
                         <div>
                             <h3
                                 className='mt-5 font-semibold align-left'
@@ -246,14 +246,14 @@ const EventCreationPage = () => {
                             </a>
                         </div>
                     </div>
-                    <div className=' flex flex-col items-center ml-3 flex-wrap sm:flex sm:flex-col  sm:ml-3 sm:items-center   md:flex md:flex-col md:ml-3 md:items-center lg:flex lg:flex-col lg:mt-3 lg:mx-0 lg:items-start '>
-                        <h1 className='mt-5 text-xl font-semibold  '>
+                    <div className='my-3 flex flex-col items-center ml-3 flex-wrap sm:flex sm:flex-col  sm:ml-3 sm:items-center   md:flex md:flex-col md:ml-3 md:items-start lg:flex lg:flex-col lg:mt-3 lg:mx-0 lg:items-start '>
+                        <h1 className='mt-5 text-xl font-semibold md:pl-2'>
                             Choose Event Type:{" "}
                             <span className='align-top font-light text-xs align-left text-[red]'>
                                 required
                             </span>
                         </h1>
-                        <p className='max-w-4xl mt-2 tinyText text-gray-400  mb-8'>
+                        <p className='max-w-4xl mt-2 md:pl-2 tinyText text-gray-400  mb-8'>
                             Every pebble event should serve at least one of the
                             sustainable development goals of United Nations.
                             Which goal do you want to help in? Select all that
@@ -261,10 +261,9 @@ const EventCreationPage = () => {
                         </p>
 
                         <div
-                            className='grid-container'
+                            className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 px-3'
                             style={{
                                 display: "grid",
-                                gridTemplateColumns: "1fr 1fr 1fr 1fr",
                                 gridAutoRows: "1fr",
                                 gap: "1rem",
                             }}
@@ -310,19 +309,19 @@ const EventCreationPage = () => {
                         </div>
                     </div>
 
-                    <div className='flex l flex-col  mx-auto   flex-wrap sm:flex sm:flex-col  sm:ml-3 sm:items-center   md:flex md:flex-col md:ml-3 md:items-center lg:flex lg:flex-col lg:mt-3 lg:mx-0 lg:items-start'>
-                        <h1 className='mt-5 text-xl font-semibold align-left '>
+                    <div className='my-3 flex l flex-col  mx-auto  items-center flex-wrap sm:flex sm:flex-col sm:ml-3 sm:items-center ml-2  md:flex md:flex-col md:ml-4 md:items-start lg:flex lg:flex-col lg:mt-3 lg:mx-0 lg:items-start'>
+                        <h1 className='mt-5 text-xl font-semibold align-left md:pl-2'>
                             Event Title:{" "}
                             <span className='align-top font-light text-xs align-left text-[red]'>
                                 required
                             </span>
                         </h1>
-                        <p className='max-w-4xl mt-2 tinyText text-gray-400'>
+                        <p className='max-w-4xl mt-2 tinyText text-gray-400 md:pl-2'>
                             Choose a title that will give people a clear idea of
                             what the event is about. Feel free to be creative!
                             You can edit this later if you change your mind.
                         </p>
-                        <form className=''>
+                        <form className='pl-4'>
                             <input
                                 required
                                 id='title'
@@ -336,30 +335,33 @@ const EventCreationPage = () => {
                         </form>
                     </div>
 
-                    <div className='flex flex-col flex-wrap mt-2 w-screen'>
-                        <h1 className='mt-5 text-xl font-semibold align-left '>
+                    <div className='my-3 md:pl-2 lg:pl-0 sm:pl-2  flex flex-col flex-wrap mt-2 w-screen sm:flex sm:flex-col sm:ml-3 '>
+                        <h1 className='mt-5 text-xl font-semibold align-left md:text-left sm:text-center sm-center'>
                             Event Description:
                         </h1>
-                        <p className='max-w-4xl mt-2 tinyText text-gray-400'>
+                        <p className='max-w-4xl mt-2 tinyText text-gray-400 md:text-left sm:text-center sm-center'>
                             Describe the purpose of your event. Who should join
                             and what will you do at the event?
                         </p>
-                        <form id='eventdescription' className='mt-1 '>
+                        <form
+                            id='eventdescription'
+                            className='mt-1 sm:text-center md:text-left sm-center'
+                        >
                             <textarea
                                 id='description'
                                 value={input.description}
                                 onChange={handleInputChange}
-                                placeholder='Please write 50 characters at least'
-                                className='outline outline-1 mt-2 h-40 rounded w-7/12 font-semibold'
+                                placeholder='  Please write 50 characters at least'
+                                className='outline outline-1 mt-2 h-40 rounded w-7/12 font-semibold '
                             ></textarea>
                         </form>
                     </div>
 
-                    <div className='flex flex-col flex-wrap mt-0 w-screen'>
+                    <div className='md:pl-2 flex flex-col  mx-auto  items-center flex-wrap sm:flex sm:flex-col sm:flex-wrap sm:items-center w-screen ml-2  md:flex md:flex-col md:ml-4 md:items-start lg:flex lg:flex-col lg:mt-3 lg:mx-0 lg:items-start my-3 px-2'>
                         <h1 className='mt-5 text-xl font-semibold align-left '>
                             Event Image:
                         </h1>
-                        <p className='max-w-4xl mt-3 tinyText text-gray-400'>
+                        <p className='max-w-4xl mt-3 tinyText text-gray-400 ml-2'>
                             We have found that listings with a photo attract
                             more interest.
                         </p>
@@ -371,7 +373,7 @@ const EventCreationPage = () => {
                         ></input>
                     </div>
 
-                    <div className='flex flex-col flex-wrap mt-8 w-screen'>
+                    <div className='flex flex-col flex-wrap mt-8 w-screen md:ml-4 ml-2'>
                         <h1 className='mt-5 text-xl font-semibold align-left '>
                             Almost Done! Just take a minute to review our
                             guidlines.
@@ -393,7 +395,7 @@ const EventCreationPage = () => {
                             You can read more about all of this in our{" "}
                             <a
                                 href='#'
-                                className='text-[#FDA855] no-underline hover:underline text-md text-blue-600'
+                                className='text-[#FDA855] no-underline hover:underline text-md'
                             >
                                 community guidelines
                             </a>
@@ -401,7 +403,7 @@ const EventCreationPage = () => {
                         </p>
                     </div>
 
-                    <div className='flex items-center flex-row mt-3 rounded '>
+                    <div className='flex items-center flex-row mt-3 rounded px-2'>
                         <button
                             onClick={() =>
                                 document

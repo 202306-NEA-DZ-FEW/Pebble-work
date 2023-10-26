@@ -12,3 +12,17 @@ body {
 .tinyText {
     font-size: 0.95rem;
 }
+
+@media (min-width: 400px) and (max-width: 1123px) {
+    .md-center-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (min-width: 100px) and (max-width: 600px) {
+    .sm-center {
+        text-align: center;
+    }
+}
