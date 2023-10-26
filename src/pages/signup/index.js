@@ -3,7 +3,13 @@ import Image from "next/image";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 import Link from "next/link";
 import { useState } from "react";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+    createUserWithEmailAndPassword,
+    updateProfile,
+    sendSignInLinkToEmail,
+    isSignInWithEmailLink,
+    signInWithEmailLink,
+} from "firebase/auth";
 import { auth } from "../../util/firebase";
 import { db } from "../../util/firebase";
 import {
@@ -24,6 +30,7 @@ import {
 import Modal from "@/components/Popup/Modal";
 import ButtonTwitter from "@/components/BtnTwitter&Google/ButtonTwitter";
 import BtnGoogle from "@/components/BtnTwitter&Google/ButtonGoogle";
+
 const SignUpPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
@@ -137,27 +144,29 @@ const SignUpPage = () => {
             // Extract first and last names from displayName
             const displayName = result.user.displayName;
             const [firstName, lastName] = displayName.split(" ");
-            // const email = result._tokenResponse.email;
             console.log(result);
 
             // Create user object with name, surname, and email
             const user = {
                 Name: firstName,
                 Surname: lastName,
-                // email: email,
+                email: result.user.email,
+                interests: [],
+                eventsCreated: [],
+                eventsJoined: [],
             };
 
             // Store user object in Firestore
             await addDoc(collection(db, "users"), user);
 
+            // Send sign-in link to the user's email address
+            await sendSignInLinkToEmail(email);
+
             setShowPopup(true);
-            setModalContent("Congrats! You signed in/up successfully.");
+            setModalContent("Congrats! Sign-in link sent to your email.");
             setModalClassName(
                 "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  "
             );
-            setTimeout(() => {
-                router.push("/editprofile");
-            }, 3000);
         } catch (error) {
             setShowPopup(true);
             setModalContent("Sign in/up failed.");
@@ -166,6 +175,7 @@ const SignUpPage = () => {
             );
         }
     };
+
     const handelTwitter = async (e) => {
         e.preventDefault();
         try {
