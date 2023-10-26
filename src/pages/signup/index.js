@@ -54,7 +54,7 @@ const SignUpPage = () => {
         const checkUserAuth = () => {
             const user = auth.currentUser;
             if (user) {
-                router.replace("/profile");
+                router.push("/profile");
             }
         };
 
