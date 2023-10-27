@@ -24,7 +24,7 @@ const EventsPage = (user) => {
     const [filteredTypes, setFilteredTypes] = useState([]);
     const [events, setEvents] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState([]);
-
+    const [CalendarEvents, setCalendarEvents] = useState([]);
     const dropdownRef = useRef(null);
     const locationRef = useRef(null);
 
@@ -56,6 +56,18 @@ const EventsPage = (user) => {
             unsubscribe();
         };
     }, [inputValue1]);
+
+    const checkEvents = async (selectedDate) => {
+        console.log(selectedDate);
+        const eventsCollectionRef = collection(db, "events");
+        const q = query(eventsCollectionRef, where("date", "==", selectedDate));
+        const querySnapshot = await getDocs(q);
+        const matchingEvents = querySnapshot.docs.map((doc) => doc.data());
+
+        console.log(matchingEvents);
+
+        setCalendarEvents(matchingEvents);
+    };
 
     const handleLocationOutside = (event) => {
         if (
@@ -243,7 +255,7 @@ const EventsPage = (user) => {
                                         styles.calendarContainer
                                     } border border-black rounded-[8px] z-10 bg-white sm:bg-transparent`}
                                 >
-                                    <Calendar />
+                                    <Calendar checkEvents={checkEvents} />
                                 </div>
                             )}
                         </div>
