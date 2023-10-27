@@ -1,4 +1,5 @@
 import styles from "@/styles/Homepage.module.css";
+import Image from "next/image";
 
 export default function HeaderCard() {
     return (
@@ -27,10 +28,15 @@ export default function HeaderCard() {
                 <div
                     className={`${styles.slideleft} ${styles.image} xl:h-[638px] xl:w-[638px] lg:w-[418px] md:w-[318px] w-[278px] flex items-center justify-center`}
                 >
-                    <img
+                    <Image
+                        width={638}
+                        height={638}
+                        alt='homeCard'
+                        fetchpriority='high'
+                        layout='responsive'
                         className={`${styles.img}`}
                         src='/Homepage/Square.png'
-                    ></img>
+                    ></Image>
                 </div>
             </div>
         </>
