@@ -28,12 +28,12 @@ const AboutPage = () => {
                     <h1
                         className={`${styles.text0} ${styles.slideInFromRight1} xl:mb-7`}
                     >
-                        {t("about.title")}
+                        {t("about:about.title")}
                     </h1>
                     <p
                         className={`${styles.text1} ${styles.slideInFromRight1} flex text-center text-[#878787] px-4`}
                     >
-                        {t("about.description")}
+                        {t("about:about.description")}
                     </p>
                 </div>
                 <div
@@ -42,7 +42,7 @@ const AboutPage = () => {
                     <h2
                         className={`${styles.teamText} text-[40px] text-[#1A1A1A] md:mt-10 pt-2 md:mb-10`}
                     >
-                        {t("about.ourTeam")}
+                        {t("about:about.ourTeam")}
                     </h2>
                     <div className='flex flex-row xl:flex-col flex-wrap gap-10 mx-3 md:mx-10'>
                         <div className='flex flex-col xl:flex-row gap-7 xl:gap-96 flex-wrap'>
@@ -96,12 +96,12 @@ const AboutPage = () => {
                     className={`${styles.slideInFromRight1} flex flex-col items-center text-center xl:mb-40 md:pb-40 pb-[222px]`}
                 >
                     <h6 className={`${styles.techText} text-[#1A1A1A] xl:mb-4`}>
-                        {t("about.techStack")}
+                        {t("about:about.techStack")}
                     </h6>
                     <h2
                         className={`${styles.techText1} text-[#878787] xl:mb-4`}
                     >
-                        {t("about.techStackDescription")}
+                        {t("about:about.techStackDescription")}
                     </h2>
                 </div>
             </div>
@@ -114,7 +114,7 @@ export default AboutPage;
 export async function getStaticProps({ locale }) {
     return {
         props: {
-            ...(await serverSideTranslations(locale, ["common"])),
+            ...(await serverSideTranslations(locale, ["common", "about"])),
             // Will be passed to the page component as props
         },
     };

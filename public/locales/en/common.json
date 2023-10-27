@@ -1,14 +1,10 @@
 {
- "about": {
-    "title": "About Pebble Work",
-    "description": "Experience the power of PebbleWork with its cutting-edge technologies. Utilizing Next.js, Firebase, DaisyUI, and Tailwind CSS, we have crafted a responsive and interactive platform. Seamlessly navigate through our server-side rendered pages, while Firebase handles secure user authentication and real-time data storage. With visually stunning designs powered by DaisyUI and Tailwind CSS, PebbleWork offers a user-friendly  experience. Join us today and make a meaningful impact in your community.",
-    "ourTeam": "Our Team",
-    "techStack": "Tech Stack",
-    "techStackDescription": "For the PebbleWork project, we utilized Next.js, Firebase, DaisyUI, and Tailwind CSS to create aresponsive and interactive platform. Next.js provided server-side rendering and seamless routing, while Firebase handled user authentication and real-time data storage. DaisyUI and Tailwind CSS ensured a visually appealing and modern design. The project structure followed modular components for easy maintenance and scalability. Together, these technologies created a user-friendly and engaging experience for volunteers to connect and make a positive impact."
-},
-"Footer" : {
-    "footer.events": "Events",
-    "footer.about": "About",
-    "footer.howItWorks": "How it works"
-}
+    "navbar": {
+        "test": "test"
+    },
+    "footer": {
+        "events": "Events",
+        "about": "About",
+        "howItWorks": "How it works"
+    }
 }

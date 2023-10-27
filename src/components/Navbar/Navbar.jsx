@@ -4,11 +4,13 @@ import Signin from "@/components/Signin/Signin";
 import Pebble from "../Pebble";
 import Language from "../Language/Language";
 import styles from "@/styles/Navbar.module.css";
+import { useTranslation } from "next-i18next";
 
 import Dropdown from "../Dropdown";
 import { auth } from "@/util/firebase";
 
 const Navbar = () => {
+    const { t } = useTranslation();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [menuDropdownOpen, setMenuDropdownOpen] = useState(false);
     const [user, setUser] = useState(null);

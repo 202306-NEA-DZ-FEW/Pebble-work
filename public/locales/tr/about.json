@@ -1,0 +1,9 @@
+{
+    "about": {
+        "title": "Pebble work hakkında",
+        "description": "Pebble Work'un güncel teknolojilerle dolu deneyimine katılın. Next.js, Firebase, DaisyUI ve Tailwind CSS'i kullanarak duyarlı ve etkileşimli bir platform oluşturduk. Sunucu tarafında oluşturulan sayfalar arasında sorunsuz gezinin ve Firebase güvenli kullanıcı kimlik doğrulama ve gerçek zamanlı veri depolamayı ele alsın. DaisyUI ve Tailwind CSS ile güçlendirilen görsel olarak çarpıcı tasarımlar sayesinde Pebble Work, kullanıcı dostu bir deneyim sunar. Bugün bize katılın ve toplumunuzda anlamlı bir etki yaratın.",
+        "ourTeam": "Ekibimiz",
+        "techStack": "Teknoloji Yığını",
+        "techStackDescription": "Pebble Work projesi için Next.js, Firebase, DaisyUI ve Tailwind CSS kullanarak duyarlı ve etkileşimli bir platform oluşturduk. Next.js, sunucu tarafında işleme ve sorunsuz yönlendirme sağlarken, Firebase kullanıcı kimlik doğrulamayı ve gerçek zamanlı veri depolamayı ele aldı. DaisyUI ve Tailwind CSS, görsel olarak çekici ve modern bir tasarımı garanti etti. Proje yapısı, bakımı ve ölçeklendirmeyi kolaylaştırmak için modüler bileşenleri izledi. Bu teknolojiler, gönüllülerin bağlanmasını ve olumlu bir etki yaratmasını sağlamak için kullanıcı dostu ve etkileyici bir deneyim sundu."
+    }
+}

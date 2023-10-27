@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useTranslation } from "next-i18next";
 
 const Footer = () => {
-    const { t } = useTranslation("common");
+    const { t } = useTranslation();
 
     return (
         <footer
