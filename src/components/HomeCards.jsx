@@ -23,7 +23,7 @@ const HomeCards = () => {
             <Heading text='How It Works' />
             <MainCard />
 
-            <Heading text='Sustainable Development' />
+            <Heading text='Sustainable Development Goals' />
             <GalleryCard />
 
             <Heading text='Hear It from Volunteers' />
