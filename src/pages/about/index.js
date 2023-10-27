@@ -1,15 +1,17 @@
 import Image from "next/image";
 import React from "react";
-
+import { useTranslation } from "next-i18next";
 import styles from "@/styles/about.module.css";
-
 import MembersCard from "@/components/Cards/Aboutus/MembersCard";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const AboutPage = () => {
+    const { t } = useTranslation();
+
     return (
         <>
             <div
-                className={` grid grid-rows-1 content-center place-items-center xl:pt-20  lg:pb-[250px] overflow-x-hidden`}
+                className={`grid grid-rows-1 content-center place-items-center xl:pt-20  lg:pb-[250px] overflow-x-hidden`}
             >
                 <div className='absolute xl:static top-0 pb-40'>
                     <Image
@@ -24,30 +26,14 @@ const AboutPage = () => {
                     className={`flex flex-col flex-wrap items-center pb-[200px] xl:pb-40 z-[1]`}
                 >
                     <h1
-                        style={{
-                            fontFamily: "Rubik",
-                            fontWeight: "500",
-                            lineHeight: "56.70px",
-                            letterSpacing: "0.23px",
-                            wordWrap: "break-word",
-                        }}
                         className={`${styles.text0} ${styles.slideInFromRight1} xl:mb-7`}
                     >
-                        About Pebble Work
+                        {t("about.title")}
                     </h1>
                     <p
                         className={`${styles.text1} ${styles.slideInFromRight1} flex text-center text-[#878787] px-4`}
                     >
-                        Experience the power of PebbleWork with its cutting-edge
-                        technologies. Utilizing Next.js, Firebase, DaisyUI, and
-                        Tailwind CSS, we have crafted a responsive and
-                        interactive platform. Seamlessly navigate through our
-                        server-side rendered pages, while Firebase handles
-                        secure user authentication and real-time data storage.
-                        With visually stunning designs powered by DaisyUI and
-                        Tailwind CSS, PebbleWork offers a user-friendly
-                        experience. Join us today and make a meaningful impact
-                        in your community.
+                        {t("about.description")}
                     </p>
                 </div>
                 <div
@@ -56,7 +42,7 @@ const AboutPage = () => {
                     <h2
                         className={`${styles.teamText} text-[40px] text-[#1A1A1A] md:mt-10 pt-2 md:mb-10`}
                     >
-                        Our Team
+                        {t("about.ourTeam")}
                     </h2>
                     <div className='flex flex-row xl:flex-col flex-wrap gap-10 mx-3 md:mx-10'>
                         <div className='flex flex-col xl:flex-row gap-7 xl:gap-96 flex-wrap'>
@@ -109,27 +95,14 @@ const AboutPage = () => {
                     id='tech-stack'
                     className={`${styles.slideInFromRight1} flex flex-col items-center text-center xl:mb-40 md:pb-40 pb-[222px]`}
                 >
-                    <h6 className={`${styles.techText} text-[#878787] xl:mb-4`}>
-                        Tech Stack
+                    <h6 className={`${styles.techText} text-[#1A1A1A] xl:mb-4`}>
+                        {t("about.techStack")}
                     </h6>
                     <h2
-                        className={`${styles.techText1} text-[#1A1A1A] xl:mb-4`}
+                        className={`${styles.techText1} text-[#878787] xl:mb-4`}
                     >
-                        Technologies Used and Project Structure
+                        {t("about.techStackDescription")}
                     </h2>
-                    <p className={`${styles.techText2} text-[#878787] px-3`}>
-                        For the PebbleWork project, we utilized Next.js,
-                        Firebase, DaisyUI, and Tailwind CSS to create a
-                        responsive and interactive platform. Next.js provided
-                        server-side rendering and seamless routing, while
-                        Firebase handled user authentication and real-time data
-                        storage. DaisyUI and Tailwind CSS ensured a visually
-                        appealing and modern design. The project structure
-                        followed modular components for easy maintenance and
-                        scalability. Together, these technologies created a
-                        user-friendly and engaging experience for volunteers to
-                        connect and make a positive impact.
-                    </p>
                 </div>
             </div>
         </>
@@ -137,3 +110,12 @@ const AboutPage = () => {
 };
 
 export default AboutPage;
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ["common"])),
+            // Will be passed to the page component as props
+        },
+    };
+}
