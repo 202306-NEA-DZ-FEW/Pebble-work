@@ -391,12 +391,11 @@ const EventCreationPage = () => {
                         </ul>
                         <p className='max-w-4xl mt-1 tinyText text-gray-400'>
                             You can read more about all of this in our{" "}
-                            <a
-                                href='#'
-                                className='text-[#FDA855] no-underline hover:underline text-md text-blue-600'
-                            >
-                                community guidelines
-                            </a>
+                            <Link href='/guidelines' target='_BLANK'>
+                                <span className='text-[#FDA855] no-underline hover:underline text-md'>
+                                    community guidelines
+                                </span>
+                            </Link>
                             .
                         </p>
                     </div>
