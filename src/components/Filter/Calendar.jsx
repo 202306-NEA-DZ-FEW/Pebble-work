@@ -7,11 +7,41 @@ import styles from "@/styles/Calender.module.css";
 const Calendar = ({ checkEvents }) => {
     const [currentDate, setCurrentDate] = useState(new Date());
     const handleDateClick = (day) => {
-        const selectedDate = `${currentDate.getFullYear()}-${
-            currentDate.getMonth() + 1
-        }-${day}`;
-        console.log(selectedDate);
-        checkEvents(selectedDate);
+        const selectedDate = new Date(
+            currentDate.getFullYear(),
+            currentDate.getMonth(),
+            day + 1
+        );
+        const formattedDate = selectedDate.toISOString().split("T")[0];
+        checkEvents(formattedDate);
+
+        // const handleDateClick = async (day) => {
+        //     const selectedDate = new Date(
+        //         currentDate.getFullYear(),
+        //         currentDate.getMonth(),
+        //         day+1
+        //     );
+
+        //     const formattedDate = selectedDate.toISOString().split("T")[0];
+
+        //     // Create a Firestore query to filter events based on the selected date
+        //     const q = query(
+        //         collection(db, "events"),
+        //         where("date", "==", formattedDate)
+        //     );
+
+        //     try {
+        //         // Retrieve the filtered events from Firestore
+        //         const querySnapshot = await getDocs(q);
+        //         const filteredEvents = querySnapshot.docs.map((doc) => doc.data());
+        //         console.log(querySnapshot.docs);
+        //         console.log(filteredEvents);
+        //         console.log(formattedDate)
+        //         console.log(selectedDate)
+        //     } catch (error) {
+        //         console.error("Error getting filtered events: ", error);
+        //     }
+        // };
     };
 
     const handleNextMonth = () => {

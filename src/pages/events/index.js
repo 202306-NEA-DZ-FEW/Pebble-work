@@ -59,19 +59,19 @@ const EventsPage = (user) => {
     }, [inputValue1]);
 
     const checkEvents = async (selectedDate) => {
-        console.log(selectedDate);
-        const eventsCollectionRef = collection(db, "events");
-        const q = query(eventsCollectionRef, where("date", "==", selectedDate));
-        const querySnapshot = await getDocs(q);
-        const matchingEvents = querySnapshot.docs.map((doc) => doc.data());
+        // console.log(selectedDate);
+        const q = query(
+            collection(db, "events"),
+            where("date", "==", selectedDate)
+        );
 
-        console.log(matchingEvents);
-
-        setCalendarEvents(matchingEvents);
-        if (matchingEvents.length > 0) {
-            setEventsFound(true);
-        } else {
-            setEventsFound(false);
+        try {
+            const querySnapshot = await getDocs(q);
+            const filteredEvents = querySnapshot.docs.map((doc) => doc.data());
+            setCalendarEvents(filteredEvents);
+            console.log(CalendarEvents);
+        } catch (error) {
+            console.error("Error getting filtered events: ", error);
         }
     };
 
