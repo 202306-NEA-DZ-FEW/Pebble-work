@@ -10,7 +10,6 @@ const Calendar = ({ checkEvents }) => {
         const selectedDate = `${currentDate.getFullYear()}-${
             currentDate.getMonth() + 1
         }-${day}`;
-
         console.log(selectedDate);
         checkEvents(selectedDate);
     };

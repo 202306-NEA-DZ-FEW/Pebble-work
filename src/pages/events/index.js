@@ -25,6 +25,7 @@ const EventsPage = (user) => {
     const [events, setEvents] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState([]);
     const [CalendarEvents, setCalendarEvents] = useState([]);
+    const [eventsFound, setEventsFound] = useState(false);
     const dropdownRef = useRef(null);
     const locationRef = useRef(null);
 
@@ -67,6 +68,11 @@ const EventsPage = (user) => {
         console.log(matchingEvents);
 
         setCalendarEvents(matchingEvents);
+        if (matchingEvents.length > 0) {
+            setEventsFound(true);
+        } else {
+            setEventsFound(false);
+        }
     };
 
     const handleLocationOutside = (event) => {
@@ -225,11 +231,34 @@ const EventsPage = (user) => {
                                         date={event.date}
                                     />
                                 ))}
-                            {inputValue1 && filteredEvents.length === 0 && (
+                            {eventsFound && CalendarEvents.length > 0 ? (
+                                CalendarEvents.map((event) => (
+                                    <EventCard
+                                        key={event.id}
+                                        title={event.title}
+                                        type={event.type}
+                                        images={event.image}
+                                        location={event.location}
+                                        description={event.description}
+                                        organizer={event.organizer}
+                                        time={event.time}
+                                        date={event.date}
+                                    />
+                                ))
+                            ) : (
                                 <p className='text-red-500 text-center'>
-                                    No events found for this location
+                                    No events found for this date
                                 </p>
                             )}
+
+                            {inputValue1 &&
+                                filteredEvents.length === 0 &&
+                                CalendarEvents.length ===
+                                    0(
+                                        <p className='text-red-500 text-center'>
+                                            No events found for this location
+                                        </p>
+                                    )}
                         </ul>
                     </div>
                     <div className='flex bg-white z-10 flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7'>
