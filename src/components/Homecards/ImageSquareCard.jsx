@@ -57,7 +57,6 @@ const ImageSquareCard = () => {
                 >
                     <Image
                         fetchpriority='high'
-                        layout='responsive'
                         width={768}
                         height={768}
                         src='/Homepage/Oxfams-COVID-19-Relief-Efforts 2.png'
@@ -73,7 +72,6 @@ const ImageSquareCard = () => {
                 >
                     <Image
                         fetchpriority='high'
-                        layout='responsive'
                         width={768}
                         height={768}
                         src='/Homepage/Image.png'
@@ -89,7 +87,6 @@ const ImageSquareCard = () => {
                 >
                     <Image
                         fetchpriority='high'
-                        layout='responsive'
                         width={768}
                         height={768}
                         src='/Homepage/Image (1).jpg'
@@ -104,7 +101,6 @@ const ImageSquareCard = () => {
                 >
                     <Image
                         fetchpriority='high'
-                        layout='responsive'
                         width={768}
                         height={768}
                         src='/Homepage/Image (2).png'
