@@ -1,15 +1,21 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+    GoogleAuthProvider,
+    signInWithPopup,
+    TwitterAuthProvider,
+} from "firebase/auth";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
-import Modal from "@/components/Popup/Modal";
-import { auth } from "../../util/firebase";
-import ButtonTwitter from "@/components/BtnTwitter&Google/ButtonTwitter";
+
 import BtnGoogle from "@/components/BtnTwitter&Google/ButtonGoogle";
+import ButtonTwitter from "@/components/BtnTwitter&Google/ButtonTwitter";
+import Modal from "@/components/Popup/Modal";
+
+import { auth } from "../../util/firebase";
 const SignInPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
@@ -19,6 +25,15 @@ const SignInPage = () => {
     const [modalContent, setModalContent] = useState("");
     const [modalClassName, setModalClassName] = useState("");
 
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user) {
+                router.push("/profile");
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
     const handleSuccess = () => {
         setShowPopup(true);
     };
@@ -70,6 +85,27 @@ const SignInPage = () => {
             );
         }
     };
+    const handelTwitter = async (e) => {
+        e.preventDefault();
+        try {
+            const provider = new TwitterAuthProvider();
+            await signInWithPopup(auth, provider);
+            setShowPopup(true);
+            setModalContent("Congrats! You signed in/up successfully.");
+            setModalClassName(
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  "
+            );
+            setTimeout(() => {
+                router.push("/editprofile");
+            }, 3000);
+        } catch (error) {
+            setShowPopup(true);
+            setModalContent("Sign in/up failed.");
+            setModalClassName(
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+            );
+        }
+    };
 
     return (
         <>
@@ -80,7 +116,7 @@ const SignInPage = () => {
                             src='/images/Sitting.png'
                             alt='Sitting'
                             width={1920}
-                            height={1080}
+                            height={1081}
                             layout='responsive'
                             objectFit='cover'
                         />
@@ -90,9 +126,7 @@ const SignInPage = () => {
                             Sign In
                         </h2>
                         <div className='mb-4'>
-                            {/* hna */}
-                            <ButtonTwitter />
-
+                            <ButtonTwitter onClick={handelTwitter} />
                             <BtnGoogle onClick={handelGoogle} />
 
                             <div className='flex items-center mb-4 mt-4'>

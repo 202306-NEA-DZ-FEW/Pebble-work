@@ -4,8 +4,14 @@ import { BsEyeSlash, BsEye } from "react-icons/bs";
 import { GrStatusGood } from "react-icons/gr";
 import { TiDeleteOutline } from "react-icons/ti";
 import Link from "next/link";
-import { useState } from "react";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { useState, useEffect } from "react";
+import {
+    createUserWithEmailAndPassword,
+    updateProfile,
+    sendSignInLinkToEmail,
+    isSignInWithEmailLink,
+    signInWithEmailLink,
+} from "firebase/auth";
 import { auth } from "../../util/firebase";
 import { db } from "../../util/firebase";
 import {
@@ -18,10 +24,22 @@ import {
 } from "firebase/firestore";
 
 import { useRouter } from "next/router";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+    GoogleAuthProvider,
+    signInWithPopup,
+    TwitterAuthProvider,
+} from "firebase/auth";
 import Modal from "@/components/Popup/Modal";
 import ButtonTwitter from "@/components/BtnTwitter&Google/ButtonTwitter";
 import BtnGoogle from "@/components/BtnTwitter&Google/ButtonGoogle";
+const checkUserAuth = (router) => {
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            router.replace("/profile");
+        }
+    });
+};
+
 const SignUpPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
@@ -38,6 +56,10 @@ const SignUpPage = () => {
     const [hasalphabetValid, setalphabetValid] = useState(false);
     const [isSignUpDisabled, setIsSignUpDisabled] = useState(true);
     const [isAllconditionMet, setisAllconditionMet] = useState(true); // New state
+
+    useEffect(() => {
+        checkUserAuth(router);
+    }, []);
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -127,7 +149,7 @@ const SignUpPage = () => {
             );
             setTimeout(() => {
                 router.push("/editprofile");
-            }, 3000);
+            }, 1500);
         } catch (error) {
             setShowPopup(true);
             setModalContent("Sign in/up failed.");
@@ -140,21 +162,92 @@ const SignUpPage = () => {
         e.preventDefault();
         try {
             const provider = new GoogleAuthProvider();
-            await signInWithPopup(auth, provider);
+            const result = await signInWithPopup(auth, provider);
+
+            // Extract first and last names from displayName
+            const displayName = result.user.displayName;
+            const [firstName, lastName] = displayName.split(" ");
+
+            // Create user object with name, surename, and email
+            const user = {
+                Name: firstName,
+                Surename: lastName,
+                email: result.user.email,
+                interests: [],
+                eventsCreated: [],
+                eventsJoined: [],
+            };
+
+            // Get the user UID
+            const userUID = result.user.uid;
+
+            // Get a reference to the "users" collection
+            const usersCollectionRef = collection(db, "users");
+
+            // Add the user object to the "users" collection with the user UID as the document ID
+            await setDoc(doc(usersCollectionRef, userUID), user);
 
             setShowPopup(true);
-            setModalContent("Congrats! You signed in/up successfully.");
+            setModalContent("Congrats! Sign-in link sent to your email.");
             setModalClassName(
                 "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  "
             );
             setTimeout(() => {
                 router.push("/editprofile");
-            }, 3000);
+            }, 1500);
         } catch (error) {
             setShowPopup(true);
             setModalContent("Sign in/up failed.");
             setModalClassName(
                 "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  "
+            );
+        }
+    };
+
+    const handelTwitter = async (e) => {
+        e.preventDefault();
+        try {
+            const provider = new TwitterAuthProvider();
+            const result = await signInWithPopup(auth, provider);
+
+            // Extract first and last names from displayName
+            const displayName = result.user.displayName;
+            const [firstName, lastName] = displayName.split(" ");
+
+            // Retrieve email from additionalUserInfo
+            const email = result._tokenResponse.email;
+
+            // Create user object with name, surename, and email
+            const user = {
+                Name: firstName,
+                Surename: lastName,
+                email: email,
+                interests: [],
+                eventsCreated: [],
+                eventsJoined: [],
+            };
+
+            const userUID = result.user.uid;
+
+            // Get a reference to the "users" collection
+            const usersCollectionRef = collection(db, "users");
+
+            // Add the user object to the "users" collection with the user UID as the document ID
+            await setDoc(doc(usersCollectionRef, userUID), user);
+
+            setShowPopup(true);
+            setModalContent("Congrats! You signed in/up successfully.");
+            setModalClassName(
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4"
+            );
+            setTimeout(() => {
+                router.push("/editprofile");
+            }, 1500);
+        } catch (error) {
+            setShowPopup(true);
+            setModalContent("Sign in/up failed.");
+            setModalClassName(
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
             );
         }
     };
@@ -177,8 +270,7 @@ const SignUpPage = () => {
                         Sign Up
                     </h2>
                     <div className='mb-4'>
-                        <ButtonTwitter />
-
+                        <ButtonTwitter onClick={handelTwitter} />
                         <BtnGoogle onClick={handelGoogle} />
 
                         <div className='flex items-center mb-4 mt-4'>

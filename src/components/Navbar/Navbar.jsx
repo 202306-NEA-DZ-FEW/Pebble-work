@@ -1,12 +1,15 @@
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
-import Signin from "@/components/Signin/Signin";
-import Pebble from "../Pebble";
-import Language from "../Language/Language";
+import React, { useEffect, useState } from "react";
+
 import styles from "@/styles/Navbar.module.css";
 
-import Dropdown from "../Dropdown";
+import Signin from "@/components/Signin/Signin";
+
 import { auth } from "@/util/firebase";
+
+import Dropdown from "../Dropdown";
+import Language from "../Language/Language";
+import Pebble from "../Pebble";
 
 const Navbar = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -20,6 +23,11 @@ const Navbar = () => {
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
     };
+
+    const closeMenuDropdown = () => {
+        setMenuDropdownOpen(false);
+    };
+
     useEffect(() => {
         const logged = auth.onAuthStateChanged((user) => {
             if (user) {
@@ -96,12 +104,22 @@ const Navbar = () => {
                 >
                     <ul
                         style={{ fontFamily: "Rubik" }}
-                        className={`' md:static text-center md:bg-transparent bg-white gap-3 fixed w-full flex flex-col font-medium  md:p-0 border border-gray-300  md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 dark:border-gray-700 left-[0px] top-0 z-10 ${styles.tiltIn}`}
+                        className={`' md:static text-center md:bg-transparent bg-white gap-3 fixed sm:w-full w-60 md:min-h-0 min-h-screen flex flex-col font-medium  md:p-0 border border-gray-300  md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 dark:border-gray-700 left-[0px] top-0 z-10 ${styles.tiltIn}`}
                         role='menu'
                     >
                         <li>
                             <Link
+                                href='/'
+                                onClick={closeMenuDropdown}
+                                className='block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700'
+                            >
+                                Home
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
                                 href='/events'
+                                onClick={closeMenuDropdown}
                                 className='block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700'
                             >
                                 Events
@@ -110,6 +128,7 @@ const Navbar = () => {
                         <li>
                             <Link
                                 href='/about'
+                                onClick={closeMenuDropdown}
                                 className='block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700'
                             >
                                 About
@@ -118,17 +137,10 @@ const Navbar = () => {
                         <li>
                             <Link
                                 href='#'
+                                onClick={closeMenuDropdown}
                                 className='block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700'
                             >
                                 Contact
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                href='/'
-                                className='block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700'
-                            >
-                                Home
                             </Link>
                         </li>
                     </ul>

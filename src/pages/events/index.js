@@ -148,9 +148,11 @@ const EventsPage = (user) => {
     // Fetch events from Firebase
     useEffect(() => {
         const fetchEvents = async () => {
-            const eventsCollectionRef = collection(db, "events"); // Assuming the collection name is "events"
+            const eventsCollectionRef = collection(db, "events");
             const eventsSnapshot = await getDocs(eventsCollectionRef);
-            const eventsData = eventsSnapshot.docs.map((doc) => doc.data());
+            const eventsData = eventsSnapshot.docs.map((doc) => {
+                return { id: doc.id, ...doc.data() };
+            });
 
             setEvents(eventsData);
         };
