@@ -170,6 +170,7 @@ const EventsPage = (user) => {
                                         if (index % 2 === 0) {
                                             return (
                                                 <EventCard
+                                                    eventId={event.id}
                                                     key={event.id}
                                                     title={event.title}
                                                     type={event.type}
@@ -186,6 +187,7 @@ const EventsPage = (user) => {
                                         } else {
                                             return (
                                                 <EventCardLeft
+                                                    eventId={event.id}
                                                     key={event.id}
                                                     title={event.title}
                                                     type={event.type}
@@ -204,19 +206,39 @@ const EventsPage = (user) => {
 
                             {inputValue1 &&
                                 filteredEvents.length > 0 &&
-                                filteredEvents.map((event) => (
-                                    <EventCard
-                                        key={event.id}
-                                        title={event.title}
-                                        type={event.type}
-                                        images={event.image}
-                                        location={event.location}
-                                        description={event.description}
-                                        organizer={event.organizer}
-                                        time={event.time}
-                                        date={event.date}
-                                    />
-                                ))}
+                                filteredEvents.map((event, index) => {
+                                    if (index % 2 === 0) {
+                                        return (
+                                            <EventCard
+                                                eventId={event.id}
+                                                key={event.id}
+                                                title={event.title}
+                                                type={event.type}
+                                                images={event.image}
+                                                location={event.location}
+                                                description={event.description}
+                                                organizer={event.organizer}
+                                                time={event.time}
+                                                date={event.date}
+                                            />
+                                        );
+                                    } else {
+                                        return (
+                                            <EventCardLeft
+                                                eventId={event.id}
+                                                key={event.id}
+                                                title={event.title}
+                                                type={event.type}
+                                                image={event.image}
+                                                location={event.location}
+                                                description={event.description}
+                                                organizer={event.organizer}
+                                                time={event.time}
+                                                date={event.date}
+                                            />
+                                        );
+                                    }
+                                })}
                             {inputValue1 && filteredEvents.length === 0 && (
                                 <p className='text-red-500 text-center'>
                                     No events found for this location
