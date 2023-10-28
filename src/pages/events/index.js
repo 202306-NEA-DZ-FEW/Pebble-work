@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-
 import Calendar from "@/components/Filter/Calendar";
 import EventCard from "@/components/Events/EventCard";
 import EventCardLeft from "@/components/Events/EventCardLeft";
@@ -258,12 +257,11 @@ const EventsPage = (user) => {
 
                             {inputValue1 &&
                                 filteredEvents.length === 0 &&
-                                CalendarEvents.length ===
-                                    0(
-                                        <p className='text-red-500 text-center'>
-                                            No events found for this location
-                                        </p>
-                                    )}
+                                CalendarEvents.length === 0 && (
+                                    <p className='text-red-500 text-center'>
+                                        No events found for this location
+                                    </p>
+                                )}
                         </ul>
                     </div>
                     <div className='flex bg-white z-10 flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7'>
