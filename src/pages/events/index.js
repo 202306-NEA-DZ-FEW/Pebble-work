@@ -168,6 +168,7 @@ const EventsPage = (user) => {
                                         if (index % 2 === 0) {
                                             return (
                                                 <EventCard
+                                                    eventId={event.id}
                                                     key={event.id}
                                                     title={event.title}
                                                     type={event.type}
@@ -184,6 +185,7 @@ const EventsPage = (user) => {
                                         } else {
                                             return (
                                                 <EventCardLeft
+                                                    eventId={event.id}
                                                     key={event.id}
                                                     title={event.title}
                                                     type={event.type}
@@ -204,6 +206,7 @@ const EventsPage = (user) => {
                                 filteredEvents.length > 0 &&
                                 filteredEvents.map((event) => (
                                     <EventCard
+                                        eventId={event.id}
                                         key={event.id}
                                         title={event.title}
                                         type={event.type}
