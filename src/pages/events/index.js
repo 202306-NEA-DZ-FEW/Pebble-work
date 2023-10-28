@@ -25,7 +25,6 @@ const EventsPage = (user) => {
     const [events, setEvents] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState([]);
     const [CalendarEvents, setCalendarEvents] = useState([]);
-    const [eventsFound, setEventsFound] = useState(false);
     const dropdownRef = useRef(null);
     const locationRef = useRef(null);
 
@@ -233,7 +232,7 @@ const EventsPage = (user) => {
                                         date={event.date}
                                     />
                                 ))}
-                            {eventsFound && CalendarEvents.length > 0 ? (
+                            {CalendarEvents.length > 0 ? (
                                 CalendarEvents.map((event) => (
                                     <EventCard
                                         key={event.id}
