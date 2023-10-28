@@ -259,7 +259,7 @@ const EventsPage = (user) => {
                                 filteredEvents.length === 0 &&
                                 CalendarEvents.length === 0 && (
                                     <p className='text-red-500 text-center'>
-                                        No events found for this location
+                                        No events found for this locations
                                     </p>
                                 )}
                         </ul>
