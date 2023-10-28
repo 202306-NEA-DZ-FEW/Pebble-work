@@ -1,0 +1,21 @@
+@media (min-width: 400px) and (max-width: 1123px) {
+    .mdCenterContent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .eventDesc {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        row-gap: 2rem;
+    }
+}
+
+@media (min-width: 100px) and (max-width: 600px) {
+    .smCenter {
+        text-align: center;
+    }
+}
