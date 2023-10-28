@@ -8,12 +8,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
-import Modal from "@/components/Popup/Modal";
-import { auth } from "../../util/firebase";
-import ButtonTwitter from "@/components/BtnTwitter&Google/ButtonTwitter";
+
 import BtnGoogle from "@/components/BtnTwitter&Google/ButtonGoogle";
+import ButtonTwitter from "@/components/BtnTwitter&Google/ButtonTwitter";
+import Modal from "@/components/Popup/Modal";
+
+import { auth } from "../../util/firebase";
 const SignInPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
@@ -23,6 +25,15 @@ const SignInPage = () => {
     const [modalContent, setModalContent] = useState("");
     const [modalClassName, setModalClassName] = useState("");
 
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user) {
+                router.push("/profile");
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
     const handleSuccess = () => {
         setShowPopup(true);
     };
