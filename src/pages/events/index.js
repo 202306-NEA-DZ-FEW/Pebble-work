@@ -25,6 +25,8 @@ const EventsPage = (user) => {
     const [events, setEvents] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState([]);
     const [CalendarEvents, setCalendarEvents] = useState([]);
+    const [selectedDate, setSelectedDate] = useState(null);
+
     const dropdownRef = useRef(null);
     const locationRef = useRef(null);
 
@@ -69,6 +71,7 @@ const EventsPage = (user) => {
             const filteredEvents = querySnapshot.docs.map((doc) => doc.data());
             setCalendarEvents(filteredEvents);
             console.log(CalendarEvents);
+            setSelectedDate(true);
         } catch (error) {
             console.error("Error getting filtered events: ", error);
         }
@@ -175,6 +178,7 @@ const EventsPage = (user) => {
                     >
                         <ul className={` flex flex-col items gap-2 `}>
                             {!inputValue1 &&
+                                !selectedDate &&
                                 events
                                     .filter((event) =>
                                         filteredTypes.length === 0
@@ -232,7 +236,7 @@ const EventsPage = (user) => {
                                         date={event.date}
                                     />
                                 ))}
-                            {CalendarEvents.length > 0 ? (
+                            {selectedDate && CalendarEvents.length > 0 ? (
                                 CalendarEvents.map((event) => (
                                     <EventCard
                                         key={event.id}
