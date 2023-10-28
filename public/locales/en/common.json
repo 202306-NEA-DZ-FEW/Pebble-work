@@ -1,6 +1,9 @@
 {
     "navbar": {
-        "test": "test"
+        "home": "Home",
+        "events": "Events",
+        "about": "About",
+        "contact": "Contact"
     },
     "footer": {
         "events": "Events",

@@ -1,6 +1,9 @@
 {
     "navbar": {
-        "test": "sparta"
+        "home": "Ana Sayfa",
+        "events": "Etkinlikler",
+        "about": "Hakkımızda",
+        "contact": "İletişim"
     },
     "footer": {
         "events": "Etkinlikler",

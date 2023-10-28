@@ -1,19 +1,17 @@
-import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import Signin from "@/components/Signin/Signin";
+import Link from "next/link";
+import { useTranslation } from "next-i18next";
+import { auth } from "@/util/firebase";
 import Pebble from "../Pebble";
 import Language from "../Language/Language";
-import styles from "@/styles/Navbar.module.css";
-import { useTranslation } from "next-i18next";
-
 import Dropdown from "../Dropdown";
-import { auth } from "@/util/firebase";
+import styles from "@/styles/Navbar.module.css";
 
 const Navbar = () => {
-    const { t } = useTranslation();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [menuDropdownOpen, setMenuDropdownOpen] = useState(false);
     const [user, setUser] = useState(null);
+    const { t } = useTranslation();
 
     const menuDropdown = () => {
         setMenuDropdownOpen(!menuDropdownOpen);
@@ -112,7 +110,7 @@ const Navbar = () => {
                                 onClick={closeMenuDropdown}
                                 className='block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700'
                             >
-                                Home
+                                {t("common:navbar:home")}
                             </Link>
                         </li>
                         <li>
@@ -121,25 +119,25 @@ const Navbar = () => {
                                 onClick={closeMenuDropdown}
                                 className='block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700'
                             >
-                                Events
+                                {t("common:navbar:events")}
                             </Link>
                         </li>
                         <li>
                             <Link
                                 href='/about'
                                 onClick={closeMenuDropdown}
-                                className='block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700'
+                                className='block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark.border-gray-700'
                             >
-                                About
+                                {t("common:navbar:about")}
                             </Link>
                         </li>
                         <li>
                             <Link
                                 href='#'
                                 onClick={closeMenuDropdown}
-                                className='block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700'
+                                className='block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover-bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover-text-blue-500 dark:hover-bg-gray-700 dark:hover-text-white dark-border-gray-700'
                             >
-                                Contact
+                                {t("common:navbar:contact")}
                             </Link>
                         </li>
                     </ul>
