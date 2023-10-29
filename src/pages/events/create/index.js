@@ -37,6 +37,14 @@ const EventCreationPage = () => {
         return docRef.id;
     };
 
+    const addLocation = async (input) => {
+        const locationsRef = doc(db, "database", "locations");
+
+        await updateDoc(locationsRef, {
+            data: arrayUnion(input.location),
+        });
+    };
+
     const imgUpload = async (eventId) => {
         const imgRef = ref(storage, `images/img${eventId}`);
         await uploadBytes(imgRef, img);
@@ -69,6 +77,7 @@ const EventCreationPage = () => {
 
         const eventId = await addEvent(input);
 
+        await addLocation(input);
         await imgUpload(eventId);
 
         //use getDownloadURL to get the url of the newly uploaded image
