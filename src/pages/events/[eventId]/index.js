@@ -79,13 +79,6 @@ const EventsPage = ({ event, organizer, notFound }) => {
             });
         }
 
-        //Delete the location from the database
-        const locationsRef = doc(db, "database", "locations");
-
-        await updateDoc(locationsRef, {
-            data: arrayRemove(event.location),
-        });
-
         //Finally, delete the event doc
         await deleteDoc(doc(db, "events", event.eventId));
 
