@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import styles from "@/styles/EventCreation.module.css";
 
 const OtpInput = ({ value, onChange, length }) => {
     const [inputValues, setInputValues] = useState(Array(length).fill(""));
+    const inputRefs = useRef([]);
 
     const handleInputChange = (index, inputValue) => {
         const newInputValues = [...inputValues];
@@ -10,6 +12,11 @@ const OtpInput = ({ value, onChange, length }) => {
 
         const otp = newInputValues.join("");
         onChange(otp);
+
+        // Move focus to the next input field
+        if (inputValue !== "" && index < length - 1) {
+            inputRefs.current[index + 1].focus();
+        }
     };
 
     const handleKeyDown = (event, index) => {
@@ -17,11 +24,16 @@ const OtpInput = ({ value, onChange, length }) => {
             const newInputValues = [...inputValues];
             newInputValues[index - 1] = "";
             setInputValues(newInputValues);
+
+            // Move focus to the previous input field
+            if (index > 0) {
+                inputRefs.current[index - 1].focus();
+            }
         }
     };
 
     return (
-        <div className='otp-container'>
+        <div className={styles.otpContainer}>
             {inputValues.map((inputValue, index) => (
                 <input
                     key={index}
@@ -29,8 +41,9 @@ const OtpInput = ({ value, onChange, length }) => {
                     value={inputValue}
                     onChange={(e) => handleInputChange(index, e.target.value)}
                     onKeyDown={(e) => handleKeyDown(e, index)}
-                    maxLength={10}
+                    maxLength={1}
                     autoFocus={index === 0}
+                    ref={(ref) => (inputRefs.current[index] = ref)}
                 />
             ))}
         </div>

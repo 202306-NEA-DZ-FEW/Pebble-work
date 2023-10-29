@@ -6,16 +6,16 @@ import "react-phone-input-2/lib/style.css";
 import { auth } from "@/util/firebase";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { toast, Toaster } from "react-hot-toast";
-import Head from "next/head";
+
 import OtpInput from "@/components/OtpVerification";
 const App = () => {
     const [otp, setOtp] = useState("");
-    const [ph, setPh] = useState("");
+    const [pn, setPn] = useState(""); //phone number
     const [loading, setLoading] = useState(false);
     const [showOTP, setShowOTP] = useState(false);
     const [user, setUser] = useState(null);
 
-    function onCaptchVerify() {
+    function onCaptchaVerify() {
         if (!window.recaptchaVerifier) {
             window.recaptchaVerifier = new RecaptchaVerifier(
                 auth,
@@ -34,11 +34,11 @@ const App = () => {
 
     function onSignup() {
         setLoading(true);
-        onCaptchVerify();
+        onCaptchaVerify();
 
         const appVerifier = window.recaptchaVerifier;
 
-        const formatPh = "+" + ph;
+        const formatPh = "+" + pn;
 
         signInWithPhoneNumber(auth, formatPh, appVerifier)
             .then((confirmationResult) => {
@@ -61,23 +61,17 @@ const App = () => {
                 console.log(res);
                 setUser(res.user);
                 setLoading(false);
+                console.log("verified");
             })
             .catch((err) => {
-                console.log(err);
+                console.log("wrong OTP input");
                 setLoading(false);
             });
     }
 
     return (
         <>
-            <Head>
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: "window.flutterfire_web_sdk_version = '9.22.1';",
-                    }}
-                />
-            </Head>
-            <section className='bg-emerald-500 flex items-center justify-center h-screen'>
+            <section className='bg-[#FDA855] bg-opacity-50 flex items-center justify-center h-screen'>
                 <div>
                     <Toaster toastOptions={{ duration: 4000 }} />
                     <div id='recaptcha-container'></div>
@@ -88,11 +82,12 @@ const App = () => {
                     ) : (
                         <div className='w-80 flex flex-col gap-4 rounded-lg p-4'>
                             <h1 className='text-center leading-normal text-white font-medium text-3xl mb-6'>
-                                Welcome to CODE A PROGRAM
+                                Verify your phone number before you can create
+                                an event
                             </h1>
                             {showOTP ? (
                                 <>
-                                    <div className='bg-white text-emerald-500 w-fit mx-auto p-4 rounded-full'>
+                                    <div className='bg-white text-orange-500 w-fit mx-auto p-4 rounded-full'>
                                         <BsFillShieldLockFill size={30} />
                                     </div>
                                     <label
@@ -109,7 +104,7 @@ const App = () => {
                                     />
                                     <button
                                         onClick={onOTPVerify}
-                                        className='bg-emerald-600 w-full flex gap-1 items-center justify-center py-2.5 text-white rounded'
+                                        className='bg-[#FDA855] hover:bg-orange-500 w-full flex gap-1 items-center justify-center py-2.5 text-white rounded'
                                     >
                                         {loading && (
                                             <CgSpinner
@@ -122,7 +117,7 @@ const App = () => {
                                 </>
                             ) : (
                                 <>
-                                    <div className='bg-white text-emerald-500 w-fit mx-auto p-4 rounded-full'>
+                                    <div className='bg-white text-orange-500 w-fit mx-auto p-4 rounded-full'>
                                         <BsTelephoneFill size={30} />
                                     </div>
                                     <label
@@ -133,12 +128,12 @@ const App = () => {
                                     </label>
                                     <PhoneInput
                                         country={"dz"}
-                                        value={ph}
-                                        onChange={setPh}
+                                        value={pn}
+                                        onChange={setPn}
                                     />
                                     <button
                                         onClick={onSignup}
-                                        className='bg-emerald-600 w-full flex gap-1 items-center justify-center py-2.5 text-white rounded'
+                                        className='bg-[#FDA855] hover:bg-orange-700 w-full flex gap-1 items-center justify-center py-2.5 text-white rounded'
                                     >
                                         {loading && (
                                             <CgSpinner
