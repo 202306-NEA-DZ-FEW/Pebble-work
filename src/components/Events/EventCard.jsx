@@ -82,9 +82,6 @@ const EventCard = ({
                             <li>
                                 <strong>Time:</strong> {time}
                             </li>
-                            <li>
-                                <strong>Organizer:</strong> {organizer}
-                            </li>
                         </ul>
                     </div>
                 </div>

@@ -1,23 +1,61 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import Calendar from "@/components/Events/Calendar";
+import Calendar from "@/components/Filter/Calendar";
 import EventCard from "@/components/Events/EventCard";
 import EventCardLeft from "@/components/Events/EventCardLeft";
 import styles from "@/styles/Events.module.css";
 import FilterByType from "@/components/Filter/FilterByType";
 import { db } from "@/util/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import {
+    collection,
+    getDocs,
+    query,
+    where,
+    onSnapshot,
+} from "firebase/firestore";
 import LocationFilter from "@/components/Filter/LocationFilter";
 
 const EventsPage = (user) => {
     // State variables
     const [inputValue, setInputValue] = useState("");
+    const [inputValue1, setInputValue1] = useState("");
     const [isCalendarOpen, setCalendarOpen] = useState(false);
     const [isLocationOpen, setLocationOpen] = useState(false);
     const [filteredTypes, setFilteredTypes] = useState([]);
     const [events, setEvents] = useState([]);
+    const [filteredEvents, setFilteredEvents] = useState([]);
+
     const dropdownRef = useRef(null);
     const locationRef = useRef(null);
+
+    const handleLocationInputChange = (value) => {
+        setInputValue1(value);
+    };
+
+    const filterEventsByLocation = (location) => {
+        if (!location) {
+            setFilteredEvents([]);
+            return () => {};
+        }
+
+        const eventsCollectionRef = collection(db, "events");
+        const q = query(eventsCollectionRef, where("location", "==", location));
+
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const matchingEvents = querySnapshot.docs.map((doc) => doc.data());
+            setFilteredEvents(matchingEvents);
+            console.log(filteredEvents);
+        });
+
+        return unsubscribe;
+    };
+    useEffect(() => {
+        const unsubscribe = filterEventsByLocation(inputValue1);
+
+        return () => {
+            unsubscribe();
+        };
+    }, [inputValue1]);
 
     const handleLocationOutside = (event) => {
         if (
@@ -119,18 +157,59 @@ const EventsPage = (user) => {
                         className={`md:h-[800px] h-[400px] xl:w-[840px] pb-[140px] md:pb-[140px] md:w-[480px] lg:w-[490px] ${styles.information}`}
                     >
                         <ul className={` flex flex-col items gap-2 `}>
-                            {events
-                                .filter((event) =>
-                                    filteredTypes.length === 0
-                                        ? true
-                                        : filteredTypes.includes(event.type)
-                                )
-                                .map((event, index) => {
+                            {!inputValue1 &&
+                                events
+                                    .filter((event) =>
+                                        filteredTypes.length === 0
+                                            ? true
+                                            : filteredTypes.includes(event.type)
+                                    )
+                                    .map((event, index) => {
+                                        if (index % 2 === 0) {
+                                            return (
+                                                <EventCard
+                                                    eventId={event.id}
+                                                    key={event.id}
+                                                    title={event.title}
+                                                    type={event.type}
+                                                    images={event.image}
+                                                    location={event.location}
+                                                    description={
+                                                        event.description
+                                                    }
+                                                    organizer={event.organizer}
+                                                    time={event.time}
+                                                    date={event.date}
+                                                />
+                                            );
+                                        } else {
+                                            return (
+                                                <EventCardLeft
+                                                    eventId={event.id}
+                                                    key={event.id}
+                                                    title={event.title}
+                                                    type={event.type}
+                                                    image={event.image}
+                                                    location={event.location}
+                                                    description={
+                                                        event.description
+                                                    }
+                                                    organizer={event.organizer}
+                                                    time={event.time}
+                                                    date={event.date}
+                                                />
+                                            );
+                                        }
+                                    })}
+
+                            {inputValue1 &&
+                                filteredEvents.length > 0 &&
+                                filteredEvents.map((event, index) => {
                                     if (index % 2 === 0) {
                                         return (
                                             <EventCard
-                                                key={event.id}
                                                 eventId={event.id}
+                                                key={event.id}
                                                 title={event.title}
                                                 type={event.type}
                                                 images={event.image}
@@ -158,6 +237,11 @@ const EventsPage = (user) => {
                                         );
                                     }
                                 })}
+                            {inputValue1 && filteredEvents.length === 0 && (
+                                <p className='text-red-500 text-center'>
+                                    No events found for this location
+                                </p>
+                            )}
                         </ul>
                     </div>
                     <div className='flex bg-white z-10 flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7'>
@@ -194,6 +278,7 @@ const EventsPage = (user) => {
                                 HandleOpen={isLocationOpen}
                                 InputChange={handleInputChange}
                                 inputValue={inputValue}
+                                onInputChange={handleLocationInputChange}
                             />
                         </div>
 
