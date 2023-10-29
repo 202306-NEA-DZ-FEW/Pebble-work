@@ -426,7 +426,7 @@ const EventCreationPage = () => {
                             Agree with terms and Create Event!
                         </button>
                     </div>
-                    <div style={{ height: "200px", marginTop: "4rem" }}></div>
+                    <div style={{ height: "4rem" }}></div>
                 </>
             ) : (
                 <EventCreation />

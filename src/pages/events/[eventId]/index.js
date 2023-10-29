@@ -371,7 +371,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                     </div>
                 </div>
             </div>
-            <div style={{ height: "200px", marginTop: "4rem" }}></div>
+            <div style={{ height: "6rem" }}></div>
 
             <dialog id='cancel_modal' className='modal'>
                 <div className='modal-box'>
