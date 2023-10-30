@@ -48,7 +48,7 @@ const EventsPage = (user) => {
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const matchingEvents = querySnapshot.docs.map((doc) => doc.data());
             setFilteredEvents(matchingEvents);
-
+            //location
             console.log(filteredEvents);
         });
 
@@ -61,9 +61,8 @@ const EventsPage = (user) => {
             unsubscribe();
         };
     }, [inputValue1]);
-
     const checkEvents = async (selectedDate) => {
-        // console.log(selectedDate);
+        // setobject(selectedDate);
         const q = query(
             collection(db, "events"),
             where("date", "==", selectedDate)
@@ -73,6 +72,7 @@ const EventsPage = (user) => {
             const querySnapshot = await getDocs(q);
             const filteredEvents = querySnapshot.docs.map((doc) => doc.data());
             setCalendarEvents(filteredEvents);
+            //date
             console.log(CalendarEvents);
             setSelectedDate(true);
         } catch (error) {
@@ -149,6 +149,44 @@ const EventsPage = (user) => {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
+    const [object, setobject] = useState([]);
+
+    const applyFilters = (formattedDate) => {
+        let filteredEvents = [...events];
+        console.log(formattedDate);
+        setobject(formattedDate);
+        console.log(object);
+        // Apply date filter
+        if (formattedDate) {
+            filteredEvents = filteredEvents.filter(
+                (event) => event.date === formattedDate
+            );
+        }
+
+        // Apply location filter
+        if (inputValue1) {
+            filteredEvents = filteredEvents.filter(
+                (event) => event.location === inputValue1
+            );
+        }
+
+        // Apply type filter
+        if (filteredTypes.length > 0) {
+            filteredEvents = filteredEvents.filter((event) =>
+                filteredTypes.includes(event.type)
+            );
+        }
+
+        setFilteredEvents(filteredEvents);
+        // console.log(filteredEvents);
+    };
+    useEffect(
+        (object) => {
+            console.log(object);
+            applyFilters();
+        },
+        [object, inputValue1, filteredTypes]
+    );
 
     // Fetch events from Firebase
     useEffect(() => {
@@ -163,22 +201,26 @@ const EventsPage = (user) => {
         };
 
         fetchEvents();
-        // fetchAllEvents()
     }, []);
-    const fetchAllEvents = async () => {
-        try {
-            const eventsCollectionRef = collection(db, "events");
-            const eventsSnapshot = await getDocs(eventsCollectionRef);
-            const eventsData = eventsSnapshot.docs.map((doc) => {
-                return { id: doc.id, ...doc.data() };
-            });
+    // const fetchAllEvents = async () => {
+    //     try {
+    //         const eventsCollectionRef = collection(db, "events");
+    //         const eventsSnapshot = await getDocs(eventsCollectionRef);
+    //         const eventsData = eventsSnapshot.docs.map((doc) => {
+    //             return { id: doc.id, ...doc.data() };
+    //         });
 
-            setData(eventsData);
-            setButtonClicked(eventsData);
-            console.log(data);
-        } catch (error) {
-            console.error("Error fetching events: ", error);
-        }
+    //         setData(eventsData);
+    //         setButtonClicked(eventsData);
+    //         console.log(data);
+    //     } catch (error) {
+    //         console.error("Error fetching events: ", error);
+    //     }
+    // };
+    const resetEvents = () => {
+        setFilteredEvents([]);
+        setCalendarEvents([]);
+        window.location.reload();
     };
     return (
         <>
@@ -190,7 +232,7 @@ const EventsPage = (user) => {
                     <p>This is the events page</p>
                 </div>
                 <button
-                    onClick={fetchAllEvents}
+                    onClick={resetEvents}
                     className={` w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px] ml-auto  mr-2`}
                 >
                     All events
@@ -246,7 +288,7 @@ const EventsPage = (user) => {
                                             );
                                         }
                                     })}
-
+                            {/* 
                             {inputValue1 &&
                                 filteredEvents.length > 0 &&
                                 filteredEvents.map((event) => (
@@ -306,6 +348,43 @@ const EventsPage = (user) => {
                                         time={event.time}
                                         date={event.date}
                                     />
+                                ))} */}
+
+                            {filteredEvents.map((event) => (
+                                <EventCard
+                                    key={event.id}
+                                    title={event.title}
+                                    type={event.type}
+                                    images={event.image}
+                                    location={event.location}
+                                    description={event.description}
+                                    organizer={event.organizer}
+                                    time={event.time}
+                                    date={event.date}
+                                />
+                            ))}
+
+                            {inputValue1 &&
+                                filteredEvents.length === 0 &&
+                                CalendarEvents.length === 0 && (
+                                    <p className='text-red-500 text-center'>
+                                        No events found for this locations
+                                    </p>
+                                )}
+                            {buttonClicked &&
+                                data.length > 0 &&
+                                data.map((event) => (
+                                    <EventCard
+                                        key={event.id}
+                                        title={event.title}
+                                        type={event.type}
+                                        images={event.image}
+                                        location={event.location}
+                                        description={event.description}
+                                        organizer={event.organizer}
+                                        time={event.time}
+                                        date={event.date}
+                                    />
                                 ))}
                         </ul>
                     </div>
@@ -332,7 +411,10 @@ const EventsPage = (user) => {
                                         styles.calendarContainer
                                     } border border-black rounded-[8px] z-10 bg-white sm:bg-transparent`}
                                 >
-                                    <Calendar checkEvents={checkEvents} />
+                                    <Calendar
+                                        checkEvents={checkEvents}
+                                        applyFilters={applyFilters}
+                                    />
                                 </div>
                             )}
                         </div>
