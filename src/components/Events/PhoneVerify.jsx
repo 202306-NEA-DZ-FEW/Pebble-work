@@ -100,7 +100,15 @@ const PhoneVerify = () => {
             setLoading(false);
         }
     }
-
+    function handleKeyDown(event) {
+        if (event.key === "Enter") {
+            if (showOTP) {
+                onOTPVerify();
+            } else {
+                onSignup();
+            }
+        }
+    }
     return (
         <>
             <section className='bg-[#FDA855] bg-opacity-50 flex items-center justify-center h-screen'>
@@ -133,6 +141,7 @@ const PhoneVerify = () => {
                                         value={otp}
                                         onChange={setOtp}
                                         length={6}
+                                        onKeyDown={handleKeyDown}
                                     />
                                     <button
                                         onClick={onOTPVerify}
@@ -162,6 +171,7 @@ const PhoneVerify = () => {
                                         country={"dz"}
                                         value={pn}
                                         onChange={setPn}
+                                        onKeyDown={handleKeyDown}
                                     />
                                     <button
                                         onClick={onSignup}

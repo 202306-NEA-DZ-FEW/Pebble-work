@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import styles from "@/styles/EventCreation.module.css";
 
-const OtpInput = ({ value, onChange, length }) => {
+const OtpInput = ({ onKeyDown, onChange, length }) => {
     const [inputValues, setInputValues] = useState(Array(length).fill(""));
     const inputRefs = useRef([]);
 
@@ -33,7 +33,7 @@ const OtpInput = ({ value, onChange, length }) => {
     };
 
     return (
-        <div className={styles.otpContainer}>
+        <div className={styles.otpContainer} onKeyDown={onKeyDown}>
             {inputValues.map((inputValue, index) => (
                 <input
                     key={index}
