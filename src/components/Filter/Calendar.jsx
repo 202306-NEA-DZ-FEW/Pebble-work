@@ -4,8 +4,18 @@ import React, { useState } from "react";
 
 import styles from "@/styles/Calender.module.css";
 
-const Calendar = () => {
+const Calendar = ({ checkEvents }) => {
     const [currentDate, setCurrentDate] = useState(new Date());
+    const handleDateClick = (day) => {
+        const selectedDate = new Date(
+            currentDate.getFullYear(),
+            currentDate.getMonth(),
+            day + 1
+        );
+        const formattedDate = selectedDate.toISOString().split("T")[0];
+        checkEvents(formattedDate);
+        // applyFilters(formattedDate);
+    };
 
     const handleNextMonth = () => {
         setCurrentDate((prevDate) => {
@@ -72,6 +82,7 @@ const Calendar = () => {
                     href='#'
                     key={`day-${day}`}
                     className={`${styles.calendarDay} xl:text-[17px] md:w-[10px] xl:w-[18px] text-center md:text-[11px] rounded`}
+                    onClick={() => handleDateClick(day)}
                 >
                     {day}
                 </Link>

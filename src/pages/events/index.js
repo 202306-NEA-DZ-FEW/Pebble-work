@@ -1,3 +1,5 @@
+import React, { useState, useEffect, useRef } from "react";
+import styles from "@/styles/Events.module.css";
 import {
     collection,
     getDocs,
@@ -5,9 +7,6 @@ import {
     query,
     where,
 } from "firebase/firestore";
-import React, { useEffect, useRef, useState } from "react";
-
-import styles from "@/styles/Events.module.css";
 
 import EventCard from "@/components/Events/EventCard";
 import EventCardLeft from "@/components/Events/EventCardLeft";
@@ -20,12 +19,17 @@ import { db } from "@/util/firebase";
 const EventsPage = (user) => {
     // State variables
     const [inputValue, setInputValue] = useState("");
+    // const [data, setData] = useState([]);
+    // const [buttonClicked, setButtonClicked] = useState(false);
+
     const [inputValue1, setInputValue1] = useState("");
     const [isCalendarOpen, setCalendarOpen] = useState(false);
     const [isLocationOpen, setLocationOpen] = useState(false);
     const [filteredTypes, setFilteredTypes] = useState([]);
     const [events, setEvents] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState([]);
+    const [CalendarEvents, setCalendarEvents] = useState([]);
+    const [selectedDate, setSelectedDate] = useState(null);
 
     const dropdownRef = useRef(null);
     const locationRef = useRef(null);
@@ -46,6 +50,7 @@ const EventsPage = (user) => {
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const matchingEvents = querySnapshot.docs.map((doc) => doc.data());
             setFilteredEvents(matchingEvents);
+
             console.log(filteredEvents);
         });
 
@@ -58,6 +63,23 @@ const EventsPage = (user) => {
             unsubscribe();
         };
     }, [inputValue1]);
+
+    const checkEvents = async (selectedDate) => {
+        const q = query(
+            collection(db, "events"),
+            where("date", "==", selectedDate)
+        );
+
+        try {
+            const querySnapshot = await getDocs(q);
+            const filteredEvents = querySnapshot.docs.map((doc) => doc.data());
+            setCalendarEvents(filteredEvents);
+            console.log(CalendarEvents);
+            setSelectedDate(selectedDate);
+        } catch (error) {
+            console.error("Error getting filtered events: ", error);
+        }
+    };
 
     const handleLocationOutside = (event) => {
         if (
@@ -143,6 +165,42 @@ const EventsPage = (user) => {
 
         fetchEvents();
     }, []);
+
+    const applyFilters = () => {
+        let filteredEvents = [...events]; // Start with all events
+
+        // Apply date filter
+        if (selectedDate) {
+            filteredEvents = filteredEvents.filter(
+                (event) => event.date === selectedDate
+            );
+        }
+
+        // Apply location filter
+        if (inputValue1) {
+            filteredEvents = filteredEvents.filter(
+                (event) => event.location === inputValue1
+            );
+        }
+
+        // Apply type filter
+        if (filteredTypes.length > 0) {
+            filteredEvents = filteredEvents.filter((event) =>
+                filteredTypes.includes(event.type)
+            );
+        }
+
+        setFilteredEvents(filteredEvents);
+        console.log(filteredEvents);
+    };
+    useEffect(() => {
+        applyFilters();
+    }, [selectedDate, inputValue1, filteredTypes]);
+    const resetEvents = () => {
+        setFilteredEvents([]);
+        setCalendarEvents([]);
+        window.location.reload();
+    };
     return (
         <>
             <main
@@ -152,6 +210,12 @@ const EventsPage = (user) => {
                     <h1>Welcome, {user.name}!</h1>
                     <p>This is the events page</p>
                 </div>
+                <button
+                    onClick={resetEvents}
+                    className={` w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px] ml-auto  mr-2`}
+                >
+                    All events
+                </button>
                 <div
                     className={`flex flex-col-reverse sm:flex sm:flex-row-reverse sm:items-center sm:justify-evenly sm:gap-8 sm:h-full sm:w-full`}
                 >
@@ -160,6 +224,8 @@ const EventsPage = (user) => {
                     >
                         <ul className={` flex flex-col items gap-2 `}>
                             {!inputValue1 &&
+                                !selectedDate &&
+                                !CalendarEvents.length &&
                                 events
                                     .filter((event) =>
                                         filteredTypes.length === 0
@@ -167,64 +233,12 @@ const EventsPage = (user) => {
                                             : filteredTypes.includes(event.type)
                                     )
                                     .map((event, index) => {
-                                        if (index % 2 === 0) {
-                                            return (
-                                                <EventCard
-                                                    eventId={event.id}
-                                                    key={event.id}
-                                                    title={event.title}
-                                                    type={event.type}
-                                                    images={event.image}
-                                                    location={event.location}
-                                                    description={
-                                                        event.description
-                                                    }
-                                                    organizer={event.organizer}
-                                                    time={event.time}
-                                                    date={event.date}
-                                                />
-                                            );
-                                        } else {
-                                            return (
-                                                <EventCardLeft
-                                                    eventId={event.id}
-                                                    key={event.id}
-                                                    title={event.title}
-                                                    type={event.type}
-                                                    image={event.image}
-                                                    location={event.location}
-                                                    description={
-                                                        event.description
-                                                    }
-                                                    organizer={event.organizer}
-                                                    time={event.time}
-                                                    date={event.date}
-                                                />
-                                            );
-                                        }
-                                    })}
-
-                            {inputValue1 &&
-                                filteredEvents.length > 0 &&
-                                filteredEvents.map((event, index) => {
-                                    if (index % 2 === 0) {
+                                        const EventCardComponent =
+                                            index % 2 === 0
+                                                ? EventCard
+                                                : EventCardLeft;
                                         return (
-                                            <EventCard
-                                                eventId={event.id}
-                                                key={event.id}
-                                                title={event.title}
-                                                type={event.type}
-                                                images={event.image}
-                                                location={event.location}
-                                                description={event.description}
-                                                organizer={event.organizer}
-                                                time={event.time}
-                                                date={event.date}
-                                            />
-                                        );
-                                    } else {
-                                        return (
-                                            <EventCardLeft
+                                            <EventCardComponent
                                                 eventId={event.id}
                                                 key={event.id}
                                                 title={event.title}
@@ -237,11 +251,37 @@ const EventsPage = (user) => {
                                                 date={event.date}
                                             />
                                         );
-                                    }
-                                })}
-                            {inputValue1 && filteredEvents.length === 0 && (
+                                    })}
+
+                            {filteredEvents.map((event, index) => {
+                                const EventCardComponent =
+                                    index % 2 === 0 ? EventCard : EventCardLeft;
+                                return (
+                                    <EventCardComponent
+                                        eventId={event.id}
+                                        key={event.id}
+                                        title={event.title}
+                                        type={event.type}
+                                        image={event.image}
+                                        location={event.location}
+                                        description={event.description}
+                                        organizer={event.organizer}
+                                        time={event.time}
+                                        date={event.date}
+                                    />
+                                );
+                            })}
+                            {(inputValue1 || filteredTypes.length > 0) &&
+                                filteredEvents.length === 0 && (
+                                    <p className='text-red-500 text-center'>
+                                        No events found for this date and
+                                        location
+                                    </p>
+                                )}
+
+                            {selectedDate && CalendarEvents.length === 0 && (
                                 <p className='text-red-500 text-center'>
-                                    No events found for this location
+                                    No events found for this date
                                 </p>
                             )}
                         </ul>
@@ -269,7 +309,7 @@ const EventsPage = (user) => {
                                         styles.calendarContainer
                                     } border border-black rounded-[8px] z-10 bg-white sm:bg-transparent`}
                                 >
-                                    <Calendar />
+                                    <Calendar checkEvents={checkEvents} />
                                 </div>
                             )}
                         </div>

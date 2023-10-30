@@ -73,7 +73,6 @@ const FilterByType = ({ setFilteredTypes }) => {
     }, [selectedTypes]);
 
     const types = [
-        "All",
         "Affordable and Clean Energy",
         "Clean Water and Sanitation",
         "Climate Action",

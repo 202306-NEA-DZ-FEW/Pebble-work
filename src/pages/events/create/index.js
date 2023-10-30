@@ -71,7 +71,7 @@ const EventCreationPage = () => {
         const eventId = await addEvent(input);
 
         if (img) {
-            await imgUpload(event.eventId);
+            await imgUpload(eventId);
         }
 
         //use getDownloadURL to get the url of the newly uploaded image
