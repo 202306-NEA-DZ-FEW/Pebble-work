@@ -3,11 +3,10 @@ import {
     arrayUnion,
     collection,
     doc,
-    getDoc,
     updateDoc,
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import Link from "next/link";
+
 import React, { useEffect, useState } from "react";
 
 import { auth, db, storage } from "@/util/firebase";

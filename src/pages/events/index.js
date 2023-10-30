@@ -194,12 +194,42 @@ const EventsPage = (user) => {
         console.log(filteredEvents);
     };
     useEffect(() => {
+        const applyFilters = () => {
+            let filteredEvents = events;
+
+            // Apply type filter
+            if (filteredTypes.length > 0) {
+                filteredEvents = filteredEvents.filter((event) =>
+                    filteredTypes.includes(event.type)
+                );
+            }
+
+            // Apply location filter
+            if (inputValue1) {
+                filteredEvents = filteredEvents.filter(
+                    (event) => event.location === inputValue1
+                );
+            }
+
+            // Apply date filter
+            if (selectedDate) {
+                filteredEvents = filteredEvents.filter(
+                    (event) => event.date === selectedDate
+                );
+            }
+
+            setFilteredEvents(filteredEvents);
+        };
+
         applyFilters();
-    }, [selectedDate, inputValue1, filteredTypes]);
+    }, [events, selectedDate, inputValue1, filteredTypes]);
+
     const resetEvents = () => {
-        setFilteredEvents([]);
-        setCalendarEvents([]);
-        window.location.reload();
+        setInputValue1(""); // Reset location filter
+        setSelectedDate(null); // Reset date filter
+        setFilteredTypes([]); // Reset type filter
+        setFilteredEvents([]); // Clear filtered events
+        setCalendarEvents([]); // Clear calendar events
     };
     return (
         <>
@@ -223,36 +253,6 @@ const EventsPage = (user) => {
                         className={`md:h-[800px] h-[400px] xl:w-[840px] pb-[140px] md:pb-[140px] md:w-[480px] lg:w-[490px] ${styles.information}`}
                     >
                         <ul className={` flex flex-col items gap-2 `}>
-                            {!inputValue1 &&
-                                !selectedDate &&
-                                !CalendarEvents.length &&
-                                events
-                                    .filter((event) =>
-                                        filteredTypes.length === 0
-                                            ? true
-                                            : filteredTypes.includes(event.type)
-                                    )
-                                    .map((event, index) => {
-                                        const EventCardComponent =
-                                            index % 2 === 0
-                                                ? EventCard
-                                                : EventCardLeft;
-                                        return (
-                                            <EventCardComponent
-                                                eventId={event.id}
-                                                key={event.id}
-                                                title={event.title}
-                                                type={event.type}
-                                                image={event.image}
-                                                location={event.location}
-                                                description={event.description}
-                                                organizer={event.organizer}
-                                                time={event.time}
-                                                date={event.date}
-                                            />
-                                        );
-                                    })}
-
                             {filteredEvents.map((event, index) => {
                                 const EventCardComponent =
                                     index % 2 === 0 ? EventCard : EventCardLeft;
