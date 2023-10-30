@@ -12,6 +12,7 @@ import React, { useEffect, useState } from "react";
 
 import { auth, db, storage } from "@/util/firebase";
 import EventCreation from "@/components/Events/EventCreation";
+import FirestoreLocation from "@/components/Filter/FirestoreLocation";
 
 const EventCreationPage = () => {
     const formCollectionRef = collection(db, "events");
@@ -78,7 +79,10 @@ const EventCreationPage = () => {
         const eventId = await addEvent(input);
 
         await addLocation(input);
-        await imgUpload(eventId);
+
+        if (img) {
+            await imgUpload(eventId);
+        }
 
         //use getDownloadURL to get the url of the newly uploaded image
 
@@ -96,6 +100,15 @@ const EventCreationPage = () => {
         }));
     };
 
+    // Function to handle location selection
+    /*
+  const handleLocationSelect = (selectedLocation) => {
+    setInput((prevInput) => ({
+      ...prevInput,
+      location: selectedLocation, // Update the location in the input state
+    }));
+  };
+*/
     const arrEventType = [
         "No Poverty",
         "Zero Hunger",
@@ -182,6 +195,8 @@ const EventCreationPage = () => {
                                         }}
                                     ></input>
                                 </form>
+
+                                {/* <FirestoreLocation onLocationSelect={handleLocationSelect} /> */}
 
                                 <h3
                                     className='mt-5 font-semibold align-left'
