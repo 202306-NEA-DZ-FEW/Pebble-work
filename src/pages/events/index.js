@@ -28,6 +28,7 @@ const EventsPage = (user) => {
     const [filteredEvents, setFilteredEvents] = useState([]);
     const [CalendarEvents, setCalendarEvents] = useState([]);
     const [selectedDate, setSelectedDate] = useState(null);
+    const [resetLocation, setResetLocation] = useState(false);
 
     const dropdownRef = useRef(null);
     const locationRef = useRef(null);
@@ -202,6 +203,7 @@ const EventsPage = (user) => {
         setFilteredTypes([]);
         setFilteredEvents([]);
         setCalendarEvents([]);
+        setResetLocation(true);
     };
     return (
         <>
@@ -293,8 +295,8 @@ const EventsPage = (user) => {
                                 InputChange={handleInputChange}
                                 inputValue={inputValue}
                                 onInputChange={handleLocationInputChange}
-                                setInputValue1={setInputValue1}
-                                inputValue1={inputValue1}
+                                resetLocation={resetLocation}
+                                setResetLocation={setResetLocation}
                             />
                         </div>
 

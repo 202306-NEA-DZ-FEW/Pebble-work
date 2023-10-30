@@ -7,6 +7,8 @@ const LocationFilter = ({
     HandleOpen,
     refLocation,
     onInputChange,
+    resetLocation,
+    setResetLocation,
 }) => {
     const [inputValue, setInputValue] = useState("");
     const [places, setPlaces] = useState([]);
@@ -46,7 +48,11 @@ const LocationFilter = ({
         } else {
             setPlaces([]);
         }
-    }, [inputValue]);
+        if (resetLocation) {
+            setInputValue("");
+            setResetLocation(false);
+        }
+    }, [inputValue, resetLocation]);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
