@@ -17,8 +17,8 @@ import LocationFilter from "@/components/Filter/LocationFilter";
 const EventsPage = (user) => {
     // State variables
     const [inputValue, setInputValue] = useState("");
-    const [data, setData] = useState([]);
-    const [buttonClicked, setButtonClicked] = useState(false);
+    // const [data, setData] = useState([]);
+    // const [buttonClicked, setButtonClicked] = useState(false);
 
     const [inputValue1, setInputValue1] = useState("");
     const [isCalendarOpen, setCalendarOpen] = useState(false);
@@ -48,7 +48,7 @@ const EventsPage = (user) => {
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const matchingEvents = querySnapshot.docs.map((doc) => doc.data());
             setFilteredEvents(matchingEvents);
-            //location
+
             console.log(filteredEvents);
         });
 
@@ -61,8 +61,8 @@ const EventsPage = (user) => {
             unsubscribe();
         };
     }, [inputValue1]);
+
     const checkEvents = async (selectedDate) => {
-        // setobject(selectedDate);
         const q = query(
             collection(db, "events"),
             where("date", "==", selectedDate)
@@ -72,9 +72,8 @@ const EventsPage = (user) => {
             const querySnapshot = await getDocs(q);
             const filteredEvents = querySnapshot.docs.map((doc) => doc.data());
             setCalendarEvents(filteredEvents);
-            //date
             console.log(CalendarEvents);
-            setSelectedDate(true);
+            setSelectedDate(selectedDate);
         } catch (error) {
             console.error("Error getting filtered events: ", error);
         }
@@ -149,19 +148,32 @@ const EventsPage = (user) => {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
-    const [object, setobject] = useState([]);
 
-    const applyFilters = (formattedDate) => {
-        let filteredEvents = [...events];
-        console.log(formattedDate);
-        setobject(formattedDate);
-        console.log(object);
+    // Fetch events from Firebase
+    useEffect(() => {
+        const fetchEvents = async () => {
+            const eventsCollectionRef = collection(db, "events");
+            const eventsSnapshot = await getDocs(eventsCollectionRef);
+            const eventsData = eventsSnapshot.docs.map((doc) => {
+                return { id: doc.id, ...doc.data() };
+            });
+
+            setEvents(eventsData);
+        };
+
+        fetchEvents();
+    }, []);
+
+    const applyFilters = () => {
+        let filteredEvents = [...events]; // Start with all events
+
         // Apply date filter
-        if (formattedDate) {
+        if (selectedDate) {
             filteredEvents = filteredEvents.filter(
-                (event) => event.date === formattedDate
+                (event) => event.date === selectedDate
             );
         }
+        // console.log(selectedDate)
 
         // Apply location filter
         if (inputValue1) {
@@ -178,45 +190,11 @@ const EventsPage = (user) => {
         }
 
         setFilteredEvents(filteredEvents);
-        // console.log(filteredEvents);
+        console.log(filteredEvents);
     };
-    useEffect(
-        (object) => {
-            console.log(object);
-            applyFilters();
-        },
-        [object, inputValue1, filteredTypes]
-    );
-
-    // Fetch events from Firebase
     useEffect(() => {
-        const fetchEvents = async () => {
-            const eventsCollectionRef = collection(db, "events");
-            const eventsSnapshot = await getDocs(eventsCollectionRef);
-            const eventsData = eventsSnapshot.docs.map((doc) => {
-                return { id: doc.id, ...doc.data() };
-            });
-
-            setEvents(eventsData);
-        };
-
-        fetchEvents();
-    }, []);
-    // const fetchAllEvents = async () => {
-    //     try {
-    //         const eventsCollectionRef = collection(db, "events");
-    //         const eventsSnapshot = await getDocs(eventsCollectionRef);
-    //         const eventsData = eventsSnapshot.docs.map((doc) => {
-    //             return { id: doc.id, ...doc.data() };
-    //         });
-
-    //         setData(eventsData);
-    //         setButtonClicked(eventsData);
-    //         console.log(data);
-    //     } catch (error) {
-    //         console.error("Error fetching events: ", error);
-    //     }
-    // };
+        applyFilters();
+    }, [selectedDate, inputValue1, filteredTypes]);
     const resetEvents = () => {
         setFilteredEvents([]);
         setCalendarEvents([]);
@@ -288,67 +266,6 @@ const EventsPage = (user) => {
                                             );
                                         }
                                     })}
-                            {/* 
-                            {inputValue1 &&
-                                filteredEvents.length > 0 &&
-                                filteredEvents.map((event) => (
-                                    <EventCard
-                                        key={event.id}
-                                        title={event.title}
-                                        type={event.type}
-                                        images={event.image}
-                                        location={event.location}
-                                        description={event.description}
-                                        organizer={event.organizer}
-                                        time={event.time}
-                                        date={event.date}
-                                    />
-                                ))}
-
-                            {selectedDate && CalendarEvents.length > 0 ? (
-                                CalendarEvents.map((event) => (
-                                    <EventCard
-                                        key={event.id}
-                                        title={event.title}
-                                        type={event.type}
-                                        images={event.image}
-                                        location={event.location}
-                                        description={event.description}
-                                        organizer={event.organizer}
-                                        time={event.time}
-                                        date={event.date}
-                                    />
-                                ))
-                            ) : selectedDate &&
-                              CalendarEvents.length === 0 &&
-                              !buttonClicked ? (
-                                <p className='text-red-500 text-center'>
-                                    No events found for this date
-                                </p>
-                            ) : null}
-
-                            {inputValue1 &&
-                                filteredEvents.length === 0 &&
-                                CalendarEvents.length === 0 && (
-                                    <p className='text-red-500 text-center'>
-                                        No events found for this locations
-                                    </p>
-                                )}
-                            {buttonClicked &&
-                                data.length > 0 &&
-                                data.map((event) => (
-                                    <EventCard
-                                        key={event.id}
-                                        title={event.title}
-                                        type={event.type}
-                                        images={event.image}
-                                        location={event.location}
-                                        description={event.description}
-                                        organizer={event.organizer}
-                                        time={event.time}
-                                        date={event.date}
-                                    />
-                                ))} */}
 
                             {filteredEvents.map((event) => (
                                 <EventCard
@@ -364,14 +281,15 @@ const EventsPage = (user) => {
                                 />
                             ))}
 
+                            {/* 
                             {inputValue1 &&
                                 filteredEvents.length === 0 &&
                                 CalendarEvents.length === 0 && (
                                     <p className='text-red-500 text-center'>
                                         No events found for this locations
                                     </p>
-                                )}
-                            {buttonClicked &&
+                                )} */}
+                            {/* {buttonClicked &&
                                 data.length > 0 &&
                                 data.map((event) => (
                                     <EventCard
@@ -385,7 +303,7 @@ const EventsPage = (user) => {
                                         time={event.time}
                                         date={event.date}
                                     />
-                                ))}
+                                ))} */}
                         </ul>
                     </div>
                     <div className='flex bg-white z-10 flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7'>
@@ -411,10 +329,7 @@ const EventsPage = (user) => {
                                         styles.calendarContainer
                                     } border border-black rounded-[8px] z-10 bg-white sm:bg-transparent`}
                                 >
-                                    <Calendar
-                                        checkEvents={checkEvents}
-                                        applyFilters={applyFilters}
-                                    />
+                                    <Calendar checkEvents={checkEvents} />
                                 </div>
                             )}
                         </div>

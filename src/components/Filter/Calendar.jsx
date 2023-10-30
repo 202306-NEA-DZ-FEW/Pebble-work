@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 import styles from "@/styles/Calender.module.css";
 
-const Calendar = ({ checkEvents, applyFilters }) => {
+const Calendar = ({ checkEvents }) => {
     const [currentDate, setCurrentDate] = useState(new Date());
     const handleDateClick = (day) => {
         const selectedDate = new Date(
@@ -14,7 +14,7 @@ const Calendar = ({ checkEvents, applyFilters }) => {
         );
         const formattedDate = selectedDate.toISOString().split("T")[0];
         checkEvents(formattedDate);
-        applyFilters(formattedDate);
+        // applyFilters(formattedDate);
     };
 
     const handleNextMonth = () => {
