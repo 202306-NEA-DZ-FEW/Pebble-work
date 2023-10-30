@@ -17,6 +17,9 @@ import LocationFilter from "@/components/Filter/LocationFilter";
 const EventsPage = (user) => {
     // State variables
     const [inputValue, setInputValue] = useState("");
+    const [data, setData] = useState([]);
+    const [buttonClicked, setButtonClicked] = useState(false);
+
     const [inputValue1, setInputValue1] = useState("");
     const [isCalendarOpen, setCalendarOpen] = useState(false);
     const [isLocationOpen, setLocationOpen] = useState(false);
@@ -45,6 +48,7 @@ const EventsPage = (user) => {
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const matchingEvents = querySnapshot.docs.map((doc) => doc.data());
             setFilteredEvents(matchingEvents);
+
             console.log(filteredEvents);
         });
 
@@ -159,7 +163,23 @@ const EventsPage = (user) => {
         };
 
         fetchEvents();
+        // fetchAllEvents()
     }, []);
+    const fetchAllEvents = async () => {
+        try {
+            const eventsCollectionRef = collection(db, "events");
+            const eventsSnapshot = await getDocs(eventsCollectionRef);
+            const eventsData = eventsSnapshot.docs.map((doc) => {
+                return { id: doc.id, ...doc.data() };
+            });
+
+            setData(eventsData);
+            setButtonClicked(eventsData);
+            console.log(data);
+        } catch (error) {
+            console.error("Error fetching events: ", error);
+        }
+    };
     return (
         <>
             <main
@@ -169,6 +189,12 @@ const EventsPage = (user) => {
                     <h1>Welcome, {user.name}!</h1>
                     <p>This is the events page</p>
                 </div>
+                <button
+                    onClick={fetchAllEvents}
+                    className={` w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px] ml-auto  mr-2`}
+                >
+                    All events
+                </button>
                 <div
                     className={`flex flex-col-reverse sm:flex sm:flex-row-reverse sm:items-center sm:justify-evenly sm:gap-8 sm:h-full sm:w-full`}
                 >
@@ -178,6 +204,7 @@ const EventsPage = (user) => {
                         <ul className={` flex flex-col items gap-2 `}>
                             {!inputValue1 &&
                                 !selectedDate &&
+                                !CalendarEvents.length &&
                                 events
                                     .filter((event) =>
                                         filteredTypes.length === 0
@@ -235,6 +262,7 @@ const EventsPage = (user) => {
                                         date={event.date}
                                     />
                                 ))}
+
                             {selectedDate && CalendarEvents.length > 0 ? (
                                 CalendarEvents.map((event) => (
                                     <EventCard
@@ -249,11 +277,13 @@ const EventsPage = (user) => {
                                         date={event.date}
                                     />
                                 ))
-                            ) : (
+                            ) : selectedDate &&
+                              CalendarEvents.length === 0 &&
+                              !buttonClicked ? (
                                 <p className='text-red-500 text-center'>
                                     No events found for this date
                                 </p>
-                            )}
+                            ) : null}
 
                             {inputValue1 &&
                                 filteredEvents.length === 0 &&
@@ -262,6 +292,21 @@ const EventsPage = (user) => {
                                         No events found for this locations
                                     </p>
                                 )}
+                            {buttonClicked &&
+                                data.length > 0 &&
+                                data.map((event) => (
+                                    <EventCard
+                                        key={event.id}
+                                        title={event.title}
+                                        type={event.type}
+                                        images={event.image}
+                                        location={event.location}
+                                        description={event.description}
+                                        organizer={event.organizer}
+                                        time={event.time}
+                                        date={event.date}
+                                    />
+                                ))}
                         </ul>
                     </div>
                     <div className='flex bg-white z-10 flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7'>
