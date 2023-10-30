@@ -19,9 +19,7 @@ import { db } from "@/util/firebase";
 const EventsPage = (user) => {
     // State variables
     const [inputValue, setInputValue] = useState("");
-    // const [data, setData] = useState([]);
-    // const [buttonClicked, setButtonClicked] = useState(false);
-
+    const [selectedTypes, setSelectedTypes] = useState([]);
     const [inputValue1, setInputValue1] = useState("");
     const [isCalendarOpen, setCalendarOpen] = useState(false);
     const [isLocationOpen, setLocationOpen] = useState(false);
@@ -198,11 +196,12 @@ const EventsPage = (user) => {
     }, [events, selectedDate, inputValue1, filteredTypes]);
 
     const resetEvents = () => {
-        setInputValue1(""); // Reset location filter
-        setSelectedDate(null); // Reset date filter
-        setFilteredTypes([]); // Reset type filter
-        setFilteredEvents([]); // Clear filtered events
-        setCalendarEvents([]); // Clear calendar events
+        setSelectedTypes([]);
+        setInputValue1("");
+        setSelectedDate(null);
+        setFilteredTypes([]);
+        setFilteredEvents([]);
+        setCalendarEvents([]);
     };
     return (
         <>
@@ -294,12 +293,16 @@ const EventsPage = (user) => {
                                 InputChange={handleInputChange}
                                 inputValue={inputValue}
                                 onInputChange={handleLocationInputChange}
+                                setInputValue1={setInputValue1}
+                                inputValue1={inputValue1}
                             />
                         </div>
 
                         <FilterByType
                             ref={dropdownRef}
                             setFilteredTypes={setFilteredTypes}
+                            selectedTypes={selectedTypes}
+                            setSelectedTypes={setSelectedTypes}
                         />
                     </div>
                 </div>
