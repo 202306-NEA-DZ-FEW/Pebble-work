@@ -1,0 +1,13 @@
+{
+    "navbar": {
+      "home": "Startseite",
+      "events": "Veranstaltungen",
+      "about": "Über uns",
+      "contact": "Kontakt"
+    },
+    "footer": {
+      "events": "Veranstaltungen",
+      "about": "Über uns",
+      "howItWorks": "Wie es funktioniert"
+    }
+  }

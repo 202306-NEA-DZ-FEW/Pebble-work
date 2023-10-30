@@ -1,19 +1,22 @@
-import React, { useState, useEffect, useRef } from "react";
-
-import Calendar from "@/components/Filter/Calendar";
-import EventCard from "@/components/Events/EventCard";
-import EventCardLeft from "@/components/Events/EventCardLeft";
-import styles from "@/styles/Events.module.css";
-import FilterByType from "@/components/Filter/FilterByType";
-import { db } from "@/util/firebase";
 import {
     collection,
     getDocs,
+    onSnapshot,
     query,
     where,
-    onSnapshot,
 } from "firebase/firestore";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import React, { useEffect, useRef, useState } from "react";
+
+import styles from "@/styles/Events.module.css";
+
+import EventCard from "@/components/Events/EventCard";
+import EventCardLeft from "@/components/Events/EventCardLeft";
+import Calendar from "@/components/Filter/Calendar";
+import FilterByType from "@/components/Filter/FilterByType";
 import LocationFilter from "@/components/Filter/LocationFilter";
+
+import { db } from "@/util/firebase";
 
 const EventsPage = (user) => {
     // State variables
@@ -272,3 +275,11 @@ const EventsPage = (user) => {
 };
 
 export default EventsPage;
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ["common", "about"])),
+            // Will be passed to the page component as props
+        },
+    };
+}

@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-import Link from "next/link";
 
 const Language = () => {
     const { t, i18n } = useTranslation();
@@ -63,7 +62,7 @@ const Language = () => {
                                 <div className='inline-flex items-center'>
                                     <img
                                         className='mr-1'
-                                        src='/Palestine.png'
+                                        src='/United-Kingdom.png'
                                         width='20px'
                                         height='20px'
                                     />
@@ -79,11 +78,44 @@ const Language = () => {
                                 <div className='inline-flex items-center'>
                                     <img
                                         className='mr-1'
-                                        src='/Palestine.png'
+                                        src='/Turkey.png'
                                         width='20px'
                                         height='20px'
                                     />
                                     {t("turkish")}
+                                </div>
+                            </button>
+                        </li>
+                        <li>
+                            <button
+                                onClick={() => changeLanguage("de")}
+                                className='block text-sm text-gray-700 hover:border hover:rounded-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
+                            >
+                                <div className='inline-flex items-center'>
+                                    <img
+                                        className='mr-1'
+                                        src='/Germany.png'
+                                        width='20px'
+                                        height='20px'
+                                    />
+                                    {t("german")}
+                                </div>
+                            </button>
+                        </li>
+                        {/* Add Chinese language here */}
+                        <li>
+                            <button
+                                onClick={() => changeLanguage("zh")}
+                                className='block text-sm text-gray-700 hover:border hover:rounded-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
+                            >
+                                <div className='inline-flex items-center'>
+                                    <img
+                                        className='mr-1'
+                                        src='/China.png'
+                                        width='20px'
+                                        height='20px'
+                                    />
+                                    {t("chinese")}
                                 </div>
                             </button>
                         </li>

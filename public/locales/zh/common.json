@@ -1,0 +1,13 @@
+{
+    "navbar": {
+      "home": "首页",
+      "events": "活动",
+      "about": "关于",
+      "contact": "联系"
+    },
+    "footer": {
+      "events": "活动",
+      "about": "关于",
+      "howItWorks": "如何使用"
+    }
+  }
