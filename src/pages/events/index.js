@@ -1,10 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import Calendar from "@/components/Filter/Calendar";
-import EventCard from "@/components/Events/EventCard";
-import EventCardLeft from "@/components/Events/EventCardLeft";
 import styles from "@/styles/Events.module.css";
-import FilterByType from "@/components/Filter/FilterByType";
-import { db } from "@/util/firebase";
 import {
     collection,
     getDocs,
@@ -12,9 +7,6 @@ import {
     query,
     where,
 } from "firebase/firestore";
-import React, { useEffect, useRef, useState } from "react";
-
-import styles from "@/styles/Events.module.css";
 
 import EventCard from "@/components/Events/EventCard";
 import EventCardLeft from "@/components/Events/EventCardLeft";
