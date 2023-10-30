@@ -166,33 +166,6 @@ const EventsPage = (user) => {
         fetchEvents();
     }, []);
 
-    const applyFilters = () => {
-        let filteredEvents = [...events]; // Start with all events
-
-        // Apply date filter
-        if (selectedDate) {
-            filteredEvents = filteredEvents.filter(
-                (event) => event.date === selectedDate
-            );
-        }
-
-        // Apply location filter
-        if (inputValue1) {
-            filteredEvents = filteredEvents.filter(
-                (event) => event.location === inputValue1
-            );
-        }
-
-        // Apply type filter
-        if (filteredTypes.length > 0) {
-            filteredEvents = filteredEvents.filter((event) =>
-                filteredTypes.includes(event.type)
-            );
-        }
-
-        setFilteredEvents(filteredEvents);
-        console.log(filteredEvents);
-    };
     useEffect(() => {
         const applyFilters = () => {
             let filteredEvents = events;
