@@ -165,7 +165,7 @@ const PhoneVerify = () => {
                                     />
                                     <button
                                         onClick={onSignup}
-                                        className='bg-[#FDA855] hover:bg-orange-700 w-full flex gap-1 items-center justify-center py-2.5 text-white rounded'
+                                        className='bg-[#FDA855] ml-[5px] hover:bg-orange-700 w-full flex gap-1 items-center justify-center py-2.5 text-white rounded'
                                     >
                                         {loading && (
                                             <CgSpinner
