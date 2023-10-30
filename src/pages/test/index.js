@@ -4,7 +4,14 @@ import { useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { auth } from "@/util/firebase";
-import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import { getFirestore, doc, updateDoc } from "firebase/firestore";
+import {
+    RecaptchaVerifier,
+    getAuth,
+    PhoneAuthProvider,
+    linkWithCredential,
+    signInWithPhoneNumber,
+} from "firebase/auth";
 import { toast, Toaster } from "react-hot-toast";
 
 import OtpInput from "@/components/OtpVerification";
@@ -53,20 +60,42 @@ const App = () => {
             });
     }
 
-    function onOTPVerify() {
+    async function onOTPVerify() {
         setLoading(true);
-        window.confirmationResult
-            .confirm(otp)
-            .then(async (res) => {
-                console.log(res);
-                setUser(res.user);
-                setLoading(false);
-                console.log("verified");
-            })
-            .catch((err) => {
-                console.log("wrong OTP input");
-                setLoading(false);
+        // Get current user before phone number verification
+        const currentUser = getAuth().currentUser;
+        if (!currentUser || !currentUser.email || !currentUser.displayName) {
+            console.log("No current user or missing email/name");
+            return;
+        }
+
+        try {
+            // Confirm the OTP and get the phone credential
+            const phoneCredential = PhoneAuthProvider.credential(
+                window.confirmationResult.verificationId,
+                otp
+            );
+
+            // Link the phone credential to the current user
+            await linkWithCredential(currentUser, phoneCredential);
+
+            console.log("Phone number linked to current user");
+
+            // Get a reference to the user's document in the "users" collection
+            const db = getFirestore();
+            const userDoc = doc(db, "users", currentUser.uid);
+            const formatPh = "+" + pn;
+            // Update the user's data
+            await updateDoc(userDoc, {
+                phoneNumber: formatPh,
             });
+
+            console.log("User's data updated in 'users' collection");
+        } catch (err) {
+            console.log(err.message);
+        } finally {
+            setLoading(false);
+        }
     }
 
     return (

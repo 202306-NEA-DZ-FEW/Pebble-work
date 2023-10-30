@@ -12,6 +12,7 @@ import React, { useEffect, useState } from "react";
 
 import { auth, db, storage } from "@/util/firebase";
 import EventCreation from "@/components/Events/EventCreation";
+import PhoneVerify from "@/components/Events/PhoneVerify";
 
 const EventCreationPage = () => {
     const formCollectionRef = collection(db, "events");
@@ -108,6 +109,7 @@ const EventCreationPage = () => {
     ];
 
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isPhoneNumberVerified, setIsPhoneNumberVerified] = useState(false);
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -116,15 +118,24 @@ const EventCreationPage = () => {
             if (user) {
                 // User is authenticated
                 setIsAuthenticated(true);
+                setIsPhoneNumberVerified(user.phoneNumber ? true : false);
             } else {
                 // User is not authenticated
                 setIsAuthenticated(false);
+                setIsPhoneNumberVerified(false);
             }
         });
 
         // Don't forget to unsubscribe when your component unmounts.
         return () => unsubscribe();
     }, []);
+    if (!isAuthenticated || !isPhoneNumberVerified) {
+        return (
+            <>
+                <PhoneVerify />
+            </>
+        );
+    }
 
     return (
         <>
