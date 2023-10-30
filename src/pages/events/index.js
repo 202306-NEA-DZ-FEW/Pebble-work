@@ -8,11 +8,21 @@ import { db } from "@/util/firebase";
 import {
     collection,
     getDocs,
+    onSnapshot,
     query,
     where,
-    onSnapshot,
 } from "firebase/firestore";
+import React, { useEffect, useRef, useState } from "react";
+
+import styles from "@/styles/Events.module.css";
+
+import EventCard from "@/components/Events/EventCard";
+import EventCardLeft from "@/components/Events/EventCardLeft";
+import Calendar from "@/components/Filter/Calendar";
+import FilterByType from "@/components/Filter/FilterByType";
 import LocationFilter from "@/components/Filter/LocationFilter";
+
+import { db } from "@/util/firebase";
 
 const EventsPage = (user) => {
     // State variables

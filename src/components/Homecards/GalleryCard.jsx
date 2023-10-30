@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/Homepage.module.css";
+import Image from "next/image";
 
 const GalleryCard = () => {
     const [isGallery, setIsGallery] = useState(false);
@@ -61,19 +62,29 @@ const GalleryCard = () => {
                     <div
                         id='gallery'
                         key={index}
-                        className={`bg-gray-100 xl:w-[190px] xl:h-[172px] lg:w-[156px] lg:h-[154px] sm:w-[138px] sm:h-[132px] w-[112px] h-[106px] p-2 md:p-4 flex items-center justify-center ${
+                        className={`bg-gray-100 xl:w-[190px] xl:h-[172px] lg:w-[156px] lg:h-[154px] m-2 sm:w-[138px] sm:h-[132px] w-[112px] h-[106px]  flex items-center justify-center ${
                             styles.gallery
                         } ${
                             isGallery ? styles.gallerySlide : styles.invisible
                         }`}
                         style={{
                             animationDelay: `${index * 0.1}s`,
+                            backgroundImage: `url(/downscaled/${image})`,
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
                         }}
                     >
                         <img
+                            style={{
+                                objectPosition: "center",
+                                objectFit: "cover",
+                                display: "block",
+                                width: "100%",
+                                aspectRatio: "1/1",
+                            }}
+                            loading='lazy'
                             src={`/images/${image}`}
                             alt={`Image ${index + 1}`}
-                            className='xl:w-[180px] xl:h-[142px] lg:w-[146px] lg:h-[124px] sm:w-[108px] sm:h-[102px] w-[92px] h-[86px]'
                         />
                     </div>
                 ))}

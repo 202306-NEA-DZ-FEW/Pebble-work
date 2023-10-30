@@ -36,6 +36,7 @@ const SocialCardSection = () => {
                     className='w-full md:w-1/3 lg:w-1/4 flex flex-col items-center gap-5'
                 >
                     <img
+                        loading='lazy'
                         className='w-16 h-16 rounded-full'
                         src={SocialCard.imageSrc}
                         alt={`Image ${index}`}
