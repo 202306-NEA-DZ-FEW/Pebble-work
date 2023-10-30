@@ -280,30 +280,19 @@ const EventsPage = (user) => {
                                     date={event.date}
                                 />
                             ))}
-
-                            {/* 
-                            {inputValue1 &&
-                                filteredEvents.length === 0 &&
-                                CalendarEvents.length === 0 && (
+                            {(inputValue1 || filteredTypes.length > 0) &&
+                                filteredEvents.length === 0 && (
                                     <p className='text-red-500 text-center'>
-                                        No events found for this locations
+                                        No events found for this date and
+                                        location
                                     </p>
-                                )} */}
-                            {/* {buttonClicked &&
-                                data.length > 0 &&
-                                data.map((event) => (
-                                    <EventCard
-                                        key={event.id}
-                                        title={event.title}
-                                        type={event.type}
-                                        images={event.image}
-                                        location={event.location}
-                                        description={event.description}
-                                        organizer={event.organizer}
-                                        time={event.time}
-                                        date={event.date}
-                                    />
-                                ))} */}
+                                )}
+
+                            {selectedDate && CalendarEvents.length === 0 && (
+                                <p className='text-red-500 text-center'>
+                                    No events found for this date
+                                </p>
+                            )}
                         </ul>
                     </div>
                     <div className='flex bg-white z-10 flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7'>
