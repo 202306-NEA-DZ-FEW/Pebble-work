@@ -1,5 +1,6 @@
 import { BsFillShieldLockFill, BsTelephoneFill } from "react-icons/bs";
 import { CgSpinner } from "react-icons/cg";
+
 import { useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -15,7 +16,7 @@ import {
 import { toast, Toaster } from "react-hot-toast";
 
 import OtpInput from "@/components/OtpVerification";
-const App = () => {
+const PhoneVerify = () => {
     const [otp, setOtp] = useState("");
     const [pn, setPn] = useState(""); //phone number
     const [loading, setLoading] = useState(false);
@@ -90,7 +91,9 @@ const App = () => {
                 phoneNumber: formatPh,
             });
 
-            console.log("User's data updated in 'users' collection");
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
         } catch (err) {
             console.log(err.message);
         } finally {
@@ -162,7 +165,7 @@ const App = () => {
                                     />
                                     <button
                                         onClick={onSignup}
-                                        className='bg-[#FDA855] hover:bg-orange-700 w-full flex gap-1 items-center justify-center py-2.5 text-white rounded'
+                                        className='bg-[#FDA855] ml-[5px] hover:bg-orange-700 w-full flex gap-1 items-center justify-center py-2.5 text-white rounded'
                                     >
                                         {loading && (
                                             <CgSpinner
@@ -182,4 +185,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default PhoneVerify;

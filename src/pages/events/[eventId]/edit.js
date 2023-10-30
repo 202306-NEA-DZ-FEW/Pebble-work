@@ -1,3 +1,4 @@
+import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import Link from "next/link";
@@ -5,7 +6,6 @@ import React, { useEffect, useState } from "react";
 import styles from "@/styles/EventDetails.module.css";
 
 import { auth, db, storage } from "@/util/firebase";
-import { onAuthStateChanged } from "firebase/auth";
 
 function EditEvent({ event, organizer }) {
     //creates the event object to be sent to firestore

@@ -1,23 +1,25 @@
+import { onAuthStateChanged } from "firebase/auth";
 import {
-    arrayUnion,
     arrayRemove,
+    arrayUnion,
+    collection,
+    deleteDoc,
     doc,
     getDoc,
     getDocs,
-    updateDoc,
-    deleteDoc,
     query,
+    updateDoc,
     where,
-    collection,
 } from "firebase/firestore";
 import Image from "next/image";
-import React from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth, db } from "@/util/firebase";
-import { useEffect, useState } from "react";
 import Link from "next/link";
+import React from "react";
+import { useEffect, useState } from "react";
+
 import NoEvent from "@/components/Events/NoEvent";
 import styles from "@/styles/EventDetails.module.css";
+
+import { auth, db } from "@/util/firebase";
 
 const EventsPage = ({ event, organizer, notFound }) => {
     const [isHovered, setIsHovered] = useState(false);

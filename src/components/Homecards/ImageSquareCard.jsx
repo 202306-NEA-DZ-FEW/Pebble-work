@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/Homepage.module.css";
+import Image from "next/image";
 
 const ImageSquareCard = () => {
     const [isImage, setIsImage] = useState(false);
@@ -54,7 +55,10 @@ const ImageSquareCard = () => {
                         isImage1 ? styles.bottomRight : styles.invisible
                     }`}
                 >
-                    <img
+                    <Image
+                        fetchpriority='high'
+                        width={768}
+                        height={768}
                         src='/Homepage/Oxfams-COVID-19-Relief-Efforts 2.png'
                         className={`${styles.imageSquare}`}
                         alt='Image 1'
@@ -66,7 +70,10 @@ const ImageSquareCard = () => {
                         isImage ? styles.bottomRight : styles.invisible
                     }`}
                 >
-                    <img
+                    <Image
+                        fetchpriority='high'
+                        width={768}
+                        height={768}
                         src='/Homepage/Image.png'
                         className={`${styles.imageSquare}`}
                         alt='Image 2'
@@ -78,7 +85,10 @@ const ImageSquareCard = () => {
                         isImage ? styles.bottomLeft : styles.invisible
                     }`}
                 >
-                    <img
+                    <Image
+                        fetchpriority='high'
+                        width={768}
+                        height={768}
                         src='/Homepage/Image (1).jpg'
                         className={`${styles.imageSquare}`}
                         alt='Image 3'
@@ -89,7 +99,10 @@ const ImageSquareCard = () => {
                         isImage1 ? styles.bottomRight : styles.invisible
                     }`}
                 >
-                    <img
+                    <Image
+                        fetchpriority='high'
+                        width={768}
+                        height={768}
                         src='/Homepage/Image (2).png'
                         className={`${styles.imageSquare}`}
                         alt='Image 4'
