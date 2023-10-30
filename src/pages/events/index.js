@@ -224,56 +224,50 @@ const EventsPage = (user) => {
                             {!inputValue1 &&
                                 !selectedDate &&
                                 !CalendarEvents.length &&
-                                events.map((event, index) => {
-                                    const EventCardComponent =
-                                        index % 2 === 0
-                                            ? EventCard
-                                            : EventCardLeft;
-                                    return (
-                                        <EventCardComponent
-                                            key={event.id}
-                                            title={event.title}
-                                            type={event.type}
-                                            image={event.image}
-                                            location={event.location}
-                                            description={event.description}
-                                            organizer={event.organizer}
-                                            time={event.time}
-                                            date={event.date}
-                                        />
-                                    );
-                                })}
+                                events
+                                    .filter((event) =>
+                                        filteredTypes.length === 0
+                                            ? true
+                                            : filteredTypes.includes(event.type)
+                                    )
+                                    .map((event, index) => {
+                                        const EventCardComponent =
+                                            index % 2 === 0
+                                                ? EventCard
+                                                : EventCardLeft;
+                                        return (
+                                            <EventCardComponent
+                                                eventId={event.id}
+                                                key={event.id}
+                                                title={event.title}
+                                                type={event.type}
+                                                image={event.image}
+                                                location={event.location}
+                                                description={event.description}
+                                                organizer={event.organizer}
+                                                time={event.time}
+                                                date={event.date}
+                                            />
+                                        );
+                                    })}
 
                             {filteredEvents.map((event, index) => {
-                                if (index % 2 === 0) {
-                                    return (
-                                        <EventCard
-                                            key={event.id}
-                                            title={event.title}
-                                            type={event.type}
-                                            images={event.image}
-                                            location={event.location}
-                                            description={event.description}
-                                            organizer={event.organizer}
-                                            time={event.time}
-                                            date={event.date}
-                                        />
-                                    );
-                                } else {
-                                    return (
-                                        <EventCardLeft
-                                            key={event.id}
-                                            title={event.title}
-                                            type={event.type}
-                                            image={event.image}
-                                            location={event.location}
-                                            description={event.description}
-                                            organizer={event.organizer}
-                                            time={event.time}
-                                            date={event.date}
-                                        />
-                                    );
-                                }
+                                const EventCardComponent =
+                                    index % 2 === 0 ? EventCard : EventCardLeft;
+                                return (
+                                    <EventCardComponent
+                                        eventId={event.id}
+                                        key={event.id}
+                                        title={event.title}
+                                        type={event.type}
+                                        image={event.image}
+                                        location={event.location}
+                                        description={event.description}
+                                        organizer={event.organizer}
+                                        time={event.time}
+                                        date={event.date}
+                                    />
+                                );
                             })}
                             {(inputValue1 || filteredTypes.length > 0) &&
                                 filteredEvents.length === 0 && (
