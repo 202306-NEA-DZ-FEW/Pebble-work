@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import styles from "@/styles/Events.module.css";
 
-const Calendar = ({ checkEvents }) => {
+const Calendar = ({ checkEvents, resetDays }) => {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDays, setSelectedDays] = useState({});
     // const formattedDate = selectedDate.toISOString().split("T")[0];
@@ -155,7 +155,11 @@ const Calendar = ({ checkEvents }) => {
 
         return calendarDays;
     };
-
+    useEffect(() => {
+        if (resetDays) {
+            setSelectedDays({});
+        }
+    }, [resetDays]);
     return (
         <>
             <div className='flex flex-col-reverse items-center justify-center xl:w-[333px] xl:h-[243px] md:w-[222px] md:h-[180px]'>

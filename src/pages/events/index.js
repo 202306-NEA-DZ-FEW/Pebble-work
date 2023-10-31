@@ -29,6 +29,7 @@ const EventsPage = (user) => {
     const [CalendarEvents, setCalendarEvents] = useState([]);
     const [selectedDate, setSelectedDate] = useState(null);
     const [resetLocation, setResetLocation] = useState(false);
+    const [resetDays, setResetDays] = useState(false);
 
     const dropdownRef = useRef(null);
     const locationRef = useRef(null);
@@ -206,6 +207,7 @@ const EventsPage = (user) => {
         setFilteredEvents([]);
         setCalendarEvents([]);
         setResetLocation(true);
+        setResetDays(true);
     };
     return (
         <>
@@ -285,7 +287,10 @@ const EventsPage = (user) => {
                                         styles.calendarContainer
                                     } border border-black rounded-[8px] z-10 bg-white sm:bg-transparent`}
                                 >
-                                    <Calendar checkEvents={checkEvents} />
+                                    <Calendar
+                                        resetDays={resetDays}
+                                        checkEvents={checkEvents}
+                                    />
                                 </div>
                             )}
                         </div>
