@@ -130,6 +130,25 @@ const EventsPage = ({ event, organizer, notFound }) => {
         location.reload();
     };
 
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            // This function will be called when the authentication state changes.
+
+            if (user) {
+                // User is authenticated
+                setIsAuthenticated(true);
+            } else {
+                // User is not authenticated
+                setIsAuthenticated(false);
+            }
+        });
+
+        // Don't forget to unsubscribe when your component unmounts.
+        return () => unsubscribe();
+    }, []);
+
     const joinEvent = async (eventId) => {
         const userId = auth?.currentUser?.uid;
         const userDocRef = doc(db, "users", userId);
@@ -240,80 +259,131 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                     <b>Dude McGee</b>
                                 )}
                             </p>
-                            {userMail === organizer.email ? (
+
+                            {isAuthenticated ? (
                                 <>
-                                    <Link
-                                        href={`/events/${event.eventId}/edit`}
-                                    >
+                                    {" "}
+                                    {userMail === organizer.email ? (
+                                        <>
+                                            <Link
+                                                href={`/events/${event.eventId}/edit`}
+                                            >
+                                                <button
+                                                    className='btn btn-sm btn-wide opacity-80 hover:opacity-100'
+                                                    style={{
+                                                        marginTop: "1rem",
+                                                        borderRadius: "8px",
+                                                        background: "grey",
+                                                        border: 0,
+                                                        color: "white",
+                                                    }}
+                                                >
+                                                    Edit event
+                                                </button>
+                                            </Link>{" "}
+                                            <button
+                                                className='btn btn-sm btn-wide hover:opacity-60'
+                                                onClick={() =>
+                                                    document
+                                                        .getElementById(
+                                                            "cancel_modal"
+                                                        )
+                                                        .showModal()
+                                                }
+                                                style={{
+                                                    marginTop: "1rem",
+                                                    borderRadius: "8px",
+                                                    background: "red",
+                                                    border: 0,
+                                                    color: "white",
+                                                }}
+                                            >
+                                                Cancel event
+                                            </button>
+                                        </>
+                                    ) : findUser ? (
                                         <button
-                                            className='btn btn-sm btn-wide opacity-80 hover:opacity-100'
+                                            className='btn btn-sm btn-wide opacity-50 hover:opacity-80 cursor-default hover:cursor-pointer'
                                             style={{
                                                 marginTop: "1rem",
                                                 borderRadius: "8px",
-                                                background: "grey",
+                                                background: isHovered
+                                                    ? "red"
+                                                    : "#FDA855",
+                                                border: 0,
+                                                color: "white",
+                                            }}
+                                            onMouseOver={() =>
+                                                setIsHovered(true)
+                                            }
+                                            onMouseOut={() =>
+                                                setIsHovered(false)
+                                            }
+                                            onClick={() =>
+                                                document
+                                                    .getElementById(
+                                                        "canceljoin_modal"
+                                                    )
+                                                    .showModal()
+                                            }
+                                        >
+                                            {isHovered
+                                                ? "Cancel join"
+                                                : "Already joined"}
+                                        </button>
+                                    ) : (
+                                        <button
+                                            className='btn btn-sm btn-wide'
+                                            onClick={() =>
+                                                joinEvent(event.eventId)
+                                            }
+                                            style={{
+                                                marginTop: "1rem",
+                                                borderRadius: "8px",
+                                                background: "#FDA855",
                                                 border: 0,
                                                 color: "white",
                                             }}
                                         >
-                                            Edit event
+                                            Join now
+                                        </button>
+                                    )}{" "}
+                                </>
+                            ) : (
+                                <>
+                                    <div className='italic text-red-400 mt-2'>
+                                        You need an account before joining an
+                                        event.
+                                    </div>
+                                    <Link href={`/signin`}>
+                                        <button
+                                            className='btn btn-sm  hover:opacity-80'
+                                            style={{
+                                                marginTop: "1rem",
+                                                borderRadius: "8px",
+                                                background: "#FDA855",
+                                                border: 0,
+                                                color: "white",
+                                            }}
+                                        >
+                                            Sign in
                                         </button>
                                     </Link>{" "}
-                                    <button
-                                        className='btn btn-sm btn-wide hover:opacity-60'
-                                        onClick={() =>
-                                            document
-                                                .getElementById("cancel_modal")
-                                                .showModal()
-                                        }
-                                        style={{
-                                            marginTop: "1rem",
-                                            borderRadius: "8px",
-                                            background: "red",
-                                            border: 0,
-                                            color: "white",
-                                        }}
-                                    >
-                                        Cancel event
-                                    </button>
+                                    <Link href={`/signup`}>
+                                        <button
+                                            className='btn btn-sm  hover:opacity-80'
+                                            style={{
+                                                marginTop: "1rem",
+                                                borderRadius: "8px",
+                                                background: "#FDA855",
+                                                border: 0,
+                                                color: "white",
+                                            }}
+                                        >
+                                            Sign up
+                                        </button>
+                                    </Link>
                                 </>
-                            ) : findUser ? (
-                                <button
-                                    className='btn btn-sm btn-wide opacity-50 hover:opacity-80 cursor-default hover:cursor-pointer'
-                                    style={{
-                                        marginTop: "1rem",
-                                        borderRadius: "8px",
-                                        background: isHovered
-                                            ? "red"
-                                            : "#FDA855",
-                                        border: 0,
-                                        color: "white",
-                                    }}
-                                    onMouseOver={() => setIsHovered(true)}
-                                    onMouseOut={() => setIsHovered(false)}
-                                    onClick={() =>
-                                        document
-                                            .getElementById("canceljoin_modal")
-                                            .showModal()
-                                    }
-                                >
-                                    {isHovered
-                                        ? "Cancel join"
-                                        : "Already joined"}
-                                </button>
-                            ) : (
-                                <button
-                                    className='btn btn-sm btn-wide'
-                                    onClick={() => joinEvent(event.eventId)}
-                                    style={{
-                                        marginTop: "1rem",
-                                        borderRadius: "8px",
-                                        background: "#FDA855",
-                                        border: 0,
-                                        color: "white",
-                                    }}
-                                >
-                                    Join now
-                                </button>
                             )}
                         </div>
                     </div>
