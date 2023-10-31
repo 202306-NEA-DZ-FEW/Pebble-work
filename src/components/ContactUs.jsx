@@ -7,7 +7,7 @@ const ContactForm = () => {
     };
 
     return (
-        <div className='flex flex-col items-center justify-center mx-auto gap-4 h-screen'>
+        <div className='flex flex-col items-center justify-center mx-auto gap-4'>
             <h2>Contact Us</h2>
             <form className='h-[40vh]' onSubmit={handleSubmit}>
                 <div className='input-row'>
