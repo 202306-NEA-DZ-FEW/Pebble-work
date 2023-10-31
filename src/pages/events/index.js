@@ -81,11 +81,13 @@ const EventsPage = (user) => {
     };
 
     const handleLocationOutside = (event) => {
-        if (
-            locationRef.current &&
-            !locationRef.current.contains(event.target)
-        ) {
-            setLocationOpen(false);
+        if (window.innerWidth <= 640) {
+            if (
+                locationRef.current &&
+                !locationRef.current.contains(event.target)
+            ) {
+                setLocationOpen(false);
+            }
         }
     };
 
