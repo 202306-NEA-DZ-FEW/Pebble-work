@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-
 import Calendar from "@/components/Filter/Calendar";
 import EventCard from "@/components/Events/EventCard";
 import EventCardLeft from "@/components/Events/EventCardLeft";
@@ -13,7 +12,7 @@ import {
     where,
     onSnapshot,
 } from "firebase/firestore";
-import LocationFilter from "@/components/Filter/LocationFilter";
+import FirestoreLocation from "@/components/Filter/FirestoreLocation";
 
 const EventsPage = (user) => {
     // State variables
@@ -272,12 +271,15 @@ const EventsPage = (user) => {
                             )}
                         </div>
                         <div className='h-66'>
-                            <LocationFilter
+                            {/* <LocationFilter
                                 refLocation={locationRef}
                                 HandleClick={handleLocationClick}
                                 HandleOpen={isLocationOpen}
                                 InputChange={handleInputChange}
                                 inputValue={inputValue}
+                                onInputChange={handleLocationInputChange}
+                            /> */}
+                            <FirestoreLocation
                                 onInputChange={handleLocationInputChange}
                             />
                         </div>
