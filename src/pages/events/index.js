@@ -207,8 +207,9 @@ const EventsPage = (user) => {
         setFilteredEvents([]);
         setCalendarEvents([]);
         setResetLocation(true);
-        setResetDays(true);
+        setResetDays([]);
     };
+
     return (
         <>
             <main

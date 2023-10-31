@@ -7,7 +7,6 @@ import styles from "@/styles/Events.module.css";
 const Calendar = ({ checkEvents, resetDays }) => {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDays, setSelectedDays] = useState({});
-    // const formattedDate = selectedDate.toISOString().split("T")[0];
 
     const handleDateClick = (day) => {
         const selectedDate = new Date(
@@ -16,62 +15,30 @@ const Calendar = ({ checkEvents, resetDays }) => {
             day + 1
         );
         const formattedDate = selectedDate.toISOString().split("T")[0];
+        const selectedMonthKey = `${currentDate.getFullYear()}-${currentDate.getMonth()}`;
 
-        const selectedMonth = currentDate.getMonth();
-        const selectedYear = currentDate.getFullYear();
+        setSelectedDays((prevSelectedDays) => {
+            const updatedSelectedDays = { ...prevSelectedDays };
+            const currentMonthDays =
+                updatedSelectedDays[selectedMonthKey] || [];
+            const dayIndex = currentMonthDays.indexOf(day);
 
-        const selectedMonthKey = `${selectedYear}-${selectedMonth}`;
-
-        if (selectedDays[selectedMonthKey]) {
-            // Check if the day is already selected
-            if (selectedDays[selectedMonthKey].includes(day)) {
-                // Remove the day from the selected days
-                setSelectedDays((prevSelectedDays) => {
-                    const updatedSelectedDays = {
-                        ...prevSelectedDays,
-                        [selectedMonthKey]: prevSelectedDays[
-                            selectedMonthKey
-                        ].filter((selectedDay) => selectedDay !== day),
-                    };
-
-                    // Remove the month key if there are no selected days
-                    if (updatedSelectedDays[selectedMonthKey].length === 0) {
-                        delete updatedSelectedDays[selectedMonthKey];
-                    }
-
-                    return updatedSelectedDays;
-                });
+            if (dayIndex !== -1) {
+                currentMonthDays.splice(dayIndex, 1);
+                checkEvents(null); // Show all events
             } else {
-                // Add the day to the selected days
-                setSelectedDays((prevSelectedDays) => ({
-                    ...prevSelectedDays,
-                    [selectedMonthKey]: [
-                        ...prevSelectedDays[selectedMonthKey],
-                        day,
-                    ],
-                }));
+                currentMonthDays.push(day);
+                checkEvents(formattedDate); // Show events for the selected date
             }
-        } else {
-            setSelectedDays((prevSelectedDays) => ({
-                ...prevSelectedDays,
-                [selectedMonthKey]: [day],
-            }));
-        }
 
-        if (
-            selectedDays[selectedMonthKey] &&
-            selectedDays[selectedMonthKey].includes(day)
-        ) {
-            // Day is already selected, remove the filter
-            setSelectedDays((prevSelectedDays) => {
-                const updatedSelectedDays = { ...prevSelectedDays };
+            if (currentMonthDays.length === 0) {
                 delete updatedSelectedDays[selectedMonthKey];
-                return updatedSelectedDays;
-            });
-            checkEvents(null); // Show all events
-        } else {
-            checkEvents(formattedDate); // Show events for the selected date
-        }
+            } else {
+                updatedSelectedDays[selectedMonthKey] = currentMonthDays;
+            }
+
+            return updatedSelectedDays;
+        });
     };
 
     const handleNextMonth = () => {
@@ -157,9 +124,10 @@ const Calendar = ({ checkEvents, resetDays }) => {
     };
     useEffect(() => {
         if (resetDays) {
-            setSelectedDays({});
+            setSelectedDays(resetDays);
         }
     }, [resetDays]);
+
     return (
         <>
             <div className='flex flex-col-reverse items-center justify-center xl:w-[333px] xl:h-[243px] md:w-[222px] md:h-[180px]'>
