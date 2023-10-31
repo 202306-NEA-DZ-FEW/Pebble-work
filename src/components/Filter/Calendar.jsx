@@ -2,10 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 
-import styles from "@/styles/Calender.module.css";
+import styles from "@/styles/Events.module.css";
 
 const Calendar = ({ checkEvents }) => {
     const [currentDate, setCurrentDate] = useState(new Date());
+    const [selectedDays, setSelectedDays] = useState({});
+    // const formattedDate = selectedDate.toISOString().split("T")[0];
+
     const handleDateClick = (day) => {
         const selectedDate = new Date(
             currentDate.getFullYear(),
@@ -13,8 +16,62 @@ const Calendar = ({ checkEvents }) => {
             day + 1
         );
         const formattedDate = selectedDate.toISOString().split("T")[0];
-        checkEvents(formattedDate);
-        // applyFilters(formattedDate);
+
+        const selectedMonth = currentDate.getMonth();
+        const selectedYear = currentDate.getFullYear();
+
+        const selectedMonthKey = `${selectedYear}-${selectedMonth}`;
+
+        if (selectedDays[selectedMonthKey]) {
+            // Check if the day is already selected
+            if (selectedDays[selectedMonthKey].includes(day)) {
+                // Remove the day from the selected days
+                setSelectedDays((prevSelectedDays) => {
+                    const updatedSelectedDays = {
+                        ...prevSelectedDays,
+                        [selectedMonthKey]: prevSelectedDays[
+                            selectedMonthKey
+                        ].filter((selectedDay) => selectedDay !== day),
+                    };
+
+                    // Remove the month key if there are no selected days
+                    if (updatedSelectedDays[selectedMonthKey].length === 0) {
+                        delete updatedSelectedDays[selectedMonthKey];
+                    }
+
+                    return updatedSelectedDays;
+                });
+            } else {
+                // Add the day to the selected days
+                setSelectedDays((prevSelectedDays) => ({
+                    ...prevSelectedDays,
+                    [selectedMonthKey]: [
+                        ...prevSelectedDays[selectedMonthKey],
+                        day,
+                    ],
+                }));
+            }
+        } else {
+            setSelectedDays((prevSelectedDays) => ({
+                ...prevSelectedDays,
+                [selectedMonthKey]: [day],
+            }));
+        }
+
+        if (
+            selectedDays[selectedMonthKey] &&
+            selectedDays[selectedMonthKey].includes(day)
+        ) {
+            // Day is already selected, remove the filter
+            setSelectedDays((prevSelectedDays) => {
+                const updatedSelectedDays = { ...prevSelectedDays };
+                delete updatedSelectedDays[selectedMonthKey];
+                return updatedSelectedDays;
+            });
+            checkEvents(null); // Show all events
+        } else {
+            checkEvents(formattedDate); // Show events for the selected date
+        }
     };
 
     const handleNextMonth = () => {
@@ -77,11 +134,18 @@ const Calendar = ({ checkEvents }) => {
 
         // Render day numbers
         for (let day = 1; day <= daysInMonth; day++) {
+            const selectedMonthKey = `${currentYear}-${currentMonth}`;
+            const isSelected =
+                selectedDays[selectedMonthKey] &&
+                selectedDays[selectedMonthKey].includes(day);
+
             calendarDays.push(
                 <Link
-                    href='#'
+                    href=''
                     key={`day-${day}`}
-                    className={`${styles.calendarDay} xl:text-[17px] md:w-[10px] xl:w-[18px] text-center md:text-[11px] rounded`}
+                    className={`${styles.calendarDay} ${
+                        isSelected ? styles.selectedDay : ""
+                    } xl:text-[17px] md:w-[10px] xl:w-[18px] text-center md:text-[11px] rounded`}
                     onClick={() => handleDateClick(day)}
                 >
                     {day}
@@ -112,12 +176,11 @@ const Calendar = ({ checkEvents }) => {
                         <div className='calendar grid grid-cols-7 gap-1'>
                             {renderCalendar()}
                         </div>
-                        <h2 className='text-xl font-bold md:text-[14px] xl:text-[18px] '>
+                        <h2 className='text-xl font-bold md:text-[14px] xl:text-[18px]'>
                             {getMonthName(currentDate)}{" "}
                             {currentDate.getFullYear()}
                         </h2>
                     </div>
-
                     <button
                         className='flex items-center'
                         onClick={handleNextMonth}
