@@ -19,9 +19,7 @@ import { db } from "@/util/firebase";
 const EventsPage = (user) => {
     // State variables
     const [inputValue, setInputValue] = useState("");
-    // const [data, setData] = useState([]);
-    // const [buttonClicked, setButtonClicked] = useState(false);
-
+    const [selectedTypes, setSelectedTypes] = useState([]);
     const [inputValue1, setInputValue1] = useState("");
     const [isCalendarOpen, setCalendarOpen] = useState(false);
     const [isLocationOpen, setLocationOpen] = useState(false);
@@ -30,6 +28,8 @@ const EventsPage = (user) => {
     const [filteredEvents, setFilteredEvents] = useState([]);
     const [CalendarEvents, setCalendarEvents] = useState([]);
     const [selectedDate, setSelectedDate] = useState(null);
+    const [resetLocation, setResetLocation] = useState(false);
+    const [resetDays, setResetDays] = useState(false);
 
     const dropdownRef = useRef(null);
     const locationRef = useRef(null);
@@ -82,11 +82,13 @@ const EventsPage = (user) => {
     };
 
     const handleLocationOutside = (event) => {
-        if (
-            locationRef.current &&
-            !locationRef.current.contains(event.target)
-        ) {
-            setLocationOpen(false);
+        if (window.innerWidth <= 640) {
+            if (
+                locationRef.current &&
+                !locationRef.current.contains(event.target)
+            ) {
+                setLocationOpen(false);
+            }
         }
     };
 
@@ -166,41 +168,48 @@ const EventsPage = (user) => {
         fetchEvents();
     }, []);
 
-    const applyFilters = () => {
-        let filteredEvents = [...events]; // Start with all events
-
-        // Apply date filter
-        if (selectedDate) {
-            filteredEvents = filteredEvents.filter(
-                (event) => event.date === selectedDate
-            );
-        }
-
-        // Apply location filter
-        if (inputValue1) {
-            filteredEvents = filteredEvents.filter(
-                (event) => event.location === inputValue1
-            );
-        }
-
-        // Apply type filter
-        if (filteredTypes.length > 0) {
-            filteredEvents = filteredEvents.filter((event) =>
-                filteredTypes.includes(event.type)
-            );
-        }
-
-        setFilteredEvents(filteredEvents);
-        console.log(filteredEvents);
-    };
     useEffect(() => {
+        const applyFilters = () => {
+            let filteredEvents = events;
+
+            // Apply type filter
+            if (filteredTypes.length > 0) {
+                filteredEvents = filteredEvents.filter((event) =>
+                    filteredTypes.includes(event.type)
+                );
+            }
+
+            // Apply location filter
+            if (inputValue1) {
+                filteredEvents = filteredEvents.filter(
+                    (event) => event.location === inputValue1
+                );
+            }
+
+            // Apply date filter
+            if (selectedDate) {
+                filteredEvents = filteredEvents.filter(
+                    (event) => event.date === selectedDate
+                );
+            }
+
+            setFilteredEvents(filteredEvents);
+        };
+
         applyFilters();
-    }, [selectedDate, inputValue1, filteredTypes]);
+    }, [events, selectedDate, inputValue1, filteredTypes]);
+
     const resetEvents = () => {
+        setSelectedTypes([]);
+        setInputValue1("");
+        setSelectedDate(null);
+        setFilteredTypes([]);
         setFilteredEvents([]);
         setCalendarEvents([]);
-        window.location.reload();
+        setResetLocation(true);
+        setResetDays([]);
     };
+
     return (
         <>
             <main
@@ -223,36 +232,6 @@ const EventsPage = (user) => {
                         className={`md:h-[800px] h-[400px] xl:w-[840px] pb-[140px] md:pb-[140px] md:w-[480px] lg:w-[490px] ${styles.information}`}
                     >
                         <ul className={` flex flex-col items gap-2 `}>
-                            {!inputValue1 &&
-                                !selectedDate &&
-                                !CalendarEvents.length &&
-                                events
-                                    .filter((event) =>
-                                        filteredTypes.length === 0
-                                            ? true
-                                            : filteredTypes.includes(event.type)
-                                    )
-                                    .map((event, index) => {
-                                        const EventCardComponent =
-                                            index % 2 === 0
-                                                ? EventCard
-                                                : EventCardLeft;
-                                        return (
-                                            <EventCardComponent
-                                                eventId={event.id}
-                                                key={event.id}
-                                                title={event.title}
-                                                type={event.type}
-                                                image={event.image}
-                                                location={event.location}
-                                                description={event.description}
-                                                organizer={event.organizer}
-                                                time={event.time}
-                                                date={event.date}
-                                            />
-                                        );
-                                    })}
-
                             {filteredEvents.map((event, index) => {
                                 const EventCardComponent =
                                     index % 2 === 0 ? EventCard : EventCardLeft;
@@ -309,7 +288,10 @@ const EventsPage = (user) => {
                                         styles.calendarContainer
                                     } border border-black rounded-[8px] z-10 bg-white sm:bg-transparent`}
                                 >
-                                    <Calendar checkEvents={checkEvents} />
+                                    <Calendar
+                                        resetDays={resetDays}
+                                        checkEvents={checkEvents}
+                                    />
                                 </div>
                             )}
                         </div>
@@ -321,12 +303,16 @@ const EventsPage = (user) => {
                                 InputChange={handleInputChange}
                                 inputValue={inputValue}
                                 onInputChange={handleLocationInputChange}
+                                resetLocation={resetLocation}
+                                setResetLocation={setResetLocation}
                             />
                         </div>
 
                         <FilterByType
                             ref={dropdownRef}
                             setFilteredTypes={setFilteredTypes}
+                            selectedTypes={selectedTypes}
+                            setSelectedTypes={setSelectedTypes}
                         />
                     </div>
                 </div>
