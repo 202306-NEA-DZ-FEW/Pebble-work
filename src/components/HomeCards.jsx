@@ -6,10 +6,11 @@ import HeroCard from "@/components/Homecards/HeroCard";
 import ImageSquareCard from "@/components/Homecards/ImageSquareCard";
 import MainCard from "@/components/Homecards/MainCard";
 import SocialCard from "@/components/Homecards/SocialCard";
+import ContactForm from "./ContactUs";
 
 const CardContainer = ({ children }) => <div className=''>{children}</div>;
 
-const Heading = ({ text }) => (
+export const Heading = ({ text }) => (
     <h2 className='text-center lg:text-[36px] md:text-[28px] sm:text-[22px] text-[18px] mt-4 sm:mt-8 md:mt-12 lg:mt-16 text-black font-[500]'>
         {text}
     </h2>
@@ -23,7 +24,7 @@ const HomeCards = () => {
             <Heading text='How It Works' />
             <MainCard />
 
-            <Heading text='Sustainable Development' />
+            <Heading text='Sustainable Development Goals' />
             <GalleryCard />
 
             <Heading text='Hear It from Volunteers' />
@@ -38,6 +39,7 @@ const HomeCards = () => {
             </div>
 
             <HeroCard />
+            <ContactForm />
         </div>
     );
 };

@@ -39,20 +39,24 @@ const AboutPage = () => {
                         className={`${styles.text1} ${styles.slideInFromRight1} flex text-center text-[#878787] px-4`}
                     >
                         Experience the power of PebbleWork with its cutting-edge
-                        technologies. Utilizing Next.js, Firebase, DaisyUI, and
-                        Tailwind CSS, we have crafted a responsive and
-                        interactive platform. Seamlessly navigate through our
-                        server-side rendered pages, while Firebase handles
-                        secure user authentication and real-time data storage.
-                        With visually stunning designs powered by DaisyUI and
-                        Tailwind CSS, PebbleWork offers a user-friendly
-                        experience. Join us today and make a meaningful impact
-                        in your community.
+                        technologies. We have crafted a responsive and
+                        interactive platform that puts the user as the central
+                        piece. Seamlessly navigate through the pages, create,
+                        edit and delete events. Join and unjoin with a simple
+                        click. PebbleWork brings a platform made by volunteers
+                        for volunteers. With secure user authentication and
+                        real-time data storage, we offer a user-friendly
+                        experience. Whether you&apos;re an event organizer or a
+                        participant, PebbleWork is here to simplify your
+                        community engagement. Join us today and make a
+                        meaningful impact in your community.
                     </p>
                 </div>
-                <div className='rounded-[20px] flex flex-col items-center bg-[#fbc495] xl:mb-40'>
+                <div
+                    className={`${styles.teamContainer} rounded-[20px] flex flex-col items-center bg-[#fbc495] bg-opacity-70 xl:mb-40`}
+                >
                     <h2
-                        className={`${styles.teamText} text-[40px] text-[#1A1A1A] md:mt-10 md:mb-10`}
+                        className={`${styles.teamText} text-[40px] text-[#1A1A1A] md:mt-10 pt-2 md:mb-10`}
                     >
                         Our Team
                     </h2>

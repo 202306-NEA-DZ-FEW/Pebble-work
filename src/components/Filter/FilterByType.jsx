@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "@/styles/Events.module.css";
 
-const FilterByType = ({ setFilteredTypes }) => {
+const FilterByType = ({
+    selectedTypes,
+    setSelectedTypes,
+    setFilteredTypes,
+}) => {
     const dropdownRef = useRef(null);
     const [isInterestOpen, setInterestOpen] = useState(false);
-    const [selectedTypes, setSelectedTypes] = useState([]);
 
     // Handle click outside the dropdown to close it
     const handleClickOutside = (event) => {
@@ -73,7 +76,6 @@ const FilterByType = ({ setFilteredTypes }) => {
     }, [selectedTypes]);
 
     const types = [
-        "All",
         "Affordable and Clean Energy",
         "Clean Water and Sanitation",
         "Climate Action",
@@ -106,17 +108,9 @@ const FilterByType = ({ setFilteredTypes }) => {
                 </button>
                 {isInterestOpen && (
                     <ul
-                        style={{
-                            // borderRadius:
-                            //     typeof window !== "undefined" && window.innerWidth <= 640
-                            //         ? "0% 100% 100% 0% / 0% 100% 0% 100%"
-                            //         : "",
-
-                            animation: `${
-                                isInterestOpen ? `${styles.fadeIn}` : ""
-                            }`,
-                        }}
-                        className={`${styles.information} flex sm:static sm:bg-transparent sm:h-[700px]  fixed bottom-0 left-0 h-64 w-full pt-8  bg-gray-900 text-white z-[999] flex-col items-start sm:pl-0 pl-4  gap-4 sm:border-x-0 sm:border-b-0 sm:pt-4 sm:items-center sm:border sm:border-t-black overflow-y-scroll`}
+                        className={`${styles.information} ${
+                            isInterestOpen ? `${styles.fadeIn}` : ""
+                        } flex sm:static sm:bg-transparent sm:h-[700px]  fixed bottom-0 left-0 h-64 w-full pt-8  bg-gray-900 text-white z-[999] flex-col items-start sm:pl-0 pl-4  gap-4 sm:border-x-0 sm:border-b-0 sm:pt-4 sm:items-center sm:border sm:border-t-black overflow-y-scroll`}
                     >
                         {types.map((type) => (
                             <button

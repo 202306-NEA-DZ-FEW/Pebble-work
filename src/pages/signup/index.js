@@ -1,35 +1,123 @@
-import React from "react";
+import {
+    createUserWithEmailAndPassword,
+    isSignInWithEmailLink,
+    sendSignInLinkToEmail,
+    signInWithEmailLink,
+    updateProfile,
+} from "firebase/auth";
+import {
+    GoogleAuthProvider,
+    signInWithPopup,
+    TwitterAuthProvider,
+} from "firebase/auth";
+import {
+    collection,
+    doc,
+    getDocs,
+    query,
+    setDoc,
+    where,
+} from "firebase/firestore";
 import Image from "next/image";
-import { FcGoogle } from "react-icons/fc";
-import { RiTwitterXFill } from "react-icons/ri";
-import { BsEyeSlash, BsEye } from "react-icons/bs";
 import Link from "next/link";
-import { useState } from "react";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { useRouter } from "next/router";
+import React from "react";
+import { useEffect, useState } from "react";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
+import { GrStatusGood } from "react-icons/gr";
+import { TiDeleteOutline } from "react-icons/ti";
+
+import BtnGoogle from "@/components/BtnTwitter&Google/ButtonGoogle";
+import ButtonTwitter from "@/components/BtnTwitter&Google/ButtonTwitter";
+import Modal from "@/components/Popup/Modal";
+
 import { auth } from "../../util/firebase";
 import { db } from "../../util/firebase";
-import { addDoc, collection, setDoc, doc } from "firebase/firestore";
-import { useRouter } from "next/router";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import Modal from "@/components/Popup/Modal";
+const checkUserAuth = (router) => {
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            router.replace("/profile");
+        }
+    });
+};
+
 const SignUpPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
     const [Name, setName] = useState("");
     const [Surename, setSurename] = useState("");
     const [password, setPassword] = useState("");
+    const [formSubmitted, setFormSubmitted] = useState(false);
     const router = useRouter();
     const [showPopup, setShowPopup] = useState(false);
     const [modalContent, setModalContent] = useState("");
     const [modalClassName, setModalClassName] = useState("");
+    const [isLengthValid, setIsLengthValid] = useState(false);
+    const [hasSpecialChars, setHasSpecialChars] = useState(false);
+    const [hasalphabetValid, setalphabetValid] = useState(false);
+    const [isSignUpDisabled, setIsSignUpDisabled] = useState(true);
+    const [isAllconditionMet, setisAllconditionMet] = useState(true); // New state
+
+    useEffect(() => {
+        checkUserAuth(router);
+    }, []);
+
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
     const handleSuccess = () => {
         setShowPopup(true);
     };
+    const checkIfEmailExists = async (email) => {
+        const users = collection(db, "users");
+        const queryEmail = query(users, where("email", "==", email));
+        const result = await getDocs(queryEmail);
+        return !result.empty;
+    };
+
+    const handlePasswordChange = (e) => {
+        const newPassword = e.target.value;
+        setPassword(newPassword);
+
+        const lengthValid = newPassword.length >= 6;
+        const specialCharsValid =
+            /[!@#$%^&*(),.?": '; = `{}|<>_ ~ \- +/ [\]]/.test(newPassword);
+        const alphabetValid = /[a-zA-Z]/.test(newPassword);
+        setIsLengthValid(lengthValid);
+        setHasSpecialChars(specialCharsValid);
+        setalphabetValid(alphabetValid);
+        const allConditionsMet =
+            lengthValid && specialCharsValid && alphabetValid;
+        setIsSignUpDisabled(!allConditionsMet);
+        setisAllconditionMet(allConditionsMet);
+    };
+
     const handleSignup = async (e) => {
         e.preventDefault();
+        setFormSubmitted(true);
+        const emailExists = await checkIfEmailExists(email);
+        if (emailExists) {
+            setShowPopup(true);
+            setModalContent("Sign in/up failed.");
+            setModalContent("This email is already in use.");
+            setModalClassName(
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4   "
+            );
+            return;
+        }
+        // if (password.length < 6) {
+        //     setShowPopup(true);
+        //     setModalContent("6 characters needed for password.");
+        //     setModalClassName(
+        //         "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4   "
+        //     );
+        //     return;
+        // }
+
+        const emailRegex = /^(.+)@(gmail|yahoo|outlook)\.(com|co\.uk|fr)$/;
+        if (!emailRegex.test(email)) {
+            return;
+        }
 
         try {
             const userCredential = await createUserWithEmailAndPassword(
@@ -53,22 +141,21 @@ const SignUpPage = () => {
                 eventsJoined: [],
             });
 
-            // Add display name to the user
             await updateProfile(user, { displayName: Name });
 
             setShowPopup(true);
             setModalContent("Congrats! You signed in/up successfully.");
             setModalClassName(
-                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4 "
             );
             setTimeout(() => {
                 router.push("/editprofile");
-            }, 3000);
+            }, 1500);
         } catch (error) {
             setShowPopup(true);
             setModalContent("Sign in/up failed.");
             setModalClassName(
-                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4 "
             );
         }
     };
@@ -76,16 +163,87 @@ const SignUpPage = () => {
         e.preventDefault();
         try {
             const provider = new GoogleAuthProvider();
-            await signInWithPopup(auth, provider);
+            const result = await signInWithPopup(auth, provider);
+
+            // Extract first and last names from displayName
+            const displayName = result.user.displayName;
+            const [firstName, lastName] = displayName.split(" ");
+
+            // Create user object with name, surename, and email
+            const user = {
+                Name: firstName,
+                Surename: lastName,
+                email: result.user.email,
+                interests: [],
+                eventsCreated: [],
+                eventsJoined: [],
+            };
+
+            // Get the user UID
+            const userUID = result.user.uid;
+
+            // Get a reference to the "users" collection
+            const usersCollectionRef = collection(db, "users");
+
+            // Add the user object to the "users" collection with the user UID as the document ID
+            await setDoc(doc(usersCollectionRef, userUID), user);
+
+            setShowPopup(true);
+            setModalContent("Congrats! Sign-in link sent to your email.");
+            setModalClassName(
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  "
+            );
+            setTimeout(() => {
+                router.push("/editprofile");
+            }, 1500);
+        } catch (error) {
+            setShowPopup(true);
+            setModalContent("Sign in/up failed.");
+            setModalClassName(
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  "
+            );
+        }
+    };
+
+    const handelTwitter = async (e) => {
+        e.preventDefault();
+        try {
+            const provider = new TwitterAuthProvider();
+            const result = await signInWithPopup(auth, provider);
+
+            // Extract first and last names from displayName
+            const displayName = result.user.displayName;
+            const [firstName, lastName] = displayName.split(" ");
+
+            // Retrieve email from additionalUserInfo
+            const email = result._tokenResponse.email;
+
+            // Create user object with name, surename, and email
+            const user = {
+                Name: firstName,
+                Surename: lastName,
+                email: email,
+                interests: [],
+                eventsCreated: [],
+                eventsJoined: [],
+            };
+
+            const userUID = result.user.uid;
+
+            // Get a reference to the "users" collection
+            const usersCollectionRef = collection(db, "users");
+
+            // Add the user object to the "users" collection with the user UID as the document ID
+            await setDoc(doc(usersCollectionRef, userUID), user);
 
             setShowPopup(true);
             setModalContent("Congrats! You signed in/up successfully.");
             setModalClassName(
-                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4"
             );
             setTimeout(() => {
                 router.push("/editprofile");
-            }, 3000);
+            }, 1500);
         } catch (error) {
             setShowPopup(true);
             setModalContent("Sign in/up failed.");
@@ -113,21 +271,9 @@ const SignUpPage = () => {
                         Sign Up
                     </h2>
                     <div className='mb-4'>
-                        <button
-                            className=' border px-4 py-2 mb-2 rounded-md shadow-md flex items-center justify-center'
-                            style={{ height: "40px", width: "300px" }}
-                        >
-                            <RiTwitterXFill className='ml-2 mr-1' />
-                            <span>Continue with Twitter</span>
-                        </button>
-                        <button
-                            className=' border px-4 py-2 mb-2 rounded-md shadow-md flex items-center justify-center'
-                            style={{ height: "40px", width: "300px" }}
-                            onClick={handelGoogle}
-                        >
-                            <FcGoogle className='ml-2 mr-1' />
-                            <span>Continue with Google</span>
-                        </button>
+                        <ButtonTwitter onClick={handelTwitter} />
+                        <BtnGoogle onClick={handelGoogle} />
+
                         <div className='flex items-center mb-4 mt-4'>
                             <div className='   shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25 border-t flex-grow'></div>
                             <div className="text-stone-500 text-lg font-normal font-['Rubik'] px-4">
@@ -161,9 +307,12 @@ const SignUpPage = () => {
                                 onChange={(e) => setSurename(e.target.value)}
                             />
                         </div>
+
                         <div className='mb-4'>
                             <input
-                                className='w-full px-3 py-2 border rounded'
+                                className={`w-full px-3 py-2 border rounded ${
+                                    formSubmitted ? "border-red-500" : ""
+                                }`}
                                 type='email'
                                 id='email'
                                 name='email'
@@ -184,7 +333,7 @@ const SignUpPage = () => {
                                 required
                                 style={{ height: "40px", width: "320px" }}
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={handlePasswordChange}
                             />
 
                             <div
@@ -194,15 +343,98 @@ const SignUpPage = () => {
                                 {showPassword ? <BsEye /> : <BsEyeSlash />}
                             </div>
                         </div>
+                        <div>
+                            <span
+                                style={{
+                                    color: isLengthValid ? "green" : "#FB923C",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    margin: "0",
+                                    padding: "0",
+                                    lineHeight: "0.05",
+                                    fontSize: "0.9rem",
+                                }}
+                            >
+                                {isLengthValid ? (
+                                    <GrStatusGood size={20} />
+                                ) : (
+                                    <TiDeleteOutline size={20} />
+                                )}
+                                <span
+                                    style={{
+                                        marginLeft: "0.5rem",
+                                        marginRight: "-0.2rem",
+                                    }}
+                                >
+                                    At least 6 characters
+                                </span>
+                            </span>
+                            <br />
+                            <span
+                                style={{
+                                    color: hasSpecialChars
+                                        ? "green"
+                                        : "#FB923C",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    margin: "0",
+                                    padding: "0",
+                                    lineHeight: "0.05",
+                                    fontSize: "0.9rem",
+                                }}
+                            >
+                                {hasSpecialChars ? (
+                                    <GrStatusGood size={20} />
+                                ) : (
+                                    <TiDeleteOutline size={20} />
+                                )}
+                                <span
+                                    style={{
+                                        marginLeft: "0.5rem",
+                                        marginRight: "-0.2rem",
+                                    }}
+                                >
+                                    Contains special characters
+                                </span>
+                            </span>
+                            <br />
+                            <span
+                                style={{
+                                    color: hasalphabetValid
+                                        ? "green"
+                                        : "#FB923C",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    margin: "0",
+                                    padding: "0",
+                                    lineHeight: "0.05",
+                                    fontSize: "0.9rem",
+                                }}
+                            >
+                                {hasalphabetValid ? (
+                                    <GrStatusGood size={20} />
+                                ) : (
+                                    <TiDeleteOutline size={20} />
+                                )}
+                                <span
+                                    style={{
+                                        marginLeft: "0.5rem",
+                                        marginRight: "-0.2rem",
+                                    }}
+                                >
+                                    Contains alphabets
+                                </span>
+                            </span>
+                        </div>
 
                         <div>
                             <div className="text-stone-500 text-sm font-normal font-['Rubik'] mt-4">
                                 Dont have an account?
                                 <Link
-                                    href='/signup'
+                                    href='/signin'
                                     className='text-orange-400 ml-1'
                                 >
-                                    Sign up
+                                    Sign
                                 </Link>
                             </div>
                         </div>
@@ -210,8 +442,7 @@ const SignUpPage = () => {
                             <button
                                 className=' px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 '
                                 type='submit'
-
-                                // onClick={handleSignup}
+                                disabled={isSignUpDisabled}
                             >
                                 Sign Up
                             </button>

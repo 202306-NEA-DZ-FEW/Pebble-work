@@ -1,21 +1,103 @@
 import React, { useState, useEffect, useRef } from "react";
+import styles from "@/styles/Events.module.css";
+import {
+    collection,
+    getDocs,
+    onSnapshot,
+    query,
+    where,
+} from "firebase/firestore";
 
-import Calendar from "@/components/Events/Calendar";
 import EventCard from "@/components/Events/EventCard";
 import EventCardLeft from "@/components/Events/EventCardLeft";
-import styles from "@/styles/Events.module.css";
+import Calendar from "@/components/Filter/Calendar";
 import FilterByType from "@/components/Filter/FilterByType";
+import LocationFilter from "@/components/Filter/LocationFilter";
+
 import { db } from "@/util/firebase";
-import { collection, getDocs } from "firebase/firestore";
 
 const EventsPage = (user) => {
     // State variables
     const [inputValue, setInputValue] = useState("");
+    const [selectedTypes, setSelectedTypes] = useState([]);
+    const [inputValue1, setInputValue1] = useState("");
     const [isCalendarOpen, setCalendarOpen] = useState(false);
     const [isLocationOpen, setLocationOpen] = useState(false);
     const [filteredTypes, setFilteredTypes] = useState([]);
     const [events, setEvents] = useState([]);
+    const [filteredEvents, setFilteredEvents] = useState([]);
+    const [CalendarEvents, setCalendarEvents] = useState([]);
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [resetLocation, setResetLocation] = useState(false);
+    const [resetDays, setResetDays] = useState(false);
+
     const dropdownRef = useRef(null);
+    const locationRef = useRef(null);
+
+    const handleLocationInputChange = (value) => {
+        setInputValue1(value);
+    };
+
+    const filterEventsByLocation = (location) => {
+        if (!location) {
+            setFilteredEvents([]);
+            return () => {};
+        }
+
+        const eventsCollectionRef = collection(db, "events");
+        const q = query(eventsCollectionRef, where("location", "==", location));
+
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const matchingEvents = querySnapshot.docs.map((doc) => doc.data());
+            setFilteredEvents(matchingEvents);
+
+            console.log(filteredEvents);
+        });
+
+        return unsubscribe;
+    };
+    useEffect(() => {
+        const unsubscribe = filterEventsByLocation(inputValue1);
+
+        return () => {
+            unsubscribe();
+        };
+    }, [inputValue1]);
+
+    const checkEvents = async (selectedDate) => {
+        const q = query(
+            collection(db, "events"),
+            where("date", "==", selectedDate)
+        );
+
+        try {
+            const querySnapshot = await getDocs(q);
+            const filteredEvents = querySnapshot.docs.map((doc) => doc.data());
+            setCalendarEvents(filteredEvents);
+            console.log(CalendarEvents);
+            setSelectedDate(selectedDate);
+        } catch (error) {
+            console.error("Error getting filtered events: ", error);
+        }
+    };
+
+    const handleLocationOutside = (event) => {
+        if (window.innerWidth <= 640) {
+            if (
+                locationRef.current &&
+                !locationRef.current.contains(event.target)
+            ) {
+                setLocationOpen(false);
+            }
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener("click", handleLocationOutside);
+        return () => {
+            document.removeEventListener("click", handleLocationOutside);
+        };
+    }, []);
 
     const handleClickOutside = (event) => {
         if (
@@ -74,15 +156,60 @@ const EventsPage = (user) => {
     // Fetch events from Firebase
     useEffect(() => {
         const fetchEvents = async () => {
-            const eventsCollectionRef = collection(db, "events"); // Assuming the collection name is "events"
+            const eventsCollectionRef = collection(db, "events");
             const eventsSnapshot = await getDocs(eventsCollectionRef);
-            const eventsData = eventsSnapshot.docs.map((doc) => doc.data());
+            const eventsData = eventsSnapshot.docs.map((doc) => {
+                return { id: doc.id, ...doc.data() };
+            });
 
             setEvents(eventsData);
         };
 
         fetchEvents();
     }, []);
+
+    useEffect(() => {
+        const applyFilters = () => {
+            let filteredEvents = events;
+
+            // Apply type filter
+            if (filteredTypes.length > 0) {
+                filteredEvents = filteredEvents.filter((event) =>
+                    filteredTypes.includes(event.type)
+                );
+            }
+
+            // Apply location filter
+            if (inputValue1) {
+                filteredEvents = filteredEvents.filter(
+                    (event) => event.location === inputValue1
+                );
+            }
+
+            // Apply date filter
+            if (selectedDate) {
+                filteredEvents = filteredEvents.filter(
+                    (event) => event.date === selectedDate
+                );
+            }
+
+            setFilteredEvents(filteredEvents);
+        };
+
+        applyFilters();
+    }, [events, selectedDate, inputValue1, filteredTypes]);
+
+    const resetEvents = () => {
+        setSelectedTypes([]);
+        setInputValue1("");
+        setSelectedDate(null);
+        setFilteredTypes([]);
+        setFilteredEvents([]);
+        setCalendarEvents([]);
+        setResetLocation(true);
+        setResetDays([]);
+    };
+
     return (
         <>
             <main
@@ -92,6 +219,12 @@ const EventsPage = (user) => {
                     <h1>Welcome, {user.name}!</h1>
                     <p>This is the events page</p>
                 </div>
+                <button
+                    onClick={resetEvents}
+                    className={` w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px] ml-auto  mr-2`}
+                >
+                    All events
+                </button>
                 <div
                     className={`flex flex-col-reverse sm:flex sm:flex-row-reverse sm:items-center sm:justify-evenly sm:gap-8 sm:h-full sm:w-full`}
                 >
@@ -99,43 +232,37 @@ const EventsPage = (user) => {
                         className={`md:h-[800px] h-[400px] xl:w-[840px] pb-[140px] md:pb-[140px] md:w-[480px] lg:w-[490px] ${styles.information}`}
                     >
                         <ul className={` flex flex-col items gap-2 `}>
-                            {events
-                                .filter((event) =>
-                                    filteredTypes.length === 0
-                                        ? true
-                                        : filteredTypes.includes(event.type)
-                                )
-                                .map((event, index) => {
-                                    if (index % 2 === 0) {
-                                        return (
-                                            <EventCard
-                                                key={event.id}
-                                                title={event.title}
-                                                type={event.type}
-                                                images={event.image}
-                                                location={event.location}
-                                                description={event.description}
-                                                organizer={event.organizer}
-                                                time={event.time}
-                                                date={event.date}
-                                            />
-                                        );
-                                    } else {
-                                        return (
-                                            <EventCardLeft
-                                                key={event.id}
-                                                title={event.title}
-                                                type={event.type}
-                                                image={event.image}
-                                                location={event.location}
-                                                description={event.description}
-                                                organizer={event.organizer}
-                                                time={event.time}
-                                                date={event.date}
-                                            />
-                                        );
-                                    }
-                                })}
+                            {filteredEvents.map((event, index) => {
+                                const EventCardComponent =
+                                    index % 2 === 0 ? EventCard : EventCardLeft;
+                                return (
+                                    <EventCardComponent
+                                        eventId={event.id}
+                                        key={event.id}
+                                        title={event.title}
+                                        type={event.type}
+                                        image={event.image}
+                                        location={event.location}
+                                        description={event.description}
+                                        organizer={event.organizer}
+                                        time={event.time}
+                                        date={event.date}
+                                    />
+                                );
+                            })}
+                            {(inputValue1 || filteredTypes.length > 0) &&
+                                filteredEvents.length === 0 && (
+                                    <p className='text-red-500 text-center'>
+                                        No events found for this date and
+                                        location
+                                    </p>
+                                )}
+
+                            {selectedDate && CalendarEvents.length === 0 && (
+                                <p className='text-red-500 text-center'>
+                                    No events found for this date
+                                </p>
+                            )}
                         </ul>
                     </div>
                     <div className='flex bg-white z-10 flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7'>
@@ -161,44 +288,31 @@ const EventsPage = (user) => {
                                         styles.calendarContainer
                                     } border border-black rounded-[8px] z-10 bg-white sm:bg-transparent`}
                                 >
-                                    <Calendar />
+                                    <Calendar
+                                        resetDays={resetDays}
+                                        checkEvents={checkEvents}
+                                    />
                                 </div>
                             )}
                         </div>
-                        <div className='flex flex-col items-center gap-4 border border-x-0 border-b-0 border-t-black'>
-                            <p
-                                style={{
-                                    color: "black",
-                                    fontWeight: "400",
-                                    textDecoration: "underline",
-                                    lineHeight: "30px",
-                                    letterSpacing: "0.10px",
-                                    wordWrap: "break-word",
-                                }}
-                                className='sm:pt-10 sm:bg-transparent cursor-pointer sm:text-[20px] text-[16px]'
-                                onClick={handleLocationClick}
-                            >
-                                Change Location
-                            </p>
-                            {isLocationOpen && (
-                                <input
-                                    className={`${styles.locationChange} border rounded-[5px] text-center`}
-                                    type='text'
-                                    value={inputValue}
-                                    onChange={handleInputChange}
-                                    style={{
-                                        backgroundColor: inputValue
-                                            ? "#FBC495"
-                                            : "white",
-                                        border: `2px solid `,
-                                    }}
-                                />
-                            )}
+                        <div className='h-66'>
+                            <LocationFilter
+                                refLocation={locationRef}
+                                HandleClick={handleLocationClick}
+                                HandleOpen={isLocationOpen}
+                                InputChange={handleInputChange}
+                                inputValue={inputValue}
+                                onInputChange={handleLocationInputChange}
+                                resetLocation={resetLocation}
+                                setResetLocation={setResetLocation}
+                            />
                         </div>
 
                         <FilterByType
                             ref={dropdownRef}
                             setFilteredTypes={setFilteredTypes}
+                            selectedTypes={selectedTypes}
+                            setSelectedTypes={setSelectedTypes}
                         />
                     </div>
                 </div>

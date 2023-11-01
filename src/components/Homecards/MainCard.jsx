@@ -51,7 +51,7 @@ const FeatureCard = ({ title, description, buttonText, imageUrl, link }) => {
             <div
                 className={`xl:w-[216px] xl:h-[245.75px] lg:w-[177px] lg:h-[200px] md:w-[131px] md:h-[145px] sm:w-[100px] sm:h-[110px] w-[80px] h-[80px] ${styles.cardImage}`}
             >
-                <img src={imageUrl} alt='Card Image' />
+                <img src={imageUrl} loading='lazy' alt='Card Image' />
             </div>
             <div className='w-full text-center px-2'>
                 <div
@@ -80,21 +80,21 @@ const MainCard = () => (
     <div className='w-full bg-white lg:flex lg:flex-wrap lg:flex-row lg:gap-0 flex flex-col items-center gap-8 sm:gap-5 lg:justify-start lg:items-start'>
         <FeatureCard
             title='Join the community!'
-            description='Body placeholder for text paragraph, a paragraph is a self-contained unit of text description.'
+            description='Create an account in a few seconds and join our team of motivated individuals. You can also connect through Gmail and X/Twitter.'
             buttonText='Sign up'
             imageUrl='/Homepage/ManTop.png'
             link='/signup'
         />
         <FeatureCard
             title='Attend events'
-            description='Body placeholder for text paragraph, a paragraph is a self-contained unit of text description.'
+            description='Join forces, contribute, and collaborate with people as passionate and dedicated as you in making the right changes. '
             buttonText='View events'
             imageUrl='/Homepage/attend.png'
             link='/events'
         />
         <FeatureCard
             title='Host your event!'
-            description='Body placeholder for text paragraph, a paragraph is a self-contained unit of text description.'
+            description={`Having trouble finding  a cause that truly resonates with you? Take the initiative by creating your own event.`}
             buttonText='Get started'
             imageUrl='/Homepage/Girl.png'
             link='/get-started-page'

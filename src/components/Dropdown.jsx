@@ -6,12 +6,14 @@ import Signup from "./Signup/Signup";
 import { useMediaQuery } from "react-responsive";
 import Signin from "./Signin/Signin";
 import styles from "@/styles/DropMenu.module.css";
+import { useRouter } from "next/router";
 
 const Dropdown = () => {
     const isMobile = useMediaQuery({ maxWidth: 640 });
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
     const [user, setUser] = useState(null);
+    const router = useRouter();
 
     const handleMouseEnter = () => {
         setIsOpen(true);
@@ -39,12 +41,16 @@ const Dropdown = () => {
     const handleSignOut = async () => {
         await signOut(auth);
     };
+    const handleSigninClick = () => {
+        if (!user) {
+            router.push("/signin");
+        }
+    };
 
     useEffect(() => {
         const logged = auth.onAuthStateChanged((user) => {
             if (user) {
                 setUser(user);
-                console.log("Name:", user);
             } else {
                 setUser(null);
             }
@@ -62,33 +68,27 @@ const Dropdown = () => {
             <div className='relative ' ref={dropdownRef}>
                 <div className='flex gap-1 items-center justify-center'>
                     <button
+                        onClick={handleSigninClick}
                         onMouseEnter={handleMouseEnter}
                         className={`w-[52px] xl:mb-0 md:mb-2 md:mt-0 sm:mt-[2px] mt-[5px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px]`}
                     >
-                        {auth?.currentUser?.email}
                         {user
                             ? // if the screen width is below 640px limit the display name to 5 characters
                               isMobile
-                                ? user.displayName.length > 5
+                                ? user.displayName?.length > 5
                                     ? user.displayName.slice(0, 5) + "..."
                                     : user.displayName
                                 : // if the screen width is above 640px limit the display name to 10 characters
-                                user.displayName.length > 10
+                                user.displayName?.length > 10
                                 ? user.displayName.slice(0, 10) + "..."
                                 : user.displayName
-                            : "Account"}
+                            : "Sign In"}
                     </button>
 
                     <img
                         className='rounded-full md:w-8 md:h-8 w-6 h-6'
                         src={user ? user.photoURL : "/logo/Logo.png"}
-                        alt={
-                            user
-                                ? user.email.length > 2
-                                    ? user.email.slice(0, 2) + "..."
-                                    : user.email
-                                : "Account"
-                        }
+                        alt='Profile'
                     />
                 </div>
 
@@ -134,11 +134,7 @@ const Dropdown = () => {
                                     </button>
                                 </div>
                             ) : (
-                                <div>
-                                    <button className='w-[52px] text-[10px] xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px] hover:bg-gray-200'>
-                                        <Link href='/signin'>Log in</Link>
-                                    </button>
-                                </div>
+                                ""
                             )}
                         </ul>
                     </div>

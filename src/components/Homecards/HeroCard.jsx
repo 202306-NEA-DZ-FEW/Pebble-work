@@ -13,9 +13,10 @@ function HeroCard() {
                         Become the change you wish to see in the world.
                     </div>
                     <div className="text-xl font-normal font-'Rubik' leading-10 tracking-tight text-zinc-500">
-                        Body placeholder for text paragraph. A paragraph is a
-                        self-contained unit of text dealing with a particular
-                        point or idea.
+                        Not only will you make a meaningful impact, you&apos;ll
+                        find a thriving, like-minded community that
+                        <br /> supports our mission to create a better world.
+                        Take the first step now.
                     </div>
                     <div className='mt-8 flex flex-col sm:flex-row justify-center items-center gap-6'>
                         <div className='cursor-pointer'>
