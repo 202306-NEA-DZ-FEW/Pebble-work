@@ -9,5 +9,34 @@
         "events": "Etkinlikler",
         "about": "Hakkımızda",
         "howItWorks": "Nasıl Çalışır"
-    }
+    },
+     "headerCard": {
+    "title": "Bir Değişiklik Yapma, Birlikte",
+    "description": "Herkesin bir etki yaratma gücüne sahip olduğuna inanıyoruz: Bu platform aracılığıyla insanların bir araya gelip dünyayı değiştirmek için çalıştığı bir yer yaratmaya çalışıyoruz. Bu PebbleWork'tir.",
+    "button": "Başlayın"
+  },
+  "main": {
+    "joinCommunityTitle": "Topluluğa katıl!",
+    "joinCommunityDescription": "Birkaç saniye içinde bir hesap oluşturun ve motive olmuş bireyler ekibimize katılın. Ayrıca Gmail ve X/Twitter ile bağlantı kurabilirsiniz.",
+    "joinCommunityButtonText": "ÜYE OL",
+    "attendEventsTitle": "Etkinliklere katıl",
+    "attendEventsDescription": "Güçlerinizi birleştirin ve doğru değişiklikleri yapma konusunda sizin kadar tutkulu ve bağlı insanlarla işbirliği yapın.",
+    "attendEventsButtonText": "Etkinliklere göz at",
+    "hostEventTitle": "Kendi etkinliğinizi düzenleyin!",
+    "hostEventDescription": "Sizinle gerçekten rezonans olan bir sebep bulmakta zorluk mu çekiyorsunuz? Kendi etkinliğinizi oluşturarak inisiyatifi alın.",
+    "hostEventButtonText": "Başlayın"
+  },
+    "heroCard": {
+      "title": "Dünyada görmek istediğiniz değişimi kendiniz olun.",
+      "description": "Sadece anlamlı bir etki yaratmakla kalmayacak, aynı vizyona sahip bir topluluğun aktif bir üyesi olduğunuzu göreceksiniz. İyi bir dünya yaratma misyonumuzu destekleyen bir topluluğa katılın.",
+      "getStarted": "Başlayın",
+      "whoWeAre": "Biz kimiz"
+    },
+  "homeCards": {
+    "howItWorks": "Nasıl Çalışır",
+    "sustainableDevelopmentGoals": "Sürdürülebilir Kalkınma Hedefleri",
+    "introductorySentence": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
+  }
+
 }
+
