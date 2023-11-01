@@ -1,13 +1,78 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import emailjs from "emailjs-com";
+import styles from "@/styles/ContactUs.module.css";
 
 const ContactForm = () => {
+    const auth = getAuth();
+    const [userPhone, setUserPhone] = useState("");
+    const [userEmail, setUserEmail] = useState("");
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUserEmail(user.email);
+                setUserPhone(user.phoneNumber);
+            } else {
+                setUserEmail("");
+                setUserPhone("");
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
     const handleSubmit = (event) => {
         event.preventDefault();
-        // handle form submission here
+
+        // Get form data
+        const formData = new FormData(event.target);
+        const firstName = formData.get("firstname");
+        const lastName = formData.get("lastname");
+        const email = formData.get("email");
+        const phone = formData.get("phone");
+        const message = formData.get("message");
+
+        // Compose the email parameters
+        const emailParams = {
+            from_name: `${firstName} ${lastName}`,
+            to_name: "Pebble Team",
+            subject: "New Form Submission",
+            message: `Email: ${email}\nPhone: ${phone}\n\n${message}`,
+        };
+
+        // Send the email using EmailJS
+        emailjs
+            .send(
+                "service_0fjrhbf",
+                "template_h17hsb1",
+                emailParams,
+                "BYaRB-Pd4x_cssRgf"
+            )
+            .then((response) => {
+                console.log("Email sent successfully!", response.text);
+                // Reset the form after successful submission
+                event.target.reset();
+            })
+            .catch((error) => {
+                console.error("Error sending email:", error);
+            });
     };
 
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUserEmail(user.email);
+            } else {
+                setUserEmail("");
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
+
     return (
-        <div className='flex flex-col items-center justify-center mx-auto h-[50vh] gap-4'>
+        <div
+            className={`${styles.formHeight} flex flex-col items-center justify-center mx-auto gap-4`}
+        >
             <h2>Contact Us</h2>
             <form className='h-[40vh]' onSubmit={handleSubmit}>
                 <div className='input-row'>
@@ -30,6 +95,7 @@ const ContactForm = () => {
                     id='email'
                     name='email'
                     placeholder='Email'
+                    value={userEmail}
                 />
                 <br />
 
@@ -38,6 +104,7 @@ const ContactForm = () => {
                     id='phone'
                     name='phone'
                     placeholder='Phone Number'
+                    value={userPhone}
                 />
                 <br />
 
