@@ -29,10 +29,9 @@ const ContactForm = () => {
     }, []);
     const handleSubmit = (event) => {
         event.preventDefault();
+
         if (!validateInput()) {
-            // If any required field is empty, set isSubmitted to true to trigger the flashing red border
             setIsSubmitted(true);
-            // Return early to prevent the form from being submitted
             return;
         }
 
@@ -40,9 +39,11 @@ const ContactForm = () => {
         const formData = new FormData(event.target);
         const firstName = formData.get("firstname");
         const lastName = formData.get("lastname");
+        const message = formData.get("message");
+
+        // Use the email and phone values from state variables
         const email = userEmail || emailInput;
         const phone = userPhone || phoneInput;
-        const message = formData.get("message");
 
         // Compose the email parameters
         const emailParams = {
@@ -82,7 +83,9 @@ const ContactForm = () => {
         return () => unsubscribe();
     }, []);
     const validateInput = () => {
-        return firstName && lastName && userEmail && userPhone && message;
+        const email = userEmail || emailInput;
+        const phone = userPhone || phoneInput;
+        return firstName && lastName && email && phone && message;
     };
 
     return (
