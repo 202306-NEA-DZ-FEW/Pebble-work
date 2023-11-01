@@ -46,6 +46,9 @@
 .selectedType {
     background-color: #e53e3e;
 }
+.selectedDay {
+    background-color: #e53e3e;
+}
 
 .information {
     overflow-y: scroll;

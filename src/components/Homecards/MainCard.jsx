@@ -53,7 +53,7 @@ const FeatureCard = ({ title, description, buttonText, imageUrl, link }) => {
             <div
                 className={`xl:w-[216px] xl:h-[245.75px] lg:w-[177px] lg:h-[200px] md:w-[131px] md:h-[145px] sm:w-[100px] sm:h-[110px] w-[80px] h-[80px] ${styles.cardImage}`}
             >
-                <img src={imageUrl} alt='Card Image' />
+                <img src={imageUrl} loading='lazy' alt='Card Image' />
             </div>
             <div className='w-full text-center px-2'>
                 <div

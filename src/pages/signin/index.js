@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useState, useEffect } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
-
+import { sendPasswordResetEmail } from "firebase/auth";
 import BtnGoogle from "@/components/BtnTwitter&Google/ButtonGoogle";
 import ButtonTwitter from "@/components/BtnTwitter&Google/ButtonTwitter";
 import Modal from "@/components/Popup/Modal";
@@ -19,11 +19,18 @@ import { auth } from "../../util/firebase";
 const SignInPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
+    const [RestEmail, setRestEmail] = useState("");
+
     const [password, setPassword] = useState("");
     const router = useRouter();
     const [showPopup, setShowPopup] = useState(false);
     const [modalContent, setModalContent] = useState("");
     const [modalClassName, setModalClassName] = useState("");
+    const [resetMode, setResetMode] = useState(false);
+
+    const toggleResetMode = () => {
+        setResetMode(!resetMode);
+    };
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -106,6 +113,26 @@ const SignInPage = () => {
             );
         }
     };
+    const handleResetPassword = async () => {
+        try {
+            await sendPasswordResetEmail(auth, RestEmail);
+            setShowPopup(true);
+            setModalContent("Congrats! You signed in/up successfully.");
+            setModalClassName(
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  "
+            );
+
+            setTimeout(() => {
+                window.location.reload();
+            }, 3000);
+        } catch (error) {
+            setShowPopup(true);
+            setModalContent("Reset failed.");
+            setModalClassName(
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+            );
+        }
+    };
 
     return (
         <>
@@ -138,24 +165,56 @@ const SignInPage = () => {
                             </div>
                         </div>
                         <form onSubmit={handleLogin}>
-                            <div className='mb-4'>
-                                <label
-                                    className="block mb-2 text-stone-500 text-base font-normal font-['Rubik']"
-                                    htmlFor='email'
-                                >
-                                    Email address
-                                </label>
-                                <input
-                                    className='w-full px-3 py-2 border rounded'
-                                    type='email'
-                                    id='email'
-                                    name='email'
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    required
-                                    style={{ height: "40px", width: "300px" }}
-                                />
-                            </div>
+                            {resetMode ? (
+                                <div className='mb-4'>
+                                    <label
+                                        className="block mb-2 text-stone-500 text-base font-normal font-['Rubik']"
+                                        htmlFor='email'
+                                    >
+                                        Email address
+                                    </label>
+                                    <input
+                                        className='w-full px-3 py-2 border rounded'
+                                        type='email'
+                                        id='email'
+                                        name='email'
+                                        value={RestEmail}
+                                        onChange={(e) =>
+                                            setRestEmail(e.target.value)
+                                        }
+                                        required
+                                        style={{
+                                            height: "40px",
+                                            width: "300px",
+                                        }}
+                                    />
+                                </div>
+                            ) : (
+                                <div>
+                                    <label
+                                        className="block mb-2 text-stone-500 text-base font-normal font-['Rubik']"
+                                        htmlFor='email'
+                                    >
+                                        Email address
+                                    </label>
+                                    <input
+                                        className='w-full px-3 py-2 border rounded'
+                                        type='email'
+                                        id='email'
+                                        name='email'
+                                        value={email}
+                                        onChange={(e) =>
+                                            setEmail(e.target.value)
+                                        }
+                                        required
+                                        style={{
+                                            height: "40px",
+                                            width: "300px",
+                                        }}
+                                    />
+                                </div>
+                            )}
+
                             <div className='mb-4 relative'>
                                 <label
                                     className="block mb-2 text-stone-500 text-base font-normal font-['Rubik']"
@@ -169,6 +228,7 @@ const SignInPage = () => {
                                     id='password'
                                     name='password'
                                     value={password}
+                                    disabled={resetMode}
                                     onChange={(e) =>
                                         setPassword(e.target.value)
                                     }
@@ -186,23 +246,47 @@ const SignInPage = () => {
 
                             <div>
                                 <div className="text-stone-500 text-sm font-normal font-['Rubik'] mt-4">
-                                    Dont have an account?
-                                    <Link
-                                        href='/signup'
-                                        className='text-orange-400 ml-1'
-                                    >
-                                        Sign up
-                                    </Link>
+                                    <button onClick={toggleResetMode}>
+                                        {" "}
+                                        Forgot your password?
+                                    </button>
+                                    {resetMode ? (
+                                        <div className='text-orange-400 ml-1 cursor-pointer'></div>
+                                    ) : (
+                                        <div className="text-stone-500 text-sm font-normal font-['Rubik'] mt-4">
+                                            Dont have an account?
+                                            <Link
+                                                href='/signup'
+                                                className='text-orange-400 ml-1'
+                                            >
+                                                Sign up
+                                            </Link>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
-                            <div className='flex justify-start'>
-                                <button
-                                    className=' px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 '
-                                    type='submit'
-                                >
-                                    Sign In
-                                </button>
-                            </div>
+
+                            {resetMode ? (
+                                <div className='flex justify-start'>
+                                    <button
+                                        className=' px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 '
+                                        type='button'
+                                        onClick={handleResetPassword}
+                                    >
+                                        Reset Password
+                                    </button>
+                                </div>
+                            ) : (
+                                <div className='flex justify-start'>
+                                    <button
+                                        className=' px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 '
+                                        type='submit'
+                                        disabled={resetMode}
+                                    >
+                                        Sign in
+                                    </button>
+                                </div>
+                            )}
                         </form>
                     </div>
                 </div>
