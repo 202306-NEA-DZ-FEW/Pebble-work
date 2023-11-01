@@ -33,9 +33,9 @@ const ContactForm = () => {
         // Compose the email parameters
         const emailParams = {
             from_name: `${firstName} ${lastName}`,
-            from_email: email,
-            phone,
-            message,
+            to_name: "Pebble Team",
+            subject: "New Form Submission",
+            message: `Email: ${email}\nPhone: ${phone}\n\n${message}`,
         };
 
         // Send the email using EmailJS
