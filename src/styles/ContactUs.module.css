@@ -30,8 +30,8 @@
 }
 
 .emptyInput {
-    border: 1px solid red;
-    animation: flash 5s steps(5, end);
+    border: 2px solid red;
+    animation: flash 5s linear;
 }
 
 @keyframes flash {

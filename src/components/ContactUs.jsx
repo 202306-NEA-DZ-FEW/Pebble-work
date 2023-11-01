@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import emailjs from "emailjs-com";
 import styles from "@/styles/ContactUs.module.css";
+import { toast } from "react-toastify";
 
 const ContactForm = () => {
     const auth = getAuth();
@@ -13,6 +14,14 @@ const ContactForm = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [emailInput, setEmailInput] = useState("");
     const [phoneInput, setPhoneInput] = useState("");
+
+    const resetForm = () => {
+        setFirstName("");
+        setLastName("");
+        setEmailInput("");
+        setPhoneInput("");
+        setMessage("");
+    };
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -61,13 +70,20 @@ const ContactForm = () => {
                 emailParams,
                 "BYaRB-Pd4x_cssRgf"
             )
-            .then((response) => {
-                console.log("Email sent successfully!", response.text);
+            .then(() => {
+                toast.success("Email sent successfully!", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
                 // Reset the form after successful submission
                 event.target.reset();
+                resetForm();
             })
-            .catch((error) => {
-                console.error("Error sending email:", error);
+            .catch(() => {
+                toast.error("Failed to send the Email", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
             });
     };
 
