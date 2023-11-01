@@ -117,7 +117,7 @@ const SignInPage = () => {
         try {
             await sendPasswordResetEmail(auth, RestEmail);
             setShowPopup(true);
-            setModalContent("Congrats! You signed in/up successfully.");
+            setModalContent("Reset Email sent successfully .");
             setModalClassName(
                 "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  "
             );
