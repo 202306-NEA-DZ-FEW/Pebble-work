@@ -28,3 +28,22 @@
         height: 135vh;
     }
 }
+
+.emptyInput {
+    border: 1px solid red;
+    animation: flash 5s steps(5, end);
+}
+
+@keyframes flash {
+    0%,
+    50% {
+        border-color: red;
+    }
+    25%,
+    75% {
+        border-color: transparent;
+    }
+    100% {
+        border-color: red;
+    }
+}

@@ -7,6 +7,13 @@ const ContactForm = () => {
     const auth = getAuth();
     const [userPhone, setUserPhone] = useState("");
     const [userEmail, setUserEmail] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [message, setMessage] = useState("");
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [emailInput, setEmailInput] = useState("");
+    const [phoneInput, setPhoneInput] = useState("");
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -22,13 +29,19 @@ const ContactForm = () => {
     }, []);
     const handleSubmit = (event) => {
         event.preventDefault();
+        if (!validateInput()) {
+            // If any required field is empty, set isSubmitted to true to trigger the flashing red border
+            setIsSubmitted(true);
+            // Return early to prevent the form from being submitted
+            return;
+        }
 
         // Get form data
         const formData = new FormData(event.target);
         const firstName = formData.get("firstname");
         const lastName = formData.get("lastname");
-        const email = formData.get("email");
-        const phone = formData.get("phone");
+        const email = userEmail || emailInput;
+        const phone = userPhone || phoneInput;
         const message = formData.get("message");
 
         // Compose the email parameters
@@ -68,6 +81,9 @@ const ContactForm = () => {
 
         return () => unsubscribe();
     }, []);
+    const validateInput = () => {
+        return firstName && lastName && userEmail && userPhone && message;
+    };
 
     return (
         <div
@@ -81,12 +97,26 @@ const ContactForm = () => {
                         id='fname'
                         name='firstname'
                         placeholder='First Name'
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        className={
+                            !firstName && isSubmitted
+                                ? `${styles.emptyInput}`
+                                : ""
+                        }
                     />
                     <input
                         type='text'
                         id='lname'
                         name='lastname'
                         placeholder='Last Name'
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        className={
+                            !lastName && isSubmitted
+                                ? `${styles.emptyInput}`
+                                : ""
+                        }
                     />
                 </div>
 
@@ -95,7 +125,8 @@ const ContactForm = () => {
                     id='email'
                     name='email'
                     placeholder='Email'
-                    value={userEmail}
+                    value={userEmail || emailInput}
+                    onChange={(e) => setEmailInput(e.target.value)}
                 />
                 <br />
 
@@ -104,7 +135,8 @@ const ContactForm = () => {
                     id='phone'
                     name='phone'
                     placeholder='Phone Number'
-                    value={userPhone}
+                    value={userPhone || phoneInput}
+                    onChange={(e) => setPhoneInput(e.target.value)}
                 />
                 <br />
 
@@ -112,6 +144,11 @@ const ContactForm = () => {
                     id='message'
                     name='message'
                     placeholder='What can we do for you?'
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    className={
+                        !message && isSubmitted ? `${styles.emptyInput}` : ""
+                    }
                 ></textarea>
                 <br />
 
