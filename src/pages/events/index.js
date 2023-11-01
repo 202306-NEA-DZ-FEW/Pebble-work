@@ -1,3 +1,5 @@
+import React, { useState, useEffect, useRef } from "react";
+import styles from "@/styles/Events.module.css";
 import {
     collection,
     getDocs,
@@ -5,6 +7,12 @@ import {
     query,
     where,
 } from "firebase/firestore";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
+import EventCard from "@/components/Events/EventCard";
+import EventCardLeft from "@/components/Events/EventCardLeft";
+import Calendar from "@/components/Filter/Calendar";
+import FilterByType from "@/components/Filter/FilterByType";
 import LocationFilter from "@/components/Filter/LocationFilter";
 
 import { db } from "@/util/firebase";
