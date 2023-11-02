@@ -1,5 +1,7 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
 import {
+    signInWithEmailAndPassword,
+    getAuth,
+    linkWithPopup,
     GoogleAuthProvider,
     signInWithPopup,
     TwitterAuthProvider,
@@ -74,16 +76,36 @@ const SignInPage = () => {
     const handelGoogle = async (e) => {
         e.preventDefault();
         try {
+            const auth = getAuth();
+
             const provider = new GoogleAuthProvider();
-            await signInWithPopup(auth, provider);
-            setShowPopup(true);
-            setModalContent("Congrats! You signed in/up successfully.");
-            setModalClassName(
-                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
-            );
-            setTimeout(() => {
-                router.push("/events");
-            }, 3000);
+
+            const userCredential = await signInWithPopup(auth, provider);
+
+            const email = userCredential.user.email;
+
+            if (email) {
+                await linkWithPopup(userCredential.user, provider);
+                await signInWithPopup(auth, provider);
+                setShowPopup(true);
+                setModalContent("Congrats! You signed in/up successfully.");
+                setModalClassName(
+                    "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                );
+                setTimeout(() => {
+                    router.push("/events");
+                }, 3000);
+            } else {
+                // The user has no email associated with the account
+                // Display an error message
+                setShowPopup(true);
+                setModalContent(
+                    "Gmail account doesn't exist. Please sign up or use an existing account."
+                );
+                setModalClassName(
+                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                );
+            }
         } catch (error) {
             setShowPopup(true);
             setModalContent("Sign in/up failed.");
