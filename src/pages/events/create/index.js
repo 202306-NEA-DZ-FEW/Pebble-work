@@ -16,6 +16,9 @@ import PhoneVerify from "@/components/Events/PhoneVerify";
 const EventCreationPage = () => {
     const formCollectionRef = collection(db, "events");
 
+    const userId = auth?.currentUser?.uid;
+    console.log(userId);
+
     //creates the event object to be sent to firestore
     const [input, setInput] = useState({
         location: "",

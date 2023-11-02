@@ -1,5 +1,7 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
 import {
+    signInWithEmailAndPassword,
+    getAuth,
+    linkWithPopup,
     GoogleAuthProvider,
     signInWithPopup,
     TwitterAuthProvider,
@@ -14,6 +16,8 @@ import { sendPasswordResetEmail } from "firebase/auth";
 import BtnGoogle from "@/components/BtnTwitter&Google/ButtonGoogle";
 import ButtonTwitter from "@/components/BtnTwitter&Google/ButtonTwitter";
 import Modal from "@/components/Popup/Modal";
+import { collection, setDoc, doc } from "firebase/firestore";
+import { db } from "../../util/firebase";
 
 import { auth } from "../../util/firebase";
 const SignInPage = () => {
@@ -74,16 +78,58 @@ const SignInPage = () => {
     const handelGoogle = async (e) => {
         e.preventDefault();
         try {
+            const auth = getAuth();
+
             const provider = new GoogleAuthProvider();
-            await signInWithPopup(auth, provider);
-            setShowPopup(true);
-            setModalContent("Congrats! You signed in/up successfully.");
-            setModalClassName(
-                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
-            );
-            setTimeout(() => {
-                router.push("/events");
-            }, 3000);
+
+            const userCredential = await signInWithPopup(auth, provider);
+
+            const displayName = userCredential.user.displayName;
+            const [firstName, lastName] = displayName.split(" ");
+
+            // Create user object with name, surename, and email
+            const user = {
+                Name: firstName,
+                Surename: lastName,
+                email: userCredential.user.email,
+                interests: [],
+                eventsCreated: [],
+                eventsJoined: [],
+            };
+
+            // Get the user UID
+            const userUID = userCredential.user.uid;
+
+            // Get a reference to the "users" collection
+            const usersCollectionRef = collection(db, "users");
+
+            // Add the user object to the "users" collection with the user UID as the document ID
+            await setDoc(doc(usersCollectionRef, userUID), user);
+
+            const email = userCredential.user.email;
+
+            if (email) {
+                await linkWithPopup(userCredential.user, provider);
+                await signInWithPopup(auth, provider);
+                setShowPopup(true);
+                setModalContent("Congrats! You signed in/up successfully.");
+                setModalClassName(
+                    "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                );
+                setTimeout(() => {
+                    router.push("/events");
+                }, 3000);
+            } else {
+                // The user has no email associated with the account
+                // Display an error message
+                setShowPopup(true);
+                setModalContent(
+                    "Gmail account doesn't exist. Please sign up or use an existing account."
+                );
+                setModalClassName(
+                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                );
+            }
         } catch (error) {
             setShowPopup(true);
             setModalContent("Sign in/up failed.");
