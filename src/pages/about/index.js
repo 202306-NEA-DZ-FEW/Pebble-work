@@ -33,7 +33,20 @@ const AboutPage = () => {
                     <p
                         className={`${styles.text1} ${styles.slideInFromRight1} flex text-center text-[#878787] px-4`}
                     >
-                        {t("about:about.description")}
+
+                        Experience the power of PebbleWork with its cutting-edge
+                        technologies. We have crafted a responsive and
+                        interactive platform that puts the user as the central
+                        piece. Seamlessly navigate through the pages, create,
+                        edit and delete events. Join and unjoin with a simple
+                        click. PebbleWork brings a platform made by volunteers
+                        for volunteers. With secure user authentication and
+                        real-time data storage, we offer a user-friendly
+                        experience. Whether you&apos;re an event organizer or a
+                        participant, PebbleWork is here to simplify your
+                        community engagement. Join us today and make a
+                        meaningful impact in your community.
+
                     </p>
                 </div>
                 <div
