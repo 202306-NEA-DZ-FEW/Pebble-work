@@ -236,7 +236,7 @@
 }
 
 .card:hover .backgroundImage {
-    width: 200px;
+    width: 300px;
     clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0);
 }
 
@@ -250,4 +250,7 @@
     background-size: cover;
     transition: width 1s ease;
     z-index: -1;
+}
+.backgroundImageHidden {
+    z-index: -10;
 }
