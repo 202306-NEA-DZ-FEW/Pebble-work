@@ -1,3 +1,4 @@
+import WideScreenCard from "@/components/Events/WideScreenCard";
 import React from "react";
 import { toast } from "react-toastify";
 
@@ -12,6 +13,7 @@ function MyComponent() {
     return (
         <div>
             <button onClick={handleClick}>Show Toast</button>
+            <WideScreenCard />
         </div>
     );
 }
