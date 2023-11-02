@@ -16,6 +16,8 @@ import { sendPasswordResetEmail } from "firebase/auth";
 import BtnGoogle from "@/components/BtnTwitter&Google/ButtonGoogle";
 import ButtonTwitter from "@/components/BtnTwitter&Google/ButtonTwitter";
 import Modal from "@/components/Popup/Modal";
+import { collection, setDoc, doc } from "firebase/firestore";
+import { db } from "../../util/firebase";
 
 import { auth } from "../../util/firebase";
 const SignInPage = () => {
@@ -81,6 +83,28 @@ const SignInPage = () => {
             const provider = new GoogleAuthProvider();
 
             const userCredential = await signInWithPopup(auth, provider);
+
+            const displayName = userCredential.user.displayName;
+            const [firstName, lastName] = displayName.split(" ");
+
+            // Create user object with name, surename, and email
+            const user = {
+                Name: firstName,
+                Surename: lastName,
+                email: userCredential.user.email,
+                interests: [],
+                eventsCreated: [],
+                eventsJoined: [],
+            };
+
+            // Get the user UID
+            const userUID = userCredential.user.uid;
+
+            // Get a reference to the "users" collection
+            const usersCollectionRef = collection(db, "users");
+
+            // Add the user object to the "users" collection with the user UID as the document ID
+            await setDoc(doc(usersCollectionRef, userUID), user);
 
             const email = userCredential.user.email;
 
