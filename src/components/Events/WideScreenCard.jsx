@@ -18,8 +18,13 @@ const WideScreenCard = ({
     return (
         <>
             <div
-                className={`${styles.contai} ${styles.fading} border relative w-[335px] h-[86px] xl:w-[816px] xl:h-[210px] sm:w-[466px] sm:h-[140px] flex flex-row items-center justify-center gap-2`}
+                // style={{
+                //     backgroundImage: `url("/images/AboutPebble.png")`,
+                //     backgroundSize: "100% 100%",
+                // }}
+                className={`${styles.contai} ${styles.card} ${styles.fading} border relative w-[335px] h-[86px] xl:w-[816px] xl:h-[210px] sm:w-[466px] sm:h-[140px] flex flex-row items-center justify-center gap-2`}
             >
+                <div className={`${styles.backgroundImage}`}></div>
                 <div className={`flex flex-col gap-1 sm:gap-4 items-end `}>
                     <h1
                         className='xl:text-[25.70px] sm:text-[15px] text-[10.55px] text-center'
@@ -57,14 +62,12 @@ const WideScreenCard = ({
                         </button>
                     </div>
                 </div>
-                <div
-                    className={`${styles.productImage} w-[100px] h-[58px] xl:w-[244px] xl:h-[143px] sm:w-[139px] sm:h-[82px]`}
-                >
-                    <img
-                        className={`{${styles.contaiImg}`}
+                <div className={`${styles.productImage} bg-red-600 h-full `}>
+                    {/* <img
+                        className={`h-full `}
                         src='/images/AboutPebble.png'
                         alt={title}
-                    />
+                    /> */}
                     <div className={`${styles.info}`}>
                         <h2 className='sm:text-[13px] text-[10px] xl:text-[22.22px] underline'>
                             {type}

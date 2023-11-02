@@ -229,3 +229,25 @@
         animation-range: entry 0% cover 30%;
     }
 }
+
+.card {
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover .backgroundImage {
+    width: 200px;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0);
+}
+
+.backgroundImage {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/images/AboutPebble.png");
+    background-size: cover;
+    transition: width 1s ease;
+    z-index: -1;
+}
