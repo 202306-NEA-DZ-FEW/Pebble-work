@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "@/styles/EventCard.module.css";
 import { useRouter } from "next/router";
-const WideScreenCard = ({
+const WideScreenCardL = ({
     eventId,
     title,
     type,
@@ -33,18 +33,22 @@ const WideScreenCard = ({
             <div
                 onMouseEnter={handleHover}
                 onMouseLeave={handleMouseLeave}
-                className={`${styles.contai} ${styles.card} ${styles.fading} border relative w-[335px] h-[86px] xl:w-[816px] xl:h-[210px] sm:w-[466px] sm:h-[140px] flex flex-row items-center justify-center gap-2`}
+                className={`${styles.contai} ${styles.card} ${styles.fading} border relative w-[55vw] h-[24vh] flex flex-row items-center justify-center gap-2`}
             >
                 <div
                     className={`${styles.backgroundImage} relative ${
                         hideBackground ? `${styles.backgroundImageHidden}` : ""
                     }`}
                 >
-                    <h2 className='sm:text-[13px] text-[10px] xl:text-[22.22px] underline'>
-                        test{type}
+                    <h2 className='sm:text-[13px] text-black text-[10px] xl:text-[22.22px] underline'>
+                        type{type}
                     </h2>
                     <ul
-                        className={`xl:text-[18.20px] absolute bottom-0 right-0 text-[8px] leading-[10px] md:leading-[15px] xl:leading-[20px] sm:text-[10.20px]`}
+                        className={`xl:text-[18.20px] ${
+                            hideBackground
+                                ? `${styles.backgroundImageHidden}`
+                                : "hidden"
+                        } text-black bottom-0 right-0 text-[8px] leading-[10px] md:leading-[15px] xl:leading-[20px] sm:text-[10.20px]`}
                     >
                         <li>
                             <strong>Location:</strong> {location}
@@ -70,7 +74,7 @@ const WideScreenCard = ({
                             wordWrap: "break-word",
                         }}
                     >
-                        test{title}
+                        title{title}
                     </h1>
 
                     <p
@@ -83,45 +87,21 @@ const WideScreenCard = ({
                         }}
                         className={`${styles.information} z-[-2] xl:leading-[17px] md:leading-[14px] leading-[10px] h-[26.2px] w-[214px] xl:w-[520px] xl:h-[63px] sm:w-[297px] sm:h-[37px] overflow-y-scroll xl:text-[15px] sm:text-[10.20px] text-[10px]`}
                     >
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
-                        {description}
+                        Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit.consectetur adipiscing elit {description}
                     </p>
-
-                    <div className='flex'>
-                        <p>avatars</p>
-                        <button
-                            onClick={handleReviewClick}
-                            className={`w-[45px] bg-blue-400 hover:bg-blue-500 text-white text-[10px] xl:text-[15px] md:text-[12px] rounded-[4px] h-[14px] xl:w-[80px] xl:h-[30px] sm:w-[60px] sm:h-[18px]`}
-                        >
-                            Review
-                        </button>
-                    </div>
                 </div>
-                {/* <div className={`${styles.productImage} bg-red-600 h-full `}>
-                    <img
-                        className={`h-full `}
-                        src='/images/AboutPebble.png'
-                        alt={title}
-                    />
-                    <div className={`${styles.info}`}>
-                        
-                        <ul
-                            className={`xl:text-[18.20px] text-[8px] leading-[10px] md:leading-[15px] xl:leading-[20px] sm:text-[10.20px]`}
-                        >
-                            <li>
-                                <strong>Location:</strong> {location}
-                            </li>
-                            <li>
-                                <strong>Date:</strong> {date}
-                            </li>
-                            <li>
-                                <strong>Time:</strong> {time}
-                            </li>
-                        </ul>
-                    </div>
-                </div> */}
+                <div className='flex flex-col justify-end h-40'>
+                    <p>avatars</p>
+                    <button
+                        onClick={handleReviewClick}
+                        className={`w-[45px] bg-blue-400 hover:bg-blue-500 text-white text-[10px] xl:text-[15px] md:text-[12px] rounded-[4px] h-[14px] xl:w-[80px] xl:h-[30px] sm:w-[60px] sm:h-[18px]`}
+                    >
+                        Review
+                    </button>
+                </div>
             </div>
         </>
     );
 };
-export default WideScreenCard;
+export default WideScreenCardL;

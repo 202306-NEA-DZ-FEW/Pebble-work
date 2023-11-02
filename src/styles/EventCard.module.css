@@ -236,7 +236,7 @@
 }
 
 .card:hover .backgroundImage {
-    width: 300px;
+    width: 18vw;
     clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0);
 }
 
