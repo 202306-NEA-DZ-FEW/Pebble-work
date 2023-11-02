@@ -248,7 +248,7 @@
     height: 100%;
     background-image: url("/images/AboutPebble.png");
     background-size: cover;
-    transition: width 1s ease;
+    transition: width 700ms ease;
     z-index: -1;
 }
 .backgroundImageHidden {

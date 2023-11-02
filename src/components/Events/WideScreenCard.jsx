@@ -16,27 +16,35 @@ const WideScreenCard = ({
         router.push(`/events/${eventId}`);
     };
     const [hideBackground, setHideBackground] = useState(false);
+    let timerId;
 
     const handleHover = () => {
-        setTimeout(() => {
+        timerId = setTimeout(() => {
             setHideBackground(true);
-        }, 750);
+        }, 500);
+    };
+
+    const handleMouseLeave = () => {
+        clearTimeout(timerId);
+        setHideBackground(false);
     };
     return (
         <>
             <div
                 onMouseEnter={handleHover}
-                onMouseLeave={() => setHideBackground(false)}
+                onMouseLeave={handleMouseLeave}
                 className={`${styles.contai} ${styles.card} ${styles.fading} border relative w-[335px] h-[86px] xl:w-[816px] xl:h-[210px] sm:w-[466px] sm:h-[140px] flex flex-row items-center justify-center gap-2`}
             >
                 <div
-                    className={`${styles.backgroundImage} ${
+                    className={`${styles.backgroundImage} relative ${
                         hideBackground ? `${styles.backgroundImageHidden}` : ""
                     }`}
                 >
-                    {" "}
+                    <h2 className='sm:text-[13px] text-[10px] xl:text-[22.22px] underline'>
+                        test{type}
+                    </h2>
                     <ul
-                        className={`xl:text-[18.20px] text-[8px] text-right leading-[10px] md:leading-[15px] xl:leading-[20px] sm:text-[10.20px]`}
+                        className={`xl:text-[18.20px] absolute bottom-0 right-0 text-[8px] leading-[10px] md:leading-[15px] xl:leading-[20px] sm:text-[10.20px]`}
                     >
                         <li>
                             <strong>Location:</strong> {location}
@@ -49,9 +57,11 @@ const WideScreenCard = ({
                         </li>
                     </ul>
                 </div>
-                <div className={`flex flex-col gap-1 sm:gap-4 items-end `}>
+                <div
+                    className={`flex flex-col gap-1 sm:gap-4 items-start text-start`}
+                >
                     <h1
-                        className='xl:text-[25.70px] sm:text-[15px] text-[10.55px] text-center'
+                        className='xl:text-[25.70px] sm:text-[15px] text-[10.55px]'
                         style={{
                             color: "#1A1A1A",
                             fontFamily: "Rubik",
@@ -60,7 +70,7 @@ const WideScreenCard = ({
                             wordWrap: "break-word",
                         }}
                     >
-                        {title}
+                        test{title}
                     </h1>
 
                     <p
@@ -94,9 +104,7 @@ const WideScreenCard = ({
                         alt={title}
                     />
                     <div className={`${styles.info}`}>
-                        <h2 className='sm:text-[13px] text-[10px] xl:text-[22.22px] underline'>
-                            {type}
-                        </h2>
+                        
                         <ul
                             className={`xl:text-[18.20px] text-[8px] leading-[10px] md:leading-[15px] xl:leading-[20px] sm:text-[10.20px]`}
                         >
