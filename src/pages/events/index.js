@@ -15,7 +15,7 @@ import FilterByType from "@/components/Filter/FilterByType";
 import LocationFilter from "@/components/Filter/LocationFilter";
 
 import { db } from "@/util/firebase";
-import WideScreenCardR from "@/components/Events/WideScreenCardR";
+import WideScreenCard from "@/components/Events/WideScreenCard";
 
 const EventsPage = (user) => {
     // State variables

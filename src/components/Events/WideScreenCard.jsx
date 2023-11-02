@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "@/styles/EventCard.module.css";
 import { useRouter } from "next/router";
-const WideScreenCardL = ({
+const WideScreenCard = ({
     eventId,
     title,
     type,
@@ -36,7 +36,8 @@ const WideScreenCardL = ({
                 className={`${styles.contai} ${styles.card} ${styles.fading} border relative w-[55vw] h-[24vh] flex flex-row items-center justify-center gap-2`}
             >
                 <div
-                    className={`${styles.backgroundImage} relative ${
+                    style={{ backgroundImage: `url(${image})` }}
+                    className={`${styles.backgroundImage} ${
                         hideBackground ? `${styles.backgroundImageHidden}` : ""
                     }`}
                 >
@@ -104,4 +105,4 @@ const WideScreenCardL = ({
         </>
     );
 };
-export default WideScreenCardL;
+export default WideScreenCard;
