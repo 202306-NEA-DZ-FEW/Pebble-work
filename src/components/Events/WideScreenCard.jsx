@@ -31,6 +31,7 @@ const WideScreenCard = ({
         clearTimeout(timerId);
         setHideBackground(false);
         setIsHovered(false);
+        h2Ref.current.innerHTML = "";
     };
     useEffect(() => {
         if (isHovered) {
@@ -43,6 +44,15 @@ const WideScreenCard = ({
                 span.className = styles.explode;
                 h2Ref.current.appendChild(span);
             });
+
+            const smoke = document.createElement("img");
+            smoke.src = "/horizontal-smoke.png";
+            smoke.style.animationDuration = `${letters.length * 0.2}s`;
+            smoke.className = styles.smoke;
+            h2Ref.current.appendChild(smoke);
+            smoke.addEventListener("animationend", () => {
+                h2Ref.current.removeChild(smoke);
+            });
         }
     }, [isHovered]);
     return (
@@ -54,9 +64,10 @@ const WideScreenCard = ({
             >
                 <h2
                     ref={h2Ref}
-                    className={`absolute sm:text-[13px] text-black text-[10px] xl:text-[22.22px] underline`}
+                    className={`absolute top-[35%] sm:text-[13px] text-black text-[10px] xl:text-[22.22px]`}
                 >
-                    type{type}
+                    Lorem ipsum dolor sit amet, consectetur adipiscing
+                    elit.consectetur adipiscing elit{type}
                 </h2>
                 <div
                     // style={{ backgroundImage: `url(${image})` }}

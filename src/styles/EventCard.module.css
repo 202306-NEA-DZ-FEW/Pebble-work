@@ -267,6 +267,26 @@
     }
 }
 
+@keyframes smoke {
+    0% {
+        opacity: 0;
+        transform: translateX(-80%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(95%);
+    }
+    105% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
 .explode {
-    animation: explode 1s forwards;
+    animation: explode 2500ms forwards;
+}
+
+.smoke {
+    top: 20px;
+    position: absolute;
+    animation: smoke 3500ms backwards;
 }
