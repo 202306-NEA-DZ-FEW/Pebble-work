@@ -1,5 +1,7 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
 import {
+    signInWithEmailAndPassword,
+    getAuth,
+    linkWithPopup,
     GoogleAuthProvider,
     signInWithPopup,
     TwitterAuthProvider,
@@ -8,12 +10,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { sendPasswordResetEmail } from "firebase/auth";
 import BtnGoogle from "@/components/BtnTwitter&Google/ButtonGoogle";
 import ButtonTwitter from "@/components/BtnTwitter&Google/ButtonTwitter";
 import Modal from "@/components/Popup/Modal";
+import { collection, setDoc, doc } from "firebase/firestore";
+import { db } from "../../util/firebase";
 
 import { auth } from "../../util/firebase";
 const SignInPage = () => {
@@ -27,10 +31,6 @@ const SignInPage = () => {
     const [modalContent, setModalContent] = useState("");
     const [modalClassName, setModalClassName] = useState("");
     const [resetMode, setResetMode] = useState(false);
-
-    const toggleResetMode = () => {
-        setResetMode(!resetMode);
-    };
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -74,16 +74,58 @@ const SignInPage = () => {
     const handelGoogle = async (e) => {
         e.preventDefault();
         try {
+            const auth = getAuth();
+
             const provider = new GoogleAuthProvider();
-            await signInWithPopup(auth, provider);
-            setShowPopup(true);
-            setModalContent("Congrats! You signed in/up successfully.");
-            setModalClassName(
-                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
-            );
-            setTimeout(() => {
-                router.push("/events");
-            }, 3000);
+
+            const userCredential = await signInWithPopup(auth, provider);
+
+            const displayName = userCredential.user.displayName;
+            const [firstName, lastName] = displayName.split(" ");
+
+            // Create user object with name, surename, and email
+            const user = {
+                Name: firstName,
+                Surename: lastName,
+                email: userCredential.user.email,
+                interests: [],
+                eventsCreated: [],
+                eventsJoined: [],
+            };
+
+            // Get the user UID
+            const userUID = userCredential.user.uid;
+
+            // Get a reference to the "users" collection
+            const usersCollectionRef = collection(db, "users");
+
+            // Add the user object to the "users" collection with the user UID as the document ID
+            await setDoc(doc(usersCollectionRef, userUID), user);
+
+            const email = userCredential.user.email;
+
+            if (email) {
+                await linkWithPopup(userCredential.user, provider);
+                await signInWithPopup(auth, provider);
+                setShowPopup(true);
+                setModalContent("Congrats! You signed in/up successfully.");
+                setModalClassName(
+                    "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                );
+                setTimeout(() => {
+                    router.push("/events");
+                }, 3000);
+            } else {
+                // The user has no email associated with the account
+                // Display an error message
+                setShowPopup(true);
+                setModalContent(
+                    "Gmail account doesn't exist. Please sign up or use an existing account."
+                );
+                setModalClassName(
+                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                );
+            }
         } catch (error) {
             setShowPopup(true);
             setModalContent("Sign in/up failed.");
@@ -113,11 +155,16 @@ const SignInPage = () => {
             );
         }
     };
-    const handleResetPassword = async () => {
+    const handleResetPassword = async (event) => {
+        event.preventDefault();
+
+        if (!resetMode) {
+            return;
+        }
         try {
             await sendPasswordResetEmail(auth, RestEmail);
             setShowPopup(true);
-            setModalContent("Congrats! You signed in/up successfully.");
+            setModalContent("Reset Email sent successfully .");
             setModalClassName(
                 "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  "
             );
@@ -133,7 +180,15 @@ const SignInPage = () => {
             );
         }
     };
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+        }
+    };
 
+    const toggleResetMode = () => {
+        setResetMode(!resetMode);
+    };
     return (
         <>
             <div className='flex justify-center items-center h-screen'>
@@ -164,7 +219,7 @@ const SignInPage = () => {
                                 <div className='shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25  border-t flex-grow'></div>
                             </div>
                         </div>
-                        <form onSubmit={handleLogin}>
+                        <form onSubmit={handleLogin} onKeyDown={handleKeyDown}>
                             {resetMode ? (
                                 <div className='mb-4'>
                                     <label
@@ -247,7 +302,6 @@ const SignInPage = () => {
                             <div>
                                 <div className="text-stone-500 text-sm font-normal font-['Rubik'] mt-4">
                                     <button onClick={toggleResetMode}>
-                                        {" "}
                                         Forgot your password?
                                     </button>
                                     {resetMode ? (
@@ -281,7 +335,7 @@ const SignInPage = () => {
                                     <button
                                         className=' px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 '
                                         type='submit'
-                                        disabled={resetMode}
+                                        // disabled={resetMode}
                                     >
                                         Sign in
                                     </button>
