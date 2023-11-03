@@ -171,11 +171,25 @@
 .explode {
     animation: explode 2500ms forwards;
 }
-
+/*reverse animation*/
+@keyframes reverseExplode {
+    0% {
+        opacity: 0;
+        transform: scale(2) rotate(45deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+.reverseExplode {
+    animation: reverseExplode 2500ms forwards;
+}
 .smoke {
-    top: 0px;
+    top: -14px;
     position: absolute;
     animation: smoke 3500ms backwards;
+    transform: rotate(90deg);
 }
 @media (max-width: 640px) {
     .contai {
@@ -226,6 +240,28 @@
 
 .fading {
     animation: fade linear;
+    animation-timeline: view(block);
+    animation-range: entry 0% cover 40%;
+}
+/*Wide screenFade*/
+@keyframes wideFade {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    95% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.wideFading {
+    animation: wideFade linear;
     animation-timeline: view(block);
     animation-range: entry 0% cover 40%;
 }

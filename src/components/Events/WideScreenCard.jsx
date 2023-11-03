@@ -17,6 +17,7 @@ const WideScreenCard = ({
     };
     const [hideBackground, setHideBackground] = useState(false);
     let timerId;
+    let reverseTimer;
     const [isHovered, setIsHovered] = useState(false);
     const h2Ref = useRef();
 
@@ -24,14 +25,25 @@ const WideScreenCard = ({
         timerId = setTimeout(() => {
             setHideBackground(true);
             setIsHovered(true);
-        }, 500);
+        }, 700);
     };
 
     const handleMouseLeave = () => {
         clearTimeout(timerId);
         setHideBackground(false);
         setIsHovered(false);
-        h2Ref.current.innerHTML = "";
+        reverseTimer = setTimeout(() => {
+            const letters = h2Ref.current.innerText.split("");
+            h2Ref.current.innerHTML = "";
+            letters.forEach((letter, i) => {
+                const span = document.createElement("span");
+                span.innerText = letter;
+                span.style.opacity = 0;
+                span.style.animationDelay = `${(letters.length - i) * 0.1}s`;
+                span.className = styles.reverseExplode;
+                h2Ref.current.appendChild(span);
+            });
+        }, 1000);
     };
     useEffect(() => {
         if (isHovered) {
@@ -46,21 +58,30 @@ const WideScreenCard = ({
             });
 
             const smoke = document.createElement("img");
-            smoke.src = "/horizontal-smoke.png";
+            smoke.src = "/smoke.gif";
             smoke.style.animationDuration = `${letters.length * 0.2}s`;
             smoke.className = styles.smoke;
+            smoke.style.transform = "rotate(90deg)"; // Rotate the image 90 degrees
             h2Ref.current.appendChild(smoke);
             smoke.addEventListener("animationend", () => {
                 h2Ref.current.removeChild(smoke);
             });
         }
     }, [isHovered]);
+    useEffect(() => {
+        //This is to ensure that the timeouts don’t try to update the state of a component that is no longer in the DOM, which can cause memory leaks.
+
+        return () => {
+            clearTimeout(timerId);
+            clearTimeout(reverseTimer);
+        };
+    }, []);
     return (
         <>
             <div
                 onMouseEnter={handleHover}
                 onMouseLeave={handleMouseLeave}
-                className={`${styles.contai} ${styles.card} ${styles.fading} border relative w-[55vw] h-[24vh] flex flex-row items-center justify-center gap-2`}
+                className={`${styles.contai} ${styles.card} ${styles.wideFading} border relative w-[55vw] h-[24vh] flex flex-row items-center justify-center gap-2`}
             >
                 <h2
                     ref={h2Ref}
