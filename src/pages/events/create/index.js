@@ -133,7 +133,7 @@ const EventCreationPage = () => {
         // Don't forget to unsubscribe when your component unmounts.
         return () => unsubscribe();
     }, []);
-    if (!isAuthenticated || !isPhoneNumberVerified) {
+    if (isAuthenticated && !isPhoneNumberVerified) {
         return (
             <>
                 <PhoneVerify />
