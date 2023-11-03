@@ -10,7 +10,6 @@ const EventCardLeft = ({
     location,
     date,
     time,
-    organizer,
     description,
 }) => {
     const router = useRouter();
@@ -57,11 +56,9 @@ const EventCardLeft = ({
                         Review
                     </button>
                 </div>
-                <div
-                    className={`${styles.productImage} xl:w-[244px] xl:h-[143px] sm:w-[139px] sm:h-[82px] w-[100px] h-[58px] `}
-                >
+                <div className={`${styles.productImage} w-full h-full`}>
                     <img
-                        className={`{${styles.contaiImg} `}
+                        className='w-full h-full'
                         src={image}
                         alt='Product Image'
                     />

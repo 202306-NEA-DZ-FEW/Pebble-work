@@ -51,8 +51,6 @@ const DesktopEvents = (user) => {
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const matchingEvents = querySnapshot.docs.map((doc) => doc.data());
             setFilteredEvents(matchingEvents);
-
-            console.log(filteredEvents);
         });
 
         return unsubscribe;
@@ -75,7 +73,6 @@ const DesktopEvents = (user) => {
             const querySnapshot = await getDocs(q);
             const filteredEvents = querySnapshot.docs.map((doc) => doc.data());
             setCalendarEvents(filteredEvents);
-            console.log(CalendarEvents);
             setSelectedDate(selectedDate);
         } catch (error) {
             console.error("Error getting filtered events: ", error);
@@ -233,9 +230,7 @@ const DesktopEvents = (user) => {
                         className={`md:h-[800px] h-[400px] xl:w-[840px] pb-[140px] md:pb-[140px] md:w-[480px] lg:w-[490px] ${styles.information}`}
                     >
                         <ul className={` flex flex-col items gap-2 `}>
-                            {filteredEvents.map((event, index) => {
-                                const EventCardComponent =
-                                    index % 2 === 0 ? EventCard : EventCardLeft;
+                            {filteredEvents.map((event) => {
                                 return (
                                     <WideScreenCard
                                         eventId={event.id}

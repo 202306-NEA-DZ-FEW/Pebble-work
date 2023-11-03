@@ -9,7 +9,6 @@ const EventCard = ({
     location,
     date,
     time,
-    organizer,
     description,
 }) => {
     const router = useRouter();
@@ -58,14 +57,8 @@ const EventCard = ({
                         </button>
                     </div>
                 </div>
-                <div
-                    className={`${styles.productImage} w-[100px] h-[58px] xl:w-[244px] xl:h-[143px] sm:w-[139px] sm:h-[82px]`}
-                >
-                    <img
-                        className={`{${styles.contaiImg}`}
-                        src={image}
-                        alt={title}
-                    />
+                <div className={`${styles.productImage} w-full h-full`}>
+                    <img className='w-full h-full' src={image} alt={title} />
                     <div className={`${styles.info}`}>
                         <h2 className='sm:text-[13px] text-[10px] xl:text-[22.22px] underline'>
                             {type}
