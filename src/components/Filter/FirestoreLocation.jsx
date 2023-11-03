@@ -9,7 +9,6 @@ function FirestoreLocation({ onInputChange }) {
 
     const handleLocationChange = (e) => {
         setInputValue(e.target.value);
-        onInputChange(e.target.value);
 
         // Clear the filtered list
         setFilteredLocations([]);
@@ -45,6 +44,7 @@ function FirestoreLocation({ onInputChange }) {
         setInputValue(selectedLocation);
         // Clear the filtered list when an item is selected
         setFilteredLocations([]);
+        onInputChange(selectedLocation);
 
         // onLocationSelect(selectedLocation);
     };
