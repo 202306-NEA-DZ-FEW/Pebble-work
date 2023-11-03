@@ -274,7 +274,7 @@
     }
     100% {
         opacity: 1;
-        transform: translateX(95%);
+        transform: translateX(90%);
     }
     105% {
         opacity: 0;
