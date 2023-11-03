@@ -10,7 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { sendPasswordResetEmail } from "firebase/auth";
 import BtnGoogle from "@/components/BtnTwitter&Google/ButtonGoogle";
@@ -31,10 +31,6 @@ const SignInPage = () => {
     const [modalContent, setModalContent] = useState("");
     const [modalClassName, setModalClassName] = useState("");
     const [resetMode, setResetMode] = useState(false);
-
-    const toggleResetMode = () => {
-        setResetMode(!resetMode);
-    };
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -159,11 +155,16 @@ const SignInPage = () => {
             );
         }
     };
-    const handleResetPassword = async () => {
+    const handleResetPassword = async (event) => {
+        event.preventDefault();
+
+        if (!resetMode) {
+            return;
+        }
         try {
             await sendPasswordResetEmail(auth, RestEmail);
             setShowPopup(true);
-            setModalContent("Congrats! You signed in/up successfully.");
+            setModalContent("Reset Email sent successfully .");
             setModalClassName(
                 "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  "
             );
@@ -179,7 +180,15 @@ const SignInPage = () => {
             );
         }
     };
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+        }
+    };
 
+    const toggleResetMode = () => {
+        setResetMode(!resetMode);
+    };
     return (
         <>
             <div className='flex justify-center items-center h-screen'>
@@ -210,7 +219,7 @@ const SignInPage = () => {
                                 <div className='shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25  border-t flex-grow'></div>
                             </div>
                         </div>
-                        <form onSubmit={handleLogin}>
+                        <form onSubmit={handleLogin} onKeyDown={handleKeyDown}>
                             {resetMode ? (
                                 <div className='mb-4'>
                                     <label
@@ -293,7 +302,6 @@ const SignInPage = () => {
                             <div>
                                 <div className="text-stone-500 text-sm font-normal font-['Rubik'] mt-4">
                                     <button onClick={toggleResetMode}>
-                                        {" "}
                                         Forgot your password?
                                     </button>
                                     {resetMode ? (
@@ -327,7 +335,7 @@ const SignInPage = () => {
                                     <button
                                         className=' px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 '
                                         type='submit'
-                                        disabled={resetMode}
+                                        // disabled={resetMode}
                                     >
                                         Sign in
                                     </button>
