@@ -30,11 +30,7 @@ const DesktopEvents = (user) => {
     const [resetDays, setResetDays] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(5);
-    const totalPages = Math.ceil(events.length / itemsPerPage);
 
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = events.slice(indexOfFirstItem, indexOfLastItem);
     const handleLocationInputChange = (value) => {
         setInputValue1(value);
     };
@@ -127,7 +123,7 @@ const DesktopEvents = (user) => {
 
     useEffect(() => {
         const applyFilters = () => {
-            let filteredEvents = currentItems;
+            let filteredEvents = events; // Use all events, not just current page
 
             // Apply type filter
             if (filteredTypes.length > 0) {
@@ -154,7 +150,16 @@ const DesktopEvents = (user) => {
         };
 
         applyFilters();
-    }, [currentItems, selectedDate, inputValue1, filteredTypes]);
+    }, [events, selectedDate, inputValue1, filteredTypes]); // Depend on all events
+
+    // Pagination should be handled outside of the useEffect
+    const totalPages = Math.ceil(filteredEvents.length / itemsPerPage);
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = filteredEvents.slice(
+        indexOfFirstItem,
+        indexOfLastItem
+    );
 
     const resetEvents = () => {
         setSelectedTypes([]);
@@ -185,7 +190,7 @@ const DesktopEvents = (user) => {
                 >
                     <div className={` `}>
                         <ul className={`flex flex-col items gap-2`}>
-                            {filteredEvents.map((event) => {
+                            {currentItems.map((event) => {
                                 return (
                                     <WideScreenCard
                                         eventId={event.id}
@@ -201,6 +206,7 @@ const DesktopEvents = (user) => {
                                     />
                                 );
                             })}
+
                             {(inputValue1 || filteredTypes.length > 0) &&
                                 filteredEvents.length === 0 && (
                                     <p className='text-red-500 text-center'>
