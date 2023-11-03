@@ -8,8 +8,6 @@ import {
     where,
 } from "firebase/firestore";
 
-import EventCard from "@/components/Events/EventCard";
-import EventCardLeft from "@/components/Events/EventCardLeft";
 import Calendar from "@/components/Filter/Calendar";
 import FilterByType from "@/components/Filter/FilterByType";
 import LocationFilter from "@/components/Filter/LocationFilter";
@@ -210,26 +208,22 @@ const DesktopEvents = (user) => {
 
     return (
         <>
-            <main
-                className={` flex flex-col justify-center items-center pb-12`}
-            >
+            <main className={` flex flex-col justify-center items-center`}>
                 <div>
                     <h1>Welcome, {user.name}!</h1>
                     <p>This is the events page</p>
                 </div>
                 <button
                     onClick={resetEvents}
-                    className={` w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px] ml-auto  mr-2`}
+                    className={` w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px] ml-auto mr-2`}
                 >
                     All events
                 </button>
                 <div
-                    className={`flex flex-col-reverse sm:flex sm:flex-row-reverse sm:items-center sm:justify-evenly sm:gap-8 sm:h-full sm:w-full`}
+                    className={`flex flex-row-reverse items-center justify-evenly w-full`}
                 >
-                    <div
-                        className={`md:h-[800px] h-[400px] xl:w-[840px] pb-[140px] md:pb-[140px] md:w-[480px] lg:w-[490px] ${styles.information}`}
-                    >
-                        <ul className={` flex flex-col items gap-2 `}>
+                    <div className={` `}>
+                        <ul className={`flex flex-col items gap-2`}>
                             {filteredEvents.map((event) => {
                                 return (
                                     <WideScreenCard
@@ -261,7 +255,7 @@ const DesktopEvents = (user) => {
                             )}
                         </ul>
                     </div>
-                    <div className='flex bg-white z-10 flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7'>
+                    <div className='flex bg-white z-10 flex-row items-center justify-between sm:flex sm:flex-col ml-[-150px] sm:items-center text-black sm:gap-7'>
                         <div className='sm:flex s:flex-col sm:items-center sm:justify-center'>
                             <button
                                 className='sm:hidden'

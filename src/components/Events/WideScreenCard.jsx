@@ -81,7 +81,7 @@ const WideScreenCard = ({
             <div
                 onMouseEnter={handleHover}
                 onMouseLeave={handleMouseLeave}
-                className={`${styles.contai} ${styles.card} ${styles.wideFading} border relative w-[55vw] h-[24vh] flex flex-row items-center justify-center gap-2`}
+                className={`${styles.contai} ${styles.card} ${styles.wideFading} border w-[55vw] h-[24vh] flex flex-row items-center justify-center gap-2`}
             >
                 <h2
                     ref={h2Ref}
@@ -103,7 +103,7 @@ const WideScreenCard = ({
                             hideBackground
                                 ? `${styles.backgroundImageHidden}`
                                 : "hidden"
-                        } text-black bottom-0 right-0 text-[8px] leading-[10px] md:leading-[15px] xl:leading-[20px] sm:text-[10.20px]`}
+                        } text-black text-[8px] leading-[10px] md:leading-[15px] xl:leading-[20px] sm:text-[10.20px]`}
                     >
                         <li>
                             <strong>Location:</strong> {location}
