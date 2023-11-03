@@ -43,8 +43,8 @@ function FirestoreLocation({ onInputChange }) {
         setLocation(selectedLocation);
         setInputValue(selectedLocation);
         // Clear the filtered list when an item is selected
-        setFilteredLocations([]);
         onInputChange(selectedLocation);
+        setFilteredLocations([]);
 
         // onLocationSelect(selectedLocation);
     };
