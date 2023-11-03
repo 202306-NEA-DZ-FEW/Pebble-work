@@ -20,7 +20,6 @@ const DesktopEvents = (user) => {
     const [inputValue, setInputValue] = useState("");
     const [selectedTypes, setSelectedTypes] = useState([]);
     const [inputValue1, setInputValue1] = useState("");
-    const [isCalendarOpen, setCalendarOpen] = useState(false);
     const [isLocationOpen, setLocationOpen] = useState(false);
     const [filteredTypes, setFilteredTypes] = useState([]);
     const [events, setEvents] = useState([]);
@@ -29,10 +28,13 @@ const DesktopEvents = (user) => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [resetLocation, setResetLocation] = useState(false);
     const [resetDays, setResetDays] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(5);
+    const totalPages = Math.ceil(events.length / itemsPerPage);
 
-    const dropdownRef = useRef(null);
-    const locationRef = useRef(null);
-
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = events.slice(indexOfFirstItem, indexOfLastItem);
     const handleLocationInputChange = (value) => {
         setInputValue1(value);
     };
@@ -77,39 +79,6 @@ const DesktopEvents = (user) => {
         }
     };
 
-    const handleLocationOutside = (event) => {
-        if (window.innerWidth <= 640) {
-            if (
-                locationRef.current &&
-                !locationRef.current.contains(event.target)
-            ) {
-                setLocationOpen(false);
-            }
-        }
-    };
-
-    useEffect(() => {
-        document.addEventListener("click", handleLocationOutside);
-        return () => {
-            document.removeEventListener("click", handleLocationOutside);
-        };
-    }, []);
-
-    const handleClickOutside = (event) => {
-        if (
-            dropdownRef.current &&
-            !dropdownRef.current.contains(event.target)
-        ) {
-            setFilteredTypes(false);
-        }
-    };
-    useEffect(() => {
-        window.addEventListener("click", handleClickOutside);
-        return () => {
-            window.removeEventListener("click", handleClickOutside);
-        };
-    }, []);
-
     // Handle location click
     const handleLocationClick = () => {
         setLocationOpen(!isLocationOpen);
@@ -120,26 +89,18 @@ const DesktopEvents = (user) => {
         setInputValue(e.target.value);
     };
 
-    // Handle test click
-    const handleTestClick = () => {
-        setCalendarOpen(!isCalendarOpen);
-    };
-
     // Resize event listener
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth > 640) {
-                setCalendarOpen(true);
                 setLocationOpen(true);
             } else {
-                setCalendarOpen(false);
                 setLocationOpen(false);
             }
         };
 
         // Set initial state based on window size
         if (window.innerWidth > 640) {
-            setCalendarOpen(true);
             setLocationOpen(true);
         }
 
@@ -166,7 +127,7 @@ const DesktopEvents = (user) => {
 
     useEffect(() => {
         const applyFilters = () => {
-            let filteredEvents = events;
+            let filteredEvents = currentItems;
 
             // Apply type filter
             if (filteredTypes.length > 0) {
@@ -193,7 +154,7 @@ const DesktopEvents = (user) => {
         };
 
         applyFilters();
-    }, [events, selectedDate, inputValue1, filteredTypes]);
+    }, [currentItems, selectedDate, inputValue1, filteredTypes]);
 
     const resetEvents = () => {
         setSelectedTypes([]);
@@ -254,40 +215,36 @@ const DesktopEvents = (user) => {
                                 </p>
                             )}
                         </ul>
-                    </div>
-                    <div className='flex bg-white z-10 flex-row items-center justify-between sm:flex sm:flex-col ml-[-150px] sm:items-center text-black sm:gap-7'>
-                        <div className='sm:flex s:flex-col sm:items-center sm:justify-center'>
-                            <button
-                                className='sm:hidden'
-                                onClick={handleTestClick}
-                            >
-                                Change Date
-                            </button>
-                            {isCalendarOpen && (
-                                <div
-                                    style={{
-                                        animation: `${
-                                            isCalendarOpen
-                                                ? `${styles.fadeIn} 0.7s ease-in-out`
-                                                : ""
-                                        }`,
-                                    }}
-                                    className={`${
-                                        isCalendarOpen ? "open" : ""
-                                    } ${
-                                        styles.calendarContainer
-                                    } border border-black rounded-[8px] z-10 bg-white sm:bg-transparent`}
+                        <div className='flex justify-center gap-20 text-black'>
+                            {Array.from(
+                                { length: totalPages },
+                                (_, i) => i + 1
+                            ).map((pageNumber) => (
+                                <button
+                                    key={pageNumber}
+                                    onClick={() => setCurrentPage(pageNumber)}
+                                    disabled={pageNumber === currentPage}
                                 >
-                                    <Calendar
-                                        resetDays={resetDays}
-                                        checkEvents={checkEvents}
-                                    />
-                                </div>
-                            )}
+                                    {pageNumber}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                    <div className='flex bg-white z-10 flex-row items-center justify-between sm:flex sm:flex-col ml-[-100px] sm:items-center text-black sm:gap-7'>
+                        <div className='sm:flex s:flex-col sm:items-center sm:justify-center'>
+                            <button className='sm:hidden'>Change Date</button>
+
+                            <div
+                                className={`${styles.calendarContainer} border border-black rounded-[8px] z-10 bg-white sm:bg-transparent`}
+                            >
+                                <Calendar
+                                    resetDays={resetDays}
+                                    checkEvents={checkEvents}
+                                />
+                            </div>
                         </div>
                         <div className='h-66'>
                             <LocationFilter
-                                refLocation={locationRef}
                                 HandleClick={handleLocationClick}
                                 HandleOpen={isLocationOpen}
                                 InputChange={handleInputChange}
@@ -299,7 +256,6 @@ const DesktopEvents = (user) => {
                         </div>
 
                         <FilterByType
-                            ref={dropdownRef}
                             setFilteredTypes={setFilteredTypes}
                             selectedTypes={selectedTypes}
                             setSelectedTypes={setSelectedTypes}

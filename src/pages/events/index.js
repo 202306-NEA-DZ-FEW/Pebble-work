@@ -4,7 +4,7 @@ import DesktopEvents from "@/components/Events/DesktopEvents";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 const EventsPage = () => {
-    const matches = useMediaQuery("(min-width:1024px)");
+    const matches = useMediaQuery("(min-width:1000px)");
     return (
         <>
             <div>{matches ? <DesktopEvents /> : <MobileEvents />}</div>
