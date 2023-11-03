@@ -209,7 +209,9 @@ const EventsPage = (user) => {
         setResetLocation(true);
         setResetDays([]);
     };
-
+    const handleInputDelete = () => {
+        setFilteredEvents(events);
+    };
     return (
         <>
             <main
@@ -300,6 +302,7 @@ const EventsPage = (user) => {
                                 onInputChange={handleLocationInputChange}
                                 resetLocation={resetLocation}
                                 setResetLocation={setResetLocation}
+                                onInputDelete={handleInputDelete}
                             />
                         </div>
 

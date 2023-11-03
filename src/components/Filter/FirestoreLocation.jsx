@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { db } from "@/util/firebase";
 import { doc, getDoc } from "firebase/firestore";
 
-function FirestoreLocation({ onInputChange }) {
+function FirestoreLocation({ onInputChange, onInputDelete }) {
     const [location, setLocation] = useState("");
     const [filteredLocations, setFilteredLocations] = useState([]);
     const [inputValue, setInputValue] = useState("");
@@ -14,7 +14,9 @@ function FirestoreLocation({ onInputChange }) {
         setFilteredLocations([]);
 
         const inputLocation = e.target.value.toLowerCase();
-
+        if (inputLocation.length === 0) {
+            onInputDelete();
+        }
         // Get the 'data' field from Firestore document
         const fetchLocationData = async () => {
             try {
