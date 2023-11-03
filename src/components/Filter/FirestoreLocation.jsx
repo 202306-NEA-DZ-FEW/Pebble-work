@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { db } from "@/util/firebase";
 import { doc, getDoc } from "firebase/firestore";
 
-function FirestoreLocation({ onLocationSelect, onInputChange }) {
+function FirestoreLocation({ onInputChange }) {
     const [location, setLocation] = useState("");
     const [filteredLocations, setFilteredLocations] = useState([]);
     const [inputValue, setInputValue] = useState("");
