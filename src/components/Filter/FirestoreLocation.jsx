@@ -46,7 +46,7 @@ function FirestoreLocation({ onLocationSelect, onInputChange }) {
         // Clear the filtered list when an item is selected
         setFilteredLocations([]);
 
-        onLocationSelect(selectedLocation);
+        // onLocationSelect(selectedLocation);
     };
 
     return (

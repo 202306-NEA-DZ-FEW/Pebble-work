@@ -271,14 +271,6 @@ const EventsPage = (user) => {
                             )}
                         </div>
                         <div className='h-66'>
-                            {/* <LocationFilter
-                                refLocation={locationRef}
-                                HandleClick={handleLocationClick}
-                                HandleOpen={isLocationOpen}
-                                InputChange={handleInputChange}
-                                inputValue={inputValue}
-                                onInputChange={handleLocationInputChange}
-                            /> */}
                             <FirestoreLocation
                                 onInputChange={handleLocationInputChange}
                             />
