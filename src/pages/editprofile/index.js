@@ -1,150 +1,458 @@
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { db, auth, storage, firestore } from "../../util/firebase";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { collection, doc, updateDoc, getDoc } from "firebase/firestore";
+import { getAuth, updatePassword, onAuthStateChanged } from "firebase/auth";
 import Image from "next/image";
-import React from "react";
+import Modal from "@/components/Popup/Modal";
+import PicturesLibrary from "./library";
 
 const ProfilePage = () => {
-    return (
-        <div className='container ml-8 mt-8 mx-0 w-80 justify-start sm:items-center  md:items-start md:text-2xl md:mx-auto md:w-auto '>
-            <div className='flex flex-col sm:items-center md:items-start md:w-12/12 '>
-                <h1 className=' font-semibold text-lg md:text-4xl md:ml-10 md:mt-5'>
-                    Edit Profile
-                </h1>
-                {/* Profile  Picture /Change */}
-                <div className='  flex flex-row mt-4 md:w-full md:gap-10  '>
-                    <div className='flex items-center h-4/12 w-4/12 rounded-full outline outline-2  overflow-hidden md:w-2/12 h-5/12 md:mt-8'>
-                        <Image
-                            src='/profile.jpg'
-                            width={200}
-                            height={200}
-                            alt=''
-                            className=' '
+    const router = useRouter();
+    const [currentUser, setCurrentUser] = useState(null);
+    const [currentUserId, setCurrentUserId] = useState(null);
+    const [userInterests, setUserInterests] = useState([]);
+    const [isSaved, setIsSaved] = useState(false);
+
+    /// Modal states
+    const [showPopup, setShowPopup] = useState(false);
+    const [modalContent, setModalContent] = useState("");
+    const [modalClassName, setModalClassName] = useState("");
+
+    /// PROFILE PICTURES LIBRARY STATES
+    const [isLibraryOpen, setIsLibraryOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState("");
+
+    // update profile inputs
+    const [editedName, setEditedName] = useState("");
+    const [editedSurname, setEditedSurname] = useState("");
+    const [editedEmail, setEditedEmail] = useState("");
+    const [editedLocation, setEditedLocation] = useState("");
+    const [newPassword, setNewPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+
+    const EventTypes = [
+        "No Poverty",
+        "Zero Hunger",
+        "Good Health and Well-being",
+        "Quality Education",
+        "Affordable and Clean Energy",
+        "Decent Work and Economic Growth",
+        "Industry, Innovation, and Infrastructurey",
+        "Reduced Inequalities",
+        "Sustainable Cities and Communities",
+        "Responsible Consumption/Production",
+        "Climate Action",
+        "Life Below Water",
+        "Life on Land",
+        "Peace, Justice and Strong Institutions",
+    ];
+
+    const handleSuccess = () => {
+        setShowPopup(true);
+    };
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, async (authUser) => {
+            if (authUser) {
+                const userDocRef = doc(db, "users", authUser.uid);
+                setCurrentUserId(authUser.uid);
+                try {
+                    const userDoc = await getDoc(userDocRef);
+                    if (userDoc.exists()) {
+                        setCurrentUser(userDoc.data());
+                        setUserInterests(userDoc.data().interests);
+                    } else {
+                        console.log("User document does not exist.");
+                    }
+                } catch (error) {
+                    console.error("Error fetching user data:", error);
+                }
+            } else {
+                router.push("/signin");
+            }
+        });
+
+        return () => {
+            unsubscribe();
+        };
+    }, []);
+
+    // Handle user interests function
+
+    const handleUpdateInterests = (interest, e) => {
+        e.preventDefault();
+        if (userInterests.includes(interest)) {
+            setUserInterests(userInterests.filter((item) => item !== interest));
+        } else {
+            setUserInterests([...userInterests, interest]);
+        }
+    };
+
+    // Handle edit profile function
+
+    const handleUpdateProfile = async (e) => {
+        e.preventDefault();
+        const userDocRef = doc(db, "users", currentUserId);
+        // Update Firestore document with the new profile data
+        // await updateDoc(userDocRef, { interests: userInterests });
+        updateDoc(userDocRef, { interests: userInterests });
+
+        await updateDoc(userDocRef, {
+            Name: editedName.trim() !== "" ? editedName : currentUser.Name,
+            Surname:
+                editedSurname.trim() !== ""
+                    ? editedSurname
+                    : currentUser.Surename,
+            email: editedEmail.trim() !== "" ? editedEmail : currentUser.email,
+            Location:
+                editedLocation.trim() !== ""
+                    ? editedLocation
+                    : currentUser.Location,
+        });
+        ///setIsSaved(true);
+        setShowPopup(true);
+        setModalContent(
+            "Profile updated successfuly,you are being redirected to your profile"
+        );
+        setModalClassName(
+            "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+        );
+        setTimeout(() => {
+            router.push("/profile");
+        }, 3000);
+    };
+
+    // handle Change Password Function
+
+    const handleChangePassword = async (e) => {
+        e.preventDefault();
+
+        if (newPassword !== confirmPassword) {
+            setShowPopup(true);
+            setModalContent("Passwords do not match. Please try again.");
+            setModalClassName(
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+            );
+            setTimeout(() => {
+                setShowPopup(false);
+            }, 2000);
+            return;
+        }
+
+        try {
+            // Change the user's password
+            await updatePassword(auth.currentUser, newPassword);
+            setShowPopup(true);
+            setModalContent("Your password has been successfully updated");
+            setModalClassName(
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+            );
+            setTimeout(() => {
+                setShowPopup(false);
+            }, 2000);
+
+            setNewPassword("");
+            setConfirmPassword("");
+        } catch (error) {
+            setShowPopup(true);
+            setModalContent("Error changing password. Please try again.");
+            setModalClassName(
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+            );
+            setTimeout(() => {
+                setShowPopup(false);
+            }, 2000);
+        }
+    };
+
+    /// handle Upload Profile Picture Function
+
+    const handleUploadProfilePicture = async (e) => {
+        const file = e.target.files[0];
+
+        if (file) {
+            try {
+                const storageRef = ref(
+                    storage,
+                    `Profilepictures/${currentUserId}/${file.name}`
+                );
+                await uploadBytes(storageRef, file);
+
+                const imageUrl = await getDownloadURL(storageRef);
+
+                const userDocRef = doc(db, "users", currentUserId);
+                await updateDoc(userDocRef, { Image: imageUrl });
+
+                // Refresh the page to display the updated profile picture
+                window.location.reload();
+            } catch (error) {
+                setShowPopup(true);
+                setModalContent(
+                    "Error uploading profile picture. Please try again."
+                );
+                setModalClassName(
+                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                );
+                setTimeout(() => {
+                    setShowPopup(false);
+                }, 2000);
+            }
+        }
+    };
+
+    /// pictures library functionalities
+    const handleOpenLibrary = () => {
+        setIsLibraryOpen(true);
+    };
+
+    const handleCloseLibrary = () => {
+        setIsLibraryOpen(false);
+    };
+
+    const handleSaveSelectedImage = async () => {
+        // Create a Firestore document reference for the user
+        const userRef = doc(db, "users", currentUserId);
+        if (selectedImage == "") {
+            return;
+        }
+
+        try {
+            // Update the user's "Image" field in Firestore with the selected photo's URL
+            await updateDoc(userRef, { Image: selectedImage });
+
+            // Profile photo updated successfully
+            setModalContent("Profile photo updated successfully");
+            setModalClassName(
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+            );
+            setTimeout(() => {
+                setShowPopup(false);
+                window.location.reload();
+            }, 2000);
+        } catch (error) {
+            setShowPopup(true);
+            setModalContent(
+                "Error updating profile picture. Please try again."
+            );
+            setModalClassName(
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+            );
+            setTimeout(() => {
+                setShowPopup(false);
+            }, 2000);
+        }
+        setIsLibraryOpen(false);
+    };
+
+    if (isSaved) {
+        router.push("/profile");
+    }
+    if (!currentUser) {
+        return <p>Loading</p>;
+    } else {
+        return (
+            <div className='container ml-8 mt-8 mx-0 w-80 justify-start sm:items-center  md:items-start md:text-2xl md:mx-auto md:w-auto '>
+                <div className='flex flex-col sm:items-center md:items-start md:w-12/12 '>
+                    <h1 className=' font-semibold text-lg md:text-4xl md:ml-10 md:mt-5'>
+                        Edit Profile
+                    </h1>
+                    {/* Profile  Picture /Change */}
+                    <form onSubmit={handleUpdateProfile}>
+                        <div className='ml-5 flex flex-row mt-4 md:w-full md:gap-10    '>
+                            <div className='flex items-center h-4/12 w-4/12 rounded-full outline outline-2  overflow-hidden md:w-2/12 h-5/12 md:mt-8'>
+                                <Image
+                                    src={currentUser.Image}
+                                    width={200}
+                                    height={200}
+                                    alt=''
+                                    className=' '
+                                />
+                            </div>
+
+                            {/* Change  Picture */}
+                            <div className='flex flex-row ml-4 -mt-4 w-full md:ml-10  md:mt-20 '>
+                                <input
+                                    type='file'
+                                    accept='image/*'
+                                    id='profilePictureInput'
+                                    style={{ display: "none" }}
+                                    onChange={handleUploadProfilePicture}
+                                />
+                                {/* profilr pic input */}
+                                <label
+                                    htmlFor='profilePictureInput'
+                                    className='bg-orange-400 mt-10 text-center h-8 w-35 ml-0 px-4 py-2 text-xs text-white  shadow-md md:text-lg md:w-3/12 md:h-12 cursor-pointer'
+                                >
+                                    Upload New
+                                </label>
+                                <button
+                                    className='mt-10 text-center h-8 w-6/12  ml-3  text-xs   outline outline-1 rounded shadow-md md:w-4/12 md:h-12 md:ml-8 md:text-lg'
+                                    type='button'
+                                    onClick={(e) => handleOpenLibrary(e)}
+                                >
+                                    Choose from Library
+                                </button>
+
+                                {isLibraryOpen && (
+                                    <PicturesLibrary
+                                        selectedImage={selectedImage}
+                                        setSelectedImage={setSelectedImage}
+                                        onClose={handleCloseLibrary}
+                                        onHandleSave={handleSaveSelectedImage}
+                                    />
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Edit  Inforation */}
+
+                        <div className='flex flex-col mt-9 w-70 sm:items-center  md:items-start md:mt-14 md:ml-10'>
+                            <h3 className='font-semibold text-md mt-5 w-70'>
+                                Name (Required)
+                            </h3>
+                            <input
+                                type='text'
+                                placeholder='  Name'
+                                className='outline outline-1 mt-3 w-3/4 rounded md:mt-5'
+                                name='name'
+                                defaultValue={currentUser.Name}
+                                onChange={(e) => setEditedName(e.target.value)}
+                                required
+                            ></input>
+                            <h3 className='font-semibold text-md mt-5 w-70'>
+                                Surname (Required)
+                            </h3>
+                            <input
+                                type='text'
+                                placeholder='  Surname'
+                                className='outline outline-1 mt-3 w-3/4 rounded md:mt-5'
+                                name='surname'
+                                defaultValue={currentUser.Surename}
+                                onChange={(e) =>
+                                    setEditedSurname(e.target.value)
+                                }
+                                required
+                            ></input>
+                            <h3 className='font-semibold text-md mt-5 w-70'>
+                                Email (Required)
+                            </h3>
+                            <input
+                                type='email'
+                                placeholder='  Email'
+                                className='outline outline-1 mt-3 w-3/4 rounded md:mt-5'
+                                name='email'
+                                defaultValue={currentUser.email}
+                                onChange={(e) => setEditedEmail(e.target.value)}
+                                required
+                            ></input>
+
+                            {/*  */}
+                            <h3 className='font-semibold text-md mt-5 w-70'>
+                                Location (Required)
+                            </h3>
+                            <input
+                                type='text'
+                                placeholder='  Location'
+                                className='outline outline-1 mt-3 w-3/4 rounded md:mt-5'
+                                name='location'
+                                defaultValue={currentUser.Location}
+                                onChange={(e) =>
+                                    setEditedLocation(e.target.value)
+                                }
+                                required
+                            ></input>
+                            {/* Your Interests */}
+                            <h3 className='font-semibold text-md mt-5 w-70'>
+                                Interests
+                            </h3>
+                            <div
+                                className=' -ml-15 mt-5 grid grid-container text-center justify-evenly  text-xs md:w-full md:h-auto  md:mt-8 md:text-3xl '
+                                style={{
+                                    display: "grid",
+                                    gridTemplateColumns: "1fr 1fr 1fr",
+                                    gap: "1rem",
+                                    height: "300px",
+                                }}
+                            >
+                                {EventTypes.map((type, index) => (
+                                    <button
+                                        key={index}
+                                        className={`outline outline-1 rounded outline-orange-600 font-semibold text-orange-600  text-xs whitespace-normal ${
+                                            userInterests.includes(type)
+                                                ? "text-white bg-orange-400" // Change the background color for selected buttons
+                                                : ""
+                                        }`}
+                                        onClick={(e) =>
+                                            handleUpdateInterests(type, e)
+                                        }
+                                    >
+                                        {type}
+                                    </button>
+                                ))}{" "}
+                            </div>
+                            {/* Save Interests Button */}
+                            <div className='mt-0 flex flex-col items-end  md:mx-auto'>
+                                <button
+                                    type='submit'
+                                    className='mt-7 bg-orange-400  text-center h-8  px-4 py-2 text-xs text-white  shadow-md md:h-14 md:w-40 md:text-md'
+                                >
+                                    Save changes
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    {/* Change Password  */}
+                    <div className='mt-5 pt-0 mx-auto pb-5 flex flex-col  bg-cyan-100  rounded mb-20 md:mx-auto md:mt-8 md:ml-20 '>
+                        <h3 className='font-bold mt-5 ml-4'>Change Password</h3>
+                        <form onSubmit={handleChangePassword}>
+                            <div className='flex flex-row ml-6 mt-3 gap-x-5 items-center justify-items-center '>
+                                <input
+                                    type='password'
+                                    placeholder='New Password'
+                                    value={newPassword}
+                                    onChange={(e) =>
+                                        setNewPassword(e.target.value)
+                                    }
+                                    className=' w-5/12 h-8 rounded'
+                                    required
+                                ></input>
+                                <input
+                                    type='password'
+                                    placeholder='Confirm Password'
+                                    value={confirmPassword}
+                                    onChange={(e) =>
+                                        setConfirmPassword(e.target.value)
+                                    }
+                                    className='w-5/12 h-9 rounded'
+                                    required
+                                ></input>
+                            </div>
+                            <div className='flex flex-row  mt-4 pb-3 gap-4 items-end  ml-20'>
+                                <button
+                                    type='submit'
+                                    className='bg-orange-400  text-center h-8 w-3/12   text-xs text-white  shadow-md '
+                                >
+                                    Submit
+                                </button>
+                                <button className=' text-center h-8 w-4/12 text-xs  outline outline-1 rounded shadow-md'>
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    {showPopup && (
+                        <Modal
+                            message={modalContent}
+                            onClose={handleSuccess}
+                            className={modalClassName}
                         />
-                    </div>
-
-                    {/* Change  Picture */}
-                    <div className='flex flex-row ml-4 -mt-4 w-full md:ml-10  md:mt-20 '>
-                        <button className='bg-orange-400 mt-10 text-center h-8 w-35 ml-0 px-4 py-2 text-xs text-white  shadow-md md:text-lg md:w-3/12 md:h-12'>
-                            Upload New
-                        </button>
-                        <button className='mt-10 text-center h-8 w-6/12  ml-3  text-xs   outline outline-1 rounded shadow-md md:w-4/12 md:h-12 md:ml-8 md:text-lg'>
-                            Choose from Library
-                        </button>
-                    </div>
-                </div>
-
-                {/* Edit  Inforation */}
-
-                <div className='flex flex-col mt-9 w-70 sm:items-center  md:items-start md:mt-14 md:ml-10'>
-                    <h3 className='font-semibold text-md w-70'>
-                        Name (Required)
-                    </h3>
-                    <input
-                        type='text'
-                        placeholder='  Name'
-                        className='outline outline-1 mt-3 w-3/4 rounded md:mt-5'
-                    ></input>
-                    {/*  */}
-                    <h3 className='font-semibold text-md mt-5 w-70'>
-                        Your Location
-                    </h3>
-                    <input
-                        type='text'
-                        placeholder='  Location'
-                        className='outline outline-1 mt-3 w-3/4 rounded md:mt-5'
-                    ></input>
-                    {/* Your Interests */}
-                    <h3 className='font-semibold text-md mt-5 w-70'>
-                        Your Interests
-                    </h3>
-                    <div
-                        className=' -ml-15 mt-5 grid grid-container text-center justify-evenly  text-xs md:w-full md:h-auto  md:mt-8 md:text-3xl '
-                        style={{
-                            display: "grid",
-                            gridTemplateColumns: "1fr 1fr 1fr",
-                            gap: "1rem",
-                            height: "300px",
-                        }}
-                    >
-                        <button className=' outline outline-1 rounded outline-orange-600 font-semibold text-orange-600 text-xs'>
-                            No Poverty
-                        </button>
-                        <button className=' outline outline-1 rounded outline-orange-600 font-semibold text-orange-600 text-xs'>
-                            Zero Hunger
-                        </button>
-                        <button className=' outline outline-1 rounded outline-orange-600 font-semibold text-orange-600 text-center  text-xs'>
-                            Good Health and Well-being
-                        </button>
-                        <button className=' outline outline-1 rounded outline-orange-600 font-semibold text-orange-600  text-xs whitespace-normal'>
-                            Quality Education
-                        </button>
-
-                        <button className=' outline outline-1 rounded outline-orange-600 font-semibold text-orange-600  text-xs whitespace-normal'>
-                            Clean Water and Sanitation
-                        </button>
-                        <button className=' outline outline-1 rounded outline-orange-600 font-semibold text-orange-600  text-xs whitespace-normal'>
-                            No Poverty Affordable and Clean Energy
-                        </button>
-                        <button className=' outline outline-1 rounded outline-orange-600 font-semibold text-orange-600  text-xs whitespace-normal'>
-                            Decent Work and Economic Growth
-                        </button>
-                        <button className='outline outline-1 rounded outline-orange-600 font-semibold text-orange-600  whitespace-normal text-xs'>
-                            Industry, Innovation, and Infrastructurey
-                        </button>
-                        <button className=' outline outline-1 rounded outline-orange-600 font-semibold text-orange-600  text-xs'>
-                            Reduced Inequalities
-                        </button>
-                        <button className=' outline outline-1 rounded outline-orange-600 font-semibold text-orange-600 whitespace-normal  text-xs'>
-                            Sustainable Cities and Communities
-                        </button>
-                        <button className='outline outline-1 rounded outline-orange-600 font-semibold text-orange-600  whitespace-normal   text-xs'>
-                            Responsible Consumption/Production
-                        </button>
-                        <button className='outline outline-1 rounded outline-orange-600 font-semibold text-orange-600 text-xs'>
-                            Climate Action
-                        </button>
-                        <button className='outline outline-1 rounded outline-orange-600 font-semibold text-orange-600 text-xs'>
-                            Life Below Water
-                        </button>
-                        <button className='outline outline-1 rounded outline-orange-600 font-semibold text-orange-600  text-xs'>
-                            Life on Land
-                        </button>
-                        <button className='outline outline-1 rounded outline-orange-600 font-semibold text-orange-600  text-xs'>
-                            Peace, Justice and Strong Institutions
-                        </button>
-                    </div>
-                    {/* Save Interests Button */}
-                    <div className='mt-0 flex flex-col items-end  md:mx-auto'>
-                        <button className='mt-7 bg-orange-400  text-center h-8  px-4 py-2 text-xs text-white  shadow-md md:h-14 md:w-40 md:text-xl'>
-                            Save changes
-                        </button>
-                    </div>
-                </div>
-                {/* Change Password  */}
-                <div className='mt-5 pt-0 mx-auto pb-5 flex flex-col  bg-cyan-100  rounded mb-20 md:mx-auto md:mt-8 md:ml-20 '>
-                    <h3 className='font-bold mt-5 ml-4'>Change Password</h3>
-                    <div className='flex flex-row ml-6 mt-3 gap-x-5 items-center justify-items-center '>
-                        <input
-                            type='password'
-                            placeholder=' Password'
-                            className=' w-5/12 h-8 rounded'
-                        ></input>
-                        <input
-                            type='password'
-                            placeholder=' Retype password'
-                            className='w-5/12 h-9 rounded'
-                        ></input>
-                    </div>
-                    <div className='flex flex-row  mt-4 pb-3 gap-4 items-end  ml-20'>
-                        <button className='bg-orange-400  text-center h-8 w-3/12   text-xs text-white  shadow-md '>
-                            Submit
-                        </button>
-                        <button className=' text-center h-8 w-4/12 text-xs  outline outline-1 rounded shadow-md'>
-                            Cancel
-                        </button>
-                    </div>
+                    )}
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
 };
 
 export default ProfilePage;
