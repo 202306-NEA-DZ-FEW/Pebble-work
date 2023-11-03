@@ -6,6 +6,7 @@ import HeroCard from "@/components/Homecards/HeroCard";
 import ImageSquareCard from "@/components/Homecards/ImageSquareCard";
 import MainCard from "@/components/Homecards/MainCard";
 import SocialCard from "@/components/Homecards/SocialCard";
+import ContactForm from "./ContactUs";
 
 const CardContainer = ({ children }) => <div className=''>{children}</div>;
 
@@ -38,6 +39,7 @@ const HomeCards = () => {
             </div>
 
             <HeroCard />
+            <ContactForm />
         </div>
     );
 };

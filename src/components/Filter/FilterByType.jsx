@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "@/styles/Events.module.css";
 
-const FilterByType = ({ setFilteredTypes }) => {
+const FilterByType = ({
+    selectedTypes,
+    setSelectedTypes,
+    setFilteredTypes,
+}) => {
     const dropdownRef = useRef(null);
     const [isInterestOpen, setInterestOpen] = useState(false);
-    const [selectedTypes, setSelectedTypes] = useState([]);
 
     // Handle click outside the dropdown to close it
     const handleClickOutside = (event) => {
@@ -73,7 +76,6 @@ const FilterByType = ({ setFilteredTypes }) => {
     }, [selectedTypes]);
 
     const types = [
-        "All",
         "Affordable and Clean Energy",
         "Clean Water and Sanitation",
         "Climate Action",

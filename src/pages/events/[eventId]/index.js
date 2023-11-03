@@ -1,22 +1,25 @@
+import { onAuthStateChanged } from "firebase/auth";
 import {
-    arrayUnion,
     arrayRemove,
+    arrayUnion,
+    collection,
+    deleteDoc,
     doc,
     getDoc,
     getDocs,
-    updateDoc,
-    deleteDoc,
     query,
+    updateDoc,
     where,
-    collection,
 } from "firebase/firestore";
 import Image from "next/image";
-import React from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth, db } from "@/util/firebase";
-import { useEffect, useState } from "react";
 import Link from "next/link";
+import React from "react";
+import { useEffect, useState } from "react";
+
 import NoEvent from "@/components/Events/NoEvent";
+import styles from "@/styles/EventDetails.module.css";
+
+import { auth, db } from "@/util/firebase";
 
 const EventsPage = ({ event, organizer, notFound }) => {
     const [isHovered, setIsHovered] = useState(false);
@@ -127,6 +130,25 @@ const EventsPage = ({ event, organizer, notFound }) => {
         location.reload();
     };
 
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            // This function will be called when the authentication state changes.
+
+            if (user) {
+                // User is authenticated
+                setIsAuthenticated(true);
+            } else {
+                // User is not authenticated
+                setIsAuthenticated(false);
+            }
+        });
+
+        // Don't forget to unsubscribe when your component unmounts.
+        return () => unsubscribe();
+    }, []);
+
     const joinEvent = async (eventId) => {
         const userId = auth?.currentUser?.uid;
         const userDocRef = doc(db, "users", userId);
@@ -176,7 +198,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                 </h2>
                 <div
                     style={{ marginBottom: "6rem", gap: "4rem" }}
-                    className='flex flex-col sm:flex-row mb-16 sm:mb-32 gap-4'
+                    className={`flex flex-col ${styles.mdCenterContent} sm:flex-row mb-16 sm:mb-32 gap-4`}
                 >
                     <div
                         style={{ margin: "auto", width: "100%" }}
@@ -198,110 +220,178 @@ const EventsPage = ({ event, organizer, notFound }) => {
                             />
                         )}
                     </div>
-                    <div style={{ width: "100%" }}>
-                        <p>
-                            <b>Location:</b> <br />
-                            {event.location}
-                            <br />
-                            <br />
-                            <b>Date and time:</b>
-                            <br />
-                            {event.date ? (
-                                <span> {event.date}</span>
+                    <div
+                        style={{ width: "100%" }}
+                        className='lg:flex lg:flex-col md:flex md:flex-row md:justify-items-center md:gap-x-10'
+                    >
+                        <div>
+                            <p>
+                                <b>Location:</b> <br />
+                                {event.location}
+                                <br />
+                                <br />
+                                <b>Date and time:</b>
+                                <br />
+                                {event.date ? (
+                                    <span> {event.date}</span>
+                                ) : (
+                                    <span> undefined</span>
+                                )}{" "}
+                                at
+                                {event.time ? (
+                                    <span> {event.time}</span>
+                                ) : (
+                                    <span> undefined</span>
+                                )}
+                                <br />
+                                <br />
+                                <br />
+                            </p>
+                        </div>
+                        <div>
+                            <p>
+                                Organized by{" "}
+                                {organizer.Name ? (
+                                    <b>
+                                        {organizer.Name} {organizer.Surename}
+                                    </b>
+                                ) : (
+                                    <b>Dude McGee</b>
+                                )}
+                            </p>
+
+                            {isAuthenticated ? (
+                                <>
+                                    {" "}
+                                    {userMail === organizer.email ? (
+                                        <>
+                                            <Link
+                                                href={`/events/${event.eventId}/edit`}
+                                            >
+                                                <button
+                                                    className='btn btn-sm btn-wide opacity-80 hover:opacity-100'
+                                                    style={{
+                                                        marginTop: "1rem",
+                                                        borderRadius: "8px",
+                                                        background: "grey",
+                                                        border: 0,
+                                                        color: "white",
+                                                    }}
+                                                >
+                                                    Edit event
+                                                </button>
+                                            </Link>{" "}
+                                            <button
+                                                className='btn btn-sm btn-wide hover:opacity-60'
+                                                onClick={() =>
+                                                    document
+                                                        .getElementById(
+                                                            "cancel_modal"
+                                                        )
+                                                        .showModal()
+                                                }
+                                                style={{
+                                                    marginTop: "1rem",
+                                                    borderRadius: "8px",
+                                                    background: "red",
+                                                    border: 0,
+                                                    color: "white",
+                                                }}
+                                            >
+                                                Cancel event
+                                            </button>
+                                        </>
+                                    ) : findUser ? (
+                                        <button
+                                            className='btn btn-sm btn-wide opacity-50 hover:opacity-80 cursor-default hover:cursor-pointer'
+                                            style={{
+                                                marginTop: "1rem",
+                                                borderRadius: "8px",
+                                                background: isHovered
+                                                    ? "red"
+                                                    : "#FDA855",
+                                                border: 0,
+                                                color: "white",
+                                            }}
+                                            onMouseOver={() =>
+                                                setIsHovered(true)
+                                            }
+                                            onMouseOut={() =>
+                                                setIsHovered(false)
+                                            }
+                                            onClick={() =>
+                                                document
+                                                    .getElementById(
+                                                        "canceljoin_modal"
+                                                    )
+                                                    .showModal()
+                                            }
+                                        >
+                                            {isHovered
+                                                ? "Cancel join"
+                                                : "Already joined"}
+                                        </button>
+                                    ) : (
+                                        <button
+                                            className='btn btn-sm btn-wide'
+                                            onClick={() =>
+                                                joinEvent(event.eventId)
+                                            }
+                                            style={{
+                                                marginTop: "1rem",
+                                                borderRadius: "8px",
+                                                background: "#FDA855",
+                                                border: 0,
+                                                color: "white",
+                                            }}
+                                        >
+                                            Join now
+                                        </button>
+                                    )}{" "}
+                                </>
                             ) : (
-                                <span> undefined</span>
-                            )}{" "}
-                            at
-                            {event.time ? (
-                                <span> {event.time}</span>
-                            ) : (
-                                <span> undefined</span>
+                                <>
+                                    <div className='italic text-red-400 mt-2'>
+                                        You need an account before joining an
+                                        event.
+                                    </div>
+                                    <Link href={`/signin`}>
+                                        <button
+                                            className='btn btn-sm  hover:opacity-80'
+                                            style={{
+                                                marginTop: "1rem",
+                                                borderRadius: "8px",
+                                                background: "#FDA855",
+                                                border: 0,
+                                                color: "white",
+                                            }}
+                                        >
+                                            Sign in
+                                        </button>
+                                    </Link>{" "}
+                                    <Link href={`/signup`}>
+                                        <button
+                                            className='btn btn-sm  hover:opacity-80'
+                                            style={{
+                                                marginTop: "1rem",
+                                                borderRadius: "8px",
+                                                background: "#FDA855",
+                                                border: 0,
+                                                color: "white",
+                                            }}
+                                        >
+                                            Sign up
+                                        </button>
+                                    </Link>
+                                </>
                             )}
-                            <br />
-                            <br />
-                            <br />
-                            Organized by{" "}
-                            {organizer.Name ? (
-                                <b>
-                                    {organizer.Name} {organizer.Surename}
-                                </b>
-                            ) : (
-                                <b>Dude McGee</b>
-                            )}
-                        </p>
-                        {userMail === organizer.email ? (
-                            <>
-                                <Link href={`/events/${event.eventId}/edit`}>
-                                    <button
-                                        className='btn btn-sm btn-wide opacity-80 hover:opacity-100'
-                                        style={{
-                                            marginTop: "1rem",
-                                            borderRadius: "8px",
-                                            background: "grey",
-                                            border: 0,
-                                            color: "white",
-                                        }}
-                                    >
-                                        Edit event
-                                    </button>
-                                </Link>{" "}
-                                <button
-                                    className='btn btn-sm btn-wide hover:opacity-60'
-                                    onClick={() =>
-                                        document
-                                            .getElementById("cancel_modal")
-                                            .showModal()
-                                    }
-                                    style={{
-                                        marginTop: "1rem",
-                                        borderRadius: "8px",
-                                        background: "red",
-                                        border: 0,
-                                        color: "white",
-                                    }}
-                                >
-                                    Cancel event
-                                </button>
-                            </>
-                        ) : findUser ? (
-                            <button
-                                className='btn btn-sm btn-wide opacity-50 hover:opacity-80 cursor-default hover:cursor-pointer'
-                                style={{
-                                    marginTop: "1rem",
-                                    borderRadius: "8px",
-                                    background: isHovered ? "red" : "#FDA855",
-                                    border: 0,
-                                    color: "white",
-                                }}
-                                onMouseOver={() => setIsHovered(true)}
-                                onMouseOut={() => setIsHovered(false)}
-                                onClick={() =>
-                                    document
-                                        .getElementById("canceljoin_modal")
-                                        .showModal()
-                                }
-                            >
-                                {isHovered ? "Cancel join" : "Already joined"}
-                            </button>
-                        ) : (
-                            <button
-                                className='btn btn-sm btn-wide'
-                                onClick={() => joinEvent(event.eventId)}
-                                style={{
-                                    marginTop: "1rem",
-                                    borderRadius: "8px",
-                                    background: "#FDA855",
-                                    border: 0,
-                                    color: "white",
-                                }}
-                            >
-                                Join now
-                            </button>
-                        )}
+                        </div>
                     </div>
                 </div>
-                <div style={{ display: "flex", gap: "3rem" }}>
-                    <div style={{ width: "500px" }}>
+                <div
+                    className={`${styles.eventDesc} lg:flex lg:flex-row lg:justify-between md:flex md:flex-col md:gap-x-5 md:gap-y-8 sm:flex sm:gap-y-5`}
+                >
+                    <div style={{ maxWidth: "400px" }} className='event-desc'>
                         <h3 className='text-2xl font-bold'>
                             Event Description:
                         </h3>
@@ -353,7 +443,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                     </div>
                 </div>
             </div>
-            <div style={{ height: "200px", marginTop: "4rem" }}></div>
+            <div style={{ height: "6rem" }}></div>
 
             <dialog id='cancel_modal' className='modal'>
                 <div className='modal-box'>

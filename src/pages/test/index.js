@@ -1,25 +1,19 @@
-import { useTranslation } from "next-i18next";
-import { useEffect, useState } from "react";
+import React from "react";
+import { toast } from "react-toastify";
 
-function HomePage() {
-    const { t } = useTranslation();
-    const [isClient, setIsClient] = useState(false);
-
-    useEffect(() => {
-        setIsClient(true);
-    }, []);
+function MyComponent() {
+    const handleClick = () => {
+        toast.success("Email sent successfully!", {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 3000,
+        });
+    };
 
     return (
-        <div className='pt-40'>
-            <h1>{isClient ? "This is never prerendered" : "Prerendered"}</h1>
-            <nav>
-                <ul>
-                    <li>{t("about")}</li>
-                    <li>{t("contact")}</li>
-                </ul>
-            </nav>
+        <div>
+            <button onClick={handleClick}>Show Toast</button>
         </div>
     );
 }
 
-export default HomePage;
+export default MyComponent;

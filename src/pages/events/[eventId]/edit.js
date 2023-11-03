@@ -1,10 +1,11 @@
+import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import styles from "@/styles/EventDetails.module.css";
 
 import { auth, db, storage } from "@/util/firebase";
-import { onAuthStateChanged } from "firebase/auth";
 
 function EditEvent({ event, organizer }) {
     //creates the event object to be sent to firestore
@@ -114,8 +115,8 @@ function EditEvent({ event, organizer }) {
             {isAuthenticated ? (
                 userMail === organizer.email ? (
                     <>
-                        <div className='flex flex-col place-items-center mx-auto'>
-                            <div className='flex flex-col  md:space-x-20  md:flex-row '>
+                        <div className='flex flex-col items-center'>
+                            <div className='flex flex-col  md:space-x-20  md:flex-row mb-10'>
                                 <div
                                     className='my-auto lg:flex lg:flex-col md:flex-col md:bt-5 sm:flex sm:flex-col sm:flex-wrap sm:mt-5 md:mt-3 '
                                     style={{ paddingTop: "2rem" }}
@@ -161,7 +162,9 @@ function EditEvent({ event, organizer }) {
                                 </div>
                             </div>
 
-                            <div className='flex l flex-col  mx-auto   flex-wrap sm:flex sm:flex-col  sm:ml-3 sm:items-center   md:flex md:flex-col md:ml-3 md:items-center lg:flex lg:flex-col lg:mt-3 lg:mx-0 lg:items-start'>
+                            <div
+                                className={`flex flex-col content-center flex-wrap mt-0 w-screen px-5 ${styles.container}`}
+                            >
                                 <h1 className='mt-5 text-xl font-semibold align-left '>
                                     Update Title:{" "}
                                 </h1>
@@ -181,27 +184,22 @@ function EditEvent({ event, organizer }) {
                                         } `}
                                     ></input>
                                 </form>
-                            </div>
-
-                            <div className='flex flex-col flex-wrap mt-2 w-screen'>
                                 <h1 className='mt-5 text-xl font-semibold align-left '>
                                     Update Description:
                                 </h1>
                                 <p className='max-w-4xl mt-2 tinyText text-gray-400'>
                                     Have additional goals or activities?
                                 </p>
+
                                 <form id='eventdescription' className='mt-1 '>
                                     <textarea
                                         id='description'
                                         value={input.description}
                                         onChange={handleInputChange}
                                         placeholder={event?.description}
-                                        className='outline outline-1 mt-2 h-40 rounded w-7/12 font-semibold'
+                                        className='outline outline-1 mt-2 h-40 rounded w-7/12 font-semibold sm:w-3/4'
                                     ></textarea>
                                 </form>
-                            </div>
-
-                            <div className='flex flex-col flex-wrap mt-0 w-screen'>
                                 <h1 className='mt-5 text-xl font-semibold align-left '>
                                     Event Image:
                                 </h1>
@@ -216,13 +214,12 @@ function EditEvent({ event, organizer }) {
                                 ></input>
                             </div>
 
-                            <div className='flex items-center flex-row mt-3 rounded '>
+                            <div className='flex items-center flex-row mt-3 rounded p-5'>
                                 <button
                                     onClick={updateEvent}
-                                    className='px-8 py-3 outline outline-1 rounded font-semibold mx-auto my-28'
+                                    className={`px-8 py-3 outline outline-1 rounded font-semibold my-28 ${styles.editButton}`}
                                     style={{
                                         display: "flex",
-                                        width: "570px",
                                         height: "99px",
                                         padding: "11px 16px",
                                         justifyContent: "center",
@@ -252,9 +249,6 @@ function EditEvent({ event, organizer }) {
                                     )}
                                 </button>
                             </div>
-                            <div
-                                style={{ height: "200px", marginTop: "4rem" }}
-                            ></div>
                         </div>
                     </>
                 ) : (

@@ -1,37 +1,38 @@
-import React from "react";
-import Image from "next/image";
-import { BsEyeSlash, BsEye } from "react-icons/bs";
-import { GrStatusGood } from "react-icons/gr";
-import { TiDeleteOutline } from "react-icons/ti";
-import Link from "next/link";
-import { useState, useEffect } from "react";
 import {
     createUserWithEmailAndPassword,
-    updateProfile,
-    sendSignInLinkToEmail,
     isSignInWithEmailLink,
+    sendSignInLinkToEmail,
     signInWithEmailLink,
+    updateProfile,
 } from "firebase/auth";
-import { auth } from "../../util/firebase";
-import { db } from "../../util/firebase";
-import {
-    collection,
-    setDoc,
-    doc,
-    query,
-    where,
-    getDocs,
-} from "firebase/firestore";
-
-import { useRouter } from "next/router";
 import {
     GoogleAuthProvider,
     signInWithPopup,
     TwitterAuthProvider,
 } from "firebase/auth";
-import Modal from "@/components/Popup/Modal";
-import ButtonTwitter from "@/components/BtnTwitter&Google/ButtonTwitter";
+import {
+    collection,
+    doc,
+    getDocs,
+    query,
+    setDoc,
+    where,
+} from "firebase/firestore";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React from "react";
+import { useEffect, useState } from "react";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
+import { GrStatusGood } from "react-icons/gr";
+import { TiDeleteOutline } from "react-icons/ti";
+
 import BtnGoogle from "@/components/BtnTwitter&Google/ButtonGoogle";
+import ButtonTwitter from "@/components/BtnTwitter&Google/ButtonTwitter";
+import Modal from "@/components/Popup/Modal";
+
+import { auth } from "../../util/firebase";
+import { db } from "../../util/firebase";
 const checkUserAuth = (router) => {
     auth.onAuthStateChanged((user) => {
         if (user) {

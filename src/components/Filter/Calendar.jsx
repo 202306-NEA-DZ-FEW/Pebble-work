@@ -1,11 +1,45 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-import styles from "@/styles/Calender.module.css";
+import styles from "@/styles/Events.module.css";
 
-const Calendar = () => {
+const Calendar = ({ checkEvents, resetDays }) => {
     const [currentDate, setCurrentDate] = useState(new Date());
+    const [selectedDays, setSelectedDays] = useState({});
+
+    const handleDateClick = (day) => {
+        const selectedDate = new Date(
+            currentDate.getFullYear(),
+            currentDate.getMonth(),
+            day + 1
+        );
+        const formattedDate = selectedDate.toISOString().split("T")[0];
+        const selectedMonthKey = `${currentDate.getFullYear()}-${currentDate.getMonth()}`;
+
+        setSelectedDays((prevSelectedDays) => {
+            const updatedSelectedDays = { ...prevSelectedDays };
+            const currentMonthDays =
+                updatedSelectedDays[selectedMonthKey] || [];
+            const dayIndex = currentMonthDays.indexOf(day);
+
+            if (dayIndex !== -1) {
+                currentMonthDays.splice(dayIndex, 1);
+                checkEvents(null); // Show all events
+            } else {
+                currentMonthDays.push(day);
+                checkEvents(formattedDate); // Show events for the selected date
+            }
+
+            if (currentMonthDays.length === 0) {
+                delete updatedSelectedDays[selectedMonthKey];
+            } else {
+                updatedSelectedDays[selectedMonthKey] = currentMonthDays;
+            }
+
+            return updatedSelectedDays;
+        });
+    };
 
     const handleNextMonth = () => {
         setCurrentDate((prevDate) => {
@@ -67,11 +101,19 @@ const Calendar = () => {
 
         // Render day numbers
         for (let day = 1; day <= daysInMonth; day++) {
+            const selectedMonthKey = `${currentYear}-${currentMonth}`;
+            const isSelected =
+                selectedDays[selectedMonthKey] &&
+                selectedDays[selectedMonthKey].includes(day);
+
             calendarDays.push(
                 <Link
-                    href='#'
+                    href=''
                     key={`day-${day}`}
-                    className={`${styles.calendarDay} xl:text-[17px] md:w-[10px] xl:w-[18px] text-center md:text-[11px] rounded`}
+                    className={`${styles.calendarDay} ${
+                        isSelected ? styles.selectedDay : ""
+                    } xl:text-[17px] md:w-[10px] xl:w-[18px] text-center md:text-[11px] rounded`}
+                    onClick={() => handleDateClick(day)}
                 >
                     {day}
                 </Link>
@@ -80,6 +122,11 @@ const Calendar = () => {
 
         return calendarDays;
     };
+    useEffect(() => {
+        if (resetDays) {
+            setSelectedDays(resetDays);
+        }
+    }, [resetDays]);
 
     return (
         <>
@@ -101,12 +148,11 @@ const Calendar = () => {
                         <div className='calendar grid grid-cols-7 gap-1'>
                             {renderCalendar()}
                         </div>
-                        <h2 className='text-xl font-bold md:text-[14px] xl:text-[18px] '>
+                        <h2 className='text-xl font-bold md:text-[14px] xl:text-[18px]'>
                             {getMonthName(currentDate)}{" "}
                             {currentDate.getFullYear()}
                         </h2>
                     </div>
-
                     <button
                         className='flex items-center'
                         onClick={handleNextMonth}

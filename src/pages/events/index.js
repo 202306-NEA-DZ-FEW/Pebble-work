@@ -1,28 +1,39 @@
 import React, { useState, useEffect, useRef } from "react";
+
 import Calendar from "@/components/Filter/Calendar";
 import EventCard from "@/components/Events/EventCard";
 import EventCardLeft from "@/components/Events/EventCardLeft";
 import styles from "@/styles/Events.module.css";
-import FilterByType from "@/components/Filter/FilterByType";
-import { db } from "@/util/firebase";
 import {
     collection,
     getDocs,
+    onSnapshot,
     query,
     where,
-    onSnapshot,
 } from "firebase/firestore";
+
+import EventCard from "@/components/Events/EventCard";
+import EventCardLeft from "@/components/Events/EventCardLeft";
+import Calendar from "@/components/Filter/Calendar";
+import FilterByType from "@/components/Filter/FilterByType";
 import FirestoreLocation from "@/components/Filter/FirestoreLocation";
+
+import { db } from "@/util/firebase";
 
 const EventsPage = (user) => {
     // State variables
     const [inputValue, setInputValue] = useState("");
+    const [selectedTypes, setSelectedTypes] = useState([]);
     const [inputValue1, setInputValue1] = useState("");
     const [isCalendarOpen, setCalendarOpen] = useState(false);
     const [isLocationOpen, setLocationOpen] = useState(false);
     const [filteredTypes, setFilteredTypes] = useState([]);
     const [events, setEvents] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState([]);
+    const [CalendarEvents, setCalendarEvents] = useState([]);
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [resetLocation, setResetLocation] = useState(false);
+    const [resetDays, setResetDays] = useState(false);
 
     const dropdownRef = useRef(null);
     const locationRef = useRef(null);
@@ -43,6 +54,7 @@ const EventsPage = (user) => {
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const matchingEvents = querySnapshot.docs.map((doc) => doc.data());
             setFilteredEvents(matchingEvents);
+
             console.log(filteredEvents);
         });
 
@@ -56,12 +68,31 @@ const EventsPage = (user) => {
         };
     }, [inputValue1]);
 
+    const checkEvents = async (selectedDate) => {
+        const q = query(
+            collection(db, "events"),
+            where("date", "==", selectedDate)
+        );
+
+        try {
+            const querySnapshot = await getDocs(q);
+            const filteredEvents = querySnapshot.docs.map((doc) => doc.data());
+            setCalendarEvents(filteredEvents);
+            console.log(CalendarEvents);
+            setSelectedDate(selectedDate);
+        } catch (error) {
+            console.error("Error getting filtered events: ", error);
+        }
+    };
+
     const handleLocationOutside = (event) => {
-        if (
-            locationRef.current &&
-            !locationRef.current.contains(event.target)
-        ) {
-            setLocationOpen(false);
+        if (window.innerWidth <= 640) {
+            if (
+                locationRef.current &&
+                !locationRef.current.contains(event.target)
+            ) {
+                setLocationOpen(false);
+            }
         }
     };
 
@@ -140,6 +171,49 @@ const EventsPage = (user) => {
 
         fetchEvents();
     }, []);
+
+    useEffect(() => {
+        const applyFilters = () => {
+            let filteredEvents = events;
+
+            // Apply type filter
+            if (filteredTypes.length > 0) {
+                filteredEvents = filteredEvents.filter((event) =>
+                    filteredTypes.includes(event.type)
+                );
+            }
+
+            // Apply location filter
+            if (inputValue1) {
+                filteredEvents = filteredEvents.filter(
+                    (event) => event.location === inputValue1
+                );
+            }
+
+            // Apply date filter
+            if (selectedDate) {
+                filteredEvents = filteredEvents.filter(
+                    (event) => event.date === selectedDate
+                );
+            }
+
+            setFilteredEvents(filteredEvents);
+        };
+
+        applyFilters();
+    }, [events, selectedDate, inputValue1, filteredTypes]);
+
+    const resetEvents = () => {
+        setSelectedTypes([]);
+        setInputValue1("");
+        setSelectedDate(null);
+        setFilteredTypes([]);
+        setFilteredEvents([]);
+        setCalendarEvents([]);
+        setResetLocation(true);
+        setResetDays([]);
+    };
+
     return (
         <>
             <main
@@ -149,6 +223,12 @@ const EventsPage = (user) => {
                     <h1>Welcome, {user.name}!</h1>
                     <p>This is the events page</p>
                 </div>
+                <button
+                    onClick={resetEvents}
+                    className={` w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px] ml-auto  mr-2`}
+                >
+                    All events
+                </button>
                 <div
                     className={`flex flex-col-reverse sm:flex sm:flex-row-reverse sm:items-center sm:justify-evenly sm:gap-8 sm:h-full sm:w-full`}
                 >
@@ -156,89 +236,35 @@ const EventsPage = (user) => {
                         className={`md:h-[800px] h-[400px] xl:w-[840px] pb-[140px] md:pb-[140px] md:w-[480px] lg:w-[490px] ${styles.information}`}
                     >
                         <ul className={` flex flex-col items gap-2 `}>
-                            {!inputValue1 &&
-                                events
-                                    .filter((event) =>
-                                        filteredTypes.length === 0
-                                            ? true
-                                            : filteredTypes.includes(event.type)
-                                    )
-                                    .map((event, index) => {
-                                        if (index % 2 === 0) {
-                                            return (
-                                                <EventCard
-                                                    eventId={event.id}
-                                                    key={event.id}
-                                                    title={event.title}
-                                                    type={event.type}
-                                                    images={event.image}
-                                                    location={event.location}
-                                                    description={
-                                                        event.description
-                                                    }
-                                                    organizer={event.organizer}
-                                                    time={event.time}
-                                                    date={event.date}
-                                                />
-                                            );
-                                        } else {
-                                            return (
-                                                <EventCardLeft
-                                                    eventId={event.id}
-                                                    key={event.id}
-                                                    title={event.title}
-                                                    type={event.type}
-                                                    image={event.image}
-                                                    location={event.location}
-                                                    description={
-                                                        event.description
-                                                    }
-                                                    organizer={event.organizer}
-                                                    time={event.time}
-                                                    date={event.date}
-                                                />
-                                            );
-                                        }
-                                    })}
+                            {filteredEvents.map((event, index) => {
+                                const EventCardComponent =
+                                    index % 2 === 0 ? EventCard : EventCardLeft;
+                                return (
+                                    <EventCardComponent
+                                        eventId={event.id}
+                                        key={event.id}
+                                        title={event.title}
+                                        type={event.type}
+                                        image={event.image}
+                                        location={event.location}
+                                        description={event.description}
+                                        organizer={event.organizer}
+                                        time={event.time}
+                                        date={event.date}
+                                    />
+                                );
+                            })}
+                            {(inputValue1 || filteredTypes.length > 0) &&
+                                filteredEvents.length === 0 && (
+                                    <p className='text-red-500 text-center'>
+                                        No events found for this date and
+                                        location
+                                    </p>
+                                )}
 
-                            {inputValue1 &&
-                                filteredEvents.length > 0 &&
-                                filteredEvents.map((event, index) => {
-                                    if (index % 2 === 0) {
-                                        return (
-                                            <EventCard
-                                                eventId={event.id}
-                                                key={event.id}
-                                                title={event.title}
-                                                type={event.type}
-                                                images={event.image}
-                                                location={event.location}
-                                                description={event.description}
-                                                organizer={event.organizer}
-                                                time={event.time}
-                                                date={event.date}
-                                            />
-                                        );
-                                    } else {
-                                        return (
-                                            <EventCardLeft
-                                                eventId={event.id}
-                                                key={event.id}
-                                                title={event.title}
-                                                type={event.type}
-                                                image={event.image}
-                                                location={event.location}
-                                                description={event.description}
-                                                organizer={event.organizer}
-                                                time={event.time}
-                                                date={event.date}
-                                            />
-                                        );
-                                    }
-                                })}
-                            {inputValue1 && filteredEvents.length === 0 && (
+                            {selectedDate && CalendarEvents.length === 0 && (
                                 <p className='text-red-500 text-center'>
-                                    No events found for this location
+                                    No events found for this date
                                 </p>
                             )}
                         </ul>
@@ -266,19 +292,26 @@ const EventsPage = (user) => {
                                         styles.calendarContainer
                                     } border border-black rounded-[8px] z-10 bg-white sm:bg-transparent`}
                                 >
-                                    <Calendar />
+                                    <Calendar
+                                        resetDays={resetDays}
+                                        checkEvents={checkEvents}
+                                    />
                                 </div>
                             )}
                         </div>
                         <div className='h-66'>
                             <FirestoreLocation
                                 onInputChange={handleLocationInputChange}
+                                resetLocation={resetLocation}
+                                setResetLocation={setResetLocation}
                             />
                         </div>
 
                         <FilterByType
                             ref={dropdownRef}
                             setFilteredTypes={setFilteredTypes}
+                            selectedTypes={selectedTypes}
+                            setSelectedTypes={setSelectedTypes}
                         />
                     </div>
                 </div>
