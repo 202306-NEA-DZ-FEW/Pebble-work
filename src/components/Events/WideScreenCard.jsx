@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "@/styles/EventCard.module.css";
 import { useRouter } from "next/router";
 const WideScreenCard = ({
@@ -17,17 +17,34 @@ const WideScreenCard = ({
     };
     const [hideBackground, setHideBackground] = useState(false);
     let timerId;
+    const [isHovered, setIsHovered] = useState(false);
+    const h2Ref = useRef();
 
     const handleHover = () => {
         timerId = setTimeout(() => {
             setHideBackground(true);
+            setIsHovered(true);
         }, 500);
     };
 
     const handleMouseLeave = () => {
         clearTimeout(timerId);
         setHideBackground(false);
+        setIsHovered(false);
     };
+    useEffect(() => {
+        if (isHovered) {
+            const letters = h2Ref.current.innerText.split("");
+            h2Ref.current.innerHTML = "";
+            letters.forEach((letter, i) => {
+                const span = document.createElement("span");
+                span.innerText = letter;
+                span.style.animationDelay = `${i * 0.1}s`;
+                span.className = styles.explode;
+                h2Ref.current.appendChild(span);
+            });
+        }
+    }, [isHovered]);
     return (
         <>
             <div
@@ -35,8 +52,14 @@ const WideScreenCard = ({
                 onMouseLeave={handleMouseLeave}
                 className={`${styles.contai} ${styles.card} ${styles.fading} border relative w-[55vw] h-[24vh] flex flex-row items-center justify-center gap-2`}
             >
+                <h2
+                    ref={h2Ref}
+                    className={`absolute sm:text-[13px] text-black text-[10px] xl:text-[22.22px] underline`}
+                >
+                    type{type}
+                </h2>
                 <div
-                    style={{ backgroundImage: `url(${image})` }}
+                    // style={{ backgroundImage: `url(${image})` }}
                     className={`${styles.backgroundImage} ${
                         hideBackground ? `${styles.backgroundImageHidden}` : ""
                     }`}
