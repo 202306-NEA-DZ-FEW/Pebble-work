@@ -66,17 +66,16 @@ const WideScreenCard = ({
                     ref={h2Ref}
                     className={`absolute top-[35%] sm:text-[13px] text-black text-[10px] xl:text-[22.22px]`}
                 >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing
-                    elit.consectetur adipiscing elit{type}
+                    {type}
                 </h2>
                 <div
-                    // style={{ backgroundImage: `url(${image})` }}
+                    style={{ backgroundImage: `url(${image})` }}
                     className={`${styles.backgroundImage} ${
                         hideBackground ? `${styles.backgroundImageHidden}` : ""
                     }`}
                 >
                     <h2 className='sm:text-[13px] text-black text-[10px] xl:text-[22.22px] underline'>
-                        type{type}
+                        {type}
                     </h2>
                     <ul
                         className={`xl:text-[18.20px] ${
@@ -109,7 +108,7 @@ const WideScreenCard = ({
                             wordWrap: "break-word",
                         }}
                     >
-                        title{title}
+                        {title}
                     </h1>
 
                     <p

@@ -237,7 +237,7 @@ const EventsPage = (user) => {
                                 const EventCardComponent =
                                     index % 2 === 0 ? EventCard : EventCardLeft;
                                 return (
-                                    <EventCardComponent
+                                    <WideScreenCard
                                         eventId={event.id}
                                         key={event.id}
                                         title={event.title}
