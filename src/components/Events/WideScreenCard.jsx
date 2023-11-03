@@ -33,7 +33,7 @@ const WideScreenCard = ({
         setHideBackground(false);
         setIsHovered(false);
         reverseTimer = setTimeout(() => {
-            const letters = h2Ref.current.innerText.split("");
+            const letters = h2Ref?.current?.innerText?.split("");
             h2Ref.current.innerHTML = "";
             letters.forEach((letter, i) => {
                 const span = document.createElement("span");
