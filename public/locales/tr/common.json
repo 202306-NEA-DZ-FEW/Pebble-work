@@ -36,5 +36,31 @@
         "howItWorks": "Nasıl Çalışır",
         "sustainableDevelopmentGoals": "Sürdürülebilir Kalkınma Hedefleri",
         "introductorySentence": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
+    },
+    "sign": {
+        "signin": "Giriş Yap",
+        "signup": "ÜYE OL"
+      },
+      "contactForm": {
+        "title": "Bize Ulaşın",
+        "firstNamePlaceholder": "Ad",
+        "lastNamePlaceholder": "Soyad",
+        "emailPlaceholder": "E-posta",
+        "phonePlaceholder": "Telefon Numarası",
+        "messagePlaceholder": "Size nasıl yardımcı olabiliriz?",
+        "submitButton": "Gönder",
+        "subject": "Yeni Form Gönderimi",
+        "email": "E-posta",
+        "phone": "Telefon Numarası",
+        "success": "E-posta başarıyla gönderildi!",
+        "error": "E-posta gönderme başarısız oldu"
+      },
+      "dropdown": {
+        "signOut": "Çıkış Yap",
+        "signIn": "Giriş Yap",
+        "profile": "Profil",
+        "hostEvent": "Etkinlik Düzenle",
+        "myEvents": "Etkinliklerim",
+        "accountSettings": "Hesap Ayarları"
     }
 }

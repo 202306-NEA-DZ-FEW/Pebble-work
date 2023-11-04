@@ -28,25 +28,12 @@ const AboutPage = () => {
                     <h1
                         className={`${styles.text0} ${styles.slideInFromRight1} xl:mb-7`}
                     >
-                        {t("about:about.title")}
+                        {t("about:about:title")}
                     </h1>
                     <p
                         className={`${styles.text1} ${styles.slideInFromRight1} flex text-center text-[#878787] px-4`}
                     >
-
-                        Experience the power of PebbleWork with its cutting-edge
-                        technologies. We have crafted a responsive and
-                        interactive platform that puts the user as the central
-                        piece. Seamlessly navigate through the pages, create,
-                        edit and delete events. Join and unjoin with a simple
-                        click. PebbleWork brings a platform made by volunteers
-                        for volunteers. With secure user authentication and
-                        real-time data storage, we offer a user-friendly
-                        experience. Whether you&apos;re an event organizer or a
-                        participant, PebbleWork is here to simplify your
-                        community engagement. Join us today and make a
-                        meaningful impact in your community.
-
+                        {t("about:about.description")}
                     </p>
                 </div>
                 <div
@@ -55,7 +42,7 @@ const AboutPage = () => {
                     <h2
                         className={`${styles.teamText} text-[40px] text-[#1A1A1A] md:mt-10 pt-2 md:mb-10`}
                     >
-                        {t("about:about.ourTeam")}
+                        {t("about:about:ourTeam")}
                     </h2>
                     <div className='flex flex-row xl:flex-col flex-wrap gap-10 mx-3 md:mx-10'>
                         <div className='flex flex-col xl:flex-row gap-7 xl:gap-96 flex-wrap'>
@@ -109,12 +96,12 @@ const AboutPage = () => {
                     className={`${styles.slideInFromRight1} flex flex-col items-center text-center xl:mb-40 md:pb-40 pb-[222px]`}
                 >
                     <h6 className={`${styles.techText} text-[#1A1A1A] xl:mb-4`}>
-                        {t("about:about.techStack")}
+                        {t("about:about:techStack")}
                     </h6>
                     <h2
                         className={`${styles.techText1} text-[#878787] xl:mb-4`}
                     >
-                        {t("about:about.techStackDescription")}
+                        {t("about:about:techStackDescription")}
                     </h2>
                 </div>
             </div>

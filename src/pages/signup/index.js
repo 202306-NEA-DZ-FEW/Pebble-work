@@ -26,11 +26,12 @@ import { useEffect, useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { GrStatusGood } from "react-icons/gr";
 import { TiDeleteOutline } from "react-icons/ti";
+import { useTranslation } from "next-i18next";
 
 import BtnGoogle from "@/components/BtnTwitter&Google/ButtonGoogle";
 import ButtonTwitter from "@/components/BtnTwitter&Google/ButtonTwitter";
 import Modal from "@/components/Popup/Modal";
-
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { auth } from "../../util/firebase";
 import { db } from "../../util/firebase";
 const checkUserAuth = (router) => {
@@ -462,3 +463,12 @@ const SignUpPage = () => {
 };
 
 export default SignUpPage;
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ["common", "about"])),
+            // Will be passed to the page component as props
+        },
+    };
+}

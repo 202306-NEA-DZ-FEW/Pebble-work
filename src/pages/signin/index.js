@@ -1,4 +1,5 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useTranslation } from "next-i18next";
 import {
     GoogleAuthProvider,
     signInWithPopup,
@@ -13,6 +14,7 @@ import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { sendPasswordResetEmail } from "firebase/auth";
 import BtnGoogle from "@/components/BtnTwitter&Google/ButtonGoogle";
 import ButtonTwitter from "@/components/BtnTwitter&Google/ButtonTwitter";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Modal from "@/components/Popup/Modal";
 
 import { auth } from "../../util/firebase";
@@ -304,3 +306,12 @@ const SignInPage = () => {
 };
 
 export default SignInPage;
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ["common", "about"])),
+            // Will be passed to the page component as props
+        },
+    };
+}

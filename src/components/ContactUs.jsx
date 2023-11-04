@@ -3,8 +3,10 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import emailjs from "emailjs-com";
 import styles from "@/styles/ContactUs.module.css";
 import { toast } from "react-toastify";
+import { useTranslation } from "next-i18next";
 
 const ContactForm = () => {
+    const { t } = useTranslation();
     const auth = getAuth();
     const [userPhone, setUserPhone] = useState("");
     const [userEmail, setUserEmail] = useState("");
@@ -58,8 +60,10 @@ const ContactForm = () => {
         const emailParams = {
             from_name: `${firstName} ${lastName}`,
             to_name: "Pebble Team",
-            subject: "New Form Submission",
-            message: `Email: ${email}\nPhone: ${phone}\n\n${message}`,
+            subject: t("contactForm.subject"), // Translation here
+            message: `${t("contactForm.email")}: ${email}\n${t(
+                "contactForm.phone"
+            )}: ${phone}\n\n${message}`,
         };
 
         // Send the email using EmailJS
@@ -71,7 +75,7 @@ const ContactForm = () => {
                 "BYaRB-Pd4x_cssRgf"
             )
             .then(() => {
-                toast.success("Email sent successfully!", {
+                toast.success(t("contactForm.success"), {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: 3000,
                 });
@@ -80,7 +84,7 @@ const ContactForm = () => {
                 resetForm();
             })
             .catch(() => {
-                toast.error("Failed to send the Email", {
+                toast.error(t("contactForm.error"), {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: 3000,
                 });
@@ -108,14 +112,15 @@ const ContactForm = () => {
         <div
             className={`${styles.formHeight} flex flex-col items-center justify-center mx-auto gap-4`}
         >
-            <h2>Contact Us</h2>
+            <h2>{t("contactForm.title")}</h2>
+
             <form className='h-[40vh]' onSubmit={handleSubmit}>
                 <div className='input-row'>
                     <input
                         type='text'
                         id='fname'
                         name='firstname'
-                        placeholder='First Name'
+                        placeholder={t("contactForm.firstNamePlaceholder")}
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                         className={
@@ -128,7 +133,7 @@ const ContactForm = () => {
                         type='text'
                         id='lname'
                         name='lastname'
-                        placeholder='Last Name'
+                        placeholder={t("contactForm.lastNamePlaceholder")}
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
                         className={
@@ -143,7 +148,7 @@ const ContactForm = () => {
                     type='email'
                     id='email'
                     name='email'
-                    placeholder='Email'
+                    placeholder={t("contactForm.emailPlaceholder")}
                     value={userEmail || emailInput}
                     onChange={(e) => setEmailInput(e.target.value)}
                 />
@@ -153,7 +158,7 @@ const ContactForm = () => {
                     type='tel'
                     id='phone'
                     name='phone'
-                    placeholder='Phone Number'
+                    placeholder={t("contactForm.phonePlaceholder")}
                     value={userPhone || phoneInput}
                     onChange={(e) => setPhoneInput(e.target.value)}
                 />
@@ -162,7 +167,7 @@ const ContactForm = () => {
                 <textarea
                     id='message'
                     name='message'
-                    placeholder='What can we do for you?'
+                    placeholder={t("contactForm.messagePlaceholder")}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     className={
@@ -171,7 +176,7 @@ const ContactForm = () => {
                 ></textarea>
                 <br />
 
-                <input type='submit' value='Submit' />
+                <input type='submit' value={t("contactForm.submitButton")} />
 
                 <style jsx>{`
                     .input-row {

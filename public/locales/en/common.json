@@ -36,5 +36,31 @@
         "howItWorks": "How It Works",
         "sustainableDevelopmentGoals": "Sustainable Development Goals",
         "introductorySentence": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
+    },
+    "sign": {
+        "signin": "Sign in",
+        "signup": "Sign up"
+      },
+      "contactForm": {
+        "title": "Contact Us",
+        "firstNamePlaceholder": "First Name",
+        "lastNamePlaceholder": "Last Name",
+        "emailPlaceholder": "Email",
+        "phonePlaceholder": "Phone Number",
+        "messagePlaceholder": "What can we do for you?",
+        "submitButton": "Submit",
+        "subject": "New Form Submission",
+        "email": "Email",
+        "phone": "Phone Number",
+        "success": "Email sent successfully!",
+        "error": "Failed to send the Email"
+      },
+      "dropdown": {
+        "signOut": "Sign Out",
+        "signIn": "Sign In",
+        "profile": "Profile",
+        "hostEvent": "Host Event",
+        "myEvents": "My Events",
+        "accountSettings": "Account Settings"
     }
 }

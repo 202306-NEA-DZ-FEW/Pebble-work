@@ -36,5 +36,31 @@
         "howItWorks": "Wie es funktioniert",
         "sustainableDevelopmentGoals": "Nachhaltige Entwicklungsziele",
         "introductorySentence": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
+    },
+    "sign": {
+        "signin": "Anmelden",
+        "signup": "Registrieren"
+      },
+      "contactForm": {
+        "title": "Kontaktiere uns",
+        "firstNamePlaceholder": "Vorname",
+        "lastNamePlaceholder": "Nachname",
+        "emailPlaceholder": "E-Mail",
+        "phonePlaceholder": "Telefonnummer",
+        "messagePlaceholder": "Wie können wir Ihnen helfen?",
+        "submitButton": "Absenden",
+        "subject": "Neues Formular gesendet",
+        "email": "E-Mail",
+        "phone": "Telefonnummer",
+        "success": "E-Mail erfolgreich gesendet!",
+        "error": "Senden der E-Mail fehlgeschlagen"
+      },
+      "dropdown": {
+        "signOut": "Abmelden",
+        "signIn": "Anmelden",
+        "profile": "Profil",
+        "hostEvent": "Veranstaltung erstellen",
+        "myEvents": "Meine Veranstaltungen",
+        "accountSettings": "Kontoeinstellungen"
     }
 }
