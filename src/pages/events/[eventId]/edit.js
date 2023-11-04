@@ -4,6 +4,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import styles from "@/styles/EventDetails.module.css";
+import NoAccess from "@/components/Events/EditEvent";
 
 import { auth, db, storage } from "@/util/firebase";
 
@@ -252,10 +253,10 @@ function EditEvent({ event, organizer }) {
                         </div>
                     </>
                 ) : (
-                    <p>Access denied ):</p>
+                    <NoAccess />
                 )
             ) : (
-                <p>Access denied ):</p>
+                <NoAccess />
             )}
         </>
     );
