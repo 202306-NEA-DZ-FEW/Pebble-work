@@ -201,12 +201,12 @@ const SignInPage = () => {
                             height={1081}
                             layout='responsive'
                             objectFit='cover'
-                            className='sm:w-auto w-full'
+                            className='w-full sm:w-auto sm:h-auto'
                             // style={{ width: '100%' }}
                         />
                     </div>
                     <div className='sm:ml-10'>
-                        <h2 className="text-zinc-800 text-[32px] font-medium font-['Rubik'] mb-4">
+                        <h2 className="text-zinc-800 text-[32px] font-medium font-['Rubik'] mb-4 text-center mt-2">
                             Sign In
                         </h2>
                         <div className='mb-4'>
