@@ -15,6 +15,7 @@ import LocationFilter from "@/components/Filter/LocationFilter";
 
 import { db } from "@/util/firebase";
 import WideScreenCard from "@/components/Events/WideScreenCard";
+import FirestoreLocation from "../Filter/FirestoreLocation";
 
 const DesktopEvents = (user) => {
     // State variables
@@ -46,7 +47,9 @@ const DesktopEvents = (user) => {
         const q = query(eventsCollectionRef, where("location", "==", location));
 
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            const matchingEvents = querySnapshot.docs.map((doc) => doc.data());
+            const matchingEvents = querySnapshot.docs.map((doc) => {
+                return { id: doc.id, ...doc.data() };
+            });
             setFilteredEvents(matchingEvents);
         });
 
@@ -172,7 +175,9 @@ const DesktopEvents = (user) => {
         setResetLocation(true);
         setResetDays([]);
     };
-
+    const handleInputDelete = () => {
+        setInputValue1("");
+    };
     return (
         <>
             <main className={` flex flex-col justify-center items-center`}>
@@ -253,14 +258,11 @@ const DesktopEvents = (user) => {
                             </div>
                         </div>
                         <div className='h-66'>
-                            <LocationFilter
-                                HandleClick={handleLocationClick}
-                                HandleOpen={isLocationOpen}
-                                InputChange={handleInputChange}
-                                inputValue={inputValue}
+                            <FirestoreLocation
                                 onInputChange={handleLocationInputChange}
                                 resetLocation={resetLocation}
                                 setResetLocation={setResetLocation}
+                                onInputDelete={handleInputDelete}
                             />
                         </div>
 

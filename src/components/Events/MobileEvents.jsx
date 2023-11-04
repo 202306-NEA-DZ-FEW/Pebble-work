@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
+import Calendar from "@/components/Filter/Calendar";
+import EventCard from "@/components/Events/EventCard";
+import EventCardLeft from "@/components/Events/EventCardLeft";
 import styles from "@/styles/Events.module.css";
 import {
     collection,
@@ -8,16 +11,13 @@ import {
     where,
 } from "firebase/firestore";
 
-import EventCard from "@/components/Events/EventCard";
-import EventCardLeft from "@/components/Events/EventCardLeft";
-import Calendar from "@/components/Filter/Calendar";
 import FilterByType from "@/components/Filter/FilterByType";
-import LocationFilter from "@/components/Filter/LocationFilter";
+import FirestoreLocation from "@/components/Filter/FirestoreLocation";
 
 import { db } from "@/util/firebase";
-import WideScreenCard from "@/components/Events/WideScreenCard";
+import { useRouter } from "next/router";
 
-const MobileEvents = (user) => {
+const EventsPage = (user) => {
     // State variables
     const [inputValue, setInputValue] = useState("");
     const [selectedTypes, setSelectedTypes] = useState([]);
@@ -31,10 +31,8 @@ const MobileEvents = (user) => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [resetLocation, setResetLocation] = useState(false);
     const [resetDays, setResetDays] = useState(false);
-
     const dropdownRef = useRef(null);
     const locationRef = useRef(null);
-
     const handleLocationInputChange = (value) => {
         setInputValue1(value);
     };
@@ -49,10 +47,10 @@ const MobileEvents = (user) => {
         const q = query(eventsCollectionRef, where("location", "==", location));
 
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            const matchingEvents = querySnapshot.docs.map((doc) => doc.data());
+            const matchingEvents = querySnapshot.docs.map((doc) => {
+                return { id: doc.id, ...doc.data() };
+            });
             setFilteredEvents(matchingEvents);
-
-            console.log(filteredEvents);
         });
 
         return unsubscribe;
@@ -210,7 +208,9 @@ const MobileEvents = (user) => {
         setResetLocation(true);
         setResetDays([]);
     };
-
+    const handleInputDelete = () => {
+        setInputValue1("");
+    };
     return (
         <>
             <main
@@ -222,7 +222,7 @@ const MobileEvents = (user) => {
                 </div>
                 <button
                     onClick={resetEvents}
-                    className={` w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px] ml-auto  mr-2`}
+                    className={` w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 md:text-[12px] rounded-[4px] h-[16px] sm:w-[72.23px] sm:h-[25.5px] ml-auto  mr-2`}
                 >
                     All events
                 </button>
@@ -297,18 +297,13 @@ const MobileEvents = (user) => {
                             )}
                         </div>
                         <div className='h-66'>
-                            <LocationFilter
-                                refLocation={locationRef}
-                                HandleClick={handleLocationClick}
-                                HandleOpen={isLocationOpen}
-                                InputChange={handleInputChange}
-                                inputValue={inputValue}
+                            <FirestoreLocation
                                 onInputChange={handleLocationInputChange}
                                 resetLocation={resetLocation}
                                 setResetLocation={setResetLocation}
+                                onInputDelete={handleInputDelete}
                             />
                         </div>
-
                         <FilterByType
                             ref={dropdownRef}
                             setFilteredTypes={setFilteredTypes}
@@ -322,4 +317,4 @@ const MobileEvents = (user) => {
     );
 };
 
-export default MobileEvents;
+export default EventsPage;
