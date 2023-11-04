@@ -12,6 +12,7 @@ import React, { useEffect, useState } from "react";
 import { auth, db, storage } from "@/util/firebase";
 import EventCreation from "@/components/Events/EventCreation";
 import PhoneVerify from "@/components/Events/PhoneVerify";
+import FirestoreLocation from "@/components/Filter/FirestoreLocation";
 
 const EventCreationPage = () => {
     const formCollectionRef = collection(db, "events");
@@ -38,6 +39,14 @@ const EventCreationPage = () => {
         const docRef = await addDoc(formCollectionRef, input);
 
         return docRef.id;
+    };
+
+    const addLocation = async (input) => {
+        const locationsRef = doc(db, "database", "locations");
+
+        await updateDoc(locationsRef, {
+            data: arrayUnion(input.location),
+        });
     };
 
     const imgUpload = async (eventId) => {
@@ -72,6 +81,8 @@ const EventCreationPage = () => {
 
         const eventId = await addEvent(input);
 
+        await addLocation(input);
+
         if (img) {
             await imgUpload(eventId);
         }
@@ -92,6 +103,15 @@ const EventCreationPage = () => {
         }));
     };
 
+    // Function to handle location selection
+    /*
+  const handleLocationSelect = (selectedLocation) => {
+    setInput((prevInput) => ({
+      ...prevInput,
+      location: selectedLocation, // Update the location in the input state
+    }));
+  };
+*/
     const arrEventType = [
         "No Poverty",
         "Zero Hunger",
@@ -189,6 +209,8 @@ const EventCreationPage = () => {
                                         }}
                                     ></input>
                                 </form>
+
+                                {/* <FirestoreLocation onLocationSelect={handleLocationSelect} /> */}
 
                                 <h3
                                     className='mt-5 font-semibold align-left'

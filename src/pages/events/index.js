@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
+import Calendar from "@/components/Filter/Calendar";
+import EventCard from "@/components/Events/EventCard";
+import EventCardLeft from "@/components/Events/EventCardLeft";
 import styles from "@/styles/Events.module.css";
 import {
     collection,
@@ -8,13 +11,11 @@ import {
     where,
 } from "firebase/firestore";
 
-import EventCard from "@/components/Events/EventCard";
-import EventCardLeft from "@/components/Events/EventCardLeft";
-import Calendar from "@/components/Filter/Calendar";
 import FilterByType from "@/components/Filter/FilterByType";
-import LocationFilter from "@/components/Filter/LocationFilter";
+import FirestoreLocation from "@/components/Filter/FirestoreLocation";
 
 import { db } from "@/util/firebase";
+import { useRouter } from "next/router";
 
 const EventsPage = (user) => {
     // State variables
@@ -30,10 +31,8 @@ const EventsPage = (user) => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [resetLocation, setResetLocation] = useState(false);
     const [resetDays, setResetDays] = useState(false);
-
     const dropdownRef = useRef(null);
     const locationRef = useRef(null);
-
     const handleLocationInputChange = (value) => {
         setInputValue1(value);
     };
@@ -48,7 +47,9 @@ const EventsPage = (user) => {
         const q = query(eventsCollectionRef, where("location", "==", location));
 
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            const matchingEvents = querySnapshot.docs.map((doc) => doc.data());
+            const matchingEvents = querySnapshot.docs.map((doc) => {
+                return { id: doc.id, ...doc.data() };
+            });
             setFilteredEvents(matchingEvents);
 
             console.log(filteredEvents);
@@ -209,7 +210,9 @@ const EventsPage = (user) => {
         setResetLocation(true);
         setResetDays([]);
     };
-
+    const handleInputDelete = () => {
+        setInputValue1("");
+    };
     return (
         <>
             <main
@@ -296,18 +299,13 @@ const EventsPage = (user) => {
                             )}
                         </div>
                         <div className='h-66'>
-                            <LocationFilter
-                                refLocation={locationRef}
-                                HandleClick={handleLocationClick}
-                                HandleOpen={isLocationOpen}
-                                InputChange={handleInputChange}
-                                inputValue={inputValue}
+                            <FirestoreLocation
                                 onInputChange={handleLocationInputChange}
                                 resetLocation={resetLocation}
                                 setResetLocation={setResetLocation}
+                                onInputDelete={handleInputDelete}
                             />
                         </div>
-
                         <FilterByType
                             ref={dropdownRef}
                             setFilteredTypes={setFilteredTypes}
