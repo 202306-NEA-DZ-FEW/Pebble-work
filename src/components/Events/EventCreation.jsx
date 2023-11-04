@@ -66,24 +66,23 @@ const EventCreation = () => {
 
     return (
         <>
-            <div className='flex items-left h-screen overflow-hidden z-10'>
-                <div className='absolute p-4 top-[50%] left-[34%] flex flex-col bg-white bg-opacity-50 border rounded-[8px]'>
+            <div className='flex items-left h-full overflow-hidden z-10 mb-[4rem]'>
+                <div className='absolute p-4 top-[50%] left-[30%] flex flex-col bg-white bg-opacity-70 border rounded-[8px]'>
                     <p className='text-red-600'>
                         Together for a Better World: Join Our Global
                         Humanitarian Movement
                     </p>
 
                     <div className='flex flex-col'>
-                        <p className='text-red-400'>
-                            If you have an account please:{" "}
+                        <p className='text-grey-600'>
+                            Join us and become an agent of hope and
+                            transformation. <br />
+                            If you already have an account, please sign in to be
+                            able to access this page.
                         </p>
-                        <Signin />
-                        <p className='text-red-400'>
-                            By joining our movement, you become an agent of hope
-                            and transformation.{" "}
-                        </p>
-
-                        <Signup />
+                        <div className='flex flex-row gap-5 content-center mx-auto mt-3'>
+                            <Signin /> <Signup />
+                        </div>
                     </div>
                 </div>
                 <canvas
