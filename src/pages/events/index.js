@@ -47,7 +47,9 @@ const EventsPage = (user) => {
         const q = query(eventsCollectionRef, where("location", "==", location));
 
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            const matchingEvents = querySnapshot.docs.map((doc) => doc.data());
+            const matchingEvents = querySnapshot.docs.map((doc) => {
+                return { id: doc.id, ...doc.data() };
+            });
             setFilteredEvents(matchingEvents);
 
             console.log(filteredEvents);
