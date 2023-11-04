@@ -106,7 +106,7 @@ const ContactForm = () => {
 
     return (
         <div
-            className={`${styles.formHeight} flex flex-col items-center justify-center mx-auto gap-4`}
+            className={`${styles.formHeight} flex flex-col mt-[-150px] items-center mx-auto gap-4`}
         >
             <h2>Contact Us</h2>
             <form className='h-[40vh]' onSubmit={handleSubmit}>
