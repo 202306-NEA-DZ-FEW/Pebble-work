@@ -191,9 +191,9 @@ const SignInPage = () => {
     };
     return (
         <>
-            <div className='flex justify-center items-center h-screen'>
-                <div className='flex items-center w-1/2'>
-                    <div className='mr-10'>
+            <div className='flex justify-center items-center  '>
+                <div className='flex flex-col items-center sm:flex-row sm:w-1/ h-fit'>
+                    <div className='mb-4 sm:mb-0'>
                         <Image
                             src='/images/Sitting.png'
                             alt='Sitting'
@@ -201,9 +201,11 @@ const SignInPage = () => {
                             height={1081}
                             layout='responsive'
                             objectFit='cover'
+                            className='sm:w-auto w-full'
+                            // style={{ width: '100%' }}
                         />
                     </div>
-                    <div>
+                    <div className='sm:ml-10'>
                         <h2 className="text-zinc-800 text-[32px] font-medium font-['Rubik'] mb-4">
                             Sign In
                         </h2>
@@ -319,28 +321,28 @@ const SignInPage = () => {
                                     )}
                                 </div>
                             </div>
-
-                            {resetMode ? (
-                                <div className='flex justify-start'>
-                                    <button
-                                        className=' px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 '
-                                        type='button'
-                                        onClick={handleResetPassword}
-                                    >
-                                        Reset Password
-                                    </button>
-                                </div>
-                            ) : (
-                                <div className='flex justify-start'>
-                                    <button
-                                        className=' px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 '
-                                        type='submit'
-                                        // disabled={resetMode}
-                                    >
-                                        Sign in
-                                    </button>
-                                </div>
-                            )}
+                            <div className='flex flex-col sm:flex-row sm:space-x-4 mt-4'>
+                                {resetMode ? (
+                                    <div className='flex justify-start'>
+                                        <button
+                                            className=' px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 '
+                                            type='button'
+                                            onClick={handleResetPassword}
+                                        >
+                                            Reset Password
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <div className='flex justify-start '>
+                                        <button
+                                            className=' w-full px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 mt-4 mb-2 '
+                                            type='submit'
+                                        >
+                                            Sign in
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
                         </form>
                     </div>
                 </div>
