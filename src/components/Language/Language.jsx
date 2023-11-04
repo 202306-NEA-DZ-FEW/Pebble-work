@@ -41,7 +41,9 @@ const Language = () => {
                 >
                     <div className='flex items-center z-[444]'>
                         <img src='/icons/Web.png' alt='Pebble Logo' />
-                        <p className='text-black'>{t("language")}</p>
+                        <p className='text-black'>
+                            {t("common:language:language")}
+                        </p>
                     </div>
                 </button>
                 <div
@@ -66,7 +68,7 @@ const Language = () => {
                                         width='20px'
                                         height='20px'
                                     />
-                                    {t("english")}
+                                    {t("common:language:english")}
                                 </div>
                             </button>
                         </li>
@@ -82,7 +84,7 @@ const Language = () => {
                                         width='20px'
                                         height='20px'
                                     />
-                                    {t("turkish")}
+                                    {t("common:language:turkish")}
                                 </div>
                             </button>
                         </li>
@@ -98,7 +100,7 @@ const Language = () => {
                                         width='20px'
                                         height='20px'
                                     />
-                                    {t("german")}
+                                    {t("common:language:german")}
                                 </div>
                             </button>
                         </li>
@@ -115,7 +117,7 @@ const Language = () => {
                                         width='20px'
                                         height='20px'
                                     />
-                                    {t("chinese")}
+                                    {t("common:language:chinese")}
                                 </div>
                             </button>
                         </li>

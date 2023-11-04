@@ -62,5 +62,12 @@
         "hostEvent": "Etkinlik Düzenle",
         "myEvents": "Etkinliklerim",
         "accountSettings": "Hesap Ayarları"
+    },
+    "language": {
+        "language": "Dil",
+        "english": "İngilizce",
+        "turkish": "Türkçe",
+        "german": "Almanca",
+        "chinese": "Çince"
     }
 }

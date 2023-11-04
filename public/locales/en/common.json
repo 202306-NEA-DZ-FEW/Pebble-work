@@ -62,5 +62,13 @@
         "hostEvent": "Host Event",
         "myEvents": "My Events",
         "accountSettings": "Account Settings"
+    },
+    "language": {
+        "language": "Language",
+        "english": "English",
+        "turkish": "Turkish",
+        "german": "German",
+        "chinese": "Chinese"
     }
+
 }

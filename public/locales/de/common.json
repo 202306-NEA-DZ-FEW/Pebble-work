@@ -62,5 +62,12 @@
         "hostEvent": "Veranstaltung erstellen",
         "myEvents": "Meine Veranstaltungen",
         "accountSettings": "Kontoeinstellungen"
+    },
+    "language": {
+        "language": "Sprache",
+        "english": "Englisch",
+        "turkish": "Türkisch",
+        "german": "Deutsch",
+        "chinese": "Chinesisch"
     }
 }

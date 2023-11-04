@@ -62,5 +62,12 @@
         "hostEvent": "主办活动",
         "myEvents": "我的活动",
         "accountSettings": "账户设置"
+    },
+    "language": {
+        "language": "语言",
+        "english": "英语",
+        "turkish": "土耳其语",
+        "german": "德语",
+        "chinese": "中文"
     }
 }
