@@ -15,11 +15,10 @@ import FilterByType from "@/components/Filter/FilterByType";
 import FirestoreLocation from "@/components/Filter/FirestoreLocation";
 
 import { db } from "@/util/firebase";
-import { useRouter } from "next/router";
 
 const EventsPage = (user) => {
     // State variables
-    const [inputValue, setInputValue] = useState("");
+
     const [selectedTypes, setSelectedTypes] = useState([]);
     const [inputValue1, setInputValue1] = useState("");
     const [isCalendarOpen, setCalendarOpen] = useState(false);
@@ -32,7 +31,7 @@ const EventsPage = (user) => {
     const [resetLocation, setResetLocation] = useState(false);
     const [resetDays, setResetDays] = useState(false);
     const dropdownRef = useRef(null);
-    const locationRef = useRef(null);
+
     const handleLocationInputChange = (value) => {
         setInputValue1(value);
     };
@@ -80,24 +79,6 @@ const EventsPage = (user) => {
         }
     };
 
-    const handleLocationOutside = (event) => {
-        if (window.innerWidth <= 640) {
-            if (
-                locationRef.current &&
-                !locationRef.current.contains(event.target)
-            ) {
-                setLocationOpen(false);
-            }
-        }
-    };
-
-    useEffect(() => {
-        document.addEventListener("click", handleLocationOutside);
-        return () => {
-            document.removeEventListener("click", handleLocationOutside);
-        };
-    }, []);
-
     const handleClickOutside = (event) => {
         if (
             dropdownRef.current &&
@@ -112,16 +93,6 @@ const EventsPage = (user) => {
             window.removeEventListener("click", handleClickOutside);
         };
     }, []);
-
-    // Handle location click
-    const handleLocationClick = () => {
-        setLocationOpen(!isLocationOpen);
-    };
-
-    // Handle input change
-    const handleInputChange = (e) => {
-        setInputValue(e.target.value);
-    };
 
     // Handle test click
     const handleTestClick = () => {
@@ -230,7 +201,7 @@ const EventsPage = (user) => {
                     className={`flex flex-col-reverse sm:flex sm:flex-row-reverse sm:items-center sm:justify-evenly sm:gap-8 sm:h-full sm:w-full`}
                 >
                     <div
-                        className={`md:h-[800px] h-[400px] xl:w-[840px] pb-[140px] md:pb-[140px] md:w-[480px] lg:w-[490px] ${styles.information}`}
+                        className={`md:h-[800px] h-[400px] pb-[140px] md:pb-[140px] md:w-[480px] ${styles.information}`}
                     >
                         <ul className={` flex flex-col items gap-2 `}>
                             {filteredEvents.map((event, index) => {
