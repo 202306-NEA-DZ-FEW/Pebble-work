@@ -150,6 +150,7 @@ const EventCreationPage = () => {
                 {isAuthenticated ? (
                     <>
                         <div style={{ height: "6rem" }}></div>
+
                         <div className='flex flex-col  md:space-x-20  md:flex-row md:center-content md:ml-4 pl-2 sm:ml-4'>
                             <div>
                                 <h3
@@ -382,7 +383,7 @@ const EventCreationPage = () => {
                             </form>
                         </div>
 
-                        <div className='md:pl-2 flex flex-col  mx-auto  items-center flex-wrap sm:flex sm:flex-col sm:flex-wrap sm:items-center w-screen ml-2  md:flex md:flex-col md:ml-4 md:items-start lg:flex lg:flex-col lg:mt-3 lg:mx-0 lg:items-start my-3 px-2'>
+                        <div className='md:pl-2 flex flex-col  mx-auto  items-center flex-wrap sm:flex sm:flex-col sm:flex-wrap sm:items-center ml-2  md:flex md:flex-col md:ml-4 md:items-start lg:flex lg:flex-col lg:mt-3 lg:mx-0 lg:items-start my-3 px-2'>
                             <h1 className='mt-5 text-xl font-semibold align-left '>
                                 Event Image:
                             </h1>
@@ -398,7 +399,7 @@ const EventCreationPage = () => {
                             ></input>
                         </div>
 
-                        <div className='flex flex-col flex-wrap mt-8 w-screen md:ml-4 ml-2'>
+                        <div className='flex flex-col flex-wrap mt-8 md:ml-4 ml-2'>
                             <h1 className='mt-5 text-xl font-semibold align-left '>
                                 Almost Done! Just take a minute to review our
                                 guidlines.
