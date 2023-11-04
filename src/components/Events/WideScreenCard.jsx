@@ -60,16 +60,6 @@ const WideScreenCard = ({
                 span.className = styles.explode;
                 h2Ref.current.appendChild(span);
             });
-
-            const smoke = document.createElement("img");
-            smoke.src = "/smoke.gif";
-            smoke.style.animationDuration = `${letters.length * 0.2}s`;
-            smoke.className = styles.smoke;
-            smoke.style.transform = "rotate(90deg)"; // Rotate the image 90 degrees
-            h2Ref.current.appendChild(smoke);
-            smoke.addEventListener("animationend", () => {
-                h2Ref.current.removeChild(smoke);
-            });
         }
     }, [isHovered]);
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/Events.module.css";
-import Draggable from "react-draggable";
 import {
     collection,
     getDocs,
@@ -18,7 +17,6 @@ import FirestoreLocation from "../Filter/FirestoreLocation";
 
 const DesktopEvents = (user) => {
     // State variables
-    const [inputValue, setInputValue] = useState("");
     const [selectedTypes, setSelectedTypes] = useState([]);
     const [inputValue1, setInputValue1] = useState("");
     const [isLocationOpen, setLocationOpen] = useState(false);
@@ -174,14 +172,7 @@ const DesktopEvents = (user) => {
                     <h1>Welcome, {user.name}!</h1>
                     <p>This is the events page</p>
                 </div>
-                <Draggable>
-                    <button
-                        onClick={resetEvents}
-                        className={`w-[52px] fixed left-[26%] top-20 z-10 bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px] ml-auto mr-2`}
-                    >
-                        All events
-                    </button>
-                </Draggable>
+
                 <div
                     className={`flex flex-row-reverse items-center justify-evenly w-full`}
                 >
@@ -254,6 +245,7 @@ const DesktopEvents = (user) => {
                         </div>
 
                         <FilterByType
+                            resetEvents={resetEvents}
                             setFilteredTypes={setFilteredTypes}
                             selectedTypes={selectedTypes}
                             setSelectedTypes={setSelectedTypes}
