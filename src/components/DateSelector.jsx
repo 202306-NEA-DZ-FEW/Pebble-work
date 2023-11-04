@@ -1,14 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const DateSelector = ({ setCurrentDate }) => {
+const DateSelector = ({ setCurrentDate, checkEvents, resetDays }) => {
     const [day, setDay] = useState(1);
     const [month, setMonth] = useState(0); // January is 0 in JavaScript's Date
     const [year, setYear] = useState(2023);
+    const [formattedDate, setFormattedDate] = useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        setCurrentDate(new Date(year, month, day));
+        const newDate = new Date(
+            parseInt(year),
+            parseInt(month),
+            parseInt(day),
+            12
+        );
+        setCurrentDate(newDate);
+        const newFormattedDate = newDate.toISOString().split("T")[0];
+        setFormattedDate(newFormattedDate);
     };
+
+    useEffect(() => {
+        if (formattedDate) {
+            checkEvents(formattedDate);
+        }
+    }, [formattedDate]);
+
+    useEffect(() => {
+        if (resetDays) {
+            const currentDate = new Date();
+            setDay(currentDate.getDate());
+            setMonth(currentDate.getMonth());
+            setYear(currentDate.getFullYear());
+            setCurrentDate(currentDate);
+            const formattedDate = currentDate.toISOString().split("T")[0];
+            setFormattedDate(formattedDate);
+        }
+    }, [resetDays]);
 
     return (
         <form onSubmit={handleSubmit}>

@@ -243,7 +243,7 @@ const EventsPage = (user) => {
                                 className='sm:hidden'
                                 onClick={handleTestClick}
                             >
-                                Change Date
+                                Dates
                             </button>
                             {isCalendarOpen && (
                                 <div

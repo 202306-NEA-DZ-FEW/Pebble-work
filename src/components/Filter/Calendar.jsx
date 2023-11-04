@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 
 import styles from "@/styles/Events.module.css";
+import DateSelector from "../DateSelector";
 
 const Calendar = ({ checkEvents, resetDays }) => {
     const [currentDate, setCurrentDate] = useState(new Date());
@@ -131,6 +132,11 @@ const Calendar = ({ checkEvents, resetDays }) => {
     return (
         <>
             <div className='flex flex-col-reverse items-center justify-center xl:w-[333px] xl:h-[243px] sm:w-[222px] sm:h-[180px]'>
+                <DateSelector
+                    resetDays={resetDays}
+                    checkEvents={checkEvents}
+                    setCurrentDate={setCurrentDate}
+                />
                 <div className='flex justify-center items-center gap-2'>
                     <button
                         className='flex items-center'

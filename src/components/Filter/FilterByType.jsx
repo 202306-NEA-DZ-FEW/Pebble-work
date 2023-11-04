@@ -104,7 +104,7 @@ const FilterByType = ({
                 }
             >
                 <button className='sm:hidden' onClick={handleInterestClick}>
-                    Change Interest
+                    Interests
                 </button>
                 {isInterestOpen && (
                     <ul

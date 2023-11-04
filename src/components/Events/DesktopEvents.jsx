@@ -78,16 +78,6 @@ const DesktopEvents = (user) => {
         }
     };
 
-    // Handle location click
-    const handleLocationClick = () => {
-        setLocationOpen(!isLocationOpen);
-    };
-
-    // Handle input change
-    const handleInputChange = (e) => {
-        setInputValue(e.target.value);
-    };
-
     // Resize event listener
     useEffect(() => {
         const handleResize = () => {
@@ -245,8 +235,6 @@ const DesktopEvents = (user) => {
                     </div>
                     <div className='flex h-[140vh] flex-col ml-[-50px] items-center text-black gap-7'>
                         <div className='sm:flex s:flex-col sm:items-center sm:justify-center'>
-                            <button className='sm:hidden'>Change Date</button>
-
                             <div
                                 className={`${styles.calendarContainer} border border-black rounded-[8px] bg-white sm:bg-transparent`}
                             >
