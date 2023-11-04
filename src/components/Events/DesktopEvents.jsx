@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "@/styles/Events.module.css";
+import Draggable from "react-draggable";
 import {
     collection,
     getDocs,
@@ -179,16 +180,18 @@ const DesktopEvents = (user) => {
                     <h1>Welcome, {user.name}!</h1>
                     <p>This is the events page</p>
                 </div>
-                <button
-                    onClick={resetEvents}
-                    className={` w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px] ml-auto mr-2`}
-                >
-                    All events
-                </button>
+                <Draggable>
+                    <button
+                        onClick={resetEvents}
+                        className={`w-[52px] fixed left-1 top-20 z-10 bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px] ml-auto mr-2`}
+                    >
+                        All events
+                    </button>
+                </Draggable>
                 <div
                     className={`flex flex-row-reverse items-center justify-evenly w-full`}
                 >
-                    <div className={`w-[55vw] h-[135vh]`}>
+                    <div className={`w-[55vw] h-[140vh]`}>
                         <ul className={`flex flex-col items gap-2`}>
                             {currentItems.map((event) => {
                                 return (
@@ -236,12 +239,12 @@ const DesktopEvents = (user) => {
                             ))}
                         </div>
                     </div>
-                    <div className='flex h-[120vh] flex-col ml-[-50px] items-center text-black gap-7'>
+                    <div className='flex h-[140vh] flex-col ml-[-50px] items-center text-black gap-7'>
                         <div className='sm:flex s:flex-col sm:items-center sm:justify-center'>
                             <button className='sm:hidden'>Change Date</button>
 
                             <div
-                                className={`${styles.calendarContainer} border border-black rounded-[8px] z-10 bg-white sm:bg-transparent`}
+                                className={`${styles.calendarContainer} border border-black rounded-[8px] bg-white sm:bg-transparent`}
                             >
                                 <Calendar
                                     resetDays={resetDays}
