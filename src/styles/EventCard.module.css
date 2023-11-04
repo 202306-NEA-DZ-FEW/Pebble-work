@@ -265,3 +265,10 @@
     animation-timeline: view(block);
     animation-range: entry 0% cover 10%;
 }
+.truncateDescription {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

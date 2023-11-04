@@ -46,7 +46,9 @@ const EventCardLeft = ({
                         }}
                         className={`${styles.information} xl:leading-[17px] md:leading-[14px] leading-[10px] h-[26.2px] w-[214px] xl:w-[520px] xl:h-[63px] sm:w-[297px] sm:h-[37px] overflow-y-scroll xl:text-[15px] sm:text-[10.20px] text-[10px]`}
                     >
-                        {description}
+                        {description.length > 105
+                            ? `${description.substring(0, 105)}...`
+                            : description}
                     </p>
 
                     <button

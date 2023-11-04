@@ -188,7 +188,7 @@ const DesktopEvents = (user) => {
                 <div
                     className={`flex flex-row-reverse items-center justify-evenly w-full`}
                 >
-                    <div className={` `}>
+                    <div className={`w-[55vw] h-[135vh]`}>
                         <ul className={`flex flex-col items gap-2`}>
                             {currentItems.map((event) => {
                                 return (
@@ -236,7 +236,7 @@ const DesktopEvents = (user) => {
                             ))}
                         </div>
                     </div>
-                    <div className='flex bg-white z-10 flex-row items-center justify-between sm:flex sm:flex-col ml-[-100px] sm:items-center text-black sm:gap-7'>
+                    <div className='flex h-[120vh] flex-col ml-[-50px] items-center text-black gap-7'>
                         <div className='sm:flex s:flex-col sm:items-center sm:justify-center'>
                             <button className='sm:hidden'>Change Date</button>
 

@@ -33,20 +33,24 @@ const WideScreenCard = ({
         setHideBackground(false);
         setIsHovered(false);
         reverseTimer = setTimeout(() => {
-            const letters = h2Ref?.current?.innerText?.split("");
-            h2Ref.current.innerHTML = "";
-            letters.forEach((letter, i) => {
-                const span = document.createElement("span");
-                span.innerText = letter;
-                span.style.opacity = 0;
-                span.style.animationDelay = `${(letters.length - i) * 0.1}s`;
-                span.className = styles.reverseExplode;
-                h2Ref.current.appendChild(span);
-            });
-        }, 1000);
+            if (h2Ref.current) {
+                const letters = h2Ref.current.innerText.split("");
+                h2Ref.current.innerHTML = "";
+                letters.forEach((letter, i) => {
+                    const span = document.createElement("span");
+                    span.innerText = letter;
+                    span.style.opacity = 0;
+                    span.style.animationDelay = `${
+                        (letters.length - i) * 0.1
+                    }s`;
+                    span.className = styles.reverseExplode;
+                    h2Ref.current.appendChild(span);
+                });
+            }
+        }, 1500);
     };
     useEffect(() => {
-        if (isHovered) {
+        if (isHovered && h2Ref.current) {
             const letters = h2Ref.current.innerText.split("");
             h2Ref.current.innerHTML = "";
             letters.forEach((letter, i) => {
@@ -68,6 +72,7 @@ const WideScreenCard = ({
             });
         }
     }, [isHovered]);
+
     useEffect(() => {
         //This is to ensure that the timeouts don’t try to update the state of a component that is no longer in the DOM, which can cause memory leaks.
 
@@ -142,8 +147,9 @@ const WideScreenCard = ({
                         }}
                         className={`${styles.information} z-[-2] xl:leading-[17px] md:leading-[14px] leading-[10px] h-[26.2px] w-[214px] xl:w-[520px] xl:h-[63px] sm:w-[297px] sm:h-[37px] overflow-y-scroll xl:text-[15px] sm:text-[10.20px] text-[10px]`}
                     >
-                        Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit.consectetur adipiscing elit {description}
+                        {description.length > 130
+                            ? `${description.substring(0, 130)}...`
+                            : description}
                     </p>
                 </div>
                 <div className='flex flex-col justify-end h-40'>
