@@ -201,7 +201,7 @@ const EventsPage = (user) => {
                     className={`flex flex-col-reverse sm:flex sm:flex-row-reverse sm:items-center sm:justify-evenly sm:gap-8 sm:h-full sm:w-full`}
                 >
                     <div
-                        className={`md:h-[800px] h-[400px] pb-[140px] md:pb-[140px] md:w-[480px] ${styles.information}`}
+                        className={`h-[400px] pb-[140px] md:pb-[140px] md:w-[480px] sm:h-[1000px] ${styles.information}`}
                     >
                         <ul className={` flex flex-col items gap-2 `}>
                             {filteredEvents.map((event, index) => {

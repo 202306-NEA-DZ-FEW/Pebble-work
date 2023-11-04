@@ -221,6 +221,11 @@
         animation-range: entry 0% cover 30%;
     }
 }
+@media (max-width: 340px) {
+    .contai {
+        width: 100vw;
+    }
+}
 @keyframes fade {
     0% {
         transform: translateY(-100%);

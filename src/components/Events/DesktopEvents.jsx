@@ -11,7 +11,6 @@ import {
 
 import Calendar from "@/components/Filter/Calendar";
 import FilterByType from "@/components/Filter/FilterByType";
-import LocationFilter from "@/components/Filter/LocationFilter";
 
 import { db } from "@/util/firebase";
 import WideScreenCard from "@/components/Events/WideScreenCard";
