@@ -15,6 +15,7 @@ import FilterByType from "@/components/Filter/FilterByType";
 import FirestoreLocation from "@/components/Filter/FirestoreLocation";
 
 import { db } from "@/util/firebase";
+import { useRouter } from "next/router";
 
 const EventsPage = (user) => {
     // State variables
@@ -30,10 +31,8 @@ const EventsPage = (user) => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [resetLocation, setResetLocation] = useState(false);
     const [resetDays, setResetDays] = useState(false);
-
     const dropdownRef = useRef(null);
     const locationRef = useRef(null);
-
     const handleLocationInputChange = (value) => {
         setInputValue1(value);
     };
@@ -210,7 +209,7 @@ const EventsPage = (user) => {
         setResetDays([]);
     };
     const handleInputDelete = () => {
-        setFilteredEvents(events);
+        setInputValue1("");
     };
     return (
         <>
@@ -305,7 +304,6 @@ const EventsPage = (user) => {
                                 onInputDelete={handleInputDelete}
                             />
                         </div>
-
                         <FilterByType
                             ref={dropdownRef}
                             setFilteredTypes={setFilteredTypes}
