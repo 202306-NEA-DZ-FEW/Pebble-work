@@ -86,7 +86,7 @@ const WideScreenCard = ({
             <div
                 onMouseEnter={handleHover}
                 onMouseLeave={handleMouseLeave}
-                className={`${styles.contai} ${styles.card} ${styles.wideFading} border w-[55vw] h-[24vh] flex flex-row items-center justify-center gap-2`}
+                className={`${styles.contai} ${styles.card} ${styles.wideFading} border w-[55vw] h-[24vh] flex flex-row items-center justify-around gap-2`}
             >
                 <h2
                     ref={h2Ref}
@@ -121,9 +121,7 @@ const WideScreenCard = ({
                         </li>
                     </ul>
                 </div>
-                <div
-                    className={`flex flex-col gap-1 sm:gap-4 items-start text-start`}
-                >
+                <div className={`flex flex-col gap-1 sm:gap-4 text-start`}>
                     <h1
                         className='xl:text-[25.70px] sm:text-[15px] text-[10.55px]'
                         style={{

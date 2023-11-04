@@ -183,7 +183,7 @@ const DesktopEvents = (user) => {
                 <Draggable>
                     <button
                         onClick={resetEvents}
-                        className={`w-[52px] fixed left-1 top-20 z-10 bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px] ml-auto mr-2`}
+                        className={`w-[52px] fixed left-[26%] top-20 z-10 bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px] ml-auto mr-2`}
                     >
                         All events
                     </button>
