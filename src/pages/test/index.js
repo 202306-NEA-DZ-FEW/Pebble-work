@@ -1,21 +1,15 @@
-import WideScreenCard from "@/components/Events/WideScreenCard";
 import React from "react";
-import { toast } from "react-toastify";
+import MobileEvents from "@/components/Events/MobileEvents";
+import DesktopEvents from "@/components/Events/DesktopEvents";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
-function MyComponent() {
-    const handleClick = () => {
-        toast.success("Email sent successfully!", {
-            position: toast.POSITION.TOP_RIGHT,
-            autoClose: 3000,
-        });
-    };
-
+const EventsPage = () => {
+    const matches = useMediaQuery("(min-width:1000px)");
     return (
-        <div>
-            <button onClick={handleClick}>Show Toast</button>
-            <WideScreenCard />
-        </div>
+        <>
+            <div>{matches ? <DesktopEvents /> : <MobileEvents />}</div>
+        </>
     );
-}
+};
 
-export default MyComponent;
+export default EventsPage;
