@@ -194,15 +194,14 @@ const SignInPage = () => {
             <div className='flex justify-center items-center  '>
                 <div className='flex flex-col items-center sm:flex-row sm:w-1/ h-fit'>
                     <div className='mb-4 sm:mb-0'>
-                        <Image
+                        <img
                             src='/images/Sitting.png'
                             alt='Sitting'
                             width={1920}
                             height={1081}
                             layout='responsive'
                             objectFit='cover'
-                            className='w-full sm:w-auto sm:h-auto'
-                            // style={{ width: '100%' }}
+                            className='w-full sm:w-auto sm:h-auto h-[250px] md:w-[300px] md:h-[300px]'
                         />
                     </div>
                     <div className='sm:ml-10'>
