@@ -131,47 +131,49 @@ const Calendar = ({ checkEvents, resetDays }) => {
 
     return (
         <>
-            <div className='flex flex-col-reverse items-center justify-center xl:w-[333px] xl:h-[243px] sm:w-[222px] sm:h-[180px]'>
+            <div className='flex flex-col items-center'>
+                <div className='flex flex-col-reverse items-center justify-center xl:w-[333px] xl:h-[243px] sm:w-[222px] sm:h-[180px]'>
+                    <div className='flex justify-center items-center gap-2'>
+                        <button
+                            className='flex items-center'
+                            onClick={handlePreviousMonth}
+                        >
+                            <Image
+                                className='xl:w-[50px] xl:h-[50px] sm:w-[35px] md:h-[35px]'
+                                src='/icons/previous.png'
+                                width={50}
+                                height={50}
+                                alt='Previous'
+                            />
+                        </button>
+                        <div className='flex flex-col items-center gap-3'>
+                            <div className='calendar grid grid-cols-7 gap-1'>
+                                {renderCalendar()}
+                            </div>
+                            <h2 className='text-xl font-bold sm:text-[14px] xl:text-[18px]'>
+                                {getMonthName(currentDate)}{" "}
+                                {currentDate.getFullYear()}
+                            </h2>
+                        </div>
+                        <button
+                            className='flex items-center'
+                            onClick={handleNextMonth}
+                        >
+                            <Image
+                                className='xl:w-[50px] xl:h-[50px] sm:w-[35px] md:h-[35px]'
+                                src='/icons/next.png'
+                                width={50}
+                                height={50}
+                                alt='Next'
+                            />
+                        </button>
+                    </div>
+                </div>
                 <DateSelector
                     resetDays={resetDays}
                     checkEvents={checkEvents}
                     setCurrentDate={setCurrentDate}
                 />
-                <div className='flex justify-center items-center gap-2'>
-                    <button
-                        className='flex items-center'
-                        onClick={handlePreviousMonth}
-                    >
-                        <Image
-                            className='xl:w-[50px] xl:h-[50px] sm:w-[35px] md:h-[35px]'
-                            src='/icons/previous.png'
-                            width={50}
-                            height={50}
-                            alt='Previous'
-                        />
-                    </button>
-                    <div className='flex flex-col items-center gap-3'>
-                        <div className='calendar grid grid-cols-7 gap-1'>
-                            {renderCalendar()}
-                        </div>
-                        <h2 className='text-xl font-bold sm:text-[14px] xl:text-[18px]'>
-                            {getMonthName(currentDate)}{" "}
-                            {currentDate.getFullYear()}
-                        </h2>
-                    </div>
-                    <button
-                        className='flex items-center'
-                        onClick={handleNextMonth}
-                    >
-                        <Image
-                            className='xl:w-[50px] xl:h-[50px] sm:w-[35px] md:h-[35px]'
-                            src='/icons/next.png'
-                            width={50}
-                            height={50}
-                            alt='Next'
-                        />
-                    </button>
-                </div>
             </div>
         </>
     );
