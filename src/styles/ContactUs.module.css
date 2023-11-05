@@ -1,4 +1,4 @@
-@media (max-height: 835px) {
+/* @media (max-height: 835px) {
     .formHeight {
         height: 50vh;
     }
@@ -26,6 +26,12 @@
 @media (max-height: 470px) {
     .formHeight {
         height: 135vh;
+    }
+} */
+@media (max-width: 470px) {
+    .formHeight {
+        padding-top: 80px;
+        margin-bottom: 80px;
     }
 }
 

@@ -165,7 +165,9 @@ const EventsPage = (user) => {
                                         key={event.id}
                                         title={event.title}
                                         type={event.type}
-                                        image={event.image}
+                                        image={
+                                            event?.image || "/event_image.png"
+                                        }
                                         location={event.location}
                                         description={event.description}
                                         organizer={event.organizer}

@@ -31,6 +31,16 @@ const SmallScreenEvents = (user) => {
     const [resetLocation, setResetLocation] = useState(false);
     const [resetDays, setResetDays] = useState(false);
     const dropdownRef = useRef(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(5);
+
+    const totalPages = Math.ceil(filteredEvents.length / itemsPerPage);
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = filteredEvents.slice(
+        indexOfFirstItem,
+        indexOfLastItem
+    );
 
     const handleLocationInputChange = (value) => {
         setInputValue1(value);
@@ -185,7 +195,7 @@ const SmallScreenEvents = (user) => {
     return (
         <>
             <main
-                className={` flex flex-col justify-center items-center pb-12`}
+                className={` flex flex-col justify-center items-center overflow-scroll`}
             >
                 <div>
                     <h1>Welcome, {user.name}!</h1>
@@ -198,18 +208,20 @@ const SmallScreenEvents = (user) => {
                     All events
                 </button>
                 <div className={`flex flex-col-reverse`}>
-                    <div className={`h-[450px] ${styles.information}`}>
+                    <div className={`h-[750px]`}>
                         <ul
                             className={` flex flex-row justify-center flex-wrap items gap-4`}
                         >
-                            {filteredEvents.map((event) => {
+                            {currentItems.map((event) => {
                                 return (
                                     <MobileCard
                                         eventId={event.id}
                                         key={event.id}
                                         title={event.title}
                                         type={event.type}
-                                        image={event.image}
+                                        image={
+                                            event?.image || "/event_image.png"
+                                        }
                                         location={event.location}
                                         description={event.description}
                                         organizer={event.organizer}
@@ -231,6 +243,22 @@ const SmallScreenEvents = (user) => {
                                     No events found for this date
                                 </p>
                             )}
+                            <div className='flex justify-center gap-8 text-black'>
+                                {Array.from(
+                                    { length: totalPages },
+                                    (_, i) => i + 1
+                                ).map((pageNumber) => (
+                                    <button
+                                        key={pageNumber}
+                                        onClick={() =>
+                                            setCurrentPage(pageNumber)
+                                        }
+                                        disabled={pageNumber === currentPage}
+                                    >
+                                        {pageNumber}
+                                    </button>
+                                ))}
+                            </div>
                         </ul>
                     </div>
                     <div className='flex bg-white z-10 flex-row items-center justify-evenly text-black'>
