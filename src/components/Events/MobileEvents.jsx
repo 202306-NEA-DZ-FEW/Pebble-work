@@ -27,6 +27,16 @@ const EventsPage = (user) => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [resetLocation, setResetLocation] = useState(false);
     const [resetDays, setResetDays] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(5);
+
+    const totalPages = Math.ceil(filteredEvents.length / itemsPerPage);
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = filteredEvents.slice(
+        indexOfFirstItem,
+        indexOfLastItem
+    );
 
     const handleLocationInputChange = (value) => {
         setInputValue1(value);
@@ -143,20 +153,12 @@ const EventsPage = (user) => {
                     <h1>Welcome, {user.name}!</h1>
                     <p>This is the events page</p>
                 </div>
-                <button
-                    onClick={resetEvents}
-                    className={` w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 md:text-[12px] rounded-[4px] h-[16px] sm:w-[72.23px] sm:h-[25.5px] ml-auto  mr-2`}
-                >
-                    All events
-                </button>
                 <div
                     className={`flex flex-col-reverse sm:flex sm:flex-row-reverse sm:items-center sm:justify-evenly sm:gap-8 sm:h-full sm:w-full`}
                 >
-                    <div
-                        className={`h-[400px] pb-[140px] md:pb-[140px] md:w-[480px] sm:h-[1000px] ${styles.information}`}
-                    >
+                    <div className={`md:w-[480px] sm:h-[800px]`}>
                         <ul className={` flex flex-col items gap-2 `}>
-                            {filteredEvents.map((event, index) => {
+                            {currentItems.map((event) => {
                                 return (
                                     <EventCardLeft
                                         eventId={event.id}
@@ -185,6 +187,22 @@ const EventsPage = (user) => {
                                     No events found for this date
                                 </p>
                             )}
+                            <div className='flex justify-center gap-8 text-black'>
+                                {Array.from(
+                                    { length: totalPages },
+                                    (_, i) => i + 1
+                                ).map((pageNumber) => (
+                                    <button
+                                        key={pageNumber}
+                                        onClick={() =>
+                                            setCurrentPage(pageNumber)
+                                        }
+                                        disabled={pageNumber === currentPage}
+                                    >
+                                        {pageNumber}
+                                    </button>
+                                ))}
+                            </div>
                         </ul>
                     </div>
                     <div className='flex bg-white z-10 flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7'>
@@ -209,6 +227,7 @@ const EventsPage = (user) => {
                             />
                         </div>
                         <FilterByType
+                            resetEvents={resetEvents}
                             setFilteredTypes={setFilteredTypes}
                             selectedTypes={selectedTypes}
                             setSelectedTypes={setSelectedTypes}
