@@ -88,7 +88,7 @@ function FirestoreLocation({ onInputChange, onInputDelete }) {
                         value={inputValue}
                         onChange={handleLocationChange}
                         placeholder='Set Location'
-                        className='p-1 mt-4 rounded-md focus:outline-2 outline outline-1 md:w-[20vw]'
+                        className='p-1 mt-4 rounded-md focus:outline-2 xl:w-[15vw] outline outline-1 md:w-[20vw]'
                         style={{
                             borderRadius: "8px",
                             border: "1px solid var(--container-border, #1A1A1A)",
