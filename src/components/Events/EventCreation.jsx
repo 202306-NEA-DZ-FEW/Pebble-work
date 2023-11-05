@@ -3,8 +3,10 @@ import Link from "next/link";
 import styles from "@/styles/EventCreation.module.css";
 import Signup from "../Signup/Signup";
 import Signin from "../Signin/Signin";
+import { useTranslation } from "react-i18next";
 
 const EventCreation = () => {
+    const { t } = useTranslation();
     const canvasRef = useRef(null);
 
     useEffect(() => {
@@ -68,20 +70,15 @@ const EventCreation = () => {
         <>
             <div className='flex items-left h-full overflow-hidden z-10 mb-[4rem]'>
                 <div className='absolute p-4 top-[50%] left-[30%] flex flex-col bg-white bg-opacity-70 border rounded-[8px]'>
-                    <p className='text-red-600'>
-                        Together for a Better World: Join Our Global
-                        Humanitarian Movement
-                    </p>
+                    <p className='text-red-600'>{t("events:pageTitle")}</p>
 
                     <div className='flex flex-col'>
                         <p className='text-grey-600'>
-                            Join us and become an agent of hope and
-                            transformation. <br />
-                            If you already have an account, please sign in to be
-                            able to access this page.
+                            {t("events:joinDescription")}
                         </p>
                         <div className='flex flex-row gap-5 content-center mx-auto mt-3'>
-                            <Signin /> <Signup />
+                            <Signin />
+                            <Signup />
                         </div>
                     </div>
                 </div>

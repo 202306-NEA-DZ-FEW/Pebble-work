@@ -1,6 +1,9 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 function EditEvent() {
+    const { t } = useTranslation();
+
     return (
         <>
             <div
@@ -11,8 +14,7 @@ function EditEvent() {
                 }}
             >
                 <p className='text-center text-xl text-red-600 px-5'>
-                    You don&apos;t have the necessary permissions to access this
-                    page.
+                    {t("events:noPermissionsMessage")}
                 </p>
             </div>
 
@@ -21,7 +23,7 @@ function EditEvent() {
                     className="text-center mb-[2rem] cursor-pointer text-2xl font-medium font-'Rubik' leading-10 tracking-tight bg-cyan-700 text-white px-4 py-2 rounded-lg"
                     onClick={() => (window.location.href = `/`)}
                 >
-                    Homepage
+                    {t("events:homepageButton")}
                 </button>
             </div>
         </>

@@ -1,0 +1,25 @@
+{
+    "welcome": "Willkommen, {{name}}!",
+    "eventsPage": "Dies ist die Veranstaltungsseite",
+    "noEventsFound": "Keine Veranstaltungen für dieses Datum und diesen Ort gefunden",
+    "noEventsFoundForDate": "Keine Veranstaltungen für dieses Datum gefunden",
+    "noPermissionsMessage": "Sie haben nicht die erforderlichen Berechtigungen, um auf diese Seite zuzugreifen.",
+    "homepageButton": "Startseite",
+    "avatars": "Avatare",
+    "reviewButton": "Bewerten",
+    "locationLabel": "Ort",
+    "dateLabel": "Datum",
+    "timeLabel": "Uhrzeit",
+    "pageTitle": "Gemeinsam für eine bessere Welt: Treten Sie unserer globalen humanitären Bewegung bei",
+    "joinDescription": "Schließen Sie sich uns an und werden Sie ein Agent der Hoffnung und Transformation. Wenn Sie bereits ein Konto haben, melden Sie sich bitte an, um auf diese Seite zugreifen zu können.",
+    "noFoundPageTitle": "Ereignis gelöscht oder hat nie existiert",
+    "notFoundTitle": "Hoppla! Seite nicht gefunden",
+    "notFoundDescription1": "Sieht so aus, als wären Sie auf eine Seite gestoßen, die nicht existiert.",
+    "notFoundDescription2": "Keine Sorge, selbst die besten Entwickler verirren sich manchmal!",
+    "notFoundSuggestions": "Hier sind ein paar Dinge, die Sie ausprobieren können:",
+    "suggestion1": "Überprüfen Sie die URL auf Tippfehler.",
+    "suggestion2": "Gehen Sie zur vorherigen Seite zurück und versuchen Sie es erneut.",
+    "suggestion3": "Klicken Sie im Navigationsmenü, um zu finden, wonach Sie suchen.",
+    "catVideoDescription": "Wenn alles andere fehlschlägt, machen Sie eine Pause und genießen Sie dieses lustige Katzenvideo."
+
+  }

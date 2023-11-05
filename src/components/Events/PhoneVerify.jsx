@@ -1,7 +1,6 @@
 import { BsFillShieldLockFill, BsTelephoneFill } from "react-icons/bs";
 import { CgSpinner } from "react-icons/cg";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { auth } from "@/util/firebase";
@@ -14,38 +13,33 @@ import {
     signInWithPhoneNumber,
 } from "firebase/auth";
 import { toast, Toaster } from "react-hot-toast";
-
 import OtpInput from "@/components/OtpVerification";
+import { useTranslation } from "react-i18next";
+
 const PhoneVerify = () => {
     const [otp, setOtp] = useState("");
-    const [pn, setPn] = useState(""); //phone number
+    const [pn, setPn] = useState("");
     const [loading, setLoading] = useState(false);
     const [showOTP, setShowOTP] = useState(false);
     const [user, setUser] = useState(null);
+    const { t } = useTranslation("verify");
 
-    function onCaptchaVerify() {
-        if (!window.recaptchaVerifier) {
-            window.recaptchaVerifier = new RecaptchaVerifier(
-                auth,
-                "recaptcha-container",
-                {
-                    size: "invisible",
-                    callback: (response) => {
-                        onSignup();
-                    },
-                    "expired-callback": () => {},
-                },
-                auth
-            );
-        }
-    }
+    useEffect(() => {
+        const recaptchaVerifier = new RecaptchaVerifier(
+            auth,
+            "recaptcha-container",
+            {
+                size: "invisible",
+                callback: (response) => {},
+            },
+            auth
+        );
+        recaptchaVerifier.render();
+    }, []);
 
-    function onSignup() {
+    const onSignup = () => {
         setLoading(true);
-        onCaptchaVerify();
-
-        const appVerifier = window.recaptchaVerifier;
-
+        const appVerifier = new RecaptchaVerifier("recaptcha-container");
         const formatPh = "+" + pn;
 
         signInWithPhoneNumber(auth, formatPh, appVerifier)
@@ -53,40 +47,36 @@ const PhoneVerify = () => {
                 window.confirmationResult = confirmationResult;
                 setLoading(false);
                 setShowOTP(true);
-                toast.success("OTP sent successfully!");
+                toast.success(t("otpSent"));
             })
             .catch((error) => {
                 console.log(error);
                 setLoading(false);
             });
-    }
+    };
 
-    async function onOTPVerify() {
+    const onOTPVerify = async () => {
         setLoading(true);
-        // Get current user before phone number verification
         const currentUser = getAuth().currentUser;
+
         if (!currentUser || !currentUser.email || !currentUser.displayName) {
-            console.log("No current user or missing email/name");
+            console.log(t("verify:noCurrentUser"));
             return;
         }
 
         try {
-            // Confirm the OTP and get the phone credential
             const phoneCredential = PhoneAuthProvider.credential(
                 window.confirmationResult.verificationId,
                 otp
             );
 
-            // Link the phone credential to the current user
             await linkWithCredential(currentUser, phoneCredential);
+            console.log(t("verify:phoneNumberLinked"));
 
-            console.log("Phone number linked to current user");
-
-            // Get a reference to the user's document in the "users" collection
             const db = getFirestore();
             const userDoc = doc(db, "users", currentUser.uid);
             const formatPh = "+" + pn;
-            // Update the user's data
+
             await updateDoc(userDoc, {
                 phoneNumber: formatPh,
             });
@@ -99,8 +89,9 @@ const PhoneVerify = () => {
         } finally {
             setLoading(false);
         }
-    }
-    function handleKeyDown(event) {
+    };
+
+    const handleKeyDown = (event) => {
         if (event.key === "Enter") {
             if (showOTP) {
                 onOTPVerify();
@@ -108,7 +99,8 @@ const PhoneVerify = () => {
                 onSignup();
             }
         }
-    }
+    };
+
     return (
         <>
             <section className='bg-[#FDA855] bg-opacity-50 flex items-center justify-center h-screen'>
@@ -117,13 +109,12 @@ const PhoneVerify = () => {
                     <div id='recaptcha-container'></div>
                     {user ? (
                         <h2 className='text-center text-white font-medium text-2xl'>
-                            👍 Login Success
+                            👍 {t("verify:loginSuccess")}
                         </h2>
                     ) : (
                         <div className='w-80 flex flex-col gap-4 rounded-lg p-4'>
                             <h1 className='text-center leading-normal text-white font-medium text-3xl mb-6'>
-                                Verify your phone number before you can create
-                                an event
+                                {t("verify:verifyPhoneNumber")}
                             </h1>
                             {showOTP ? (
                                 <>
@@ -134,7 +125,7 @@ const PhoneVerify = () => {
                                         htmlFor='otp'
                                         className='font-bold text-xl text-white text-center'
                                     >
-                                        Enter your OTP
+                                        {t("verify:enterOTP")}
                                     </label>
 
                                     <OtpInput
@@ -153,7 +144,7 @@ const PhoneVerify = () => {
                                                 className='mt-1 animate-spin'
                                             />
                                         )}
-                                        <span>Verify OTP</span>
+                                        <span>{t("verify:verifyOTP")}</span>
                                     </button>
                                 </>
                             ) : (
@@ -162,10 +153,10 @@ const PhoneVerify = () => {
                                         <BsTelephoneFill size={30} />
                                     </div>
                                     <label
-                                        htmlFor=''
+                                        htmlFor='phoneNumber'
                                         className='font-bold text-xl text-white text-center'
                                     >
-                                        Verify your phone number
+                                        {t("verify:verifyPhoneNumberLabel")}
                                     </label>
                                     <PhoneInput
                                         country={"dz"}
@@ -175,7 +166,7 @@ const PhoneVerify = () => {
                                     />
                                     <button
                                         onClick={onSignup}
-                                        className='bg-[#FDA855] ml-[5px] hover:bg-orange-700 w-full flex gap-1 items-center justify-center py-2.5 text-white rounded'
+                                        className='bg-[#FDA855] ml-5 hover:bg-orange-700 w-full flex gap-1 items-center justify-center py-2.5 text-white rounded'
                                     >
                                         {loading && (
                                             <CgSpinner
@@ -183,7 +174,9 @@ const PhoneVerify = () => {
                                                 className='mt-1 animate-spin'
                                             />
                                         )}
-                                        <span>Send code via SMS</span>
+                                        <span>
+                                            {t("verify:sendCodeViaSMS")}
+                                        </span>
                                     </button>
                                 </>
                             )}

@@ -1,0 +1,25 @@
+{
+    "welcome": "欢迎，{{name}}！",
+    "eventsPage": "这是活动页面",
+    "noEventsFound": "找不到该日期和地点的活动",
+    "noEventsFoundForDate": "找不到该日期的活动",
+    "noPermissionsMessage": "您没有访问此页面所需的权限。",
+    "homepageButton": "首页",
+    "avatars": "头像",
+    "reviewButton": "评论",
+    "locationLabel": "地点",
+    "dateLabel": "日期",
+    "timeLabel": "时间",
+    "pageTitle": "共同建设更美好的世界：加入我们的全球人道主义运动",
+    "joinDescription": "加入我们，成为希望和改变的代理人。如果您已经有一个帐户，请登录以访问此页面。",
+    "noFoundPpageTitle": "活动已删除或从未存在",
+    "notFoundTitle": "糟糕！找不到页面",
+    "notFoundDescription1": "看起来您已经偶然找到了一个不存在的页面。",
+    "notFoundDescription2": "别担心，即使是最好的开发人员有时也会迷路！",
+    "notFoundSuggestions": "以下是一些您可以尝试的方法：",
+    "suggestion1": "仔细检查URL中是否存在拼写错误。",
+    "suggestion2": "返回到上一页，然后重试。",
+    "suggestion3": "单击导航菜单以查找您要寻找的内容。",
+    "catVideoDescription": "如果一切都失败了，请休息一下，欣赏这个有趣的猫咪视频。"
+
+  }
