@@ -1,12 +1,10 @@
 import React from "react";
-import SmallMobileEvents from "@/components/Events/SmallMobileEvents";
-
-import MobileCard from "@/components/Events/MobileCard";
+import SmallScreenEvents from "@/components/Events/SmallScreenEvents";
 
 const Test = () => {
     return (
         <>
-            <SmallMobileEvents />
+            <SmallScreenEvents />
         </>
     );
 };

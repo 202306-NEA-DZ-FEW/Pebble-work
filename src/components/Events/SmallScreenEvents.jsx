@@ -16,7 +16,7 @@ import FirestoreLocation from "@/components/Filter/FirestoreLocation";
 
 import { db } from "@/util/firebase";
 
-const SmallMobileEvents = (user) => {
+const SmallScreenEvents = (user) => {
     // State variables
 
     const [selectedTypes, setSelectedTypes] = useState([]);
@@ -193,17 +193,15 @@ const SmallMobileEvents = (user) => {
                 </div>
                 <button
                     onClick={resetEvents}
-                    className={` w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 md:text-[12px] rounded-[4px] h-[16px] sm:w-[72.23px] sm:h-[25.5px] ml-auto  mr-2`}
+                    className={` w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 rounded-[4px] h-[16px] ml-auto mr-2`}
                 >
                     All events
                 </button>
-                <div
-                    className={`flex flex-col-reverse sm:flex sm:flex-row-reverse sm:items-center sm:justify-evenly sm:gap-8 sm:h-full sm:w-full`}
-                >
-                    <div
-                        className={`h-[400px] pb-[140px] md:pb-[140px] md:w-[480px] sm:h-[1000px] ${styles.information}`}
-                    >
-                        <ul className={` flex flex-col items gap-4 `}>
+                <div className={`flex flex-col-reverse`}>
+                    <div className={`h-[450px] ${styles.information}`}>
+                        <ul
+                            className={` flex flex-row justify-center flex-wrap items gap-4`}
+                        >
                             {filteredEvents.map((event) => {
                                 return (
                                     <MobileCard
@@ -235,8 +233,8 @@ const SmallMobileEvents = (user) => {
                             )}
                         </ul>
                     </div>
-                    <div className='flex bg-white z-10 flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7'>
-                        <div className='sm:flex s:flex-col sm:items-center sm:justify-center'>
+                    <div className='flex bg-white z-10 flex-row items-center justify-evenly text-black'>
+                        <div>
                             <button
                                 className='sm:hidden'
                                 onClick={handleTestClick}
@@ -256,7 +254,7 @@ const SmallMobileEvents = (user) => {
                                         isCalendarOpen ? "open" : ""
                                     } ${
                                         styles.calendarContainer
-                                    } border border-black rounded-[8px] z-10 bg-white sm:bg-transparent`}
+                                    } border border-black rounded-[8px] z-10 bg-white`}
                                 >
                                     <Calendar
                                         resetDays={resetDays}
@@ -286,4 +284,4 @@ const SmallMobileEvents = (user) => {
     );
 };
 
-export default SmallMobileEvents;
+export default SmallScreenEvents;
