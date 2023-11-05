@@ -4,7 +4,6 @@ import { auth } from "@/util/firebase";
 import Link from "next/link";
 import Signup from "./Signup/Signup";
 import { useMediaQuery } from "react-responsive";
-import Signin from "./Signin/Signin";
 import styles from "@/styles/DropMenu.module.css";
 import { useRouter } from "next/router";
 
@@ -66,10 +65,12 @@ const Dropdown = () => {
                 <Signup />
             </div>
             <div className='relative ' ref={dropdownRef}>
-                <div className='flex gap-1 items-center justify-center'>
+                <div
+                    onMouseEnter={handleMouseEnter}
+                    className='flex gap-1 items-center cursor-pointer justify-center'
+                >
                     <button
                         onClick={handleSigninClick}
-                        onMouseEnter={handleMouseEnter}
                         className={`w-[52px] xl:mb-0 md:mb-2 md:mt-0 sm:mt-[2px] mt-[5px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px]`}
                     >
                         {user
@@ -84,12 +85,15 @@ const Dropdown = () => {
                                 : user.displayName
                             : "Sign In"}
                     </button>
-
-                    <img
-                        className='rounded-full md:w-8 md:h-8 w-6 h-6'
-                        src={user ? user.photoURL : "/logo/Logo.png"}
-                        alt='Profile'
-                    />
+                    {user ? (
+                        <img
+                            className='rounded-full md:w-8 md:h-8 w-6 h-6'
+                            src={user ? user.photoURL : ""}
+                            alt='Profile'
+                        />
+                    ) : (
+                        ""
+                    )}
                 </div>
 
                 {isOpen && (
