@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "@/styles/EventCard.module.css";
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
 
 const EventCardLeft = ({
     eventId,
@@ -13,6 +14,8 @@ const EventCardLeft = ({
     description,
 }) => {
     const router = useRouter();
+    const { t } = useTranslation();
+
     const handleReviewClick = () => {
         router.push(`/events/${eventId}`);
     };
@@ -20,9 +23,9 @@ const EventCardLeft = ({
     return (
         <>
             <div
-                className={`${styles.contai} border ${styles.fading} relative sm:w-[62vw] sm:h-[16vh] w-[335px] h-[86px] md:w-[466px] md:h-[140px] flex flex-row-reverse items-center justify-center gap-2`}
+                className={`${styles.contai} border relative sm:w-[62vw] md:w-[466px] h-[140px] flex flex-row-reverse items-center justify-center gap-2`}
             >
-                <div className={`flex flex-col gap-1 sm:gap-4 `}>
+                <div className={`flex flex-col gap-1 sm:gap-4`}>
                     <h1
                         className='sm:text-[15px] text-[10.55px] text-center'
                         style={{
@@ -55,7 +58,7 @@ const EventCardLeft = ({
                         className={`w-[45px] bg-blue-400 hover:bg-blue-500 text-white text-[10px] md:text-[12px] rounded-[4px] h-[14px] sm:w-[60px] sm:h-[18px]`}
                         onClick={handleReviewClick}
                     >
-                        Review
+                        {t("events:reviewButton")}
                     </button>
                 </div>
                 <div className={`${styles.productImage} w-full h-full`}>
@@ -72,13 +75,14 @@ const EventCardLeft = ({
                             className={`text-[8px] leading-[10px] md:leading-[15px] sm:text-[10.20px]`}
                         >
                             <li>
-                                <strong>Location:</strong> {location}
+                                <strong>{t("events:locationLabel")}:</strong>{" "}
+                                {location}
                             </li>
                             <li>
-                                <strong>Date:</strong> {date}
+                                <strong>{t("events:dateLabel")}:</strong> {date}
                             </li>
                             <li>
-                                <strong>Time:</strong> {time}
+                                <strong>{t("events:timeLabel")}:</strong> {time}
                             </li>
                         </ul>
                     </div>
@@ -87,4 +91,5 @@ const EventCardLeft = ({
         </>
     );
 };
+
 export default EventCardLeft;

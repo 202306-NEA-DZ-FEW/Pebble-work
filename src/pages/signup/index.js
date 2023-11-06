@@ -26,11 +26,12 @@ import { useEffect, useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { GrStatusGood } from "react-icons/gr";
 import { TiDeleteOutline } from "react-icons/ti";
+import { useTranslation } from "next-i18next";
 
 import BtnGoogle from "@/components/BtnTwitter&Google/ButtonGoogle";
 import ButtonTwitter from "@/components/BtnTwitter&Google/ButtonTwitter";
 import Modal from "@/components/Popup/Modal";
-
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { auth } from "../../util/firebase";
 import { db } from "../../util/firebase";
 const checkUserAuth = (router) => {
@@ -42,6 +43,8 @@ const checkUserAuth = (router) => {
 };
 
 const SignUpPage = () => {
+    const { t } = useTranslation();
+
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
     const [Name, setName] = useState("");
@@ -261,18 +264,18 @@ const SignUpPage = () => {
                 </div>
                 <div>
                     <h2 className="text-zinc-800 text-[32px] font-medium font-['Rubik'] mb-4 text-center mt-4">
-                        Sign Up
+                        {t("signUp:title")}
                     </h2>
                     <div className='mb-4'>
                         <ButtonTwitter onClick={handelTwitter} />
                         <BtnGoogle onClick={handelGoogle} />
 
                         <div className='flex items-center mb-4 mt-4'>
-                            <div className='   shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25 border-t flex-grow'></div>
+                            <div className='shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25 border-t flex-grow'></div>
                             <div className="text-stone-500 text-lg font-normal font-['Rubik'] px-4">
-                                OR
+                                {t("signUp:or")}
                             </div>
-                            <div className='   shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25  border-t flex-grow'></div>
+                            <div className='shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25  border-t flex-grow'></div>
                         </div>
                     </div>
                     <form onSubmit={handleSignup}>
@@ -300,7 +303,6 @@ const SignUpPage = () => {
                                 onChange={(e) => setSurename(e.target.value)}
                             />
                         </div>
-
                         <div className='mb-4'>
                             <input
                                 className={`w-full px-3 py-2 border rounded ${
@@ -328,7 +330,6 @@ const SignUpPage = () => {
                                 value={password}
                                 onChange={handlePasswordChange}
                             />
-
                             <div
                                 className='absolute -bottom-1.5 right-1 m-4 cursor-pointer'
                                 onClick={togglePasswordVisibility}
@@ -359,7 +360,7 @@ const SignUpPage = () => {
                                         marginRight: "-0.2rem",
                                     }}
                                 >
-                                    At least 6 characters
+                                    {t("signUp:specialCharsValid")}
                                 </span>
                             </span>
                             <br />
@@ -387,7 +388,7 @@ const SignUpPage = () => {
                                         marginRight: "-0.2rem",
                                     }}
                                 >
-                                    Contains special characters
+                                    {t("signUp:specialCharsInvalid")}
                                 </span>
                             </span>
                             <br />
@@ -415,19 +416,19 @@ const SignUpPage = () => {
                                         marginRight: "-0.2rem",
                                     }}
                                 >
-                                    Contains alphabets
+                                    {t("signUp:alphabetInvalid")}
                                 </span>
                             </span>
                         </div>
 
                         <div>
                             <div className="text-stone-500 text-sm font-normal font-['Rubik'] mt-4">
-                                Dont have an account?
+                                {t("signUp:haveAccount")}
                                 <Link
                                     href='/signin'
                                     className='text-orange-400 ml-1'
                                 >
-                                    Sign in
+                                    {t("signUp:signIn")}
                                 </Link>
                             </div>
                         </div>
@@ -438,7 +439,7 @@ const SignUpPage = () => {
                                     type='submit'
                                     disabled={isSignUpDisabled}
                                 >
-                                    Sign Up
+                                    {t("signUp:signUp")}
                                 </button>
                             </div>
                         </div>
@@ -457,3 +458,16 @@ const SignUpPage = () => {
 };
 
 export default SignUpPage;
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, [
+                "common",
+                "about",
+                "signUp",
+            ])),
+            // Will be passed to the page component as props
+        },
+    };
+}

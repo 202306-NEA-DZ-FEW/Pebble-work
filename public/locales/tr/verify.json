@@ -1,0 +1,11 @@
+{
+    "otpSent": "OTP başarıyla gönderildi!",
+    "noCurrentUser": "Mevcut kullanıcı yok veya eksik e-posta/ismi",
+    "phoneNumberLinked": "Telefon numarası mevcut kullanıcıya bağlandı",
+    "verifyPhoneNumber": "Etkinlik oluşturmadan önce telefon numaranızı doğrulayın",
+    "enterOTP": "OTP'nizi girin",
+    "verifyOTP": "OTP'yi doğrula",
+    "verifyPhoneNumberLabel": "Telefon numaranızı doğrulayın",
+    "sendCodeViaSMS": "SMS ile kod gönder",
+    "loginSuccess": "👍 Giriş Başarılı"
+}

@@ -5,10 +5,12 @@ import { app } from "../../util/firebase";
 import { collection, doc, getDocs, getDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/router";
-import { data } from "autoprefixer";
+import { useTranslation } from "react-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const ProfilePage = () => {
     const router = useRouter();
+    const { t } = useTranslation();
     const [usersData, setUsersData] = useState(null);
     const [currentUser, setCurrentUser] = useState(null);
     const [userInterests, setUserInterests] = useState([]);
@@ -19,7 +21,7 @@ const ProfilePage = () => {
         "Quality Education",
         "Affordable and Clean Energy",
         "Decent Work and Economic Growth",
-        "Industry, Innovation, and Infrastructurey",
+        "Industry, Innovation, and Infrastructure",
         "Reduced Inequalities",
         "Sustainable Cities and Communities",
         "Responsible Consumption/Production",
@@ -67,7 +69,7 @@ const ProfilePage = () => {
             <div className='container ml-8 mt-8 mx-0 w-80 justify-start sm:items-center  md:items-start md:text-2xl md:mx-auto md:w-auto '>
                 <div className='flex flex-col sm:items-center md:items-start md:w-12/12 '>
                     <h1 className=' font-semibold text-lg md:text-4xl md:ml-10 md:mt-5'>
-                        Your Profile
+                        {t("profile:yourProfile")}
                     </h1>
 
                     {/* Profile  Picture /Change */}
@@ -88,42 +90,40 @@ const ProfilePage = () => {
                             John Doe
                         </h1> */}
                             {/* <button className='bg-orange-400 mt-10 text-center h-8 w-35 ml-0 px-4 py-2 text-xs text-white  shadow-md md:text-lg md:w-3/12 md:h-12'>
-                            Upload New
+                            {t("uploadNew")}
                         </button>
                         <button className='mt-10 text-center h-8 w-6/12  ml-3  text-xs   outline outline-1 rounded shadow-md md:w-4/12 md:h-12 md:ml-8 md:text-lg'>
-                            Choose from Library
+                            {t("chooseFromLibrary")}
                         </button> */}
                         </div>
                     </div>
 
-                    {/* Edit  Inforation */}
-
+                    {/* Edit  Information */}
                     <div className='flex flex-col mt-9 w-70 sm:items-center  md:items-start md:mt-14 md:ml-10'>
                         <h3 className='font-semibold text-md w-70 text-gray-600'>
-                            Name:
+                            {t("profile:nameRequired")}:
                         </h3>
                         <p className=' mt-2 mb-4 w-3/4  '>{currentUser.Name}</p>
                         <h3 className='font-semibold text-md w-70 text-gray-600'>
-                            Surname:
+                            {t("profile:surnameRequired")}:
                         </h3>
                         <p className=' mt-2 mb-4 w-3/4  '>
                             {currentUser.Surename}
                         </p>
                         <h3 className='font-semibold text-md w-70 text-gray-600'>
-                            Email:
+                            {t("profile:emailRequired")}:
                         </h3>
                         <p className=' mt-2 mb-4 w-3/4  '>
                             {currentUser.email}
                         </p>
-
                         <h3 className='mt-1 mb-1 font-semibold text-md  w-70 text-gray-600'>
-                            Location:
+                            {t("profile:locationRequired")}:
                         </h3>
                         <p className=' mt-2  w-3/4 '>{currentUser.Location}</p>
 
                         {/* Your Interests */}
                         <h3 className='mt-3 mb-2 font-semibold text-md  w-70  text-gray-600'>
-                            Interests:
+                            {t("profile:interests")}:
                         </h3>
                         <div
                             className=' -ml-15 mt-5 grid grid-container text-center justify-evenly  text-xs md:w-full md:h-auto  md:mt-8 md:text-3xl '
@@ -139,7 +139,7 @@ const ProfilePage = () => {
                                     key={index}
                                     className={`outline outline-1 rounded outline-orange-600 font-semibold text-orange-600  text-xs whitespace-normal ${
                                         userInterests.includes(type)
-                                            ? "text-white bg-orange-400" // Change the background color for selected buttons
+                                            ? "text-white bg-orange-400"
                                             : ""
                                     }`}
                                 >
@@ -153,7 +153,7 @@ const ProfilePage = () => {
                                 className='mt-12 bg-orange-400  text-center h-8  px-4 py-2 text-xs text-white font-bold shadow-md md:h-14 mb-12 md:w-40 md:text-xl '
                                 onClick={handleEditProfile}
                             >
-                                Edit Profile
+                                {t("profile:editProfile")}
                             </button>
                         </div>
                     </div>
@@ -188,3 +188,17 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, [
+                "common",
+                "about",
+                "edit",
+                "profile",
+            ])),
+            // Will be passed to the page component as props
+        },
+    };
+}

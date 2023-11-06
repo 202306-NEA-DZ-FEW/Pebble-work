@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import {
     signInWithEmailAndPassword,
     getAuth,
@@ -9,22 +10,23 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { sendPasswordResetEmail } from "firebase/auth";
 import BtnGoogle from "@/components/BtnTwitter&Google/ButtonGoogle";
 import ButtonTwitter from "@/components/BtnTwitter&Google/ButtonTwitter";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Modal from "@/components/Popup/Modal";
 import { collection, setDoc, doc } from "firebase/firestore";
 import { db } from "../../util/firebase";
-
 import { auth } from "../../util/firebase";
+
 const SignInPage = () => {
+    const { t } = useTranslation();
+
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
     const [RestEmail, setRestEmail] = useState("");
-
     const [password, setPassword] = useState("");
     const router = useRouter();
     const [showPopup, setShowPopup] = useState(false);
@@ -189,6 +191,7 @@ const SignInPage = () => {
     const toggleResetMode = () => {
         setResetMode(!resetMode);
     };
+
     return (
         <>
             <div className='flex justify-center items-center  '>
@@ -206,16 +209,16 @@ const SignInPage = () => {
                     </div>
                     <div className='sm:ml-10'>
                         <h2 className="text-zinc-800 text-[32px] font-medium font-['Rubik'] mb-4 text-center mt-2">
-                            Sign In
+                            {t("signin:signInTitle")}
                         </h2>
                         <div className='mb-4'>
                             <ButtonTwitter onClick={handelTwitter} />
                             <BtnGoogle onClick={handelGoogle} />
 
                             <div className='flex items-center mb-4 mt-4'>
-                                <div className='   shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25 border-t flex-grow'></div>
+                                <div className='shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25 border-t flex-grow'></div>
                                 <div className="text-stone-500 text-lg font-normal font-['Rubik'] px-4">
-                                    OR
+                                    {t("signin:or")}
                                 </div>
                                 <div className='shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25  border-t flex-grow'></div>
                             </div>
@@ -227,7 +230,7 @@ const SignInPage = () => {
                                         className="block mb-2 text-stone-500 text-base font-normal font-['Rubik']"
                                         htmlFor='email'
                                     >
-                                        Email address
+                                        {t("signin:signInWith")}
                                     </label>
                                     <input
                                         className='w-full px-3 py-2 border rounded'
@@ -251,7 +254,7 @@ const SignInPage = () => {
                                         className="block mb-2 text-stone-500 text-base font-normal font-['Rubik']"
                                         htmlFor='email'
                                     >
-                                        Email address
+                                        {t("signin:emailLabel")}
                                     </label>
                                     <input
                                         className='w-full px-3 py-2 border rounded'
@@ -276,7 +279,7 @@ const SignInPage = () => {
                                     className="block mb-2 text-stone-500 text-base font-normal font-['Rubik']"
                                     htmlFor='password'
                                 >
-                                    Your password
+                                    {t("signin:passwordLabel")}
                                 </label>
                                 <input
                                     className='w-full px-3 py-2 border rounded'
@@ -303,18 +306,18 @@ const SignInPage = () => {
                             <div>
                                 <div className="text-stone-500 text-sm font-normal font-['Rubik'] mt-4">
                                     <button onClick={toggleResetMode}>
-                                        Forgot your password?
+                                        {t("signin:forgotPassword")}
                                     </button>
                                     {resetMode ? (
                                         <div className='text-orange-400 ml-1 cursor-pointer'></div>
                                     ) : (
                                         <div className="text-stone-500 text-sm font-normal font-['Rubik'] mt-4">
-                                            Dont have an account?
+                                            {t("signin:noAccount")}{" "}
                                             <Link
                                                 href='/signup'
                                                 className='text-orange-400 ml-1'
                                             >
-                                                Sign up
+                                                {t("signin:signUpLink")}
                                             </Link>
                                         </div>
                                     )}
@@ -324,11 +327,11 @@ const SignInPage = () => {
                                 {resetMode ? (
                                     <div className='flex justify-start'>
                                         <button
-                                            className=' px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 '
+                                            className=' px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 mb-4'
                                             type='button'
                                             onClick={handleResetPassword}
                                         >
-                                            Reset Password
+                                            {t("signin:resetPasswordButton")}
                                         </button>
                                     </div>
                                 ) : (
@@ -337,7 +340,7 @@ const SignInPage = () => {
                                             className=' w-full px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 mt-4 mb-2 '
                                             type='submit'
                                         >
-                                            Sign in
+                                            {t("signin:signInButton")}
                                         </button>
                                     </div>
                                 )}
@@ -359,3 +362,16 @@ const SignInPage = () => {
 };
 
 export default SignInPage;
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, [
+                "common",
+                "about",
+                "signin",
+            ])),
+            // Will be passed to the page component as props
+        },
+    };
+}

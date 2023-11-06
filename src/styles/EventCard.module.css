@@ -37,7 +37,7 @@
     background: rgba(27, 26, 26, 0.5);
     font-family: "Bree Serif", serif;
     transition: all 0.7s ease-out;
-    transform: translateX(-100%);
+    transform: translateX(-101%);
     position: absolute;
     text-align: center;
     cursor: no-drop;

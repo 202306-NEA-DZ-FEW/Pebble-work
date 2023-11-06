@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Calendar from "@/components/Filter/Calendar";
-import EventCard from "@/components/Events/EventCard";
 import EventCardLeft from "@/components/Events/EventCardLeft";
 import styles from "@/styles/Events.module.css";
 import {
@@ -21,8 +20,6 @@ const EventsPage = (user) => {
 
     const [selectedTypes, setSelectedTypes] = useState([]);
     const [inputValue1, setInputValue1] = useState("");
-    const [isCalendarOpen, setCalendarOpen] = useState(false);
-    const [isLocationOpen, setLocationOpen] = useState(false);
     const [filteredTypes, setFilteredTypes] = useState([]);
     const [events, setEvents] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState([]);
@@ -30,7 +27,16 @@ const EventsPage = (user) => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [resetLocation, setResetLocation] = useState(false);
     const [resetDays, setResetDays] = useState(false);
-    const dropdownRef = useRef(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(5);
+
+    const totalPages = Math.ceil(filteredEvents.length / itemsPerPage);
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = filteredEvents.slice(
+        indexOfFirstItem,
+        indexOfLastItem
+    );
 
     const handleLocationInputChange = (value) => {
         setInputValue1(value);
@@ -78,50 +84,6 @@ const EventsPage = (user) => {
             console.error("Error getting filtered events: ", error);
         }
     };
-
-    const handleClickOutside = (event) => {
-        if (
-            dropdownRef.current &&
-            !dropdownRef.current.contains(event.target)
-        ) {
-            setFilteredTypes(false);
-        }
-    };
-    useEffect(() => {
-        window.addEventListener("click", handleClickOutside);
-        return () => {
-            window.removeEventListener("click", handleClickOutside);
-        };
-    }, []);
-
-    // Handle test click
-    const handleTestClick = () => {
-        setCalendarOpen(!isCalendarOpen);
-    };
-
-    // Resize event listener
-    useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth > 640) {
-                setCalendarOpen(true);
-                setLocationOpen(true);
-            } else {
-                setCalendarOpen(false);
-                setLocationOpen(false);
-            }
-        };
-
-        // Set initial state based on window size
-        if (window.innerWidth > 640) {
-            setCalendarOpen(true);
-            setLocationOpen(true);
-        }
-
-        window.addEventListener("resize", handleResize);
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
 
     // Fetch events from Firebase
     useEffect(() => {
@@ -191,29 +153,21 @@ const EventsPage = (user) => {
                     <h1>Welcome, {user.name}!</h1>
                     <p>This is the events page</p>
                 </div>
-                <button
-                    onClick={resetEvents}
-                    className={` w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 md:text-[12px] rounded-[4px] h-[16px] sm:w-[72.23px] sm:h-[25.5px] ml-auto  mr-2`}
-                >
-                    All events
-                </button>
                 <div
                     className={`flex flex-col-reverse sm:flex sm:flex-row-reverse sm:items-center sm:justify-evenly sm:gap-8 sm:h-full sm:w-full`}
                 >
-                    <div
-                        className={`h-[400px] pb-[140px] md:pb-[140px] md:w-[480px] sm:h-[1000px] ${styles.information}`}
-                    >
+                    <div className={`md:w-[480px] sm:h-[800px]`}>
                         <ul className={` flex flex-col items gap-2 `}>
-                            {filteredEvents.map((event, index) => {
-                                const EventCardComponent =
-                                    index % 2 === 0 ? EventCard : EventCardLeft;
+                            {currentItems.map((event) => {
                                 return (
-                                    <EventCardComponent
+                                    <EventCardLeft
                                         eventId={event.id}
                                         key={event.id}
                                         title={event.title}
                                         type={event.type}
-                                        image={event.image}
+                                        image={
+                                            event?.image || "/event_image.png"
+                                        }
                                         location={event.location}
                                         description={event.description}
                                         organizer={event.organizer}
@@ -235,37 +189,36 @@ const EventsPage = (user) => {
                                     No events found for this date
                                 </p>
                             )}
+                            <div className='flex justify-center gap-8 text-black'>
+                                {Array.from(
+                                    { length: totalPages },
+                                    (_, i) => i + 1
+                                ).map((pageNumber) => (
+                                    <button
+                                        key={pageNumber}
+                                        onClick={() =>
+                                            setCurrentPage(pageNumber)
+                                        }
+                                        disabled={pageNumber === currentPage}
+                                    >
+                                        {pageNumber}
+                                    </button>
+                                ))}
+                            </div>
                         </ul>
                     </div>
                     <div className='flex bg-white z-10 flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7'>
                         <div className='sm:flex s:flex-col sm:items-center sm:justify-center'>
-                            <button
-                                className='sm:hidden'
-                                onClick={handleTestClick}
+                            <button className='sm:hidden'>Dates</button>
+
+                            <div
+                                className={`border border-black rounded-[8px] z-10 bg-white sm:bg-transparent`}
                             >
-                                Dates
-                            </button>
-                            {isCalendarOpen && (
-                                <div
-                                    style={{
-                                        animation: `${
-                                            isCalendarOpen
-                                                ? `${styles.fadeIn} 0.7s ease-in-out`
-                                                : ""
-                                        }`,
-                                    }}
-                                    className={`${
-                                        isCalendarOpen ? "open" : ""
-                                    } ${
-                                        styles.calendarContainer
-                                    } border border-black rounded-[8px] z-10 bg-white sm:bg-transparent`}
-                                >
-                                    <Calendar
-                                        resetDays={resetDays}
-                                        checkEvents={checkEvents}
-                                    />
-                                </div>
-                            )}
+                                <Calendar
+                                    resetDays={resetDays}
+                                    checkEvents={checkEvents}
+                                />
+                            </div>
                         </div>
                         <div className='h-66'>
                             <FirestoreLocation
@@ -276,7 +229,7 @@ const EventsPage = (user) => {
                             />
                         </div>
                         <FilterByType
-                            ref={dropdownRef}
+                            resetEvents={resetEvents}
                             setFilteredTypes={setFilteredTypes}
                             selectedTypes={selectedTypes}
                             setSelectedTypes={setSelectedTypes}

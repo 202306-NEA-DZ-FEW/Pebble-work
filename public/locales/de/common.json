@@ -1,0 +1,73 @@
+{
+    "navbar": {
+        "home": "Startseite",
+        "events": "Veranstaltungen",
+        "about": "Über uns",
+        "contact": "Kontakt"
+    },
+    "footer": {
+        "events": "Veranstaltungen",
+        "about": "Über uns",
+        "howItWorks": "Wie es funktioniert"
+    },
+    "headerCard": {
+        "title": "Etwas verändern, gemeinsam",
+        "description": "Wir glauben, dass jeder die Macht hat, einen Einfluss zu haben: Über diese Plattform streben wir danach, einen Ort zu schaffen, an dem Menschen zusammenkommen und arbeiten, um die Welt zu verändern. Das ist PebbleWork.",
+        "button": "Loslegen"
+    },
+    "main": {
+        "joinCommunityTitle": "Tritt der Gemeinschaft bei!",
+        "joinCommunityDescription": "Erstellen Sie innerhalb von wenigen Sekunden ein Konto und treten Sie unserem Team motivierter Einzelpersonen bei. Sie können sich auch über Gmail und X/Twitter verbinden.",
+        "joinCommunityButtonText": "Anmelden",
+        "attendEventsTitle": "Veranstaltungen besuchen",
+        "attendEventsDescription": "Bündeln Sie Ihre Kräfte und arbeiten Sie mit Menschen zusammen, die ebenso leidenschaftlich und engagiert sind wie Sie, um die richtigen Veränderungen herbeizuführen.",
+        "attendEventsButtonText": "Veranstaltungen anzeigen",
+        "hostEventTitle": "Veranstalten Sie Ihre eigene Veranstaltung!",
+        "hostEventDescription": "Haben Sie Schwierigkeiten, eine Ursache zu finden, die wirklich zu Ihnen passt? Ergreifen Sie die Initiative und erstellen Sie Ihre eigene Veranstaltung.",
+        "hostEventButtonText": "Loslegen"
+    },
+    "heroCard": {
+        "title": "Werde die Veränderung, die du in der Welt sehen möchtest.",
+        "description": "Nicht nur wirst du einen bedeutsamen Einfluss haben, sondern auch eine blühende, gleichgesinnte Gemeinschaft finden, die unsere Mission unterstützt, eine bessere Welt zu schaffen. Mach den ersten Schritt jetzt.",
+        "getStarted": "Loslegen",
+        "whoWeAre": "Wer sind wir"
+    },
+    "homeCards": {
+        "howItWorks": "Wie es funktioniert",
+        "sustainableDevelopmentGoals": "Nachhaltige Entwicklungsziele",
+        "introductorySentence": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
+    },
+    "sign": {
+        "signin": "Anmelden",
+        "signup": "Registrieren"
+    },
+    "contactForm": {
+        "title": "Kontaktiere uns",
+        "firstNamePlaceholder": "Vorname",
+        "lastNamePlaceholder": "Nachname",
+        "emailPlaceholder": "E-Mail",
+        "phonePlaceholder": "Telefonnummer",
+        "messagePlaceholder": "Wie können wir Ihnen helfen?",
+        "submitButton": "Absenden",
+        "subject": "Neues Formular gesendet",
+        "email": "E-Mail",
+        "phone": "Telefonnummer",
+        "success": "E-Mail erfolgreich gesendet!",
+        "error": "Senden der E-Mail fehlgeschlagen"
+    },
+    "dropdown": {
+        "signOut": "Abmelden",
+        "signIn": "Anmelden",
+        "profile": "Profil",
+        "hostEvent": "Veranstaltung erstellen",
+        "myEvents": "Meine Veranstaltungen",
+        "accountSettings": "Kontoeinstellungen"
+    },
+    "language": {
+        "language": "Sprache",
+        "english": "Englisch",
+        "turkish": "Türkisch",
+        "german": "Deutsch",
+        "chinese": "Chinesisch"
+    }
+}

@@ -1,6 +1,8 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import styles from "@/styles/EventCard.module.css";
 import { useRouter } from "next/router";
+
 const EventCard = ({
     eventId,
     title,
@@ -12,13 +14,16 @@ const EventCard = ({
     description,
 }) => {
     const router = useRouter();
+    const { t } = useTranslation();
+
     const handleReviewClick = () => {
         router.push(`/events/${eventId}`);
     };
+
     return (
         <>
             <div
-                className={`${styles.contai} ${styles.fading} border sm:w-[62vw] sm:h-[16vh] relative w-[335px] h-[86px] md:w-[466px] md:h-[140px] flex flex-row items-center justify-center gap-2`}
+                className={`${styles.contai} border sm:w-[62vw] sm:h-[16vh] relative w-[335px] h-[86px] md:w-[466px] md:h-[140px] flex flex-row items-center justify-center gap-2`}
             >
                 <div className={`flex flex-col gap-1 sm:gap-4 items-end `}>
                     <h1
@@ -50,12 +55,12 @@ const EventCard = ({
                     </p>
 
                     <div className='flex'>
-                        <p>avatars</p>
+                        <p>{t("events:avatars")}</p>
                         <button
                             onClick={handleReviewClick}
                             className={`w-[45px] bg-blue-400 hover:bg-blue-500 text-white text-[10px]md:text-[12px] rounded-[4px] h-[14px] sm:w-[60px] sm:h-[18px]`}
                         >
-                            Review
+                            {t("events:reviewButton")}
                         </button>
                     </div>
                 </div>
@@ -69,13 +74,19 @@ const EventCard = ({
                             className={`text-[8px] leading-[10px] md:leading-[15px] sm:text-[10.20px]`}
                         >
                             <li>
-                                <strong>Location:</strong> {location}
+                                <strong>
+                                    {t("events:locationLabel")}: {location}
+                                </strong>
                             </li>
                             <li>
-                                <strong>Date:</strong> {date}
+                                <strong>
+                                    {t("events:dateLabel")}: {date}
+                                </strong>
                             </li>
                             <li>
-                                <strong>Time:</strong> {time}
+                                <strong>
+                                    {t("events:timeLabel")}: {time}
+                                </strong>
                             </li>
                         </ul>
                     </div>
@@ -84,4 +95,5 @@ const EventCard = ({
         </>
     );
 };
+
 export default EventCard;

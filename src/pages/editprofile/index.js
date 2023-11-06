@@ -5,10 +5,14 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { collection, doc, updateDoc, getDoc } from "firebase/firestore";
 import { getAuth, updatePassword, onAuthStateChanged } from "firebase/auth";
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
 import Modal from "@/components/Popup/Modal";
 import PicturesLibrary from "./library";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const ProfilePage = () => {
+    const { t } = useTranslation();
+
     const router = useRouter();
     const [currentUser, setCurrentUser] = useState(null);
     const [currentUserId, setCurrentUserId] = useState(null);
@@ -250,13 +254,13 @@ const ProfilePage = () => {
         router.push("/profile");
     }
     if (!currentUser) {
-        return <p>Loading</p>;
+        return <p>loading</p>;
     } else {
         return (
             <div className='container ml-8 mt-8 mx-0 w-80 justify-start sm:items-center  md:items-start md:text-2xl md:mx-auto md:w-auto '>
                 <div className='flex flex-col sm:items-center md:items-start md:w-12/12 '>
                     <h1 className=' font-semibold text-lg md:text-4xl md:ml-10 md:mt-5'>
-                        Edit Profile
+                        {t("edit:editProfile")}
                     </h1>
                     {/* Profile  Picture /Change */}
                     <form onSubmit={handleUpdateProfile}>
@@ -285,14 +289,14 @@ const ProfilePage = () => {
                                     htmlFor='profilePictureInput'
                                     className='bg-orange-400 mt-10 text-center h-8 w-35 ml-0 px-4 py-2 text-xs text-white  shadow-md md:text-lg md:w-3/12 md:h-12 cursor-pointer'
                                 >
-                                    Upload New
+                                    {t("edit:uploadNew")}
                                 </label>
                                 <button
                                     className='mt-10 text-center h-8 w-6/12  ml-3  text-xs   outline outline-1 rounded shadow-md md:w-4/12 md:h-12 md:ml-8 md:text-lg'
                                     type='button'
                                     onClick={(e) => handleOpenLibrary(e)}
                                 >
-                                    Choose from Library
+                                    {t("edit:chooseFromLibrary")}
                                 </button>
 
                                 {isLibraryOpen && (
@@ -310,7 +314,7 @@ const ProfilePage = () => {
 
                         <div className='flex flex-col mt-9 w-70 sm:items-center  md:items-start md:mt-14 md:ml-10'>
                             <h3 className='font-semibold text-md mt-5 w-70'>
-                                Name (Required)
+                                {t("edit:nameRequired")}
                             </h3>
                             <input
                                 type='text'
@@ -322,7 +326,7 @@ const ProfilePage = () => {
                                 required
                             ></input>
                             <h3 className='font-semibold text-md mt-5 w-70'>
-                                Surname (Required)
+                                {t("edit:surnameRequired")}
                             </h3>
                             <input
                                 type='text'
@@ -336,7 +340,7 @@ const ProfilePage = () => {
                                 required
                             ></input>
                             <h3 className='font-semibold text-md mt-5 w-70'>
-                                Email (Required)
+                                {t("edit:emailRequired")}
                             </h3>
                             <input
                                 type='email'
@@ -350,7 +354,7 @@ const ProfilePage = () => {
 
                             {/*  */}
                             <h3 className='font-semibold text-md mt-5 w-70'>
-                                Location (Required)
+                                {t("edit:locationRequired")}
                             </h3>
                             <input
                                 type='text'
@@ -365,7 +369,7 @@ const ProfilePage = () => {
                             ></input>
                             {/* Your Interests */}
                             <h3 className='font-semibold text-md mt-5 w-70'>
-                                Interests
+                                {t("edit:interests")}
                             </h3>
                             <div
                                 className=' -ml-15 mt-5 grid grid-container text-center justify-evenly  text-xs md:w-full md:h-auto  md:mt-8 md:text-3xl '
@@ -398,14 +402,16 @@ const ProfilePage = () => {
                                     type='submit'
                                     className='mt-7 bg-orange-400  text-center h-8  px-4 py-2 text-xs text-white  shadow-md md:h-14 md:w-40 md:text-md'
                                 >
-                                    Save changes
+                                    {t("edit:saveChanges")}
                                 </button>
                             </div>
                         </div>
                     </form>
                     {/* Change Password  */}
                     <div className='mt-5 pt-0 mx-auto pb-5 flex flex-col  bg-cyan-100  rounded mb-20 md:mx-auto md:mt-8 md:ml-20 '>
-                        <h3 className='font-bold mt-5 ml-4'>Change Password</h3>
+                        <h3 className='font-bold mt-5 ml-4'>
+                            {t("edit:changePassword")}
+                        </h3>
                         <form onSubmit={handleChangePassword}>
                             <div className='flex flex-row ml-6 mt-3 gap-x-5 items-center justify-items-center '>
                                 <input
@@ -434,10 +440,10 @@ const ProfilePage = () => {
                                     type='submit'
                                     className='bg-orange-400  text-center h-8 w-3/12   text-xs text-white  shadow-md '
                                 >
-                                    Submit
+                                    {t("edit:Submit")}
                                 </button>
                                 <button className=' text-center h-8 w-4/12 text-xs  outline outline-1 rounded shadow-md'>
-                                    Cancel
+                                    {t("edit:Cancel")}
                                 </button>
                             </div>
                         </form>
@@ -456,3 +462,16 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, [
+                "common",
+                "about",
+                "edit",
+            ])),
+            // Will be passed to the page component as props
+        },
+    };
+}

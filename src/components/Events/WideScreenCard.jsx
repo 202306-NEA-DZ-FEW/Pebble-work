@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "@/styles/EventCard.module.css";
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
+
 const WideScreenCard = ({
     eventId,
     title,
@@ -16,19 +18,26 @@ const WideScreenCard = ({
         router.push(`/events/${eventId}`);
     };
     const [hideBackground, setHideBackground] = useState(false);
+    const [enterDelay, setEnterDelay] = useState(null);
     let timerId;
     let reverseTimer;
     const [isHovered, setIsHovered] = useState(false);
     const h2Ref = useRef();
+    const { t } = useTranslation(); // Initialize useTranslation
 
     const handleHover = () => {
-        timerId = setTimeout(() => {
-            setHideBackground(true);
-            setIsHovered(true);
-        }, 700);
+        clearTimeout(enterDelay); // clear the enter delay if the mouse enters again
+        setEnterDelay(
+            setTimeout(() => {
+                setHideBackground(true);
+                setIsHovered(true);
+            }, 1000)
+        ); // delay of 1 second before handleHover is executed
     };
 
     const handleMouseLeave = () => {
+        clearTimeout(enterDelay); // clear the enter delay if the mouse leaves
+        if (!isHovered) return; // if the mouse hasn't been hovered for at least 1 second, do nothing
         clearTimeout(timerId);
         setHideBackground(false);
         setIsHovered(false);
@@ -64,19 +73,20 @@ const WideScreenCard = ({
     }, [isHovered]);
 
     useEffect(() => {
-        //This is to ensure that the timeouts don’t try to update the state of a component that is no longer in the DOM, which can cause memory leaks.
-
+        // This is to ensure that the timeouts don’t try to update the state of a component that is no longer in the DOM, which can cause memory leaks.
         return () => {
             clearTimeout(timerId);
             clearTimeout(reverseTimer);
+            clearTimeout(enterDelay);
         };
     }, []);
+
     return (
         <>
             <div
                 onMouseEnter={handleHover}
                 onMouseLeave={handleMouseLeave}
-                className={`${styles.contai} ${styles.card} ${styles.wideFading} border w-[55vw] h-[24vh] flex flex-row items-center justify-around gap-2`}
+                className={`${styles.contai} ${styles.card} ${styles.wideFading} border w-[55vw] h-[200px] flex flex-row items-center justify-around gap-2`}
             >
                 <h2
                     ref={h2Ref}
@@ -101,13 +111,19 @@ const WideScreenCard = ({
                         } text-black text-[8px] leading-[10px] md:leading-[15px] xl:leading-[20px] sm:text-[10.20px]`}
                     >
                         <li>
-                            <strong>Location:</strong> {location}
+                            <strong>
+                                {t("event:locationLabel")}: {location}
+                            </strong>
                         </li>
                         <li>
-                            <strong>Date:</strong> {date}
+                            <strong>
+                                {t("events:dateLabel")}: {date}
+                            </strong>
                         </li>
                         <li>
-                            <strong>Time:</strong> {time}
+                            <strong>
+                                {t("events:timeLabel")}: {time}
+                            </strong>
                         </li>
                     </ul>
                 </div>
@@ -141,16 +157,17 @@ const WideScreenCard = ({
                     </p>
                 </div>
                 <div className='flex flex-col justify-end h-40'>
-                    <p>avatars</p>
+                    <p>{t("events:avatars")}</p>
                     <button
                         onClick={handleReviewClick}
                         className={`w-[45px] bg-blue-400 hover:bg-blue-500 text-white text-[10px] xl:text-[15px] md:text-[12px] rounded-[4px] h-[14px] xl:w-[80px] xl:h-[30px] sm:w-[60px] sm:h-[18px]`}
                     >
-                        Review
+                        {t("events:reviewButton")}
                     </button>
                 </div>
             </div>
         </>
     );
 };
+
 export default WideScreenCard;

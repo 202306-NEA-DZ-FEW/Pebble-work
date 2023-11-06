@@ -1,0 +1,13 @@
+{
+    "title": "注册",
+    "or": "或",
+    "passwordValid": "密码有效",
+    "passwordInvalid": "密码必须至少包含6个字符",
+    "specialCharsValid": "密码包含特殊字符",
+    "specialCharsInvalid": "密码必须包含特殊字符",
+    "alphabetValid": "密码包含字母",
+    "alphabetInvalid": "密码必须包含字母",
+    "haveAccount": "还没有账号？",
+    "signIn": "登录",
+    "signUp": "注册"
+}

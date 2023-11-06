@@ -2,9 +2,13 @@ import React, { useEffect, useRef } from "react";
 import YouTube from "react-youtube";
 import styles from "@/styles/NoEvent.module.css";
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
 
 const NoEvent = () => {
     const router = useRouter();
+    const canvasRef = useRef(null);
+    const { t } = useTranslation("noEvent");
+
     const videoOptions = {
         playerVars: {
             autoplay: 1,
@@ -16,6 +20,7 @@ const NoEvent = () => {
     const onReady = (event) => {
         event.target.playVideo();
     };
+
     useEffect(() => {
         const redirectTimeout = setTimeout(() => {
             router.push("/events");
@@ -23,6 +28,7 @@ const NoEvent = () => {
 
         return () => clearTimeout(redirectTimeout);
     }, [router]);
+
     return (
         <div
             className={`${styles.container} flex h-screen flex-col justify-center items-center`}
@@ -30,24 +36,18 @@ const NoEvent = () => {
             <div
                 className={`${styles.background} text-red-600 text-center text-[100px]`}
             >
-                Event deleted or never existed
+                {t("events:noFoundPageTitle")}
             </div>
-            <h1>Oops! Page Not Found</h1>
-
-            <p>Looks like you ve stumbled upon a page that doesnt exist.</p>
-            <p>Dont worry, even the best developers get lost sometimes!</p>
-            <p>Here are a few things you can try:</p>
+            <h1>{t("events:notFoundTitle")}</h1>
+            <p>{t("events:notFoundDescription1")}</p>
+            <p>{t("events:notFoundDescription2")}</p>
+            <p>{t("events:notFoundSuggestions")}</p>
             <ul>
-                <li>Double-check the URL for any typos.</li>
-                <li>Go back to the previous page and try again.</li>
-                <li>
-                    Click on the navigation menu to find what you are looking
-                    for.
-                </li>
+                <li>{t("events:suggestion1")}</li>
+                <li>{t("events:suggestion2")}</li>
+                <li>{t("events:suggestion3")}</li>
             </ul>
-            <p>
-                If all else fails, take a break and enjoy this funny cat video:
-            </p>
+            <p>{t("events:catVideoDescription")}</p>
             <YouTube
                 videoId='J---aiyznGQ'
                 opts={videoOptions}
