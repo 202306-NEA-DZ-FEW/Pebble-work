@@ -75,7 +75,7 @@ const EventCard = ({
                         >
                             <li>
                                 <strong>
-                                    {t("event:locationLabel")}: {location}
+                                    {t("events:locationLabel")}: {location}
                                 </strong>
                             </li>
                             <li>
