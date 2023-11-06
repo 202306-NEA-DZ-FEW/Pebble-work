@@ -6,8 +6,10 @@ import Signup from "./Signup/Signup";
 import { useMediaQuery } from "react-responsive";
 import styles from "@/styles/DropMenu.module.css";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 const Dropdown = () => {
+    const { t } = useTranslation("common");
     const isMobile = useMediaQuery({ maxWidth: 640 });
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
@@ -74,16 +76,14 @@ const Dropdown = () => {
                         className={`w-[52px] xl:mb-0 md:mb-2 md:mt-0 sm:mt-[2px] mt-[5px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px]`}
                     >
                         {user
-                            ? // if the screen width is below 640px limit the display name to 5 characters
-                              isMobile
+                            ? isMobile
                                 ? user.displayName?.length > 5
                                     ? user.displayName.slice(0, 5) + "..."
                                     : user.displayName
-                                : // if the screen width is above 640px limit the display name to 10 characters
-                                user.displayName?.length > 10
+                                : user.displayName?.length > 10
                                 ? user.displayName.slice(0, 10) + "..."
                                 : user.displayName
-                            : "Sign In"}
+                            : t("common:dropdown:signIn")}
                     </button>
                     {user ? (
                         <img
@@ -108,33 +108,33 @@ const Dropdown = () => {
                                         href='/profile'
                                         className={`hover:text-red-600 ${styles.listItem}`}
                                     >
-                                        Profile
+                                        {t("common:dropdown:profile")}
                                     </Link>
                                     <Link
                                         href='/events/create'
                                         className={`hover:text-red-600 ${styles.listItem}`}
                                     >
-                                        Host Event
+                                        {t("common:dropdown:hostEvent")}
                                     </Link>
                                     <Link
                                         href='/myevents'
                                         className={`hover:text-red-600 ${styles.listItem}`}
                                     >
-                                        My Events
+                                        {t("common:dropdown:myEvents")}
                                     </Link>
                                     <hr />
                                     <Link
                                         href='/editprofile'
                                         className={`hover:text-red-600 ${styles.listItem}`}
                                     >
-                                        Account Settings
+                                        {t("common:dropdown:accountSettings")}
                                     </Link>
                                     <hr />
                                     <button
                                         onClick={handleSignOut}
                                         className='px-2 py-2 border border-t-transparent border-r-transparent border-l-transparent hover:bg-gray-100'
                                     >
-                                        Logout
+                                        {t("common:dropdown:signOut")}
                                     </button>
                                 </div>
                             ) : (

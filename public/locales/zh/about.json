@@ -1,0 +1,9 @@
+{
+    "about": {
+        "title": "关于Pebble Work",
+        "description": "体验PebbleWork的强大功能，借助其先进的技术。我们打造了一个响应迅捷、互动性强的平台，将用户置于核心位置。在页面之间无缝导航，创建、编辑和删除事件。通过简单点击加入或退出。PebbleWork提供一种由志愿者为志愿者打造的平台。通过安全的用户身份验证和实时数据存储，我们提供用户友好的体验。无论您是活动组织者还是参与者，PebbleWork都在这里，为您简化社区参与。立即加入我们，为您的社区产生有意义的影响。",
+        "ourTeam": "我们的团队",
+        "techStack": "技术堆栈",
+        "techStackDescription": "对于PebbleWork项目，我们利用Next.js、Firebase、DaisyUI和Tailwind CSS创建了一个响应式和互动的平台。Next.js提供了服务器端渲染和无缝路由，而Firebase处理用户认证和实时数据存储。DaisyUI和Tailwind CSS确保了视觉上吸引人且现代的设计。项目结构遵循了模块化组件，便于维护和扩展。这些技术共同创建了一个用户友好且引人入胜的体验，使志愿者能够联系并产生积极影响。"
+    }
+}

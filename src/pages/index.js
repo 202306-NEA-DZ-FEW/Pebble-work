@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import * as React from "react";
 
@@ -11,4 +12,12 @@ export default function HomePage() {
             <i class='fa-solid fa-language fa-2xl'></i>
         </main>
     );
+}
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ["common", "about"])),
+            // Will be passed to the page component as props
+        },
+    };
 }

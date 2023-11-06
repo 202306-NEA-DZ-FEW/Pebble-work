@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/Events.module.css";
+import { useTranslation } from "react-i18next";
 import {
     collection,
     getDocs,
@@ -16,6 +17,7 @@ import WideScreenCard from "@/components/Events/WideScreenCard";
 import FirestoreLocation from "../Filter/FirestoreLocation";
 
 const DesktopEvents = (user) => {
+    const { t } = useTranslation();
     // State variables
     const [selectedTypes, setSelectedTypes] = useState([]);
     const [inputValue1, setInputValue1] = useState("");
@@ -169,8 +171,8 @@ const DesktopEvents = (user) => {
         <>
             <main className={` flex flex-col justify-center items-center`}>
                 <div>
-                    <h1>Welcome, {user.name}!</h1>
-                    <p>This is the events page</p>
+                    <h1>{t("events:welcome", { name: user.name })}</h1>
+                    <p>{t("events:eventsPage")}</p>
                 </div>
 
                 <div
@@ -200,14 +202,13 @@ const DesktopEvents = (user) => {
                             {(inputValue1 || filteredTypes.length > 0) &&
                                 filteredEvents.length === 0 && (
                                     <p className='text-red-500 text-center'>
-                                        No events found for this date and
-                                        location
+                                        {t("events:noEventsFound")}
                                     </p>
                                 )}
 
                             {selectedDate && CalendarEvents.length === 0 && (
                                 <p className='text-red-500 text-center'>
-                                    No events found for this date
+                                    {t("events:noEventsFoundForDate")}
                                 </p>
                             )}
                         </ul>

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "@/styles/Homepage.module.css";
+import { useTranslation } from "next-i18next";
 
 const FeatureCard = ({ title, description, buttonText, imageUrl, link }) => {
+    const { t } = useTranslation();
     const [isVisible, setIsVisible] = useState(false);
 
     // handle scroll event and update the visibility of the featuredcard
@@ -76,30 +78,34 @@ const FeatureCard = ({ title, description, buttonText, imageUrl, link }) => {
     );
 };
 
-const MainCard = () => (
-    <div className='w-full bg-white lg:flex lg:flex-wrap lg:flex-row lg:gap-0 flex flex-col items-center gap-8 sm:gap-5 lg:justify-start lg:items-start'>
-        <FeatureCard
-            title='Join the community!'
-            description='Create an account in a few seconds and join our team of motivated individuals. You can also connect through Gmail and X/Twitter.'
-            buttonText='Sign up'
-            imageUrl='/Homepage/ManTop.png'
-            link='/signup'
-        />
-        <FeatureCard
-            title='Attend events'
-            description='Join forces, contribute, and collaborate with people as passionate and dedicated as you in making the right changes. '
-            buttonText='View events'
-            imageUrl='/Homepage/attend.png'
-            link='/events'
-        />
-        <FeatureCard
-            title='Host your event!'
-            description={`Having trouble finding  a cause that truly resonates with you? Take the initiative by creating your own event.`}
-            buttonText='Get started'
-            imageUrl='/Homepage/Girl.png'
-            link='/get-started-page'
-        />
-    </div>
-);
+const MainCard = () => {
+    const { t } = useTranslation();
+
+    return (
+        <div className='w-full bg-white lg:flex lg:flex-wrap lg:flex-row lg:gap-0 flex flex-col items-center gap-8 sm:gap-5 lg:justify-start lg:items-start'>
+            <FeatureCard
+                title={t("common:main:joinCommunityTitle")}
+                description={t("common:main:joinCommunityDescription")}
+                buttonText={t("common:main:joinCommunityButtonText")}
+                imageUrl='/Homepage/ManTop.png'
+                link='/signup'
+            />
+            <FeatureCard
+                title={t("common:main:attendEventsTitle")}
+                description={t("common:main:attendEventsDescription")}
+                buttonText={t("common:main:attendEventsButtonText")}
+                imageUrl='/Homepage/attend.png'
+                link='/events'
+            />
+            <FeatureCard
+                title={t("common:main:hostEventTitle")}
+                description={t("common:main:hostEventDescription")}
+                buttonText={t("common:main:hostEventButtonText")}
+                imageUrl='/Homepage/Girl.png'
+                link='/get-started-page'
+            />
+        </div>
+    );
+};
 
 export default MainCard;

@@ -3,6 +3,7 @@ import MobileEvents from "@/components/Events/MobileEvents";
 import DesktopEvents from "@/components/Events/DesktopEvents";
 import SmallScreenEvents from "@/components/Events/SmallScreenEvents";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const EventsPage = () => {
     const isDesktop = useMediaQuery("(min-width:1000px)");
@@ -28,3 +29,16 @@ const EventsPage = () => {
 };
 
 export default EventsPage;
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, [
+                "common",
+                "about",
+                "eventCreation",
+                "events",
+            ])),
+            // Will be passed to the page component as props
+        },
+    };
+}
