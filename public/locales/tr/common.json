@@ -40,8 +40,8 @@
     "sign": {
         "signin": "Giriş Yap",
         "signup": "ÜYE OL"
-      },
-      "contactForm": {
+    },
+    "contactForm": {
         "title": "Bize Ulaşın",
         "firstNamePlaceholder": "Ad",
         "lastNamePlaceholder": "Soyad",
@@ -54,8 +54,8 @@
         "phone": "Telefon Numarası",
         "success": "E-posta başarıyla gönderildi!",
         "error": "E-posta gönderme başarısız oldu"
-      },
-      "dropdown": {
+    },
+    "dropdown": {
         "signOut": "Çıkış Yap",
         "signIn": "Giriş Yap",
         "profile": "Profil",

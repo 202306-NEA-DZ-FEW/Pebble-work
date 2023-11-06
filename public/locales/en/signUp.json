@@ -1,14 +1,13 @@
 {
-      "title": "Sign Up",
-      "or": "OR",
-      "passwordValid": "Password is valid",
-      "passwordInvalid": "Password must be at least 6 characters",
-      "specialCharsValid": "Password contains special characters",
-      "specialCharsInvalid": "Password must contain special characters",
-      "alphabetValid": "Password contains alphabets",
-      "alphabetInvalid": "Password must contain alphabets",
-      "haveAccount": "Don't have an account?",
-      "signIn": "Sign In",
-      "signUp": "Sign Up"
-    }
-  
+    "title": "Sign Up",
+    "or": "OR",
+    "passwordValid": "Password is valid",
+    "passwordInvalid": "Password must be at least 6 characters",
+    "specialCharsValid": "Password contains special characters",
+    "specialCharsInvalid": "Password must contain special characters",
+    "alphabetValid": "Password contains alphabets",
+    "alphabetInvalid": "Password must contain alphabets",
+    "haveAccount": "Don't have an account?",
+    "signIn": "Sign In",
+    "signUp": "Sign Up"
+}

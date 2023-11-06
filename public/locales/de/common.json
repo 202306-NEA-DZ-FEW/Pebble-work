@@ -40,8 +40,8 @@
     "sign": {
         "signin": "Anmelden",
         "signup": "Registrieren"
-      },
-      "contactForm": {
+    },
+    "contactForm": {
         "title": "Kontaktiere uns",
         "firstNamePlaceholder": "Vorname",
         "lastNamePlaceholder": "Nachname",
@@ -54,8 +54,8 @@
         "phone": "Telefonnummer",
         "success": "E-Mail erfolgreich gesendet!",
         "error": "Senden der E-Mail fehlgeschlagen"
-      },
-      "dropdown": {
+    },
+    "dropdown": {
         "signOut": "Abmelden",
         "signIn": "Anmelden",
         "profile": "Profil",

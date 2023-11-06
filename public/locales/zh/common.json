@@ -40,8 +40,8 @@
     "sign": {
         "signin": "登录",
         "signup": "注册"
-      },
-      "contactForm": {
+    },
+    "contactForm": {
         "title": "联系我们",
         "firstNamePlaceholder": "名字",
         "lastNamePlaceholder": "姓",
@@ -54,8 +54,8 @@
         "phone": "电话号码",
         "success": "电子邮件发送成功！",
         "error": "电子邮件发送失败"
-      },
-      "dropdown": {
+    },
+    "dropdown": {
         "signOut": "退出",
         "signIn": "登录",
         "profile": "个人资料",

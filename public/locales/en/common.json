@@ -40,8 +40,8 @@
     "sign": {
         "signin": "Sign in",
         "signup": "Sign up"
-      },
-      "contactForm": {
+    },
+    "contactForm": {
         "title": "Contact Us",
         "firstNamePlaceholder": "First Name",
         "lastNamePlaceholder": "Last Name",
@@ -54,8 +54,8 @@
         "phone": "Phone Number",
         "success": "Email sent successfully!",
         "error": "Failed to send the Email"
-      },
-      "dropdown": {
+    },
+    "dropdown": {
         "signOut": "Sign Out",
         "signIn": "Sign In",
         "profile": "Profile",
@@ -70,5 +70,4 @@
         "german": "German",
         "chinese": "Chinese"
     }
-
 }
