@@ -110,13 +110,18 @@ const ContactForm = () => {
 
     return (
         <div
-            className={`${styles.formHeight} flex flex-col mt-[-150px] items-center mx-auto gap-4`}
+            className={`${styles.formHeight} h-[450px] flex flex-col mt-[-150px] items-center mx-auto gap-4`}
         >
             <h2>{t("contactForm.title")}</h2>
 
             <form className='h-[40vh]' onSubmit={handleSubmit}>
                 <div className='input-row'>
                     <input
+                        style={{
+                            background: "var(--fill-white, #FFF)",
+                            border: "solid",
+                            borderRadius: "4px",
+                        }}
                         type='text'
                         id='fname'
                         name='firstname'
@@ -130,6 +135,11 @@ const ContactForm = () => {
                         }
                     />
                     <input
+                        style={{
+                            background: "var(--fill-white, #FFF)",
+                            border: "solid",
+                            borderRadius: "4px",
+                        }}
                         type='text'
                         id='lname'
                         name='lastname'
@@ -145,6 +155,11 @@ const ContactForm = () => {
                 </div>
 
                 <input
+                    style={{
+                        background: "var(--fill-white, #FFF)",
+                        border: "solid",
+                        borderRadius: "4px",
+                    }}
                     type='email'
                     id='email'
                     name='email'
@@ -155,6 +170,11 @@ const ContactForm = () => {
                 <br />
 
                 <input
+                    style={{
+                        background: "var(--fill-white, #FFF)",
+                        border: "solid",
+                        borderRadius: "4px",
+                    }}
                     type='tel'
                     id='phone'
                     name='phone'
@@ -165,6 +185,11 @@ const ContactForm = () => {
                 <br />
 
                 <textarea
+                    style={{
+                        background: "var(--fill-white, #FFF)",
+                        border: "solid",
+                        borderRadius: "4px",
+                    }}
                     id='message'
                     name='message'
                     placeholder={t("contactForm.messagePlaceholder")}

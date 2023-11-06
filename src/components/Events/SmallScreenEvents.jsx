@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Calendar from "@/components/Filter/Calendar";
-import EventCardLeft from "@/components/Events/EventCardLeft";
+import MobileCard from "./MobileCard";
+
 import styles from "@/styles/Events.module.css";
 import {
     collection,
@@ -15,11 +16,13 @@ import FirestoreLocation from "@/components/Filter/FirestoreLocation";
 
 import { db } from "@/util/firebase";
 
-const EventsPage = (user) => {
+const SmallScreenEvents = (user) => {
     // State variables
 
     const [selectedTypes, setSelectedTypes] = useState([]);
     const [inputValue1, setInputValue1] = useState("");
+    const [isCalendarOpen, setCalendarOpen] = useState(false);
+    const [isLocationOpen, setLocationOpen] = useState(false);
     const [filteredTypes, setFilteredTypes] = useState([]);
     const [events, setEvents] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState([]);
@@ -27,6 +30,7 @@ const EventsPage = (user) => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [resetLocation, setResetLocation] = useState(false);
     const [resetDays, setResetDays] = useState(false);
+    const dropdownRef = useRef(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(5);
 
@@ -84,6 +88,50 @@ const EventsPage = (user) => {
             console.error("Error getting filtered events: ", error);
         }
     };
+
+    const handleClickOutside = (event) => {
+        if (
+            dropdownRef.current &&
+            !dropdownRef.current.contains(event.target)
+        ) {
+            setFilteredTypes(false);
+        }
+    };
+    useEffect(() => {
+        window.addEventListener("click", handleClickOutside);
+        return () => {
+            window.removeEventListener("click", handleClickOutside);
+        };
+    }, []);
+
+    // Handle test click
+    const handleTestClick = () => {
+        setCalendarOpen(!isCalendarOpen);
+    };
+
+    // Resize event listener
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth > 640) {
+                setCalendarOpen(true);
+                setLocationOpen(true);
+            } else {
+                setCalendarOpen(false);
+                setLocationOpen(false);
+            }
+        };
+
+        // Set initial state based on window size
+        if (window.innerWidth > 640) {
+            setCalendarOpen(true);
+            setLocationOpen(true);
+        }
+
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
 
     // Fetch events from Firebase
     useEffect(() => {
@@ -147,20 +195,26 @@ const EventsPage = (user) => {
     return (
         <>
             <main
-                className={` flex flex-col justify-center items-center pb-12`}
+                className={` flex flex-col justify-center items-center overflow-scroll`}
             >
                 <div>
                     <h1>Welcome, {user.name}!</h1>
                     <p>This is the events page</p>
                 </div>
-                <div
-                    className={`flex flex-col-reverse sm:flex sm:flex-row-reverse sm:items-center sm:justify-evenly sm:gap-8 sm:h-full sm:w-full`}
+                <button
+                    onClick={resetEvents}
+                    className={` w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 rounded-[4px] h-[16px] ml-auto mr-2`}
                 >
-                    <div className={`md:w-[480px] sm:h-[800px]`}>
-                        <ul className={` flex flex-col items gap-2 `}>
+                    All events
+                </button>
+                <div className={`flex flex-col-reverse`}>
+                    <div className={`h-[750px]`}>
+                        <ul
+                            className={` flex flex-row justify-center flex-wrap items gap-4`}
+                        >
                             {currentItems.map((event) => {
                                 return (
-                                    <EventCardLeft
+                                    <MobileCard
                                         eventId={event.id}
                                         key={event.id}
                                         title={event.title}
@@ -207,18 +261,35 @@ const EventsPage = (user) => {
                             </div>
                         </ul>
                     </div>
-                    <div className='flex bg-white z-10 flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7'>
-                        <div className='sm:flex s:flex-col sm:items-center sm:justify-center'>
-                            <button className='sm:hidden'>Dates</button>
-
-                            <div
-                                className={`border border-black rounded-[8px] z-10 bg-white sm:bg-transparent`}
+                    <div className='flex bg-white z-10 flex-row items-center justify-evenly text-black'>
+                        <div>
+                            <button
+                                className='sm:hidden'
+                                onClick={handleTestClick}
                             >
-                                <Calendar
-                                    resetDays={resetDays}
-                                    checkEvents={checkEvents}
-                                />
-                            </div>
+                                Dates
+                            </button>
+                            {isCalendarOpen && (
+                                <div
+                                    style={{
+                                        animation: `${
+                                            isCalendarOpen
+                                                ? `${styles.fadeIn} 0.7s ease-in-out`
+                                                : ""
+                                        }`,
+                                    }}
+                                    className={`${
+                                        isCalendarOpen ? "open" : ""
+                                    } ${
+                                        styles.calendarContainer
+                                    } border border-black rounded-[8px] z-10 bg-white`}
+                                >
+                                    <Calendar
+                                        resetDays={resetDays}
+                                        checkEvents={checkEvents}
+                                    />
+                                </div>
+                            )}
                         </div>
                         <div className='h-66'>
                             <FirestoreLocation
@@ -229,7 +300,7 @@ const EventsPage = (user) => {
                             />
                         </div>
                         <FilterByType
-                            resetEvents={resetEvents}
+                            ref={dropdownRef}
                             setFilteredTypes={setFilteredTypes}
                             selectedTypes={selectedTypes}
                             setSelectedTypes={setSelectedTypes}
@@ -241,4 +312,4 @@ const EventsPage = (user) => {
     );
 };
 
-export default EventsPage;
+export default SmallScreenEvents;

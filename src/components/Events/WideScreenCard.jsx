@@ -18,6 +18,7 @@ const WideScreenCard = ({
         router.push(`/events/${eventId}`);
     };
     const [hideBackground, setHideBackground] = useState(false);
+    const [enterDelay, setEnterDelay] = useState(null);
     let timerId;
     let reverseTimer;
     const [isHovered, setIsHovered] = useState(false);
@@ -25,13 +26,18 @@ const WideScreenCard = ({
     const { t } = useTranslation(); // Initialize useTranslation
 
     const handleHover = () => {
-        timerId = setTimeout(() => {
-            setHideBackground(true);
-            setIsHovered(true);
-        }, 700);
+        clearTimeout(enterDelay); // clear the enter delay if the mouse enters again
+        setEnterDelay(
+            setTimeout(() => {
+                setHideBackground(true);
+                setIsHovered(true);
+            }, 1000)
+        ); // delay of 1 second before handleHover is executed
     };
 
     const handleMouseLeave = () => {
+        clearTimeout(enterDelay); // clear the enter delay if the mouse leaves
+        if (!isHovered) return; // if the mouse hasn't been hovered for at least 1 second, do nothing
         clearTimeout(timerId);
         setHideBackground(false);
         setIsHovered(false);
@@ -71,6 +77,7 @@ const WideScreenCard = ({
         return () => {
             clearTimeout(timerId);
             clearTimeout(reverseTimer);
+            clearTimeout(enterDelay);
         };
     }, []);
 
@@ -79,7 +86,7 @@ const WideScreenCard = ({
             <div
                 onMouseEnter={handleHover}
                 onMouseLeave={handleMouseLeave}
-                className={`${styles.contai} ${styles.card} ${styles.wideFading} border w-[55vw] h-[24vh] flex flex-row items-center justify-around gap-2`}
+                className={`${styles.contai} ${styles.card} ${styles.wideFading} border w-[55vw] h-[200px] flex flex-row items-center justify-around gap-2`}
             >
                 <h2
                     ref={h2Ref}

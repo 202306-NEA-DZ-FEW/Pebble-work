@@ -178,7 +178,7 @@ const DesktopEvents = (user) => {
                 <div
                     className={`flex flex-row-reverse items-center justify-evenly w-full`}
                 >
-                    <div className={`w-[55vw] h-[140vh]`}>
+                    <div className={`w-[55vw] h-[1150px]`}>
                         <ul className={`flex flex-col items gap-2`}>
                             {currentItems.map((event) => {
                                 return (
@@ -187,7 +187,9 @@ const DesktopEvents = (user) => {
                                         key={event.id}
                                         title={event.title}
                                         type={event.type}
-                                        image={event.image}
+                                        image={
+                                            event?.image || "/event_image.png"
+                                        }
                                         location={event.location}
                                         description={event.description}
                                         organizer={event.organizer}
@@ -225,7 +227,7 @@ const DesktopEvents = (user) => {
                             ))}
                         </div>
                     </div>
-                    <div className='flex h-[140vh] flex-col ml-[-50px] items-center text-black gap-7'>
+                    <div className='flex h-[1150px] flex-col ml-[-50px] items-center text-black gap-7'>
                         <div className='sm:flex s:flex-col sm:items-center sm:justify-center'>
                             <div
                                 className={`${styles.calendarContainer} border border-black rounded-[8px] bg-white sm:bg-transparent`}
