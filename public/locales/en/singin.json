@@ -1,9 +1,9 @@
 {
     "signInTitle": "Sign In",
+    "or": "OR",
     "signInWith": "Sign in with",
     "emailLabel": "Email address",
     "passwordLabel": "Your password",
-    "showPassword": "Show Password",
     "forgotPassword": "Forgot your password?",
     "resetPasswordButton": "Reset Password",
     "signInButton": "Sign in",

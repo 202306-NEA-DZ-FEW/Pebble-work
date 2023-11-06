@@ -1,9 +1,9 @@
 {
     "signInTitle": "登录",
+    "or": "或",
     "signInWith": "使用以下方式登录",
     "emailLabel": "电子邮件地址",
     "passwordLabel": "密码",
-    "showPassword": "显示密码",
     "forgotPassword": "忘记密码？",
     "resetPasswordButton": "重置密码",
     "signInButton": "登录",
