@@ -194,20 +194,21 @@ const SignInPage = () => {
 
     return (
         <>
-            <div className='flex justify-center items-center h-screen'>
-                <div className='flex items-center w-1/2'>
-                    <div className='mr-10'>
-                        <Image
+            <div className='flex justify-center items-center  '>
+                <div className='flex flex-col items-center sm:flex-row sm:w-1/ h-fit'>
+                    <div className='mb-4 sm:mb-0'>
+                        <img
                             src='/images/Sitting.png'
                             alt='Sitting'
                             width={1920}
                             height={1081}
                             layout='responsive'
                             objectFit='cover'
+                            className='w-full sm:w-auto sm:h-auto h-[250px] md:w-[300px] md:h-[300px]'
                         />
                     </div>
-                    <div>
-                        <h2 className="text-zinc-800 text-[32px] font-medium font-['Rubik'] mb-4">
+                    <div className='sm:ml-10'>
+                        <h2 className="text-zinc-800 text-[32px] font-medium font-['Rubik'] mb-4 text-center mt-2">
                             {t("signin:signInTitle")}
                         </h2>
                         <div className='mb-4'>
@@ -322,28 +323,28 @@ const SignInPage = () => {
                                     )}
                                 </div>
                             </div>
-
-                            {resetMode ? (
-                                <div className='flex justify-start'>
-                                    <button
-                                        className=' px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 '
-                                        type='button'
-                                        onClick={handleResetPassword}
-                                    >
-                                        {t("signin:resetPasswordButton")}
-                                    </button>
-                                </div>
-                            ) : (
-                                <div className='flex justify-start'>
-                                    <button
-                                        className=' px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 '
-                                        type='submit'
-                                        // disabled={resetMode}
-                                    >
-                                        {t("signin:signInButton")}
-                                    </button>
-                                </div>
-                            )}
+                            <div className='flex flex-col sm:flex-row sm:space-x-4 mt-4'>
+                                {resetMode ? (
+                                    <div className='flex justify-start'>
+                                        <button
+                                            className=' px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 mb-4'
+                                            type='button'
+                                            onClick={handleResetPassword}
+                                        >
+                                            {t("signin:resetPasswordButton")}
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <div className='flex justify-start '>
+                                        <button
+                                            className=' w-full px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 mt-4 mb-2 '
+                                            type='submit'
+                                        >
+                                            {t("signin:signInButton")}
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
                         </form>
                     </div>
                 </div>

@@ -108,14 +108,6 @@ const SignUpPage = () => {
             );
             return;
         }
-        // if (password.length < 6) {
-        //     setShowPopup(true);
-        //     setModalContent("6 characters needed for password.");
-        //     setModalClassName(
-        //         "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4   "
-        //     );
-        //     return;
-        // }
 
         const emailRegex = /^(.+)@(gmail|yahoo|outlook)\.(com|co\.uk|fr)$/;
         if (!emailRegex.test(email)) {
@@ -257,20 +249,21 @@ const SignUpPage = () => {
     };
 
     return (
-        <div className='flex justify-center items-center h-screen'>
-            <div className='flex items-center w-1/2'>
+        <div className='flex justify-center items-center '>
+            <div className='flex flex-col items-center sm:flex-row sm:w-1/ h-fit'>
                 <div className='mr-10'>
-                    <Image
+                    <img
                         src='/images/Sitting.png'
                         alt='Sitting'
                         width={1920}
-                        height={1080}
+                        height={1081}
                         layout='responsive'
                         objectFit='cover'
+                        className='w-full sm:w-auto sm:h-auto h-[250px] md:w-[300px] md:h-[300px]'
                     />
                 </div>
                 <div>
-                    <h2 className="text-zinc-800 text-[32px] font-medium font-['Rubik'] mb-4">
+                    <h2 className="text-zinc-800 text-[32px] font-medium font-['Rubik'] mb-4 text-center mt-4">
                         {t("signUp:title")}
                     </h2>
                     <div className='mb-4'>
@@ -278,11 +271,11 @@ const SignUpPage = () => {
                         <BtnGoogle onClick={handelGoogle} />
 
                         <div className='flex items-center mb-4 mt-4'>
-                            <div className='   shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25 border-t flex-grow'></div>
+                            <div className='shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25 border-t flex-grow'></div>
                             <div className="text-stone-500 text-lg font-normal font-['Rubik'] px-4">
                                 {t("signUp:or")}
                             </div>
-                            <div className='   shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25  border-t flex-grow'></div>
+                            <div className='shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25  border-t flex-grow'></div>
                         </div>
                     </div>
                     <form onSubmit={handleSignup}>
@@ -310,7 +303,6 @@ const SignUpPage = () => {
                                 onChange={(e) => setSurename(e.target.value)}
                             />
                         </div>
-                        {t("signUp:passwordValid")}
                         <div className='mb-4'>
                             <input
                                 className={`w-full px-3 py-2 border rounded ${
@@ -338,7 +330,6 @@ const SignUpPage = () => {
                                 value={password}
                                 onChange={handlePasswordChange}
                             />
-                            {t("signUp:passwordInvalid")}
                             <div
                                 className='absolute -bottom-1.5 right-1 m-4 cursor-pointer'
                                 onClick={togglePasswordVisibility}
@@ -441,14 +432,16 @@ const SignUpPage = () => {
                                 </Link>
                             </div>
                         </div>
-                        <div className='flex justify-start'>
-                            <button
-                                className=' px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 '
-                                type='submit'
-                                disabled={isSignUpDisabled}
-                            >
-                                {t("signUp:signUp")}
-                            </button>
+                        <div className='flex flex-col sm:flex-row sm:space-x-4 mt-4'>
+                            <div className='flex justify-start '>
+                                <button
+                                    className=' w-full px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300   mb-4  '
+                                    type='submit'
+                                    disabled={isSignUpDisabled}
+                                >
+                                    {t("signUp:signUp")}
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>
