@@ -46,30 +46,30 @@ const FeatureCard = ({ title, description, buttonText, imageUrl, link }) => {
     return (
         <div
             id='featuredCard'
-            className={`w-1/2 lg:w-1/3 md:w-1/2 flex flex-col justify-evenly items-center shadow-md ${
+            className={`w-1/2 sm:min-h-[320px] min-h-[200px] lg:min-h-[550px] lg:w-1/3 md:w-1/2 flex flex-col justify-evenly items-center shadow-md ${
                 isVisible ? styles.visible : styles.invisible
             }`}
         >
             <div
-                className={`xl:w-[216px] xl:h-[245.75px] lg:w-[177px] lg:h-[200px] md:w-[131px] md:h-[145px] sm:w-[100px] sm:h-[110px] w-[80px] h-[80px] ${styles.cardImage}`}
+                className={`xl:w-[216px] xl:h-[245.75px] lg:w-[177px] lg:h-[200px] md:w-[131px] md:h-[145px] sm:w-[100px] sm:h-[110px] w-[80px] h-[80px]`}
             >
                 <img src={imageUrl} loading='lazy' alt='Card Image' />
             </div>
             <div className='w-full text-center px-2'>
                 <div
-                    className={`text-zinc-900 w- lg:text-[32px] md:text-[24px] sm:text-[20px] font-medium font-['Rubik'] sm:leading-[44px] tracking-[0.10px] ${styles.title}`}
+                    className={`text-zinc-900 w- lg:text-[32px] md:text-[24px] sm:text-[20px] font-medium font-['Rubik'] sm:leading-[44px] tracking-[0.10px]`}
                 >
                     {title}
                 </div>
                 <div
-                    className={`text-zinc-500 lg:text-[18px] md:text-[15px] sm:text-[13px] text-[10px] font-normal font-['Rubik'] sm:leading-[30px] tracking-[0.10px] ${styles.description}`}
+                    className={`text-zinc-500 lg:text-[18px] md:text-[15px] sm:text-[13px] text-[10px] font-normal font-['Rubik'] sm:leading-[30px] tracking-[0.10px]`}
                 >
                     {description}
                 </div>
             </div>
             <Link
                 href=''
-                className={`xl:w-[163px] xl:h-[52px] justify-start items-center gap-2.5 inline-flex text-zinc-900 lg:text-[22px] sm:text-[16px] font-medium font-['Rubik'] leading-[30px] tracking-tight ${styles.button}`}
+                className={`xl:w-[163px] mb-5 xl:h-[52px] justify-center items-center gap-2.5 inline-flex text-zinc-900 lg:text-[22px] sm:text-[16px] font-medium font-['Rubik'] leading-[30px] tracking-tight`}
                 onClick={handleButtonClick}
             >
                 {buttonText}

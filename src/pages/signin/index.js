@@ -194,8 +194,8 @@ const SignInPage = () => {
 
     return (
         <>
-            <div className='flex justify-center items-center  '>
-                <div className='flex flex-col items-center sm:flex-row sm:w-1/ h-fit'>
+            <div className='flex justify-center items-center min-w-screen min-h-screen'>
+                <div className='flex flex-col items-center sm:flex-row '>
                     <div className='mb-4 sm:mb-0'>
                         <img
                             src='/images/Sitting.png'
@@ -204,11 +204,11 @@ const SignInPage = () => {
                             height={1081}
                             layout='responsive'
                             objectFit='cover'
-                            className='w-full sm:w-auto sm:h-auto h-[250px] md:w-[300px] md:h-[300px]'
+                            className='w-full sm:w-auto sm:h-auto h-[250px] md:w-[450px] md:h-[450px]'
                         />
                     </div>
                     <div className='sm:ml-10'>
-                        <h2 className="text-zinc-800 text-[32px] font-medium font-['Rubik'] mb-4 text-center mt-2">
+                        <h2 className='text-zinc-800 text-[32px] font-medium mb-4 text-center mt-2'>
                             {t("signin:signInTitle")}
                         </h2>
                         <div className='mb-4'>
@@ -217,7 +217,7 @@ const SignInPage = () => {
 
                             <div className='flex items-center mb-4 mt-4'>
                                 <div className='shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25 border-t flex-grow'></div>
-                                <div className="text-stone-500 text-lg font-normal font-['Rubik'] px-4">
+                                <div className='text-stone-500 text-lg font-normal px-4'>
                                     {t("signin:or")}
                                 </div>
                                 <div className='shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25  border-t flex-grow'></div>
@@ -227,7 +227,7 @@ const SignInPage = () => {
                             {resetMode ? (
                                 <div className='mb-4'>
                                     <label
-                                        className="block mb-2 text-stone-500 text-base font-normal font-['Rubik']"
+                                        className='block mb-2 text-stone-500 text-base font-normal'
                                         htmlFor='email'
                                     >
                                         {t("signin:signInWith")}
@@ -251,7 +251,7 @@ const SignInPage = () => {
                             ) : (
                                 <div>
                                     <label
-                                        className="block mb-2 text-stone-500 text-base font-normal font-['Rubik']"
+                                        className='block mb-2 text-stone-500 text-base font-normal'
                                         htmlFor='email'
                                     >
                                         {t("signin:emailLabel")}
@@ -276,7 +276,7 @@ const SignInPage = () => {
 
                             <div className='mb-4 relative'>
                                 <label
-                                    className="block mb-2 text-stone-500 text-base font-normal font-['Rubik']"
+                                    className='block mb-2 text-stone-500 text-base font-normal'
                                     htmlFor='password'
                                 >
                                     {t("signin:passwordLabel")}
@@ -304,14 +304,14 @@ const SignInPage = () => {
                             </div>
 
                             <div>
-                                <div className="text-stone-500 text-sm font-normal font-['Rubik'] mt-4">
+                                <div className='text-stone-500 text-sm font-normal mt-4'>
                                     <button onClick={toggleResetMode}>
                                         {t("signin:forgotPassword")}
                                     </button>
                                     {resetMode ? (
                                         <div className='text-orange-400 ml-1 cursor-pointer'></div>
                                     ) : (
-                                        <div className="text-stone-500 text-sm font-normal font-['Rubik'] mt-4">
+                                        <div className='text-stone-500 text-sm font-normal mt-4'>
                                             {t("signin:noAccount")}{" "}
                                             <Link
                                                 href='/signup'

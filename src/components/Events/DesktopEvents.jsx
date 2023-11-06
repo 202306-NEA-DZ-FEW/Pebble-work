@@ -164,9 +164,9 @@ const DesktopEvents = (user) => {
         setResetLocation(true);
         setResetDays([]);
     };
-    const handleInputDelete = () => {
-        setInputValue1("");
-    };
+    // const handleInputDelete = () => {
+    //     setInputValue1("");
+    // };
     return (
         <>
             <main className={` flex flex-col justify-center items-center`}>
@@ -243,7 +243,9 @@ const DesktopEvents = (user) => {
                                 onInputChange={handleLocationInputChange}
                                 resetLocation={resetLocation}
                                 setResetLocation={setResetLocation}
-                                onInputDelete={handleInputDelete}
+                                // onInputDelete={handleInputDelete}
+                                setInputValue1={setInputValue1}
+                                inputValue1={inputValue1}
                             />
                         </div>
 

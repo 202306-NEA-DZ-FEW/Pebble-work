@@ -110,7 +110,7 @@ const ContactForm = () => {
 
     return (
         <div
-            className={`${styles.formHeight} h-[450px] flex flex-col mt-[-150px] items-center mx-auto gap-4`}
+            className={`${styles.formHeight} h-[450px] flex flex-col items-center mx-auto gap-4`}
         >
             <h2>{t("contactForm.title")}</h2>
 

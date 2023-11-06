@@ -165,10 +165,7 @@ const EventCreationPage = () => {
 
     return (
         <>
-            <div
-                className='container ml-auto mr-auto max-w-6xl mt-2 flex flex-col bg-white mx-auto'
-                style={{ fontFamily: "Rubik" }}
-            >
+            <div className='container ml-auto mr-auto max-w-6xl mt-2 flex flex-col bg-white mx-auto'>
                 {isAuthenticated ? (
                     <>
                         <div style={{ height: "6rem" }}></div>

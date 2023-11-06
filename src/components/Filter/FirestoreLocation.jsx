@@ -2,10 +2,15 @@ import React, { useState, useEffect, useRef } from "react";
 import { db } from "@/util/firebase";
 import { doc, getDoc } from "firebase/firestore";
 
-function FirestoreLocation({ onInputChange, onInputDelete }) {
+function FirestoreLocation({
+    onInputChange,
+    onInputDelete,
+    inputValue1,
+    setInputValue1,
+}) {
     const [location, setLocation] = useState("");
     const [filteredLocations, setFilteredLocations] = useState([]);
-    const [inputValue, setInputValue] = useState("");
+    // const [inputValue, setInputValue] = useState("");
     const [isFormVisible, setFormVisible] = useState(false);
     const formRef = useRef(null);
 
@@ -30,15 +35,15 @@ function FirestoreLocation({ onInputChange, onInputDelete }) {
         };
     }, []);
     const handleLocationChange = (e) => {
-        setInputValue(e.target.value);
+        setInputValue1(e.target.value);
 
         // Clear the filtered list
         setFilteredLocations([]);
 
         const inputLocation = e.target.value.toLowerCase();
-        if (inputLocation.length === 0) {
-            onInputDelete();
-        }
+        // if (inputLocation.length === 0) {
+        //     onInputDelete();
+        // }
         // Get the 'data' field from Firestore document
         const fetchLocationData = async () => {
             try {
@@ -65,7 +70,7 @@ function FirestoreLocation({ onInputChange, onInputDelete }) {
     // Function to handle clicking a list item
     const handleLocationItemClick = (selectedLocation) => {
         setLocation(selectedLocation);
-        setInputValue(selectedLocation);
+        setInputValue1(selectedLocation);
         // Clear the filtered list when an item is selected
         onInputChange(selectedLocation);
         setFilteredLocations([]);
@@ -85,7 +90,7 @@ function FirestoreLocation({ onInputChange, onInputDelete }) {
                     <input
                         required
                         id='location'
-                        value={inputValue}
+                        value={inputValue1}
                         onChange={handleLocationChange}
                         placeholder='Set Location'
                         className='p-1 mt-4 rounded-md focus:outline-2 xl:w-[15vw] outline outline-1 md:w-[20vw]'
@@ -97,22 +102,23 @@ function FirestoreLocation({ onInputChange, onInputDelete }) {
                         }}
                     ></input>
 
-                    {filteredLocations.length > 0 && (
-                        <ul className='location-list p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52'>
-                            {filteredLocations.map((location, index) => (
-                                <li
-                                    key={index}
-                                    value={location}
-                                    className='h-[2rem] pt-2 cursor-pointer hover:bg-slate-50'
-                                    onClick={() =>
-                                        handleLocationItemClick(location)
-                                    }
-                                >
-                                    {location}
-                                </li>
-                            ))}
-                        </ul>
-                    )}
+                    {filteredLocations.length > 0 &&
+                        inputValue1.length >= 2 && (
+                            <ul className='location-list p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52'>
+                                {filteredLocations.map((location, index) => (
+                                    <li
+                                        key={index}
+                                        value={location}
+                                        className='h-[2rem] pt-2 cursor-pointer hover:bg-slate-50'
+                                        onClick={() =>
+                                            handleLocationItemClick(location)
+                                        }
+                                    >
+                                        {location}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
                 </form>
             )}
             <style jsx>{`

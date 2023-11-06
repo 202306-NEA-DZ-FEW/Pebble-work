@@ -28,10 +28,7 @@ const HomeCards = () => {
             <HeaderCard />
 
             <Heading />
-            <p
-                className='mt-4 sm:mt-8 md:mt-12 lg:mt-16'
-                style={{ fontSize: "42px", color: "black" }}
-            >
+            <p className='lg:text-[42px] sm:text-[32px] font-[500] text-black'>
                 {t("common:homeCards:howItWorks")}
             </p>
             <MainCard />
@@ -49,11 +46,11 @@ const HomeCards = () => {
             <GalleryCard />
 
             <p className='mt-4 sm:mt-8 md:mt-12 lg:mt-16'></p>
-            <div className='xl:h-[420px] lg:h-[420px] sm:mb-20'>
+            <div className='xl:h-[420px] lg:h-[420px] '>
                 <SocialCard />
             </div>
 
-            <div className='lg:pt-20 overflow-hidden sm:mt-[-80px] pt-40 sm:pt-0 pb-40'>
+            <div className='mt-4'>
                 <ImageSquareCard />
             </div>
 
