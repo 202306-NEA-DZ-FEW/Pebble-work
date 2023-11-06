@@ -1,0 +1,12 @@
+{
+    "signInTitle": "Sign In",
+    "signInWith": "Sign in with",
+    "emailLabel": "Email address",
+    "passwordLabel": "Your password",
+    "showPassword": "Show Password",
+    "forgotPassword": "Forgot your password?",
+    "resetPasswordButton": "Reset Password",
+    "signInButton": "Sign in",
+    "noAccount": "Don't have an account?",
+    "signUpLink": "Sign up"
+  }

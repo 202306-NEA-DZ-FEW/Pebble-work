@@ -1,0 +1,14 @@
+ {
+      "title": "Registrieren",
+      "or": "ODER",
+      "passwordValid": "Passwort gültig",
+      "passwordInvalid": "Das Passwort muss mindestens 6 Zeichen lang sein",
+      "specialCharsValid": "Passwort enthält Sonderzeichen",
+      "specialCharsInvalid": "Das Passwort muss Sonderzeichen enthalten",
+      "alphabetValid": "Passwort enthält Buchstaben",
+      "alphabetInvalid": "Das Passwort muss Buchstaben enthalten",
+      "haveAccount": "Noch kein Konto?",
+      "signIn": "Anmelden",
+      "signUp": "Registrieren"
+    }
+  

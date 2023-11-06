@@ -10,8 +10,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { sendPasswordResetEmail } from "firebase/auth";
 import BtnGoogle from "@/components/BtnTwitter&Google/ButtonGoogle";
@@ -20,19 +19,20 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Modal from "@/components/Popup/Modal";
 import { collection, setDoc, doc } from "firebase/firestore";
 import { db } from "../../util/firebase";
-
 import { auth } from "../../util/firebase";
+
 const SignInPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
     const [RestEmail, setRestEmail] = useState("");
-
     const [password, setPassword] = useState("");
     const router = useRouter();
     const [showPopup, setShowPopup] = useState(false);
     const [modalContent, setModalContent] = useState("");
     const [modalClassName, setModalClassName] = useState("");
     const [resetMode, setResetMode] = useState(false);
+
+    const { t } = useTranslation();
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -43,6 +43,7 @@ const SignInPage = () => {
 
         return () => unsubscribe();
     }, []);
+
     const handleSuccess = () => {
         setShowPopup(true);
     };
@@ -50,13 +51,14 @@ const SignInPage = () => {
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
+
     const handleLogin = async (e) => {
         e.preventDefault();
 
         try {
             await signInWithEmailAndPassword(auth, email, password);
             setShowPopup(true);
-            setModalContent("Congrats! You signed in/up successfully.");
+            setModalContent(t("signIn:signInSuccess"));
             setModalClassName(
                 "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
             );
@@ -65,27 +67,23 @@ const SignInPage = () => {
             }, 3000);
         } catch (error) {
             setShowPopup(true);
-            setModalContent(
-                "Error: Login failed. Invalid credentials or password requirements not met"
-            );
+            setModalContent(t("signIn:signInError"));
             setModalClassName(
                 "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
             );
         }
     };
+
     const handelGoogle = async (e) => {
         e.preventDefault();
         try {
             const auth = getAuth();
-
             const provider = new GoogleAuthProvider();
-
             const userCredential = await signInWithPopup(auth, provider);
-
             const displayName = userCredential.user.displayName;
             const [firstName, lastName] = displayName.split(" ");
 
-            // Create user object with name, surename, and email
+            // Create user object with name, surname, and email
             const user = {
                 Name: firstName,
                 Surename: lastName,
@@ -97,11 +95,7 @@ const SignInPage = () => {
 
             // Get the user UID
             const userUID = userCredential.user.uid;
-
-            // Get a reference to the "users" collection
             const usersCollectionRef = collection(db, "users");
-
-            // Add the user object to the "users" collection with the user UID as the document ID
             await setDoc(doc(usersCollectionRef, userUID), user);
 
             const email = userCredential.user.email;
@@ -110,7 +104,7 @@ const SignInPage = () => {
                 await linkWithPopup(userCredential.user, provider);
                 await signInWithPopup(auth, provider);
                 setShowPopup(true);
-                setModalContent("Congrats! You signed in/up successfully.");
+                setModalContent(t("signIn:signInSuccess"));
                 setModalClassName(
                     "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
                 );
@@ -118,45 +112,43 @@ const SignInPage = () => {
                     router.push("/events");
                 }, 3000);
             } else {
-                // The user has no email associated with the account
-                // Display an error message
                 setShowPopup(true);
-                setModalContent(
-                    "Gmail account doesn't exist. Please sign up or use an existing account."
-                );
+                setModalContent(t("signIn:gmailAccountNotExist"));
                 setModalClassName(
                     "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
                 );
             }
         } catch (error) {
             setShowPopup(true);
-            setModalContent("Sign in/up failed.");
+            setModalContent(t("signIn:signInError"));
             setModalClassName(
                 "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
             );
         }
     };
+
     const handelTwitter = async (e) => {
         e.preventDefault();
         try {
             const provider = new TwitterAuthProvider();
             await signInWithPopup(auth, provider);
             setShowPopup(true);
-            setModalContent("Congrats! You signed in/up successfully.");
+            setModalContent(t("signIn:signInSuccess"));
             setModalClassName(
-                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  "
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4"
             );
             setTimeout(() => {
                 router.push("/editprofile");
             }, 3000);
         } catch (error) {
             setShowPopup(true);
-            setModalContent("Sign in/up failed.");
+            setModalContent(t("signIn:signInError"));
             setModalClassName(
                 "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
             );
         }
     };
+
     const handleResetPassword = async (event) => {
         event.preventDefault();
 
@@ -166,22 +158,22 @@ const SignInPage = () => {
         try {
             await sendPasswordResetEmail(auth, RestEmail);
             setShowPopup(true);
-            setModalContent("Reset Email sent successfully .");
+            setModalContent(t("signIn:resetEmailSuccess"));
             setModalClassName(
-                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  "
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4"
             );
-
             setTimeout(() => {
                 window.location.reload();
             }, 3000);
         } catch (error) {
             setShowPopup(true);
-            setModalContent("Reset failed.");
+            setModalContent(t("signIn:resetError"));
             setModalClassName(
                 "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
             );
         }
     };
+
     const handleKeyDown = (event) => {
         if (event.key === "Enter") {
             event.preventDefault();
@@ -191,6 +183,7 @@ const SignInPage = () => {
     const toggleResetMode = () => {
         setResetMode(!resetMode);
     };
+
     return (
         <>
             <div className='flex justify-center items-center h-screen'>
@@ -207,16 +200,16 @@ const SignInPage = () => {
                     </div>
                     <div>
                         <h2 className="text-zinc-800 text-[32px] font-medium font-['Rubik'] mb-4">
-                            Sign In
+                            {t("signin:signIn")}
                         </h2>
                         <div className='mb-4'>
                             <ButtonTwitter onClick={handelTwitter} />
                             <BtnGoogle onClick={handelGoogle} />
 
                             <div className='flex items-center mb-4 mt-4'>
-                                <div className='   shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25 border-t flex-grow'></div>
+                                <div className='shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25 border-t flex-grow'></div>
                                 <div className="text-stone-500 text-lg font-normal font-['Rubik'] px-4">
-                                    OR
+                                    {t("signin:or")}
                                 </div>
                                 <div className='shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25  border-t flex-grow'></div>
                             </div>
@@ -228,7 +221,7 @@ const SignInPage = () => {
                                         className="block mb-2 text-stone-500 text-base font-normal font-['Rubik']"
                                         htmlFor='email'
                                     >
-                                        Email address
+                                        {t("signin:emailAddress")}
                                     </label>
                                     <input
                                         className='w-full px-3 py-2 border rounded'
@@ -252,7 +245,7 @@ const SignInPage = () => {
                                         className="block mb-2 text-stone-500 text-base font-normal font-['Rubik']"
                                         htmlFor='email'
                                     >
-                                        Email address
+                                        {t("signin:emailAddress")}
                                     </label>
                                     <input
                                         className='w-full px-3 py-2 border rounded'
@@ -277,7 +270,7 @@ const SignInPage = () => {
                                     className="block mb-2 text-stone-500 text-base font-normal font-['Rubik']"
                                     htmlFor='password'
                                 >
-                                    Your password
+                                    {t("signin:yourPassword")}
                                 </label>
                                 <input
                                     className='w-full px-3 py-2 border rounded'
@@ -304,18 +297,18 @@ const SignInPage = () => {
                             <div>
                                 <div className="text-stone-500 text-sm font-normal font-['Rubik'] mt-4">
                                     <button onClick={toggleResetMode}>
-                                        Forgot your password?
+                                        {t("signin:forgotPassword")}
                                     </button>
                                     {resetMode ? (
                                         <div className='text-orange-400 ml-1 cursor-pointer'></div>
                                     ) : (
                                         <div className="text-stone-500 text-sm font-normal font-['Rubik'] mt-4">
-                                            Dont have an account?
+                                            {t("signin:noAccount")}{" "}
                                             <Link
                                                 href='/signup'
                                                 className='text-orange-400 ml-1'
                                             >
-                                                Sign up
+                                                {t("signin:signUp")}
                                             </Link>
                                         </div>
                                     )}
@@ -329,7 +322,7 @@ const SignInPage = () => {
                                         type='button'
                                         onClick={handleResetPassword}
                                     >
-                                        Reset Password
+                                        {t("signin:resetPassword")}
                                     </button>
                                 </div>
                             ) : (
@@ -339,7 +332,7 @@ const SignInPage = () => {
                                         type='submit'
                                         // disabled={resetMode}
                                     >
-                                        Sign in
+                                        {t("signin:signIn")}
                                     </button>
                                 </div>
                             )}
@@ -364,7 +357,11 @@ export default SignInPage;
 export async function getStaticProps({ locale }) {
     return {
         props: {
-            ...(await serverSideTranslations(locale, ["common", "about"])),
+            ...(await serverSideTranslations(locale, [
+                "common",
+                "about",
+                "signin",
+            ])),
             // Will be passed to the page component as props
         },
     };
