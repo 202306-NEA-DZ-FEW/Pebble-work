@@ -17,13 +17,8 @@ const DateSelector = ({ setCurrentDate, checkEvents, resetDays }) => {
         setCurrentDate(newDate);
         const newFormattedDate = newDate.toISOString().split("T")[0];
         setFormattedDate(newFormattedDate);
+        checkEvents(newFormattedDate);
     };
-
-    useEffect(() => {
-        if (formattedDate) {
-            checkEvents(formattedDate);
-        }
-    }, [formattedDate]);
 
     useEffect(() => {
         if (resetDays) {

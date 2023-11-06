@@ -136,15 +136,6 @@ const Navbar = () => {
                                 {t("common:navbar:about")}
                             </Link>
                         </li>
-                        <li>
-                            <Link
-                                href='#'
-                                onClick={closeMenuDropdown}
-                                className='block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover-bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover-text-blue-500 dark:hover-bg-gray-700 dark:hover-text-white dark-border-gray-700'
-                            >
-                                {t("common:navbar:contact")}
-                            </Link>
-                        </li>
                     </ul>
                 </div>
             </div>

@@ -249,7 +249,7 @@ const SignUpPage = () => {
     };
 
     return (
-        <div className='flex justify-center items-center '>
+        <div className='flex justify-center items-center h-screen '>
             <div className='flex flex-col items-center sm:flex-row sm:w-1/ h-fit'>
                 <div className='mr-10'>
                     <img
@@ -259,11 +259,11 @@ const SignUpPage = () => {
                         height={1081}
                         layout='responsive'
                         objectFit='cover'
-                        className='w-full sm:w-auto sm:h-auto h-[250px] md:w-[300px] md:h-[300px]'
+                        className='w-full sm:w-auto sm:h-auto h-[250px] md:w-[450px] md:h-[450px]'
                     />
                 </div>
                 <div>
-                    <h2 className="text-zinc-800 text-[32px] font-medium font-['Rubik'] mb-4 text-center mt-4">
+                    <h2 className='text-zinc-800 text-[32px] font-medium mb-4 text-center mt-4'>
                         {t("signUp:title")}
                     </h2>
                     <div className='mb-4'>
@@ -272,7 +272,7 @@ const SignUpPage = () => {
 
                         <div className='flex items-center mb-4 mt-4'>
                             <div className='shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25 border-t flex-grow'></div>
-                            <div className="text-stone-500 text-lg font-normal font-['Rubik'] px-4">
+                            <div className='text-stone-500 text-lg font-normal px-4'>
                                 {t("signUp:or")}
                             </div>
                             <div className='shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25  border-t flex-grow'></div>
@@ -422,7 +422,7 @@ const SignUpPage = () => {
                         </div>
 
                         <div>
-                            <div className="text-stone-500 text-sm font-normal font-['Rubik'] mt-4">
+                            <div className='text-stone-500 text-sm font-normal mt-4'>
                                 {t("signUp:haveAccount")}
                                 <Link
                                     href='/signin'

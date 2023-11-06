@@ -5,36 +5,50 @@ import React, { useState, useEffect } from "react";
 import styles from "@/styles/Events.module.css";
 import DateSelector from "../DateSelector";
 
+// Define the Calendar component
 const Calendar = ({ checkEvents, resetDays }) => {
+    // State for the current date and selected days
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDays, setSelectedDays] = useState({});
 
+    // Function to handle date click
     const handleDateClick = (day) => {
+        // Create a new date based on the clicked day
         const selectedDate = new Date(
             currentDate.getFullYear(),
             currentDate.getMonth(),
             day + 1
         );
+        // Format the date to ISO string
         const formattedDate = selectedDate.toISOString().split("T")[0];
+        // Key for the selected month
         const selectedMonthKey = `${currentDate.getFullYear()}-${currentDate.getMonth()}`;
 
+        // Update the selected days state
         setSelectedDays((prevSelectedDays) => {
+            // Copy the previous state
             const updatedSelectedDays = { ...prevSelectedDays };
+            // Get the days for the current month
             const currentMonthDays =
                 updatedSelectedDays[selectedMonthKey] || [];
+            // Check if the day is already selected
             const dayIndex = currentMonthDays.indexOf(day);
 
+            // If the day is already selected, remove it from the selected days
             if (dayIndex !== -1) {
                 currentMonthDays.splice(dayIndex, 1);
                 checkEvents(null); // Show all events
             } else {
+                // If the day is not selected, add it to the selected days
                 currentMonthDays.push(day);
                 checkEvents(formattedDate); // Show events for the selected date
             }
 
+            // If there are no selected days for the current month, remove the month from the state
             if (currentMonthDays.length === 0) {
                 delete updatedSelectedDays[selectedMonthKey];
             } else {
+                // Otherwise, update the selected days for the current month
                 updatedSelectedDays[selectedMonthKey] = currentMonthDays;
             }
 
@@ -42,6 +56,7 @@ const Calendar = ({ checkEvents, resetDays }) => {
         });
     };
 
+    // handle next month button click
     const handleNextMonth = () => {
         setCurrentDate((prevDate) => {
             const nextMonth = new Date(
@@ -52,6 +67,7 @@ const Calendar = ({ checkEvents, resetDays }) => {
         });
     };
 
+    // handle previous month button click
     const handlePreviousMonth = () => {
         setCurrentDate((prevDate) => {
             const previousMonth = new Date(
@@ -62,11 +78,13 @@ const Calendar = ({ checkEvents, resetDays }) => {
         });
     };
 
+    // get the name of the month
     const getMonthName = (date) => {
         const options = { month: "long" };
         return date.toLocaleDateString("en-US", options);
     };
 
+    // render the calendar
     const renderCalendar = () => {
         const currentMonth = currentDate.getMonth();
         const currentYear = currentDate.getFullYear();
@@ -79,14 +97,14 @@ const Calendar = ({ checkEvents, resetDays }) => {
         ).getDate();
 
         const calendarDays = [];
-        const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        const weekdays = ["S", "M", "T", "W", "T", "F", "S"];
 
         // Render weekdays
         for (let i = 0; i < 7; i++) {
             calendarDays.push(
                 <div
                     key={`weekday-${i}`}
-                    className={`sm:text-[12px] xl:text-[17px]`}
+                    className={`sm:text-[12px] font-[500] w-[25px] md:ml-1 sm:ml-2 xl:text-[17px]`}
                 >
                     {weekdays[i]}
                 </div>
@@ -123,12 +141,15 @@ const Calendar = ({ checkEvents, resetDays }) => {
 
         return calendarDays;
     };
+
+    //update selected days when resetDays changes
     useEffect(() => {
         if (resetDays) {
             setSelectedDays(resetDays);
         }
     }, [resetDays]);
 
+    // Render the Calendar component
     return (
         <>
             <div className='flex flex-col items-center'>
