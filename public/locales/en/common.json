@@ -1,6 +1,73 @@
 {
-    "test": "Hello",
-    "player": "Player",
-    "about": "About",
-    "contact": "Contact"
+    "navbar": {
+        "home": "Home",
+        "events": "Events",
+        "about": "About",
+        "contact": "Contact"
+    },
+    "footer": {
+        "events": "Events",
+        "about": "About",
+        "howItWorks": "How it works"
+    },
+    "headerCard": {
+        "title": "Making a change, Together",
+        "description": "We believe that anyone has the power to make an impact: Through this platform we strive to create a place where people come together and work to change the world. This is PebbleWork.",
+        "button": "Get Started"
+    },
+    "main": {
+        "joinCommunityTitle": "Join the community!",
+        "joinCommunityDescription": "Create an account in a few seconds and join our team of motivated individuals. You can also connect through Gmail and X/Twitter.",
+        "joinCommunityButtonText": "Sign up",
+        "attendEventsTitle": "Attend events",
+        "attendEventsDescription": "Join forces, contribute, and collaborate with people as passionate and dedicated as you in making the right changes.",
+        "attendEventsButtonText": "View events",
+        "hostEventTitle": "Host your event!",
+        "hostEventDescription": "Having trouble finding a cause that truly resonates with you? Take the initiative by creating your own event.",
+        "hostEventButtonText": "Get started"
+    },
+    "heroCard": {
+        "title": "Become the change you wish to see in the world.",
+        "description": "Not only will you make a meaningful impact, you'll find a thriving, like-minded community that supports our mission to create a better world. Take the first step now.",
+        "getStarted": "Get started",
+        "whoWeAre": "Who are we"
+    },
+    "homeCards": {
+        "howItWorks": "How It Works",
+        "sustainableDevelopmentGoals": "Sustainable Development Goals",
+        "introductorySentence": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
+    },
+    "sign": {
+        "signin": "Sign in",
+        "signup": "Sign up"
+    },
+    "contactForm": {
+        "title": "Contact Us",
+        "firstNamePlaceholder": "First Name",
+        "lastNamePlaceholder": "Last Name",
+        "emailPlaceholder": "Email",
+        "phonePlaceholder": "Phone Number",
+        "messagePlaceholder": "What can we do for you?",
+        "submitButton": "Submit",
+        "subject": "New Form Submission",
+        "email": "Email",
+        "phone": "Phone Number",
+        "success": "Email sent successfully!",
+        "error": "Failed to send the Email"
+    },
+    "dropdown": {
+        "signOut": "Sign Out",
+        "signIn": "Sign In",
+        "profile": "Profile",
+        "hostEvent": "Host Event",
+        "myEvents": "My Events",
+        "accountSettings": "Account Settings"
+    },
+    "language": {
+        "language": "Language",
+        "english": "English",
+        "turkish": "Turkish",
+        "german": "German",
+        "chinese": "Chinese"
+    }
 }

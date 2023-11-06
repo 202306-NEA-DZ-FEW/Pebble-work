@@ -1,11 +1,14 @@
 import React from "react";
 import Link from "next/link";
+import { useTranslation } from "next-i18next";
 
 const Footer = () => {
+    const { t } = useTranslation();
+
     return (
         <footer
             data-testid='footer'
-            className=' md:flex md:items-center md:justify-center flex items-center justify-center bg-[#FDA855]'
+            className='md:flex md:items-center md:justify-center flex items-center justify-center bg-[#FDA855]'
             style={{
                 width: "100%",
                 height: "180px",
@@ -14,7 +17,7 @@ const Footer = () => {
         >
             <div className='md:flex md:flex-row md:justify-between flex flex-col items-center md:xl:gap-72 md:gap-20 md:items-center'>
                 <div>
-                    <Link href='/' className='flex items-center'>
+                    <Link href='/' passHref>
                         <img
                             src='/logo/Logo.png'
                             className='md:h-20 md:mr-3 h-10'
@@ -23,40 +26,19 @@ const Footer = () => {
                     </Link>
                 </div>
                 <div className='flex flex-col items-center md:flex md:flex-col md:items-center md:gap-5'>
-                    <ul
-                        style={{
-                            color: "black",
-                            fontSize: "20px",
-                            fontFamily: "Rubik",
-                            fontWeight: "700",
-                            lineHeight: "30px",
-                            letterSpacing: "0.10px",
-                            wordWrap: "break-word",
-                        }}
-                        className='flex gap-[30px] '
-                    >
+                    <ul className='flex gap-[30px]'>
                         <li>
-                            <Link href='/events'>Events</Link>
+                            <Link href='/events'>{t("footer.events")}</Link>
                         </li>
                         <li>
-                            <Link href='/about'>About</Link>
+                            <Link href='/about'>{t("footer.about")}</Link>
                         </li>
                         <li>
-                            <Link href='#'>How it works</Link>
+                            <Link href='#'>{t("footer.howItWorks")}</Link>
                         </li>
                     </ul>
                     <div>
-                        <p
-                            style={{
-                                color: "#878787",
-                                fontSize: "17px",
-                                fontFamily: "Rubik",
-                                fontWeight: "300",
-                                lineHeight: "30px",
-                                letterSpacing: "0.10px",
-                                wordWrap: "break-word",
-                            }}
-                        >
+                        <p className='text-[#878787] text-17px'>
                             © Pebble Work, 2023
                         </p>
                     </div>

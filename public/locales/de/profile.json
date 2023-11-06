@@ -1,0 +1,11 @@
+{
+    "yourProfile": "Ihr Profil",
+    "editProfile": "Profil bearbeiten",
+    "uploadNew": "Neu hochladen",
+    "chooseFromLibrary": "Aus der Bibliothek auswählen",
+    "nameRequired": "Name (Erforderlich)",
+    "surnameRequired": "Nachname (Erforderlich)",
+    "emailRequired": "E-Mail (Erforderlich)",
+    "locationRequired": "Standort (Erforderlich)",
+    "interests": "Interessen"
+}

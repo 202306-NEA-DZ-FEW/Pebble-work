@@ -1,0 +1,73 @@
+{
+    "navbar": {
+        "home": "首页",
+        "events": "活动",
+        "about": "关于",
+        "contact": "联系"
+    },
+    "footer": {
+        "events": "活动",
+        "about": "关于",
+        "howItWorks": "它是如何工作的 "
+    },
+    "headerCard": {
+        "title": "一起改变",
+        "description": "我们相信任何人都有能力产生影响：通过这个平台，我们努力创造一个人们可以聚集并共同努力改变世界的地方。这就是PebbleWork。",
+        "button": "开始"
+    },
+    "main": {
+        "joinCommunityTitle": "加入社区！",
+        "joinCommunityDescription": "在几秒钟内创建一个帐户，加入我们充满动力的团队。您还可以通过Gmail和X/Twitter建立联系。",
+        "joinCommunityButtonText": "注册",
+        "attendEventsTitle": "参加活动",
+        "attendEventsDescription": "与热情和专注于做出正确改变的人们合作，集思广益。",
+        "attendEventsButtonText": "查看活动",
+        "hostEventTitle": "主持您的活动！",
+        "hostEventDescription": "难以找到与您真正共鸣的事业吗？采取主动，创建自己的活动。",
+        "hostEventButtonText": "开始"
+    },
+    "heroCard": {
+        "title": "成为你希望在世界上看到的变化。",
+        "description": "你不仅将产生深远的影响，还将找到一个蓬勃发展的、志同道合的社群，支持我们创建一个更美好世界的使命。现在迈出第一步。",
+        "getStarted": "开始",
+        "whoWeAre": "我们是谁"
+    },
+    "homeCards": {
+        "howItWorks": "它是如何工作的",
+        "sustainableDevelopmentGoals": "可持续发展目标",
+        "introductorySentence": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
+    },
+    "sign": {
+        "signin": "登录",
+        "signup": "注册"
+    },
+    "contactForm": {
+        "title": "联系我们",
+        "firstNamePlaceholder": "名字",
+        "lastNamePlaceholder": "姓",
+        "emailPlaceholder": "电子邮件",
+        "phonePlaceholder": "电话号码",
+        "messagePlaceholder": "我们能为您做些什么？",
+        "submitButton": "提交",
+        "subject": "新表单提交",
+        "email": "电子邮件",
+        "phone": "电话号码",
+        "success": "电子邮件发送成功！",
+        "error": "电子邮件发送失败"
+    },
+    "dropdown": {
+        "signOut": "退出",
+        "signIn": "登录",
+        "profile": "个人资料",
+        "hostEvent": "主办活动",
+        "myEvents": "我的活动",
+        "accountSettings": "账户设置"
+    },
+    "language": {
+        "language": "语言",
+        "english": "英语",
+        "turkish": "土耳其语",
+        "german": "德语",
+        "chinese": "中文"
+    }
+}

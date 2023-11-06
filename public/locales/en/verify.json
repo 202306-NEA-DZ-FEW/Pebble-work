@@ -1,0 +1,11 @@
+{
+    "otpSent": "OTP sent successfully!",
+    "noCurrentUser": "No current user or missing email/name",
+    "phoneNumberLinked": "Phone number linked to current user",
+    "verifyPhoneNumber": "Verify your phone number before you can create an event",
+    "enterOTP": "Enter your OTP",
+    "verifyOTP": "Verify OTP",
+    "verifyPhoneNumberLabel": "Verify your phone number",
+    "sendCodeViaSMS": "Send code via SMS",
+    "loginSuccess": "👍 Login Success"
+}
