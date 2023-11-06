@@ -11,7 +11,7 @@ import PicturesLibrary from "./library";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const ProfilePage = () => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const router = useRouter();
     const [currentUser, setCurrentUser] = useState(null);

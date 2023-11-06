@@ -1,0 +1,11 @@
+{
+    "yourProfile": "Profiliniz",
+    "editProfile": "Profili Düzenle",
+    "uploadNew": "Yeni Yükle",
+    "chooseFromLibrary": "Kütüphaneden Seç",
+    "nameRequired": "Ad (Gerekli)",
+    "surnameRequired": "Soyad (Gerekli)",
+    "emailRequired": "E-posta (Gerekli)",
+    "locationRequired": "Konum (Gerekli)",
+    "interests": "İlgi Alanları"
+  }
