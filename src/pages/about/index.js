@@ -11,22 +11,20 @@ const AboutPage = () => {
     return (
         <>
             <div
-                className={`grid grid-rows-1 content-center place-items-center xl:pt-20  lg:pb-[250px] overflow-x-hidden`}
+                className={`grid grid-rows-1 content-center place-items-center overflow-x-hidden`}
             >
-                <div className='absolute xl:static top-0 pb-40'>
+                <div className=''>
                     <Image
-                        className={`${styles.topImage} xl:w-[1440px] object-cover xl:object-cover lg:object-cover md:object-cover xl:h-[780px] lg:w-[1233px] lg:h-[630px] md:h-[575px] h-[363px]`}
+                        className={`${styles.topImage} xl:w-[1440px] object-cover xl:h-[780px] lg:w-[1233px] lg:h-[630px] md:h-[575px] h-[363px]`}
                         src='/images/AboutPebble.png'
                         alt='Pebbles'
                         width={1440}
                         height={780}
                     />
                 </div>
-                <div
-                    className={`flex flex-col flex-wrap items-center pb-[200px] xl:pb-40 z-[1]`}
-                >
+                <div className={`flex flex-col flex-wrap items-center z-[1]`}>
                     <h1
-                        className={`${styles.text0} ${styles.slideInFromRight1} xl:mb-7`}
+                        className={`${styles.text0} ${styles.slideInFromRight1}`}
                     >
                         {t("about:about:title")}
                     </h1>
@@ -37,10 +35,10 @@ const AboutPage = () => {
                     </p>
                 </div>
                 <div
-                    className={`${styles.teamContainer} rounded-[20px] flex flex-col items-center bg-[#fbc495] bg-opacity-70 xl:mb-40`}
+                    className={`${styles.teamContainer} rounded-[20px] flex flex-col items-center bg-[#fbc495] bg-opacity-70 `}
                 >
                     <h2
-                        className={`${styles.teamText} text-[40px] text-[#1A1A1A] md:mt-10 pt-2 md:mb-10`}
+                        className={`${styles.teamText} text-[40px] text-[#1A1A1A]`}
                     >
                         {t("about:about:ourTeam")}
                     </h2>
@@ -63,7 +61,7 @@ const AboutPage = () => {
                             />
                         </div>
 
-                        <div className='flex flex-col xl:flex-row gap-7 xl:gap-20 justify-center mb-7 xl:mb-20'>
+                        <div className='flex flex-col xl:flex-row gap-7 xl:gap-20 justify-center'>
                             <MembersCard
                                 imageSrc='https://avatars.githubusercontent.com/u/95043080?v=4'
                                 name='Manel H.Haddoud'
@@ -81,7 +79,7 @@ const AboutPage = () => {
                             />
                         </div>
                     </div>
-                    <div className='xl:mb-10 md:mb-7 mb-4'>
+                    <div className=''>
                         <MembersCard
                             imageSrc='https://avatars.githubusercontent.com/u/138169337?v=4'
                             name='Louisa Hamrit'
@@ -93,14 +91,12 @@ const AboutPage = () => {
                 </div>
                 <div
                     id='tech-stack'
-                    className={`${styles.slideInFromRight1} flex flex-col items-center text-center xl:mb-40 md:pb-40 pb-[222px]`}
+                    className={`${styles.slideInFromRight1} flex flex-col items-center text-center`}
                 >
-                    <h6 className={`${styles.techText} text-[#1A1A1A] xl:mb-4`}>
+                    <h6 className={`${styles.techText} text-[#1A1A1A]`}>
                         {t("about:about:techStack")}
                     </h6>
-                    <h2
-                        className={`${styles.techText1} text-[#878787] xl:mb-4`}
-                    >
+                    <h2 className={`${styles.techText1} text-[#878787]`}>
                         {t("about:about:techStackDescription")}
                     </h2>
                 </div>
