@@ -48,6 +48,8 @@ jobs:
     test:
         name: 🃏 Test
         runs-on: ubuntu-latest
+        env:
+      NEXT_PUBLIC_APP_API_KEY: ${{ secrets.NEXT_PUBLIC_APP_API_KEY }}
         steps:
             - name: ⬇️ Checkout repo
               uses: actions/checkout@v2
