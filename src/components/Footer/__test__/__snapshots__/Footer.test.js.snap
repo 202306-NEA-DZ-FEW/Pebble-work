@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer renders correctly 1`] = `
+<DocumentFragment>
+  <footer
+    class="md:flex md:items-center md:justify-center flex items-center justify-center bg-[#FDA855]"
+    data-testid="footer"
+    style="width: 100%; height: 180px; z-index: 90;"
+  >
+    <div
+      class="md:flex md:flex-row md:justify-between flex flex-col items-center md:xl:gap-72 md:gap-20 md:items-center"
+    >
+      <div>
+        <a
+          href="/"
+        >
+          <img
+            alt="Logo"
+            class="md:h-20 md:mr-3 h-10"
+            src="/logo/Logo.png"
+          />
+        </a>
+      </div>
+      <div
+        class="flex flex-col items-center md:flex md:flex-col md:items-center md:gap-5"
+      >
+        <ul
+          class="flex gap-[30px]"
+        >
+          <li>
+            <a
+              href="/events"
+            >
+              footer.events
+            </a>
+          </li>
+          <li>
+            <a
+              href="/about"
+            >
+              footer.about
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+            >
+              footer.howItWorks
+            </a>
+          </li>
+        </ul>
+        <div>
+          <p
+            class="text-[#878787] text-17px"
+          >
+            © Pebble Work, 2023
+          </p>
+        </div>
+      </div>
+      <div
+        class="md:flex "
+      >
+        <ul
+          class="flex gap-20 md:gap-8"
+        >
+          <li>
+            <a
+              href="#"
+            >
+              <img
+                alt="Facebook"
+                src="/icons/Facebook.png"
+              />
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+            >
+              <img
+                alt="Gmail"
+                src="/icons/Google.png"
+              />
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+            >
+              <img
+                alt="Twitter"
+                src="/icons/Twitter.png"
+              />
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</DocumentFragment>
+`;
