@@ -14,15 +14,14 @@ jest.mock("next-i18next", () => ({
     }),
 }));
 
-i18n
-  .use(Backend)
-  .use(initReactI18next)
-  .init({
-    lng: "en",
-    fallbackLng: "en",
-    supportedLngs: ["en", "tr", "de", "zh"],
-    nonExplicitSupportedLngs: true,
-    backend: {
-      loadPath: "./public/locales/{{lng}}/{{ns}}.json",
-    },
-  });
+i18n.use(Backend)
+    .use(initReactI18next)
+    .init({
+        lng: "en",
+        fallbackLng: "en",
+        supportedLngs: ["en", "tr", "de", "zh"],
+        nonExplicitSupportedLngs: true,
+        backend: {
+            loadPath: "./public/locales/{{lng}}/{{ns}}.json",
+        },
+    });
