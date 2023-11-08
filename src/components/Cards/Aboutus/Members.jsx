@@ -35,7 +35,7 @@ const Members = ({ members }) => {
                     data-index={index}
                     ref={(el) => (memberRefs.current[index] = el)}
                     className={`${styles.member} ${
-                        index === current ? styles.active : ""
+                        index === current ? styles.clip : styles.active
                     }`}
                     style={{
                         backgroundImage: `url(${member.imageSrc})`,

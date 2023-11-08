@@ -82,7 +82,7 @@ const AboutPage = () => {
                     </div>
                 </div>
                 <div
-                    className={`${styles.teamContainer} w-[1200px] pt-8 min-h-[500px] md:min-h-[800px] xl:min-h-[1050px] rounded-[20px] flex flex-col items-center bg-[#fbc495] bg-opacity-70 `}
+                    className={`xl:w-[1200px] pt-8 min-h-[500px] md:min-h-[800px] xl:min-h-[1050px] rounded-[20px] flex flex-col items-center bg-[#fbc495] bg-opacity-70 `}
                 >
                     <h2
                         className={`${styles.teamText} text-[40px] text-[#1A1A1A]`}
