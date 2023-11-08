@@ -1,16 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import styles from "./Member.module.css";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import styles from "@/styles/Member.module.css";
 
-const Member = () => {
-    const members = [
-        { name: "Member 1", image: "/images/300x300px.jpg" },
-        { name: "Member 2", image: "/images/AboutPebble.png" },
-        { name: "Member 3", image: "/images/HelpThePoor.jpeg" },
-        { name: "Member 4", image: "/images/300x300px.jpg" },
-        { name: "Member 5", image: "/images/300x300px.jpg" },
-        // ...
-    ];
+import Link from "next/link";
+import Image from "next/image";
+
+const Members = ({ members }) => {
     const [current, setCurrent] = useState(0);
     const memberRefs = useRef([]);
 
@@ -44,25 +38,60 @@ const Member = () => {
                         index === current ? styles.active : ""
                     }`}
                     style={{
-                        backgroundImage: `url(${member.image})`,
+                        backgroundImage: `url(${member.imageSrc})`,
                         backgroundRepeat: "no-repeat",
                         backgroundPosition: "center",
                         backgroundSize: "cover",
                     }}
                 >
                     <h2>{member.name}</h2>
+                    <div className='social-media-icons mb-4 flex justify-center items-center gap-2 md:gap-10'>
+                        <p className='absolute top-0'>Information</p>
+
+                        <Link
+                            href={member.google}
+                            key='index'
+                            className='social-media-icon'
+                        >
+                            <Image
+                                className='xl:w-[35px] xl:h-[35px] md:w-[30px] md:h-[30px] w-[18px] h-[18px]'
+                                width={50}
+                                height={50}
+                                src='/icons/Google.png'
+                                alt='Gmail'
+                            />
+                        </Link>
+                        <Link
+                            href={member.linkedin}
+                            key='index'
+                            className='social-media-icon'
+                        >
+                            <Image
+                                className='xl:w-[35px] xl:h-[35px] md:w-[30px] md:h-[30px] w-[18px] h-[18px]'
+                                width={50}
+                                height={50}
+                                src='/icons/Linkedin.png'
+                                alt='Linkedin'
+                            />
+                        </Link>
+                        <Link
+                            href={member.github}
+                            key='index'
+                            className='social-media-icon'
+                        >
+                            <Image
+                                className='xl:w-[35px] xl:h-[35px] md:w-[30px] md:h-[30px] w-[18px] h-[18px]'
+                                width={50}
+                                height={50}
+                                src='/icons/Github.svg'
+                                alt='Github'
+                            />
+                        </Link>
+                    </div>
                 </div>
             ))}
         </div>
     );
 };
 
-export default Member;
-export async function getStaticProps({ locale }) {
-    return {
-        props: {
-            ...(await serverSideTranslations(locale, ["common", "about"])),
-            // Will be passed to the page component as props
-        },
-    };
-}
+export default Members;
