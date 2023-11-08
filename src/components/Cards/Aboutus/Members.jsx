@@ -29,9 +29,25 @@ const Members = ({ members, scrollContainerRef }) => {
             memberRefs.current.forEach((ref) => observer.unobserve(ref));
         };
     }, []);
+    useEffect(() => {
+        const handleScroll = (event) => {
+            if (event.deltaY < 0) {
+                event.preventDefault();
+            }
+        };
+
+        // Add event listener to the component's container
+        const container = document.getElementById("scroll-disable-container");
+        container.addEventListener("wheel", handleScroll, { passive: false });
+
+        // Clean up the event listener when the component is unmounted
+        return () => {
+            container.removeEventListener("wheel", handleScroll);
+        };
+    }, []);
 
     return (
-        <div className={styles.container}>
+        <div id='scroll-disable-container' className={styles.container}>
             {members.map((member, index) => (
                 <div
                     key={index}

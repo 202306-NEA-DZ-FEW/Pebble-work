@@ -1,5 +1,4 @@
-import Image from "next/image";
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { useTranslation } from "next-i18next";
 import styles from "@/styles/about.module.css";
 import Members from "@/components/Cards/Aboutus/Members";
@@ -45,7 +44,23 @@ const AboutPage = () => {
             github: "https://github.com/Polichinell",
         },
     ];
-    const scrollContainerRef = useRef(null);
+    const scrollContainerRef = useRef();
+    let lastScrollTop = 0;
+    useEffect(() => {
+        const onScroll = (e) => {
+            let st = e.target.scrollTop;
+            if (st < lastScrollTop) {
+                e.target.scrollTop = lastScrollTop;
+            } else {
+                lastScrollTop = st;
+            }
+        };
+        scrollContainerRef.current.addEventListener("scroll", onScroll);
+
+        return () => {
+            scrollContainerRef.current.removeEventListener("scroll", onScroll);
+        };
+    }, []);
 
     return (
         <>
@@ -61,14 +76,6 @@ const AboutPage = () => {
                     }}
                     className='2xl:max-w-[1440px] xl:h-[780px] lg:max-w-[1233px] lg:h-[630px] md:min-h-[575px] mb-10 pb-4 w-[100vw] min-h-[363px] flex flex-col items-center justify-center'
                 >
-                    {/* <Image
-                        className={`${styles.topImage} xl:w-[1440px] xl:h-[780px] lg:w-[1233px] lg:h-[630px] md:h-[575px] w-[100vw] h-[363px]`}
-                        src='/images/AboutPebble.png'
-                        alt='Pebbles'
-                        width={1440}
-                        height={780}
-                    /> */}
-
                     <div className={`flex flex-col flex-wrap items-center`}>
                         <h1
                             className={`${styles.text0} text-center ${styles.slideInFromRight1}`}
@@ -84,7 +91,7 @@ const AboutPage = () => {
                 </div>
                 <div
                     ref={scrollContainerRef}
-                    className={`xl:w-[1200px] scroll-container pt-8 min-h-[500px] md:min-h-[800px] xl:min-h-[1050px] rounded-[20px] flex flex-col items-center bg-[#fbc495] bg-opacity-70 `}
+                    className={`xl:w-[1200px] pt-8 min-h-[500px] md:min-h-[800px] xl:min-h-[1050px] rounded-[20px] flex flex-col items-center bg-opacity-70 `}
                     style={{ overflowY: "auto", height: "100vh" }}
                 >
                     <h2
