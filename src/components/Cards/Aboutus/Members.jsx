@@ -4,7 +4,7 @@ import styles from "@/styles/Member.module.css";
 import Link from "next/link";
 import Image from "next/image";
 
-const Members = ({ members }) => {
+const Members = ({ members, scrollContainerRef }) => {
     const [current, setCurrent] = useState(0);
     const memberRefs = useRef([]);
 
@@ -17,7 +17,10 @@ const Members = ({ members }) => {
                     }
                 });
             },
-            { threshold: 0.7 }
+            {
+                root: scrollContainerRef.current,
+                threshold: 0.87,
+            }
         );
 
         memberRefs.current.forEach((ref) => observer.observe(ref));

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useRef } from "react";
 import { useTranslation } from "next-i18next";
 import styles from "@/styles/about.module.css";
 import Members from "@/components/Cards/Aboutus/Members";
@@ -45,6 +45,7 @@ const AboutPage = () => {
             github: "https://github.com/Polichinell",
         },
     ];
+    const scrollContainerRef = useRef(null);
 
     return (
         <>
@@ -82,14 +83,19 @@ const AboutPage = () => {
                     </div>
                 </div>
                 <div
-                    className={`xl:w-[1200px] pt-8 min-h-[500px] md:min-h-[800px] xl:min-h-[1050px] rounded-[20px] flex flex-col items-center bg-[#fbc495] bg-opacity-70 `}
+                    ref={scrollContainerRef}
+                    className={`xl:w-[1200px] scroll-container pt-8 min-h-[500px] md:min-h-[800px] xl:min-h-[1050px] rounded-[20px] flex flex-col items-center bg-[#fbc495] bg-opacity-70 `}
+                    style={{ overflowY: "auto", height: "100vh" }}
                 >
                     <h2
                         className={`${styles.teamText} text-[40px] text-[#1A1A1A]`}
                     >
                         {t("about:about:ourTeam")}
                     </h2>
-                    <Members members={members} />
+                    <Members
+                        members={members}
+                        scrollContainerRef={scrollContainerRef}
+                    />
                 </div>
                 <div
                     id='tech-stack'
