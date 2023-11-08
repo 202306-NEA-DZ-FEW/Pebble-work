@@ -5,8 +5,8 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 const Member = () => {
     const members = [
         { name: "Member 1", image: "/images/300x300px.jpg" },
-        { name: "Member 2", image: "/images/300x300px.jpg" },
-        { name: "Member 3", image: "/images/300x300px.jpg" },
+        { name: "Member 2", image: "/images/AboutPebble.png" },
+        { name: "Member 3", image: "/images/HelpThePoor.jpeg" },
         { name: "Member 4", image: "/images/300x300px.jpg" },
         { name: "Member 5", image: "/images/300x300px.jpg" },
         // ...
@@ -43,8 +43,13 @@ const Member = () => {
                     className={`${styles.member} ${
                         index === current ? styles.active : ""
                     }`}
+                    style={{
+                        backgroundImage: `url(${member.image})`,
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "center",
+                        backgroundSize: "cover",
+                    }}
                 >
-                    <img src={member.image} alt={member.name} />
                     <h2>{member.name}</h2>
                 </div>
             ))}
