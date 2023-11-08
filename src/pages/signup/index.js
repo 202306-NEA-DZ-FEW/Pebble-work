@@ -249,7 +249,7 @@ const SignUpPage = () => {
     };
 
     return (
-        <div className='flex justify-center items-center h-screen '>
+        <div className='flex justify-center items-center min-h-screen '>
             <div className='flex flex-col items-center sm:flex-row sm:w-1/ h-fit'>
                 <div className='mr-10'>
                     <img
