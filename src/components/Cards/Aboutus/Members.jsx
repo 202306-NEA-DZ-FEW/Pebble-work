@@ -13,7 +13,14 @@ const Members = ({ members, scrollContainerRef }) => {
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        setCurrent(+entry.target.getAttribute("data-index"));
+                        const index = +entry.target.getAttribute("data-index");
+                        setCurrent(index);
+                        if (index === members.length - 1) {
+                            const scrollContainer = document.getElementById(
+                                "scroll-disable-container"
+                            );
+                            scrollContainer.scrollTop = 0;
+                        }
                     }
                 });
             },
@@ -29,6 +36,7 @@ const Members = ({ members, scrollContainerRef }) => {
             memberRefs.current.forEach((ref) => observer.unobserve(ref));
         };
     }, []);
+
     useEffect(() => {
         const handleScroll = (event) => {
             if (event.deltaY < 0) {

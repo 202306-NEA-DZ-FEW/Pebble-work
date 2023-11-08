@@ -43,6 +43,13 @@ const AboutPage = () => {
             linkedin: "https://www.linkedin.com/in/louisa-h-958733294/",
             github: "https://github.com/Polichinell",
         },
+        {
+            imageSrc: "test",
+            name: "testing",
+            google: "test",
+            linkedin: "test",
+            github: "test",
+        },
     ];
     const scrollContainerRef = useRef();
     let lastScrollTop = 0;
