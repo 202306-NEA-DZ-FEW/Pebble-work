@@ -1,0 +1,267 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navbar renders correctly 1`] = `
+<DocumentFragment>
+  <nav
+    class="sticky z-[9999] md:mb-10 mb-4 bg-gray-200 top-0 xl:flex xl:flex-col xl:items-center"
+  >
+    <div
+      class="flex flex-wrap items-center justify-between p-4 xl:gap-40"
+      style="width: 100%; height: 8%; z-index: 9999;"
+    >
+      <a
+        class="flex items-center"
+        href="./"
+      >
+        <img
+          alt="Pebble Logo"
+          class="h-8 mr-3"
+          src="/logo/Logo.png"
+        />
+        <div
+          class="wave flex flex-row gap-1 lg:text-[18px] sm:text-[16px] text-[14px]"
+        >
+          <span
+            class="letter"
+            style="--i: 1;"
+          >
+            P
+          </span>
+          <span
+            class="letter"
+            style="--i: 2;"
+          >
+            E
+          </span>
+          <span
+            class="letter"
+            style="--i: 3;"
+          >
+            B
+          </span>
+          <span
+            class="letter"
+            style="--i: 4;"
+          >
+            B
+          </span>
+          <span
+            class="letter"
+            style="--i: 5;"
+          >
+            L
+          </span>
+          <span
+            class="letter"
+            style="--i: 6;"
+          >
+            E
+          </span>
+        </div>
+      </a>
+      <div
+        class="flex items-center md:order-2"
+      >
+        <div
+          class="flex gap-4"
+        >
+          <div
+            class=""
+          >
+            <a
+              href="/signup"
+            >
+              <button
+                class="w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px]"
+              >
+                common:sign:signup
+              </button>
+            </a>
+          </div>
+          <div
+            class="relative "
+          >
+            <div
+              class="flex gap-1 items-center cursor-pointer justify-center"
+            >
+              <button
+                class="w-[52px] xl:mb-0 md:mb-2 md:mt-0 sm:mt-[2px] mt-[5px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px]"
+              >
+                common:dropdown:signIn
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="fixed bottom-0 right-20 sm:right-40"
+        >
+          <button
+            class="inline-flex items-center font-medium justify-center text-sm text-gray-900 rounded-lg cursor-pointer"
+            type="button"
+          >
+            <div
+              class="flex items-center z-[444]"
+            >
+              <img
+                alt="Pebble Logo"
+                src="/icons/Web.png"
+              />
+              <p
+                class="text-black"
+              >
+                common:language:language
+              </p>
+            </div>
+          </button>
+          <div
+            class="z-50 hidden text-base list-none divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700"
+            id="language-dropdown-menu"
+          >
+            <ul
+              class="font-medium overflow-hidden flex flex-col gap-2 fixed bottom-10 right-20 sm:right-40"
+            >
+              <li>
+                <button
+                  class="block text-sm text-gray-700 hover:border hover:rounded-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                >
+                  <div
+                    class="inline-flex items-center"
+                  >
+                    <img
+                      class="mr-1"
+                      height="20px"
+                      src="/United-Kingdom.png"
+                      width="20px"
+                    />
+                    common:language:english
+                  </div>
+                </button>
+              </li>
+              <li>
+                <button
+                  class="block text-sm text-gray-700 hover:border hover:rounded-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                >
+                  <div
+                    class="inline-flex items-center"
+                  >
+                    <img
+                      class="mr-1"
+                      height="20px"
+                      src="/Turkey.png"
+                      width="20px"
+                    />
+                    common:language:turkish
+                  </div>
+                </button>
+              </li>
+              <li>
+                <button
+                  class="block text-sm text-gray-700 hover:border hover:rounded-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                >
+                  <div
+                    class="inline-flex items-center"
+                  >
+                    <img
+                      class="mr-1"
+                      height="20px"
+                      src="/Germany.png"
+                      width="20px"
+                    />
+                    common:language:german
+                  </div>
+                </button>
+              </li>
+              <li>
+                <button
+                  class="block text-sm text-gray-700 hover:border hover:rounded-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                >
+                  <div
+                    class="inline-flex items-center"
+                  >
+                    <img
+                      class="mr-1"
+                      height="20px"
+                      src="/China.png"
+                      width="20px"
+                    />
+                    common:language:chinese
+                  </div>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <button
+          aria-controls="navbar-language"
+          aria-expanded="false"
+          class="inline-flex z-50 items-center p-2 ml-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+          data-collapse-toggle="navbar-language"
+          type="button"
+        >
+          <svg
+            height="20"
+            viewBox="0 0 100 80"
+            width="20"
+          >
+            <rect
+              fill="grey"
+              height="15"
+              rx="10"
+              width="100"
+            />
+            <rect
+              fill="grey"
+              height="15"
+              rx="10"
+              width="100"
+              y="25"
+            />
+            <rect
+              fill="grey"
+              height="15"
+              rx="10"
+              width="100"
+              y="50"
+            />
+          </svg>
+        </button>
+      </div>
+      <div
+        class="hidden md:block md:flex md:items-center w-full md:w-auto"
+        id="navbar-language"
+      >
+        <ul
+          class="' md:static text-center md:bg-transparent bg-white gap-3 fixed sm:w-full w-60 md:min-h-0 min-h-screen flex flex-col font-medium  md:p-0 border border-gray-300  md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 dark:border-gray-700 left-[0px] top-0 z-10 tiltIn"
+          role="menu"
+          style="font-family: Rubik;"
+        >
+          <li>
+            <a
+              class="block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700"
+              href="/"
+            >
+              common:navbar:home
+            </a>
+          </li>
+          <li>
+            <a
+              class="block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700"
+              href="/events"
+            >
+              common:navbar:events
+            </a>
+          </li>
+          <li>
+            <a
+              class="block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark.border-gray-700"
+              href="/about"
+            >
+              common:navbar:about
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</DocumentFragment>
+`;
