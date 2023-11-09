@@ -82,7 +82,7 @@ const Members = ({ members, scrollContainerRef }) => {
                     <h2 className='text-black flex items-end mt-10'>
                         {member.name}
                     </h2>
-                    <div className='flex sm:w-[70vw] justify-around gap-10 px-20 pb-20 h-[70vh] w-[95vw] items-end '>
+                    <div className='flex sm:w-[70vw] w-[100vw] justify-center lg:gap-40 sm:gap-20 gap-8 pb-20 h-[70vh] items-end '>
                         <Link
                             href={member.google}
                             key='index'
