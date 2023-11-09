@@ -100,7 +100,11 @@ const AboutPage = () => {
                 <div
                     ref={scrollContainerRef}
                     className={`${styles.information} pt-8 rounded-[20px] flex flex-col items-center`}
-                    style={{ overflowY: "hidden", height: "100vh" }}
+                    style={{
+                        overflowY: "hidden",
+                        height: "50vh",
+                        width: "50vw",
+                    }}
                 >
                     <h2
                         className={`${styles.teamText} text-[40px] text-[#1A1A1A]`}

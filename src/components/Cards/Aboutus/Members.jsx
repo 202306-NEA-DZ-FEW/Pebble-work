@@ -27,7 +27,7 @@ const Members = ({ members, scrollContainerRef }) => {
             },
             {
                 root: scrollContainerRef.current,
-                threshold: 0.87,
+                threshold: 0.78,
             }
         );
 
@@ -58,19 +58,21 @@ const Members = ({ members, scrollContainerRef }) => {
     return (
         <div
             id='scroll-disable-container'
-            className={`${styles.container} ${styles.information} h-full w-full`}
+            className={`${styles.container} w-[100%] h-[100%] ${styles.information} `}
         >
             {members.map((member, index) => (
                 <div
                     key={index}
                     data-index={index}
                     ref={(el) => (memberRefs.current[index] = el)}
-                    className={`${
-                        styles.member
-                    } h-[70vh] w-[70vw] flex flex-col ${
+                    className={`${styles.member}  flex flex-col absolute ${
                         index === current ? styles.clip : styles.active
                     }`}
                     style={{
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
                         backgroundImage: `url(${member.imageSrc})`,
                         backgroundRepeat: "no-repeat",
                         backgroundPosition: "center",
@@ -80,7 +82,7 @@ const Members = ({ members, scrollContainerRef }) => {
                     <h2 className='text-black flex items-end mt-10'>
                         {member.name}
                     </h2>
-                    <div className='flex sm:w-[70vw] justify-between px-20 pb-20 h-[70vh] w-[95vw] items-end '>
+                    <div className='flex sm:w-[70vw] justify-around gap-10 px-20 pb-20 h-[70vh] w-[95vw] items-end '>
                         <Link
                             href={member.google}
                             key='index'
