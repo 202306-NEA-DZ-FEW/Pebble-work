@@ -9,6 +9,7 @@ const AboutPage = () => {
     const members = [
         {
             imageSrc: "https://avatars.githubusercontent.com/u/137820288?v=4",
+
             name: "Halla Hamidi",
             google: "https://mail.google.com/mail/u/0/?fs=1&to=aniabisso.16@gmail.com&tf=cm",
             linkedin: "https://www.linkedin.com/in/halla-hamidi-989197229/",
@@ -22,19 +23,19 @@ const AboutPage = () => {
             github: "https://github.com/takidilmi",
         },
         {
+            imageSrc: "https://avatars.githubusercontent.com/u/64746106?v=4",
+            name: "Youssouf Sergma",
+            google: "https://mail.google.com/mail/u/0/?fs=1&to=sergmayoussouf@gmail.com&tf=cm",
+            linkedin: "https://www.linkedin.com/in/sergma/",
+            github: "https://github.com/ysergma",
+        },
+        {
             imageSrc: "https://avatars.githubusercontent.com/u/95043080?v=4",
             name: "Manel H.Haddoud",
             google: "https://mail.google.com/mail/u/0/?fs=1&to=manelhasnahaddoud@gmail.com&tf=cm",
             linkedin:
                 "https://www.linkedin.com/in/manel-hasna-haddoud-aa5095278/",
             github: "https://github.com/hasnahadd",
-        },
-        {
-            imageSrc: "https://avatars.githubusercontent.com/u/64746106?v=4",
-            name: "Youssouf Sergma",
-            google: "https://mail.google.com/mail/u/0/?fs=1&to=sergmayoussouf@gmail.com&tf=cm",
-            linkedin: "https://www.linkedin.com/in/sergma/",
-            github: "https://github.com/ysergma",
         },
         {
             imageSrc: "https://avatars.githubusercontent.com/u/138169337?v=4",
@@ -44,11 +45,11 @@ const AboutPage = () => {
             github: "https://github.com/Polichinell",
         },
         {
-            imageSrc: "test",
-            name: "testing",
-            google: "test",
-            linkedin: "test",
-            github: "test",
+            imageSrc: "https://avatars.githubusercontent.com/u/137820288?v=4",
+            name: "Halla Hamidi",
+            google: "https://mail.google.com/mail/u/0/?fs=1&to=aniabisso.16@gmail.com&tf=cm",
+            linkedin: "https://www.linkedin.com/in/halla-hamidi-989197229/",
+            github: "https://github.com/Halla24",
         },
     ];
     const scrollContainerRef = useRef();
@@ -98,8 +99,8 @@ const AboutPage = () => {
                 </div>
                 <div
                     ref={scrollContainerRef}
-                    className={`xl:w-[1200px] pt-8 min-h-[500px] md:min-h-[800px] xl:min-h-[1050px] rounded-[20px] flex flex-col items-center bg-opacity-70 `}
-                    style={{ overflowY: "auto", height: "100vh" }}
+                    className={`${styles.information} pt-8 rounded-[20px] flex flex-col items-center`}
+                    style={{ overflowY: "hidden", height: "100vh" }}
                 >
                     <h2
                         className={`${styles.teamText} text-[40px] text-[#1A1A1A]`}

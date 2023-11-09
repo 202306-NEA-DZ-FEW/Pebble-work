@@ -20,6 +20,7 @@ const Members = ({ members, scrollContainerRef }) => {
                                 "scroll-disable-container"
                             );
                             scrollContainer.scrollTop = 0;
+                            setCurrent(0); // Reset the current state to 0
                         }
                     }
                 });
@@ -55,13 +56,18 @@ const Members = ({ members, scrollContainerRef }) => {
     }, []);
 
     return (
-        <div id='scroll-disable-container' className={styles.container}>
+        <div
+            id='scroll-disable-container'
+            className={`${styles.container} ${styles.information} h-full w-full`}
+        >
             {members.map((member, index) => (
                 <div
                     key={index}
                     data-index={index}
                     ref={(el) => (memberRefs.current[index] = el)}
-                    className={`${styles.member} ${
+                    className={`${
+                        styles.member
+                    } h-[70vh] w-[70vw] flex flex-col ${
                         index === current ? styles.clip : styles.active
                     }`}
                     style={{
@@ -71,17 +77,17 @@ const Members = ({ members, scrollContainerRef }) => {
                         backgroundSize: "cover",
                     }}
                 >
-                    <h2>{member.name}</h2>
-                    <div className='social-media-icons mb-4 flex justify-center items-center gap-2 md:gap-10'>
-                        <p className='absolute top-0'>Information</p>
-
+                    <h2 className='text-black flex items-end mt-10'>
+                        {member.name}
+                    </h2>
+                    <div className='flex sm:w-[70vw] justify-between px-20 pb-20 h-[70vh] w-[95vw] items-end '>
                         <Link
                             href={member.google}
                             key='index'
                             className='social-media-icon'
                         >
                             <Image
-                                className='xl:w-[35px] xl:h-[35px] md:w-[30px] md:h-[30px] w-[18px] h-[18px]'
+                                className='xl:w-[50px] xl:h-[50px] md:w-[40px] md:h-[40px] sm:w-[30px] sm:h-[30px] w-[22px] h-[22px]'
                                 width={50}
                                 height={50}
                                 src='/icons/Google.png'
@@ -94,7 +100,7 @@ const Members = ({ members, scrollContainerRef }) => {
                             className='social-media-icon'
                         >
                             <Image
-                                className='xl:w-[35px] xl:h-[35px] md:w-[30px] md:h-[30px] w-[18px] h-[18px]'
+                                className='xl:w-[50px] xl:h-[50px] md:w-[40px] md:h-[40px] sm:w-[30px] sm:h-[30px] w-[22px] h-[22px]'
                                 width={50}
                                 height={50}
                                 src='/icons/Linkedin.png'
@@ -107,7 +113,7 @@ const Members = ({ members, scrollContainerRef }) => {
                             className='social-media-icon'
                         >
                             <Image
-                                className='xl:w-[35px] xl:h-[35px] md:w-[30px] md:h-[30px] w-[18px] h-[18px]'
+                                className='xl:w-[50px] xl:h-[50px] md:w-[40px] md:h-[40px] sm:w-[30px] sm:h-[30px] w-[22px] h-[22px]'
                                 width={50}
                                 height={50}
                                 src='/icons/Github.svg'
@@ -115,6 +121,7 @@ const Members = ({ members, scrollContainerRef }) => {
                             />
                         </Link>
                     </div>
+                    {/* <p className='absolute text-red-600 top-0'>Information</p> */}
                 </div>
             ))}
         </div>

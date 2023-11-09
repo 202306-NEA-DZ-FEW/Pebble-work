@@ -223,3 +223,21 @@
         transform-origin: top;
     }
 }
+.information {
+    overflow-y: scroll;
+    scrollbar-color: rgba(0, 0, 0, 0);
+}
+
+/* Scrollbar color */
+.information::-webkit-scrollbar {
+    width: 8px;
+}
+
+.information::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 4px;
+}
+
+.information::-webkit-scrollbar-track {
+    background-color: transparent;
+}
