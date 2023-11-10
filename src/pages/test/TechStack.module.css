@@ -84,7 +84,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+
     width: 100px;
     height: 100px;
     animation: spin 10s linear infinite reverse;
@@ -129,14 +129,14 @@
 .svg:nth-child(1) {
     top: 50%;
     left: 0;
-    transform: translate(-50%, -50%);
+
     animation: spin 10s linear infinite reverse;
 }
 
 .svg:nth-child(2) {
     top: 0;
     left: 50%;
-    transform: translate(-50%, -50%);
+
     animation: spin 10s linear infinite reverse;
 }
 .textContent {
@@ -161,14 +161,14 @@
 .svg:nth-child(4) {
     top: 50%;
     left: 100%;
-    transform: translate(-50%, -50%);
+
     animation: spin 10s linear infinite reverse;
 }
 
 .svg:nth-child(5) {
     top: 100%;
     left: 50%;
-    transform: translate(-50%, -50%);
+
     animation: spin 10s linear infinite reverse;
 }
 .svg:nth-child(6) {
@@ -176,34 +176,34 @@
     height: 40px;
     top: 72%;
     right: 10%;
-    transform: translate(-50%, -50%);
+
     animation: spin 10s linear infinite reverse;
-    transition: width 1s ease, height 1s ease;
+    transition: width 0.6s linear, height 0.6s linear;
 }
 .svg:nth-child(7) {
     width: 40px;
     height: 40px;
     bottom: 12%;
     right: 42%;
-    transform: translate(-50%, -50%);
+
     animation: spin 10s linear infinite reverse;
-    transition: width 1s ease, height 1s ease;
+    transition: width 0.6s linear, height 0.6s linear;
 }
 .svg:nth-child(8) {
     width: 40px;
     height: 40px;
     top: 42%;
     left: 50%;
-    transform: translate(-50%, -50%);
+
     animation: spin 10s linear infinite reverse;
-    transition: width 1s ease, height 1s ease;
+    transition: width 0.6s linear, height 0.6s linear;
 }
 .svg:nth-child(9) {
     width: 40px;
     height: 40px;
     bottom: 42%;
     right: 10%;
-    transform: translate(-50%, -50%);
+
     animation: spin 10s linear infinite reverse;
-    transition: width 1s ease, height 1s ease;
+    transition: width 0.6s linear, height 0.6s linear;
 }

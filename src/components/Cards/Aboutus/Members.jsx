@@ -116,9 +116,15 @@ const Members = ({ members, scrollContainerRef }) => {
                         backgroundSize: "cover",
                     }}
                 >
-                    <h2 className='text-black flex items-end mt-10'>
+                    <h2 className='text-black flex sm:static absolute top-[-40px] font-[500] items-end mt-10'>
                         {member.name}
                     </h2>
+                    <p
+                        style={{ fontSize: "clamp(8px, 2vw, 18px)" }}
+                        className='xl:w-[30vw] w-[38vw] sm:w-[45vw] max-h-[10vh] sm:static absolute text-center text-black'
+                    >
+                        {member.description}
+                    </p>
                     <div className='flex sm:w-[70vw] w-[100vw] justify-center lg:gap-40 sm:gap-20 gap-10 sm:pb-20 sm:h-[70vh] items-end '>
                         <Link
                             href={member.google}
@@ -129,7 +135,7 @@ const Members = ({ members, scrollContainerRef }) => {
                                 className='xl:w-[50px] xl:h-[50px] md:w-[40px] md:h-[40px] sm:w-[30px] sm:h-[30px] w-[22px] h-[22px]'
                                 width={50}
                                 height={50}
-                                src='/icons/Google.png'
+                                src='/icons/Google.svg'
                                 alt='Gmail'
                             />
                         </Link>

@@ -185,13 +185,15 @@ const TechStack = () => {
             >
                 <img src='/Tech/material-ui.svg' />
                 <span className={styles.right}>
-                    <h3>Material UI</h3>
-                    <ul>
-                        <li>React components based on Material Design</li>
-                        <li>Beautiful, responsive, customizable</li>
-                        <li>Comprehensive and production-ready library</li>
-                    </ul>
-                    <i></i>
+                    <div className={styles.textContent}>
+                        <h3>Material UI</h3>
+                        <ul>
+                            <li>React components based on Material Design</li>
+                            <li>Beautiful, responsive, customizable</li>
+                            <li>Comprehensive and production-ready library</li>
+                        </ul>
+                        <i></i>
+                    </div>
                 </span>
             </div>
             <div
@@ -202,13 +204,15 @@ const TechStack = () => {
             >
                 <img src='/Tech/DaisyUi.webp' />
                 <span className={styles.right}>
-                    <h3>daisyUI</h3>
-                    <ul>
-                        <li>Tailwind CSS component library</li>
-                        <li>No JavaScript, pure CSS</li>
-                        <li>Cute and functional design</li>
-                    </ul>
-                    <i></i>
+                    <div className={styles.textContent}>
+                        <h3>daisyUI</h3>
+                        <ul>
+                            <li>Tailwind CSS component library</li>
+                            <li>No JavaScript, pure CSS</li>
+                            <li>Cute and functional design</li>
+                        </ul>
+                        <i></i>
+                    </div>
                 </span>
             </div>
         </div>

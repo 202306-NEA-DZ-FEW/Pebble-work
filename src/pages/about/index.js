@@ -10,7 +10,8 @@ const AboutPage = () => {
     const members = [
         {
             imageSrc: "https://avatars.githubusercontent.com/u/137820288?v=4",
-
+            description:
+                "I solve problems with love and care I learn eagerly and always dare I observe keenly and find the flaws I am a person with a noble cause.",
             name: "Halla Hamidi",
             google: "https://mail.google.com/mail/u/0/?fs=1&to=aniabisso.16@gmail.com&tf=cm",
             linkedin: "https://www.linkedin.com/in/halla-hamidi-989197229/",
@@ -19,6 +20,8 @@ const AboutPage = () => {
         {
             imageSrc: "https://avatars.githubusercontent.com/u/137835769?v=4",
             name: "Takieddine Dilmi",
+            description:
+                "I solve problems with love and care I learn eagerly and always dare I observe keenly and find the flaws I am a person with a noble cause.",
             google: "https://mail.google.com/mail/u/0/?fs=1&to=angeldilmi@gmail.com&tf=cm",
             linkedin: "https://www.linkedin.com/in/takidilmi/",
             github: "https://github.com/takidilmi",
@@ -26,6 +29,8 @@ const AboutPage = () => {
         {
             imageSrc: "https://avatars.githubusercontent.com/u/64746106?v=4",
             name: "Youssouf Sergma",
+            description:
+                "I solve problems with love and care I learn eagerly and always dare I observe keenly and find the flaws I am a person with a noble cause.",
             google: "https://mail.google.com/mail/u/0/?fs=1&to=sergmayoussouf@gmail.com&tf=cm",
             linkedin: "https://www.linkedin.com/in/sergma/",
             github: "https://github.com/ysergma",
@@ -33,6 +38,8 @@ const AboutPage = () => {
         {
             imageSrc: "https://avatars.githubusercontent.com/u/95043080?v=4",
             name: "Manel H.Haddoud",
+            description:
+                "I solve problems with love and care I learn eagerly and always dare I observe keenly and find the flaws I am a person with a noble cause.",
             google: "https://mail.google.com/mail/u/0/?fs=1&to=manelhasnahaddoud@gmail.com&tf=cm",
             linkedin:
                 "https://www.linkedin.com/in/manel-hasna-haddoud-aa5095278/",
@@ -41,6 +48,8 @@ const AboutPage = () => {
         {
             imageSrc: "https://avatars.githubusercontent.com/u/138169337?v=4",
             name: "Louisa Hamrit",
+            description:
+                "I solve problems with love and care I learn eagerly and always dare I observe keenly and find the flaws I am a person with a noble cause.",
             google: "https://mail.google.com/mail/u/0/?fs=1&to=l19.45.127.0@gmail.com&tf=cm",
             linkedin: "https://www.linkedin.com/in/louisa-h-958733294/",
             github: "https://github.com/Polichinell",
@@ -48,6 +57,8 @@ const AboutPage = () => {
         {
             imageSrc: "https://avatars.githubusercontent.com/u/137820288?v=4",
             name: "Halla Hamidi",
+            description:
+                "I solve problems with love and care I learn eagerly and always dare I observe keenly and find the flaws I am a person with a noble cause.",
             google: "https://mail.google.com/mail/u/0/?fs=1&to=aniabisso.16@gmail.com&tf=cm",
             linkedin: "https://www.linkedin.com/in/halla-hamidi-989197229/",
             github: "https://github.com/Halla24",
@@ -80,7 +91,7 @@ const AboutPage = () => {
     return (
         <>
             <div
-                className={`flex flex-col items-center justify-center overflow-hidden`}
+                className={`flex flex-col text-justify items-center justify-center overflow-hidden`}
             >
                 <div
                     style={{
@@ -93,12 +104,12 @@ const AboutPage = () => {
                 >
                     <div className={`flex flex-col flex-wrap items-center`}>
                         <h1
-                            className={`${styles.text0} text-center ${styles.slideInFromRight1}`}
+                            className={`${styles.text0} ${styles.slideInFromRight1}`}
                         >
                             {t("about:about:title")}
                         </h1>
                         <p
-                            className={`${styles.text1} ${styles.slideInFromRight1} flex text-center text-[#878787] px-4`}
+                            className={`${styles.text1} ${styles.slideInFromRight1} flex text-[#878787] px-4`}
                         >
                             {t("about:about.description")}
                         </p>
@@ -106,7 +117,7 @@ const AboutPage = () => {
                 </div>
                 <div
                     ref={scrollContainerRef}
-                    className={`${styles.information} xl:h-[750px] xl:w-[750px] md:h-[600px] md:w-[600px] h-[250px] w-[250px] sm:h-[400px] sm:w-[400px] pt-8 rounded-[20px] flex flex-col items-center`}
+                    className={`${styles.information} xl:h-[750px] xl:w-[750px] md:h-[600px] md:w-[600px] h-[250px] w-[250px] sm:h-[400px] sm:w-[400px] pt-8 rounded-[8px] flex flex-col items-center`}
                     style={{
                         overflowY: "hidden",
                     }}
@@ -116,6 +127,10 @@ const AboutPage = () => {
                     >
                         {t("about:about:ourTeam")}
                     </h2>
+                    <p className='text-center'>
+                        A team that is meant to make a difference, We thrive on
+                        working together to turn ideas into reality
+                    </p>
                     <Members
                         members={members}
                         scrollContainerRef={scrollContainerRef}
@@ -123,7 +138,7 @@ const AboutPage = () => {
                 </div>
                 <div
                     id='tech-stack'
-                    className={`${styles.slideInFromRight1} relative mb-10 mt-10 w-96 flex flex-col items-center text-center`}
+                    className={`${styles.slideInFromRight1} text-center relative mb-10 mt-10 w-96 flex flex-col items-center`}
                 >
                     <TechStack />
                     <div style={{ position: "absolute" }}>

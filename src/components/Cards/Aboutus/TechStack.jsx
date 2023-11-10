@@ -6,7 +6,7 @@ const TechStack = () => {
     const containerRef = useRef(null);
     const pngRef = useRef(null);
     const svgRefs = useRef([]);
-    svgRefs.current = new Array(4)
+    svgRefs.current = new Array(8)
         .fill()
         .map((_, i) => svgRefs.current[i] || React.createRef());
 
@@ -131,6 +131,87 @@ const TechStack = () => {
                         </ul>
                     </div>
                     <i></i>
+                </span>
+            </div>
+            <div
+                ref={svgRefs.current[4]}
+                onMouseOver={handleMouseOver}
+                onMouseOut={handleMouseOut}
+                className={`${styles.tooltip} ${styles.svg}`}
+            >
+                <img src='/Tech/jest-svgrepo.svg' />
+                <span className={styles.right}>
+                    <div className={styles.textContent}>
+                        <h3>Jest</h3>
+                        <ul>
+                            <li>JavaScript testing framework</li>
+                            <li>Simple, fast, powerful</li>
+                            <li>Confident code quality assurance</li>
+                        </ul>
+                    </div>
+                    <i></i>
+                </span>
+            </div>
+            <div
+                ref={svgRefs.current[5]}
+                onMouseOver={handleMouseOver}
+                onMouseOut={handleMouseOut}
+                className={`${styles.tooltip} ${styles.svg}`}
+            >
+                <img src='/Tech/i18next.svg' />
+                <span className={styles.right}>
+                    <div className={styles.textContent}>
+                        <h3>I18next</h3>
+                        <ul>
+                            <li>
+                                Internationalization framework for JavaScript
+                            </li>
+                            <li>Learn once, translate everywhere</li>
+                            <li>
+                                Complete translation solution for web, mobile
+                                and desktop
+                            </li>
+                        </ul>
+                    </div>
+                    <i></i>
+                </span>
+            </div>
+            <div
+                ref={svgRefs.current[6]}
+                onMouseOver={handleMouseOver}
+                onMouseOut={handleMouseOut}
+                className={`${styles.tooltip} ${styles.svg}`}
+            >
+                <img src='/Tech/material-ui.svg' />
+                <span className={styles.right}>
+                    <div className={styles.textContent}>
+                        <h3>Material UI</h3>
+                        <ul>
+                            <li>React components based on Material Design</li>
+                            <li>Beautiful, responsive, customizable</li>
+                            <li>Comprehensive and production-ready library</li>
+                        </ul>
+                        <i></i>
+                    </div>
+                </span>
+            </div>
+            <div
+                ref={svgRefs.current[7]}
+                onMouseOver={handleMouseOver}
+                onMouseOut={handleMouseOut}
+                className={`${styles.tooltip} ${styles.svg}`}
+            >
+                <img src='/Tech/DaisyUi.webp' />
+                <span className={styles.right}>
+                    <div className={styles.textContent}>
+                        <h3>daisyUI</h3>
+                        <ul>
+                            <li>Tailwind CSS component library</li>
+                            <li>No JavaScript, pure CSS</li>
+                            <li>Cute and functional design</li>
+                        </ul>
+                        <i></i>
+                    </div>
                 </span>
             </div>
         </div>
