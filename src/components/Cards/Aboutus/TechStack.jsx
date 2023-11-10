@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useCallback } from "react";
 
 import styles from "@/styles/TechStack.module.css";
 
@@ -10,21 +10,27 @@ const TechStack = () => {
         .fill()
         .map((_, i) => svgRefs.current[i] || React.createRef());
 
-    const handleMouseOver = () => {
-        if (containerRef.current) {
-            containerRef.current.style.animationPlayState = "paused";
-        }
-        if (pngRef.current) {
-            pngRef.current.style.animationPlayState = "paused";
-        }
-        svgRefs.current.forEach((ref) => {
-            if (ref.current) {
-                ref.current.style.animationPlayState = "paused";
-            }
-        });
-    };
+    const timer = useRef(); // Move timer inside the component
 
-    const handleMouseOut = () => {
+    // Wrap the handlers with useCallback to avoid creating new functions on each render
+    const handleMouseOver = useCallback(() => {
+        timer.current = setTimeout(() => {
+            if (containerRef.current) {
+                containerRef.current.style.animationPlayState = "paused";
+            }
+            if (pngRef.current) {
+                pngRef.current.style.animationPlayState = "paused";
+            }
+            svgRefs.current.forEach((ref) => {
+                if (ref.current) {
+                    ref.current.style.animationPlayState = "paused";
+                }
+            });
+        }, 400);
+    }, []);
+
+    const handleMouseOut = useCallback(() => {
+        clearTimeout(timer.current);
         if (containerRef.current) {
             containerRef.current.style.animationPlayState = "running";
         }
@@ -36,7 +42,14 @@ const TechStack = () => {
                 ref.current.style.animationPlayState = "running";
             }
         });
-    };
+    }, []);
+
+    // Clear the timer when the component unmounts
+    useEffect(() => {
+        return () => {
+            clearTimeout(timer.current);
+        };
+    }, []);
     return (
         <div className={`z-10 ${styles.container}`} ref={containerRef}>
             <div

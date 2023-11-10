@@ -1,7 +1,5 @@
 .container {
     position: relative;
-
-    overflow-y: scroll;
 }
 
 .member {
@@ -33,7 +31,7 @@
 }
 
 .member.active {
-    opacity: 0.1;
+    opacity: 0;
     clip-path: polygon(
         50% 0%,
         61% 35%,
@@ -48,17 +46,16 @@
     );
 }
 .information {
-    overflow-y: scroll;
-    scrollbar-color: rgba(0, 0, 0, 0);
+    scrollbar-color: rgba(0, 0, 0, 0.3);
 }
 
 /* Scrollbar color */
 .information::-webkit-scrollbar {
-    width: 8px;
+    width: 5px;
 }
 
 .information::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.3);
     border-radius: 4px;
 }
 

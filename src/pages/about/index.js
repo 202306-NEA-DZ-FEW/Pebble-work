@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useCallback } from "react";
 import { useTranslation } from "next-i18next";
 import styles from "@/styles/about.module.css";
 import Members from "@/components/Cards/Aboutus/Members";
@@ -55,15 +55,16 @@ const AboutPage = () => {
     ];
     const scrollContainerRef = useRef();
     let lastScrollTop = 0;
+    const onScroll = useCallback((e) => {
+        let st = e.target.scrollTop;
+        if (st < lastScrollTop) {
+            e.target.scrollTop = lastScrollTop;
+        } else {
+            lastScrollTop = st;
+        }
+    }, []);
+
     useEffect(() => {
-        const onScroll = (e) => {
-            let st = e.target.scrollTop;
-            if (st < lastScrollTop) {
-                e.target.scrollTop = lastScrollTop;
-            } else {
-                lastScrollTop = st;
-            }
-        };
         scrollContainerRef.current.addEventListener("scroll", onScroll);
 
         return () => {
@@ -74,7 +75,7 @@ const AboutPage = () => {
                 );
             }
         };
-    }, []);
+    }, [onScroll]);
 
     return (
         <>
@@ -105,11 +106,9 @@ const AboutPage = () => {
                 </div>
                 <div
                     ref={scrollContainerRef}
-                    className={`${styles.information} pt-8 rounded-[20px] flex flex-col items-center`}
+                    className={`${styles.information} xl:h-[750px] xl:w-[750px] md:h-[600px] md:w-[600px] h-[250px] w-[250px] sm:h-[400px] sm:w-[400px] pt-8 rounded-[20px] flex flex-col items-center`}
                     style={{
                         overflowY: "hidden",
-                        height: "50vh",
-                        width: "50vw",
                     }}
                 >
                     <h2

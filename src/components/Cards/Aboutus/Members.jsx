@@ -62,14 +62,16 @@ const Members = ({ members, scrollContainerRef }) => {
     return (
         <div
             id='scroll-disable-container'
-            className={`${styles.container} w-[100%] h-[100%] ${styles.information} `}
+            className={`${styles.container} w-[100%] h-[100%] ${styles.information} overflow-x-hidden overflow-y-scroll `}
         >
             {members.map((member, index) => (
                 <div
                     key={index}
                     data-index={index}
                     ref={(el) => (memberRefs.current[index] = el)}
-                    className={`${styles.member}  flex flex-col absolute ${
+                    className={`${
+                        styles.member
+                    } rounded-[4px] flex flex-col absolute ${
                         index === current ? styles.clip : styles.active
                     }`}
                     style={{
@@ -80,13 +82,14 @@ const Members = ({ members, scrollContainerRef }) => {
                         backgroundImage: `url(${member.imageSrc})`,
                         backgroundRepeat: "no-repeat",
                         backgroundPosition: "center",
+                        zIndex: 10 - index,
                         backgroundSize: "cover",
                     }}
                 >
                     <h2 className='text-black flex items-end mt-10'>
                         {member.name}
                     </h2>
-                    <div className='flex sm:w-[70vw] w-[100vw] justify-center lg:gap-40 sm:gap-20 gap-8 pb-20 h-[70vh] items-end '>
+                    <div className='flex sm:w-[70vw] w-[100vw] justify-center lg:gap-40 sm:gap-20 gap-10 sm:pb-20 sm:h-[70vh] items-end '>
                         <Link
                             href={member.google}
                             key='index'
