@@ -41,6 +41,36 @@ const Members = ({ members, scrollContainerRef }) => {
             });
         };
     }, []);
+    useEffect(() => {
+        let startY;
+
+        const handleTouchStart = (event) => {
+            startY = event.touches[0].clientY;
+        };
+
+        const handleTouchMove = (event) => {
+            const currentY = event.touches[0].clientY;
+            if (currentY > startY) {
+                // The touch moved upwards, prevent scrolling
+                event.preventDefault();
+            }
+        };
+
+        // Add event listener to the component's container
+        const container = document.getElementById("scroll-disable-container");
+        container.addEventListener("touchstart", handleTouchStart, {
+            passive: false,
+        });
+        container.addEventListener("touchmove", handleTouchMove, {
+            passive: false,
+        });
+
+        // Clean up the event listener when the component is unmounted
+        return () => {
+            container.removeEventListener("touchstart", handleTouchStart);
+            container.removeEventListener("touchmove", handleTouchMove);
+        };
+    }, []);
 
     useEffect(() => {
         const handleScroll = (event) => {
