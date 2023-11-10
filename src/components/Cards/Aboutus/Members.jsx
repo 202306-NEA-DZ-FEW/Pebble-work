@@ -34,7 +34,11 @@ const Members = ({ members, scrollContainerRef }) => {
         memberRefs.current.forEach((ref) => observer.observe(ref));
 
         return () => {
-            memberRefs.current.forEach((ref) => observer.unobserve(ref));
+            memberRefs.current.forEach((ref) => {
+                if (ref && observer.unobserve(ref)) {
+                    observer.unobserve(ref);
+                }
+            });
         };
     }, []);
 
