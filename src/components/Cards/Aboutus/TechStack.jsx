@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useCallback } from "react";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import styles from "./TechStack.module.css";
+import styles from "@/styles/TechStack.module.css";
 
 const TechStack = () => {
     const containerRef = useRef(null);
@@ -220,11 +219,3 @@ const TechStack = () => {
 };
 
 export default TechStack;
-export async function getStaticProps({ locale }) {
-    return {
-        props: {
-            ...(await serverSideTranslations(locale, ["common", "about"])),
-            // Will be passed to the page component as props
-        },
-    };
-}

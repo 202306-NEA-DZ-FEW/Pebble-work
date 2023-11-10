@@ -1,0 +1,64 @@
+.container {
+    position: relative;
+}
+
+.member {
+    position: sticky;
+    top: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+
+    transition: opacity 1s ease-out, clip-path 1000ms ease-out;
+}
+.clip {
+    clip-path: polygon(
+        50% 0%,
+        100% 0%,
+        100% 35%,
+        100% 100%,
+        79% 100%,
+        50% 100%,
+        21% 100%,
+        0% 100%,
+        0% 35%,
+        0% 0%
+    );
+    opacity: 1;
+    transition: opacity 1s linear, clip-path 1000ms ease-out;
+}
+
+.member.active {
+    opacity: 0;
+    clip-path: polygon(
+        50% 0%,
+        61% 35%,
+        98% 35%,
+        68% 57%,
+        79% 91%,
+        50% 70%,
+        21% 91%,
+        32% 57%,
+        2% 35%,
+        39% 35%
+    );
+}
+.information {
+    scrollbar-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Scrollbar color */
+.information::-webkit-scrollbar {
+    width: 5px;
+}
+
+.information::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.information::-webkit-scrollbar-track {
+    background-color: transparent;
+}

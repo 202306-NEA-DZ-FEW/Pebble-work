@@ -4,6 +4,7 @@
         "description": "PebbleWork'ün gücünü, son teknolojileri ile deneyimleyin. Kullanıcıyı merkezde tutan duyarlı ve etkileşimli bir platform oluşturduk. Sayfalar arasında sorunsuz gezinin, etkinlikler oluşturun, düzenleyin ve silin. Basit bir tıklamayla katılın ve ayrılın. PebbleWork, gönüllüler için gönüllüler tarafından oluşturulan bir platform sunar. Güvenli kullanıcı kimlik doğrulama ve gerçek zamanlı veri depolama ile kullanıcı dostu bir deneyim sunuyoruz. Etkinlik düzenleyicisi veya katılımcısı olun, PebbleWork topluluk katılımınızı basitleştirmek için burada. Bugün katılın ve toplumunuzda anlamlı bir etki yaratın.",
         "ourTeam": "Ekibimiz",
         "techStack": "Teknoloji Yığını",
+        "techStackTitle": "Kullanılan Teknolojiler ve Proje Yapısı",
         "techStackDescription": "Pebble Work projesi için Next.js, Firebase, DaisyUI ve Tailwind CSS kullanarak duyarlı ve etkileşimli bir platform oluşturduk. Next.js, sunucu tarafında işleme ve sorunsuz yönlendirme sağlarken, Firebase kullanıcı kimlik doğrulamayı ve gerçek zamanlı veri depolamayı ele aldı. DaisyUI ve Tailwind CSS, görsel olarak çekici ve modern bir tasarımı garanti etti. Proje yapısı, bakımı ve ölçeklendirmeyi kolaylaştırmak için modüler bileşenleri izledi. Bu teknolojiler, gönüllülerin bağlanmasını ve olumlu bir etki yaratmasını sağlamak için kullanıcı dostu ve etkileyici bir deneyim sundu."
     }
 }
