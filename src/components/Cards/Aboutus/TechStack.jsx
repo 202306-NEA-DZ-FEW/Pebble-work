@@ -60,12 +60,12 @@ const TechStack = () => {
             >
                 <img src='/Tech/icons8-css.svg' />
                 <span className={styles.right}>
-                    <div className='text-content'>
-                        <h3>testing</h3>
+                    <div className={styles.textContent}>
+                        <h3>CSS3</h3>
                         <ul>
-                            <li>This will work as a tooltip</li>
-                            <li>Am sure i will make it</li>
-                            <li>Why not? we still got time</li>
+                            <li>Style sheet language for web</li>
+                            <li>Beautiful, responsive, interactive</li>
+                            <li>Enhanced design possibilities</li>
                         </ul>
                     </div>
                     <i></i>
@@ -79,12 +79,12 @@ const TechStack = () => {
             >
                 <img src='/Tech/icons8-firebase.svg' />
                 <span className={styles.right}>
-                    <div className='text-content'>
-                        <h3>testing</h3>
+                    <div className={styles.textContent}>
+                        <h3>firebase</h3>
                         <ul>
-                            <li>This will work as a tooltip</li>
-                            <li>Am sure i will make it</li>
-                            <li>Why not? we still got time</li>
+                            <li>Backend platform for apps</li>
+                            <li>Secure, scalable, reliable</li>
+                            <li>Seamless integration with web</li>
                         </ul>
                     </div>
                     <i></i>
@@ -103,12 +103,12 @@ const TechStack = () => {
             >
                 <img src='/Tech/icons8-nextjs.svg' />
                 <span className={styles.right}>
-                    <div className='text-content'>
-                        <h3>testing</h3>
+                    <div className={styles.textContent}>
+                        <h3>Next.js</h3>
                         <ul>
-                            <li>This will work as a tooltip</li>
-                            <li>Am sure i will make it</li>
-                            <li>Why not? we still got time</li>
+                            <li>React framework for web</li>
+                            <li>Fast, easy, versatile</li>
+                            <li>Enjoyable development experience</li>
                         </ul>
                     </div>
                     <i></i>
@@ -122,12 +122,12 @@ const TechStack = () => {
             >
                 <img src='/Tech/icons8-tailwind-css.svg' />
                 <span className={styles.right}>
-                    <div className='text-content'>
-                        <h3>testing</h3>
+                    <div className={styles.textContent}>
+                        <h3>TailwindCSS</h3>
                         <ul>
-                            <li>This will work as a tooltip</li>
-                            <li>Am sure i will make it</li>
-                            <li>Why not? we still got time</li>
+                            <li>Utility-first CSS framework</li>
+                            <li>Customizable, modular, efficient</li>
+                            <li>Rapid prototyping and development</li>
                         </ul>
                     </div>
                     <i></i>

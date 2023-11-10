@@ -119,6 +119,24 @@
     transform: translate(-50%, -50%);
     animation: spin 10s linear infinite reverse;
 }
+.textContent {
+    padding: 8px;
+}
+.textContent ul {
+    list-style-type: none; /* Remove default bullet points */
+}
+
+.textContent li::before {
+    content: "\2022"; /* Add bullet point using Unicode */
+    color: rgb(0, 255, 85); /* Change color of bullet point */
+    display: inline-block; /* Needed to add space between bullet point and text */
+    width: 1em; /* Width of space between bullet point and text */
+    margin-left: 0em; /* Move bullet point to the left so it's in the same position as default bullet points */
+}
+
+.textContent h3 {
+    font-weight: bold;
+}
 
 .svg:nth-child(4) {
     top: 50%;
