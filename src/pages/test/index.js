@@ -1,63 +1,96 @@
-import { useEffect, useRef, useState } from "react";
-import styles from "./Member.module.css";
+import React from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import styles from "./TechStack.module.css";
 
-const Member = () => {
-    const members = [
-        { name: "Member 1", image: "/images/300x300px.jpg" },
-        { name: "Member 2", image: "/images/AboutPebble.png" },
-        { name: "Member 3", image: "/images/HelpThePoor.jpeg" },
-        { name: "Member 4", image: "/images/300x300px.jpg" },
-        { name: "Member 5", image: "/images/300x300px.jpg" },
-        // ...
-    ];
-    const [current, setCurrent] = useState(0);
-    const memberRefs = useRef([]);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        setCurrent(+entry.target.getAttribute("data-index"));
-                    }
-                });
-            },
-            { threshold: 0.7 }
-        );
-
-        memberRefs.current.forEach((ref) => observer.observe(ref));
-
-        return () => {
-            memberRefs.current.forEach((ref) => observer.unobserve(ref));
-        };
-    }, []);
-
+const TechStack = () => {
     return (
-        <div className={styles.container}>
-            {members.map((member, index) => (
-                <div
-                    key={index}
-                    data-index={index}
-                    ref={(el) => (memberRefs.current[index] = el)}
-                    className={`${styles.member} ${
-                        index === current ? styles.active : ""
-                    }`}
-                    style={{
-                        backgroundImage: `url(${member.image})`,
-                        backgroundRepeat: "no-repeat",
-                        backgroundPosition: "center",
-                        backgroundSize: "cover",
-                    }}
-                >
-                    <h2>{member.name}</h2>
-                </div>
-            ))}
+        <div className={`${styles.container}`}>
+            <div className={`${styles.tooltip} ${styles.svg}`}>
+                <img src='/Tech/icons8-css.svg' />
+                <span className={styles.right}>
+                    <div className='text-content'>
+                        <h3>Fade in Effect</h3>
+                        <ul>
+                            <li>This demo has fade in/out effect.</li>
+                            <li>
+                                It is using CSS opacity, visibility, and
+                                transition property to toggle the tooltip.
+                            </li>
+                            <li>
+                                Other demos are using display property
+                                <em>(none or block)</em> for the toggle.
+                            </li>
+                        </ul>
+                    </div>
+                    <i></i>
+                </span>
+            </div>
+            <div className={`${styles.tooltip} ${styles.svg}`}>
+                <img src='/Tech/icons8-firebase.svg' />
+                <span className={styles.right}>
+                    <div className='text-content'>
+                        <h3>Fade in Effect</h3>
+                        <ul>
+                            <li>This demo has fade in/out effect.</li>
+                            <li>
+                                It is using CSS opacity, visibility, and
+                                transition property to toggle the tooltip.
+                            </li>
+                            <li>
+                                Other demos are using display property
+                                <em>(none or block)</em> for the toggle.
+                            </li>
+                        </ul>
+                    </div>
+                    <i></i>
+                </span>
+            </div>
+            <img className={styles.png} src='/Tech/techstack.png' />
+            <div className={`${styles.tooltip} ${styles.svg}`}>
+                <img src='/Tech/icons8-nextjs.svg' />
+                <span className={styles.right}>
+                    <div className='text-content'>
+                        <h3>Fade in Effect</h3>
+                        <ul>
+                            <li>This demo has fade in/out effect.</li>
+                            <li>
+                                It is using CSS opacity, visibility, and
+                                transition property to toggle the tooltip.
+                            </li>
+                            <li>
+                                Other demos are using display property
+                                <em>(none or block)</em> for the toggle.
+                            </li>
+                        </ul>
+                    </div>
+                    <i></i>
+                </span>
+            </div>
+            <div className={`${styles.tooltip} ${styles.svg}`}>
+                <img src='/Tech/icons8-tailwind-css.svg' />
+                <span className={styles.right}>
+                    <div className='text-content'>
+                        <h3>Fade in Effect</h3>
+                        <ul>
+                            <li>This demo has fade in/out effect.</li>
+                            <li>
+                                It is using CSS opacity, visibility, and
+                                transition property to toggle the tooltip.
+                            </li>
+                            <li>
+                                Other demos are using display property
+                                <em>(none or block)</em> for the toggle.
+                            </li>
+                        </ul>
+                    </div>
+                    <i></i>
+                </span>
+            </div>
         </div>
     );
 };
 
-export default Member;
+export default TechStack;
 export async function getStaticProps({ locale }) {
     return {
         props: {

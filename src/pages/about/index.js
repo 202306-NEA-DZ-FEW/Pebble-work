@@ -3,6 +3,7 @@ import { useTranslation } from "next-i18next";
 import styles from "@/styles/about.module.css";
 import Members from "@/components/Cards/Aboutus/Members";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import TechStack from "@/components/Cards/Aboutus/TechStack";
 
 const AboutPage = () => {
     const { t } = useTranslation();
@@ -118,17 +119,20 @@ const AboutPage = () => {
                 </div>
                 <div
                     id='tech-stack'
-                    className={`${styles.slideInFromRight1} mb-10 mt-10 2xl:max-w-[1440px] lg:max-w-[1233px] flex flex-col items-center text-center`}
+                    className={`${styles.slideInFromRight1} relative mb-10 mt-10 w-96 flex flex-col items-center text-center`}
                 >
-                    <h6 className={`${styles.techText}`}>
-                        {t("about:about:techStack")}
-                    </h6>
-                    <h5 className={`${styles.techText1}`}>
-                        {t("about:about:techStackTitle")}
-                    </h5>
-                    <h2 className={`${styles.techText2}`}>
-                        {t("about:about:techStackDescription")}
-                    </h2>
+                    <TechStack />
+                    <div style={{ position: "absolute" }}>
+                        <h6 className={`${styles.techText}`}>
+                            {t("about:about:techStack")}
+                        </h6>
+                        <h5 className={`${styles.techText1}`}>
+                            {t("about:about:techStackTitle")}
+                        </h5>
+                        <h2 className={`${styles.techText2}`}>
+                            {/* {t("about:about:techStackDescription")} */}
+                        </h2>
+                    </div>
                 </div>
             </div>
         </>
