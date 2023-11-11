@@ -12,7 +12,6 @@ import { useTranslation } from "next-i18next";
 import { auth, db, storage } from "@/util/firebase";
 import EventCreation from "@/components/Events/EventCreation";
 import PhoneVerify from "@/components/Events/PhoneVerify";
-import FirestoreLocation from "@/components/Filter/FirestoreLocation";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const EventCreationPage = () => {
@@ -207,8 +206,6 @@ const EventCreationPage = () => {
                                         }}
                                     ></input>
                                 </form>
-
-                                {/* <FirestoreLocation onLocationSelect={handleLocationSelect} /> */}
 
                                 <h3
                                     className='mt-5 font-semibold align-left'
@@ -440,9 +437,7 @@ const EventCreationPage = () => {
                             <button
                                 onClick={() =>
                                     document
-                                        .getElementById(
-                                            "eventCreation:confirmcreate_modal"
-                                        )
+                                        .getElementById("confirmcreate_modal")
                                         .showModal()
                                 }
                                 className='px-8 py-3 outline outline-1 rounded font-semibold mx-auto my-28'
