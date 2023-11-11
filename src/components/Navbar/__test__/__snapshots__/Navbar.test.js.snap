@@ -231,32 +231,50 @@ exports[`Navbar renders correctly 1`] = `
         id="navbar-language"
       >
         <ul
-          class="' md:static text-center md:bg-transparent bg-white gap-3 fixed sm:w-full w-60 md:min-h-0 min-h-screen flex flex-col font-medium  md:p-0 border border-gray-300  md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 dark:border-gray-700 left-[0px] top-0 z-10 tiltIn"
+          class="md:static text-center md:bg-transparent bg-white gap-3 fixed sm:w-full w-60 md:min-h-0 min-h-screen flex flex-col font-medium md:p-0 border border-gray-300 md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 dark:border-gray-700 left-[0px] top-0 z-10 tiltIn"
           role="menu"
-          style="font-family: Rubik;"
         >
-          <li>
+          <li
+            class=""
+          >
             <a
-              class="block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700"
               href="/"
             >
-              common:navbar:home
+              <p
+                class="block py-2 pl-3 pr-4 rounded md:p-0 dark:border-gray-700 hover:text-green-600 relative rounded-full px-3 py-1.5 text-sm font-medium text-green-400 outline-sky-400 transition focus-visible:outline-2"
+              >
+                <span
+                  class="absolute inset-0 z-10 bg-green-400 mix-blend-difference"
+                  style="border-radius: 9999px; opacity: 1;"
+                />
+                common:navbar:home
+              </p>
             </a>
           </li>
-          <li>
+          <li
+            class=""
+          >
             <a
-              class="block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700"
               href="/events"
             >
-              common:navbar:events
+              <p
+                class="block py-2 pl-3 pr-4 rounded md:p-0 dark:border-gray-700 hover:text-red-600/60 relative rounded-full px-3 py-1.5 text-sm font-medium text-green-400 outline-sky-400 transition focus-visible:outline-2"
+              >
+                common:navbar:events
+              </p>
             </a>
           </li>
-          <li>
+          <li
+            class=""
+          >
             <a
-              class="block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark.border-gray-700"
               href="/about"
             >
-              common:navbar:about
+              <p
+                class="block py-2 pl-3 pr-4 rounded md:p-0 dark:border-gray-700 hover:text-red-600/60 relative rounded-full px-3 py-1.5 text-sm font-medium text-green-400 outline-sky-400 transition focus-visible:outline-2"
+              >
+                common:navbar:about
+              </p>
             </a>
           </li>
         </ul>

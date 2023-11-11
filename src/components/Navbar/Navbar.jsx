@@ -4,18 +4,23 @@ import React, { useEffect, useState } from "react";
 
 import styles from "@/styles/Navbar.module.css";
 
-import Signin from "@/components/Signin/Signin";
-
 import { auth } from "@/util/firebase";
 
 import Dropdown from "../Dropdown";
 import Language from "../Language/Language";
 import Pebble from "../Pebble";
+import { motion } from "framer-motion";
 
+let tabs = [
+    { id: "", label: "Home" },
+    { id: "events", label: "Events" },
+    { id: "about", label: "About" },
+];
 const Navbar = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [menuDropdownOpen, setMenuDropdownOpen] = useState(false);
     const [user, setUser] = useState(null);
+    const [activeTab, setActiveTab] = useState(tabs[0].id);
     const { t } = useTranslation();
 
     const menuDropdown = () => {
@@ -105,37 +110,46 @@ const Navbar = () => {
                     id='navbar-language'
                 >
                     <ul
-                        style={{ fontFamily: "Rubik" }}
-                        className={`' md:static text-center md:bg-transparent bg-white gap-3 fixed sm:w-full w-60 md:min-h-0 min-h-screen flex flex-col font-medium  md:p-0 border border-gray-300  md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 dark:border-gray-700 left-[0px] top-0 z-10 ${styles.tiltIn}`}
+                        className={`md:static text-center md:bg-transparent bg-white gap-3 fixed sm:w-full w-60 md:min-h-0 min-h-screen flex flex-col font-medium md:p-0 border border-gray-300 md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 dark:border-gray-700 left-[0px] top-0 z-10 ${styles.tiltIn}`}
                         role='menu'
                     >
-                        <li>
-                            <Link
-                                href='/'
-                                onClick={closeMenuDropdown}
-                                className='block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700'
-                            >
-                                {t("common:navbar:home")}
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                href='/events'
-                                onClick={closeMenuDropdown}
-                                className='block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700'
-                            >
-                                {t("common:navbar:events")}
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                href='/about'
-                                onClick={closeMenuDropdown}
-                                className='block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark.border-gray-700'
-                            >
-                                {t("common:navbar:about")}
-                            </Link>
-                        </li>
+                        {tabs.map((tab) => (
+                            <li key={tab.id} className=''>
+                                <Link href={`/${tab.id}`}>
+                                    <p
+                                        onClick={() => {
+                                            setActiveTab(tab.id);
+                                            closeMenuDropdown();
+                                        }}
+                                        className={`block py-2 pl-3 pr-4 rounded md:p-0 dark:border-gray-700 ${
+                                            activeTab === tab.id
+                                                ? "hover:text-green-600" //text on hover while the motion is on it
+                                                : "hover:text-red-600/60" //text on hover while the motion is not on it
+                                        } relative rounded-full px-3 py-1.5 text-sm font-medium text-green-400 outline-sky-400 transition focus-visible:outline-2`}
+                                        style={{
+                                            WebkitTapHighlightColor:
+                                                "transparent",
+                                        }}
+                                    >
+                                        {activeTab === tab.id && (
+                                            <motion.span
+                                                layoutId='bubble'
+                                                className='absolute inset-0 z-10 bg-green-400 mix-blend-difference'
+                                                style={{ borderRadius: 9999 }}
+                                                transition={{
+                                                    type: "spring",
+                                                    bounce: 0.3,
+                                                    duration: 1.2,
+                                                }}
+                                            />
+                                        )}
+                                        {t(
+                                            `common:navbar:${tab.label.toLowerCase()}`
+                                        )}
+                                    </p>
+                                </Link>
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </div>
