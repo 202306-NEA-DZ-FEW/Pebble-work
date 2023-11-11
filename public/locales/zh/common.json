@@ -69,5 +69,11 @@
         "turkish": "土耳其语",
         "german": "德语",
         "chinese": "中文"
+    },
+    "button": {
+        "continueWithTwitter": "继续使用 Twitter"
+    },
+    "buttons": {
+        "continueWithGoogle": "继续使用 Google"
     }
 }
