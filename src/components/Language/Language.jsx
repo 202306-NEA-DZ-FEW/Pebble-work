@@ -102,7 +102,7 @@ const Language = () => {
                                 <div className='inline-flex items-center'>
                                     <img
                                         className='mr-1'
-                                        src='/United-Kingdom.png'
+                                        src='/United-Kingdom.svg'
                                         width='20px'
                                         height='20px'
                                     />
@@ -118,7 +118,7 @@ const Language = () => {
                                 <div className='inline-flex items-center'>
                                     <img
                                         className='mr-1'
-                                        src='/Turkey.png'
+                                        src='/Turkey.svg'
                                         width='20px'
                                         height='20px'
                                     />
@@ -134,7 +134,7 @@ const Language = () => {
                                 <div className='inline-flex items-center'>
                                     <img
                                         className='mr-1'
-                                        src='/Germany.png'
+                                        src='/Germany.svg'
                                         width='20px'
                                         height='20px'
                                     />
@@ -151,7 +151,7 @@ const Language = () => {
                                 <div className='inline-flex items-center'>
                                     <img
                                         className='mr-1'
-                                        src='/China.png'
+                                        src='/China.svg'
                                         width='20px'
                                         height='20px'
                                     />
