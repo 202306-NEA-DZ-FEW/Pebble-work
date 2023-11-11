@@ -68,10 +68,10 @@ const ProfilePage = () => {
                         setCurrentUser(userDoc.data());
                         setUserInterests(userDoc.data().interests);
                     } else {
-                        return;
+                        console.log("User document does not exist.");
                     }
                 } catch (error) {
-                    return;
+                    console.error("Error fetching user data:", error);
                 }
             } else {
                 router.push("/signin");
@@ -257,7 +257,7 @@ const ProfilePage = () => {
         return <p>loading</p>;
     } else {
         return (
-            <div className='container ml-8 mt-8 mx-0 w-80 justify-start sm:items-center md:ml-20 md:items-start md:text-2xl md:mx-auto md:w-auto '>
+            <div className='container ml-8 mt-8 mx-0 w-80 justify-start sm:items-center  md:items-start md:text-2xl md:mx-auto md:w-auto '>
                 <div className='flex flex-col sm:items-center md:items-start md:w-12/12 '>
                     <h1 className=' font-semibold text-lg md:text-4xl md:ml-10 md:mt-5'>
                         {t("edit:editProfile")}
@@ -265,13 +265,13 @@ const ProfilePage = () => {
                     {/* Profile  Picture /Change */}
                     <form onSubmit={handleUpdateProfile}>
                         <div className='ml-5 flex flex-row mt-4 md:w-full md:gap-10    '>
-                            <div className='flex items-center h-4/12 w-4/12 rounded-full outline outline-2  overflow-hidden md:w-3/12 h-4/12 md:mt-8'>
+                            <div className='flex items-center h-4/12 w-4/12 rounded-full outline outline-2  overflow-hidden md:w-2/12 h-5/12 md:mt-8'>
                                 <Image
                                     src={currentUser.Image}
-                                    width={220}
+                                    width={200}
                                     height={200}
                                     alt=''
-                                    className=''
+                                    className=' '
                                 />
                             </div>
 
@@ -287,12 +287,12 @@ const ProfilePage = () => {
                                 {/* profilr pic input */}
                                 <label
                                     htmlFor='profilePictureInput'
-                                    className='bg-orange-400 mt-10 text-center h-8 w-4/12  py-2 text-xs text-white  shadow-md  md:w-3/12 md:h-12 cursor-pointer rounded md:text-2xl'
+                                    className='bg-orange-400 mt-10 text-center h-8 w-35 ml-0 px-4 py-2 text-xs text-white  shadow-md md:text-lg md:w-3/12 md:h-12 cursor-pointer'
                                 >
                                     {t("edit:uploadNew")}
                                 </label>
                                 <button
-                                    className='librarybtn mt-10 text-center h-8  ml-3 w-7/12  text-xs  outline outline-1 rounded shadow-md md:w-4/12 md:h-12 md:ml-8 md:text-2xl '
+                                    className='mt-10 text-center h-8 w-6/12  ml-3  text-xs   outline outline-1 rounded shadow-md md:w-4/12 md:h-12 md:ml-8 md:text-lg'
                                     type='button'
                                     onClick={(e) => handleOpenLibrary(e)}
                                 >
@@ -301,12 +301,10 @@ const ProfilePage = () => {
 
                                 {isLibraryOpen && (
                                     <PicturesLibrary
-                                        isLibraryOpen={isLibraryOpen}
                                         selectedImage={selectedImage}
                                         setSelectedImage={setSelectedImage}
                                         onClose={handleCloseLibrary}
                                         onHandleSave={handleSaveSelectedImage}
-                                        className='z-1000'
                                     />
                                 )}
                             </div>
@@ -314,21 +312,21 @@ const ProfilePage = () => {
 
                         {/* Edit  Inforation */}
 
-                        <div className='flex flex-col mt-4 w-70 sm:items-center  md:items-start md:mt-8 md:ml-10'>
-                            <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
-                                {t("edit:Name*")}
+                        <div className='flex flex-col mt-9 w-70 sm:items-center  md:items-start md:mt-14 md:ml-10'>
+                            <h3 className='font-semibold text-md mt-5 w-70'>
+                                {t("edit:nameRequired")}
                             </h3>
                             <input
                                 type='text'
                                 placeholder='  Name'
-                                className='outline outline-1 mt-2 w-3/4 rounded md:mt-5'
+                                className='outline outline-1 mt-3 w-3/4 rounded md:mt-5'
                                 name='name'
                                 defaultValue={currentUser.Name}
                                 onChange={(e) => setEditedName(e.target.value)}
                                 required
                             ></input>
-                            <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
-                                {t("edit:Surname*")}
+                            <h3 className='font-semibold text-md mt-5 w-70'>
+                                {t("edit:surnameRequired")}
                             </h3>
                             <input
                                 type='text'
@@ -341,8 +339,8 @@ const ProfilePage = () => {
                                 }
                                 required
                             ></input>
-                            <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
-                                {t("edit:Email*")}
+                            <h3 className='font-semibold text-md mt-5 w-70'>
+                                {t("edit:emailRequired")}
                             </h3>
                             <input
                                 type='email'
@@ -355,8 +353,8 @@ const ProfilePage = () => {
                             ></input>
 
                             {/*  */}
-                            <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
-                                {t("edit:Location")}
+                            <h3 className='font-semibold text-md mt-5 w-70'>
+                                {t("edit:locationRequired")}
                             </h3>
                             <input
                                 type='text'
@@ -367,16 +365,25 @@ const ProfilePage = () => {
                                 onChange={(e) =>
                                     setEditedLocation(e.target.value)
                                 }
+                                required
                             ></input>
                             {/* Your Interests */}
-                            <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
-                                {t("edit:Interests")}
+                            <h3 className='font-semibold text-md mt-5 w-70'>
+                                {t("edit:interests")}
                             </h3>
-                            <div className=' grid grid-container grid-cols-2 gap-8 -ml-15 mt-3 text-center justify-evenly  md:grid-cols-3 text-xs md:w-full md:h-auto  md:mt-8 md:text-3xl '>
+                            <div
+                                className=' -ml-15 mt-5 grid grid-container text-center justify-evenly  text-xs md:w-full md:h-auto  md:mt-8 md:text-3xl '
+                                style={{
+                                    display: "grid",
+                                    gridTemplateColumns: "1fr 1fr 1fr",
+                                    gap: "1rem",
+                                    height: "300px",
+                                }}
+                            >
                                 {EventTypes.map((type, index) => (
                                     <button
                                         key={index}
-                                        className={`outline outline-1 h-10 md:h-16 md:text-base -mx-1 rounded outline-orange-600 font-semibold text-orange-600 whitespace-normal  text-xs ${
+                                        className={`outline outline-1 rounded outline-orange-600 font-semibold text-orange-600  text-xs whitespace-normal ${
                                             userInterests.includes(type)
                                                 ? "text-white bg-orange-400" // Change the background color for selected buttons
                                                 : ""
@@ -390,10 +397,10 @@ const ProfilePage = () => {
                                 ))}{" "}
                             </div>
                             {/* Save Interests Button */}
-                            <div className='mt-0 flex flex-col items-center  md:mx-auto'>
+                            <div className='mt-0 flex flex-col items-end  md:mx-auto'>
                                 <button
                                     type='submit'
-                                    className='mt-7 bg-orange-400  text-center h-10 w-30  px-4 py-2 text-xs text-white  shadow-md md:h-14 md:w-45 md:h-13 md:font-bold md:text-xl '
+                                    className='mt-7 bg-orange-400  text-center h-8  px-4 py-2 text-xs text-white  shadow-md md:h-14 md:w-40 md:text-md'
                                 >
                                     {t("edit:saveChanges")}
                                 </button>
@@ -401,41 +408,41 @@ const ProfilePage = () => {
                         </div>
                     </form>
                     {/* Change Password  */}
-                    <div className='mt-5 pt-0 mx-auto pb-5 flex flex-col  bg-cyan-100  rounded mb-20 md:mx-auto md:mt-11 md:w-8/12 '>
-                        <h3 className='font-bold mt-5 ml-4 md:text-2xl'>
+                    <div className='mt-5 pt-0 mx-auto pb-5 flex flex-col  bg-cyan-100  rounded mb-20 md:mx-auto md:mt-8 md:ml-20 '>
+                        <h3 className='font-bold mt-5 ml-4'>
                             {t("edit:changePassword")}
                         </h3>
                         <form onSubmit={handleChangePassword}>
-                            <div className='flex flex-row ml-6 mt-3 gap-x-5 items-center justify-items-center md:mt-5 '>
+                            <div className='flex flex-row ml-6 mt-3 gap-x-5 items-center justify-items-center '>
                                 <input
                                     type='password'
-                                    placeholder=' New Password'
+                                    placeholder='New Password'
                                     value={newPassword}
                                     onChange={(e) =>
                                         setNewPassword(e.target.value)
                                     }
-                                    className=' w-5/12 h-8 rounded md:h-10'
+                                    className=' w-5/12 h-8 rounded'
                                     required
                                 ></input>
                                 <input
                                     type='password'
-                                    placeholder=' Confirm Password'
+                                    placeholder='Confirm Password'
                                     value={confirmPassword}
                                     onChange={(e) =>
                                         setConfirmPassword(e.target.value)
                                     }
-                                    className=' w-5/12 h-8 rounded md:h-10'
+                                    className='w-5/12 h-9 rounded'
                                     required
                                 ></input>
                             </div>
-                            <div className='flex flex-row mt-4 pb-3 gap-4 items-end  ml-20  md:mt-8 md:ml-40'>
+                            <div className='flex flex-row  mt-4 pb-3 gap-4 items-end  ml-20'>
                                 <button
                                     type='submit'
-                                    className='bg-orange-400  text-center h-8 w-3/12   text-xs text-white rounded shadow-md md:h-11 md:text-xl'
+                                    className='bg-orange-400  text-center h-8 w-3/12   text-xs text-white  shadow-md '
                                 >
                                     {t("edit:Submit")}
                                 </button>
-                                <button className=' text-center h-8 w-3/12 text-xs  outline outline-1 rounded shadow-md md:h-11 md:text-xl'>
+                                <button className=' text-center h-8 w-4/12 text-xs  outline outline-1 rounded shadow-md'>
                                     {t("edit:Cancel")}
                                 </button>
                             </div>
