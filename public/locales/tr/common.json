@@ -72,5 +72,8 @@
     },
     "button": {
         "continueWithTwitter": "Twitter ile Devam Et"
+    }, 
+    "buttons": {
+        "continueWithGoogle": "Google ile Devam Et"
     }
 }

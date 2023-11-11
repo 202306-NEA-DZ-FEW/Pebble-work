@@ -43,7 +43,7 @@ exports[`ButtonTwitter renders correctly 1`] = `
       />
     </svg>
     <span>
-      Continue with Google
+      common:buttons:continueWithGoogle
     </span>
   </button>
 </DocumentFragment>
