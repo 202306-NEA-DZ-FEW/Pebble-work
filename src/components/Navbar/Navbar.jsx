@@ -133,9 +133,8 @@ const Navbar = () => {
                                     >
                                         {activeTab === tab.id && (
                                             <motion.span
-                                                layoutId='bubble'
-                                                className='absolute inset-0 z-10 bg-green-400 mix-blend-difference'
-                                                style={{ borderRadius: 9999 }}
+                                                layoutId='line'
+                                                className='absolute bottom-0 left-0 right-0 h-1 z-10 bg-green-400 mix-blend-difference'
                                                 transition={{
                                                     type: "spring",
                                                     bounce: 0.3,
