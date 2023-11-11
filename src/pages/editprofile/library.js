@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { db, auth, storage, firestore } from "../../util/firebase";
 import {
@@ -13,14 +13,11 @@ import { getAuth, updatePassword, onAuthStateChanged } from "firebase/auth";
 import Image from "next/image";
 
 const PicturesLibrary = ({
-    isLibraryOpen,
     onClose,
     setSelectedImage,
     selectedImage,
     onHandleSave,
 }) => {
-    const libraryRef = useRef(null);
-
     const [images, setImages] = useState([]);
 
     const fetchImages = async () => {
@@ -34,44 +31,21 @@ const PicturesLibrary = ({
         const imageURLs = await Promise.all(
             res.items.map(async (itemRef) => await getDownloadURL(itemRef))
         );
+        console.log(imageURLs);
         // Set the state variable with the image URLs.
         setImages(imageURLs);
     };
 
     useEffect(() => {
         fetchImages();
-
-        /// a function to close the library when the user clicks outside it
-
-        const handleClickOutside = (event) => {
-            if (isLibraryOpen) {
-                const isInsideModal = event.target.closest(".modal-content");
-                const isLibraryButton =
-                    event.target.classList.contains("librarybtn");
-
-                if (!isInsideModal && !isLibraryButton) {
-                    onClose();
-                }
-            }
-        };
-
-        if (isLibraryOpen) {
-            document.addEventListener("click", handleClickOutside);
-        }
-        return () => {
-            document.removeEventListener("click", handleClickOutside);
-        };
-    }, [isLibraryOpen]);
+    }, []);
 
     if (!images) {
         return <div>Loading</div>;
     }
     return (
-        <div
-            ref={libraryRef}
-            className='absolute inset-10 md:inset-72 z-50 flex items-center justify-center bg-opacity-50 h-screen place-items-center'
-        >
-            <div className='modal-content bg-gray-200 p-8 rounded-lg'>
+        <div className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50'>
+            <div className='modal-content bg-white p-8 rounded-lg'>
                 <div className='library-images grid grid-cols-3 gap-4'>
                     {/* Display library images here */}
                     {images.map((image, index) => (
@@ -80,7 +54,7 @@ const PicturesLibrary = ({
                             src={image}
                             alt='Library Image'
                             onClick={() => setSelectedImage(image)}
-                            className={`w-20 h-20 object-cover cursor-pointer md:h-40 md:w-40 ${
+                            className={`w-20 h-20 object-cover cursor-pointer ${
                                 selectedImage === image
                                     ? "border-2 border-blue-500"
                                     : ""

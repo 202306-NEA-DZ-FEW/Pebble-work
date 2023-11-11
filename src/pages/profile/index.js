@@ -23,8 +23,8 @@ const ProfilePage = () => {
         "Decent Work and Economic Growth",
         "Industry, Innovation, and Infrastructure",
         "Reduced Inequalities",
-        "Responsible Consumption/Production",
         "Sustainable Cities and Communities",
+        "Responsible Consumption/Production",
         "Climate Action",
         "Life Below Water",
         "Life on Land",
@@ -42,10 +42,10 @@ const ProfilePage = () => {
                         setCurrentUser(userDoc.data());
                         setUserInterests(userDoc.data().interests);
                     } else {
-                        return;
+                        console.log("User document does not exist.");
                     }
                 } catch (error) {
-                    return;
+                    console.error("Error fetching user data:", error);
                 }
             } else {
                 setCurrentUser(null);
@@ -101,35 +101,43 @@ const ProfilePage = () => {
                     {/* Edit  Information */}
                     <div className='flex flex-col mt-9 w-70 sm:items-center  md:items-start md:mt-14 md:ml-10'>
                         <h3 className='font-semibold text-md w-70 text-gray-600'>
-                            {t("profile:Name")}:
+                            {t("profile:nameRequired")}:
                         </h3>
                         <p className=' mt-2 mb-4 w-3/4  '>{currentUser.Name}</p>
                         <h3 className='font-semibold text-md w-70 text-gray-600'>
-                            {t("profile:Surname")}:
+                            {t("profile:surnameRequired")}:
                         </h3>
                         <p className=' mt-2 mb-4 w-3/4  '>
                             {currentUser.Surename}
                         </p>
                         <h3 className='font-semibold text-md w-70 text-gray-600'>
-                            {t("profile:Email")}:
+                            {t("profile:emailRequired")}:
                         </h3>
                         <p className=' mt-2 mb-4 w-3/4  '>
                             {currentUser.email}
                         </p>
                         <h3 className='mt-1 mb-1 font-semibold text-md  w-70 text-gray-600'>
-                            {t("profile:Location")}:
+                            {t("profile:locationRequired")}:
                         </h3>
                         <p className=' mt-2  w-3/4 '>{currentUser.Location}</p>
 
                         {/* Your Interests */}
-                        <h3 className='mt-3 mb-2  font-semibold text-md  w-70  text-gray-600'>
+                        <h3 className='mt-3 mb-2 font-semibold text-md  w-70  text-gray-600'>
                             {t("profile:interests")}:
                         </h3>
-                        <div className='grid grid-container grid-cols-2 gap-8 -ml-15 mt-3 text-center justify-evenly  md:grid-cols-3 text-xs md:w-full md:h-auto  md:mt-8 md:text-3xl '>
+                        <div
+                            className=' -ml-15 mt-5 grid grid-container text-center justify-evenly  text-xs md:w-full md:h-auto  md:mt-8 md:text-3xl '
+                            style={{
+                                display: "grid",
+                                gridTemplateColumns: "1fr 1fr 1fr",
+                                gap: "1rem",
+                                height: "300px",
+                            }}
+                        >
                             {EventTypes.map((type, index) => (
                                 <button
                                     key={index}
-                                    className={`outline outline-1 h-12 md:h-15 -mx-1 rounded outline-orange-600 font-semibold text-orange-600 whitespace-normal  text-xs  ${
+                                    className={`outline outline-1 rounded outline-orange-600 font-semibold text-orange-600  text-xs whitespace-normal ${
                                         userInterests.includes(type)
                                             ? "text-white bg-orange-400"
                                             : ""
@@ -140,9 +148,9 @@ const ProfilePage = () => {
                             ))}
                         </div>
                         {/* Save Interests Button */}
-                        <div className='mt-10 flex flex-col items-end  mx-auto'>
+                        <div className='mt-0 flex flex-col items-end  mx-auto'>
                             <button
-                                className=' bg-orange-400  text-center h-10 w-30  px-4 py-2 text-xs text-white font-bold shadow-md md:h-14 mb-12 md:w-40 md:text-xl '
+                                className='mt-12 bg-orange-400  text-center h-8  px-4 py-2 text-xs text-white font-bold shadow-md md:h-14 mb-12 md:w-40 md:text-xl '
                                 onClick={handleEditProfile}
                             >
                                 {t("profile:editProfile")}
