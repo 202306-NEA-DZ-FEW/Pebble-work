@@ -69,5 +69,8 @@
         "turkish": "Türkisch",
         "german": "Deutsch",
         "chinese": "Chinesisch"
+    },
+    "button": {
+        "continueWithTwitter": "Mit Twitter fortfahren"
     }
 }
