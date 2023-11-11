@@ -12,6 +12,17 @@ const Language = () => {
     const dropdownRef = useRef(null);
 
     const [rotationDegree, setRotationDegree] = useState(0);
+    const [isDragging, setIsDragging] = useState(false);
+
+    const handleStart = () => {
+        setIsDragging(true);
+    };
+
+    const handleStop = () => {
+        setTimeout(() => {
+            setIsDragging(false);
+        }, 100);
+    };
 
     const handleClickOutside = (event) => {
         if (
@@ -33,9 +44,10 @@ const Language = () => {
     }, []);
 
     const toggleDropdown = () => {
-        setIsDropdownOpen(!isDropdownOpen);
-
-        setRotationDegree(isDropdownOpen ? 0 : 180);
+        if (!isDragging) {
+            setIsDropdownOpen(!isDropdownOpen);
+            setRotationDegree(isDropdownOpen ? 0 : 180);
+        }
     };
 
     const changeLanguage = (lng) => {
@@ -46,7 +58,7 @@ const Language = () => {
     };
 
     return (
-        <Draggable>
+        <Draggable onDrag={handleStart} onStop={handleStop}>
             <div
                 ref={dropdownRef}
                 className='fixed bottom-0 right-20 sm:right-40'
