@@ -1,6 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEarthEurope } from "@fortawesome/free-solid-svg-icons";
+import Draggable from "react-draggable";
 
 const Language = () => {
     const { t, i18n } = useTranslation();
@@ -8,17 +11,31 @@ const Language = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
 
+    const [rotationDegree, setRotationDegree] = useState(0);
+
     const handleClickOutside = (event) => {
         if (
             dropdownRef.current &&
             !dropdownRef.current.contains(event.target)
         ) {
             setIsDropdownOpen(false);
+            setRotationDegree(0);
         }
     };
+    useEffect(() => {
+        // Add event listener when component mounts
+        document.addEventListener("mousedown", handleClickOutside);
+
+        // Remove event listener when component unmounts
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
+
+        setRotationDegree(isDropdownOpen ? 0 : 180);
     };
 
     const changeLanguage = (lng) => {
@@ -29,7 +46,7 @@ const Language = () => {
     };
 
     return (
-        <>
+        <Draggable>
             <div
                 ref={dropdownRef}
                 className='fixed bottom-0 right-20 sm:right-40'
@@ -40,7 +57,16 @@ const Language = () => {
                     className='inline-flex items-center font-medium justify-center text-sm text-gray-900 rounded-lg cursor-pointer'
                 >
                     <div className='flex items-center z-[444]'>
-                        <img src='/icons/Web.png' alt='Pebble Logo' />
+                        <FontAwesomeIcon
+                            icon={faEarthEurope}
+                            size='2x'
+                            style={{
+                                color: "#63d4a9",
+                                paddingRight: "2px",
+                                transform: `rotate(${rotationDegree}deg)`,
+                                transition: "transform 0.5s",
+                            }}
+                        />
                         <p className='text-black'>
                             {t("common:language:language")}
                         </p>
@@ -49,17 +75,17 @@ const Language = () => {
                 <div
                     className={`z-50 ${
                         isDropdownOpen ? "block" : "hidden"
-                    } text-base list-none divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700`}
+                    } text-base list-none divide-y divide-gray-100 fixed bottom-10 right-0 rounded-[4px] shadow dark:bg-gray-700`}
                     id='language-dropdown-menu'
                 >
                     <ul
                         ref={dropdownRef}
-                        className='font-medium overflow-hidden flex flex-col gap-2 fixed bottom-10 right-20 sm:right-40'
+                        className='font-medium overflow-hidden flex flex-col gap-2 '
                     >
                         <li>
                             <button
                                 onClick={() => changeLanguage("en")}
-                                className='block text-sm text-gray-700 hover:border hover:rounded-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
+                                className='block text-sm text-gray-700 hover:border hover:rounded-sm w-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
                             >
                                 <div className='inline-flex items-center'>
                                     <img
@@ -75,7 +101,7 @@ const Language = () => {
                         <li>
                             <button
                                 onClick={() => changeLanguage("tr")}
-                                className='block text-sm text-gray-700 hover:border hover:rounded-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
+                                className='block text-sm text-gray-700 hover:border hover:rounded-sm w-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
                             >
                                 <div className='inline-flex items-center'>
                                     <img
@@ -91,7 +117,7 @@ const Language = () => {
                         <li>
                             <button
                                 onClick={() => changeLanguage("de")}
-                                className='block text-sm text-gray-700 hover:border hover:rounded-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
+                                className='block text-sm text-gray-700 hover:border hover:rounded-sm w-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
                             >
                                 <div className='inline-flex items-center'>
                                     <img
@@ -108,7 +134,7 @@ const Language = () => {
                         <li>
                             <button
                                 onClick={() => changeLanguage("zh")}
-                                className='block text-sm text-gray-700 hover:border hover:rounded-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
+                                className='block text-sm text-gray-700 hover:border hover:rounded-sm w-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
                             >
                                 <div className='inline-flex items-center'>
                                     <img
@@ -124,7 +150,7 @@ const Language = () => {
                     </ul>
                 </div>
             </div>
-        </>
+        </Draggable>
     );
 };
 
