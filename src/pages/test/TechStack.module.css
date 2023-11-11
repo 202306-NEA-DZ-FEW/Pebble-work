@@ -1,0 +1,209 @@
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+.container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    margin: 0 auto;
+    animation: spin 10s linear infinite;
+}
+
+.svg {
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    background-color: transparent;
+    transition: background-color 0.5s;
+    border-radius: 100%;
+}
+
+/*tooltip*/
+.tooltip {
+    display: inline-block;
+    border-bottom: 1px dotted #666;
+    text-align: left;
+}
+
+.tooltip .right {
+    min-width: 200px;
+    max-width: 400px;
+    top: 50%;
+    left: 100%;
+    margin-left: 20px;
+    transform: translate(0, -50%);
+    padding: 0;
+    color: #eeeeee;
+    background-color: #444444;
+    font-weight: normal;
+    font-size: 13px;
+    border-radius: 8px;
+    position: absolute;
+    z-index: 20;
+    box-sizing: border-box;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.8s;
+}
+
+.tooltip:hover .right {
+    visibility: visible;
+    opacity: 1;
+}
+
+.tooltip .right i {
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -12px;
+    width: 12px;
+    height: 24px;
+    overflow: hidden;
+}
+.tooltip .right i::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    left: 0;
+    top: 50%;
+    transform: translate(50%, -50%) rotate(-45deg);
+    background-color: #444444;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+}
+
+.png {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 100px;
+    height: 100px;
+    animation: spin 10s linear infinite reverse;
+}
+
+.svg:nth-child(1):hover {
+    background-color: red;
+}
+
+.svg:nth-child(2):hover {
+    background-color: blue;
+}
+
+.svg:nth-child(4):hover {
+    background-color: green;
+}
+
+.svg:nth-child(5):hover {
+    background-color: black;
+}
+.svg:nth-child(6):hover {
+    width: 65px;
+    height: 65px;
+    background-color: rgb(11, 148, 102);
+}
+.svg:nth-child(7):hover {
+    width: 65px;
+    height: 65px;
+    background-color: rgb(11, 148, 102);
+}
+.svg:nth-child(8):hover {
+    width: 65px;
+    height: 65px;
+    background-color: rgb(11, 148, 102);
+}
+.svg:nth-child(9):hover {
+    width: 65px;
+    height: 65px;
+    background-color: rgb(11, 148, 102);
+}
+
+.svg:nth-child(1) {
+    top: 50%;
+    left: 0;
+
+    animation: spin 10s linear infinite reverse;
+}
+
+.svg:nth-child(2) {
+    top: 0;
+    left: 50%;
+
+    animation: spin 10s linear infinite reverse;
+}
+.textContent {
+    padding: 8px;
+}
+.textContent ul {
+    list-style-type: none; /* Remove default bullet points */
+}
+
+.textContent li::before {
+    content: "\2022"; /* Add bullet point using Unicode */
+    color: rgb(0, 255, 85); /* Change color of bullet point */
+    display: inline-block; /* Needed to add space between bullet point and text */
+    width: 1em; /* Width of space between bullet point and text */
+    margin-left: 0em; /* Move bullet point to the left so it's in the same position as default bullet points */
+}
+
+.textContent h3 {
+    font-weight: bold;
+}
+
+.svg:nth-child(4) {
+    top: 50%;
+    left: 100%;
+
+    animation: spin 10s linear infinite reverse;
+}
+
+.svg:nth-child(5) {
+    top: 100%;
+    left: 50%;
+
+    animation: spin 10s linear infinite reverse;
+}
+.svg:nth-child(6) {
+    width: 40px;
+    height: 40px;
+    top: 72%;
+    right: 10%;
+
+    animation: spin 10s linear infinite reverse;
+    transition: width 0.6s linear, height 0.6s linear;
+}
+.svg:nth-child(7) {
+    width: 40px;
+    height: 40px;
+    bottom: 12%;
+    right: 42%;
+
+    animation: spin 10s linear infinite reverse;
+    transition: width 0.6s linear, height 0.6s linear;
+}
+.svg:nth-child(8) {
+    width: 40px;
+    height: 40px;
+    top: 42%;
+    left: 50%;
+
+    animation: spin 10s linear infinite reverse;
+    transition: width 0.6s linear, height 0.6s linear;
+}
+.svg:nth-child(9) {
+    width: 40px;
+    height: 40px;
+    bottom: 42%;
+    right: 10%;
+
+    animation: spin 10s linear infinite reverse;
+    transition: width 0.6s linear, height 0.6s linear;
+}

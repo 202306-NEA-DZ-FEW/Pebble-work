@@ -1,108 +1,157 @@
-import Image from "next/image";
-import React from "react";
+import React, { useRef, useEffect, useCallback } from "react";
 import { useTranslation } from "next-i18next";
 import styles from "@/styles/about.module.css";
-import MembersCard from "@/components/Cards/Aboutus/MembersCard";
+import Members from "@/components/Cards/Aboutus/Members";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import TechStack from "@/components/Cards/Aboutus/TechStack";
 
 const AboutPage = () => {
     const { t } = useTranslation();
+    const members = [
+        {
+            imageSrc: "https://avatars.githubusercontent.com/u/137820288?v=4",
+            description:
+                "I solve problems with love and care I learn eagerly and always dare I observe keenly and find the flaws I am a person with a noble cause.",
+            name: "Halla Hamidi",
+            google: "https://mail.google.com/mail/u/0/?fs=1&to=aniabisso.16@gmail.com&tf=cm",
+            linkedin: "https://www.linkedin.com/in/halla-hamidi-989197229/",
+            github: "https://github.com/Halla24",
+        },
+        {
+            imageSrc: "https://avatars.githubusercontent.com/u/137835769?v=4",
+            name: "Takieddine Dilmi",
+            description:
+                "I solve problems with love and care I learn eagerly and always dare I observe keenly and find the flaws I am a person with a noble cause.",
+            google: "https://mail.google.com/mail/u/0/?fs=1&to=angeldilmi@gmail.com&tf=cm",
+            linkedin: "https://www.linkedin.com/in/takidilmi/",
+            github: "https://github.com/takidilmi",
+        },
+        {
+            imageSrc: "https://avatars.githubusercontent.com/u/64746106?v=4",
+            name: "Youssouf Sergma",
+            description:
+                "I solve problems with love and care I learn eagerly and always dare I observe keenly and find the flaws I am a person with a noble cause.",
+            google: "https://mail.google.com/mail/u/0/?fs=1&to=sergmayoussouf@gmail.com&tf=cm",
+            linkedin: "https://www.linkedin.com/in/sergma/",
+            github: "https://github.com/ysergma",
+        },
+        {
+            imageSrc: "https://avatars.githubusercontent.com/u/95043080?v=4",
+            name: "Manel H.Haddoud",
+            description:
+                "I solve problems with love and care I learn eagerly and always dare I observe keenly and find the flaws I am a person with a noble cause.",
+            google: "https://mail.google.com/mail/u/0/?fs=1&to=manelhasnahaddoud@gmail.com&tf=cm",
+            linkedin:
+                "https://www.linkedin.com/in/manel-hasna-haddoud-aa5095278/",
+            github: "https://github.com/hasnahadd",
+        },
+        {
+            imageSrc: "https://avatars.githubusercontent.com/u/138169337?v=4",
+            name: "Louisa Hamrit",
+            description:
+                "I solve problems with love and care I learn eagerly and always dare I observe keenly and find the flaws I am a person with a noble cause.",
+            google: "https://mail.google.com/mail/u/0/?fs=1&to=l19.45.127.0@gmail.com&tf=cm",
+            linkedin: "https://www.linkedin.com/in/louisa-h-958733294/",
+            github: "https://github.com/Polichinell",
+        },
+        {
+            imageSrc: "https://avatars.githubusercontent.com/u/137820288?v=4",
+            name: "Halla Hamidi",
+            description:
+                "I solve problems with love and care I learn eagerly and always dare I observe keenly and find the flaws I am a person with a noble cause.",
+            google: "https://mail.google.com/mail/u/0/?fs=1&to=aniabisso.16@gmail.com&tf=cm",
+            linkedin: "https://www.linkedin.com/in/halla-hamidi-989197229/",
+            github: "https://github.com/Halla24",
+        },
+    ];
+    const scrollContainerRef = useRef();
+    let lastScrollTop = 0;
+    const onScroll = useCallback((e) => {
+        let st = e.target.scrollTop;
+        if (st < lastScrollTop) {
+            e.target.scrollTop = lastScrollTop;
+        } else {
+            lastScrollTop = st;
+        }
+    }, []);
+
+    useEffect(() => {
+        scrollContainerRef.current.addEventListener("scroll", onScroll);
+
+        return () => {
+            if (scrollContainerRef.current) {
+                scrollContainerRef.current.removeEventListener(
+                    "scroll",
+                    onScroll
+                );
+            }
+        };
+    }, [onScroll]);
 
     return (
         <>
             <div
-                className={`grid grid-rows-1 content-center place-items-center xl:pt-20  lg:pb-[250px] overflow-x-hidden`}
+                className={`flex flex-col text-justify items-center justify-center overflow-hidden`}
             >
-                <div className='absolute xl:static top-0 pb-40'>
-                    <Image
-                        className={`${styles.topImage} xl:w-[1440px] object-cover xl:object-cover lg:object-cover md:object-cover xl:h-[780px] lg:w-[1233px] lg:h-[630px] md:h-[575px] h-[363px]`}
-                        src='/images/AboutPebble.png'
-                        alt='Pebbles'
-                        width={1440}
-                        height={780}
-                    />
-                </div>
                 <div
-                    className={`flex flex-col flex-wrap items-center pb-[200px] xl:pb-40 z-[1]`}
+                    style={{
+                        backgroundImage: `url(/images/AboutPebble.png)`,
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                    }}
+                    className='2xl:max-w-[1440px] xl:h-[780px] lg:max-w-[1233px] lg:h-[630px] md:min-h-[575px] mb-10 pb-4 w-[100vw] min-h-[363px] flex flex-col items-center justify-center'
                 >
-                    <h1
-                        className={`${styles.text0} ${styles.slideInFromRight1} xl:mb-7`}
-                    >
-                        {t("about:about:title")}
-                    </h1>
-                    <p
-                        className={`${styles.text1} ${styles.slideInFromRight1} flex text-center text-[#878787] px-4`}
-                    >
-                        {t("about:about.description")}
-                    </p>
+                    <div className={`flex flex-col flex-wrap items-center`}>
+                        <h1
+                            className={`${styles.text0} ${styles.slideInFromRight1}`}
+                        >
+                            {t("about:about:title")}
+                        </h1>
+                        <p
+                            className={`${styles.text1} ${styles.slideInFromRight1} flex text-[#878787] px-4`}
+                        >
+                            {t("about:about.description")}
+                        </p>
+                    </div>
                 </div>
                 <div
-                    className={`${styles.teamContainer} rounded-[20px] flex flex-col items-center bg-[#fbc495] bg-opacity-70 xl:mb-40`}
+                    ref={scrollContainerRef}
+                    className={`${styles.information} xl:h-[750px] xl:w-[750px] md:h-[600px] md:w-[600px] h-[250px] w-[250px] sm:h-[400px] sm:w-[400px] pt-8 rounded-[8px] flex flex-col items-center`}
+                    style={{
+                        overflowY: "hidden",
+                    }}
                 >
                     <h2
-                        className={`${styles.teamText} text-[40px] text-[#1A1A1A] md:mt-10 pt-2 md:mb-10`}
+                        className={`${styles.teamText} text-[40px] text-[#1A1A1A]`}
                     >
                         {t("about:about:ourTeam")}
                     </h2>
-                    <div className='flex flex-row xl:flex-col flex-wrap gap-10 mx-3 md:mx-10'>
-                        <div className='flex flex-col xl:flex-row gap-7 xl:gap-96 flex-wrap'>
-                            <MembersCard
-                                imageSrc='https://avatars.githubusercontent.com/u/137820288?v=4'
-                                name='Halla Hamidi'
-                                google='https://mail.google.com/mail/u/0/?fs=1&to=aniabisso.16@gmail.com&tf=cm'
-                                linkedin='https://www.linkedin.com/in/halla-hamidi-989197229/'
-                                github='https://github.com/Halla24'
-                            />
-
-                            <MembersCard
-                                imageSrc='https://avatars.githubusercontent.com/u/137835769?v=4'
-                                name='Takieddine Dilmi'
-                                google='https://mail.google.com/mail/u/0/?fs=1&to=angeldilmi@gmail.com&tf=cm'
-                                linkedin='https://www.linkedin.com/in/takidilmi/'
-                                github='https://github.com/takidilmi'
-                            />
-                        </div>
-
-                        <div className='flex flex-col xl:flex-row gap-7 xl:gap-20 justify-center mb-7 xl:mb-20'>
-                            <MembersCard
-                                imageSrc='https://avatars.githubusercontent.com/u/95043080?v=4'
-                                name='Manel H.Haddoud'
-                                google='https://mail.google.com/mail/u/0/?fs=1&to=manelhasnahaddoud@gmail.com&tf=cm'
-                                linkedin='https://www.linkedin.com/in/manel-hasna-haddoud-aa5095278/'
-                                github='https://github.com/hasnahadd'
-                            />
-
-                            <MembersCard
-                                imageSrc='https://avatars.githubusercontent.com/u/64746106?v=4'
-                                name='Youssouf Sergma'
-                                google='https://mail.google.com/mail/u/0/?fs=1&to=sergmayoussouf@gmail.com&tf=cm'
-                                linkedin='https://www.linkedin.com/in/sergma/'
-                                github='https://github.com/ysergma'
-                            />
-                        </div>
-                    </div>
-                    <div className='xl:mb-10 md:mb-7 mb-4'>
-                        <MembersCard
-                            imageSrc='https://avatars.githubusercontent.com/u/138169337?v=4'
-                            name='Louisa Hamrit'
-                            google='https://mail.google.com/mail/u/0/?fs=1&to=l19.45.127.0@gmail.com&tf=cm'
-                            linkedin='https://www.linkedin.com/in/louisa-h-958733294/'
-                            github='https://github.com/Polichinell'
-                        />
-                    </div>
+                    <p className='text-center'>
+                        A team that is meant to make a difference, We thrive on
+                        working together to turn ideas into reality
+                    </p>
+                    <Members
+                        members={members}
+                        scrollContainerRef={scrollContainerRef}
+                    />
                 </div>
                 <div
                     id='tech-stack'
-                    className={`${styles.slideInFromRight1} flex flex-col items-center text-center xl:mb-40 md:pb-40 pb-[222px]`}
+                    className={`${styles.slideInFromRight1} text-center relative mb-10 mt-10 w-96 flex flex-col items-center`}
                 >
-                    <h6 className={`${styles.techText} text-[#1A1A1A] xl:mb-4`}>
-                        {t("about:about:techStack")}
-                    </h6>
-                    <h2
-                        className={`${styles.techText1} text-[#878787] xl:mb-4`}
-                    >
-                        {t("about:about:techStackDescription")}
-                    </h2>
+                    <TechStack />
+                    <div style={{ position: "absolute" }}>
+                        <h6 className={`${styles.techText}`}>
+                            {t("about:about:techStack")}
+                        </h6>
+                        <h5 className={`${styles.techText1}`}>
+                            {t("about:about:techStackTitle")}
+                        </h5>
+                        <h2 className={`${styles.techText2}`}>
+                            {/* {t("about:about:techStackDescription")} */}
+                        </h2>
+                    </div>
                 </div>
             </div>
         </>
