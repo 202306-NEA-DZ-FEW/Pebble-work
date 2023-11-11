@@ -47,17 +47,29 @@ const Footer = () => {
                     <ul className='flex gap-20 md:gap-8'>
                         <li>
                             <Link href='#'>
-                                <img src='/icons/Facebook.png' alt='Facebook' />
+                                <img
+                                    src='/icons/Facebook.svg'
+                                    className='md:w-[50px] w-[30px]'
+                                    alt='Facebook'
+                                />
                             </Link>
                         </li>
                         <li>
                             <Link href='#'>
-                                <img src='/icons/Google.png' alt='Gmail' />
+                                <img
+                                    src='/icons/Google.svg'
+                                    className='md:w-[50px] w-[30px]'
+                                    alt='Gmail'
+                                />
                             </Link>
                         </li>
                         <li>
                             <Link href='#'>
-                                <img src='/icons/Twitter.png' alt='Twitter' />
+                                <img
+                                    src='/icons/Github.svg'
+                                    className='md:w-[50px] w-[30px]'
+                                    alt='Github'
+                                />
                             </Link>
                         </li>
                     </ul>
