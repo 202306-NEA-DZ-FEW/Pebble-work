@@ -69,5 +69,11 @@
         "turkish": "Turkish",
         "german": "German",
         "chinese": "Chinese"
+    },
+    "button": {
+        "continueWithTwitter": "Continue with Twitter"
+    },
+    "buttons": {
+        "continueWithGoogle": "Continue with Google"
     }
 }

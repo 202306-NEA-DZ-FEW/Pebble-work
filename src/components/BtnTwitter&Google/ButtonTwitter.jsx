@@ -1,7 +1,10 @@
 import React from "react";
 import { RiTwitterXFill } from "react-icons/ri";
+import { useTranslation } from "next-i18next"; // Import useTranslation
 
 const ButtonTwitter = ({ onClick }) => {
+    const { t } = useTranslation();
+
     return (
         <button
             className=' border px-4 py-2 mb-2 rounded-md shadow-md flex items-center justify-center'
@@ -9,7 +12,7 @@ const ButtonTwitter = ({ onClick }) => {
             onClick={onClick}
         >
             <RiTwitterXFill className='ml-2 mr-1' />
-            <span>Continue with Twitter</span>
+            <span>{t("common:button:continueWithTwitter")}</span>
         </button>
     );
 };
