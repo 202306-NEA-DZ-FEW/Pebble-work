@@ -43,8 +43,15 @@ const Language = () => {
         };
     }, []);
 
-    const toggleDropdown = () => {
+    const toggleDropdown = (event) => {
+        if (isDragging) {
+            return;
+        }
         if (!isDragging) {
+            // Prevents the dropdown from closing if the event is a touch event
+            if (event.type === "touchstart") {
+                event.stopPropagation();
+            }
             setIsDropdownOpen(!isDropdownOpen);
             setRotationDegree(isDropdownOpen ? 0 : 180);
         }
@@ -66,6 +73,7 @@ const Language = () => {
                 <button
                     type='button'
                     onClick={toggleDropdown}
+                    onTouchStart={toggleDropdown}
                     className='inline-flex items-center font-medium justify-center text-sm text-gray-900 rounded-lg cursor-pointer'
                 >
                     <div className='flex items-center z-[444]'>
@@ -79,7 +87,7 @@ const Language = () => {
                                 transition: "transform 0.5s",
                             }}
                         />
-                        <p className='text-black'>
+                        <p className='text-black md:text-[15px] text-[12px]'>
                             {t("common:language:language")}
                         </p>
                     </div>
@@ -87,7 +95,7 @@ const Language = () => {
                 <div
                     className={`z-50 ${
                         isDropdownOpen ? "block" : "hidden"
-                    } text-base list-none divide-y divide-gray-100 fixed bottom-10 right-0 rounded-[4px] shadow dark:bg-gray-700`}
+                    } text-base list-none divide-y divide-gray-100 fixed bottom-10 right-0 rounded-[4px] shadow bg-transparent`}
                     id='language-dropdown-menu'
                 >
                     <ul
