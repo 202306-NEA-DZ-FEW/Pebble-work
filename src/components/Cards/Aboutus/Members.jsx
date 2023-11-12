@@ -1,176 +1,130 @@
-import { useEffect, useRef, useState } from "react";
-import styles from "@/styles/Member.module.css";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+
+// import required modules
+import {
+    EffectCoverflow,
+    Pagination,
+    Autoplay,
+    Navigation,
+} from "swiper/modules";
 import Link from "next/link";
 import Image from "next/image";
 
-const Members = ({ members, scrollContainerRef }) => {
-    const [current, setCurrent] = useState(0);
-    const memberRefs = useRef([]);
+export default function Test({ members }) {
+    const [direction, setDirection] = useState("horizontal");
+    const [slideShadows, setSlideShadows] = useState(
+        typeof window !== "undefined" ? window.innerWidth > 640 : false
+    );
 
     useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        const index = +entry.target.getAttribute("data-index");
-                        setCurrent(index);
-                        if (index === members.length - 1) {
-                            const scrollContainer = document.getElementById(
-                                "scroll-disable-container"
-                            );
-                            scrollContainer.scrollTop = 0;
-                            setCurrent(0); // Reset the current state to 0
-                        }
-                    }
-                });
-            },
-            {
-                root: scrollContainerRef.current,
-                threshold: 0.78,
-            }
-        );
-
-        memberRefs.current.forEach((ref) => observer.observe(ref));
-
-        return () => {
-            memberRefs.current.forEach((ref) => {
-                if (ref && observer.unobserve(ref)) {
-                    observer.unobserve(ref);
-                }
-            });
-        };
-    }, []);
-    useEffect(() => {
-        let startY;
-
-        const handleTouchStart = (event) => {
-            startY = event.touches[0].clientY;
-        };
-
-        const handleTouchMove = (event) => {
-            const currentY = event.touches[0].clientY;
-            if (currentY > startY) {
-                // The touch moved upwards, prevent scrolling
-                event.preventDefault();
+        const handleResize = () => {
+            if (typeof window !== "undefined") {
+                setSlideShadows(window.innerWidth > 640);
+                setDirection(
+                    window.innerWidth < 640 ? "vertical" : "horizontal"
+                );
             }
         };
 
-        // Add event listener to the component's container
-        const container = document.getElementById("scroll-disable-container");
-        container.addEventListener("touchstart", handleTouchStart, {
-            passive: false,
-        });
-        container.addEventListener("touchmove", handleTouchMove, {
-            passive: false,
-        });
+        if (typeof window !== "undefined") {
+            window.addEventListener("resize", handleResize);
+        }
 
-        // Clean up the event listener when the component is unmounted
         return () => {
-            container.removeEventListener("touchstart", handleTouchStart);
-            container.removeEventListener("touchmove", handleTouchMove);
-        };
-    }, []);
-
-    useEffect(() => {
-        const handleScroll = (event) => {
-            if (event.deltaY < 0) {
-                event.preventDefault();
+            if (typeof window !== "undefined") {
+                window.removeEventListener("resize", handleResize);
             }
-        };
-
-        // Add event listener to the component's container
-        const container = document.getElementById("scroll-disable-container");
-        container.addEventListener("wheel", handleScroll, { passive: false });
-
-        // Clean up the event listener when the component is unmounted
-        return () => {
-            container.removeEventListener("wheel", handleScroll);
         };
     }, []);
 
     return (
-        <div
-            id='scroll-disable-container'
-            className={`${styles.container} w-[100%] h-[100%] ${styles.information} overflow-x-hidden overflow-y-scroll `}
+        <Swiper
+            direction={direction}
+            effect={"coverflow"}
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={2}
+            loop={true}
+            autoplay={{
+                delay: 5000,
+                disableOnInteraction: false,
+            }}
+            coverflowEffect={{
+                rotate: 70,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: slideShadows,
+            }}
+            pagination={true}
+            modules={[EffectCoverflow, Pagination, Autoplay, Navigation]}
         >
             {members.map((member, index) => (
-                <div
-                    key={index}
-                    data-index={index}
-                    ref={(el) => (memberRefs.current[index] = el)}
-                    className={`${
-                        styles.member
-                    } rounded-[4px] flex flex-col absolute ${
-                        index === current ? styles.clip : styles.active
-                    }`}
-                    style={{
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        backgroundImage: `url(${member.imageSrc})`,
-                        backgroundRepeat: "no-repeat",
-                        backgroundPosition: "center",
-                        zIndex: 10 - index,
-                        backgroundSize: "cover",
-                    }}
-                >
-                    <h2 className='text-black flex sm:static absolute top-[-40px] font-[500] items-end mt-10'>
-                        {member.name}
-                    </h2>
-                    <p
-                        style={{ fontSize: "clamp(8px, 2vw, 18px)" }}
-                        className='xl:w-[30vw] w-[38vw] sm:w-[45vw] max-h-[10vh] sm:static absolute text-center text-black'
-                    >
-                        {member.description}
-                    </p>
-                    <div className='flex sm:w-[70vw] w-[100vw] justify-center lg:gap-40 sm:gap-20 gap-10 sm:pb-20 sm:h-[70vh] items-end '>
-                        <Link
-                            href={member.google}
-                            key='index'
-                            className='social-media-icon'
-                        >
-                            <Image
-                                className='xl:w-[50px] xl:h-[50px] md:w-[40px] md:h-[40px] sm:w-[30px] sm:h-[30px] w-[22px] h-[22px]'
-                                width={50}
-                                height={50}
-                                src='/icons/Google.svg'
-                                alt='Gmail'
-                            />
-                        </Link>
-                        <Link
-                            href={member.linkedin}
-                            key='index'
-                            className='social-media-icon'
-                        >
-                            <Image
-                                className='xl:w-[50px] xl:h-[50px] md:w-[40px] md:h-[40px] sm:w-[30px] sm:h-[30px] w-[22px] h-[22px]'
-                                width={50}
-                                height={50}
-                                src='/icons/Linkedin.png'
-                                alt='Linkedin'
-                            />
-                        </Link>
-                        <Link
-                            href={member.github}
-                            key='index'
-                            className='social-media-icon'
-                        >
-                            <Image
-                                className='xl:w-[50px] xl:h-[50px] md:w-[40px] md:h-[40px] sm:w-[30px] sm:h-[30px] w-[22px] h-[22px]'
-                                width={50}
-                                height={50}
-                                src='/icons/Github.svg'
-                                alt='Github'
-                            />
-                        </Link>
+                <SwiperSlide key={index}>
+                    <div className='h-full w-full flex flex-col items-center justify-evenly'>
+                        <img
+                            src={member.imageSrc}
+                            alt='member'
+                            className='rounded-full w-[30vw] sm:w-[80px] lg:w-[140px] '
+                        />
+                        <div className='flex flex-col items-center'>
+                            <h2 className='text-red-600'>{member.name}</h2>
+                            <p className='slide-content p-5 text-black'>
+                                {member.description}
+                            </p>
+                            <div className='flex w-full justify-evenly slide-content'>
+                                <Link
+                                    href={member.google}
+                                    key='index'
+                                    className='social-media-icon'
+                                >
+                                    <Image
+                                        className='xl:w-[50px] xl:h-[50px] md:w-[40px] md:h-[40px] sm:w-[30px] sm:h-[30px] w-[22px] h-[22px]'
+                                        width={50}
+                                        height={50}
+                                        src='/icons/Google.svg'
+                                        alt='Gmail'
+                                    />
+                                </Link>
+                                <Link
+                                    href={member.linkedin}
+                                    key='index'
+                                    className='social-media-icon'
+                                >
+                                    <Image
+                                        className='xl:w-[50px] xl:h-[50px] md:w-[40px] md:h-[40px] sm:w-[30px] sm:h-[30px] w-[22px] h-[22px]'
+                                        width={50}
+                                        height={50}
+                                        src='/icons/Linkedin.png'
+                                        alt='Linkedin'
+                                    />
+                                </Link>
+                                <Link
+                                    href={member.github}
+                                    key='index'
+                                    className='social-media-icon'
+                                >
+                                    <Image
+                                        className='xl:w-[50px] xl:h-[50px] md:w-[40px] md:h-[40px] sm:w-[30px] sm:h-[30px] w-[22px] h-[22px]'
+                                        width={50}
+                                        height={50}
+                                        src='/icons/Github.svg'
+                                        alt='Github'
+                                    />
+                                </Link>
+                            </div>
+                        </div>
                     </div>
-                    {/* <p className='absolute text-red-600 top-0'>Information</p> */}
-                </div>
+                </SwiperSlide>
             ))}
-        </div>
+        </Swiper>
     );
-};
-
-export default Members;
+}
