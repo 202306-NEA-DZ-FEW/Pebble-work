@@ -13,17 +13,20 @@ const Language = () => {
 
     const [rotationDegree, setRotationDegree] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
-
+    const [touchStartTime, setTouchStartTime] = useState(null);
     const handleStart = () => {
         setIsDragging(true);
+        setTouchStartTime(Date.now());
     };
 
+    // const handleStop = () => {
+    //     setTimeout(() => {
+    //         setIsDragging(false);
+    //     }, 100);
+    // };
     const handleStop = () => {
-        setTimeout(() => {
-            setIsDragging(false);
-        }, 100);
+        setIsDragging(false);
     };
-
     const handleClickOutside = (event) => {
         if (
             dropdownRef.current &&
@@ -44,17 +47,17 @@ const Language = () => {
     }, []);
 
     const toggleDropdown = (event) => {
-        if (isDragging) {
+        if (isDragging || Date.now() - touchStartTime < 200) {
             return;
         }
-        if (!isDragging) {
-            // Prevents the dropdown from closing if the event is a touch event
-            if (event.type === "touchstart") {
-                event.stopPropagation();
-            }
-            setIsDropdownOpen(!isDropdownOpen);
-            setRotationDegree(isDropdownOpen ? 0 : 180);
+
+        // Prevents the dropdown from closing if the event is a touch event
+        if (event.type === "touchstart") {
+            event.stopPropagation();
         }
+
+        setIsDropdownOpen(!isDropdownOpen);
+        setRotationDegree(isDropdownOpen ? 0 : 180);
     };
 
     const changeLanguage = (lng) => {
