@@ -138,7 +138,7 @@ const AboutPage = () => {
                 </div>
                 <div
                     id='tech-stack'
-                    className={`${styles.slideInFromRight1} text-center relative mb-10 mt-10 w-96 flex flex-col items-center`}
+                    className={`${styles.slideInFromRight1} text-center relative h-[550px] w-96 flex justify-center flex-col items-center`}
                 >
                     <TechStack />
                     <div style={{ position: "absolute" }}>
@@ -148,9 +148,6 @@ const AboutPage = () => {
                         <h5 className={`${styles.techText1}`}>
                             {t("about:about:techStackTitle")}
                         </h5>
-                        <h2 className={`${styles.techText2}`}>
-                            {/* {t("about:about:techStackDescription")} */}
-                        </h2>
                     </div>
                 </div>
             </div>

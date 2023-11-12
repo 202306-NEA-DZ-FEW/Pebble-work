@@ -23,6 +23,15 @@
     height: 100%;
     animation: spin 20s linear infinite;
 }
+.svgContainer1 {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: spin 20s linear infinite reverse;
+}
 @keyframes counterSpin {
     from {
         transform: rotate(0deg);
@@ -31,8 +40,16 @@
         transform: rotate(-1turn);
     }
 }
-.svg {
+.svgContainer .svg {
     animation: counterSpin 20s linear infinite;
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    background-color: transparent;
+    border-radius: 100%;
+}
+.svgContainer1 .svg {
+    animation: counterSpin 20s linear infinite reverse;
     position: absolute;
     width: 55px;
     height: 55px;
@@ -104,52 +121,52 @@
     transform: translate(-50%, -50%);
 }
 
-.svg:nth-child(1):hover {
+.svgContainer .svg:nth-child(1):hover {
     z-index: 10;
     width: 60px;
     height: 60px;
     cursor: pointer;
 }
 
-.svg:nth-child(2):hover {
+.svgContainer .svg:nth-child(2):hover {
+    z-index: 10;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}
+.svgContainer .svg:nth-child(3):hover {
+    width: 60px;
+    height: 60px;
+    z-index: 10;
+    cursor: pointer;
+}
+.svgContainer .svg:nth-child(4):hover {
+    width: 60px;
+    height: 60px;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.svgContainer1 .svg:nth-child(1):hover {
     z-index: 10;
     width: 55px;
     height: 55px;
     cursor: pointer;
 }
 
-.svg:nth-child(3):hover {
+.svgContainer1 .svg:nth-child(2):hover {
     z-index: 10;
     width: 55px;
     height: 55px;
     cursor: pointer;
 }
-
-.svg:nth-child(4):hover {
-    z-index: 10;
-    width: 60px;
-    height: 60px;
-    cursor: pointer;
-}
-.svg:nth-child(5):hover {
-    width: 60px;
-    height: 60px;
-    z-index: 10;
-    cursor: pointer;
-}
-.svg:nth-child(6):hover {
+.svgContainer1 .svg:nth-child(3):hover {
     width: 55px;
     height: 55px;
     z-index: 10;
     cursor: pointer;
 }
-.svg:nth-child(7):hover {
-    width: 60px;
-    height: 60px;
-    z-index: 10;
-    cursor: pointer;
-}
-.svg:nth-child(8):hover {
+.svgContainer1 .svg:nth-child(4):hover {
     width: 55px;
     height: 55px;
     z-index: 10;
@@ -174,13 +191,31 @@
 .textContent h3 {
     font-weight: bold;
 }
-.svg:nth-child(1) {
+.svgContainer .svg:nth-child(1) {
     position: absolute;
-    top: 300px;
+    top: 350px;
     left: 120px;
     transition: width 0.5s linear, height 0.5s linear;
 }
-.svg:nth-child(2) {
+.svgContainer .svg:nth-child(2) {
+    position: absolute;
+    top: 120px;
+    left: -110px;
+    transition: width 0.5s linear, height 0.5s linear;
+}
+.svgContainer .svg:nth-child(3) {
+    position: absolute;
+    top: 120px;
+    left: 350px;
+    transition: width 0.5s linear, height 0.5s linear;
+}
+.svgContainer .svg:nth-child(4) {
+    position: absolute;
+    top: -110px;
+    left: 120px;
+    transition: width 0.5s linear, height 0.5s linear;
+}
+.svgContainer1 .svg:nth-child(1) {
     position: absolute;
     top: 50px;
     left: 200px;
@@ -188,7 +223,7 @@
     height: 40px;
     transition: width 0.6s linear, height 0.6s linear;
 }
-.svg:nth-child(3) {
+.svgContainer1 .svg:nth-child(2) {
     position: absolute;
     width: 40px;
     height: 40px;
@@ -196,19 +231,7 @@
     left: 50px;
     transition: width 0.6s linear, height 0.6s linear;
 }
-.svg:nth-child(4) {
-    position: absolute;
-    top: 118px;
-    left: -60px;
-    transition: width 0.5s linear, height 0.5s linear;
-}
-.svg:nth-child(5) {
-    position: absolute;
-    top: 120px;
-    left: 300px;
-    transition: width 0.5s linear, height 0.5s linear;
-}
-.svg:nth-child(6) {
+.svgContainer1 .svg:nth-child(3) {
     position: absolute;
     top: 200px;
     left: 200px;
@@ -216,13 +239,7 @@
     height: 40px;
     transition: width 0.6s linear, height 0.6s linear;
 }
-.svg:nth-child(7) {
-    position: absolute;
-    top: -60px;
-    left: 120px;
-    transition: width 0.5s linear, height 0.5s linear;
-}
-.svg:nth-child(8) {
+.svgContainer1 .svg:nth-child(4) {
     position: absolute;
     top: 50px;
     left: 50px;
