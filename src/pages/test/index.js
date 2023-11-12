@@ -1,150 +1,227 @@
-import React, { useRef, useEffect, useCallback } from "react";
-import { useTranslation } from "next-i18next";
-import styles from "@/styles/about.module.css";
-import Members from "@/components/Cards/Aboutus/Members";
+import React, { useRef, useEffect, useCallback, useState } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import TechStack from "@/components/Cards/Aboutus/TechStack";
 
-const AboutPage = () => {
-    const { t } = useTranslation();
-    const members = [
-        {
-            imageSrc: "https://avatars.githubusercontent.com/u/137820288?v=4",
-            description:
-                "I solve problems with love and care I learn eagerly and always dare I observe keenly and find the flaws I am a person with a noble cause.",
-            name: "Halla Hamidi",
-            google: "https://mail.google.com/mail/u/0/?fs=1&to=aniabisso.16@gmail.com&tf=cm",
-            linkedin: "https://www.linkedin.com/in/halla-hamidi-989197229/",
-            github: "https://github.com/Halla24",
-        },
-        {
-            imageSrc: "https://avatars.githubusercontent.com/u/137835769?v=4",
-            name: "Takieddine Dilmi",
-            description:
-                "I solve problems with love and care I learn eagerly and always dare I observe keenly and find the flaws I am a person with a noble cause.",
-            google: "https://mail.google.com/mail/u/0/?fs=1&to=angeldilmi@gmail.com&tf=cm",
-            linkedin: "https://www.linkedin.com/in/takidilmi/",
-            github: "https://github.com/takidilmi",
-        },
-        {
-            imageSrc: "https://avatars.githubusercontent.com/u/64746106?v=4",
-            name: "Youssouf Sergma",
-            description:
-                "I solve problems with love and care I learn eagerly and always dare I observe keenly and find the flaws I am a person with a noble cause.",
-            google: "https://mail.google.com/mail/u/0/?fs=1&to=sergmayoussouf@gmail.com&tf=cm",
-            linkedin: "https://www.linkedin.com/in/sergma/",
-            github: "https://github.com/ysergma",
-        },
-        {
-            imageSrc: "https://avatars.githubusercontent.com/u/95043080?v=4",
-            name: "Manel H.Haddoud",
-            description:
-                "I solve problems with love and care I learn eagerly and always dare I observe keenly and find the flaws I am a person with a noble cause.",
-            google: "https://mail.google.com/mail/u/0/?fs=1&to=manelhasnahaddoud@gmail.com&tf=cm",
-            linkedin:
-                "https://www.linkedin.com/in/manel-hasna-haddoud-aa5095278/",
-            github: "https://github.com/hasnahadd",
-        },
-        {
-            imageSrc: "https://avatars.githubusercontent.com/u/138169337?v=4",
-            name: "Louisa Hamrit",
-            description:
-                "I solve problems with love and care I learn eagerly and always dare I observe keenly and find the flaws I am a person with a noble cause.",
-            google: "https://mail.google.com/mail/u/0/?fs=1&to=l19.45.127.0@gmail.com&tf=cm",
-            linkedin: "https://www.linkedin.com/in/louisa-h-958733294/",
-            github: "https://github.com/Polichinell",
-        },
-    ];
-    const scrollContainerRef = useRef();
-    let lastScrollTop = 0;
-    const onScroll = useCallback((e) => {
-        let st = e.target.scrollTop;
-        if (st < lastScrollTop) {
-            e.target.scrollTop = lastScrollTop;
-        } else {
-            lastScrollTop = st;
-        }
+import styles from "./TechStack.module.css";
+
+const TechStack = () => {
+    const containerRef = useRef(null);
+    const pngRef = useRef(null);
+    const svgRefs = useRef([]);
+    svgRefs.current = new Array(8)
+        .fill()
+        .map((_, i) => svgRefs.current[i] || React.createRef());
+
+    const timer = useRef(); // Move timer inside the component
+
+    // Wrap the handlers with useCallback to avoid creating new functions on each render
+    const handleMouseOver = useCallback(() => {
+        timer.current = setTimeout(() => {
+            if (containerRef.current) {
+                containerRef.current.style.animationPlayState = "paused";
+            }
+            if (pngRef.current) {
+                pngRef.current.style.animationPlayState = "paused";
+            }
+            svgRefs.current.forEach((ref) => {
+                if (ref.current) {
+                    ref.current.style.animationPlayState = "paused";
+                }
+            });
+        }, 400);
     }, []);
 
-    useEffect(() => {
-        scrollContainerRef.current.addEventListener("scroll", onScroll);
-
-        return () => {
-            if (scrollContainerRef.current) {
-                scrollContainerRef.current.removeEventListener(
-                    "scroll",
-                    onScroll
-                );
+    const handleMouseOut = useCallback(() => {
+        clearTimeout(timer.current);
+        if (containerRef.current) {
+            containerRef.current.style.animationPlayState = "running";
+        }
+        if (pngRef.current) {
+            pngRef.current.style.animationPlayState = "running";
+        }
+        svgRefs.current.forEach((ref) => {
+            if (ref.current) {
+                ref.current.style.animationPlayState = "running";
             }
-        };
-    }, [onScroll]);
+        });
+    }, []);
 
+    // Clear the timer when the component unmounts
+    useEffect(() => {
+        return () => {
+            clearTimeout(timer.current);
+        };
+    }, []);
     return (
-        <>
+        <div className={`z-10 ${styles.container}`} ref={containerRef}>
             <div
-                className={`flex flex-col text-justify items-center justify-center overflow-hidden`}
+                ref={svgRefs.current[0]}
+                className={`${styles.tooltip} ${styles.svg} `}
+                onMouseOver={handleMouseOver}
+                onMouseOut={handleMouseOut}
             >
-                <div
-                    style={{
-                        backgroundImage: `url(/images/AboutPebble.png)`,
-                        backgroundRepeat: "no-repeat",
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                    }}
-                    className='2xl:max-w-[1440px] xl:h-[780px] lg:max-w-[1233px] lg:h-[630px] md:min-h-[575px] mb-10 pb-4 w-[100vw] min-h-[363px] flex flex-col items-center justify-center'
-                >
-                    <div className={`flex flex-col flex-wrap items-center`}>
-                        <h1
-                            className={`${styles.text0} ${styles.slideInFromRight1}`}
-                        >
-                            {t("about:about:title")}
-                        </h1>
-                        <p
-                            className={`${styles.text1} ${styles.slideInFromRight1} flex text-[#878787] px-4`}
-                        >
-                            {t("about:about.description")}
-                        </p>
+                <img src='/Tech/icons8-css.svg' />
+                <span className={styles.right}>
+                    <div className={styles.textContent}>
+                        <h3>CSS3</h3>
+                        <ul>
+                            <li>Style sheet language for web</li>
+                            <li>Beautiful, responsive, interactive</li>
+                            <li>Enhanced design possibilities</li>
+                        </ul>
                     </div>
-                </div>
-                <div
-                    ref={scrollContainerRef}
-                    className={`2xl:w-[1500px] xl:w-[1250px] lg:w-[1010px] md:w-[755px] sm:w-[630px] w-[90vw] lg:h-[600px] sm:h-[400px] h-[800px] rounded-[8px] flex flex-col items-center`}
-                >
-                    <h2
-                        className={`${styles.teamText} text-[40px] text-[#1A1A1A]`}
-                    >
-                        {t("about:about:ourTeam")}
-                    </h2>
-                    <p className='text-center'>
-                        A team that is meant to make a difference, We thrive on
-                        working together to turn ideas into reality
-                    </p>
-                    <Members
-                        members={members}
-                        scrollContainerRef={scrollContainerRef}
-                    />
-                </div>
-                <div
-                    id='tech-stack'
-                    className={`${styles.slideInFromRight1} text-center relative h-[550px] w-96 flex justify-center flex-col items-center`}
-                >
-                    <TechStack />
-                    <div style={{ position: "absolute" }}>
-                        <h6 className={`${styles.techText}`}>
-                            {t("about:about:techStack")}
-                        </h6>
-                        <h5 className={`${styles.techText1}`}>
-                            {t("about:about:techStackTitle")}
-                        </h5>
+                    <i></i>
+                </span>
+            </div>
+            <div
+                ref={svgRefs.current[1]}
+                onMouseOver={handleMouseOver}
+                onMouseOut={handleMouseOut}
+                className={`${styles.tooltip} ${styles.svg}`}
+            >
+                <img src='/Tech/icons8-firebase.svg' />
+                <span className={styles.right}>
+                    <div className={styles.textContent}>
+                        <h3>firebase</h3>
+                        <ul>
+                            <li>Backend platform for apps</li>
+                            <li>Secure, scalable, reliable</li>
+                            <li>Seamless integration with web</li>
+                        </ul>
                     </div>
-                </div>
+                    <i></i>
+                </span>
+            </div>
+            <img
+                className={styles.png}
+                src='/Tech/techstack.png'
+                ref={pngRef}
+            />
+            <div
+                className={`${styles.tooltip} ${styles.svg}`}
+                ref={svgRefs.current[2]}
+                onMouseOver={handleMouseOver}
+                onMouseOut={handleMouseOut}
+            >
+                <img src='/Tech/icons8-nextjs.svg' />
+                <span className={styles.right}>
+                    <div className={styles.textContent}>
+                        <h3>Next.js</h3>
+                        <ul>
+                            <li>React framework for web</li>
+                            <li>Fast, easy, versatile</li>
+                            <li>Enjoyable development experience</li>
+                        </ul>
+                    </div>
+                    <i></i>
+                </span>
+            </div>
+            <div
+                ref={svgRefs.current[3]}
+                onMouseOver={handleMouseOver}
+                onMouseOut={handleMouseOut}
+                className={`${styles.tooltip} ${styles.svg}`}
+            >
+                <img src='/Tech/icons8-tailwind-css.svg' />
+                <span className={styles.right}>
+                    <div className={styles.textContent}>
+                        <h3>TailwindCSS</h3>
+                        <ul>
+                            <li>Utility-first CSS framework</li>
+                            <li>Customizable, modular, efficient</li>
+                            <li>Rapid prototyping and development</li>
+                        </ul>
+                    </div>
+                    <i></i>
+                </span>
+            </div>
+            <div
+                ref={svgRefs.current[4]}
+                onMouseOver={handleMouseOver}
+                onMouseOut={handleMouseOut}
+                className={`${styles.tooltip} ${styles.svg}`}
+            >
+                <img src='/Tech/jest-svgrepo.svg' />
+                <span className={styles.right}>
+                    <div className={styles.textContent}>
+                        <h3>Jest</h3>
+                        <ul>
+                            <li>JavaScript testing framework</li>
+                            <li>Simple, fast, powerful</li>
+                            <li>Confident code quality assurance</li>
+                        </ul>
+                    </div>
+                    <i></i>
+                </span>
+            </div>
+            <div
+                ref={svgRefs.current[5]}
+                onMouseOver={handleMouseOver}
+                onMouseOut={handleMouseOut}
+                className={`${styles.tooltip} ${styles.svg}`}
+            >
+                <img src='/Tech/i18next.svg' />
+                <span className={styles.right}>
+                    <div className={styles.textContent}>
+                        <h3>I18next</h3>
+                        <ul>
+                            <li>
+                                Internationalization framework for JavaScript
+                            </li>
+                            <li>Learn once, translate everywhere</li>
+                            <li>
+                                Complete translation solution for web, mobile
+                                and desktop
+                            </li>
+                        </ul>
+                    </div>
+                    <i></i>
+                </span>
+            </div>
+            <div
+                ref={svgRefs.current[6]}
+                onMouseOver={handleMouseOver}
+                onMouseOut={handleMouseOut}
+                className={`${styles.tooltip} ${styles.svg}`}
+            >
+                <img src='/Tech/material-ui.svg' />
+                <span className={styles.right}>
+                    <div className={styles.textContent}>
+                        <h3>Material UI</h3>
+                        <ul>
+                            <li>React components based on Material Design</li>
+                            <li>Beautiful, responsive, customizable</li>
+                            <li>Comprehensive and production-ready library</li>
+                        </ul>
+                        <i></i>
+                    </div>
+                </span>
+            </div>
+            <div
+                ref={svgRefs.current[7]}
+                onMouseOver={handleMouseOver}
+                onMouseOut={handleMouseOut}
+                className={`${styles.tooltip} ${styles.svg}`}
+            >
+                <img src='/Tech/DaisyUi.webp' />
+                <span className={styles.right}>
+                    <div className={styles.textContent}>
+                        <h3>daisyUI</h3>
+                        <ul>
+                            <li>Tailwind CSS component library</li>
+                            <li>No JavaScript, pure CSS</li>
+                            <li>Cute and functional design</li>
+                        </ul>
+                        <i></i>
+                    </div>
+                </span>
             </div>
         </>
     );
-};
+}
 
-export default AboutPage;
+export default AnimatedTabs;
 
+export default TechStack;
 export async function getStaticProps({ locale }) {
     return {
         props: {
