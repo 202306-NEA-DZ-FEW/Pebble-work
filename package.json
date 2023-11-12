@@ -33,6 +33,7 @@
         "emailjs-com": "^3.2.0",
         "eslint-plugin-jest": "^26.6.0",
         "firebase": "^10.5.2",
+        "framer-motion": "^10.16.4",
         "i18n": "^0.15.1",
         "i18next": "^21.9.0",
         "i18next-fs-backend": "^2.2.0",
