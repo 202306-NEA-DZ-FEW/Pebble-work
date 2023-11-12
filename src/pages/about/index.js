@@ -108,7 +108,7 @@ const AboutPage = () => {
                 </div>
                 <div
                     ref={scrollContainerRef}
-                    className={`2xl:w-[1500px] xl:w-[1250px] lg:w-[1010px] md:w-[755px] sm:w-[630px] w-[90vw] lg:h-[600px] sm:h-[400px] h-[800px] rounded-[8px] flex flex-col items-center`}
+                    className={`md:w-[755px] sm:w-[630px] w-[90vw] lg:h-[600px] sm:h-[400px] h-[800px] rounded-[8px] flex flex-col items-center`}
                 >
                     <h2
                         className={`${styles.teamText} text-[40px] text-[#1A1A1A]`}
