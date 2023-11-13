@@ -8,42 +8,7 @@ function FirestoreLocation({ onInputChange, inputValue1, setInputValue1 }) {
         onInputChange(selectedLocation);
         console.log(`Selected location: ${selectedLocation}`);
     };
-    // const [isFormVisible, setFormVisible] = useState(false);
-    // const buttonRef = useRef(null);
-    // const formRef = useRef(null);
 
-    // const handleClickOutside = (event) => {
-    //     if (!buttonRef.current.contains(event.target) && formRef.current && !formRef.current.contains(event.target)) {
-    //         setFormVisible(false);
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     window.addEventListener("click", handleClickOutside);
-
-    //     return () => {
-    //         window.removeEventListener("click", handleClickOutside);
-    //     };
-    // }, []);
-
-    // const handleButtonClick = () => {
-    //     setFormVisible(!isFormVisible);
-    // };
-
-    // const handleLocationItemClick = (selectedLocation) => {
-    //     setInputValue1(selectedLocation);
-    //     onInputChange(selectedLocation);
-    //     setFormVisible(false);
-    // };
-
-    // const handleLocationChange = (e) => {
-    //     setInputValue1(e.target.value);
-
-    //     // Clear the filtered list
-    //     setFilteredLocations([]);
-
-    //     // const inputLocation = e.target.value.toLowerCase();
-    // }
     const fetchLocationData = async () => {
         try {
             const locationsDocRef = doc(db, "database", "locations");
@@ -84,31 +49,20 @@ function FirestoreLocation({ onInputChange, inputValue1, setInputValue1 }) {
                                 ([key, value], index) => (
                                     <li
                                         key={index}
-                                        className='my-2 block hover:bg-gray-200 cursor-pointer'
-                                        onClick={() =>
-                                            handleLocationClick(value)
-                                        }
+                                        className='my-2 block hover:bg-gray-400 cursor-pointer'
+                                        onClick={() => {
+                                            handleLocationClick(value);
+
+                                            document
+                                                .getElementById("my_modal_1")
+                                                .close();
+                                        }}
                                     >
                                         {value}
                                     </li>
                                 )
                             )}
                         </ul>
-                    </div>
-
-                    <div className='modal-action'>
-                        <form method='dialog'>
-                            <button
-                                className='btn'
-                                onClick={() =>
-                                    document
-                                        .getElementById("my_modal_1")
-                                        .close()
-                                }
-                            >
-                                Close
-                            </button>
-                        </form>
                     </div>
                 </div>
             </dialog>
