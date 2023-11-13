@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+
 import React, { useState, useEffect } from "react";
 
 import styles from "@/styles/Events.module.css";
@@ -144,8 +144,7 @@ const Calendar = ({ checkEvents, resetDays }) => {
                 selectedDays[selectedMonthKey].includes(day);
 
             calendarDays.push(
-                <Link
-                    href=''
+                <button
                     key={`day-${day}`}
                     className={`${styles.calendarDay} ${
                         isSelected ? styles.selectedDay : ""
@@ -153,7 +152,7 @@ const Calendar = ({ checkEvents, resetDays }) => {
                     onClick={() => handleDateClick(day)}
                 >
                     {day}
-                </Link>
+                </button>
             );
         }
 
