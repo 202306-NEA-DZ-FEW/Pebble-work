@@ -19,59 +19,29 @@ const Calendar = ({ checkEvents, resetDays }) => {
             currentDate.getMonth(),
             day + 1
         );
-        const formattedDate = selectedDate.toISOString().split("T")[0];
-        const selectedMonthKey = `${currentDate.getFullYear()}-${currentDate.getMonth()}`;
 
-        setSelectedDays((prevSelectedDays) => {
-            const updatedSelectedDays = { ...prevSelectedDays };
-            const currentMonthDays =
-                updatedSelectedDays[selectedMonthKey] || [];
-            const dayIndex = currentMonthDays.indexOf(day);
+        if (rangeStart === null) {
+            setRangeStart(selectedDate);
+        } else {
+            let startDate = rangeStart;
+            let endDate = selectedDate;
 
-            if (rangeStart === null) {
-                setRangeStart(day);
-            } else {
-                const rangeEnd = day;
-                const range =
-                    rangeEnd > rangeStart
-                        ? Array.from(
-                              { length: rangeEnd - rangeStart + 1 },
-                              (_, i) => rangeStart + i
-                          )
-                        : Array.from(
-                              { length: rangeStart - rangeEnd + 1 },
-                              (_, i) => rangeEnd + i
-                          );
-                console.log(range);
-                range.forEach((day) => {
-                    const dayIndex = currentMonthDays.indexOf(day);
-                    if (dayIndex === -1) {
-                        currentMonthDays.push(day);
-                    }
-                });
-                setRangeStart(null);
-                checkEvents(
-                    range.map(
-                        (day) =>
-                            new Date(
-                                currentDate.getFullYear(),
-                                currentDate.getMonth(),
-                                day + 1
-                            )
-                                .toISOString()
-                                .split("T")[0]
-                    )
-                );
+            if (startDate > endDate) {
+                [startDate, endDate] = [endDate, startDate];
             }
 
-            if (currentMonthDays.length === 0) {
-                delete updatedSelectedDays[selectedMonthKey];
-            } else {
-                updatedSelectedDays[selectedMonthKey] = currentMonthDays;
-            }
+            const range = [];
+            let currentDate = startDate;
 
-            return updatedSelectedDays;
-        });
+            while (currentDate <= endDate) {
+                range.push(new Date(currentDate));
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+            console.log(range);
+
+            checkEvents(range.map((date) => date.toISOString().split("T")[0]));
+            setRangeStart(null);
+        }
     };
 
     // handle next month button click
