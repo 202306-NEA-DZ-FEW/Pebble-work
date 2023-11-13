@@ -54,15 +54,6 @@ const AboutPage = () => {
             linkedin: "https://www.linkedin.com/in/louisa-h-958733294/",
             github: "https://github.com/Polichinell",
         },
-        {
-            imageSrc: "https://avatars.githubusercontent.com/u/137820288?v=4",
-            name: "Halla Hamidi",
-            description:
-                "I solve problems with love and care I learn eagerly and always dare I observe keenly and find the flaws I am a person with a noble cause.",
-            google: "https://mail.google.com/mail/u/0/?fs=1&to=aniabisso.16@gmail.com&tf=cm",
-            linkedin: "https://www.linkedin.com/in/halla-hamidi-989197229/",
-            github: "https://github.com/Halla24",
-        },
     ];
     const scrollContainerRef = useRef();
     let lastScrollTop = 0;
@@ -117,10 +108,7 @@ const AboutPage = () => {
                 </div>
                 <div
                     ref={scrollContainerRef}
-                    className={`${styles.information} xl:h-[750px] xl:w-[750px] md:h-[600px] md:w-[600px] h-[250px] w-[250px] sm:h-[400px] sm:w-[400px] pt-8 rounded-[8px] flex flex-col items-center`}
-                    style={{
-                        overflowY: "hidden",
-                    }}
+                    className={`md:w-[755px] sm:w-[630px] w-[90vw] lg:h-[600px] sm:h-[400px] h-[800px] rounded-[8px] flex flex-col items-center`}
                 >
                     <h2
                         className={`${styles.teamText} text-[40px] text-[#1A1A1A]`}
@@ -138,7 +126,7 @@ const AboutPage = () => {
                 </div>
                 <div
                     id='tech-stack'
-                    className={`${styles.slideInFromRight1} text-center relative mb-10 mt-10 w-96 flex flex-col items-center`}
+                    className={`${styles.slideInFromRight1} text-center relative h-[550px] w-96 flex justify-center flex-col items-center`}
                 >
                     <TechStack />
                     <div style={{ position: "absolute" }}>
@@ -148,9 +136,6 @@ const AboutPage = () => {
                         <h5 className={`${styles.techText1}`}>
                             {t("about:about:techStackTitle")}
                         </h5>
-                        <h2 className={`${styles.techText2}`}>
-                            {/* {t("about:about:techStackDescription")} */}
-                        </h2>
                     </div>
                 </div>
             </div>

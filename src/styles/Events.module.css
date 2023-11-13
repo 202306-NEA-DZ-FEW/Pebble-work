@@ -68,3 +68,6 @@
 .information::-webkit-scrollbar-track {
     background-color: transparent;
 }
+.selectedRange {
+    text-decoration: underline;
+}

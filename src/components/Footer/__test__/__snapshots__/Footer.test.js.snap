@@ -69,7 +69,8 @@ exports[`Footer renders correctly 1`] = `
             >
               <img
                 alt="Facebook"
-                src="/icons/Facebook.png"
+                class="md:w-[50px] w-[30px]"
+                src="/icons/Facebook.svg"
               />
             </a>
           </li>
@@ -79,7 +80,8 @@ exports[`Footer renders correctly 1`] = `
             >
               <img
                 alt="Gmail"
-                src="/icons/Google.png"
+                class="md:w-[50px] w-[30px]"
+                src="/icons/Google.svg"
               />
             </a>
           </li>
@@ -88,8 +90,9 @@ exports[`Footer renders correctly 1`] = `
               href="#"
             >
               <img
-                alt="Twitter"
-                src="/icons/Twitter.png"
+                alt="Github"
+                class="md:w-[50px] w-[30px]"
+                src="/icons/Github.svg"
               />
             </a>
           </li>

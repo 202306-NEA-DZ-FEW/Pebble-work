@@ -13,15 +13,47 @@
     height: 300px;
     border-radius: 50%;
     margin: 0 auto;
+}
+.svgContainer {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     animation: spin 20s linear infinite;
 }
-
-.svg {
+.svgContainer1 {
     position: absolute;
-    width: 65px;
-    height: 65px;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: spin 20s linear infinite reverse;
+}
+@keyframes counterSpin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-1turn);
+    }
+}
+.svgContainer .svg {
+    animation: counterSpin 20s linear infinite;
+    position: absolute;
+    width: 55px;
+    height: 55px;
     background-color: transparent;
-    transition: background-color 0.5s;
+    border-radius: 100%;
+}
+.svgContainer1 .svg {
+    animation: counterSpin 20s linear infinite reverse;
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    background-color: transparent;
     border-radius: 100%;
 }
 
@@ -84,126 +116,134 @@
     position: absolute;
     top: 50%;
     left: 50%;
-
     width: 100px;
     height: 100px;
-    animation: spin 20s linear infinite reverse;
+    transform: translate(-50%, -50%);
 }
 
-.svg:nth-child(1):hover {
-    background-color: red;
+.svgContainer .svg:nth-child(1):hover {
+    z-index: 10;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
 }
 
-.svg:nth-child(2):hover {
-    background-color: blue;
+.svgContainer .svg:nth-child(2):hover {
+    z-index: 10;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}
+.svgContainer .svg:nth-child(3):hover {
+    width: 60px;
+    height: 60px;
+    z-index: 10;
+    cursor: pointer;
+}
+.svgContainer .svg:nth-child(4):hover {
+    width: 60px;
+    height: 60px;
+    z-index: 10;
+    cursor: pointer;
 }
 
-.svg:nth-child(4):hover {
-    background-color: green;
+.svgContainer1 .svg:nth-child(1):hover {
+    z-index: 10;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
 }
 
-.svg:nth-child(5):hover {
-    background-color: black;
+.svgContainer1 .svg:nth-child(2):hover {
+    z-index: 10;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
 }
-.svg:nth-child(6):hover {
-    width: 65px;
-    height: 65px;
-    background-color: rgb(11, 148, 102);
+.svgContainer1 .svg:nth-child(3):hover {
+    width: 55px;
+    height: 55px;
+    z-index: 10;
+    cursor: pointer;
 }
-.svg:nth-child(7):hover {
-    width: 65px;
-    height: 65px;
-    background-color: rgb(11, 148, 102);
-}
-.svg:nth-child(8):hover {
-    width: 65px;
-    height: 65px;
-    background-color: rgb(11, 148, 102);
-}
-.svg:nth-child(9):hover {
-    width: 65px;
-    height: 65px;
-    background-color: rgb(11, 148, 102);
+.svgContainer1 .svg:nth-child(4):hover {
+    width: 55px;
+    height: 55px;
+    z-index: 10;
+    cursor: pointer;
 }
 
-.svg:nth-child(1) {
-    top: 50%;
-    left: 0;
-
-    animation: spin 20s linear infinite reverse;
-}
-
-.svg:nth-child(2) {
-    top: 0;
-    left: 50%;
-
-    animation: spin 20s linear infinite reverse;
-}
 .textContent {
     padding: 8px;
 }
 .textContent ul {
-    list-style-type: none; /* Remove default bullet points */
+    list-style-type: none;
 }
 
 .textContent li::before {
-    content: "\2022"; /* Add bullet point using Unicode */
-    color: rgb(0, 255, 85); /* Change color of bullet point */
-    display: inline-block; /* Needed to add space between bullet point and text */
-    width: 1em; /* Width of space between bullet point and text */
-    margin-left: 0em; /* Move bullet point to the left so it's in the same position as default bullet points */
+    content: "\2022";
+    color: rgb(0, 255, 85);
+    display: inline-block;
+    width: 1em;
+    margin-left: 0em;
 }
 
 .textContent h3 {
     font-weight: bold;
 }
-
-.svg:nth-child(4) {
-    top: 50%;
-    left: 100%;
-
-    animation: spin 20s linear infinite reverse;
+.svgContainer .svg:nth-child(1) {
+    position: absolute;
+    top: 350px;
+    left: 120px;
+    transition: width 0.5s linear, height 0.5s linear;
 }
-
-.svg:nth-child(5) {
-    top: 100%;
-    left: 50%;
-
-    animation: spin 20s linear infinite reverse;
+.svgContainer .svg:nth-child(2) {
+    position: absolute;
+    top: 120px;
+    left: -110px;
+    transition: width 0.5s linear, height 0.5s linear;
 }
-.svg:nth-child(6) {
+.svgContainer .svg:nth-child(3) {
+    position: absolute;
+    top: 120px;
+    left: 350px;
+    transition: width 0.5s linear, height 0.5s linear;
+}
+.svgContainer .svg:nth-child(4) {
+    position: absolute;
+    top: -110px;
+    left: 120px;
+    transition: width 0.5s linear, height 0.5s linear;
+}
+.svgContainer1 .svg:nth-child(1) {
+    position: absolute;
+    top: 50px;
+    left: 200px;
     width: 40px;
     height: 40px;
-    top: 72%;
-    right: 10%;
-
-    animation: spin 20s linear infinite reverse;
     transition: width 0.6s linear, height 0.6s linear;
 }
-.svg:nth-child(7) {
+.svgContainer1 .svg:nth-child(2) {
+    position: absolute;
     width: 40px;
     height: 40px;
-    bottom: 12%;
-    right: 42%;
-
-    animation: spin 20s linear infinite reverse;
+    bottom: 60px;
+    left: 50px;
     transition: width 0.6s linear, height 0.6s linear;
 }
-.svg:nth-child(8) {
+.svgContainer1 .svg:nth-child(3) {
+    position: absolute;
+    top: 200px;
+    left: 200px;
     width: 40px;
     height: 40px;
-    top: 42%;
-    left: 50%;
-
-    animation: spin 20s linear infinite reverse;
     transition: width 0.6s linear, height 0.6s linear;
 }
-.svg:nth-child(9) {
+.svgContainer1 .svg:nth-child(4) {
+    position: absolute;
+    top: 50px;
+    left: 50px;
     width: 40px;
     height: 40px;
-    bottom: 42%;
-    right: 10%;
-
-    animation: spin 20s linear infinite reverse;
     transition: width 0.6s linear, height 0.6s linear;
 }

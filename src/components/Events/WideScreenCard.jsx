@@ -65,7 +65,7 @@ const WideScreenCard = ({
             letters.forEach((letter, i) => {
                 const span = document.createElement("span");
                 span.innerText = letter;
-                span.style.animationDelay = `${i * 0.1}s`;
+                span.style.animationDelay = `${i * 0.05}s`;
                 span.className = styles.explode;
                 h2Ref.current.appendChild(span);
             });
@@ -86,7 +86,7 @@ const WideScreenCard = ({
             <div
                 onMouseEnter={handleHover}
                 onMouseLeave={handleMouseLeave}
-                className={`${styles.contai} ${styles.card} ${styles.wideFading} border w-[55vw] h-[200px] flex flex-row items-center justify-around gap-2`}
+                className={`${styles.contai} ${styles.card} ${styles.wideFading} shadow-inner w-[55vw] h-[200px] flex flex-row items-center justify-around gap-2`}
             >
                 <h2
                     ref={h2Ref}

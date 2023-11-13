@@ -68,18 +68,26 @@ const EventsPage = (user) => {
         };
     }, [inputValue1]);
 
-    const checkEvents = async (selectedDate) => {
-        const q = query(
-            collection(db, "events"),
-            where("date", "==", selectedDate)
-        );
-
+    const checkEvents = async (dates) => {
         try {
-            const querySnapshot = await getDocs(q);
-            const filteredEvents = querySnapshot.docs.map((doc) => doc.data());
+            const eventsForAllDates = await Promise.all(
+                dates.map(async (selectedDate) => {
+                    const q = query(
+                        collection(db, "events"),
+                        where("date", "==", selectedDate)
+                    );
+
+                    const querySnapshot = await getDocs(q);
+                    return querySnapshot.docs.map((doc) => doc.data());
+                })
+            );
+
+            // Flatten the array of arrays into a single array
+            const filteredEvents = [].concat(...eventsForAllDates);
+            console.log(filteredEvents); // This will log the events for the selected range
+
             setCalendarEvents(filteredEvents);
-            console.log(CalendarEvents);
-            setSelectedDate(selectedDate);
+            setSelectedDate(dates);
         } catch (error) {
             console.error("Error getting filtered events: ", error);
         }
@@ -119,9 +127,9 @@ const EventsPage = (user) => {
             }
 
             // Apply date filter
-            if (selectedDate) {
-                filteredEvents = filteredEvents.filter(
-                    (event) => event.date === selectedDate
+            if (selectedDate && selectedDate.length > 0) {
+                filteredEvents = filteredEvents.filter((event) =>
+                    selectedDate.includes(event.date)
                 );
             }
 
@@ -209,10 +217,8 @@ const EventsPage = (user) => {
                     </div>
                     <div className='flex bg-white z-10 flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7'>
                         <div className='sm:flex s:flex-col sm:items-center sm:justify-center'>
-                            <button className='sm:hidden'>Dates</button>
-
                             <div
-                                className={`border border-black rounded-[8px] z-10 bg-white sm:bg-transparent`}
+                                className={`shadow-inner rounded-[8px] z-10 bg-white sm:bg-transparent`}
                             >
                                 <Calendar
                                     resetDays={resetDays}
