@@ -163,7 +163,32 @@ const Calendar = ({ checkEvents, resetDays }) => {
                                 {renderCalendar()}
                             </div>
                             <h2 className='text-xl font-bold sm:text-[14px] xl:text-[18px]'>
-                                {getMonthName(currentDate)}{" "}
+                                <select
+                                    value={currentDate.getMonth()}
+                                    onChange={(e) =>
+                                        setCurrentDate(
+                                            new Date(
+                                                currentDate.getFullYear(),
+                                                e.target.value
+                                            )
+                                        )
+                                    }
+                                    className='text-xl bg-transparent font-bold sm:text-[14px] xl:text-[18px]'
+                                >
+                                    {Array.from(
+                                        { length: 12 },
+                                        (_, i) => i
+                                    ).map((month) => (
+                                        <option key={month} value={month}>
+                                            {new Date(
+                                                currentDate.getFullYear(),
+                                                month
+                                            ).toLocaleString("default", {
+                                                month: "long",
+                                            })}
+                                        </option>
+                                    ))}
+                                </select>{" "}
                                 <select
                                     value={currentDate.getFullYear()}
                                     onChange={(e) =>
