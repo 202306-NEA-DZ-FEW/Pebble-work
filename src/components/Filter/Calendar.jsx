@@ -164,6 +164,7 @@ const Calendar = ({ checkEvents, resetDays }) => {
                                 {renderCalendar()}
                             </div>
                             <h2 className='text-xl xl:w-[200px] sm:w-[165px] flex justify-center gap-4 font-bold sm:text-[14px] xl:text-[18px]'>
+                                ^
                                 <Dropdown
                                     options={Array.from(
                                         { length: 12 },
@@ -189,6 +190,7 @@ const Calendar = ({ checkEvents, resetDays }) => {
                                         );
                                     }}
                                 />
+                                ^
                                 <Dropdown
                                     options={Array.from(
                                         { length: 6 },
