@@ -3,7 +3,6 @@ import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
 import styles from "@/styles/Events.module.css";
-import DateSelector from "../DateSelector";
 
 // Define the Calendar component
 const Calendar = ({ checkEvents, resetDays }) => {
@@ -182,11 +181,6 @@ const Calendar = ({ checkEvents, resetDays }) => {
                         </button>
                     </div>
                 </div>
-                <DateSelector
-                    resetDays={resetDays}
-                    checkEvents={checkEvents}
-                    setCurrentDate={setCurrentDate}
-                />
             </div>
         </>
     );
