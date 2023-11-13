@@ -11,6 +11,7 @@ const Calendar = ({ checkEvents, resetDays }) => {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDays, setSelectedDays] = useState({});
     const [rangeStart, setRangeStart] = useState(null);
+    const [selectedRange, setSelectedRange] = useState([]);
 
     // Function to handle date click
     const handleDateClick = (day) => {
@@ -37,6 +38,8 @@ const Calendar = ({ checkEvents, resetDays }) => {
                 range.push(new Date(currentDate));
                 currentDate.setDate(currentDate.getDate() + 1);
             }
+
+            setSelectedRange(range);
             console.log(range);
 
             checkEvents(range.map((date) => date.toISOString().split("T")[0]));
@@ -108,16 +111,16 @@ const Calendar = ({ checkEvents, resetDays }) => {
 
         // Render day numbers
         for (let day = 1; day <= daysInMonth; day++) {
-            const selectedMonthKey = `${currentYear}-${currentMonth}`;
-            const isSelected =
-                selectedDays[selectedMonthKey] &&
-                selectedDays[selectedMonthKey].includes(day);
+            const thisDate = new Date(currentYear, currentMonth, day);
+            const isSelected = selectedRange.some(
+                (date) => date.toDateString() === thisDate.toDateString()
+            );
 
             calendarDays.push(
                 <button
                     key={`day-${day}`}
                     className={`${styles.calendarDay} ${
-                        isSelected ? styles.selectedDay : ""
+                        isSelected ? styles.selectedRange : ""
                     } xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded`}
                     onClick={() => handleDateClick(day)}
                 >
@@ -133,6 +136,8 @@ const Calendar = ({ checkEvents, resetDays }) => {
     useEffect(() => {
         if (resetDays) {
             setSelectedDays(resetDays);
+            setRangeStart(null);
+            setSelectedRange([]);
         }
     }, [resetDays]);
 
