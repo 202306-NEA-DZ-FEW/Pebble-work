@@ -1,133 +1,147 @@
 import React, { useState, useEffect, useRef } from "react";
 import { db } from "@/util/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, collection } from "firebase/firestore";
+import Modal from "react-awesome-modal";
+function FirestoreLocation({ onInputChange, inputValue1, setInputValue1 }) {
+    // Open state
+    const [open, setOpen] = useState(false);
 
-function FirestoreLocation({
-    onInputChange,
-    onInputDelete,
-    inputValue1,
-    setInputValue1,
-}) {
-    const [location, setLocation] = useState("");
+    // Modal handler
+    const openModal = () => {
+        setOpen(true);
+    };
+
+    const closeModal = () => {
+        setOpen(false);
+    };
+
     const [filteredLocations, setFilteredLocations] = useState([]);
-    // const [inputValue, setInputValue] = useState("");
-    const [isFormVisible, setFormVisible] = useState(false);
-    const formRef = useRef(null);
+    // const [isFormVisible, setFormVisible] = useState(false);
+    // const buttonRef = useRef(null);
+    // const formRef = useRef(null);
 
-    const handleClickOutside = (event) => {
-        if (formRef.current && !formRef.current.contains(event.target)) {
-            // Check if the event target is the paragraph element
-            if (
-                event.target.tagName === "P" &&
-                event.target.textContent === "Locations"
-            ) {
-                return;
+    // const handleClickOutside = (event) => {
+    //     if (!buttonRef.current.contains(event.target) && formRef.current && !formRef.current.contains(event.target)) {
+    //         setFormVisible(false);
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     window.addEventListener("click", handleClickOutside);
+
+    //     return () => {
+    //         window.removeEventListener("click", handleClickOutside);
+    //     };
+    // }, []);
+
+    // const handleButtonClick = () => {
+    //     setFormVisible(!isFormVisible);
+    // };
+
+    // const handleLocationItemClick = (selectedLocation) => {
+    //     setInputValue1(selectedLocation);
+    //     onInputChange(selectedLocation);
+    //     setFormVisible(false);
+    // };
+
+    // const handleLocationChange = (e) => {
+    //     setInputValue1(e.target.value);
+
+    //     // Clear the filtered list
+    //     setFilteredLocations([]);
+
+    //     // const inputLocation = e.target.value.toLowerCase();
+    // }
+    const fetchLocationData = async () => {
+        try {
+            const locationsDocRef = doc(db, "database", "locations");
+            const locationsDoc = await getDoc(locationsDocRef);
+            if (locationsDoc.exists()) {
+                const locationData = locationsDoc.data();
+                setFilteredLocations(locationData);
+                console.log(filteredLocations);
             }
-            setFormVisible(false);
+        } catch (error) {
+            console.error("Error fetching locations:", error);
         }
     };
 
     useEffect(() => {
-        window.addEventListener("click", handleClickOutside);
-
-        return () => {
-            window.removeEventListener("click", handleClickOutside);
-        };
+        fetchLocationData();
     }, []);
-    const handleLocationChange = (e) => {
-        setInputValue1(e.target.value);
-
-        // Clear the filtered list
-        setFilteredLocations([]);
-
-        const inputLocation = e.target.value.toLowerCase();
-        // if (inputLocation.length === 0) {
-        //     onInputDelete();
-        // }
-        // Get the 'data' field from Firestore document
-        const fetchLocationData = async () => {
-            try {
-                const locationRef = doc(db, "database", "locations");
-                const locationDoc = await getDoc(locationRef);
-
-                if (locationDoc.exists()) {
-                    const locationData = locationDoc.data().data || [];
-                    const filtered = locationData.filter((location) =>
-                        location.toLowerCase().includes(inputLocation)
-                    );
-                    setFilteredLocations(filtered);
-                }
-            } catch (error) {
-                console.error("Error fetching locations:", error);
-            }
-        };
-
-        if (inputLocation.length >= 2) {
-            fetchLocationData();
-        }
-    };
-
-    // Function to handle clicking a list item
-    const handleLocationItemClick = (selectedLocation) => {
-        setLocation(selectedLocation);
-        setInputValue1(selectedLocation);
-        // Clear the filtered list when an item is selected
-        onInputChange(selectedLocation);
-        setFilteredLocations([]);
-    };
 
     return (
         <>
-            <p
-                className='md:hidden relative'
-                onClick={() => setFormVisible(!isFormVisible)}
-            >
-                Locations
-            </p>
-            {(isFormVisible ||
-                (typeof window !== "undefined" && window.innerWidth > 640)) && (
-                <form ref={formRef} className='max-w-1/2 sm:static absolute'>
-                    <input
-                        required
-                        id='location'
-                        value={inputValue1}
-                        onChange={handleLocationChange}
-                        placeholder='Set Location'
-                        className='p-1 mt-4 rounded-md focus:outline-2 xl:w-[15vw] outline outline-1 md:w-[20vw]'
-                        style={{
-                            borderRadius: "8px",
-                            border: "1px solid var(--container-border, #1A1A1A)",
-                            background: "var(--fill-white, #FFF)",
-                            height: "55px",
-                        }}
-                    ></input>
+            {/* <button className="btn" onClick={()=>document.getElementById('my_modal_1').showModal()}>Location</button>
+<dialog id="my_modal_1" className="modal">
 
-                    {filteredLocations.length > 0 &&
-                        inputValue1.length >= 2 && (
-                            <ul className='location-list p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52'>
-                                {filteredLocations.map((location, index) => (
-                                    <li
-                                        key={index}
-                                        value={location}
-                                        className='h-[2rem] pt-2 cursor-pointer hover:bg-slate-50'
-                                        onClick={() =>
-                                            handleLocationItemClick(location)
-                                        }
-                                    >
-                                        {location}
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                </form>
-            )}
-            <style jsx>{`
-                @media (min-width: 640px) {
-                    p {
-                        display: none;
-                    }
-                }
-            `}</style>
+  <div className="modal-box">
+
+    <h3 className="font-bold text-lg">Modal Title</h3>
+
+    <div className="py-4">
+
+      <ul className='list-none'>
+
+        {Object.entries(filteredLocations).map(( [key, value], index) => (
+
+          <li key={index} className='my-2 block'>
+
+            {value}
+
+          </li>
+
+        ))}
+
+      </ul>
+
+    </div>
+
+    <div className="modal-action">
+
+      <form method="dialog">
+
+        <button className="btn" onClick={() => document.getElementById('my_modal_1').close()}>Close</button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</dialog> */}
+
+            <button onClick={openModal}>Open Modal</button>
+
+            <Modal
+                visible={open}
+                width='400'
+                effect='fadeInUp'
+                onClickAway={closeModal}
+                styles={{
+                    width: "600px",
+                    height: "400px",
+                    border: "1px solid #ccc",
+                    borderRadius: "10px",
+                }}
+                className=''
+            >
+                <h3>Modal Title</h3>
+
+                <ul className=' flex flex-col my-2 mr-4 ml-4'>
+                    {/* map through data */}
+
+                    {Object.entries(filteredLocations).map(
+                        ([key, value], index) => (
+                            <li key={index} className='my-2 '>
+                                {value}
+                            </li>
+                        )
+                    )}
+                </ul>
+
+                <button onClick={closeModal}>Close</button>
+            </Modal>
         </>
     );
 }
