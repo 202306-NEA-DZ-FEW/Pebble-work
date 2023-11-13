@@ -113,7 +113,7 @@ const SmallScreenEvents = (user) => {
     }, []);
 
     // Handle test click
-    const handleTestClick = () => {
+    const handleCalendarClick = () => {
         setCalendarOpen(!isCalendarOpen);
     };
 
@@ -273,7 +273,7 @@ const SmallScreenEvents = (user) => {
                         <div>
                             <button
                                 className='sm:hidden'
-                                onClick={handleTestClick}
+                                onClick={handleCalendarClick}
                             >
                                 Dates
                             </button>
@@ -286,12 +286,18 @@ const SmallScreenEvents = (user) => {
                                                 : ""
                                         }`,
                                     }}
-                                    className={`${
+                                    className={`text-center ${
                                         isCalendarOpen ? "open" : ""
                                     } ${
                                         styles.calendarContainer
-                                    } border border-black rounded-[8px] z-10 bg-white`}
+                                    } shadow-inner rounded-[4px] z-10 bg-white`}
                                 >
+                                    <button
+                                        className='mb-2 bg-green-400 rounded-[8px]'
+                                        onClick={() => setCalendarOpen(false)}
+                                    >
+                                        Close
+                                    </button>
                                     <Calendar
                                         resetDays={resetDays}
                                         checkEvents={checkEvents}

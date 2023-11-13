@@ -217,10 +217,8 @@ const EventsPage = (user) => {
                     </div>
                     <div className='flex bg-white z-10 flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7'>
                         <div className='sm:flex s:flex-col sm:items-center sm:justify-center'>
-                            <button className='sm:hidden'>Dates</button>
-
                             <div
-                                className={`border border-black rounded-[8px] z-10 bg-white sm:bg-transparent`}
+                                className={`shadow-inner rounded-[8px] z-10 bg-white sm:bg-transparent`}
                             >
                                 <Calendar
                                     resetDays={resetDays}
