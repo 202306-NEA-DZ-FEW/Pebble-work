@@ -1,0 +1,27 @@
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdownMenu {
+    position: absolute;
+    bottom: 100%;
+    background-color: white;
+    overflow-y: scroll;
+    height: 100px;
+    scrollbar-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column-reverse;
+}
+.dropdownMenu::-webkit-scrollbar {
+    width: 8px;
+}
+
+.dropdownMenu::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.dropdownMenu::-webkit-scrollbar-track {
+    background-color: transparent;
+}

@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
 import styles from "@/styles/Events.module.css";
+import Dropdown from "./Dropdown";
 
 // Define the Calendar component
 const Calendar = ({ checkEvents, resetDays }) => {
@@ -159,57 +160,52 @@ const Calendar = ({ checkEvents, resetDays }) => {
                             />
                         </button>
                         <div className='flex flex-col items-center gap-3'>
-                            <div className='calendar grid grid-cols-7 gap-1'>
+                            <div className='calendar sm:h-[140px] xl:h-[200px] grid grid-cols-7 gap-1'>
                                 {renderCalendar()}
                             </div>
-                            <h2 className='text-xl font-bold sm:text-[14px] xl:text-[18px]'>
-                                <select
-                                    value={currentDate.getMonth()}
-                                    onChange={(e) =>
-                                        setCurrentDate(
-                                            new Date(
-                                                currentDate.getFullYear(),
-                                                e.target.value
-                                            )
-                                        )
-                                    }
-                                    className='text-xl bg-transparent font-bold sm:text-[14px] xl:text-[18px]'
-                                >
-                                    {Array.from(
+                            <h2 className='text-xl xl:w-[200px] sm:w-[165px] flex justify-center gap-4 font-bold sm:text-[14px] xl:text-[18px]'>
+                                <Dropdown
+                                    options={Array.from(
                                         { length: 12 },
                                         (_, i) => i
-                                    ).map((month) => (
-                                        <option key={month} value={month}>
-                                            {new Date(
-                                                currentDate.getFullYear(),
-                                                month
-                                            ).toLocaleString("default", {
-                                                month: "long",
-                                            })}
-                                        </option>
-                                    ))}
-                                </select>{" "}
-                                <select
-                                    value={currentDate.getFullYear()}
-                                    onChange={(e) =>
+                                    ).map((month) =>
+                                        new Date(
+                                            currentDate.getFullYear(),
+                                            month
+                                        ).toLocaleString("default", {
+                                            month: "long",
+                                        })
+                                    )}
+                                    selectedOption={getMonthName(currentDate)}
+                                    setSelectedOption={(monthName) => {
+                                        const month = new Date(
+                                            Date.parse(monthName + " 1, 2012")
+                                        ).getMonth();
                                         setCurrentDate(
                                             new Date(
-                                                e.target.value,
-                                                currentDate.getMonth()
+                                                currentDate.getFullYear(),
+                                                month
                                             )
-                                        )
-                                    }
-                                    className='text-xl bg-transparent font-bold sm:text-[14px] xl:text-[18px]'
-                                >
-                                    {Array.from(
+                                        );
+                                    }}
+                                />
+                                <Dropdown
+                                    options={Array.from(
                                         { length: 5 },
                                         (_, i) => i + currentDate.getFullYear()
-                                    ).map((year) => (
-                                        <option key={year} value={year}>
-                                            {year}
-                                        </option>
-                                    ))}
-                                </select>
+                                    )}
+                                    selectedOption={currentDate
+                                        .getFullYear()
+                                        .toString()}
+                                    setSelectedOption={(year) => {
+                                        setCurrentDate(
+                                            new Date(
+                                                year,
+                                                currentDate.getMonth()
+                                            )
+                                        );
+                                    }}
+                                />
                             </h2>
                         </div>
                         <button
