@@ -75,5 +75,18 @@
     },
     "buttons": {
         "continueWithGoogle": "Continue with Google"
+    },
+    "edit": {
+        "change": "Location cannot be changed",
+        "time": "Update Time:",
+        "title": "Update Title:",
+        "titleDescription": "Need a better title to convey the objective of the event? We got you covered",
+        "updateDescription": "Update Description:",
+        "updateDescriptionText": "Have additional goals or activities?",
+        "eventImage": "Event Image:",
+        "eventImageText": "Upload an image or update the previous one.",
+        "choseFile": "CHOSE FILE",
+        "noEdits": "No edits",
+        "updateEvent" : "Update Event"
     }
 }

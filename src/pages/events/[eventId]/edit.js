@@ -5,10 +5,13 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import styles from "@/styles/EventDetails.module.css";
 import NoAccess from "@/components/Events/EditEvent";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 import { auth, db, storage } from "@/util/firebase";
 
 function EditEvent({ event, organizer }) {
+    const { t } = useTranslation();
     //creates the event object to be sent to firestore
     const [input, setInput] = useState({
         location: "",
@@ -127,7 +130,7 @@ function EditEvent({ event, organizer }) {
                                     </p>
 
                                     <p className='italic mt-2'>
-                                        Location cannot be changed
+                                        {t("edit.change")}
                                     </p>
                                 </div>
 
@@ -141,7 +144,7 @@ function EditEvent({ event, organizer }) {
                                             wordWrap: "break-word",
                                         }}
                                     >
-                                        Update Time:{" "}
+                                        {t("edit.time")}{" "}
                                     </h3>
                                     <input
                                         type='time'
@@ -167,11 +170,10 @@ function EditEvent({ event, organizer }) {
                                 className={`flex flex-col content-center flex-wrap mt-0 w-screen px-5 ${styles.container}`}
                             >
                                 <h1 className='mt-5 text-xl font-semibold align-left '>
-                                    Update Title:{" "}
+                                    {t("edit.title")}{" "}
                                 </h1>
                                 <p className='max-w-4xl mt-2 tinyText text-gray-400'>
-                                    Need a better title to convey the objective
-                                    of the event? We got you covered
+                                    {t("edit.titleDescription")}
                                 </p>
                                 <form className=''>
                                     <input
@@ -186,10 +188,10 @@ function EditEvent({ event, organizer }) {
                                     ></input>
                                 </form>
                                 <h1 className='mt-5 text-xl font-semibold align-left '>
-                                    Update Description:
+                                    {t("edit.updateDescription")}
                                 </h1>
                                 <p className='max-w-4xl mt-2 tinyText text-gray-400'>
-                                    Have additional goals or activities?
+                                    {t("edit.updateDescriptionText")}
                                 </p>
 
                                 <form id='eventdescription' className='mt-1 '>
@@ -202,17 +204,17 @@ function EditEvent({ event, organizer }) {
                                     ></textarea>
                                 </form>
                                 <h1 className='mt-5 text-xl font-semibold align-left '>
-                                    Event Image:
+                                    {t("edit.eventImage")}
                                 </h1>
                                 <p className='max-w-4xl mt-3 tinyText text-gray-400'>
-                                    Upload an image or update the previous one.
+                                    {t("edit.eventImageText")}
                                 </p>
                                 <input
                                     type='file'
                                     onChange={(e) => setImg(e.target.files[0])}
                                     id='eventimage'
                                     className='mt-3 file-input file-input-bordered w-full max-w-3xl border-2 border-black'
-                                ></input>
+                                />
                             </div>
 
                             <div className='flex items-center flex-row mt-3 rounded p-5'>
@@ -242,10 +244,10 @@ function EditEvent({ event, organizer }) {
                                     input.date ||
                                     input.description ||
                                     img ? (
-                                        "Update Event"
+                                        t("edit.updateEvent")
                                     ) : (
                                         <span className='italic font-normal'>
-                                            No edits
+                                            {t("edit.noEdits")}
                                         </span>
                                     )}
                                 </button>
@@ -281,6 +283,7 @@ export async function getServerSideProps(context) {
                 eventId: eventId,
             },
             organizer,
+            ...(await serverSideTranslations(context.locale, ["common"])),
         },
     };
 }

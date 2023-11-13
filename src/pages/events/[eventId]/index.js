@@ -1,4 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
 import {
     arrayRemove,
     arrayUnion,
@@ -511,6 +513,7 @@ export async function getServerSideProps(context) {
                 event: null,
                 organizer: null,
                 notFound: true, // Flag to indicate event not found
+                ...(await serverSideTranslations(context.locale, ["common"])),
             },
         };
     }
@@ -530,6 +533,7 @@ export async function getServerSideProps(context) {
             },
             organizer,
             notFound: false,
+            ...(await serverSideTranslations(context.locale, ["common"])),
         },
     };
 }
