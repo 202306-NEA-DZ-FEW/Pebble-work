@@ -191,8 +191,13 @@ const Calendar = ({ checkEvents, resetDays }) => {
                                 />
                                 <Dropdown
                                     options={Array.from(
-                                        { length: 5 },
-                                        (_, i) => i + currentDate.getFullYear()
+                                        { length: 6 },
+                                        (_, i) =>
+                                            i +
+                                            Math.min(
+                                                currentDate.getFullYear(),
+                                                new Date().getFullYear()
+                                            )
                                     )}
                                     selectedOption={currentDate
                                         .getFullYear()
