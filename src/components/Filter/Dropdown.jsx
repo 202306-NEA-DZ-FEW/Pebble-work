@@ -24,7 +24,7 @@ const Dropdown = ({ options, selectedOption, setSelectedOption }) => {
             className={`text-xl bg-transparent font-bold sm:text-[14px] xl:text-[18px] ${styles.dropdown}`}
             ref={ref}
         >
-            <button onClick={toggleOpen}>{selectedOption}</button>
+            <button onClick={toggleOpen}>^{selectedOption}</button>
             {isOpen && (
                 <ul className={styles.dropdownMenu}>
                     {options.map((option, index) => (
