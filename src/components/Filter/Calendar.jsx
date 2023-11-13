@@ -10,45 +10,63 @@ const Calendar = ({ checkEvents, resetDays }) => {
     // State for the current date and selected days
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDays, setSelectedDays] = useState({});
+    const [rangeStart, setRangeStart] = useState(null);
 
     // Function to handle date click
     const handleDateClick = (day) => {
-        // Create a new date based on the clicked day
         const selectedDate = new Date(
             currentDate.getFullYear(),
             currentDate.getMonth(),
             day + 1
         );
-        // Format the date to ISO string
         const formattedDate = selectedDate.toISOString().split("T")[0];
-        // Key for the selected month
         const selectedMonthKey = `${currentDate.getFullYear()}-${currentDate.getMonth()}`;
 
-        // Update the selected days state
         setSelectedDays((prevSelectedDays) => {
-            // Copy the previous state
             const updatedSelectedDays = { ...prevSelectedDays };
-            // Get the days for the current month
             const currentMonthDays =
                 updatedSelectedDays[selectedMonthKey] || [];
-            // Check if the day is already selected
             const dayIndex = currentMonthDays.indexOf(day);
 
-            // If the day is already selected, remove it from the selected days
-            if (dayIndex !== -1) {
-                currentMonthDays.splice(dayIndex, 1);
-                checkEvents(null); // Show all events
+            if (rangeStart === null) {
+                setRangeStart(day);
             } else {
-                // If the day is not selected, add it to the selected days
-                currentMonthDays.push(day);
-                checkEvents(formattedDate); // Show events for the selected date
+                const rangeEnd = day;
+                const range =
+                    rangeEnd > rangeStart
+                        ? Array.from(
+                              { length: rangeEnd - rangeStart + 1 },
+                              (_, i) => rangeStart + i
+                          )
+                        : Array.from(
+                              { length: rangeStart - rangeEnd + 1 },
+                              (_, i) => rangeEnd + i
+                          );
+                console.log(range);
+                range.forEach((day) => {
+                    const dayIndex = currentMonthDays.indexOf(day);
+                    if (dayIndex === -1) {
+                        currentMonthDays.push(day);
+                    }
+                });
+                setRangeStart(null);
+                checkEvents(
+                    range.map(
+                        (day) =>
+                            new Date(
+                                currentDate.getFullYear(),
+                                currentDate.getMonth(),
+                                day + 1
+                            )
+                                .toISOString()
+                                .split("T")[0]
+                    )
+                );
             }
 
-            // If there are no selected days for the current month, remove the month from the state
             if (currentMonthDays.length === 0) {
                 delete updatedSelectedDays[selectedMonthKey];
             } else {
-                // Otherwise, update the selected days for the current month
                 updatedSelectedDays[selectedMonthKey] = currentMonthDays;
             }
 
