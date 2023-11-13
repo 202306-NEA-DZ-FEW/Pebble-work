@@ -65,7 +65,7 @@ const WideScreenCard = ({
             letters.forEach((letter, i) => {
                 const span = document.createElement("span");
                 span.innerText = letter;
-                span.style.animationDelay = `${i * 0.1}s`;
+                span.style.animationDelay = `${i * 0.05}s`;
                 span.className = styles.explode;
                 h2Ref.current.appendChild(span);
             });
