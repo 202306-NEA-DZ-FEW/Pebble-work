@@ -142,9 +142,9 @@ const DesktopEvents = (user) => {
             }
 
             // Apply date filter
-            if (selectedDate) {
-                filteredEvents = filteredEvents.filter(
-                    (event) => event.date === selectedDate
+            if (selectedDate && selectedDate.length > 0) {
+                filteredEvents = filteredEvents.filter((event) =>
+                    selectedDate.includes(event.date)
                 );
             }
 
