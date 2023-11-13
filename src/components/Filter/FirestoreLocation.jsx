@@ -3,6 +3,11 @@ import { db } from "@/util/firebase";
 import { doc, getDoc, collection } from "firebase/firestore";
 function FirestoreLocation({ onInputChange, inputValue1, setInputValue1 }) {
     const [filteredLocations, setFilteredLocations] = useState([]);
+
+    const handleLocationClick = (selectedLocation) => {
+        onInputChange(selectedLocation);
+        console.log(`Selected location: ${selectedLocation}`);
+    };
     // const [isFormVisible, setFormVisible] = useState(false);
     // const buttonRef = useRef(null);
     // const formRef = useRef(null);
@@ -77,7 +82,13 @@ function FirestoreLocation({ onInputChange, inputValue1, setInputValue1 }) {
                         <ul className='list-none '>
                             {Object.entries(filteredLocations).map(
                                 ([key, value], index) => (
-                                    <li key={index} className='my-2 block  '>
+                                    <li
+                                        key={index}
+                                        className='my-2 block hover:bg-gray-200 cursor-pointer'
+                                        onClick={() =>
+                                            handleLocationClick(value)
+                                        }
+                                    >
                                         {value}
                                     </li>
                                 )
