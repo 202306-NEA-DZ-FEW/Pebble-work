@@ -164,7 +164,27 @@ const Calendar = ({ checkEvents, resetDays }) => {
                             </div>
                             <h2 className='text-xl font-bold sm:text-[14px] xl:text-[18px]'>
                                 {getMonthName(currentDate)}{" "}
-                                {currentDate.getFullYear()}
+                                <select
+                                    value={currentDate.getFullYear()}
+                                    onChange={(e) =>
+                                        setCurrentDate(
+                                            new Date(
+                                                e.target.value,
+                                                currentDate.getMonth()
+                                            )
+                                        )
+                                    }
+                                    className='text-xl bg-transparent font-bold sm:text-[14px] xl:text-[18px]'
+                                >
+                                    {Array.from(
+                                        { length: 5 },
+                                        (_, i) => i + currentDate.getFullYear()
+                                    ).map((year) => (
+                                        <option key={year} value={year}>
+                                            {year}
+                                        </option>
+                                    ))}
+                                </select>
                             </h2>
                         </div>
                         <button
