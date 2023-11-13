@@ -168,7 +168,7 @@
     }
 }
 .explode {
-    animation: explode 2500ms forwards;
+    animation: explode 1000ms forwards;
 }
 /*reverse animation*/
 @keyframes reverseExplode {
@@ -182,7 +182,7 @@
     }
 }
 .reverseExplode {
-    animation: reverseExplode 2500ms forwards;
+    animation: reverseExplode 1600ms forwards;
 }
 .smoke {
     top: -14px;
