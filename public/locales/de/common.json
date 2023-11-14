@@ -75,5 +75,44 @@
     },
     "buttons": {
         "continueWithGoogle": "Mit Google fortfahren"
+    },
+    "edit": {
+        "change": "Standort kann nicht geändert werden",
+        "time": "Aktualisierungszeit:",
+        "title": "Titel aktualisieren:",
+        "titleDescription": "Benötigen Sie einen besseren Titel, um das Ziel der Veranstaltung zu vermitteln? Wir haben Sie abgedeckt",
+        "updateDescription": "Beschreibung aktualisieren:",
+        "updateDescriptionText": "Haben Sie zusätzliche Ziele oder Aktivitäten?",
+        "eventImage": "Veranstaltungsbild:",
+        "eventImageText": "Laden Sie ein Bild hoch oder aktualisieren Sie das vorherige.",
+        "choseFile": "DATEI AUSWÄHLEN",
+        "noEdits": "Keine Bearbeitungen",
+        "updateEvent": "Veranstaltung aktualisieren"
+    },
+    "review": {
+        "location": "Ort:",
+        "dateAndTime": "Datum und Uhrzeit:",
+        "undefined": "nicht definiert",
+        "organizedBy": "Organisiert von",
+        "dudeMcGee": "Dude McGee",
+        "editEvent": "Veranstaltung bearbeiten",
+        "cancelEvent": "Veranstaltung abbrechen",
+        "cancelJoin": "Teilnahme abbrechen",
+        "alreadyJoined": "Bereits beigetreten",
+        "joinNow": "Jetzt teilnehmen",
+        "joinNowText": "Sie benötigen ein Konto, bevor Sie an einer Veranstaltung teilnehmen können.",
+        "signIn": "Anmelden",
+        "signUp": "Registrieren",
+        "eventDescription": "Veranstaltungsbeschreibung:",
+        "loading": "Laden... es gibt vielleicht keine Veranstaltungsbeschreibung",
+        "attendees": "Teilnehmer",
+        "noParticipant": "Noch kein Teilnehmer. Seien Sie der Erste, der teilnimmt!",
+        "warning": "Warnung",
+        "warningCancel": "Sie sind dabei, diese Veranstaltung abzusagen.",
+        "thisAction": "Diese Aktion löscht alle zugehörigen Daten dauerhaft. Sind Sie sicher, dass Sie fortfahren möchten?",
+        "close": "Schließen",
+        "warningLeave": "Sie sind dabei, diese Veranstaltung zu verlassen.",
+        "proceed": "Möchten Sie wirklich fortfahren?",
+        "leave": "Verlassen"
     }
 }

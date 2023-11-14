@@ -1,4 +1,7 @@
 import { onAuthStateChanged } from "firebase/auth";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
+
 import {
     arrayRemove,
     arrayUnion,
@@ -22,6 +25,8 @@ import styles from "@/styles/EventDetails.module.css";
 import { auth, db } from "@/util/firebase";
 
 const EventsPage = ({ event, organizer, notFound }) => {
+    const { t } = useTranslation();
+
     const [isHovered, setIsHovered] = useState(false);
 
     const [userMail, setUserMail] = useState(null);
@@ -226,22 +231,22 @@ const EventsPage = ({ event, organizer, notFound }) => {
                     >
                         <div>
                             <p>
-                                <b>Location:</b> <br />
+                                <b>{t("review.location")}</b> <br />
                                 {event.location}
                                 <br />
                                 <br />
-                                <b>Date and time:</b>
+                                <b>{t("review.dateAndTime")}</b>
                                 <br />
                                 {event.date ? (
                                     <span> {event.date}</span>
                                 ) : (
-                                    <span> undefined</span>
+                                    <span> {t("review.undefined")}</span>
                                 )}{" "}
                                 at
                                 {event.time ? (
                                     <span> {event.time}</span>
                                 ) : (
-                                    <span> undefined</span>
+                                    <span> {t("review.undefined")}</span>
                                 )}
                                 <br />
                                 <br />
@@ -250,13 +255,13 @@ const EventsPage = ({ event, organizer, notFound }) => {
                         </div>
                         <div>
                             <p>
-                                Organized by{" "}
+                                {t("review.organizedBy")}{" "}
                                 {organizer.Name ? (
                                     <b>
                                         {organizer.Name} {organizer.Surename}
                                     </b>
                                 ) : (
-                                    <b>Dude McGee</b>
+                                    <b>{t("review.dudeMcGee")}</b>
                                 )}
                             </p>
 
@@ -278,7 +283,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                                         color: "white",
                                                     }}
                                                 >
-                                                    Edit event
+                                                    {t("review.editEvent")}
                                                 </button>
                                             </Link>{" "}
                                             <button
@@ -298,7 +303,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                                     color: "white",
                                                 }}
                                             >
-                                                Cancel event
+                                                {t("review.cancelEvent")}
                                             </button>
                                         </>
                                     ) : findUser ? (
@@ -328,8 +333,8 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                             }
                                         >
                                             {isHovered
-                                                ? "Cancel join"
-                                                : "Already joined"}
+                                                ? t("review.cancelJoin")
+                                                : t("review.alreadyJoined")}
                                         </button>
                                     ) : (
                                         <button
@@ -345,15 +350,14 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                                 color: "white",
                                             }}
                                         >
-                                            Join now
+                                            {t("review.joinNow")}
                                         </button>
                                     )}{" "}
                                 </>
                             ) : (
                                 <>
                                     <div className='italic text-red-400 mt-2'>
-                                        You need an account before joining an
-                                        event.
+                                        {t("review.joinNowText")}
                                     </div>
                                     <Link href={`/signin`}>
                                         <button
@@ -366,7 +370,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                                 color: "white",
                                             }}
                                         >
-                                            Sign in
+                                            {t("review.signIn")}
                                         </button>
                                     </Link>{" "}
                                     <Link href={`/signup`}>
@@ -380,7 +384,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                                 color: "white",
                                             }}
                                         >
-                                            Sign up
+                                            {t("review.signUp")}
                                         </button>
                                     </Link>
                                 </>
@@ -393,20 +397,20 @@ const EventsPage = ({ event, organizer, notFound }) => {
                 >
                     <div style={{ maxWidth: "400px" }} className='event-desc'>
                         <h3 className='text-2xl font-bold'>
-                            Event Description:
+                            {t("review.eventDescription")}
                         </h3>
 
                         {event ? (
                             <p>{event.description}</p>
                         ) : (
-                            <p>
-                                Loading... there might be no event description{" "}
-                            </p>
+                            <p>{t("review.loading")} </p>
                         )}
                     </div>
 
                     <div>
-                        <h3 className='text-xl font-bold'>Attendees:</h3>
+                        <h3 className='text-xl font-bold'>
+                            {t("review.attendees")}:
+                        </h3>
                         {attendeesArr.length > 0 ? (
                             <div
                                 style={{
@@ -437,7 +441,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                             </div>
                         ) : (
                             <div className='italic pt-3'>
-                                No participant yet. Be the first to join!
+                                {t("review.noParticipant")}
                             </div>
                         )}
                     </div>
@@ -447,12 +451,9 @@ const EventsPage = ({ event, organizer, notFound }) => {
 
             <dialog id='cancel_modal' className='modal'>
                 <div className='modal-box'>
-                    <h3 className='font-bold text-lg'>Warning</h3>
-                    <p className='py-4'>You are about to cancel this event.</p>
-                    <p>
-                        This action will permanently delete all associated data.
-                        Are you sure you want to proceed?
-                    </p>
+                    <h3 className='font-bold text-lg'>{t("review.warning")}</h3>
+                    <p className='py-4'>{t("review.warningCancel")}</p>
+                    <p>{t("review.thisAction")}</p>
                     <div className='modal-action'>
                         <form method='dialog'>
                             {/* if there is a button in form, it will close the modal */}
@@ -465,18 +466,20 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                 }}
                                 onClick={deleteEvent}
                             >
-                                Cancel event
+                                {t("review.cancelEvent")}
                             </button>
-                            <button className='btn'>Close</button>
+                            <button className='btn'>{t("review.close")}</button>
                         </form>
                     </div>
                 </div>
             </dialog>
             <dialog id='canceljoin_modal' className='modal'>
                 <div className='modal-box'>
-                    <h3 className='font-bold text-lg'>Warning</h3>
-                    <p className='py-4'>You are about to leave this event.</p>
-                    <p>Are you sure you want to proceed?</p>
+                    <h3 className='font-bold text-lg'>
+                        {t("review.noParticipant")}
+                    </h3>
+                    <p className='py-4'>{t("review.warningLeave")}</p>
+                    <p>{t("review.proceed")}</p>
                     <div className='modal-action'>
                         <form method='dialog'>
                             <button
@@ -488,9 +491,9 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                 }}
                                 onClick={cancelJoin}
                             >
-                                Leave
+                                {t("review.leave")}
                             </button>
-                            <button className='btn'>Close</button>
+                            <button className='btn'>{t("review.close")}</button>
                         </form>
                     </div>
                 </div>
@@ -511,6 +514,7 @@ export async function getServerSideProps(context) {
                 event: null,
                 organizer: null,
                 notFound: true, // Flag to indicate event not found
+                ...(await serverSideTranslations(context.locale, ["common"])),
             },
         };
     }
@@ -530,6 +534,7 @@ export async function getServerSideProps(context) {
             },
             organizer,
             notFound: false,
+            ...(await serverSideTranslations(context.locale, ["common"])),
         },
     };
 }
