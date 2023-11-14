@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { db } from "@/util/firebase";
 import { doc, getDoc, collection } from "firebase/firestore";
+import styles from "@/styles/Events.module.css";
+import { AiOutlineClose } from "react-icons/ai";
+
 function FirestoreLocation({ onInputChange }) {
     const [filteredLocations, setFilteredLocations] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
@@ -52,16 +55,20 @@ function FirestoreLocation({ onInputChange }) {
             </button>
             <dialog id='my_modal_1' className='modal rounded-tr rounded-br'>
                 <div className='modal-box'>
+                    <div className='flex justify-center'>
+                        <input
+                            type='text'
+                            placeholder='Search city...'
+                            value={searchTerm}
+                            onChange={handleSearchChange}
+                            className='mt-2 p-2 border rounded'
+                        />
+                    </div>
                     <h3 className='font-bold text-lg mb-0'>Citys </h3>
-                    <input
-                        type='text'
-                        placeholder='Search city...'
-                        value={searchTerm}
-                        onChange={handleSearchChange}
-                        className='mt-2 p-2 border rounded'
-                    />
                     <div className=' mt-2  '>
-                        <ul className='list-none '>
+                        <ul
+                            className={`list-none ${styles.information} h-[200px]`}
+                        >
                             {Object.entries(filteredLocations).map(
                                 ([key, value], index) => (
                                     <li
@@ -81,17 +88,17 @@ function FirestoreLocation({ onInputChange }) {
                             )}
                         </ul>
 
-                        <div className='modal-action mt-0'>
+                        <div className='modal-action absolute top-7 right-3 mt-0'>
                             <form method='dialog'>
                                 <button
-                                    className='btn'
+                                    className=''
                                     onClick={() =>
                                         document
                                             .getElementById("my_modal_1")
                                             .close()
                                     }
                                 >
-                                    Close
+                                    <AiOutlineClose size={20} />
                                 </button>
                             </form>
                         </div>
