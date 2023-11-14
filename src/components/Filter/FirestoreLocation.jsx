@@ -3,12 +3,22 @@ import { db } from "@/util/firebase";
 import { doc, getDoc, collection } from "firebase/firestore";
 function FirestoreLocation({ onInputChange }) {
     const [filteredLocations, setFilteredLocations] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [locationsArray, setLocationsArray] = useState([]);
 
     const handleLocationClick = (selectedLocation) => {
         onInputChange(selectedLocation);
         console.log(`Selected location: ${selectedLocation}`);
     };
-
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value.toLowerCase());
+    };
+    useEffect(() => {
+        const filtered = locationsArray.filter((location) =>
+            location.toLowerCase().includes(searchTerm)
+        );
+        setFilteredLocations(filtered);
+    }, [searchTerm, locationsArray]);
     const fetchLocationData = async () => {
         try {
             const locationsDocRef = doc(db, "database", "locations");
@@ -19,6 +29,7 @@ function FirestoreLocation({ onInputChange }) {
                     ...Object.values(locationData)
                 );
                 setFilteredLocations(locationsArray);
+                setLocationsArray(locationsArray);
             }
         } catch (error) {
             console.error("Error fetching locations:", error);
@@ -42,7 +53,13 @@ function FirestoreLocation({ onInputChange }) {
             <dialog id='my_modal_1' className='modal rounded-tr rounded-br'>
                 <div className='modal-box'>
                     <h3 className='font-bold text-lg mb-0'>Citys </h3>
-
+                    <input
+                        type='text'
+                        placeholder='Search city...'
+                        value={searchTerm}
+                        onChange={handleSearchChange}
+                        className='mt-2 p-2 border rounded'
+                    />
                     <div className=' mt-2  '>
                         <ul className='list-none '>
                             {Object.entries(filteredLocations).map(
