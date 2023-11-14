@@ -1,133 +1,109 @@
 import React, { useState, useEffect, useRef } from "react";
 import { db } from "@/util/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, collection } from "firebase/firestore";
+import styles from "@/styles/Events.module.css";
+import { AiOutlineClose } from "react-icons/ai";
 
-function FirestoreLocation({
-    onInputChange,
-    onInputDelete,
-    inputValue1,
-    setInputValue1,
-}) {
-    const [location, setLocation] = useState("");
+function FirestoreLocation({ onInputChange }) {
     const [filteredLocations, setFilteredLocations] = useState([]);
-    // const [inputValue, setInputValue] = useState("");
-    const [isFormVisible, setFormVisible] = useState(false);
-    const formRef = useRef(null);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [locationsArray, setLocationsArray] = useState([]);
 
-    const handleClickOutside = (event) => {
-        if (formRef.current && !formRef.current.contains(event.target)) {
-            // Check if the event target is the paragraph element
-            if (
-                event.target.tagName === "P" &&
-                event.target.textContent === "Locations"
-            ) {
-                return;
+    const handleLocationClick = (selectedLocation) => {
+        onInputChange(selectedLocation);
+    };
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value.toLowerCase());
+    };
+    useEffect(() => {
+        const filtered = locationsArray.filter((location) =>
+            location.toLowerCase().includes(searchTerm)
+        );
+        setFilteredLocations(filtered);
+    }, [searchTerm, locationsArray]);
+    const fetchLocationData = async () => {
+        try {
+            const locationsDocRef = doc(db, "database", "locations");
+            const locationsDoc = await getDoc(locationsDocRef);
+            if (locationsDoc.exists()) {
+                const locationData = locationsDoc.data();
+                const locationsArray = [].concat(
+                    ...Object.values(locationData)
+                );
+                setFilteredLocations(locationsArray);
+                setLocationsArray(locationsArray);
             }
-            setFormVisible(false);
+        } catch (error) {
+            console.error("Error fetching locations:", error);
         }
     };
 
     useEffect(() => {
-        window.addEventListener("click", handleClickOutside);
-
-        return () => {
-            window.removeEventListener("click", handleClickOutside);
-        };
+        fetchLocationData();
     }, []);
-    const handleLocationChange = (e) => {
-        setInputValue1(e.target.value);
-
-        // Clear the filtered list
-        setFilteredLocations([]);
-
-        const inputLocation = e.target.value.toLowerCase();
-        // if (inputLocation.length === 0) {
-        //     onInputDelete();
-        // }
-        // Get the 'data' field from Firestore document
-        const fetchLocationData = async () => {
-            try {
-                const locationRef = doc(db, "database", "locations");
-                const locationDoc = await getDoc(locationRef);
-
-                if (locationDoc.exists()) {
-                    const locationData = locationDoc.data().data || [];
-                    const filtered = locationData.filter((location) =>
-                        location.toLowerCase().includes(inputLocation)
-                    );
-                    setFilteredLocations(filtered);
-                }
-            } catch (error) {
-                console.error("Error fetching locations:", error);
-            }
-        };
-
-        if (inputLocation.length >= 2) {
-            fetchLocationData();
-        }
-    };
-
-    // Function to handle clicking a list item
-    const handleLocationItemClick = (selectedLocation) => {
-        setLocation(selectedLocation);
-        setInputValue1(selectedLocation);
-        // Clear the filtered list when an item is selected
-        onInputChange(selectedLocation);
-        setFilteredLocations([]);
-    };
 
     return (
         <>
-            <p
-                className='md:hidden relative'
-                onClick={() => setFormVisible(!isFormVisible)}
+            <button
+                className='btn sm:bg-blue-500   hover:bg-gray-400 sm:text-center flex lg:items-center sm:gap-0 gap-2 sm:justify-center lg:w-[281px] lg:h-[52px] sm:w-[149px] sm:h-[30px] text-white font-[500] lg:text-[18px] lg:tracking-[0.10px] sm:text-[12px] sm:px-4 sm:py-2 rounded-lg'
+                onClick={() =>
+                    document.getElementById("my_modal_1").showModal()
+                }
             >
-                Locations
-            </p>
-            {(isFormVisible ||
-                (typeof window !== "undefined" && window.innerWidth > 640)) && (
-                <form ref={formRef} className='max-w-1/2 sm:static absolute'>
-                    <input
-                        required
-                        id='location'
-                        value={inputValue1}
-                        onChange={handleLocationChange}
-                        placeholder='Set Location'
-                        className='p-1 mt-4 rounded-md focus:outline-2 xl:w-[15vw] outline outline-1 md:w-[20vw]'
-                        style={{
-                            borderRadius: "8px",
-                            border: "1px solid var(--container-border, #1A1A1A)",
-                            background: "var(--fill-white, #FFF)",
-                            height: "55px",
-                        }}
-                    ></input>
-
-                    {filteredLocations.length > 0 &&
-                        inputValue1.length >= 2 && (
-                            <ul className='location-list p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52'>
-                                {filteredLocations.map((location, index) => (
+                Location
+            </button>
+            <dialog id='my_modal_1' className='modal rounded-tr rounded-br'>
+                <div className='modal-box'>
+                    <div className='flex justify-center'>
+                        <input
+                            type='text'
+                            placeholder='Search city...'
+                            value={searchTerm}
+                            onChange={handleSearchChange}
+                            className='mt-2 p-2 border rounded'
+                        />
+                    </div>
+                    <h3 className='font-bold text-lg mb-0'>cities </h3>
+                    <div className=' mt-2  '>
+                        <ul
+                            className={`list-none ${styles.information} h-[200px]`}
+                        >
+                            {Object.entries(filteredLocations).map(
+                                ([key, value], index) => (
                                     <li
                                         key={index}
-                                        value={location}
-                                        className='h-[2rem] pt-2 cursor-pointer hover:bg-slate-50'
-                                        onClick={() =>
-                                            handleLocationItemClick(location)
-                                        }
+                                        className='my-2 block hover:bg-gray-400 cursor-pointer'
+                                        onClick={() => {
+                                            handleLocationClick(value);
+
+                                            document
+                                                .getElementById("my_modal_1")
+                                                .close();
+                                        }}
                                     >
-                                        {location}
+                                        {value}
                                     </li>
-                                ))}
-                            </ul>
-                        )}
-                </form>
-            )}
-            <style jsx>{`
-                @media (min-width: 640px) {
-                    p {
-                        display: none;
-                    }
-                }
-            `}</style>
+                                )
+                            )}
+                        </ul>
+
+                        <div className='modal-action absolute top-7 right-3 mt-0'>
+                            <form method='dialog'>
+                                <button
+                                    className=''
+                                    onClick={() =>
+                                        document
+                                            .getElementById("my_modal_1")
+                                            .close()
+                                    }
+                                >
+                                    <AiOutlineClose size={20} />
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </dialog>
         </>
     );
 }

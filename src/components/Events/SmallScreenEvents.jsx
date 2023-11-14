@@ -293,7 +293,7 @@ const SmallScreenEvents = (user) => {
                                     } shadow-inner rounded-[4px] z-10 bg-white`}
                                 >
                                     <button
-                                        className='mb-2 bg-green-400 rounded-[8px]'
+                                        className='btn rounded-[8px]'
                                         onClick={() => setCalendarOpen(false)}
                                     >
                                         Close
