@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { db } from "@/util/firebase";
 import { doc, getDoc, collection } from "firebase/firestore";
-function FirestoreLocation({ onInputChange, inputValue1, setInputValue1 }) {
+function FirestoreLocation({ onInputChange }) {
     const [filteredLocations, setFilteredLocations] = useState([]);
 
     const handleLocationClick = (selectedLocation) => {
@@ -32,7 +32,7 @@ function FirestoreLocation({ onInputChange, inputValue1, setInputValue1 }) {
     return (
         <>
             <button
-                className='btn'
+                className='btn sm:bg-blue-500   hover:bg-gray-400 sm:text-center flex lg:items-center sm:gap-0 gap-2 sm:justify-center lg:w-[281px] lg:h-[52px] sm:w-[149px] sm:h-[30px] text-white font-[500] lg:text-[18px] lg:tracking-[0.10px] sm:text-[12px] sm:px-4 sm:py-2 rounded-lg'
                 onClick={() =>
                     document.getElementById("my_modal_1").showModal()
                 }
@@ -63,6 +63,21 @@ function FirestoreLocation({ onInputChange, inputValue1, setInputValue1 }) {
                                 )
                             )}
                         </ul>
+
+                        <div className='modal-action mt-0'>
+                            <form method='dialog'>
+                                <button
+                                    className='btn'
+                                    onClick={() =>
+                                        document
+                                            .getElementById("my_modal_1")
+                                            .close()
+                                    }
+                                >
+                                    Close
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </dialog>
