@@ -75,5 +75,45 @@
     },
     "buttons": {
         "continueWithGoogle": "Continue with Google"
+    },
+    "edit": {
+        "change": "Location cannot be changed",
+        "time": "Update Time:",
+        "title": "Update Title:",
+        "titleDescription": "Need a better title to convey the objective of the event? We got you covered",
+        "updateDescription": "Update Description:",
+        "updateDescriptionText": "Have additional goals or activities?",
+        "eventImage": "Event Image:",
+        "eventImageText": "Upload an image or update the previous one.",
+        "choseFile": "CHOSE FILE",
+        "noEdits": "No edits",
+        "updateEvent": "Update Event"
+    },
+    "review": {
+        "location": "Location:",
+        "dateAndTime": "Date and time:",
+        "undefined": "undefined",
+        "organizedBy": "Organized by",
+        "dudeMcGee": "Dude McGee",
+        "editEvent": "Edit event",
+        "cancelEvent": "Cancel event",
+        "cancelJoin": "Cancel Join",
+        "alreadyJoined": "Already Joined",
+        "joinNow": "Join now",
+        "joinNowText": "You need an account before joining an event.",
+        "signIn": "Sign in",
+        "signUp": "Sign up",
+        "eventDescription": "Event Description:",
+        "loading": "Loading... there might be no event description",
+        "attendees": "Attendees",
+        "noParticipant": "No participant yet. Be the first to join!",
+        "warning": "Warning",
+        "warningCancel": "You are about to cancel this event.",
+        "thisAction": "This action will permanently delete all associated data. Are you sure you want to proceed?",
+        "cancelEvent": "Cancel event",
+        "close": "Close",
+        "warningLeave": "You are about to leave this event.",
+        "proceed": "Are you sure you want to proceed?",
+        "leave": "Leave"
     }
 }
