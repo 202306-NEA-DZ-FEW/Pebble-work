@@ -11,7 +11,6 @@ function FirestoreLocation({ onInputChange }) {
 
     const handleLocationClick = (selectedLocation) => {
         onInputChange(selectedLocation);
-        console.log(`Selected location: ${selectedLocation}`);
     };
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value.toLowerCase());
