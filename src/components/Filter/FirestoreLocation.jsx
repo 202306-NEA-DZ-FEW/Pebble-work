@@ -63,7 +63,7 @@ function FirestoreLocation({ onInputChange }) {
                             className='mt-2 p-2 border rounded'
                         />
                     </div>
-                    <h3 className='font-bold text-lg mb-0'>Citys </h3>
+                    <h3 className='font-bold text-lg mb-0'>cities </h3>
                     <div className=' mt-2  '>
                         <ul
                             className={`list-none ${styles.information} h-[200px]`}
