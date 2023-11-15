@@ -152,8 +152,8 @@ const Calendar = ({ checkEvents, resetDays }) => {
                             onClick={handlePreviousMonth}
                         >
                             <Image
-                                className='xl:w-[50px] xl:h-[50px] sm:w-[35px] md:h-[35px]'
-                                src='/icons/previous.png'
+                                className='xl:w-[40px] rotate-180 xl:h-[40px] sm:w-[25px] md:h-[25px]'
+                                src='/icons/next.svg'
                                 width={50}
                                 height={50}
                                 alt='Previous'
@@ -219,8 +219,8 @@ const Calendar = ({ checkEvents, resetDays }) => {
                             onClick={handleNextMonth}
                         >
                             <Image
-                                className='xl:w-[50px] xl:h-[50px] sm:w-[35px] md:h-[35px]'
-                                src='/icons/next.png'
+                                className='xl:w-[40px] xl:h-[40px] sm:w-[25px] md:h-[25px]'
+                                src='/icons/next.svg'
                                 width={50}
                                 height={50}
                                 alt='Next'
