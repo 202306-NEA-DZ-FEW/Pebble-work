@@ -23,28 +23,13 @@ const SmallScreenEvents = (user) => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [resetLocation, setResetLocation] = useState(false);
     const [resetDays, setResetDays] = useState(false);
-    const dropdownRef = useRef(null);
+
     const { currentPage, totalPages, currentItems, setCurrentPage } =
         usePagination(1, 5, filteredEvents);
 
     const handleLocationInputChange = (value) => {
         setInputValue1(value);
     };
-
-    const handleClickOutside = (event) => {
-        if (
-            dropdownRef.current &&
-            !dropdownRef.current.contains(event.target)
-        ) {
-            setFilteredTypes(false);
-        }
-    };
-    useEffect(() => {
-        window.addEventListener("click", handleClickOutside);
-        return () => {
-            window.removeEventListener("click", handleClickOutside);
-        };
-    }, []);
 
     // Handle test click
     const handleCalendarClick = () => {
@@ -229,7 +214,6 @@ const SmallScreenEvents = (user) => {
                             />
                         </div>
                         <FilterByType
-                            ref={dropdownRef}
                             setFilteredTypes={setFilteredTypes}
                             selectedTypes={selectedTypes}
                             setSelectedTypes={setSelectedTypes}
