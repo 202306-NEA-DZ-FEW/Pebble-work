@@ -1,9 +1,8 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { db, auth, storage, firestore } from "../../util/firebase";
-import { app } from "../../util/firebase";
-import { collection, doc, getDocs, getDoc } from "firebase/firestore";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { db, auth } from "../../util/firebase";
+import { collection, doc, getDoc } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -14,6 +13,8 @@ const ProfilePage = () => {
     const [usersData, setUsersData] = useState(null);
     const [currentUser, setCurrentUser] = useState(null);
     const [userInterests, setUserInterests] = useState([]);
+    const [joinedEvents, setJoinedEvents] = useState([]);
+
     const EventTypes = [
         "No Poverty",
         "Zero Hunger",
@@ -41,6 +42,9 @@ const ProfilePage = () => {
                     if (userDoc.exists()) {
                         setCurrentUser(userDoc.data());
                         setUserInterests(userDoc.data().interests);
+
+                        // Set joined events
+                        setJoinedEvents(userDoc.data().eventsJoined || []);
                     } else {
                         return;
                     }
@@ -72,7 +76,7 @@ const ProfilePage = () => {
                         {t("profile:yourProfile")}
                     </h1>
 
-                    {/* Profile  Picture /Change */}
+                    {/* Profile Picture /Change */}
                     <div className=' ml-5 flex flex-row mt-4 md:w-full md:gap-10  '>
                         <div className='flex items-center h-4/12 w-4/12 rounded-full outline outline-2  overflow-hidden md:w-2/12 h-5/12 md:mt-8'>
                             <Image
@@ -84,7 +88,7 @@ const ProfilePage = () => {
                             />
                         </div>
 
-                        {/* Change  Picture */}
+                        {/* Change Picture */}
                         <div className='flex flex-row ml-4 -mt-4 w-full md:ml-5  md:mt-20 '>
                             {/* <h1 className=' mt-10 text-center h-8 w-35 ml-0 px-4 py-2 text-lg font-bold  md:text-3xl md:w-3/12 md:h-12  text-gray-600'>
                             John Doe
@@ -98,7 +102,7 @@ const ProfilePage = () => {
                         </div>
                     </div>
 
-                    {/* Edit  Information */}
+                    {/* Edit Information */}
                     <div className='flex flex-col mt-9 w-70 sm:items-center  md:items-start md:mt-14 md:ml-10'>
                         <h3 className='font-semibold text-md w-70 text-gray-600'>
                             {t("profile:Name")}:
@@ -122,7 +126,7 @@ const ProfilePage = () => {
                         <p className=' mt-2  w-3/4 '>{currentUser.Location}</p>
 
                         {/* Your Interests */}
-                        <h3 className='mt-3 mb-2  font-semibold text-md  w-70  text-gray-600'>
+                        <h3 className='mt-3 mb-2 font-semibold text-md  w-70  text-gray-600'>
                             {t("profile:interests")}:
                         </h3>
                         <div className='grid grid-container grid-cols-2 gap-8 -ml-15 mt-3 text-center justify-evenly  md:grid-cols-3 text-xs md:w-full md:h-auto  md:mt-8 md:text-3xl '>
@@ -139,40 +143,31 @@ const ProfilePage = () => {
                                 </button>
                             ))}
                         </div>
-                        {/* Save Interests Button */}
-                        <div className='mt-10 flex flex-col items-end  mx-auto'>
-                            <button
-                                className=' bg-orange-400  text-center h-10 w-30  px-4 py-2 text-xs text-white font-bold shadow-md md:h-14 mb-12 md:w-40 md:text-xl '
-                                onClick={handleEditProfile}
+                    </div>
+
+                    <div className='mt-3 mb-2 font-semibold text-md w-70 text-gray-600'>
+                        {t("profile:joinedEvents")}:
+                    </div>
+                    <div className='flex flex-wrap max-h-40 overflow-auto'>
+                        {joinedEvents.map((event, index) => (
+                            <div
+                                key={index}
+                                className='mr-3 mb-2 p-4 border rounded-md bg-white w-40 sm:w-60 md:w-80'
                             >
-                                {t("profile:editProfile")}
-                            </button>
-                        </div>
+                                {/* Card Content */}
+                                {event.title}
+                            </div>
+                        ))}
                     </div>
-                    {/* Change Password  */}
-                    {/* <div className='mt-5 pt-0 mx-auto pb-5 flex flex-col  bg-cyan-100  rounded mb-20 md:mx-auto md:mt-8 md:ml-20 '>
-                    <h3 className='font-bold mt-5 ml-4'>Change Password</h3>
-                    <div className='flex flex-row ml-6 mt-3 gap-x-5 items-center justify-items-center '>
-                        <input
-                            type='password'
-                            placeholder=' Password'
-                            className=' w-5/12 h-8 rounded'
-                        ></input>
-                        <input
-                            type='password'
-                            placeholder=' Retype password'
-                            className='w-5/12 h-9 rounded'
-                        ></input>
+                    {/* Save Interests Button */}
+                    <div className='mt-10 flex flex-col items-end mx-auto'>
+                        <button
+                            className='bg-orange-400 text-center h-10 w-30 px-4 py-2 text-xs text-white font-bold shadow-md md:h-14 mb-12 md:w-40 md:text-xl'
+                            onClick={handleEditProfile}
+                        >
+                            {t("profile:editProfile")}
+                        </button>
                     </div>
-                    <div className='flex flex-row  mt-4 pb-3 gap-4 items-end  ml-20'>
-                        <button className='bg-orange-400  text-center h-8 w-3/12   text-xs text-white  shadow-md '>
-                            Submit
-                        </button>
-                        <button className=' text-center h-8 w-4/12 text-xs  outline outline-1 rounded shadow-md'>
-                            Cancel
-                        </button>
-                    </div> */}
-                    {/* </div> */}
                 </div>
             </div>
         );
