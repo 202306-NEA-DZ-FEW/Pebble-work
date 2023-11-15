@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import Link from "next/link";
 import styles from "@/styles/EventCreation.module.css";
 import Signup from "../Signup/Signup";
 import Signin from "../Signin/Signin";
