@@ -9,7 +9,7 @@ import Dropdown from "./Dropdown";
 const Calendar = ({ checkEvents, resetDays }) => {
     // State for the current date and selected days
     const [currentDate, setCurrentDate] = useState(new Date());
-    const [selectedDays, setSelectedDays] = useState({});
+
     const [rangeStart, setRangeStart] = useState(null);
     const [selectedRange, setSelectedRange] = useState([]);
 
@@ -18,21 +18,24 @@ const Calendar = ({ checkEvents, resetDays }) => {
         const selectedDate = new Date(
             currentDate.getFullYear(),
             currentDate.getMonth(),
-            day + 1
+            day
         );
+        selectedDate.setHours(12); //to solve the problem of having to chose a "day+1" so the event in "day" will show
 
         if (rangeStart === null) {
             setRangeStart(selectedDate);
+            setSelectedRange([selectedDate]);
+            checkEvents([selectedDate.toISOString().split("T")[0]]);
         } else {
-            let startDate = rangeStart;
-            let endDate = selectedDate;
+            let startDate = new Date(rangeStart);
+            let endDate = new Date(selectedDate);
 
             if (startDate > endDate) {
                 [startDate, endDate] = [endDate, startDate];
             }
 
             const range = [];
-            let currentDate = startDate;
+            let currentDate = new Date(startDate);
 
             while (currentDate <= endDate) {
                 range.push(new Date(currentDate));
@@ -40,9 +43,13 @@ const Calendar = ({ checkEvents, resetDays }) => {
             }
 
             setSelectedRange(range);
-            console.log(range);
 
-            checkEvents(range.map((date) => date.toISOString().split("T")[0]));
+            checkEvents(
+                range.map((date) => {
+                    date.setHours(12); // Add 12 hours
+                    return date.toISOString().split("T")[0];
+                })
+            );
             setRangeStart(null);
         }
     };
@@ -135,7 +142,6 @@ const Calendar = ({ checkEvents, resetDays }) => {
     //update selected days when resetDays changes
     useEffect(() => {
         if (resetDays) {
-            setSelectedDays(resetDays);
             setRangeStart(null);
             setSelectedRange([]);
         }
