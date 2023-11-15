@@ -3,6 +3,7 @@ import { useTranslation } from "next-i18next";
 import React, { useEffect, useState } from "react";
 
 import styles from "@/styles/Navbar.module.css";
+import { useRouter } from "next/router";
 
 import { auth } from "@/util/firebase";
 
@@ -22,6 +23,7 @@ const Navbar = () => {
     const [user, setUser] = useState(null);
     const [activeTab, setActiveTab] = useState(tabs[0].id);
     const { t } = useTranslation();
+    const router = useRouter(); //so the motion will always stay on the current active tab
 
     const menuDropdown = () => {
         setMenuDropdownOpen(!menuDropdownOpen);
@@ -43,6 +45,9 @@ const Navbar = () => {
                 setUser(null);
             }
         });
+
+        setActiveTab(router.pathname.slice(1)); //so the motion will always stay on the current active tab
+
         return () => {
             logged();
         };
