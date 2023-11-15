@@ -9,6 +9,7 @@ import { useTranslation } from "next-i18next";
 import Modal from "@/components/Popup/Modal";
 import PicturesLibrary from "./library";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { updateProfile } from "firebase/auth";
 
 const ProfilePage = () => {
     const { t } = useTranslation();
@@ -95,7 +96,6 @@ const ProfilePage = () => {
     };
 
     // Handle edit profile function
-
     const handleUpdateProfile = async (e) => {
         e.preventDefault();
         const userDocRef = doc(db, "users", currentUserId);
@@ -105,7 +105,7 @@ const ProfilePage = () => {
 
         await updateDoc(userDocRef, {
             Name: editedName.trim() !== "" ? editedName : currentUser.Name,
-            Surname:
+            Surename:
                 editedSurname.trim() !== ""
                     ? editedSurname
                     : currentUser.Surename,
@@ -114,6 +114,15 @@ const ProfilePage = () => {
                 editedLocation.trim() !== ""
                     ? editedLocation
                     : currentUser.Location,
+        });
+
+        const nameDisplay =
+            editedName.trim() !== "" ? editedName : currentUser.Name;
+        const surnameDisplay =
+            editedSurname.trim() !== "" ? editedSurname : currentUser.Surename;
+
+        await updateProfile(auth.currentUser, {
+            displayName: `${nameDisplay} ${surnameDisplay}`,
         });
         ///setIsSaved(true);
         setShowPopup(true);
@@ -180,14 +189,19 @@ const ProfilePage = () => {
             try {
                 const storageRef = ref(
                     storage,
-                    `Profilepictures/${currentUserId}/${file.name}`
+                    `profilePictures/${currentUserId}`
                 );
                 await uploadBytes(storageRef, file);
 
                 const imageUrl = await getDownloadURL(storageRef);
 
                 const userDocRef = doc(db, "users", currentUserId);
-                await updateDoc(userDocRef, { Image: imageUrl });
+                await updateDoc(userDocRef, { imageURL: imageUrl });
+
+                const auth = getAuth();
+                await updateProfile(auth.currentUser, {
+                    photoURL: imageUrl,
+                });
 
                 // Refresh the page to display the updated profile picture
                 window.location.reload();
@@ -224,7 +238,7 @@ const ProfilePage = () => {
 
         try {
             // Update the user's "Image" field in Firestore with the selected photo's URL
-            await updateDoc(userRef, { Image: selectedImage });
+            await updateDoc(userRef, { imageURL: selectedImage });
 
             // Profile photo updated successfully
             setModalContent("Profile photo updated successfully");
@@ -267,7 +281,7 @@ const ProfilePage = () => {
                         <div className='ml-5 flex flex-row mt-4 md:w-full md:gap-10    '>
                             <div className='flex items-center h-4/12 w-4/12 rounded-full outline outline-2  overflow-hidden md:w-3/12 h-4/12 md:mt-8'>
                                 <Image
-                                    src={currentUser.Image}
+                                    src={auth?.currentUser.photoURL}
                                     width={220}
                                     height={200}
                                     alt=''
