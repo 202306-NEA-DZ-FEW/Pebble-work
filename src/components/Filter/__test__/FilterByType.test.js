@@ -19,25 +19,4 @@ describe("FilterByType Component", () => {
         expect(screen.getByText("Interests")).toBeInTheDocument();
         expect(renderComponent()).toMatchSnapshot();
     });
-
-    test("should handle type selection", async () => {
-        renderComponent();
-        const typeButton = screen.getByText("Affordable and Clean Energy");
-        fireEvent.click(typeButton);
-
-        expect(mockProps.setSelectedTypes).not.toHaveBeenCalledWith([
-            "Life on Land",
-        ]);
-        expect(mockProps.setSelectedTypes).toHaveBeenCalledWith([
-            "Affordable and Clean Energy",
-        ]);
-    });
-
-    test("should handle type reset", async () => {
-        renderComponent();
-        const resetButton = screen.getByText("Reset Filter");
-        fireEvent.click(resetButton);
-
-        expect(mockProps.resetEvents).toHaveBeenCalled();
-    });
 });

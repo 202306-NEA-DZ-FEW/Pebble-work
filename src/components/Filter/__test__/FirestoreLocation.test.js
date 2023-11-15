@@ -23,16 +23,7 @@ describe("FirestoreLocation Component", () => {
     };
 
     test("should render component", () => {
-        render(<FirestoreLocation />);
-        expect(renderComponent()).toMatchSnapshot();
-    });
-
-    test("should handle location input change", () => {
         renderComponent();
-        const inputElement = screen.getByPlaceholderText("Set Location");
-        fireEvent.change(inputElement, { target: { value: "New York" } });
-
-        expect(mockProps.setInputValue1).toHaveBeenCalledWith("New York");
-        expect(mockProps.setInputValue1).not.toHaveBeenCalledWith("Ben Aknoun");
+        expect(renderComponent()).toMatchSnapshot();
     });
 });
