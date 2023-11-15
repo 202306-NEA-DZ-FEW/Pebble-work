@@ -3,18 +3,11 @@ import Calendar from "@/components/Filter/Calendar";
 import MobileCard from "./MobileCard";
 
 import styles from "@/styles/Events.module.css";
-import {
-    collection,
-    getDocs,
-    onSnapshot,
-    query,
-    where,
-} from "firebase/firestore";
 
 import FilterByType from "@/components/Filter/FilterByType";
 import FirestoreLocation from "@/components/Filter/FirestoreLocation";
 
-import { db } from "@/util/firebase";
+import { usePagination } from "@/components/Pagination/Pagination";
 
 const SmallScreenEvents = (user) => {
     // State variables
@@ -22,7 +15,7 @@ const SmallScreenEvents = (user) => {
     const [selectedTypes, setSelectedTypes] = useState([]);
     const [inputValue1, setInputValue1] = useState("");
     const [isCalendarOpen, setCalendarOpen] = useState(false);
-    const [isLocationOpen, setLocationOpen] = useState(false);
+
     const [filteredTypes, setFilteredTypes] = useState([]);
     const [events, setEvents] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState([]);
@@ -31,70 +24,11 @@ const SmallScreenEvents = (user) => {
     const [resetLocation, setResetLocation] = useState(false);
     const [resetDays, setResetDays] = useState(false);
     const dropdownRef = useRef(null);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(5);
-
-    const totalPages = Math.ceil(filteredEvents.length / itemsPerPage);
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = filteredEvents.slice(
-        indexOfFirstItem,
-        indexOfLastItem
-    );
+    const { currentPage, totalPages, currentItems, setCurrentPage } =
+        usePagination(1, 5, filteredEvents);
 
     const handleLocationInputChange = (value) => {
         setInputValue1(value);
-    };
-
-    const filterEventsByLocation = (location) => {
-        if (!location) {
-            setFilteredEvents([]);
-            return () => {};
-        }
-
-        const eventsCollectionRef = collection(db, "events");
-        const q = query(eventsCollectionRef, where("location", "==", location));
-
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            const matchingEvents = querySnapshot.docs.map((doc) => {
-                return { id: doc.id, ...doc.data() };
-            });
-            setFilteredEvents(matchingEvents);
-        });
-
-        return unsubscribe;
-    };
-    useEffect(() => {
-        const unsubscribe = filterEventsByLocation(inputValue1);
-
-        return () => {
-            unsubscribe();
-        };
-    }, [inputValue1]);
-
-    const checkEvents = async (dates) => {
-        try {
-            const eventsForAllDates = await Promise.all(
-                dates.map(async (selectedDate) => {
-                    const q = query(
-                        collection(db, "events"),
-                        where("date", "==", selectedDate)
-                    );
-
-                    const querySnapshot = await getDocs(q);
-                    return querySnapshot.docs.map((doc) => doc.data());
-                })
-            );
-
-            // Flatten the array of arrays into a single array
-            const filteredEvents = [].concat(...eventsForAllDates);
-            console.log(filteredEvents); // This will log the events for the selected range
-
-            setCalendarEvents(filteredEvents);
-            setSelectedDate(dates);
-        } catch (error) {
-            console.error("Error getting filtered events: ", error);
-        }
     };
 
     const handleClickOutside = (event) => {
@@ -117,48 +51,26 @@ const SmallScreenEvents = (user) => {
         setCalendarOpen(!isCalendarOpen);
     };
 
-    // Resize event listener
-    useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth > 640) {
-                setCalendarOpen(true);
-                setLocationOpen(true);
-            } else {
-                setCalendarOpen(false);
-                setLocationOpen(false);
-            }
-        };
-
-        // Set initial state based on window size
-        if (window.innerWidth > 640) {
-            setCalendarOpen(true);
-            setLocationOpen(true);
-        }
-
-        window.addEventListener("resize", handleResize);
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
-
     // Fetch events from Firebase
     useEffect(() => {
         const fetchEvents = async () => {
-            const eventsCollectionRef = collection(db, "events");
-            const eventsSnapshot = await getDocs(eventsCollectionRef);
-            const eventsData = eventsSnapshot.docs.map((doc) => {
-                return { id: doc.id, ...doc.data() };
-            });
+            const types = selectedTypes ? selectedTypes.join(",") : "";
+            const dates = selectedDate ? selectedDate.join(",") : "";
+            const response = await fetch(
+                `/api/events?type=${types}&location=${inputValue1}&date=${dates}`
+            );
+            const eventsData = await response.json();
 
             setEvents(eventsData);
+            setCalendarEvents(eventsData);
         };
 
         fetchEvents();
-    }, []);
+    }, [selectedTypes, inputValue1, selectedDate]);
 
     useEffect(() => {
         const applyFilters = () => {
-            let filteredEvents = events;
+            let filteredEvents = events; // Use all events, not just current page
 
             // Apply type filter
             if (filteredTypes.length > 0) {
@@ -176,7 +88,7 @@ const SmallScreenEvents = (user) => {
 
             // Apply date filter
             if (selectedDate && selectedDate.length > 0) {
-                filteredEvents = filteredEvents.filter((event) =>
+                filteredEvents = filteredEvents?.filter((event) =>
                     selectedDate.includes(event.date)
                 );
             }
@@ -185,7 +97,7 @@ const SmallScreenEvents = (user) => {
         };
 
         applyFilters();
-    }, [events, selectedDate, inputValue1, filteredTypes]);
+    }, [events, selectedDate, inputValue1, filteredTypes]); // Depend on all filters
 
     const resetEvents = () => {
         setSelectedTypes([]);
@@ -199,6 +111,11 @@ const SmallScreenEvents = (user) => {
     };
     const handleInputDelete = () => {
         setInputValue1("");
+    };
+    const handleDateChange = (dates) => {
+        setSelectedDate(
+            dates.map((date) => new Date(date).toISOString().split("T")[0])
+        );
     };
     return (
         <>
@@ -218,7 +135,7 @@ const SmallScreenEvents = (user) => {
                 <div className={`flex flex-col-reverse`}>
                     <div className={`h-[750px]`}>
                         <ul
-                            className={` flex flex-row justify-center flex-wrap items gap-4`}
+                            className={` flex flex-row pb-5 justify-center flex-wrap items gap-4`}
                         >
                             {currentItems.map((event) => {
                                 return (
@@ -251,23 +168,21 @@ const SmallScreenEvents = (user) => {
                                     No events found for this date
                                 </p>
                             )}
-                            <div className='flex justify-center gap-8 text-black'>
-                                {Array.from(
-                                    { length: totalPages },
-                                    (_, i) => i + 1
-                                ).map((pageNumber) => (
-                                    <button
-                                        key={pageNumber}
-                                        onClick={() =>
-                                            setCurrentPage(pageNumber)
-                                        }
-                                        disabled={pageNumber === currentPage}
-                                    >
-                                        {pageNumber}
-                                    </button>
-                                ))}
-                            </div>
                         </ul>
+                        <div className='flex justify-center pb-2 gap-8 text-black'>
+                            {Array.from(
+                                { length: totalPages },
+                                (_, i) => i + 1
+                            ).map((pageNumber) => (
+                                <button
+                                    key={pageNumber}
+                                    onClick={() => setCurrentPage(pageNumber)}
+                                    disabled={pageNumber === currentPage}
+                                >
+                                    {pageNumber}
+                                </button>
+                            ))}
+                        </div>
                     </div>
                     <div className='flex bg-white z-10 flex-row items-center justify-evenly text-black'>
                         <div>
@@ -300,7 +215,7 @@ const SmallScreenEvents = (user) => {
                                     </button>
                                     <Calendar
                                         resetDays={resetDays}
-                                        checkEvents={checkEvents}
+                                        checkEvents={handleDateChange}
                                     />
                                 </div>
                             )}
