@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 
-const Test = ({ eventId, title, type, image, location, date, time }) => {
+const MobileCard = ({ eventId, title, type, image, location, date, time }) => {
     const router = useRouter();
     const handleReviewClick = () => {
         router.push(`/events/${eventId}`);
@@ -36,4 +36,4 @@ const Test = ({ eventId, title, type, image, location, date, time }) => {
     );
 };
 
-export default Test;
+export default MobileCard;

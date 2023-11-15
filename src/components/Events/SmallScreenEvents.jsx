@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Calendar from "@/components/Filter/Calendar";
-import MobileCard from "./MobileCard";
+import SmallCard from "./SmallCard";
 
 import styles from "@/styles/Events.module.css";
 
@@ -139,7 +139,7 @@ const SmallScreenEvents = (user) => {
                         >
                             {currentItems.map((event) => {
                                 return (
-                                    <MobileCard
+                                    <SmallCard
                                         eventId={event.id}
                                         key={event.id}
                                         title={event.title}
