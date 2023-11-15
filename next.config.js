@@ -12,7 +12,7 @@ module.exports = {
             "images.unsplash.com",
             "firebasestorage.googleapis.com",
             "plus.unsplash.com",
-            "lh3.googleusercontent.com"
+            "lh3.googleusercontent.com",
         ],
     },
 };

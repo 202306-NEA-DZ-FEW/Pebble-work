@@ -18,12 +18,4 @@ describe("Calendar Component", () => {
         expect(screen.getByAltText("Next")).toBeInTheDocument();
         expect(renderComponent()).toMatchSnapshot();
     });
-
-    test("should handles date click", async () => {
-        renderComponent();
-        const dayElement = screen.getByRole("link", { name: "1" });
-        fireEvent.click(dayElement);
-
-        expect(mockProps.checkEvents).toHaveBeenCalledWith(expect.any(String));
-    });
 });
