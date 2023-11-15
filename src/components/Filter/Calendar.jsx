@@ -9,7 +9,7 @@ import Dropdown from "./Dropdown";
 const Calendar = ({ checkEvents, resetDays }) => {
     // State for the current date and selected days
     const [currentDate, setCurrentDate] = useState(new Date());
-    const [selectedDays, setSelectedDays] = useState({});
+
     const [rangeStart, setRangeStart] = useState(null);
     const [selectedRange, setSelectedRange] = useState([]);
 
@@ -135,7 +135,6 @@ const Calendar = ({ checkEvents, resetDays }) => {
     //update selected days when resetDays changes
     useEffect(() => {
         if (resetDays) {
-            setSelectedDays(resetDays);
             setRangeStart(null);
             setSelectedRange([]);
         }
