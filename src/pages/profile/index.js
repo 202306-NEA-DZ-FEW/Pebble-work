@@ -143,27 +143,30 @@ const ProfilePage = () => {
                                 </button>
                             ))}
                         </div>
-                        {/* Save Interests Button */}
-                        <div className='mt-10 flex flex-col items-end  mx-auto'>
-                            <button
-                                className=' bg-orange-400  text-center h-10 w-30  px-4 py-2 text-xs text-white font-bold shadow-md md:h-14 mb-12 md:w-40 md:text-xl '
-                                onClick={handleEditProfile}
-                            >
-                                {t("profile:editProfile")}
-                            </button>
-                        </div>
                     </div>
 
-                    {/* Display joined events */}
                     <div className='mt-3 mb-2 font-semibold text-md w-70 text-gray-600'>
                         {t("profile:joinedEvents")}:
                     </div>
-                    <div className='flex flex-wrap'>
+                    <div className='flex flex-wrap max-h-40 overflow-auto'>
                         {joinedEvents.map((event, index) => (
-                            <div key={index} className='mr-3 mb-2'>
+                            <div
+                                key={index}
+                                className='mr-3 mb-2 p-4 border rounded-md bg-white w-40 sm:w-60 md:w-80'
+                            >
+                                {/* Card Content */}
                                 {event.title}
                             </div>
                         ))}
+                    </div>
+                    {/* Save Interests Button */}
+                    <div className='mt-10 flex flex-col items-end mx-auto'>
+                        <button
+                            className='bg-orange-400 text-center h-10 w-30 px-4 py-2 text-xs text-white font-bold shadow-md md:h-14 mb-12 md:w-40 md:text-xl'
+                            onClick={handleEditProfile}
+                        >
+                            {t("profile:editProfile")}
+                        </button>
                     </div>
                 </div>
             </div>
