@@ -24,6 +24,7 @@ const Calendar = ({ checkEvents, resetDays }) => {
 
         if (rangeStart === null) {
             setRangeStart(selectedDate);
+            setSelectedRange([selectedDate]);
             checkEvents([selectedDate.toISOString().split("T")[0]]);
         } else {
             let startDate = new Date(rangeStart);
