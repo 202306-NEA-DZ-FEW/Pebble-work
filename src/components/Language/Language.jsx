@@ -68,7 +68,7 @@ const Language = () => {
         <Draggable onDrag={handleStart} onStop={handleStop}>
             <div
                 ref={dropdownRef}
-                className='fixed bottom-0 right-20 sm:right-40'
+                className='fixed bottom-0 left-20 sm:right-40'
             >
                 <button
                     type='button'
@@ -95,7 +95,7 @@ const Language = () => {
                 <div
                     className={`z-50 ${
                         isDropdownOpen ? "block" : "hidden"
-                    } text-base list-none divide-y divide-gray-100 fixed bottom-10 right-0 rounded-[4px] shadow bg-transparent`}
+                    } text-base list-none divide-y divide-gray-100 fixed bottom-10 left-6 rounded-[4px] shadow bg-transparent`}
                     id='language-dropdown-menu'
                 >
                     <ul
@@ -107,7 +107,7 @@ const Language = () => {
                                 onClick={() => changeLanguage("en")}
                                 className='block text-sm text-gray-700 hover:border hover:rounded-sm w-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
                             >
-                                <div className='inline-flex items-center'>
+                                <div className='inline-flex w-full items-center'>
                                     <img
                                         className='mr-1'
                                         src='/United-Kingdom.svg'
@@ -123,7 +123,7 @@ const Language = () => {
                                 onClick={() => changeLanguage("tr")}
                                 className='block text-sm text-gray-700 hover:border hover:rounded-sm w-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
                             >
-                                <div className='inline-flex items-center'>
+                                <div className='inline-flex w-full items-center'>
                                     <img
                                         className='mr-1'
                                         src='/Turkey.svg'
@@ -139,7 +139,7 @@ const Language = () => {
                                 onClick={() => changeLanguage("de")}
                                 className='block text-sm text-gray-700 hover:border hover:rounded-sm w-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
                             >
-                                <div className='inline-flex items-center'>
+                                <div className='inline-flex w-full items-center'>
                                     <img
                                         className='mr-1'
                                         src='/Germany.svg'
@@ -156,7 +156,7 @@ const Language = () => {
                                 onClick={() => changeLanguage("zh")}
                                 className='block text-sm text-gray-700 hover:border hover:rounded-sm w-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
                             >
-                                <div className='inline-flex items-center'>
+                                <div className='inline-flex w-full items-center'>
                                     <img
                                         className='mr-1'
                                         src='/China.svg'
