@@ -162,6 +162,7 @@ const SignUpPage = () => {
 
             // Extract first and last names from displayName
             const displayName = result.user.displayName;
+            const image = result.user.photoURL;
             const [firstName, lastName] = displayName.split(" ");
 
             // Create user object with name, surename, and email
@@ -172,6 +173,7 @@ const SignUpPage = () => {
                 interests: [],
                 eventsCreated: [],
                 eventsJoined: [],
+                imageURL: image,
             };
 
             // Get the user UID
@@ -208,6 +210,7 @@ const SignUpPage = () => {
 
             // Extract first and last names from displayName
             const displayName = result.user.displayName;
+            const image = result.user.photoURL;
             const [firstName, lastName] = displayName.split(" ");
 
             // Retrieve email from additionalUserInfo
@@ -221,6 +224,7 @@ const SignUpPage = () => {
                 interests: [],
                 eventsCreated: [],
                 eventsJoined: [],
+                imageURL: image,
             };
 
             const userUID = result.user.uid;
