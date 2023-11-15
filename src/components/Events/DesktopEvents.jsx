@@ -1,27 +1,19 @@
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/Events.module.css";
 import { useTranslation } from "react-i18next";
-import {
-    collection,
-    getDocs,
-    onSnapshot,
-    query,
-    where,
-} from "firebase/firestore";
 
 import Calendar from "@/components/Filter/Calendar";
 import FilterByType from "@/components/Filter/FilterByType";
 
-import { db } from "@/util/firebase";
 import WideScreenCard from "@/components/Events/WideScreenCard";
 import FirestoreLocation from "../Filter/FirestoreLocation";
+import { usePagination } from "@/components/Pagination/Pagination";
 
 const DesktopEvents = (user) => {
     const { t } = useTranslation();
     // State variables
     const [selectedTypes, setSelectedTypes] = useState([]);
     const [inputValue1, setInputValue1] = useState("");
-    const [isLocationOpen, setLocationOpen] = useState(false);
     const [filteredTypes, setFilteredTypes] = useState([]);
     const [events, setEvents] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState([]);
@@ -29,99 +21,30 @@ const DesktopEvents = (user) => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [resetLocation, setResetLocation] = useState(false);
     const [resetDays, setResetDays] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(5);
+    const { currentPage, totalPages, currentItems, setCurrentPage } =
+        usePagination(1, 5, filteredEvents);
 
     const handleLocationInputChange = (value) => {
         setInputValue1(value);
     };
 
-    const filterEventsByLocation = (location) => {
-        if (!location) {
-            setFilteredEvents([]);
-            return () => {};
-        }
-
-        const eventsCollectionRef = collection(db, "events");
-        const q = query(eventsCollectionRef, where("location", "==", location));
-
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            const matchingEvents = querySnapshot.docs.map((doc) => {
-                return { id: doc.id, ...doc.data() };
-            });
-            setFilteredEvents(matchingEvents);
-        });
-
-        return unsubscribe;
-    };
-    useEffect(() => {
-        const unsubscribe = filterEventsByLocation(inputValue1);
-
-        return () => {
-            unsubscribe();
-        };
-    }, [inputValue1]);
-
-    const checkEvents = async (dates) => {
-        try {
-            const eventsForAllDates = await Promise.all(
-                dates.map(async (selectedDate) => {
-                    const q = query(
-                        collection(db, "events"),
-                        where("date", "==", selectedDate)
-                    );
-
-                    const querySnapshot = await getDocs(q);
-                    return querySnapshot.docs.map((doc) => doc.data());
-                })
-            );
-
-            // Flatten the array of arrays into a single array
-            const filteredEvents = [].concat(...eventsForAllDates);
-            console.log(filteredEvents); // This will log the events for the selected range
-
-            setCalendarEvents(filteredEvents);
-            setSelectedDate(dates);
-        } catch (error) {
-            console.error("Error getting filtered events: ", error);
-        }
-    };
-
-    // Resize event listener
-    useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth > 640) {
-                setLocationOpen(true);
-            } else {
-                setLocationOpen(false);
-            }
-        };
-
-        // Set initial state based on window size
-        if (window.innerWidth > 640) {
-            setLocationOpen(true);
-        }
-
-        window.addEventListener("resize", handleResize);
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
-
     // Fetch events from Firebase
+
     useEffect(() => {
         const fetchEvents = async () => {
-            const eventsCollectionRef = collection(db, "events");
-            const eventsSnapshot = await getDocs(eventsCollectionRef);
-            const eventsData = eventsSnapshot.docs.map((doc) => {
-                return { id: doc.id, ...doc.data() };
-            });
+            const types = selectedTypes ? selectedTypes.join(",") : "";
+            const dates = selectedDate ? selectedDate.join(",") : "";
+            const response = await fetch(
+                `/api/events?type=${types}&location=${inputValue1}&date=${dates}`
+            );
+            const eventsData = await response.json();
 
             setEvents(eventsData);
+            setCalendarEvents(eventsData);
         };
 
         fetchEvents();
-    }, []);
+    }, [selectedTypes, inputValue1, selectedDate]);
 
     useEffect(() => {
         const applyFilters = () => {
@@ -143,7 +66,7 @@ const DesktopEvents = (user) => {
 
             // Apply date filter
             if (selectedDate && selectedDate.length > 0) {
-                filteredEvents = filteredEvents.filter((event) =>
+                filteredEvents = filteredEvents?.filter((event) =>
                     selectedDate.includes(event.date)
                 );
             }
@@ -152,16 +75,14 @@ const DesktopEvents = (user) => {
         };
 
         applyFilters();
-    }, [events, selectedDate, inputValue1, filteredTypes]); // Depend on all events
+    }, [events, selectedDate, inputValue1, filteredTypes]); // Depend on all filters
 
-    // Pagination should be handled outside of the useEffect
-    const totalPages = Math.ceil(filteredEvents.length / itemsPerPage);
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = filteredEvents.slice(
-        indexOfFirstItem,
-        indexOfLastItem
-    );
+    // get the date from calendar
+    const handleDateChange = (dates) => {
+        setSelectedDate(
+            dates.map((date) => new Date(date).toISOString().split("T")[0])
+        );
+    };
 
     const resetEvents = () => {
         setSelectedTypes([]);
@@ -173,9 +94,7 @@ const DesktopEvents = (user) => {
         setResetLocation(true);
         setResetDays([]);
     };
-    // const handleInputDelete = () => {
-    //     setInputValue1("");
-    // };
+
     return (
         <>
             <main className={` flex flex-col justify-center items-center`}>
@@ -209,7 +128,7 @@ const DesktopEvents = (user) => {
                             })}
 
                             {(inputValue1 || filteredTypes.length > 0) &&
-                                filteredEvents.length === 0 && (
+                                filteredEvents?.length === 0 && (
                                     <p className='text-red-500 text-center'>
                                         {t("events:noEventsFound")}
                                     </p>
@@ -243,7 +162,7 @@ const DesktopEvents = (user) => {
                             >
                                 <Calendar
                                     resetDays={resetDays}
-                                    checkEvents={checkEvents}
+                                    checkEvents={handleDateChange}
                                 />
                             </div>
                         </div>

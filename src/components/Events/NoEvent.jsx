@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import YouTube from "react-youtube";
 import styles from "@/styles/NoEvent.module.css";
 import { useRouter } from "next/router";
@@ -6,14 +6,13 @@ import { useTranslation } from "react-i18next";
 
 const NoEvent = () => {
     const router = useRouter();
-    const canvasRef = useRef(null);
+
     const { t } = useTranslation("noEvent");
 
     const videoOptions = {
         playerVars: {
             autoplay: 1,
             volume: 40,
-            // mute:1,
         },
     };
 
