@@ -7,5 +7,6 @@
     "surnameRequired": "姓氏（必填）",
     "emailRequired": "电子邮件（必填）",
     "locationRequired": "位置（必填）",
-    "interests": "兴趣爱好"
+    "interests": "兴趣爱好",
+    "joinedEvents": "已参加的活动"
 }

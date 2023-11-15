@@ -7,5 +7,6 @@
     "surnameRequired": "Nachname (Erforderlich)",
     "emailRequired": "E-Mail (Erforderlich)",
     "locationRequired": "Standort (Erforderlich)",
-    "interests": "Interessen"
+    "interests": "Interessen",
+    "joinedEvents": "Beigetretene Veranstaltungen"
 }
