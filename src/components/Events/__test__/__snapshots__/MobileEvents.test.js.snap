@@ -51,7 +51,7 @@ exports[`EventsPage component renders correctly 1`] = `
                 >
                   <img
                     alt="Previous"
-                    className="xl:w-[40px] rotate-180 xl:h-[40px] sm:w-[25px] md:h-[25px]"
+                    className="xl:w-[40px] rotate-180 xl:h-[40px] w-[25px] md:h-[25px]"
                     data-nimg="1"
                     decoding="async"
                     height={50}
@@ -329,7 +329,7 @@ exports[`EventsPage component renders correctly 1`] = `
                 >
                   <img
                     alt="Next"
-                    className="xl:w-[40px] xl:h-[40px] sm:w-[25px] md:h-[25px]"
+                    className="xl:w-[40px] xl:h-[40px] w-[25px] md:h-[25px]"
                     data-nimg="1"
                     decoding="async"
                     height={50}
