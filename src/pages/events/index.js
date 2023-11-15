@@ -6,7 +6,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const EventsPage = () => {
-    const isDesktop = useMediaQuery("(min-width:1000px)");
+    const isDesktop = useMediaQuery("(min-width:1080px)");
     const isMobile = useMediaQuery("(min-width:640px)");
 
     let ComponentToRender;

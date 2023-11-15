@@ -1,0 +1,131 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SmallScreenEvents component renders correctly 1`] = `
+<main
+  className=" flex flex-col justify-center items-center overflow-scroll"
+>
+  <div>
+    <h1>
+      Welcome, 
+      !
+    </h1>
+    <p>
+      This is the events page
+    </p>
+  </div>
+  <button
+    className=" w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 rounded-[4px] h-[16px] ml-auto mr-2"
+    onClick={[Function]}
+  >
+    All events
+  </button>
+  <div
+    className="flex flex-col-reverse"
+  >
+    <div
+      className="h-[750px]"
+    >
+      <ul
+        className=" flex flex-row pb-5 justify-center flex-wrap items gap-4"
+      />
+      <div
+        className="flex justify-center pb-2 gap-8 text-black"
+      />
+    </div>
+    <div
+      className="flex bg-white z-10 flex-row items-center justify-evenly text-black"
+    >
+      <div>
+        <button
+          className="sm:hidden"
+          onClick={[Function]}
+        >
+          Dates
+        </button>
+      </div>
+      <div
+        className="h-66"
+      >
+        <button
+          className="btn sm:bg-blue-500   hover:bg-gray-400 sm:text-center flex lg:items-center sm:gap-0 gap-2 sm:justify-center lg:w-[281px] lg:h-[52px] sm:w-[149px] sm:h-[30px] text-white font-[500] lg:text-[18px] lg:tracking-[0.10px] sm:text-[12px] sm:px-4 sm:py-2 rounded-lg"
+          onClick={[Function]}
+        >
+          Location
+        </button>
+        <dialog
+          className="modal rounded-tr rounded-br"
+          id="my_modal_1"
+        >
+          <div
+            className="modal-box"
+          >
+            <div
+              className="flex justify-center"
+            >
+              <input
+                className="mt-2 p-2 border rounded"
+                onChange={[Function]}
+                placeholder="Search city..."
+                type="text"
+                value=""
+              />
+            </div>
+            <h3
+              className="font-bold text-lg mb-0"
+            >
+              cities 
+            </h3>
+            <div
+              className=" mt-2  "
+            >
+              <ul
+                className="list-none information h-[200px]"
+              />
+              <div
+                className="modal-action absolute top-7 right-3 mt-0"
+              >
+                <form
+                  method="dialog"
+                >
+                  <button
+                    className=""
+                    onClick={[Function]}
+                  >
+                    <svg
+                      fill="currentColor"
+                      fillRule="evenodd"
+                      height={20}
+                      stroke="currentColor"
+                      strokeWidth="0"
+                      style={
+                        Object {
+                          "color": undefined,
+                        }
+                      }
+                      viewBox="0 0 1024 1024"
+                      width={20}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M799.855 166.312c.023.007.043.018.084.059l57.69 57.69c.041.041.052.06.059.084a.118.118 0 0 1 0 .069c-.007.023-.018.042-.059.083L569.926 512l287.703 287.703c.041.04.052.06.059.083a.118.118 0 0 1 0 .07c-.007.022-.018.042-.059.083l-57.69 57.69c-.041.041-.06.052-.084.059a.118.118 0 0 1-.069 0c-.023-.007-.042-.018-.083-.059L512 569.926 224.297 857.629c-.04.041-.06.052-.083.059a.118.118 0 0 1-.07 0c-.022-.007-.042-.018-.083-.059l-57.69-57.69c-.041-.041-.052-.06-.059-.084a.118.118 0 0 1 0-.069c.007-.023.018-.042.059-.083L454.073 512 166.371 224.297c-.041-.04-.052-.06-.059-.083a.118.118 0 0 1 0-.07c.007-.022.018-.042.059-.083l57.69-57.69c.041-.041.06-.052.084-.059a.118.118 0 0 1 .069 0c.023.007.042.018.083.059L512 454.073l287.703-287.702c.04-.041.06-.052.083-.059a.118.118 0 0 1 .07 0Z"
+                      />
+                    </svg>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </dialog>
+      </div>
+      <div>
+        <button
+          className="sm:hidden"
+          onClick={[Function]}
+        >
+          Interests
+        </button>
+      </div>
+    </div>
+  </div>
+</main>
+`;
