@@ -88,7 +88,11 @@ const Dropdown = () => {
                     {user ? (
                         <img
                             className='rounded-full md:w-8 md:h-8 w-6 h-6'
-                            src={user ? user.photoURL : ""}
+                            src={
+                                auth?.currentUser.photoURL !== null
+                                    ? auth?.currentUser.photoURL
+                                    : "/images/icon_default.png"
+                            }
                             alt='Profile'
                         />
                     ) : (
