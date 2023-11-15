@@ -62,17 +62,26 @@ const DesktopEvents = (user) => {
         };
     }, [inputValue1]);
 
-    const checkEvents = async (selectedDate) => {
-        const q = query(
-            collection(db, "events"),
-            where("date", "==", selectedDate)
-        );
-
+    const checkEvents = async (dates) => {
         try {
-            const querySnapshot = await getDocs(q);
-            const filteredEvents = querySnapshot.docs.map((doc) => doc.data());
+            const eventsForAllDates = await Promise.all(
+                dates.map(async (selectedDate) => {
+                    const q = query(
+                        collection(db, "events"),
+                        where("date", "==", selectedDate)
+                    );
+
+                    const querySnapshot = await getDocs(q);
+                    return querySnapshot.docs.map((doc) => doc.data());
+                })
+            );
+
+            // Flatten the array of arrays into a single array
+            const filteredEvents = [].concat(...eventsForAllDates);
+            console.log(filteredEvents); // This will log the events for the selected range
+
             setCalendarEvents(filteredEvents);
-            setSelectedDate(selectedDate);
+            setSelectedDate(dates);
         } catch (error) {
             console.error("Error getting filtered events: ", error);
         }
@@ -133,9 +142,9 @@ const DesktopEvents = (user) => {
             }
 
             // Apply date filter
-            if (selectedDate) {
-                filteredEvents = filteredEvents.filter(
-                    (event) => event.date === selectedDate
+            if (selectedDate && selectedDate.length > 0) {
+                filteredEvents = filteredEvents.filter((event) =>
+                    selectedDate.includes(event.date)
                 );
             }
 
@@ -230,7 +239,7 @@ const DesktopEvents = (user) => {
                     <div className='flex h-[1150px] flex-col ml-[-50px] items-center text-black gap-7'>
                         <div className='sm:flex s:flex-col sm:items-center sm:justify-center'>
                             <div
-                                className={`${styles.calendarContainer} border border-black rounded-[8px] bg-white sm:bg-transparent`}
+                                className={`${styles.calendarContainer} shadow-inner rounded-[8px] bg-white sm:bg-transparent`}
                             >
                                 <Calendar
                                     resetDays={resetDays}
@@ -243,7 +252,6 @@ const DesktopEvents = (user) => {
                                 onInputChange={handleLocationInputChange}
                                 resetLocation={resetLocation}
                                 setResetLocation={setResetLocation}
-                                // onInputDelete={handleInputDelete}
                                 setInputValue1={setInputValue1}
                                 inputValue1={inputValue1}
                             />

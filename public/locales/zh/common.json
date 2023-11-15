@@ -75,5 +75,44 @@
     },
     "buttons": {
         "continueWithGoogle": "继续使用 Google"
+    },
+    "edit": {
+        "change": "位置无法更改",
+        "time": "更新时间：",
+        "title": "更新标题：",
+        "titleDescription": "需要一个更好的标题来传达活动的目标？我们为您提供了解决方案",
+        "updateDescription": "更新描述：",
+        "updateDescriptionText": "有额外的目标或活动吗？",
+        "eventImage": "活动图片：",
+        "eventImageText": "上传一张图片或更新以前的图片。",
+        "choseFile": "选择文件",
+        "noEdits": "无编辑",
+        "updateEvent": "更新活动"
+    },
+    "review": {
+        "location": "地点：",
+        "dateAndTime": "日期和时间：",
+        "undefined": "未定义",
+        "organizedBy": "组织者",
+        "dudeMcGee": "小伙子麦基",
+        "editEvent": "编辑活动",
+        "cancelEvent": "取消活动",
+        "cancelJoin": "取消参加",
+        "alreadyJoined": "已经参加",
+        "joinNow": "现在加入",
+        "joinNowText": "在加入活动之前，您需要一个帐户。",
+        "signIn": "登录",
+        "signUp": "注册",
+        "eventDescription": "活动描述：",
+        "loading": "加载中...可能没有活动描述",
+        "attendees": "参与者",
+        "noParticipant": "目前还没有参与者。成为第一个加入吧！",
+        "warning": "警告",
+        "warningCancel": "您即将取消此活动。",
+        "thisAction": "此操作将永久删除所有关联数据。确定要继续吗？",
+        "close": "关闭",
+        "warningLeave": "您即将离开此活动。",
+        "proceed": "确定要继续吗？",
+        "leave": "离开"
     }
 }

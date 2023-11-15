@@ -228,7 +228,6 @@ const SignUpPage = () => {
             };
 
             const userUID = result.user.uid;
-
             // Get a reference to the "users" collection
             const usersCollectionRef = collection(db, "users");
 

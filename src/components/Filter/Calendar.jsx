@@ -1,59 +1,50 @@
 import Image from "next/image";
-import Link from "next/link";
+
 import React, { useState, useEffect } from "react";
 
 import styles from "@/styles/Events.module.css";
-import DateSelector from "../DateSelector";
+import Dropdown from "./Dropdown";
 
 // Define the Calendar component
 const Calendar = ({ checkEvents, resetDays }) => {
     // State for the current date and selected days
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDays, setSelectedDays] = useState({});
+    const [rangeStart, setRangeStart] = useState(null);
+    const [selectedRange, setSelectedRange] = useState([]);
 
     // Function to handle date click
     const handleDateClick = (day) => {
-        // Create a new date based on the clicked day
         const selectedDate = new Date(
             currentDate.getFullYear(),
             currentDate.getMonth(),
             day + 1
         );
-        // Format the date to ISO string
-        const formattedDate = selectedDate.toISOString().split("T")[0];
-        // Key for the selected month
-        const selectedMonthKey = `${currentDate.getFullYear()}-${currentDate.getMonth()}`;
 
-        // Update the selected days state
-        setSelectedDays((prevSelectedDays) => {
-            // Copy the previous state
-            const updatedSelectedDays = { ...prevSelectedDays };
-            // Get the days for the current month
-            const currentMonthDays =
-                updatedSelectedDays[selectedMonthKey] || [];
-            // Check if the day is already selected
-            const dayIndex = currentMonthDays.indexOf(day);
+        if (rangeStart === null) {
+            setRangeStart(selectedDate);
+        } else {
+            let startDate = rangeStart;
+            let endDate = selectedDate;
 
-            // If the day is already selected, remove it from the selected days
-            if (dayIndex !== -1) {
-                currentMonthDays.splice(dayIndex, 1);
-                checkEvents(null); // Show all events
-            } else {
-                // If the day is not selected, add it to the selected days
-                currentMonthDays.push(day);
-                checkEvents(formattedDate); // Show events for the selected date
+            if (startDate > endDate) {
+                [startDate, endDate] = [endDate, startDate];
             }
 
-            // If there are no selected days for the current month, remove the month from the state
-            if (currentMonthDays.length === 0) {
-                delete updatedSelectedDays[selectedMonthKey];
-            } else {
-                // Otherwise, update the selected days for the current month
-                updatedSelectedDays[selectedMonthKey] = currentMonthDays;
+            const range = [];
+            let currentDate = startDate;
+
+            while (currentDate <= endDate) {
+                range.push(new Date(currentDate));
+                currentDate.setDate(currentDate.getDate() + 1);
             }
 
-            return updatedSelectedDays;
-        });
+            setSelectedRange(range);
+            console.log(range);
+
+            checkEvents(range.map((date) => date.toISOString().split("T")[0]));
+            setRangeStart(null);
+        }
     };
 
     // handle next month button click
@@ -120,22 +111,21 @@ const Calendar = ({ checkEvents, resetDays }) => {
 
         // Render day numbers
         for (let day = 1; day <= daysInMonth; day++) {
-            const selectedMonthKey = `${currentYear}-${currentMonth}`;
-            const isSelected =
-                selectedDays[selectedMonthKey] &&
-                selectedDays[selectedMonthKey].includes(day);
+            const thisDate = new Date(currentYear, currentMonth, day);
+            const isSelected = selectedRange.some(
+                (date) => date.toDateString() === thisDate.toDateString()
+            );
 
             calendarDays.push(
-                <Link
-                    href=''
+                <button
                     key={`day-${day}`}
                     className={`${styles.calendarDay} ${
-                        isSelected ? styles.selectedDay : ""
+                        isSelected ? styles.selectedRange : ""
                     } xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded`}
                     onClick={() => handleDateClick(day)}
                 >
                     {day}
-                </Link>
+                </button>
             );
         }
 
@@ -146,6 +136,8 @@ const Calendar = ({ checkEvents, resetDays }) => {
     useEffect(() => {
         if (resetDays) {
             setSelectedDays(resetDays);
+            setRangeStart(null);
+            setSelectedRange([]);
         }
     }, [resetDays]);
 
@@ -168,12 +160,58 @@ const Calendar = ({ checkEvents, resetDays }) => {
                             />
                         </button>
                         <div className='flex flex-col items-center gap-3'>
-                            <div className='calendar grid grid-cols-7 gap-1'>
+                            <div className='calendar sm:h-[140px] xl:h-[200px] grid grid-cols-7 gap-1'>
                                 {renderCalendar()}
                             </div>
-                            <h2 className='text-xl font-bold sm:text-[14px] xl:text-[18px]'>
-                                {getMonthName(currentDate)}{" "}
-                                {currentDate.getFullYear()}
+                            <h2 className='text-xl xl:w-[200px] sm:w-[165px] flex justify-center gap-4 font-bold sm:text-[14px] xl:text-[18px]'>
+                                <Dropdown
+                                    options={Array.from(
+                                        { length: 12 },
+                                        (_, i) => i
+                                    ).map((month) =>
+                                        new Date(
+                                            currentDate.getFullYear(),
+                                            month
+                                        ).toLocaleString("default", {
+                                            month: "long",
+                                        })
+                                    )}
+                                    selectedOption={getMonthName(currentDate)}
+                                    setSelectedOption={(monthName) => {
+                                        const month = new Date(
+                                            Date.parse(monthName + " 1, 2012")
+                                        ).getMonth();
+                                        setCurrentDate(
+                                            new Date(
+                                                currentDate.getFullYear(),
+                                                month
+                                            )
+                                        );
+                                    }}
+                                />
+
+                                <Dropdown
+                                    options={Array.from(
+                                        { length: 6 },
+                                        (_, i) =>
+                                            i +
+                                            Math.min(
+                                                currentDate.getFullYear(),
+                                                new Date().getFullYear()
+                                            )
+                                    )}
+                                    selectedOption={currentDate
+                                        .getFullYear()
+                                        .toString()}
+                                    setSelectedOption={(year) => {
+                                        setCurrentDate(
+                                            new Date(
+                                                year,
+                                                currentDate.getMonth()
+                                            )
+                                        );
+                                    }}
+                                />
                             </h2>
                         </div>
                         <button
@@ -190,11 +228,6 @@ const Calendar = ({ checkEvents, resetDays }) => {
                         </button>
                     </div>
                 </div>
-                <DateSelector
-                    resetDays={resetDays}
-                    checkEvents={checkEvents}
-                    setCurrentDate={setCurrentDate}
-                />
             </div>
         </>
     );
