@@ -68,18 +68,30 @@ const Chat = () => {
     };
 
     return (
-        <div>
-            {messages.map((message, i) => (
-                <p key={i}>{message.text}</p>
-            ))}
-            <form onSubmit={sendMessage}>
-                <input
-                    value={newMessage}
-                    onChange={(e) => setNewMessage(e.target.value)}
-                />
-                <button type='submit'>Send</button>
-            </form>
-        </div>
+        <>
+            <div
+                className='min-w-full'
+                style={{ position: "relative", display: "inline-block" }}
+            >
+                <form onSubmit={sendMessage}>
+                    <input
+                        className='min-w-full'
+                        value={newMessage}
+                        onChange={(e) => setNewMessage(e.target.value)}
+                        style={{ paddingRight: "60px" }} // Make room for the button
+                    />
+                    <button
+                        type='submit'
+                        style={{
+                            position: "absolute",
+                            right: "10px",
+                        }}
+                    >
+                        Send
+                    </button>
+                </form>
+            </div>
+        </>
     );
 };
 

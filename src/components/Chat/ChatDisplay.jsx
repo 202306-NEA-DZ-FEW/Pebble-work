@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { db, auth } from "../../util/firebase";
 import { doc, onSnapshot, getDoc } from "firebase/firestore";
+import Chat from "./Chat";
 
 const ChatDisplay = () => {
     const [messages, setMessages] = useState([]);
@@ -48,36 +49,43 @@ const ChatDisplay = () => {
 
     return (
         <>
-            <div className='w-[300px]'>
-                {messages.map((message, i) => {
-                    // Calculate the age of the message in seconds
-                    const messageAge = (currentTime - message.timestamp) / 1000;
+            <div className='flex justify-center max-h-full w-full overflow-y-scroll'>
+                <div className='w-full'>
+                    {messages.map((message, i) => {
+                        // Calculate the age of the message in seconds
+                        const messageAge =
+                            (currentTime - message.timestamp) / 1000;
 
-                    // Calculate the opacity based on the age of the message
-                    let style = {};
-                    if (messageAge > 38) {
-                        const transitionDuration = 41 - messageAge;
-                        style = {
-                            opacity: 0,
-                            transition: `opacity ${transitionDuration}s linear`,
-                        };
-                    }
+                        // Calculate the opacity based on the age of the message
+                        let style = {};
+                        if (messageAge > 38) {
+                            const transitionDuration = 41 - messageAge;
+                            style = {
+                                opacity: 0,
+                                transition: `opacity ${transitionDuration}s linear`,
+                            };
+                        }
 
-                    // Determine the alignment of the message based on the user
-                    const alignment =
-                        message.uid === auth.currentUser.uid
-                            ? "chat chat-end"
-                            : "chat chat-start";
+                        // Determine the alignment of the message based on the user
+                        const alignment =
+                            message.uid === auth.currentUser.uid
+                                ? "chat chat-end"
+                                : "chat chat-start";
 
-                    return (
-                        <div key={i} className={alignment}>
-                            <div className='chat-bubble' style={style}>
-                                <strong>{message.userName}</strong>:{" "}
-                                {message.text}
+                        return (
+                            <div
+                                key={i}
+                                className={`overflow-hidden ${alignment}`}
+                            >
+                                <div className='chat-bubble' style={style}>
+                                    <strong>{message.userName}</strong>:{" "}
+                                    {message.text}
+                                </div>
                             </div>
-                        </div>
-                    );
-                })}
+                        );
+                    })}
+                    <Chat />
+                </div>
             </div>
         </>
     );

@@ -1,13 +1,13 @@
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import ChatDisplay from "@/components/Chat/ChatDisplay";
-import Chat from "@/components/Chat/Chat";
+import Bubble from "@/components/Chat/Bubble";
 
 const Test = () => {
     return (
-        <div>
-            <ChatDisplay />
-            <Chat />
+        <div className='min-h-screen'>
+            {/* <ChatDisplay /> */}
+            <Bubble />
         </div>
     );
 };

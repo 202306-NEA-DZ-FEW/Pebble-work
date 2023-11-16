@@ -1,0 +1,22 @@
+/* ExpandingButton.module.css */
+.expandingButton {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.expandingDiv {
+    width: 100px;
+    height: 100px;
+    background-color: #007bff;
+    clip-path: circle(0% at 50% 50%);
+    transition: clip-path 0.5s, width 0.5s, height 0.5s;
+}
+
+.expanded {
+    clip-path: circle(100% at 50% 50%);
+    width: 400px;
+    height: 400px;
+}
