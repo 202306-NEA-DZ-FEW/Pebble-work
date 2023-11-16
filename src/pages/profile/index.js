@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { db, auth } from "../../util/firebase";
-import { collection, doc, getDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
@@ -10,7 +10,6 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 const ProfilePage = () => {
     const router = useRouter();
     const { t } = useTranslation();
-    const [usersData, setUsersData] = useState(null);
     const [currentUser, setCurrentUser] = useState(null);
     const [userInterests, setUserInterests] = useState([]);
     const [joinedEvents, setJoinedEvents] = useState([]);
