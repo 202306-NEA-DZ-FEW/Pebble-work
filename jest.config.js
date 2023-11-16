@@ -22,8 +22,7 @@ const customJestConfig = {
     moduleNameMapper: {
         "^@/(.*)$": "<rootDir>/src/$1",
         "^~/(.*)$": "<rootDir>/public/$1",
-        'swiper/css': '<rootDir>/__mocks__/swiper.css.js',
-
+        "swiper/css": "<rootDir>/__mocks__/swiper.css.js",
     },
 };
 
