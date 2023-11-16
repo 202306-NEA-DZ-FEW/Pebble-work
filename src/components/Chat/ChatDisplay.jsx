@@ -22,7 +22,7 @@ const ChatDisplay = () => {
             const validMessages = chatData.messages.filter((message) => {
                 // Check if the message was sent more than 40 seconds ago
                 const messageAge = currentTime - message.timestamp;
-                return messageAge <= 40000; // 40000 milliseconds = 40 seconds
+                return messageAge <= 40000;
             });
 
             for (let message of validMessages) {
@@ -34,7 +34,7 @@ const ChatDisplay = () => {
 
         // Clean up the listener when the component unmounts
         return () => unsubscribe();
-    }, [currentTime]); // Add currentTime as a dependency
+    }, [currentTime]);
 
     // Update the current time every second
     useEffect(() => {
@@ -47,28 +47,39 @@ const ChatDisplay = () => {
     }, []);
 
     return (
-        <div>
-            {messages.map((message, i) => {
-                // Calculate the age of the message in seconds
-                const messageAge = (currentTime - message.timestamp) / 1000;
+        <>
+            <div className='w-[300px]'>
+                {messages.map((message, i) => {
+                    // Calculate the age of the message in seconds
+                    const messageAge = (currentTime - message.timestamp) / 1000;
 
-                // Calculate the opacity based on the age of the message
-                let style = {};
-                if (messageAge > 28) {
-                    const transitionDuration = 40 - messageAge;
-                    style = {
-                        opacity: 0,
-                        transition: `opacity ${transitionDuration}s linear`,
-                    };
-                }
+                    // Calculate the opacity based on the age of the message
+                    let style = {};
+                    if (messageAge > 38) {
+                        const transitionDuration = 41 - messageAge;
+                        style = {
+                            opacity: 0,
+                            transition: `opacity ${transitionDuration}s linear`,
+                        };
+                    }
 
-                return (
-                    <p key={i} style={style}>
-                        <strong>{message.userName}</strong>: {message.text}
-                    </p>
-                );
-            })}
-        </div>
+                    // Determine the alignment of the message based on the user
+                    const alignment =
+                        message.uid === auth.currentUser.uid
+                            ? "chat chat-end"
+                            : "chat chat-start";
+
+                    return (
+                        <div key={i} className={alignment}>
+                            <div className='chat-bubble' style={style}>
+                                <strong>{message.userName}</strong>:{" "}
+                                {message.text}
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+        </>
     );
 };
 
