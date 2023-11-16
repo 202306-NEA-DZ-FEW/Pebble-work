@@ -7,5 +7,6 @@
     "verifyOTP": "验证 OTP",
     "verifyPhoneNumberLabel": "验证您的电话号码",
     "sendCodeViaSMS": "通过短信发送代码",
-    "loginSuccess": "👍 登录成功"
+    "loginSuccess": "👍 登录成功",
+    "exists": "已存在于其他帐户中"
 }

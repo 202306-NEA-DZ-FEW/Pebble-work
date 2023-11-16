@@ -7,5 +7,6 @@
     "verifyOTP": "OTP'yi doğrula",
     "verifyPhoneNumberLabel": "Telefon numaranızı doğrulayın",
     "sendCodeViaSMS": "SMS ile kod gönder",
-    "loginSuccess": "👍 Giriş Başarılı"
+    "loginSuccess": "👍 Giriş Başarılı",
+    "exists": "Zaten farklı bir hesapta var"
 }

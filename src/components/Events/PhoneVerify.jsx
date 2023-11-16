@@ -96,7 +96,7 @@ const PhoneVerify = () => {
                 location.reload();
             }, 2000);
         } catch (err) {
-            toast.error("Exists with different account");
+            toast.error(t("verify:exists"));
         } finally {
             setLoading(false);
         }
@@ -118,7 +118,7 @@ const PhoneVerify = () => {
                     <div id='recaptcha-container'></div>
                     {user ? (
                         <h2 className='text-center text-white font-medium text-2xl'>
-                            👍 {t("verify:loginSuccess")}
+                            {t("verify:loginSuccess")}
                         </h2>
                     ) : (
                         <div className='w-80 flex flex-col gap-4 rounded-lg p-4'>
