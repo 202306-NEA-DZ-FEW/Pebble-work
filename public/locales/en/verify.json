@@ -7,5 +7,6 @@
     "verifyOTP": "Verify OTP",
     "verifyPhoneNumberLabel": "Verify your phone number",
     "sendCodeViaSMS": "Send code via SMS",
-    "loginSuccess": "👍 Login Success"
+    "loginSuccess": "👍 Login Success",
+    "exists": "Already exists on a different account"
 }

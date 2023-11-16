@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { db, auth } from "../../util/firebase";
-import { collection, doc, getDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
@@ -10,7 +10,6 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 const ProfilePage = () => {
     const router = useRouter();
     const { t } = useTranslation();
-    const [usersData, setUsersData] = useState(null);
     const [currentUser, setCurrentUser] = useState(null);
     const [userInterests, setUserInterests] = useState([]);
     const [joinedEvents, setJoinedEvents] = useState([]);
@@ -78,7 +77,7 @@ const ProfilePage = () => {
 
                     {/* Profile Picture /Change */}
                     <div className=' ml-5 flex flex-row mt-4 md:w-full md:gap-10  '>
-                        <div className='flex items-center h-4/12 w-4/12 rounded-full outline outline-2  overflow-hidden md:w-2/12 h-5/12 md:mt-8'>
+                        <div className='flex justify-center items-center h-4/12 w-4/12 rounded-full outline outline-2  overflow-hidden md:w-2/12 h-5/12 md:mt-8'>
                             <Image
                                 src={
                                     auth?.currentUser.photoURL !== null
@@ -87,8 +86,8 @@ const ProfilePage = () => {
                                 }
                                 width={200}
                                 height={200}
-                                alt=''
-                                className=' '
+                                alt='profile'
+                                className='h-full w-full'
                             />
                         </div>
 

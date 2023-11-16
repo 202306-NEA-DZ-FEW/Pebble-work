@@ -1,6 +1,7 @@
 import { BsFillShieldLockFill, BsTelephoneFill } from "react-icons/bs";
 import { CgSpinner } from "react-icons/cg";
-import { useState, useEffect } from "react";
+
+import { useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { auth } from "@/util/firebase";
@@ -13,33 +14,40 @@ import {
     signInWithPhoneNumber,
 } from "firebase/auth";
 import { toast, Toaster } from "react-hot-toast";
-import OtpInput from "@/components/OtpVerification";
 import { useTranslation } from "react-i18next";
 
+import OtpInput from "@/components/OtpVerification";
 const PhoneVerify = () => {
     const [otp, setOtp] = useState("");
-    const [pn, setPn] = useState("");
+    const [pn, setPn] = useState(""); //phone number
     const [loading, setLoading] = useState(false);
     const [showOTP, setShowOTP] = useState(false);
     const [user, setUser] = useState(null);
     const { t } = useTranslation("verify");
 
-    useEffect(() => {
-        const recaptchaVerifier = new RecaptchaVerifier(
-            auth,
-            "recaptcha-container",
-            {
-                size: "invisible",
-                callback: (response) => {},
-            },
-            auth
-        );
-        recaptchaVerifier.render();
-    }, []);
+    function onCaptchaVerify() {
+        if (!window.recaptchaVerifier) {
+            window.recaptchaVerifier = new RecaptchaVerifier(
+                auth,
+                "recaptcha-container",
+                {
+                    size: "invisible",
+                    callback: (response) => {
+                        onSignup();
+                    },
+                    "expired-callback": () => {},
+                },
+                auth
+            );
+        }
+    }
 
-    const onSignup = () => {
+    function onSignup() {
         setLoading(true);
-        const appVerifier = new RecaptchaVerifier("recaptcha-container");
+        onCaptchaVerify();
+
+        const appVerifier = window.recaptchaVerifier;
+
         const formatPh = "+" + pn;
 
         signInWithPhoneNumber(auth, formatPh, appVerifier)
@@ -47,36 +55,39 @@ const PhoneVerify = () => {
                 window.confirmationResult = confirmationResult;
                 setLoading(false);
                 setShowOTP(true);
-                toast.success(t("otpSent"));
+                toast.success(t("verify:otpSent"));
             })
-            .catch((error) => {
-                console.log(error);
+            .catch(() => {
                 setLoading(false);
             });
-    };
+    }
 
-    const onOTPVerify = async () => {
+    async function onOTPVerify() {
         setLoading(true);
+        // Get current user before phone number verification
         const currentUser = getAuth().currentUser;
-
         if (!currentUser || !currentUser.email || !currentUser.displayName) {
-            console.log(t("verify:noCurrentUser"));
+            toast.error(t("verify:noCurrentUser"));
             return;
         }
 
         try {
+            // Confirm the OTP and get the phone credential
             const phoneCredential = PhoneAuthProvider.credential(
                 window.confirmationResult.verificationId,
                 otp
             );
 
+            // Link the phone credential to the current user
             await linkWithCredential(currentUser, phoneCredential);
-            console.log(t("verify:phoneNumberLinked"));
 
+            toast.success(t("verify:phoneNumberLinked"));
+
+            // Get a reference to the user's document in the "users" collection
             const db = getFirestore();
             const userDoc = doc(db, "users", currentUser.uid);
             const formatPh = "+" + pn;
-
+            // Update the user's data
             await updateDoc(userDoc, {
                 phoneNumber: formatPh,
             });
@@ -85,13 +96,12 @@ const PhoneVerify = () => {
                 location.reload();
             }, 2000);
         } catch (err) {
-            console.log(err.message);
+            toast.error(t("verify:exists"));
         } finally {
             setLoading(false);
         }
-    };
-
-    const handleKeyDown = (event) => {
+    }
+    function handleKeyDown(event) {
         if (event.key === "Enter") {
             if (showOTP) {
                 onOTPVerify();
@@ -99,8 +109,7 @@ const PhoneVerify = () => {
                 onSignup();
             }
         }
-    };
-
+    }
     return (
         <>
             <section className='bg-[#FDA855] bg-opacity-50 flex items-center justify-center h-screen'>
@@ -109,7 +118,7 @@ const PhoneVerify = () => {
                     <div id='recaptcha-container'></div>
                     {user ? (
                         <h2 className='text-center text-white font-medium text-2xl'>
-                            👍 {t("verify:loginSuccess")}
+                            {t("verify:loginSuccess")}
                         </h2>
                     ) : (
                         <div className='w-80 flex flex-col gap-4 rounded-lg p-4'>
@@ -153,7 +162,7 @@ const PhoneVerify = () => {
                                         <BsTelephoneFill size={30} />
                                     </div>
                                     <label
-                                        htmlFor='phoneNumber'
+                                        htmlFor=''
                                         className='font-bold text-xl text-white text-center'
                                     >
                                         {t("verify:verifyPhoneNumberLabel")}
@@ -166,7 +175,7 @@ const PhoneVerify = () => {
                                     />
                                     <button
                                         onClick={onSignup}
-                                        className='bg-[#FDA855] ml-5 hover:bg-orange-700 w-full flex gap-1 items-center justify-center py-2.5 text-white rounded'
+                                        className='bg-[#FDA855] ml-[5px] hover:bg-orange-700 w-full flex gap-1 items-center justify-center py-2.5 text-white rounded'
                                     >
                                         {loading && (
                                             <CgSpinner
