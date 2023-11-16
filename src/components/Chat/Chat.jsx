@@ -74,20 +74,31 @@ const Chat = () => {
                 style={{ position: "relative", display: "inline-block" }}
             >
                 <form onSubmit={sendMessage}>
-                    <input
+                    <textarea
                         className='min-w-full'
                         value={newMessage}
                         onChange={(e) => setNewMessage(e.target.value)}
-                        style={{ paddingRight: "60px" }} // Make room for the button
-                    />
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter" && !e.shiftKey) {
+                                e.preventDefault();
+                                sendMessage(e);
+                            }
+                        }}
+                        style={{
+                            paddingRight: "30px",
+                            height: "80px",
+                        }}
+                    ></textarea>
                     <button
+                        className='w-6'
                         type='submit'
                         style={{
                             position: "absolute",
-                            right: "10px",
+                            right: "4px",
+                            top: "4px",
                         }}
                     >
-                        Send
+                        <img src='/icons/message.svg' alt='Send' />
                     </button>
                 </form>
             </div>
