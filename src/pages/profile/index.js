@@ -78,7 +78,7 @@ const ProfilePage = () => {
 
                     {/* Profile Picture /Change */}
                     <div className=' ml-5 flex flex-row mt-4 md:w-full md:gap-10  '>
-                        <div className='flex items-center h-4/12 w-4/12 rounded-full outline outline-2  overflow-hidden md:w-2/12 h-5/12 md:mt-8'>
+                        <div className='flex justify-center items-center h-4/12 w-4/12 rounded-full outline outline-2  overflow-hidden md:w-2/12 h-5/12 md:mt-8'>
                             <Image
                                 src={
                                     auth?.currentUser.photoURL !== null
@@ -87,8 +87,8 @@ const ProfilePage = () => {
                                 }
                                 width={200}
                                 height={200}
-                                alt=''
-                                className=' '
+                                alt='profile'
+                                className='h-full w-full'
                             />
                         </div>
 
