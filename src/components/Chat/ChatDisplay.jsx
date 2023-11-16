@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { db } from "../../util/firebase";
+import { db, auth } from "../../util/firebase";
 import { doc, onSnapshot, getDoc } from "firebase/firestore";
 
 const ChatDisplay = () => {
@@ -12,6 +12,7 @@ const ChatDisplay = () => {
         return userDoc.data().Name;
     };
 
+    // Listen for new messages
     useEffect(() => {
         const chatRef = doc(db, "database", "Chat");
 
@@ -21,7 +22,7 @@ const ChatDisplay = () => {
             const validMessages = chatData.messages.filter((message) => {
                 // Check if the message was sent more than 40 seconds ago
                 const messageAge = currentTime - message.timestamp;
-                return messageAge <= 40000;
+                return messageAge <= 40000; // 40000 milliseconds = 40 seconds
             });
 
             for (let message of validMessages) {
@@ -51,9 +52,9 @@ const ChatDisplay = () => {
                 // Calculate the age of the message in seconds
                 const messageAge = (currentTime - message.timestamp) / 1000;
 
-                // Calculate the opacity and transition duration based on the age of the message
+                // Calculate the opacity based on the age of the message
                 let style = {};
-                if (messageAge > 20) {
+                if (messageAge > 28) {
                     const transitionDuration = 40 - messageAge;
                     style = {
                         opacity: 0,
