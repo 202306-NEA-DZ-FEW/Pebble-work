@@ -7,5 +7,6 @@
     "verifyOTP": "OTP überprüfen",
     "verifyPhoneNumberLabel": "Überprüfen Sie Ihre Telefonnummer",
     "sendCodeViaSMS": "Code per SMS senden",
-    "loginSuccess": "👍 Anmeldung erfolgreich"
+    "loginSuccess": "👍 Anmeldung erfolgreich",
+    "exists": "Bereits auf einem anderen Konto vorhanden ist"
 }
