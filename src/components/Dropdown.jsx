@@ -7,7 +7,6 @@ import { useMediaQuery } from "react-responsive";
 import styles from "@/styles/DropMenu.module.css";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import { css } from "@emotion/react";
 import { BeatLoader } from "react-spinners";
 
 const Dropdown = () => {

@@ -47,7 +47,6 @@ const DesktopCard = ({ eventId, title, type, image, description }) => {
             <div
                 style={{
                     color: "black",
-                    textShadow: "0px 1px 2px rgba(10, 10, 10, 0.8)",
                 }}
                 onMouseEnter={handleHover}
                 onMouseLeave={handleMouseLeave}
@@ -66,6 +65,7 @@ const DesktopCard = ({ eventId, title, type, image, description }) => {
                             fontWeight: " 500",
                             letterSpacing: "0.11px",
                             wordWrap: "break-word",
+                            textShadow: "0px 1px 2px rgba(10, 10, 10, 0.8)",
                         }}
                     >
                         {title}
