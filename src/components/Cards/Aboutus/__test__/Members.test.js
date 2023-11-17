@@ -11,7 +11,7 @@ jest.mock("swiper/react", () => ({
 
 import React from "react";
 import renderer from "react-test-renderer";
-import Test from "../Members"; // replace with the path to your Test component
+import Members from "../Members";
 
 describe("Test Component", () => {
     it("renders correctly", () => {
@@ -27,7 +27,7 @@ describe("Test Component", () => {
             // add more member objects as needed
         ];
 
-        const tree = renderer.create(<Test members={members} />).toJSON();
+        const tree = renderer.create(<Members members={members} />).toJSON();
         expect(tree).toMatchSnapshot();
     });
 });
