@@ -309,13 +309,13 @@ const SignInPage = () => {
                                         {t("signin:forgotPassword")}
                                     </button>
                                     {resetMode ? (
-                                        <div className='text-orange-400 ml-1 cursor-pointer'></div>
+                                        <div className='text-[#749D60] ml-1 cursor-pointer'></div>
                                     ) : (
                                         <div className='text-stone-500 text-sm font-normal mt-4'>
                                             {t("signin:noAccount")}{" "}
                                             <Link
                                                 href='/signup'
-                                                className='text-orange-400 ml-1'
+                                                className='text-[#749D60] ml-1'
                                             >
                                                 {t("signin:signUpLink")}
                                             </Link>
@@ -327,7 +327,7 @@ const SignInPage = () => {
                                 {resetMode ? (
                                     <div className='flex justify-start'>
                                         <button
-                                            className=' px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 mb-4'
+                                            className=' px-4 py-2 bg-[#749D60] text-white rounded  transform hover:scale-110 transition-transform duration-300 mb-4'
                                             type='button'
                                             onClick={handleResetPassword}
                                         >
@@ -337,7 +337,7 @@ const SignInPage = () => {
                                 ) : (
                                     <div className='flex justify-start '>
                                         <button
-                                            className=' w-full px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 mt-4 mb-2 '
+                                            className=' w-full px-4 py-2 bg-[#749D60] text-white rounded  transform hover:scale-110 transition-transform duration-300 mt-4 mb-2 '
                                             type='submit'
                                         >
                                             {t("signin:signInButton")}

@@ -1,10 +1,4 @@
-import {
-    createUserWithEmailAndPassword,
-    isSignInWithEmailLink,
-    sendSignInLinkToEmail,
-    signInWithEmailLink,
-    updateProfile,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import {
     GoogleAuthProvider,
     signInWithPopup,
@@ -18,7 +12,6 @@ import {
     setDoc,
     where,
 } from "firebase/firestore";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
@@ -363,7 +356,7 @@ const SignUpPage = () => {
                                         marginRight: "-0.2rem",
                                     }}
                                 >
-                                    {t("signUp:specialCharsValid")}
+                                    {t("signUp:passwordInvalid")}
                                 </span>
                             </span>
                             <br />
@@ -429,7 +422,7 @@ const SignUpPage = () => {
                                 {t("signUp:haveAccount")}
                                 <Link
                                     href='/signin'
-                                    className='text-orange-400 ml-1'
+                                    className='text-[#749D60] ml-1'
                                 >
                                     {t("signUp:signIn")}
                                 </Link>
@@ -438,7 +431,7 @@ const SignUpPage = () => {
                         <div className='flex flex-col sm:flex-row sm:space-x-4 mt-4'>
                             <div className='flex justify-start '>
                                 <button
-                                    className=' w-full px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300   mb-4  '
+                                    className=' w-full px-4 py-2 cursor-pointer bg-[#749D60] text-white rounded  transform hover:scale-110 transition-transform duration-300   mb-4  '
                                     type='submit'
                                     disabled={isSignUpDisabled}
                                 >

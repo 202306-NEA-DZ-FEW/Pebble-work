@@ -1,5 +1,5 @@
 .nowave {
-    color: #a30808;
+    color: #749d60;
 }
 
 .wave {
@@ -9,7 +9,7 @@
 .wave span {
     position: relative;
     display: inline-block;
-    color: #a30808;
+    color: #749d60;
 
     text-transform: uppercase;
     animation: animate 2s ease-in-out infinite;
