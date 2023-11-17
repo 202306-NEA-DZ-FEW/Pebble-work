@@ -2,7 +2,7 @@
 
 exports[`EventsPage component renders correctly 1`] = `
 <main
-  className=" flex flex-col justify-center items-center pb-12"
+  className="flex flex-col justify-center items-center pb-12"
 >
   <div>
     <h1>
@@ -34,7 +34,7 @@ exports[`EventsPage component renders correctly 1`] = `
         className="sm:flex s:flex-col sm:items-center sm:justify-center"
       >
         <div
-          className="shadow-inner rounded-[8px] z-10 bg-white sm:bg-transparent"
+          className="shadow-inner rounded-[8px] z-10 bg-[#B4CD93]"
         >
           <div
             className="flex flex-col items-center"

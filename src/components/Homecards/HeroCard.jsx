@@ -9,7 +9,7 @@ function HeroCard() {
     };
 
     return (
-        <div className='w-full sm:h-[400px] bg-white flex justify-center items-center'>
+        <div className='w-full shadow-md sm:h-[400px] flex justify-center items-center'>
             <div className='text-center p-4'>
                 <div className='max-w-screen-xl mx-auto'>
                     <div className='text-4xl font-medium leading-10 tracking-tight text-zinc-900'>

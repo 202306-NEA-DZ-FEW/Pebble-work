@@ -46,7 +46,7 @@ const FeatureCard = ({ title, description, buttonText, imageUrl, link }) => {
     return (
         <div
             id='featuredCard'
-            className={`w-1/2 p-2 sm:min-h-[320px] min-h-[200px] lg:min-h-[550px] lg:w-1/3 md:w-1/2 flex flex-col justify-evenly items-center shadow-inner ${
+            className={`w-1/2 p-2 sm:min-h-[320px] min-h-[200px] lg:min-h-[550px] lg:w-1/3 md:w-1/2 flex flex-col justify-evenly items-center shadow-md ${
                 isVisible ? styles.visible : styles.invisible
             }`}
         >
@@ -82,7 +82,7 @@ const MainCard = () => {
     const { t } = useTranslation();
 
     return (
-        <div className='w-full bg-white lg:flex lg:flex-wrap lg:flex-row lg:gap-0 flex flex-col items-center gap-8 sm:gap-5 lg:justify-start lg:items-start'>
+        <div className='w-full lg:flex lg:flex-wrap lg:flex-row lg:gap-0 flex flex-col items-center gap-8 sm:gap-5 lg:justify-start lg:items-start'>
             <FeatureCard
                 title={t("common:main:joinCommunityTitle")}
                 description={t("common:main:joinCommunityDescription")}

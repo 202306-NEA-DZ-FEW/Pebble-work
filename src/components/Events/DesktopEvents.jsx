@@ -158,7 +158,7 @@ const DesktopEvents = (user) => {
                     <div className='flex h-[1150px] flex-col ml-[-50px] items-center text-black gap-7'>
                         <div className='sm:flex s:flex-col sm:items-center sm:justify-center'>
                             <div
-                                className={`${styles.calendarContainer} shadow-inner rounded-[8px] bg-white sm:bg-transparent`}
+                                className={`${styles.calendarContainer} shadow-inner rounded-[8px] bg-[#B4CD93]`}
                             >
                                 <Calendar
                                     resetDays={resetDays}

@@ -94,9 +94,7 @@ const EventsPage = (user) => {
     };
     return (
         <>
-            <main
-                className={` flex flex-col justify-center items-center pb-12`}
-            >
+            <main className={`flex flex-col justify-center items-center pb-12`}>
                 <div>
                     <h1>Welcome, {user.name}!</h1>
                     <p>This is the events page</p>
@@ -158,7 +156,7 @@ const EventsPage = (user) => {
                     <div className='flex bg-white z-10 flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7'>
                         <div className='sm:flex s:flex-col sm:items-center sm:justify-center'>
                             <div
-                                className={`shadow-inner rounded-[8px] z-10 bg-white sm:bg-transparent`}
+                                className={`shadow-inner rounded-[8px] z-10 bg-[#B4CD93]`}
                             >
                                 <Calendar
                                     resetDays={resetDays}
