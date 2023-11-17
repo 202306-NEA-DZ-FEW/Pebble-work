@@ -73,7 +73,11 @@ const Dropdown = () => {
                 >
                     <button
                         onClick={handleSigninClick}
-                        className={`text-green-600 text-[12px] lg:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:h-[41px] sm:h-[25.5px]`}
+                        className={
+                            user
+                                ? `text-green-600 text-[12px] lg:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:h-[41px] sm:h-[25.5px]`
+                                : `w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px]`
+                        }
                     >
                         {user
                             ? isMobile

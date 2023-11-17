@@ -23,29 +23,29 @@ const HomeCards = () => {
 
     return (
         <div className='container overflow-hidden flex flex-col items-center justify-center mx-auto'>
-            <HeaderCard />
+            <div className='overflow-hidden shadow-inner p-2'>
+                <HeaderCard />
+            </div>
 
-            <Heading />
             <p className='lg:text-[42px] sm:text-[32px] font-[500] text-black'>
                 {t("common:homeCards:howItWorks")}
             </p>
             <MainCard />
 
-            <Heading />
             <p style={{ fontSize: "42px", color: "black" }}>
                 {t("common:homeCards:sustainableDevelopmentGoals")}
             </p>
             <p>{t("common:homeCards:introductorySentence")}</p>
-            <div className='shadow-inner overflow-hidden'>
+            <div className='shadow-inner p-2 overflow-hidden'>
                 <GalleryCard />
             </div>
 
             <p></p>
-            <div className='xl:h-[420px] shadow-inner lg:h-[420px] '>
+            <div className='xl:h-[420px] shadow-inner p-2 lg:h-[420px] '>
                 <SocialCard />
             </div>
 
-            <div className='shadow-inner'>
+            <div className='shadow-inner p-2'>
                 <ImageSquareCard />
             </div>
 

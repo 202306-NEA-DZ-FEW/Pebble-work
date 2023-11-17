@@ -55,7 +55,7 @@ const GalleryCard = () => {
     }, []);
 
     return (
-        <div className='flex justify-center items-center shadow-md'>
+        <div className='flex justify-center items-center shadow-md p-4'>
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4'>
                 {images.map((image, index) => (
                     <div
