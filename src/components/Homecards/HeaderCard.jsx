@@ -34,7 +34,6 @@ export default function HeaderCard() {
                         height={638}
                         alt='homeCard'
                         fetchpriority='high'
-                        layout='responsive'
                         className={`${styles.img}`}
                         src='/Homepage/Square.png'
                     ></Image>

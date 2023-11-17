@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/Homepage.module.css";
-import Image from "next/image";
 
 const GalleryCard = () => {
     const [isGallery, setIsGallery] = useState(false);
@@ -69,9 +68,6 @@ const GalleryCard = () => {
                         }`}
                         style={{
                             animationDelay: `${index * 0.1}s`,
-                            backgroundImage: `url(/downscaled/${image})`,
-                            backgroundSize: "cover",
-                            backgroundPosition: "center",
                         }}
                     >
                         <img

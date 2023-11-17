@@ -181,8 +181,7 @@
 
 @media (max-width: 640px) {
     .container {
-        width: 100%;
-        height: 180vh;
+        height: 1550px;
     }
 
     .gridContainer {

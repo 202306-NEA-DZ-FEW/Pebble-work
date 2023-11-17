@@ -1,4 +1,5 @@
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
+
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import Backend from "i18next-fs-backend";

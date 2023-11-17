@@ -80,7 +80,6 @@ const ImageSquareCard = () => {
                     />
                 </div>
                 <div
-                    id=''
                     className={`${styles.imageWrapper} ${
                         isImage ? styles.bottomLeft : styles.invisible
                     }`}

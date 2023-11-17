@@ -68,7 +68,7 @@ const Language = () => {
         <Draggable onDrag={handleStart} onStop={handleStop}>
             <div
                 ref={dropdownRef}
-                className='fixed bottom-0 left-20 sm:right-40'
+                className='fixed md:text-[15px] text-[12px] bottom-0 left-20 sm:right-40'
             >
                 <button
                     type='button'
@@ -100,7 +100,7 @@ const Language = () => {
                 >
                     <ul
                         ref={dropdownRef}
-                        className='font-medium overflow-hidden flex flex-col gap-2 '
+                        className='font-medium w-[100px] overflow-hidden flex flex-col gap-2 '
                     >
                         <li>
                             <button
