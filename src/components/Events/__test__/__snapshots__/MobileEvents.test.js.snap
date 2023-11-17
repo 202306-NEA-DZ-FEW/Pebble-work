@@ -60,7 +60,7 @@ exports[`EventsPage component renders correctly 1`] = `
                     onLoad={[Function]}
                     src="/icons/next.svg"
                     style={
-                      Object {
+                      {
                         "color": "transparent",
                       }
                     }
@@ -338,7 +338,7 @@ exports[`EventsPage component renders correctly 1`] = `
                     onLoad={[Function]}
                     src="/icons/next.svg"
                     style={
-                      Object {
+                      {
                         "color": "transparent",
                       }
                     }
@@ -405,7 +405,7 @@ exports[`EventsPage component renders correctly 1`] = `
                       stroke="currentColor"
                       strokeWidth="0"
                       style={
-                        Object {
+                        {
                           "color": undefined,
                         }
                       }

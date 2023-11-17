@@ -98,7 +98,7 @@ exports[`SmallScreenEvents component renders correctly 1`] = `
                       stroke="currentColor"
                       strokeWidth="0"
                       style={
-                        Object {
+                        {
                           "color": undefined,
                         }
                       }

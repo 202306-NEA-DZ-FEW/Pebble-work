@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -18,7 +18,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 
-export default function Test({ members }) {
+export default function Members({ members }) {
     const [direction, setDirection] = useState("horizontal");
     const [slideShadows, setSlideShadows] = useState(
         typeof window !== "undefined" ? window.innerWidth > 640 : false
