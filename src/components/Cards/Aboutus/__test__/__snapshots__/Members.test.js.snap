@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Component renders correctly 1`] = `
+<div>
+  Mock Swiper 
+  <div>
+    Mock SwiperSlide 
+    <div
+      className="h-full w-full flex flex-col items-center justify-evenly"
+    >
+      <img
+        alt="member"
+        className="rounded-full w-[30vw] sm:w-[80px] lg:w-[140px] "
+        src="/path/to/image.jpg"
+      />
+      <div
+        className="flex flex-col items-center"
+      >
+        <h2
+          className="text-red-600"
+        >
+          Test Name
+        </h2>
+        <p
+          className="slide-content p-5 text-black"
+        >
+          Test Description
+        </p>
+        <div
+          className="flex w-full justify-evenly slide-content"
+        >
+          <a
+            className="social-media-icon"
+            href="https://google.com"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            onTouchStart={[Function]}
+          >
+            <img
+              alt="Gmail"
+              className="xl:w-[50px] xl:h-[50px] md:w-[40px] md:h-[40px] sm:w-[30px] sm:h-[30px] w-[22px] h-[22px]"
+              data-nimg="1"
+              decoding="async"
+              height={50}
+              loading="lazy"
+              onError={[Function]}
+              onLoad={[Function]}
+              src="/icons/Google.svg"
+              style={
+                {
+                  "color": "transparent",
+                }
+              }
+              width={50}
+            />
+          </a>
+          <a
+            className="social-media-icon"
+            href="https://linkedin.com"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            onTouchStart={[Function]}
+          >
+            <img
+              alt="Linkedin"
+              className="xl:w-[50px] xl:h-[50px] md:w-[40px] md:h-[40px] sm:w-[30px] sm:h-[30px] w-[22px] h-[22px]"
+              data-nimg="1"
+              decoding="async"
+              height={50}
+              loading="lazy"
+              onError={[Function]}
+              onLoad={[Function]}
+              src="/_next/image?url=%2Ficons%2FLinkedin.png&w=128&q=75"
+              srcSet="/_next/image?url=%2Ficons%2FLinkedin.png&w=64&q=75 1x, /_next/image?url=%2Ficons%2FLinkedin.png&w=128&q=75 2x"
+              style={
+                {
+                  "color": "transparent",
+                }
+              }
+              width={50}
+            />
+          </a>
+          <a
+            className="social-media-icon"
+            href="https://github.com"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            onTouchStart={[Function]}
+          >
+            <img
+              alt="Github"
+              className="xl:w-[50px] xl:h-[50px] md:w-[40px] md:h-[40px] sm:w-[30px] sm:h-[30px] w-[22px] h-[22px]"
+              data-nimg="1"
+              decoding="async"
+              height={50}
+              loading="lazy"
+              onError={[Function]}
+              onLoad={[Function]}
+              src="/icons/Github.svg"
+              style={
+                {
+                  "color": "transparent",
+                }
+              }
+              width={50}
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
