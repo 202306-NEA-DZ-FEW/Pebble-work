@@ -178,6 +178,19 @@
         min-height: 220px;
     }
 }
+@media (max-width: 330px) {
+    .image {
+        width: 122px;
+        height: 122px;
+    }
+    .change {
+        width: 300px;
+        min-height: 280px;
+    }
+    .text {
+        width: 130px;
+    }
+}
 
 @media (max-width: 640px) {
     .container {

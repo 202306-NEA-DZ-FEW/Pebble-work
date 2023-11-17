@@ -13,7 +13,7 @@ export default function HeaderCard() {
                 <div className={`${styles.text}`}>
                     <div
                         style={{ wordWrap: "break-word" }}
-                        className='flex flex-col justify-center items-start gap-3 lg:w-[488px] w-[150px] sm:w-[318px] sm:min-h-[218px] md:w-[388px] md:min-h-[274px] lg:min-h-[374px] overflow-clip'
+                        className={`${styles.text} flex flex-col justify-center items-start gap-3 lg:w-[488px] w-[150px] sm:w-[318px] sm:min-h-[218px] md:w-[388px] md:min-h-[274px] lg:min-h-[374px] overflow-clip`}
                     >
                         <h5 className='text-[#1A1A1A] md:text-[32px] sm:text-[24px] text-[13px] lg:text-[48px] sm:leading-[32px] sm:tracking-[0.11px] font-[500] lg:leading-[44px] lg:tracking-[0.18px] break-words '>
                             {t("common:headerCard:title")}
