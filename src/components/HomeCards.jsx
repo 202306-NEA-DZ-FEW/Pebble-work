@@ -50,7 +50,10 @@ const HomeCards = () => {
             </div>
 
             <HeroCard />
-            <ContactForm />
+            <div className='shadow-inner w-[600px]'>
+                {" "}
+                <ContactForm />
+            </div>
         </div>
     );
 };

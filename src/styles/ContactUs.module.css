@@ -1,33 +1,3 @@
-/* @media (max-height: 835px) {
-    .formHeight {
-        height: 50vh;
-    }
-}
-@media (max-height: 800px) {
-    .formHeight {
-        height: 65vh;
-    }
-}
-@media (max-height: 690px) {
-    .formHeight {
-        height: 80vh;
-    }
-}
-@media (max-height: 600px) {
-    .formHeight {
-        height: 95vh;
-    }
-}
-@media (max-height: 535px) {
-    .formHeight {
-        height: 115vh;
-    }
-}
-@media (max-height: 470px) {
-    .formHeight {
-        height: 135vh;
-    }
-} */
 @media (max-width: 470px) {
     .formHeight {
         padding-top: 80px;
