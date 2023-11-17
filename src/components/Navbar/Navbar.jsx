@@ -18,7 +18,6 @@ let tabs = [
     { id: "about", label: "About" },
 ];
 const Navbar = () => {
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [menuDropdownOpen, setMenuDropdownOpen] = useState(false);
     const [user, setUser] = useState(null);
     const [activeTab, setActiveTab] = useState(tabs[0].id);
@@ -27,10 +26,6 @@ const Navbar = () => {
 
     const menuDropdown = () => {
         setMenuDropdownOpen(!menuDropdownOpen);
-    };
-
-    const toggleDropdown = () => {
-        setIsDropdownOpen(!isDropdownOpen);
     };
 
     const closeMenuDropdown = () => {
@@ -115,7 +110,7 @@ const Navbar = () => {
                     id='navbar-language'
                 >
                     <ul
-                        className={`md:static text-center md:bg-transparent bg-white gap-3 fixed sm:w-full w-60 md:min-h-0 min-h-screen flex flex-col font-medium md:p-0 border border-gray-300 md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 dark:border-gray-700 left-[0px] top-0 z-10 ${styles.tiltIn}`}
+                        className={`md:static text-center md:bg-transparent bg-white gap-10 fixed sm:w-full w-60 md:min-h-0 min-h-screen flex flex-col font-medium md:p-0 border border-gray-300 md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 dark:border-gray-700 left-[0px] top-0 z-10 ${styles.tiltIn}`}
                         role='menu'
                     >
                         {tabs.map((tab) => (
@@ -126,11 +121,11 @@ const Navbar = () => {
                                             setActiveTab(tab.id);
                                             closeMenuDropdown();
                                         }}
-                                        className={`block py-2 pl-3 pr-4 rounded md:p-0 dark:border-gray-700 ${
+                                        className={`block rounded dark:border-gray-700 ${
                                             activeTab === tab.id
                                                 ? "hover:text-green-600" //text on hover while the motion is on it
                                                 : "hover:text-red-600/60" //text on hover while the motion is not on it
-                                        } relative rounded-full px-3 py-1.5 text-sm font-medium text-green-400 outline-sky-400 transition focus-visible:outline-2`}
+                                        } relative rounded-full text-[18px] font-medium text-green-400 outline-sky-400 transition focus-visible:outline-2`}
                                         style={{
                                             WebkitTapHighlightColor:
                                                 "transparent",
