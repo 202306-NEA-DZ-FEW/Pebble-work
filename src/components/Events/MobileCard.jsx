@@ -3,7 +3,7 @@ import styles from "@/styles/EventCard.module.css";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 
-const EventCardLeft = ({
+const MobileCard = ({
     eventId,
     title,
     type,
@@ -24,7 +24,7 @@ const EventCardLeft = ({
         <>
             <div
                 style={{
-                    color: "#749D60",
+                    color: "black",
                     textShadow: "0px 1px 2px rgba(10, 10, 10, 0.8)",
                 }}
                 className={`${styles.contai} shadow-inner relative sm:w-[62vw] md:w-[466px] h-[140px] flex flex-row-reverse items-center justify-center gap-2`}
@@ -92,4 +92,4 @@ const EventCardLeft = ({
     );
 };
 
-export default EventCardLeft;
+export default MobileCard;

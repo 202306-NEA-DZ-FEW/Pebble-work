@@ -314,7 +314,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                                 borderRadius: "8px",
                                                 background: isHovered
                                                     ? "red"
-                                                    : "#FDA855",
+                                                    : "#749D60",
                                                 border: 0,
                                                 color: "white",
                                             }}

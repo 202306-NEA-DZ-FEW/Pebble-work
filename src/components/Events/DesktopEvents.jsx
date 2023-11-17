@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import styles from "@/styles/Events.module.css";
 import { useTranslation } from "react-i18next";
 
 import Calendar from "@/components/Filter/Calendar";
 import FilterByType from "@/components/Filter/FilterByType";
 
-import WideScreenCard from "@/components/Events/WideScreenCard";
+import DesktopCard from "@/components/Events/DesktopCard";
 import FirestoreLocation from "../Filter/FirestoreLocation";
 import { usePagination } from "@/components/Pagination/Pagination";
 
@@ -116,7 +115,7 @@ const DesktopEvents = (user) => {
                         <ul className={`flex flex-col items gap-2`}>
                             {currentItems.map((event) => {
                                 return (
-                                    <WideScreenCard
+                                    <DesktopCard
                                         eventId={event.id}
                                         key={event.id}
                                         title={event.title}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "@/components/Filter/Calendar";
-import EventCardLeft from "@/components/Events/EventCardLeft";
+import MobileCard from "@/components/Events/MobileCard";
 
 import FilterByType from "@/components/Filter/FilterByType";
 import FirestoreLocation from "@/components/Filter/FirestoreLocation";
@@ -112,7 +112,7 @@ const EventsPage = (user) => {
                         <ul className={` flex flex-col items gap-2 `}>
                             {currentItems.map((event) => {
                                 return (
-                                    <EventCardLeft
+                                    <MobileCard
                                         eventId={event.id}
                                         key={event.id}
                                         title={event.title}
