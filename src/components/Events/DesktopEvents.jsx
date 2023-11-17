@@ -97,7 +97,13 @@ const DesktopEvents = (user) => {
 
     return (
         <>
-            <main className={` flex flex-col justify-center items-center`}>
+            <main
+                style={{
+                    color: "#749D60",
+                    textShadow: "0px 1px 2px rgba(10, 10, 10, 0.8)",
+                }}
+                className={` flex flex-col justify-center items-center`}
+            >
                 <div>
                     <h1>{t("events:welcome", { name: user.name })}</h1>
                     <p>{t("events:eventsPage")}</p>

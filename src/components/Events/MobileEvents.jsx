@@ -94,7 +94,13 @@ const EventsPage = (user) => {
     };
     return (
         <>
-            <main className={`flex flex-col justify-center items-center pb-12`}>
+            <main
+                style={{
+                    color: "#749D60",
+                    textShadow: "0px 1px 2px rgba(10, 10, 10, 0.8)",
+                }}
+                className={`flex flex-col justify-center items-center pb-12`}
+            >
                 <div>
                     <h1>Welcome, {user.name}!</h1>
                     <p>This is the events page</p>
