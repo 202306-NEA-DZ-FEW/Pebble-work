@@ -7,6 +7,8 @@ import { useMediaQuery } from "react-responsive";
 import styles from "@/styles/DropMenu.module.css";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import { css } from "@emotion/react";
+import { BeatLoader } from "react-spinners";
 
 const Dropdown = () => {
     const { t } = useTranslation("common");
@@ -15,7 +17,9 @@ const Dropdown = () => {
     const dropdownRef = useRef(null);
     const [user, setUser] = useState(null);
     const router = useRouter();
-
+    const spinner = <BeatLoader size={10} color={"#749D60"} loading={true} />;
+    const [loading, setLoading] = useState(true);
+    const [loadingName, setLoadingName] = useState(false);
     const handleMouseEnter = () => {
         setIsOpen(true);
     };
@@ -52,14 +56,37 @@ const Dropdown = () => {
         const logged = auth.onAuthStateChanged((user) => {
             if (user) {
                 setUser(user);
+                setLoading(false);
+                if (!user.displayName) {
+                    setLoadingName(true);
+                } else {
+                    setLoadingName(false);
+                }
             } else {
                 setUser(null);
+                setLoading(false);
             }
         });
         return () => {
             logged();
         };
     }, []);
+    useEffect(() => {
+        if (user) {
+            const interval = setInterval(async () => {
+                await user.reload();
+                if (user.displayName) {
+                    setLoadingName(false);
+                    clearInterval(interval);
+                }
+            }, 1000);
+            return () => clearInterval(interval);
+        }
+    }, [user]);
+
+    if (loading) {
+        return spinner;
+    }
 
     return (
         <>
@@ -75,11 +102,13 @@ const Dropdown = () => {
                         onClick={handleSigninClick}
                         className={
                             user
-                                ? `text-green-600 text-[12px] lg:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:h-[41px] sm:h-[25.5px]`
+                                ? `text-[#749D60] hover:text-inherit text-[12px] lg:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:h-[41px] sm:h-[25.5px]`
                                 : `w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px]`
                         }
                     >
-                        {user
+                        {user && loadingName
+                            ? spinner
+                            : user
                             ? isMobile
                                 ? user.displayName?.length > 6
                                     ? user.displayName.slice(0, 4) + ".."

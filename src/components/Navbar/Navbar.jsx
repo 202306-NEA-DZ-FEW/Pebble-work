@@ -49,7 +49,7 @@ const Navbar = () => {
     }, []);
 
     return (
-        <nav className='sticky z-[9999] md:mb-10 mb-4 bg-gray-200 top-0 xl:flex xl:flex-col xl:items-center'>
+        <nav className='sticky z-[9999] md:mb-10 mb-4 bg-[#B4CD93] top-0 xl:flex xl:flex-col xl:items-center'>
             <div
                 style={{
                     width: "100%",
@@ -123,9 +123,9 @@ const Navbar = () => {
                                         }}
                                         className={`block rounded dark:border-gray-700 ${
                                             activeTab === tab.id
-                                                ? "hover:text-green-600" //text on hover while the motion is on it
-                                                : "hover:text-red-600/60" //text on hover while the motion is not on it
-                                        } relative rounded-full lg:text-[18px] md:text-[15px] font-medium text-green-400 outline-sky-400 transition focus-visible:outline-2`}
+                                                ? "cursor-default" //text on hover while the motion is on it
+                                                : "hover:text-[#71c249]" //text on hover while the motion is not on it
+                                        } relative rounded-full lg:text-[18px] md:text-[15px] font-medium text-[#749D60] outline-sky-400 transition focus-visible:outline-2`}
                                         style={{
                                             WebkitTapHighlightColor:
                                                 "transparent",
@@ -134,7 +134,7 @@ const Navbar = () => {
                                         {activeTab === tab.id && (
                                             <motion.span
                                                 layoutId='line'
-                                                className='absolute bottom-0 left-0 right-0 h-1 z-10 bg-green-400 mix-blend-difference'
+                                                className='absolute bottom-0 left-0 right-0 h-1 z-10 bg-[#749D60] mix-blend-difference'
                                                 transition={{
                                                     type: "spring",
                                                     bounce: 0.3,

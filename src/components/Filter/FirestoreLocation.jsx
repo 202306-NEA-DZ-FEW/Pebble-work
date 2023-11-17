@@ -45,7 +45,7 @@ function FirestoreLocation({ onInputChange }) {
     return (
         <>
             <button
-                className='btn sm:bg-blue-500   hover:bg-gray-400 sm:text-center flex lg:items-center sm:gap-0 gap-2 sm:justify-center lg:w-[281px] lg:h-[52px] sm:w-[149px] sm:h-[30px] text-white font-[500] lg:text-[18px] lg:tracking-[0.10px] sm:text-[12px] sm:px-4 sm:py-2 rounded-lg'
+                className='btn bg-[#B4CD93] hover:bg-gray-400 sm:text-center flex lg:items-center sm:gap-0 gap-2 sm:justify-center lg:w-[281px] lg:h-[52px] sm:w-[149px] sm:h-[30px] text-white font-[500] lg:text-[18px] lg:tracking-[0.10px] sm:text-[12px] sm:px-4 sm:py-2 rounded-lg'
                 onClick={() =>
                     document.getElementById("my_modal_1").showModal()
                 }

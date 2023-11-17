@@ -81,7 +81,7 @@ const Language = () => {
                             icon={faEarthEurope}
                             size='2x'
                             style={{
-                                color: "#63d4a9",
+                                color: "#749D60",
                                 paddingRight: "2px",
                                 transform: `rotate(${rotationDegree}deg)`,
                                 transition: "transform 0.5s",
