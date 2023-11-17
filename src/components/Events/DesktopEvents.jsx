@@ -158,7 +158,7 @@ const DesktopEvents = (user) => {
                     <div className='flex h-[1150px] flex-col ml-[-50px] items-center text-black gap-7'>
                         <div className='sm:flex s:flex-col sm:items-center sm:justify-center'>
                             <div
-                                className={`${styles.calendarContainer} shadow-inner rounded-[8px] bg-[#B4CD93]`}
+                                className={`shadow-md rounded-[8px] bg-[#B4CD93]`}
                             >
                                 <Calendar
                                     resetDays={resetDays}
@@ -166,7 +166,7 @@ const DesktopEvents = (user) => {
                                 />
                             </div>
                         </div>
-                        <div className='h-66'>
+                        <div className='h-66 shadow-md'>
                             <FirestoreLocation
                                 onInputChange={handleLocationInputChange}
                                 resetLocation={resetLocation}
@@ -176,12 +176,14 @@ const DesktopEvents = (user) => {
                             />
                         </div>
 
-                        <FilterByType
-                            resetEvents={resetEvents}
-                            setFilteredTypes={setFilteredTypes}
-                            selectedTypes={selectedTypes}
-                            setSelectedTypes={setSelectedTypes}
-                        />
+                        <div className='shadow-md'>
+                            <FilterByType
+                                resetEvents={resetEvents}
+                                setFilteredTypes={setFilteredTypes}
+                                selectedTypes={selectedTypes}
+                                setSelectedTypes={setSelectedTypes}
+                            />
+                        </div>
                     </div>
                 </div>
             </main>

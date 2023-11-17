@@ -110,7 +110,7 @@ const Navbar = () => {
                     id='navbar-language'
                 >
                     <ul
-                        className={`md:static text-center md:bg-transparent bg-white gap-10 fixed sm:w-full w-60 md:min-h-0 min-h-screen flex flex-col font-medium md:p-0 border border-gray-300 md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 dark:border-gray-700 left-[0px] top-0 z-10 ${styles.tiltIn}`}
+                        className={`md:static text-center md:bg-transparent gap-10 fixed sm:w-full w-60 md:min-h-0 min-h-screen flex flex-col font-medium md:p-0 border border-gray-300 md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 dark:border-gray-700 left-[0px] top-0 z-10 ${styles.tiltIn}`}
                         role='menu'
                     >
                         {tabs.map((tab) => (

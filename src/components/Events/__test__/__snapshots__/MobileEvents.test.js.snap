@@ -28,13 +28,13 @@ exports[`EventsPage component renders correctly 1`] = `
       </ul>
     </div>
     <div
-      className="flex bg-white z-10 flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7"
+      className="flex z-10 flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7"
     >
       <div
         className="sm:flex s:flex-col sm:items-center sm:justify-center"
       >
         <div
-          className="shadow-inner rounded-[8px] z-10 bg-[#B4CD93]"
+          className="shadow-md rounded-[8px] z-10 bg-[#B4CD93]"
         >
           <div
             className="flex flex-col items-center"
@@ -351,7 +351,7 @@ exports[`EventsPage component renders correctly 1`] = `
         </div>
       </div>
       <div
-        className="h-66"
+        className="h-66 shadow-md"
       >
         <button
           className="btn bg-[#B4CD93] hover:bg-gray-400 sm:text-center flex lg:items-center sm:gap-0 gap-2 sm:justify-center lg:w-[281px] lg:h-[52px] sm:w-[149px] sm:h-[30px] text-white font-[500] lg:text-[18px] lg:tracking-[0.10px] sm:text-[12px] sm:px-4 sm:py-2 rounded-lg"
@@ -424,13 +424,17 @@ exports[`EventsPage component renders correctly 1`] = `
           </div>
         </dialog>
       </div>
-      <div>
-        <button
-          className="sm:hidden"
-          onClick={[Function]}
-        >
-          Interests
-        </button>
+      <div
+        className=" shadow-md"
+      >
+        <div>
+          <button
+            className="sm:hidden"
+            onClick={[Function]}
+          >
+            Interests
+          </button>
+        </div>
       </div>
     </div>
   </div>

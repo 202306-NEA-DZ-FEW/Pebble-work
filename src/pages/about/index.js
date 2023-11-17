@@ -108,7 +108,7 @@ const AboutPage = () => {
                 </div>
                 <div
                     ref={scrollContainerRef}
-                    className={`md:w-[755px] sm:w-[630px] w-[90vw] lg:h-[600px] sm:h-[400px] h-[800px] rounded-[8px] flex flex-col items-center`}
+                    className={`md:w-[755px] sm:w-[630px] w-[80vw] lg:h-[600px] sm:h-[400px] h-[800px] rounded-[8px] flex flex-col items-center`}
                 >
                     <h2
                         className={`${styles.teamText} text-[40px] text-[#1A1A1A]`}
@@ -130,7 +130,7 @@ const AboutPage = () => {
                 >
                     <TechStack />
                     <div style={{ position: "absolute" }}>
-                        <h6 className={`${styles.techText}`}>
+                        <h6 className={`${styles.techText} mb-5`}>
                             {t("about:about:techStack")}
                         </h6>
                         <h5 className={`${styles.techText1}`}>

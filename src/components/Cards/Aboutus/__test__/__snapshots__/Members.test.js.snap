@@ -6,7 +6,7 @@ exports[`Test Component renders correctly 1`] = `
   <div>
     Mock SwiperSlide 
     <div
-      className="h-full w-full flex flex-col items-center justify-evenly"
+      className="h-full shadow-md w-full flex flex-col items-center justify-evenly"
     >
       <img
         alt="member"
@@ -17,7 +17,7 @@ exports[`Test Component renders correctly 1`] = `
         className="flex flex-col items-center"
       >
         <h2
-          className="text-red-600"
+          className="text-[#749D60]"
         >
           Test Name
         </h2>

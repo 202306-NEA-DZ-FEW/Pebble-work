@@ -112,7 +112,7 @@ const FilterByType = ({
                     <ul
                         className={`${styles.information} ${
                             isInterestOpen ? `${styles.fadeIn}` : ""
-                        } flex p-5 sm:static sm:bg-transparent sm:h-[700px] fixed bottom-0 left-0 h-64 w-full sm:pt-8 pt-[330px] bg-[#B4CD93] text-white z-[999] flex-col items-start  gap-4 sm:border-x-0 sm:border-b-0 sm:items-center sm:border sm:border-t-black overflow-y-scroll`}
+                        } flex p-5 sm:static sm:bg-transparent sm:h-[700px] fixed bottom-0 left-0 h-64 w-full sm:pt-8 pt-[330px] bg-[#B4CD93] text-white z-[999] flex-col items-start gap-4 sm:items-center overflow-y-scroll`}
                     >
                         <button
                             onClick={resetEvents}

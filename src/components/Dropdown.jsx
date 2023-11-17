@@ -89,11 +89,11 @@ const Dropdown = () => {
     }
 
     return (
-        <>
+        <div className='flex sm:flex-row flex-col gap-3 sm:gap-4'>
             <div className={user ? "hidden" : ""}>
                 <Signup />
             </div>
-            <div className='relative ' ref={dropdownRef}>
+            <div className='relative' ref={dropdownRef}>
                 <div
                     onMouseEnter={handleMouseEnter}
                     className='flex gap-1 items-center cursor-pointer justify-center'
@@ -138,7 +138,7 @@ const Dropdown = () => {
                         onMouseLeave={handleMouseLeave}
                         className='absolute cursor-pointer right-0 xl:mr-11 md:mt-2 md:mr-10 sm:mt-1 sm:mr-4 mr-7 mt-1 bg-white rounded-md shadow-lg overflow-hidden'
                     >
-                        <ul className='text-[10px] lg:text-[14px] xl:text-[16px] md:text-[12px] h-full flex items-center justify-center sm:w-[90px] lg:w-[100px] xl:w-[110px]'>
+                        <ul className='text-[10px] lg:text-[14px] xl:text-[16px] md:text-[12px] h-full flex items-center justify-center w-[90px] lg:w-[100px] xl:w-[110px]'>
                             {user ? (
                                 <div className='flex flex-col pl-1'>
                                     <Link
@@ -181,7 +181,7 @@ const Dropdown = () => {
                     </div>
                 )}
             </div>
-        </>
+        </div>
     );
 };
 

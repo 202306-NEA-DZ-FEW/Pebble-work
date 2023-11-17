@@ -84,13 +84,17 @@ const WideScreenCard = ({
     return (
         <>
             <div
+                style={{
+                    color: "#749D60",
+                    textShadow: "0px 1px 2px rgba(10, 10, 10, 0.8)",
+                }}
                 onMouseEnter={handleHover}
                 onMouseLeave={handleMouseLeave}
                 className={`${styles.contai} ${styles.card} ${styles.wideFading} shadow-inner w-[55vw] h-[200px] flex flex-row items-center justify-around gap-2`}
             >
                 <h2
                     ref={h2Ref}
-                    className={`absolute top-[38%] sm:text-[13px] text-black text-[10px] xl:text-[22.22px]`}
+                    className={`absolute top-[38%] text-black sm:text-[13px] text-[10px] xl:text-[22.22px]`}
                 >
                     {type}
                 </h2>
@@ -100,7 +104,7 @@ const WideScreenCard = ({
                         hideBackground ? `${styles.backgroundImageHidden}` : ""
                     }`}
                 >
-                    <h2 className='sm:text-[13px] text-black text-[10px] xl:text-[22.22px] underline'>
+                    <h2 className='sm:text-[13px] text-[10px] xl:text-[22.22px] underline'>
                         {type}
                     </h2>
                     <ul
@@ -108,7 +112,7 @@ const WideScreenCard = ({
                             hideBackground
                                 ? `${styles.backgroundImageHidden}`
                                 : "hidden"
-                        } text-black text-[8px] leading-[10px] md:leading-[15px] xl:leading-[20px] sm:text-[10.20px]`}
+                        } text-[8px] leading-[10px] md:leading-[15px] xl:leading-[20px] sm:text-[10.20px]`}
                     >
                         <li>
                             <strong>
@@ -131,7 +135,6 @@ const WideScreenCard = ({
                     <h1
                         className='xl:text-[25.70px] sm:text-[15px] text-[10.55px]'
                         style={{
-                            color: "#1A1A1A",
                             fontWeight: " 500",
                             letterSpacing: "0.11px",
                             wordWrap: "break-word",
@@ -142,7 +145,6 @@ const WideScreenCard = ({
 
                     <p
                         style={{
-                            color: "#1A1A1A",
                             fontWeight: " 400",
                             letterSpacing: "0.06px",
                             wordWrap: "break-word",
@@ -158,7 +160,7 @@ const WideScreenCard = ({
                     <p>{t("events:avatars")}</p>
                     <button
                         onClick={handleReviewClick}
-                        className={`w-[45px] bg-blue-400 hover:bg-blue-500 text-white text-[10px] xl:text-[15px] md:text-[12px] rounded-[4px] h-[14px] xl:w-[80px] xl:h-[30px] sm:w-[60px] sm:h-[18px]`}
+                        className={`w-[45px] bg-[#749D60] hover:bg-gray-400 text-white text-[10px] xl:text-[15px] md:text-[12px] rounded-[4px] h-[14px] xl:w-[80px] xl:h-[30px] sm:w-[60px] sm:h-[18px]`}
                     >
                         {t("events:reviewButton")}
                     </button>
