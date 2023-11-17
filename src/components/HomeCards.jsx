@@ -50,7 +50,7 @@ const HomeCards = () => {
             </div>
 
             <HeroCard />
-            <div className='shadow-inner w-[600px]'>
+            <div className='shadow-inner sm:w-[600px] w-[95vw]'>
                 {" "}
                 <ContactForm />
             </div>
