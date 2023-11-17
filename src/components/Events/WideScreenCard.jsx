@@ -132,7 +132,6 @@ const WideScreenCard = ({
                         className='xl:text-[25.70px] sm:text-[15px] text-[10.55px]'
                         style={{
                             color: "#1A1A1A",
-                            fontFamily: "Rubik",
                             fontWeight: " 500",
                             letterSpacing: "0.11px",
                             wordWrap: "break-word",
@@ -144,7 +143,6 @@ const WideScreenCard = ({
                     <p
                         style={{
                             color: "#1A1A1A",
-                            fontFamily: "Rubik",
                             fontWeight: " 400",
                             letterSpacing: "0.06px",
                             wordWrap: "break-word",

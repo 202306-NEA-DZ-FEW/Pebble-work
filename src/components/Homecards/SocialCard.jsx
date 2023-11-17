@@ -27,7 +27,7 @@ const SocialCardData = [
 const SocialCardSection = () => {
     return (
         <div className='shadow-md w-full max-w-[1440px] px-5 md:px-[123px] lg:px-[127px] bg-white flex flex-wrap justify-center items-center gap-10'>
-            <div className='w-full text-center text-zinc-900 text-4xl font-medium font-rubik leading-[44px] tracking-tight'>
+            <div className='w-full text-center text-zinc-900 text-4xl font-medium leading-[44px] tracking-tight'>
                 Hear it from volunteers
             </div>
             {SocialCardData.map((SocialCard, index) => (
@@ -42,10 +42,10 @@ const SocialCardSection = () => {
                         alt={`Image ${index}`}
                     />
                     <div className='w-full text-center'>
-                        <div className='text-zinc-900 text-xl md:text-2xl lg:text-3xl font-medium font-rubik leading-[30px] tracking-tight'>
+                        <div className='text-zinc-900 text-xl md:text-2xl lg:text-3xl font-medium leading-[30px] tracking-tight'>
                             {SocialCard.name}, {SocialCard.occupation}
                         </div>
-                        <div className='text-zinc-500 text-base md:text-xl lg:text-2xl font-normal font-rubik leading-[30px] tracking-tight'>
+                        <div className='text-zinc-500 text-base md:text-xl lg:text-2xl font-normal leading-[30px] tracking-tight'>
                             {SocialCard.text}
                         </div>
                     </div>

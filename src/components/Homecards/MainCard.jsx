@@ -57,19 +57,19 @@ const FeatureCard = ({ title, description, buttonText, imageUrl, link }) => {
             </div>
             <div className='w-full text-center px-2'>
                 <div
-                    className={`text-zinc-900 w- lg:text-[32px] md:text-[24px] sm:text-[20px] font-medium font-['Rubik'] sm:leading-[44px] tracking-[0.10px]`}
+                    className={`text-zinc-900 w- lg:text-[32px] md:text-[24px] sm:text-[20px] font-medium sm:leading-[44px] tracking-[0.10px]`}
                 >
                     {title}
                 </div>
                 <div
-                    className={`text-zinc-500 lg:text-[18px] md:text-[15px] sm:text-[13px] text-[10px] font-normal font-['Rubik'] sm:leading-[30px] tracking-[0.10px]`}
+                    className={`text-zinc-500 lg:text-[18px] md:text-[15px] sm:text-[13px] text-[10px] font-normal sm:leading-[30px] tracking-[0.10px]`}
                 >
                     {description}
                 </div>
             </div>
             <Link
                 href=''
-                className={`xl:w-[163px] mb-5 xl:h-[52px] justify-center items-center gap-2.5 inline-flex text-zinc-900 lg:text-[22px] sm:text-[16px] font-medium font-['Rubik'] leading-[30px] tracking-tight`}
+                className={`xl:w-[163px] mb-5 xl:h-[52px] justify-center items-center gap-2.5 inline-flex text-zinc-900 lg:text-[22px] sm:text-[16px] font-medium leading-[30px] tracking-tight`}
                 onClick={handleButtonClick}
             >
                 {buttonText}

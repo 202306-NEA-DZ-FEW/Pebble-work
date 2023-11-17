@@ -73,15 +73,15 @@ const Dropdown = () => {
                 >
                     <button
                         onClick={handleSigninClick}
-                        className={`w-[52px] xl:mb-0 md:mb-2 md:mt-0 sm:mt-[2px] mt-[5px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 xl:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:w-[127px] xl:h-[41px] sm:w-[72.23px] sm:h-[25.5px]`}
+                        className={`text-green-600 text-[12px] lg:text-[15px] md:text-[12px] rounded-[4px] h-[16px] xl:h-[41px] sm:h-[25.5px]`}
                     >
                         {user
                             ? isMobile
-                                ? user.displayName?.length > 5
-                                    ? user.displayName.slice(0, 5) + "..."
+                                ? user.displayName?.length > 6
+                                    ? user.displayName.slice(0, 4) + ".."
                                     : user.displayName
                                 : user.displayName?.length > 10
-                                ? user.displayName.slice(0, 10) + "..."
+                                ? user.displayName.slice(0, 10) + ".."
                                 : user.displayName
                             : t("common:dropdown:signIn")}
                     </button>

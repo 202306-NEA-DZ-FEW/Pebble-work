@@ -106,7 +106,7 @@ const Navbar = () => {
                 <div
                     className={`${
                         menuDropdownOpen ? "block" : "hidden"
-                    } md:block md:flex md:items-center w-full md:w-auto`}
+                    }  md:flex md:items-center w-full md:w-auto`}
                     id='navbar-language'
                 >
                     <ul
@@ -114,7 +114,7 @@ const Navbar = () => {
                         role='menu'
                     >
                         {tabs.map((tab) => (
-                            <li key={tab.id} className=''>
+                            <li key={tab.id}>
                                 <Link href={`/${tab.id}`}>
                                     <p
                                         onClick={() => {
@@ -125,7 +125,7 @@ const Navbar = () => {
                                             activeTab === tab.id
                                                 ? "hover:text-green-600" //text on hover while the motion is on it
                                                 : "hover:text-red-600/60" //text on hover while the motion is not on it
-                                        } relative rounded-full text-[18px] font-medium text-green-400 outline-sky-400 transition focus-visible:outline-2`}
+                                        } relative rounded-full lg:text-[18px] md:text-[15px] font-medium text-green-400 outline-sky-400 transition focus-visible:outline-2`}
                                         style={{
                                             WebkitTapHighlightColor:
                                                 "transparent",

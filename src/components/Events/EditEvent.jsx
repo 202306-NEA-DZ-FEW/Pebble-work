@@ -20,7 +20,7 @@ function EditEvent() {
 
             <div className='flex justify-center items-center mb-6'>
                 <button
-                    className="text-center mb-[2rem] cursor-pointer text-2xl font-medium font-'Rubik' leading-10 tracking-tight bg-cyan-700 text-white px-4 py-2 rounded-lg"
+                    className='text-center mb-[2rem] cursor-pointer text-2xl font-medium leading-10 tracking-tight bg-cyan-700 text-white px-4 py-2 rounded-lg'
                     onClick={() => (window.location.href = `/`)}
                 >
                     {t("events:homepageButton")}
