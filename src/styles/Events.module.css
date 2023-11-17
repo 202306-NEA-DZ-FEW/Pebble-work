@@ -70,5 +70,5 @@
     background-color: transparent;
 }
 .selectedRange {
-    text-decoration: underline;
+    color: black;
 }

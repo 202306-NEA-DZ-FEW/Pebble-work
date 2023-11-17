@@ -114,7 +114,7 @@ const SmallScreenEvents = (user) => {
                 </div>
                 <button
                     onClick={resetEvents}
-                    className={` w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 rounded-[4px] h-[16px] ml-auto mr-2`}
+                    className={` w-[52px] bg-[#2E7EAA] text-white text-[10px] rounded-[4px] h-[16px] ml-auto mr-2`}
                 >
                     All events
                 </button>

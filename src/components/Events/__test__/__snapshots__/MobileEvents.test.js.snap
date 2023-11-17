@@ -79,37 +79,37 @@ exports[`EventsPage component renders correctly 1`] = `
                     className="calendar sm:h-[140px] xl:h-[200px] grid grid-cols-7 gap-1"
                   >
                     <div
-                      className="sm:text-[12px] font-[500] w-[25px] md:ml-1 sm:ml-2 xl:text-[17px]"
+                      className="sm:text-[12px] text-black font-[500] w-[25px] md:ml-1 sm:ml-2 xl:text-[17px]"
                     >
                       S
                     </div>
                     <div
-                      className="sm:text-[12px] font-[500] w-[25px] md:ml-1 sm:ml-2 xl:text-[17px]"
+                      className="sm:text-[12px] text-black font-[500] w-[25px] md:ml-1 sm:ml-2 xl:text-[17px]"
                     >
                       M
                     </div>
                     <div
-                      className="sm:text-[12px] font-[500] w-[25px] md:ml-1 sm:ml-2 xl:text-[17px]"
+                      className="sm:text-[12px] text-black font-[500] w-[25px] md:ml-1 sm:ml-2 xl:text-[17px]"
                     >
                       T
                     </div>
                     <div
-                      className="sm:text-[12px] font-[500] w-[25px] md:ml-1 sm:ml-2 xl:text-[17px]"
+                      className="sm:text-[12px] text-black font-[500] w-[25px] md:ml-1 sm:ml-2 xl:text-[17px]"
                     >
                       W
                     </div>
                     <div
-                      className="sm:text-[12px] font-[500] w-[25px] md:ml-1 sm:ml-2 xl:text-[17px]"
+                      className="sm:text-[12px] text-black font-[500] w-[25px] md:ml-1 sm:ml-2 xl:text-[17px]"
                     >
                       T
                     </div>
                     <div
-                      className="sm:text-[12px] font-[500] w-[25px] md:ml-1 sm:ml-2 xl:text-[17px]"
+                      className="sm:text-[12px] text-black font-[500] w-[25px] md:ml-1 sm:ml-2 xl:text-[17px]"
                     >
                       F
                     </div>
                     <div
-                      className="sm:text-[12px] font-[500] w-[25px] md:ml-1 sm:ml-2 xl:text-[17px]"
+                      className="sm:text-[12px] text-black font-[500] w-[25px] md:ml-1 sm:ml-2 xl:text-[17px]"
                     >
                       S
                     </div>
@@ -123,181 +123,181 @@ exports[`EventsPage component renders correctly 1`] = `
                       className="emptyDay"
                     />
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       1
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       2
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       3
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       4
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       5
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       6
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       7
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       8
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       9
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       10
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       11
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       12
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       13
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       14
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       15
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       16
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       17
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       18
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       19
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       20
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       21
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       22
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       23
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       24
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       25
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       26
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       27
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       28
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       29
                     </button>
                     <button
-                      className="calendarDay  xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded"
+                      className="calendarDay  xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded"
                       onClick={[Function]}
                     >
                       30
@@ -359,7 +359,7 @@ exports[`EventsPage component renders correctly 1`] = `
         className="h-66 shadow-md"
       >
         <button
-          className="btn bg-[#B4CD93] hover:bg-gray-400 sm:text-center flex lg:items-center sm:gap-0 gap-2 sm:justify-center lg:w-[281px] lg:h-[52px] sm:w-[149px] sm:h-[30px] text-white font-[500] lg:text-[18px] lg:tracking-[0.10px] sm:text-[12px] sm:px-4 sm:py-2 rounded-lg"
+          className="btn bg-[#749D60] hover:bg-[#B4CD93] sm:text-center flex lg:items-center sm:gap-0 gap-2 sm:justify-center lg:w-[281px] lg:h-[52px] sm:w-[149px] sm:h-[30px] text-white font-[500] lg:text-[18px] lg:tracking-[0.10px] sm:text-[12px] sm:px-4 sm:py-2 rounded-lg"
           onClick={[Function]}
         >
           Location

@@ -25,6 +25,7 @@ const MobileCard = ({
             <div
                 style={{
                     color: "black",
+                    backgroundColor: "white",
                 }}
                 className={`${styles.contai} shadow-inner relative sm:w-[62vw] md:w-[466px] h-[140px] flex flex-row-reverse items-center justify-center gap-2`}
             >
@@ -54,7 +55,7 @@ const MobileCard = ({
                     </p>
 
                     <button
-                        className={`w-[45px] bg-[#749D60] hover:bg-gray-400 text-white text-[10px] md:text-[12px] rounded-[4px] h-[14px] sm:w-[60px] sm:h-[18px]`}
+                        className={`w-[45px] bg-[#2E7EAA] hover:bg-gray-400 text-white text-[10px] md:text-[12px] rounded-[4px] h-[14px] sm:w-[60px] sm:h-[18px]`}
                         onClick={handleReviewClick}
                     >
                         {t("events:reviewButton")}

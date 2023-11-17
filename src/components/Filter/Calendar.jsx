@@ -102,7 +102,7 @@ const Calendar = ({ checkEvents, resetDays }) => {
             calendarDays.push(
                 <div
                     key={`weekday-${i}`}
-                    className={`sm:text-[12px] font-[500] w-[25px] md:ml-1 sm:ml-2 xl:text-[17px]`}
+                    className={`sm:text-[12px] text-black font-[500] w-[25px] md:ml-1 sm:ml-2 xl:text-[17px]`}
                 >
                     {weekdays[i]}
                 </div>
@@ -128,7 +128,7 @@ const Calendar = ({ checkEvents, resetDays }) => {
                     key={`day-${day}`}
                     className={`${styles.calendarDay} ${
                         isSelected ? styles.selectedRange : ""
-                    } xl:text-[17px] md:w-[10px] xl:w-[18px] text-center sm:text-[11px] rounded`}
+                    } xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded`}
                     onClick={() => handleDateClick(day)}
                 >
                     {day}

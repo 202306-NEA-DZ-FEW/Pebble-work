@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 
-const MobileCard = ({ eventId, title, type, image, location, date, time }) => {
+const MobileCard = ({ eventId, title, type, image }) => {
     const router = useRouter();
     const handleReviewClick = () => {
         router.push(`/events/${eventId}`);
@@ -22,17 +22,12 @@ const MobileCard = ({ eventId, title, type, image, location, date, time }) => {
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
                 }}
-            >
-                <p className='text-end'>avatars</p>
-                <h3 className='font-[400] ml-2'>{location}</h3>
-                <h3 className='font-[400] ml-2'>{date}</h3>
-                <h3 className='font-[400] ml-2'>{time}</h3>
-            </div>
-            <h2 className='w-[250px] h-[30px] text-center font-[400]'>
+            ></div>
+            <h2 className='w-[250px] bg-white h-[30px] text-center font-[400]'>
                 {type}
             </h2>
             <button
-                className={`w-[250px] h-[30px] bg-[#749D60] text-white text-[14px] rounded-b-[6px]`}
+                className={`w-[250px] h-[30px] bg-[#2E7EAA] text-white text-[14px] rounded-b-[6px]`}
                 onClick={handleReviewClick}
             >
                 Review

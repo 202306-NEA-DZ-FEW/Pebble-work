@@ -124,8 +124,8 @@ const Navbar = () => {
                                         className={`block rounded dark:border-gray-700 ${
                                             activeTab === tab.id
                                                 ? "cursor-default" //text on hover while the motion is on it
-                                                : "hover:text-[#71c249]" //text on hover while the motion is not on it
-                                        } relative rounded-full lg:text-[18px] md:text-[15px] font-medium text-[#749D60] outline-sky-400 transition focus-visible:outline-2`}
+                                                : "hover:text-[#547543]" //text on hover while the motion is not on it
+                                        } relative rounded-full lg:text-[18px] md:text-[15px] font-medium text-white outline-sky-400 transition focus-visible:outline-2`}
                                         style={{
                                             WebkitTapHighlightColor:
                                                 "transparent",
@@ -134,7 +134,7 @@ const Navbar = () => {
                                         {activeTab === tab.id && (
                                             <motion.span
                                                 layoutId='line'
-                                                className='absolute bottom-0 left-0 right-0 h-1 z-10 bg-[#749D60] mix-blend-difference'
+                                                className='absolute bottom-0 left-0 right-0 h-1 z-10 bg-[#2E7EAA] mix-blend-difference'
                                                 transition={{
                                                     type: "spring",
                                                     bounce: 0.3,

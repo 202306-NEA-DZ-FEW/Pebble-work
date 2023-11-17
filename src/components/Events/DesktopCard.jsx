@@ -47,6 +47,7 @@ const DesktopCard = ({ eventId, title, type, image, description }) => {
             <div
                 style={{
                     color: "black",
+                    backgroundColor: "white",
                 }}
                 onMouseEnter={handleHover}
                 onMouseLeave={handleMouseLeave}
@@ -88,10 +89,9 @@ const DesktopCard = ({ eventId, title, type, image, description }) => {
                     </p>
                 </div>
                 <div className='flex flex-col justify-end h-40'>
-                    <p>{t("events:avatars")}</p>
                     <button
                         onClick={handleReviewClick}
-                        className={`w-[45px] bg-[#749D60] hover:bg-gray-400 text-white text-[10px] xl:text-[15px] md:text-[12px] rounded-[4px] h-[14px] xl:w-[80px] xl:h-[30px] sm:w-[60px] sm:h-[18px]`}
+                        className={`w-[45px] bg-[#2E7EAA] hover:bg-[#749D60] text-white text-[10px] xl:text-[15px] md:text-[12px] rounded-[4px] h-[14px] xl:w-[80px] xl:h-[30px] sm:w-[60px] sm:h-[18px]`}
                     >
                         {t("events:reviewButton")}
                     </button>
