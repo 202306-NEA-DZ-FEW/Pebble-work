@@ -4,6 +4,7 @@ import styles from "@/styles/about.module.css";
 import Members from "@/components/Cards/Aboutus/Members";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import TechStack from "@/components/Cards/Aboutus/TechStack";
+import Wave from "@/components/Wave";
 
 const AboutPage = () => {
     const { t } = useTranslation();
@@ -82,8 +83,10 @@ const AboutPage = () => {
     return (
         <>
             <div
-                className={`flex flex-col text-justify items-center justify-center overflow-hidden`}
+                className={`flex flex-col text-justify items-center justify-center overflow-hidden z-[5] relative`}
             >
+                <Wave height={850} />
+
                 <div
                     style={{
                         backgroundImage: `url(/images/AboutPebble.png)`,
@@ -108,7 +111,7 @@ const AboutPage = () => {
                 </div>
                 <div
                     ref={scrollContainerRef}
-                    className={`md:w-[755px] sm:w-[630px] w-[90vw] lg:h-[600px] sm:h-[400px] h-[800px] rounded-[8px] flex flex-col items-center`}
+                    className={`md:w-[755px] sm:w-[630px] w-[80vw] lg:h-[600px] sm:h-[400px] h-[800px] rounded-[8px] flex flex-col items-center`}
                 >
                     <h2
                         className={`${styles.teamText} text-[40px] text-[#1A1A1A]`}
@@ -130,7 +133,7 @@ const AboutPage = () => {
                 >
                     <TechStack />
                     <div style={{ position: "absolute" }}>
-                        <h6 className={`${styles.techText}`}>
+                        <h6 className={`${styles.techText} mb-5`}>
                             {t("about:about:techStack")}
                         </h6>
                         <h5 className={`${styles.techText1}`}>

@@ -1,8 +1,8 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import WideScreenCard from "../WideScreenCard";
+import DesktopCard from "../MobileCard";
 
-describe("WideScreenCard", () => {
+describe("EventCardLeft", () => {
     it("renders correctly", () => {
         const event = {
             eventId: "1",
@@ -15,7 +15,7 @@ describe("WideScreenCard", () => {
             description: "Test Description",
         };
 
-        const { asFragment } = render(<WideScreenCard {...event} />);
+        const { asFragment } = render(<DesktopCard {...event} />);
 
         expect(asFragment()).toMatchSnapshot();
     });

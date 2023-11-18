@@ -46,7 +46,7 @@ const FeatureCard = ({ title, description, buttonText, imageUrl, link }) => {
     return (
         <div
             id='featuredCard'
-            className={`w-1/2 sm:min-h-[320px] min-h-[200px] lg:min-h-[550px] lg:w-1/3 md:w-1/2 flex flex-col justify-evenly items-center shadow-md ${
+            className={`w-1/2 p-2 sm:min-h-[320px] min-h-[200px] lg:min-h-[550px] lg:w-1/3 md:w-1/2 flex flex-col justify-evenly items-center shadow-md ${
                 isVisible ? styles.visible : styles.invisible
             }`}
         >
@@ -57,19 +57,19 @@ const FeatureCard = ({ title, description, buttonText, imageUrl, link }) => {
             </div>
             <div className='w-full text-center px-2'>
                 <div
-                    className={`text-zinc-900 w- lg:text-[32px] md:text-[24px] sm:text-[20px] font-medium font-['Rubik'] sm:leading-[44px] tracking-[0.10px]`}
+                    className={`text-zinc-900 w- lg:text-[32px] md:text-[24px] sm:text-[20px] font-medium sm:leading-[44px] tracking-[0.10px]`}
                 >
                     {title}
                 </div>
                 <div
-                    className={`text-zinc-500 lg:text-[18px] md:text-[15px] sm:text-[13px] text-[10px] font-normal font-['Rubik'] sm:leading-[30px] tracking-[0.10px]`}
+                    className={`text-zinc-500 lg:text-[18px] md:text-[15px] sm:text-[13px] text-[10px] font-normal sm:leading-[30px] tracking-[0.10px]`}
                 >
                     {description}
                 </div>
             </div>
             <Link
                 href=''
-                className={`xl:w-[163px] mb-5 xl:h-[52px] justify-center items-center gap-2.5 inline-flex text-zinc-900 lg:text-[22px] sm:text-[16px] font-medium font-['Rubik'] leading-[30px] tracking-tight`}
+                className={`xl:w-[163px] mb-5 xl:h-[52px] justify-center items-center gap-2.5 inline-flex text-zinc-900 lg:text-[22px] sm:text-[16px] font-medium leading-[30px] tracking-tight`}
                 onClick={handleButtonClick}
             >
                 {buttonText}
@@ -82,7 +82,7 @@ const MainCard = () => {
     const { t } = useTranslation();
 
     return (
-        <div className='w-full bg-white lg:flex lg:flex-wrap lg:flex-row lg:gap-0 flex flex-col items-center gap-8 sm:gap-5 lg:justify-start lg:items-start'>
+        <div className='w-full lg:flex lg:flex-wrap lg:flex-row lg:gap-0 flex flex-col items-center gap-8 sm:gap-5 lg:justify-start lg:items-start'>
             <FeatureCard
                 title={t("common:main:joinCommunityTitle")}
                 description={t("common:main:joinCommunityDescription")}

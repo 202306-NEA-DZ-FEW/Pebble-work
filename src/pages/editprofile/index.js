@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { db, auth, storage, firestore } from "../../util/firebase";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { collection, doc, updateDoc, getDoc } from "firebase/firestore";
+import { db, auth, storage } from "../../util/firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { getAuth, updatePassword, onAuthStateChanged } from "firebase/auth";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
@@ -305,12 +305,12 @@ const ProfilePage = () => {
                                 {/* profilr pic input */}
                                 <label
                                     htmlFor='profilePictureInput'
-                                    className='bg-orange-400 mt-10 text-center h-8 w-4/12  py-2 text-xs text-white  shadow-md  md:w-3/12 md:h-12 cursor-pointer rounded md:text-2xl'
+                                    className='bg-[#2E7EAA] mt-10 text-center h-8 w-4/12  py-2 text-xs text-white  shadow-md  md:w-3/12 md:h-12 cursor-pointer rounded md:text-2xl'
                                 >
                                     {t("edit:uploadNew")}
                                 </label>
                                 <button
-                                    className='librarybtn mt-10 text-center h-8  ml-3 w-7/12  text-xs  outline outline-1 rounded shadow-md md:w-4/12 md:h-12 md:ml-8 md:text-2xl '
+                                    className='librarybtn mt-10 text-center h-8  ml-3 w-7/12  text-xs  outline outline-1 rounded shadow-md md:w-4/12 md:h-12 md:ml-8 sm:text-xl '
                                     type='button'
                                     onClick={(e) => handleOpenLibrary(e)}
                                 >
@@ -394,9 +394,9 @@ const ProfilePage = () => {
                                 {EventTypes.map((type, index) => (
                                     <button
                                         key={index}
-                                        className={`outline outline-1 h-10 md:h-16 md:text-base -mx-1 rounded outline-orange-600 font-semibold text-orange-600 whitespace-normal  text-xs ${
+                                        className={`outline outline-1 h-12 md:h-15 -mx-1 rounded outline-[#2E7EAA] font-semibold text-[#2E7EAA] whitespace-normal text-xs ${
                                             userInterests.includes(type)
-                                                ? "text-white bg-orange-400" // Change the background color for selected buttons
+                                                ? "text-white bg-[#2E7EAA]" // Change the background color for selected buttons
                                                 : ""
                                         }`}
                                         onClick={(e) =>
@@ -408,10 +408,10 @@ const ProfilePage = () => {
                                 ))}{" "}
                             </div>
                             {/* Save Interests Button */}
-                            <div className='mt-0 flex flex-col items-center  md:mx-auto'>
+                            <div className='mt-0 flex flex-col items-center md:mx-auto'>
                                 <button
                                     type='submit'
-                                    className='mt-7 bg-orange-400  text-center h-10 w-30  px-4 py-2 text-xs text-white  shadow-md md:h-14 md:w-45 md:h-13 md:font-bold md:text-xl '
+                                    className='mt-7 bg-[#2E7EAA]  text-center h-10 w-30  px-4 py-2 text-xs text-white  shadow-md md:h-14 md:w-45 md:h-13 md:font-bold md:text-xl '
                                 >
                                     {t("edit:saveChanges")}
                                 </button>
@@ -419,7 +419,7 @@ const ProfilePage = () => {
                         </div>
                     </form>
                     {/* Change Password  */}
-                    <div className='mt-5 pt-0 mx-auto pb-5 flex flex-col  bg-cyan-100  rounded mb-20 md:mx-auto md:mt-11 md:w-8/12 '>
+                    <div className='mt-5 pt-0 mx-auto pb-5 flex flex-col  bg-[#B4CD93]  rounded mb-20 md:mx-auto md:mt-11 md:w-8/12 '>
                         <h3 className='font-bold mt-5 ml-4 md:text-2xl'>
                             {t("edit:changePassword")}
                         </h3>
@@ -449,7 +449,7 @@ const ProfilePage = () => {
                             <div className='flex flex-row mt-4 pb-3 gap-4 items-end  ml-20  md:mt-8 md:ml-40'>
                                 <button
                                     type='submit'
-                                    className='bg-orange-400  text-center h-8 w-3/12   text-xs text-white rounded shadow-md md:h-11 md:text-xl'
+                                    className='bg-[#2E7EAA]  text-center h-8 w-3/12   text-xs text-white rounded shadow-md md:h-11 md:text-xl'
                                 >
                                     {t("edit:Submit")}
                                 </button>

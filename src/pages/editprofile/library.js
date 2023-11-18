@@ -1,16 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/router";
-import { db, auth, storage, firestore } from "../../util/firebase";
-import {
-    getStorage,
-    ref,
-    uploadBytes,
-    getDownloadURL,
-    listAll,
-} from "firebase/storage";
-import { collection, doc, updateDoc, getDoc } from "firebase/firestore";
-import { getAuth, updatePassword, onAuthStateChanged } from "firebase/auth";
-import Image from "next/image";
+import { getStorage, ref, getDownloadURL, listAll } from "firebase/storage";
 
 const PicturesLibrary = ({
     isLibraryOpen,

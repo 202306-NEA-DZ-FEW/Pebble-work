@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import styles from "@/styles/Events.module.css";
 import { useTranslation } from "react-i18next";
 
 import Calendar from "@/components/Filter/Calendar";
 import FilterByType from "@/components/Filter/FilterByType";
 
-import WideScreenCard from "@/components/Events/WideScreenCard";
+import DesktopCard from "@/components/Events/DesktopCard";
 import FirestoreLocation from "../Filter/FirestoreLocation";
 import { usePagination } from "@/components/Pagination/Pagination";
 
@@ -97,7 +96,12 @@ const DesktopEvents = (user) => {
 
     return (
         <>
-            <main className={` flex flex-col justify-center items-center`}>
+            <main
+                style={{
+                    color: "#749D60",
+                }}
+                className={` flex flex-col justify-center items-center`}
+            >
                 <div>
                     <h1>{t("events:welcome", { name: user.name })}</h1>
                     <p>{t("events:eventsPage")}</p>
@@ -110,7 +114,7 @@ const DesktopEvents = (user) => {
                         <ul className={`flex flex-col items gap-2`}>
                             {currentItems.map((event) => {
                                 return (
-                                    <WideScreenCard
+                                    <DesktopCard
                                         eventId={event.id}
                                         key={event.id}
                                         title={event.title}
@@ -158,7 +162,7 @@ const DesktopEvents = (user) => {
                     <div className='flex h-[1150px] flex-col ml-[-50px] items-center text-black gap-7'>
                         <div className='sm:flex s:flex-col sm:items-center sm:justify-center'>
                             <div
-                                className={`${styles.calendarContainer} shadow-inner rounded-[8px] bg-white sm:bg-transparent`}
+                                className={`shadow-md rounded-[8px] bg-[#B4CD93]`}
                             >
                                 <Calendar
                                     resetDays={resetDays}
@@ -166,7 +170,7 @@ const DesktopEvents = (user) => {
                                 />
                             </div>
                         </div>
-                        <div className='h-66'>
+                        <div className='h-66 shadow-md'>
                             <FirestoreLocation
                                 onInputChange={handleLocationInputChange}
                                 resetLocation={resetLocation}
@@ -176,12 +180,14 @@ const DesktopEvents = (user) => {
                             />
                         </div>
 
-                        <FilterByType
-                            resetEvents={resetEvents}
-                            setFilteredTypes={setFilteredTypes}
-                            selectedTypes={selectedTypes}
-                            setSelectedTypes={setSelectedTypes}
-                        />
+                        <div className='shadow-md'>
+                            <FilterByType
+                                resetEvents={resetEvents}
+                                setFilteredTypes={setFilteredTypes}
+                                selectedTypes={selectedTypes}
+                                setSelectedTypes={setSelectedTypes}
+                            />
+                        </div>
                     </div>
                 </div>
             </main>

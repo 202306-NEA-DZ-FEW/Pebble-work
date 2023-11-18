@@ -1,16 +1,16 @@
 .techText {
-    color: #878787;
+    color: black;
     font-size: 15px;
-
+    opacity: 60%;
     font-weight: 400;
     line-height: 22px;
     letter-spacing: 0.07px;
     word-wrap: break-word;
 }
 .techText1 {
-    color: #1a1a1a;
+    color: black;
     font-size: 36px;
-
+    opacity: 80%;
     font-weight: 500;
     line-height: 44px;
     letter-spacing: 0.18px;

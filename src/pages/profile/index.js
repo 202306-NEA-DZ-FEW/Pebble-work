@@ -140,9 +140,9 @@ const ProfilePage = () => {
                             {EventTypes.map((type, index) => (
                                 <button
                                     key={index}
-                                    className={`outline outline-1 h-12 md:h-15 -mx-1 rounded outline-orange-600 font-semibold text-orange-600 whitespace-normal text-xs ${
+                                    className={`outline outline-1 h-12 md:h-15 -mx-1 rounded outline-[#2E7EAA] font-semibold text-[#2E7EAA] whitespace-normal text-xs ${
                                         userInterests.includes(type)
-                                            ? "text-white bg-orange-400"
+                                            ? "text-white bg-[#2E7EAA]"
                                             : ""
                                     }`}
                                 >
@@ -156,7 +156,7 @@ const ProfilePage = () => {
                 {/* Save Interests Button */}
                 <div className='mt-10'>
                     <button
-                        className='sm-button bg-orange-400 text-center h-10 w-30 px-4 py-2 text-xs text-white font-bold shadow-md md:h-14 mb-12 md:w-40 md:text-xl'
+                        className='sm-button bg-[#2E7EAA] text-center h-10 w-30 px-4 py-2 text-xs text-white font-bold shadow-md md:h-14 mb-12 md:w-40 md:text-xl'
                         onClick={handleEditProfile}
                     >
                         {t("profile:editProfile")}

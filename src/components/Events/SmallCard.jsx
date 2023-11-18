@@ -1,13 +1,18 @@
 import React from "react";
 import { useRouter } from "next/router";
 
-const MobileCard = ({ eventId, title, type, image, location, date, time }) => {
+const MobileCard = ({ eventId, title, type, image }) => {
     const router = useRouter();
     const handleReviewClick = () => {
         router.push(`/events/${eventId}`);
     };
     return (
-        <div className='flex flex-col justify-center text-black items-center'>
+        <div
+            style={{
+                color: "black",
+            }}
+            className='flex flex-col justify-center text-black items-center'
+        >
             <h1 className='font-[600]'>{title}</h1>
             <div
                 className='w-[250px] h-[250px] font-[300] rounded-t-[6px]'
@@ -17,17 +22,12 @@ const MobileCard = ({ eventId, title, type, image, location, date, time }) => {
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
                 }}
-            >
-                <p className='text-end'>avatars</p>
-                <h3>{location}</h3>
-                <h3>{date}</h3>
-                <h3>{time}</h3>
-            </div>
-            <h2 className='w-[250px] h-[30px] text-center font-[400]'>
+            ></div>
+            <h2 className='w-[250px] bg-white h-[30px] text-center font-[400]'>
                 {type}
             </h2>
             <button
-                className={`w-[250px] h-[30px] bg-blue-400 hover:bg-blue-500 text-white text-[14px] rounded-b-[6px]`}
+                className={`w-[250px] h-[30px] bg-[#2E7EAA] text-white text-[14px] rounded-b-[6px]`}
                 onClick={handleReviewClick}
             >
                 Review

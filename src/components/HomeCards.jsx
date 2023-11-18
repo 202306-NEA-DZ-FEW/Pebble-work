@@ -7,14 +7,14 @@ import ImageSquareCard from "@/components/Homecards/ImageSquareCard";
 import MainCard from "@/components/Homecards/MainCard";
 import SocialCard from "@/components/Homecards/SocialCard";
 import ContactForm from "./ContactUs";
-
-const CardContainer = ({ children }) => <div className=''>{children}</div>;
+import Wave from "./Wave";
+import styles from "@/styles/Homepage.module.css";
 
 export const Heading = ({ text }) => {
     const { t } = useTranslation();
 
     return (
-        <h2 className='text-center lg:text-[36px] md:text-[28px] sm:text-[22px] text-[18px] mt-4 sm:mt-8 md:mt-12 lg:mt-16 text-black font-[500]'>
+        <h2 className='text-center lg:text-[36px] md:text-[28px] sm:text-[22px] text-[18px] text-black font-[500]'>
             {t(text)}
         </h2>
     );
@@ -24,38 +24,45 @@ const HomeCards = () => {
     const { t } = useTranslation();
 
     return (
-        <div className='container overflow-hidden flex flex-col items-center justify-center mx-auto'>
-            <HeaderCard />
+        <div className='overflow-hidden flex flex-col items-center justify-center mx-auto'>
+            <div className='overflow-hidden p-2'>
+                <HeaderCard />
+            </div>
 
-            <Heading />
             <p className='lg:text-[42px] sm:text-[32px] font-[500] text-black'>
                 {t("common:homeCards:howItWorks")}
             </p>
             <MainCard />
 
-            <Heading />
-            <p
-                className='mt-4 sm:mt-8 md:mt-12 lg:mt-16'
-                style={{ fontSize: "42px", color: "black" }}
-            >
+            <p style={{ fontSize: "42px", color: "black" }}>
                 {t("common:homeCards:sustainableDevelopmentGoals")}
             </p>
-            <p className='mt-4 sm:mt-8 md:mt-12 lg:mt-16'>
-                {t("common:homeCards:introductorySentence")}
-            </p>
-            <GalleryCard />
+            <p>{t("common:homeCards:introductorySentence")}</p>
+            <div className='p-2 overflow-hidden'>
+                <GalleryCard />
+            </div>
 
-            <p className='mt-4 sm:mt-8 md:mt-12 lg:mt-16'></p>
-            <div className='xl:h-[420px] lg:h-[420px] '>
+            <p></p>
+            <div className='xl:h-[420px] p-2 lg:h-[420px] '>
                 <SocialCard />
             </div>
 
-            <div className='mt-4'>
+            <div className='p-2'>
                 <ImageSquareCard />
             </div>
+            <div
+                className={`w-screen flex flex-col items-center justify-center  ${styles.components}`}
+            >
+                <HeroCard />
 
-            <HeroCard />
-            <ContactForm />
+                <Wave height={850} />
+                {/* <div className={styles.blur}>
+                </div> */}
+                <div className='sm:w-[600px] shadow-inner w-[95vw]'>
+                    {" "}
+                    <ContactForm />
+                </div>
+            </div>
         </div>
     );
 };

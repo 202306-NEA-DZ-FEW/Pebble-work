@@ -1,7 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import styles from "@/styles/EventDetails.module.css";
 import NoAccess from "@/components/Events/EditEvent";

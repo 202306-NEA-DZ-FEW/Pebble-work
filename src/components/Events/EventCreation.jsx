@@ -67,16 +67,18 @@ const EventCreation = () => {
 
     return (
         <>
-            <div className='flex items-left h-full overflow-hidden z-10 mb-[4rem]'>
-                <div className='absolute p-4 top-[50%] left-[30%] flex flex-col bg-white bg-opacity-70 border rounded-[8px]'>
+            <div className='relative flex items-left h-full overflow-hidden z-10 mb-[4rem]'>
+                <div className='absolute w-full top-40 p-4 flex flex-col bg-white bg-opacity-70 border rounded-[8px]'>
                     <p className='text-red-600'>{t("events:pageTitle")}</p>
 
                     <div className='flex flex-col'>
-                        <p className='text-grey-600'>
+                        <p className='text-green-400'>
                             {t("events:joinDescription")}
                         </p>
-                        <div className='flex flex-row gap-5 content-center mx-auto mt-3'>
-                            <Signin />
+                        <div className='flex gap-12 justify-center items-center mx-auto mt-3'>
+                            <div>
+                                <Signin />
+                            </div>
                             <Signup />
                         </div>
                     </div>

@@ -18,9 +18,6 @@ const EventCreationPage = () => {
     const { t } = useTranslation();
     const formCollectionRef = collection(db, "events");
 
-    const userId = auth?.currentUser?.uid;
-    console.log(userId);
-
     //creates the event object to be sent to firestore
     const [input, setInput] = useState({
         location: "",
@@ -104,15 +101,6 @@ const EventCreationPage = () => {
         }));
     };
 
-    // Function to handle location selection
-    /*
-  const handleLocationSelect = (selectedLocation) => {
-    setInput((prevInput) => ({
-      ...prevInput,
-      location: selectedLocation, // Update the location in the input state
-    }));
-  };
-*/
     const arrEventType = [
         "No Poverty",
         "Zero Hunger",

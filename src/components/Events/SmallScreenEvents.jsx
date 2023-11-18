@@ -8,6 +8,7 @@ import FilterByType from "@/components/Filter/FilterByType";
 import FirestoreLocation from "@/components/Filter/FirestoreLocation";
 
 import { usePagination } from "@/components/Pagination/Pagination";
+import { AiOutlineClose } from "react-icons/ai";
 
 const SmallScreenEvents = (user) => {
     // State variables
@@ -113,7 +114,7 @@ const SmallScreenEvents = (user) => {
                 </div>
                 <button
                     onClick={resetEvents}
-                    className={` w-[52px] bg-blue-400 text-white text-[10px] hover:bg-blue-500 rounded-[4px] h-[16px] ml-auto mr-2`}
+                    className={` w-[52px] bg-[#2E7EAA] text-white text-[10px] rounded-[4px] h-[16px] ml-auto mr-2`}
                 >
                     All events
                 </button>
@@ -193,10 +194,10 @@ const SmallScreenEvents = (user) => {
                                     } shadow-inner rounded-[4px] z-10 bg-white`}
                                 >
                                     <button
-                                        className='btn rounded-[8px]'
+                                        className='mb-3 rounded-[8px]'
                                         onClick={() => setCalendarOpen(false)}
                                     >
-                                        Close
+                                        <AiOutlineClose size={20} />
                                     </button>
                                     <Calendar
                                         resetDays={resetDays}

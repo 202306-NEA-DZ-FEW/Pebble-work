@@ -68,7 +68,7 @@ const Language = () => {
         <Draggable onDrag={handleStart} onStop={handleStop}>
             <div
                 ref={dropdownRef}
-                className='fixed bottom-0 left-20 sm:right-40'
+                className='fixed md:text-[15px] text-[12px] bottom-0 left-20 sm:right-40'
             >
                 <button
                     type='button'
@@ -81,7 +81,7 @@ const Language = () => {
                             icon={faEarthEurope}
                             size='2x'
                             style={{
-                                color: "#63d4a9",
+                                color: "#2E7EAA",
                                 paddingRight: "2px",
                                 transform: `rotate(${rotationDegree}deg)`,
                                 transition: "transform 0.5s",
@@ -100,10 +100,11 @@ const Language = () => {
                 >
                     <ul
                         ref={dropdownRef}
-                        className='font-medium overflow-hidden flex flex-col gap-2 '
+                        className='font-medium w-[100px] overflow-hidden flex flex-col gap-2 '
                     >
                         <li>
                             <button
+                                onTouchStart={() => changeLanguage("en")}
                                 onClick={() => changeLanguage("en")}
                                 className='block text-sm text-gray-700 hover:border hover:rounded-sm w-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
                             >
@@ -120,6 +121,7 @@ const Language = () => {
                         </li>
                         <li>
                             <button
+                                onTouchStart={() => changeLanguage("tr")}
                                 onClick={() => changeLanguage("tr")}
                                 className='block text-sm text-gray-700 hover:border hover:rounded-sm w-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
                             >
@@ -136,6 +138,7 @@ const Language = () => {
                         </li>
                         <li>
                             <button
+                                onTouchStart={() => changeLanguage("de")}
                                 onClick={() => changeLanguage("de")}
                                 className='block text-sm text-gray-700 hover:border hover:rounded-sm w-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
                             >
@@ -153,6 +156,7 @@ const Language = () => {
                         {/* Add Chinese language here */}
                         <li>
                             <button
+                                onTouchStart={() => changeLanguage("zh")}
                                 onClick={() => changeLanguage("zh")}
                                 className='block text-sm text-gray-700 hover:border hover:rounded-sm w-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
                             >

@@ -3,7 +3,7 @@ import styles from "@/styles/EventCard.module.css";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 
-const EventCardLeft = ({
+const MobileCard = ({
     eventId,
     title,
     type,
@@ -23,14 +23,16 @@ const EventCardLeft = ({
     return (
         <>
             <div
+                style={{
+                    color: "black",
+                    backgroundColor: "white",
+                }}
                 className={`${styles.contai} shadow-inner relative sm:w-[62vw] md:w-[466px] h-[140px] flex flex-row-reverse items-center justify-center gap-2`}
             >
                 <div className={`flex flex-col gap-1 sm:gap-4`}>
                     <h1
                         className='sm:text-[15px] text-[10.55px] text-center'
                         style={{
-                            color: "#1A1A1A",
-                            fontFamily: "Rubik",
                             fontWeight: " 500",
                             letterSpacing: "0.11px",
                             wordWrap: "break-word",
@@ -41,8 +43,6 @@ const EventCardLeft = ({
 
                     <p
                         style={{
-                            color: "#1A1A1A",
-                            fontFamily: "Rubik",
                             fontWeight: " 400",
                             letterSpacing: "0.06px",
                             wordWrap: "break-word",
@@ -55,7 +55,7 @@ const EventCardLeft = ({
                     </p>
 
                     <button
-                        className={`w-[45px] bg-blue-400 hover:bg-blue-500 text-white text-[10px] md:text-[12px] rounded-[4px] h-[14px] sm:w-[60px] sm:h-[18px]`}
+                        className={`w-[45px] bg-[#2E7EAA] hover:bg-gray-400 text-white text-[10px] md:text-[12px] rounded-[4px] h-[14px] sm:w-[60px] sm:h-[18px]`}
                         onClick={handleReviewClick}
                     >
                         {t("events:reviewButton")}
@@ -92,4 +92,4 @@ const EventCardLeft = ({
     );
 };
 
-export default EventCardLeft;
+export default MobileCard;

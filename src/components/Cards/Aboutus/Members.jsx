@@ -19,20 +19,19 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Members({ members }) {
-    const [direction, setDirection] = useState("horizontal");
-    const [slideShadows, setSlideShadows] = useState(
-        typeof window !== "undefined" ? window.innerWidth > 640 : false
-    );
+    const [direction, setDirection] = useState("");
 
     useEffect(() => {
         const handleResize = () => {
             if (typeof window !== "undefined") {
-                setSlideShadows(window.innerWidth > 640);
                 setDirection(
                     window.innerWidth < 640 ? "vertical" : "horizontal"
                 );
             }
         };
+
+        // Call handleResize once to set the direction based on the initial window size
+        handleResize();
 
         if (typeof window !== "undefined") {
             window.addEventListener("resize", handleResize);
@@ -62,21 +61,23 @@ export default function Members({ members }) {
                 stretch: 0,
                 depth: 100,
                 modifier: 1,
-                slideShadows: slideShadows,
+                slideShadows: false,
             }}
             pagination={true}
             modules={[EffectCoverflow, Pagination, Autoplay, Navigation]}
         >
             {members.map((member, index) => (
                 <SwiperSlide key={index}>
-                    <div className='h-full w-full flex flex-col items-center justify-evenly'>
+                    <div className='h-full shadow-md w-full flex flex-col items-center justify-evenly'>
                         <img
                             src={member.imageSrc}
                             alt='member'
                             className='rounded-full w-[30vw] sm:w-[80px] lg:w-[140px] '
                         />
                         <div className='flex flex-col items-center'>
-                            <h2 className='text-red-600'>{member.name}</h2>
+                            <h2 className='text-black font-[500]'>
+                                {member.name}
+                            </h2>
                             <p className='slide-content p-5 text-black'>
                                 {member.description}
                             </p>

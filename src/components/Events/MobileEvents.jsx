@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "@/components/Filter/Calendar";
-import EventCardLeft from "@/components/Events/EventCardLeft";
+import MobileCard from "@/components/Events/MobileCard";
 
 import FilterByType from "@/components/Filter/FilterByType";
 import FirestoreLocation from "@/components/Filter/FirestoreLocation";
@@ -95,7 +95,10 @@ const EventsPage = (user) => {
     return (
         <>
             <main
-                className={` flex flex-col justify-center items-center pb-12`}
+                style={{
+                    color: "#749D60",
+                }}
+                className={`flex flex-col justify-center items-center pb-12`}
             >
                 <div>
                     <h1>Welcome, {user.name}!</h1>
@@ -108,7 +111,7 @@ const EventsPage = (user) => {
                         <ul className={` flex flex-col items gap-2 `}>
                             {currentItems.map((event) => {
                                 return (
-                                    <EventCardLeft
+                                    <MobileCard
                                         eventId={event.id}
                                         key={event.id}
                                         title={event.title}
@@ -155,10 +158,10 @@ const EventsPage = (user) => {
                             </div>
                         </ul>
                     </div>
-                    <div className='flex bg-white z-10 flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7'>
+                    <div className='flex z-10 flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7'>
                         <div className='sm:flex s:flex-col sm:items-center sm:justify-center'>
                             <div
-                                className={`shadow-inner rounded-[8px] z-10 bg-white sm:bg-transparent`}
+                                className={`shadow-md rounded-[8px] z-10 bg-[#B4CD93]`}
                             >
                                 <Calendar
                                     resetDays={resetDays}
@@ -166,7 +169,7 @@ const EventsPage = (user) => {
                                 />
                             </div>
                         </div>
-                        <div className='h-66'>
+                        <div className='h-66 shadow-md'>
                             <FirestoreLocation
                                 onInputChange={handleLocationInputChange}
                                 resetLocation={resetLocation}
@@ -174,12 +177,14 @@ const EventsPage = (user) => {
                                 onInputDelete={handleInputDelete}
                             />
                         </div>
-                        <FilterByType
-                            resetEvents={resetEvents}
-                            setFilteredTypes={setFilteredTypes}
-                            selectedTypes={selectedTypes}
-                            setSelectedTypes={setSelectedTypes}
-                        />
+                        <div className=' shadow-md'>
+                            <FilterByType
+                                resetEvents={resetEvents}
+                                setFilteredTypes={setFilteredTypes}
+                                selectedTypes={selectedTypes}
+                                setSelectedTypes={setSelectedTypes}
+                            />
+                        </div>
                     </div>
                 </div>
             </main>

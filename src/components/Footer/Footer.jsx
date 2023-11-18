@@ -8,7 +8,7 @@ const Footer = () => {
     return (
         <footer
             data-testid='footer'
-            className='md:flex md:items-center md:justify-center flex items-center justify-center bg-[#FDA855]'
+            className='md:flex md:items-center md:justify-center flex items-center justify-center bg-[#B4CD93]'
             style={{
                 width: "100%",
                 height: "180px",
@@ -26,7 +26,7 @@ const Footer = () => {
                     </Link>
                 </div>
                 <div className='flex flex-col items-center md:flex md:flex-col md:items-center md:gap-5'>
-                    <ul className='flex gap-[30px]'>
+                    <ul className='flex sm:gap-[80px] gap-10 lg:text-[18px] md:text-[15px] text-[#749D60]'>
                         <li>
                             <Link href='/events'>{t("footer.events")}</Link>
                         </li>
@@ -34,7 +34,9 @@ const Footer = () => {
                             <Link href='/about'>{t("footer.about")}</Link>
                         </li>
                         <li>
-                            <Link href='#'>{t("footer.howItWorks")}</Link>
+                            <Link href='/guidelines'>
+                                {t("footer.howItWorks")}
+                            </Link>
                         </li>
                     </ul>
                     <div>
@@ -46,28 +48,28 @@ const Footer = () => {
                 <div className='md:flex '>
                     <ul className='flex gap-20 md:gap-8'>
                         <li>
-                            <Link href='#'>
+                            <Link href=''>
                                 <img
                                     src='/icons/Facebook.svg'
-                                    className='md:w-[50px] w-[30px]'
+                                    className='md:w-[40px] w-[25px]'
                                     alt='Facebook'
                                 />
                             </Link>
                         </li>
                         <li>
-                            <Link href='#'>
+                            <Link href=''>
                                 <img
                                     src='/icons/Google.svg'
-                                    className='md:w-[50px] w-[30px]'
+                                    className='md:w-[40px] w-[25px]'
                                     alt='Gmail'
                                 />
                             </Link>
                         </li>
                         <li>
-                            <Link href='#'>
+                            <Link href=''>
                                 <img
                                     src='/icons/Github.svg'
-                                    className='md:w-[50px] w-[30px]'
+                                    className='md:w-[40px] w-[25px]'
                                     alt='Github'
                                 />
                             </Link>

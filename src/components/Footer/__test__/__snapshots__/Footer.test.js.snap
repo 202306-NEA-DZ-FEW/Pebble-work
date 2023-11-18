@@ -3,7 +3,7 @@
 exports[`Footer renders correctly 1`] = `
 <DocumentFragment>
   <footer
-    class="md:flex md:items-center md:justify-center flex items-center justify-center bg-[#FDA855]"
+    class="md:flex md:items-center md:justify-center flex items-center justify-center bg-[#B4CD93]"
     data-testid="footer"
     style="width: 100%; height: 180px; z-index: 90;"
   >
@@ -25,7 +25,7 @@ exports[`Footer renders correctly 1`] = `
         class="flex flex-col items-center md:flex md:flex-col md:items-center md:gap-5"
       >
         <ul
-          class="flex gap-[30px]"
+          class="flex sm:gap-[80px] gap-10 lg:text-[18px] md:text-[15px] text-[#749D60]"
         >
           <li>
             <a
@@ -43,7 +43,7 @@ exports[`Footer renders correctly 1`] = `
           </li>
           <li>
             <a
-              href="#"
+              href="/guidelines"
             >
               footer.howItWorks
             </a>
@@ -65,33 +65,33 @@ exports[`Footer renders correctly 1`] = `
         >
           <li>
             <a
-              href="#"
+              href=""
             >
               <img
                 alt="Facebook"
-                class="md:w-[50px] w-[30px]"
+                class="md:w-[40px] w-[25px]"
                 src="/icons/Facebook.svg"
               />
             </a>
           </li>
           <li>
             <a
-              href="#"
+              href=""
             >
               <img
                 alt="Gmail"
-                class="md:w-[50px] w-[30px]"
+                class="md:w-[40px] w-[25px]"
                 src="/icons/Google.svg"
               />
             </a>
           </li>
           <li>
             <a
-              href="#"
+              href=""
             >
               <img
                 alt="Github"
-                class="md:w-[50px] w-[30px]"
+                class="md:w-[40px] w-[25px]"
                 src="/icons/Github.svg"
               />
             </a>
