@@ -18,14 +18,14 @@ function HeroCard() {
                     <div className=' flex flex-col sm:flex-row justify-center items-center gap-6'>
                         <Link
                             href='/signup'
-                            className={`buttonTransition text-2xl font-medium leading-10 tracking-tight text-white px-4 py-2 rounded-lg`}
+                            className={`buttonTransition text-[22px] font-medium leading-10 tracking-tight text-white px-4 py-2 rounded-lg`}
                         >
                             {t("common:heroCard:getStarted")}
                         </Link>
 
                         <Link
                             href='/guidelines'
-                            className={`secondButton text-2xl font-medium leading-10 tracking-tight text-zinc-900`}
+                            className={`secondButton text-[2xl] font-medium leading-10 tracking-tight text-zinc-900`}
                         >
                             {t("common:heroCard:whoWeAre")}
                         </Link>

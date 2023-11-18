@@ -24,7 +24,7 @@ export default function HeaderCard() {
                         </p>
                         <Link
                             href='/signup'
-                            className='buttonTransition text-center bg-[#2F7DA9] hover:bg-[#38779b] sm:w-[88px] sm:h-[22px] w-[60px] h-[16px] sm:text-[13px] text-[10px] rounded-[4px] lg:w-[120px] lg:h-[30px] text-white lg:text-[18px] mt-3'
+                            className='text-center bg-[#2F7DA9] hover:bg-[#38779b] sm:w-[88px] sm:h-[22px] w-[60px] h-[16px] sm:text-[13px] text-[10px] rounded-[4px] lg:w-[120px] lg:h-[30px] text-white lg:text-[18px] mt-3'
                         >
                             {t("common:headerCard:button")}
                         </Link>
