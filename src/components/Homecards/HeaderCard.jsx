@@ -1,6 +1,7 @@
 import styles from "@/styles/Homepage.module.css";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
+import Link from "next/link";
 
 export default function HeaderCard() {
     const { t } = useTranslation();
@@ -21,9 +22,12 @@ export default function HeaderCard() {
                         <p className='text-[#878787] md:text-[18px] sm:text-[16px] text-[10px]  lg:text-[24px] font-[400] lg:leading-[30px] lg:tracking-[0.10px] break-words '>
                             {t("common:headerCard:description")}
                         </p>
-                        <button className='text-center bg-[#2F7DA9] hover:bg-[#38779b] sm:w-[88px] sm:h-[22px] w-[60px] h-[16px] sm:text-[13px] text-[10px] rounded-[4px] lg:w-[120px] lg:h-[30px] text-white lg:text-[18px] mt-3'>
+                        <Link
+                            href='/signup'
+                            className='buttonTransition text-center bg-[#2F7DA9] hover:bg-[#38779b] sm:w-[88px] sm:h-[22px] w-[60px] h-[16px] sm:text-[13px] text-[10px] rounded-[4px] lg:w-[120px] lg:h-[30px] text-white lg:text-[18px] mt-3'
+                        >
                             {t("common:headerCard:button")}
-                        </button>
+                        </Link>
                     </div>
                 </div>
                 <div
