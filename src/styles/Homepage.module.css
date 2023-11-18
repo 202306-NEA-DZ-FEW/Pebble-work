@@ -220,12 +220,12 @@
     z-index: 5;
 }
 
-.blur {
+/* .blur {
     position: absolute;
     top: 0;
     left: 0;
     z-index: -1;
     filter: blur(
-        3px
-    ); /* Adjust the pixel value to control the amount of blur */
-}
+        0px
+    ); 
+} */

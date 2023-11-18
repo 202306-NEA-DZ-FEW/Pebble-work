@@ -55,9 +55,9 @@ const HomeCards = () => {
             >
                 <HeroCard />
 
-                <div className={styles.blur}>
-                    <Wave />
-                </div>
+                <Wave />
+                {/* <div className={styles.blur}>
+                </div> */}
                 <div className='sm:w-[600px] shadow-inner w-[95vw]'>
                     {" "}
                     <ContactForm />
