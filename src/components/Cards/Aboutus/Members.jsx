@@ -19,20 +19,19 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Members({ members }) {
-    const [direction, setDirection] = useState("horizontal");
-    const [slideShadows, setSlideShadows] = useState(
-        typeof window !== "undefined" ? window.innerWidth > 640 : false
-    );
+    const [direction, setDirection] = useState("");
 
     useEffect(() => {
         const handleResize = () => {
             if (typeof window !== "undefined") {
-                setSlideShadows(window.innerWidth > 640);
                 setDirection(
                     window.innerWidth < 640 ? "vertical" : "horizontal"
                 );
             }
         };
+
+        // Call handleResize once to set the direction based on the initial window size
+        handleResize();
 
         if (typeof window !== "undefined") {
             window.addEventListener("resize", handleResize);
@@ -62,7 +61,7 @@ export default function Members({ members }) {
                 stretch: 0,
                 depth: 100,
                 modifier: 1,
-                slideShadows: slideShadows,
+                slideShadows: false,
             }}
             pagination={true}
             modules={[EffectCoverflow, Pagination, Autoplay, Navigation]}

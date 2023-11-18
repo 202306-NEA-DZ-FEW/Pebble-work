@@ -110,7 +110,7 @@ const Navbar = () => {
                     id='navbar-language'
                 >
                     <ul
-                        className={`md:static text-center md:bg-transparent gap-10 fixed sm:w-full w-60 md:min-h-0 min-h-screen flex flex-col font-medium md:p-0 border border-gray-300 md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 dark:border-gray-700 left-[0px] top-0 z-10 ${styles.tiltIn}`}
+                        className={`md:static text-center md:bg-transparent gap-10 fixed sm:w-full w-60 md:min-h-0 min-h-screen flex flex-col font-medium md:p-0 md:flex-row md:space-x-8 md:mt-0 bg-gray-800 left-[0px] top-0 z-10 ${styles.tiltIn}`}
                         role='menu'
                     >
                         {tabs.map((tab) => (
@@ -134,7 +134,7 @@ const Navbar = () => {
                                         {activeTab === tab.id && (
                                             <motion.span
                                                 layoutId='line'
-                                                className='absolute bottom-0 left-0 right-0 h-1 z-10 bg-[#2E7EAA] mix-blend-difference'
+                                                className='absolute bottom-0 left-0 right-0 md:h-[2px] h-1 z-10 bg-[#547543]'
                                                 transition={{
                                                     type: "spring",
                                                     bounce: 0.3,
