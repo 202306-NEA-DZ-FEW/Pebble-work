@@ -228,19 +228,31 @@ const ContactForm = () => {
                         padding: 12px;
                         box-sizing: border-box;
                     }
+                    @keyframes fill {
+                        0% {
+                            background-position: 0% 0%;
+                        }
+                        100% {
+                            background-position: 0% 100%;
+                        }
+                    }
 
                     input[type="submit"] {
-                        background-color: #4caf50;
+                        background: linear-gradient(to top, #749d60, #2e7eaa);
+                        background-size: 100% 200%;
+                        transition: all 1s;
                         color: white;
                         padding: 14px 20px;
                         border: none;
                         cursor: pointer;
                         margin-top: 1em;
                         width: 100%;
+                        position: relative;
+                        overflow: hidden;
                     }
 
                     input[type="submit"]:hover {
-                        background-color: #45a049;
+                        animation: fill 1.5s both;
                     }
                 `}</style>
             </form>
