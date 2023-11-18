@@ -278,7 +278,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                                     style={{
                                                         marginTop: "1rem",
                                                         borderRadius: "8px",
-                                                        background: "grey",
+                                                        background: "#749D60",
                                                         border: 0,
                                                         color: "white",
                                                     }}
@@ -345,7 +345,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                             style={{
                                                 marginTop: "1rem",
                                                 borderRadius: "8px",
-                                                background: "#FDA855",
+                                                background: "#2E7EAA",
                                                 border: 0,
                                                 color: "white",
                                             }}
@@ -365,7 +365,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                             style={{
                                                 marginTop: "1rem",
                                                 borderRadius: "8px",
-                                                background: "#FDA855",
+                                                background: "#2E7EAA",
                                                 border: 0,
                                                 color: "white",
                                             }}
@@ -379,7 +379,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                             style={{
                                                 marginTop: "1rem",
                                                 borderRadius: "8px",
-                                                background: "#FDA855",
+                                                background: "#2E7EAA",
                                                 border: 0,
                                                 color: "white",
                                             }}
