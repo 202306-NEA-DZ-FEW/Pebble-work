@@ -1,5 +1,5 @@
 .techText {
-    color: #749d60;
+    color: black;
     font-size: 15px;
     opacity: 60%;
     font-weight: 400;
@@ -8,7 +8,7 @@
     word-wrap: break-word;
 }
 .techText1 {
-    color: #749d60;
+    color: black;
     font-size: 36px;
     opacity: 80%;
     font-weight: 500;

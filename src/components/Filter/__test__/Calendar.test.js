@@ -1,5 +1,5 @@
 import Calendar from "../Calendar";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 describe("Calendar Component", () => {

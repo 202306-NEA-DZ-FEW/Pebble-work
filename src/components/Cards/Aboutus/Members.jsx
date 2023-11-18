@@ -75,7 +75,9 @@ export default function Members({ members }) {
                             className='rounded-full w-[30vw] sm:w-[80px] lg:w-[140px] '
                         />
                         <div className='flex flex-col items-center'>
-                            <h2 className='text-[#749D60]'>{member.name}</h2>
+                            <h2 className='text-black font-[500]'>
+                                {member.name}
+                            </h2>
                             <p className='slide-content p-5 text-black'>
                                 {member.description}
                             </p>

@@ -85,6 +85,8 @@ const AboutPage = () => {
             <div
                 className={`flex flex-col text-justify items-center justify-center overflow-hidden z-[5] relative`}
             >
+                <Wave height={850} />
+
                 <div
                     style={{
                         backgroundImage: `url(/images/AboutPebble.png)`,
@@ -138,7 +140,6 @@ const AboutPage = () => {
                             {t("about:about:techStackTitle")}
                         </h5>
                     </div>
-                    <Wave />
                 </div>
             </div>
         </>

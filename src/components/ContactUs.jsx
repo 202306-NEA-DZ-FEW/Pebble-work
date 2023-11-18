@@ -119,7 +119,7 @@ const ContactForm = () => {
                     <input
                         style={{
                             background: "var(--fill-white, #FFF)",
-                            // border: "solid",
+
                             borderRadius: "4px",
                         }}
                         type='text'
@@ -137,7 +137,7 @@ const ContactForm = () => {
                     <input
                         style={{
                             background: "var(--fill-white, #FFF)",
-                            // border: "solid",
+
                             borderRadius: "4px",
                         }}
                         type='text'
@@ -157,7 +157,7 @@ const ContactForm = () => {
                 <input
                     style={{
                         background: "var(--fill-white, #FFF)",
-                        // border: "solid",
+
                         borderRadius: "4px",
                     }}
                     type='email'
@@ -172,7 +172,7 @@ const ContactForm = () => {
                 <input
                     style={{
                         background: "var(--fill-white, #FFF)",
-                        // border: "solid",
+
                         borderRadius: "4px",
                     }}
                     type='tel'
@@ -187,7 +187,7 @@ const ContactForm = () => {
                 <textarea
                     style={{
                         background: "var(--fill-white, #FFF)",
-                        // border: "solid",
+
                         borderRadius: "4px",
                     }}
                     id='message'
