@@ -133,7 +133,10 @@ const ProfilePage = () => {
                         <h3 className='mt-8 font-semibold text-2xl text-gray-600 mb-2'>
                             {t("profile:interests")}:
                         </h3>
-                        <div className='grid grid-container grid-cols-2 gap-8 md:grid-cols-3 text-center justify-evenly md:w-full md:h-auto md:mt-1 md:text-3xl'>
+                        <div
+                            className='grid grid-container grid-cols-2 gap-8 md:grid-cols-3 
+                        text-center justify-evenly md:w-full md:h-auto md:mt-1 md:text-3xl px-3'
+                        >
                             {EventTypes.map((type, index) => (
                                 <button
                                     key={index}
