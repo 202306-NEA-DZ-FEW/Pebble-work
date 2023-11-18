@@ -5,10 +5,6 @@ import Link from "next/link";
 function HeroCard() {
     const { t } = useTranslation();
 
-    const handleButtonClick = (path) => {
-        window.location.href = path;
-    };
-
     return (
         <div className='w-full shadow-md sm:h-[400px] flex justify-center items-center'>
             <div className='text-center p-4'>

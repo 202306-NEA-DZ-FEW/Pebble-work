@@ -7,6 +7,8 @@ import ImageSquareCard from "@/components/Homecards/ImageSquareCard";
 import MainCard from "@/components/Homecards/MainCard";
 import SocialCard from "@/components/Homecards/SocialCard";
 import ContactForm from "./ContactUs";
+import Wave from "./Wave";
+import styles from "@/styles/Homepage.module.css";
 
 export const Heading = ({ text }) => {
     const { t } = useTranslation();
@@ -48,11 +50,18 @@ const HomeCards = () => {
             <div className='p-2'>
                 <ImageSquareCard />
             </div>
+            <div
+                className={`w-screen flex flex-col items-center justify-center  ${styles.components}`}
+            >
+                <HeroCard />
 
-            <HeroCard />
-            <div className='sm:w-[600px] shadow-inner w-[95vw]'>
-                {" "}
-                <ContactForm />
+                <div className={styles.blur}>
+                    <Wave />
+                </div>
+                <div className='sm:w-[600px] shadow-inner w-[95vw]'>
+                    {" "}
+                    <ContactForm />
+                </div>
             </div>
         </div>
     );
