@@ -110,16 +110,16 @@ const ContactForm = () => {
 
     return (
         <div
-            className={`${styles.formHeight} sm:w-[450px] w-[90vw] h-[450px] flex flex-col items-center mx-auto gap-4`}
+            className={`${styles.formHeight} text-black sm:w-[450px] w-[90vw] h-[450px] flex flex-col items-center mx-auto gap-4`}
         >
-            <h2>{t("contactForm.title")}</h2>
+            <h1 className='text-[26px]'>{t("contactForm.title")}</h1>
 
             <form className='h-[40vh]' onSubmit={handleSubmit}>
                 <div className='input-row'>
                     <input
                         style={{
                             background: "var(--fill-white, #FFF)",
-                            border: "solid",
+                            // border: "solid",
                             borderRadius: "4px",
                         }}
                         type='text'
@@ -137,7 +137,7 @@ const ContactForm = () => {
                     <input
                         style={{
                             background: "var(--fill-white, #FFF)",
-                            border: "solid",
+                            // border: "solid",
                             borderRadius: "4px",
                         }}
                         type='text'
@@ -157,7 +157,7 @@ const ContactForm = () => {
                 <input
                     style={{
                         background: "var(--fill-white, #FFF)",
-                        border: "solid",
+                        // border: "solid",
                         borderRadius: "4px",
                     }}
                     type='email'
@@ -172,7 +172,7 @@ const ContactForm = () => {
                 <input
                     style={{
                         background: "var(--fill-white, #FFF)",
-                        border: "solid",
+                        // border: "solid",
                         borderRadius: "4px",
                     }}
                     type='tel'
@@ -187,7 +187,7 @@ const ContactForm = () => {
                 <textarea
                     style={{
                         background: "var(--fill-white, #FFF)",
-                        border: "solid",
+                        // border: "solid",
                         borderRadius: "4px",
                     }}
                     id='message'
@@ -243,7 +243,7 @@ const ContactForm = () => {
                         transition: all 1s;
                         color: white;
                         padding: 14px 20px;
-                        border: none;
+                        // border: none;
                         cursor: pointer;
                         margin-top: 1em;
                         width: 100%;
