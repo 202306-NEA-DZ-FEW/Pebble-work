@@ -5,6 +5,9 @@
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }
+.svg path:nth-child(1) {
+    animation-delay: 100ms;
+}
 .svg path:nth-child(2) {
     animation-play-state: paused;
 }

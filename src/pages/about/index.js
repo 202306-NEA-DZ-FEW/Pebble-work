@@ -4,6 +4,7 @@ import styles from "@/styles/about.module.css";
 import Members from "@/components/Cards/Aboutus/Members";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import TechStack from "@/components/Cards/Aboutus/TechStack";
+import Wave from "@/components/Wave";
 
 const AboutPage = () => {
     const { t } = useTranslation();
@@ -82,7 +83,7 @@ const AboutPage = () => {
     return (
         <>
             <div
-                className={`flex flex-col text-justify items-center justify-center overflow-hidden`}
+                className={`flex flex-col text-justify items-center justify-center overflow-hidden z-[5] relative`}
             >
                 <div
                     style={{
@@ -137,6 +138,7 @@ const AboutPage = () => {
                             {t("about:about:techStackTitle")}
                         </h5>
                     </div>
+                    <Wave />
                 </div>
             </div>
         </>

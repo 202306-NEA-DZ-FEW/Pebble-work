@@ -5,7 +5,7 @@ const Wave = () => {
             <div className='absolute z-[-1] w-screen'>
                 <svg
                     viewBox='0 0 1320 500'
-                    className={`h-[850px] ${styles.svg}`}
+                    className={`h-[850px] w-[screen] ${styles.svg}`}
                 >
                     /
                     <path

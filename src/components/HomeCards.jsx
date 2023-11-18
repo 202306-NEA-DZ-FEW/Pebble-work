@@ -24,7 +24,7 @@ const HomeCards = () => {
     const { t } = useTranslation();
 
     return (
-        <div className='container overflow-hidden flex flex-col items-center justify-center mx-auto'>
+        <div className='overflow-hidden flex flex-col items-center justify-center mx-auto'>
             <div className='overflow-hidden p-2'>
                 <HeaderCard />
             </div>
