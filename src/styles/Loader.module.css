@@ -1,6 +1,7 @@
 .body {
-    height: 100vh;
-    position: relative;
+    min-height: 100vh;
+    min-width: 100vw;
+    position: fixed;
     background-color: #e6f5e4;
     z-index: 9999;
     animation: changeBackground 3s infinite linear;
