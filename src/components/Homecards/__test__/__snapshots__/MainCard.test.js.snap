@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainCard renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="w-full lg:flex lg:flex-wrap lg:flex-row lg:gap-0 flex flex-col items-center gap-8 sm:gap-5 lg:justify-start lg:items-start"
+  >
+    <div
+      class="w-1/2 p-2 sm:min-h-[320px] min-h-[200px] lg:min-h-[550px] lg:w-1/3 md:w-1/2 flex flex-col justify-evenly items-center shadow-md invisible"
+      id="featuredCard"
+    >
+      <div
+        class="xl:w-[216px] xl:h-[245.75px] lg:w-[177px] lg:h-[200px] md:w-[131px] md:h-[145px] sm:w-[100px] sm:h-[110px] w-[80px] h-[80px]"
+      >
+        <img
+          alt="Card Image"
+          loading="lazy"
+          src="/Homepage/ManTop.png"
+        />
+      </div>
+      <div
+        class="w-full text-center px-2"
+      >
+        <div
+          class="text-zinc-900 w- lg:text-[32px] md:text-[24px] sm:text-[20px] font-medium sm:leading-[44px] tracking-[0.10px]"
+        >
+          common:main:joinCommunityTitle
+        </div>
+        <div
+          class="text-zinc-500 lg:text-[18px] md:text-[15px] sm:text-[13px] text-[10px] font-normal sm:leading-[30px] tracking-[0.10px]"
+        >
+          common:main:joinCommunityDescription
+        </div>
+      </div>
+      <a
+        class="xl:w-[163px] mb-5 xl:h-[52px] justify-center items-center gap-2.5 inline-flex text-zinc-900 lg:text-[22px] sm:text-[16px] font-medium leading-[30px] tracking-tight"
+        href=""
+      >
+        common:main:joinCommunityButtonText
+      </a>
+    </div>
+    <div
+      class="w-1/2 p-2 sm:min-h-[320px] min-h-[200px] lg:min-h-[550px] lg:w-1/3 md:w-1/2 flex flex-col justify-evenly items-center shadow-md invisible"
+      id="featuredCard"
+    >
+      <div
+        class="xl:w-[216px] xl:h-[245.75px] lg:w-[177px] lg:h-[200px] md:w-[131px] md:h-[145px] sm:w-[100px] sm:h-[110px] w-[80px] h-[80px]"
+      >
+        <img
+          alt="Card Image"
+          loading="lazy"
+          src="/Homepage/attend.png"
+        />
+      </div>
+      <div
+        class="w-full text-center px-2"
+      >
+        <div
+          class="text-zinc-900 w- lg:text-[32px] md:text-[24px] sm:text-[20px] font-medium sm:leading-[44px] tracking-[0.10px]"
+        >
+          common:main:attendEventsTitle
+        </div>
+        <div
+          class="text-zinc-500 lg:text-[18px] md:text-[15px] sm:text-[13px] text-[10px] font-normal sm:leading-[30px] tracking-[0.10px]"
+        >
+          common:main:attendEventsDescription
+        </div>
+      </div>
+      <a
+        class="xl:w-[163px] mb-5 xl:h-[52px] justify-center items-center gap-2.5 inline-flex text-zinc-900 lg:text-[22px] sm:text-[16px] font-medium leading-[30px] tracking-tight"
+        href=""
+      >
+        common:main:attendEventsButtonText
+      </a>
+    </div>
+    <div
+      class="w-1/2 p-2 sm:min-h-[320px] min-h-[200px] lg:min-h-[550px] lg:w-1/3 md:w-1/2 flex flex-col justify-evenly items-center shadow-md invisible"
+      id="featuredCard"
+    >
+      <div
+        class="xl:w-[216px] xl:h-[245.75px] lg:w-[177px] lg:h-[200px] md:w-[131px] md:h-[145px] sm:w-[100px] sm:h-[110px] w-[80px] h-[80px]"
+      >
+        <img
+          alt="Card Image"
+          loading="lazy"
+          src="/Homepage/Girl.png"
+        />
+      </div>
+      <div
+        class="w-full text-center px-2"
+      >
+        <div
+          class="text-zinc-900 w- lg:text-[32px] md:text-[24px] sm:text-[20px] font-medium sm:leading-[44px] tracking-[0.10px]"
+        >
+          common:main:hostEventTitle
+        </div>
+        <div
+          class="text-zinc-500 lg:text-[18px] md:text-[15px] sm:text-[13px] text-[10px] font-normal sm:leading-[30px] tracking-[0.10px]"
+        >
+          common:main:hostEventDescription
+        </div>
+      </div>
+      <a
+        class="xl:w-[163px] mb-5 xl:h-[52px] justify-center items-center gap-2.5 inline-flex text-zinc-900 lg:text-[22px] sm:text-[16px] font-medium leading-[30px] tracking-tight"
+        href=""
+      >
+        common:main:hostEventButtonText
+      </a>
+    </div>
+  </div>
+</DocumentFragment>
+`;

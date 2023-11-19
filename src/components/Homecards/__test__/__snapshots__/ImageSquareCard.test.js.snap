@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImageSquareCard renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="container shadow-md"
+  >
+    <div
+      class="gridContainer"
+    >
+      <div
+        class="imageWrapper invisible"
+        id="imagecard1"
+      >
+        <img
+          alt="Image 1"
+          class="imageSquare"
+          data-nimg="1"
+          decoding="async"
+          height="768"
+          loading="lazy"
+          src="/_next/image?url=%2FHomepage%2FOxfams-COVID-19-Relief-Efforts%202.png&w=1920&q=75"
+          srcset="/_next/image?url=%2FHomepage%2FOxfams-COVID-19-Relief-Efforts%202.png&w=828&q=75 1x, /_next/image?url=%2FHomepage%2FOxfams-COVID-19-Relief-Efforts%202.png&w=1920&q=75 2x"
+          style="color: transparent;"
+          width="768"
+        />
+      </div>
+      <div
+        class="imageWrapper invisible"
+        id="imagecard"
+      >
+        <img
+          alt="Image 2"
+          class="imageSquare"
+          data-nimg="1"
+          decoding="async"
+          height="768"
+          loading="lazy"
+          src="/_next/image?url=%2FHomepage%2FImage.png&w=1920&q=75"
+          srcset="/_next/image?url=%2FHomepage%2FImage.png&w=828&q=75 1x, /_next/image?url=%2FHomepage%2FImage.png&w=1920&q=75 2x"
+          style="color: transparent;"
+          width="768"
+        />
+      </div>
+      <div
+        class="imageWrapper invisible"
+      >
+        <img
+          alt="Image 3"
+          class="imageSquare"
+          data-nimg="1"
+          decoding="async"
+          height="768"
+          loading="lazy"
+          src="/_next/image?url=%2FHomepage%2FImage%20(1).jpg&w=1920&q=75"
+          srcset="/_next/image?url=%2FHomepage%2FImage%20(1).jpg&w=828&q=75 1x, /_next/image?url=%2FHomepage%2FImage%20(1).jpg&w=1920&q=75 2x"
+          style="color: transparent;"
+          width="768"
+        />
+      </div>
+      <div
+        class="imageWrapper invisible"
+      >
+        <img
+          alt="Image 4"
+          class="imageSquare"
+          data-nimg="1"
+          decoding="async"
+          height="768"
+          loading="lazy"
+          src="/_next/image?url=%2FHomepage%2FImage%20(2).png&w=1920&q=75"
+          srcset="/_next/image?url=%2FHomepage%2FImage%20(2).png&w=828&q=75 1x, /_next/image?url=%2FHomepage%2FImage%20(2).png&w=1920&q=75 2x"
+          style="color: transparent;"
+          width="768"
+        />
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
