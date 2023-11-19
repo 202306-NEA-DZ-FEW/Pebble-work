@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { db, auth } from "../../util/firebase";
+import { db, auth } from "@/util/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/router";
@@ -62,7 +62,7 @@ const ProfilePage = () => {
     }, []);
 
     const handleEditProfile = () => {
-        router.push("/editprofile"); // Redirect to the Edit Profile page
+        router.push("/profile/edit"); // Redirect to the Edit Profile page
     };
 
     if (!currentUser) {
