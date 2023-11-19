@@ -1,7 +1,8 @@
 .body {
     height: 100vh;
     position: relative;
-    background-color: #fff;
+    background-color: #e6f5e4;
+    z-index: 9999;
     animation: changeBackground 3s infinite linear;
 }
 .wrapper {
@@ -287,7 +288,7 @@
     59%,
     98%,
     100% {
-        background: #fff;
+        background: #e6f5e4;
     }
     61%,
     97% {
