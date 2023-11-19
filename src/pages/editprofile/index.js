@@ -10,6 +10,7 @@ import Modal from "@/components/Popup/Modal";
 import PicturesLibrary from "./library";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { updateProfile } from "firebase/auth";
+import MorphingSvg from "@/components/MorphingSvg";
 
 const ProfilePage = () => {
     const { t } = useTranslation();
@@ -271,8 +272,17 @@ const ProfilePage = () => {
         return <p>loading</p>;
     } else {
         return (
-            <div className='container ml-8 mt-8 mx-0 w-80 justify-start sm:items-center md:ml-20 md:items-start md:text-2xl md:mx-auto md:w-auto '>
-                <div className='flex flex-col sm:items-center md:items-start md:w-12/12 '>
+            <div className='ml-8 relative mt-8 mx-0 w-80 justify-start sm:items-center md:ml-20 md:items-start md:text-2xl md:mx-auto md:w-auto '>
+                <div
+                    style={{
+                        position: "absolute",
+                        width: "screen",
+                        height: "screen",
+                    }}
+                >
+                    <MorphingSvg />
+                </div>
+                <div className='flex relative flex-col sm:items-center md:items-start md:w-12/12 '>
                     <h1 className=' font-semibold text-lg md:text-4xl md:ml-10 md:mt-5'>
                         {t("edit:editProfile")}
                     </h1>
@@ -466,6 +476,17 @@ const ProfilePage = () => {
                             className={modalClassName}
                         />
                     )}
+                </div>
+                <div
+                    className='morphingSVGHidden'
+                    style={{
+                        position: "absolute",
+                        bottom: "140px",
+                        width: "screen",
+                        height: "screen",
+                    }}
+                >
+                    <MorphingSvg />
                 </div>
             </div>
         );
