@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import styles from "@/styles/Navbar.module.css";
 import { useRouter } from "next/router";
@@ -18,6 +18,8 @@ let tabs = [
     { id: "about", label: "About" },
 ];
 const Navbar = () => {
+    const dropdownRef = useRef(null);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [menuDropdownOpen, setMenuDropdownOpen] = useState(false);
     const [user, setUser] = useState(null);
     const [activeTab, setActiveTab] = useState(tabs[0].id);
@@ -28,11 +30,27 @@ const Navbar = () => {
         setMenuDropdownOpen(!menuDropdownOpen);
     };
 
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
     const closeMenuDropdown = () => {
-        setMenuDropdownOpen(false);
+        setMenuDropdownOpen(!menuDropdownOpen);
     };
 
     useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                menuDropdownOpen &&
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target)
+            ) {
+                closeMenuDropdown();
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
         const logged = auth.onAuthStateChanged((user) => {
             if (user) {
                 setUser(user);
@@ -42,14 +60,14 @@ const Navbar = () => {
         });
 
         setActiveTab(router.pathname.slice(1)); //so the motion will always stay on the current active tab
-
         return () => {
             logged();
+            document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, []);
+    }, [menuDropdownOpen]);
 
     return (
-        <nav className='sticky z-[9999] md:mb-10 mb-4 bg-[#B4CD93] top-0 xl:flex xl:flex-col xl:items-center'>
+        <nav className='sticky z-[9999] md:mb-10 mb-4 bg-gray-200 top-0 xl:flex xl:flex-col xl:items-center'>
             <div
                 style={{
                     width: "100%",
@@ -75,7 +93,7 @@ const Navbar = () => {
                         data-collapse-toggle='navbar-language'
                         type='button'
                         onClick={menuDropdown}
-                        className='inline-flex z-50 items-center p-2 ml-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'
+                        className='inline-flex z-50 items-center p-2 ml-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 navbar-button'
                         aria-controls='navbar-language'
                         aria-expanded='false'
                     >
@@ -106,26 +124,27 @@ const Navbar = () => {
                 <div
                     className={`${
                         menuDropdownOpen ? "block" : "hidden"
-                    }  md:flex md:items-center w-full md:w-auto`}
+                    } md:block md:flex md:items-center w-full md:w-auto navbar-content`}
                     id='navbar-language'
+                    ref={dropdownRef}
                 >
                     <ul
-                        className={`md:static text-center md:bg-transparent gap-10 fixed sm:w-full w-60 md:min-h-0 min-h-screen flex flex-col font-medium md:p-0 md:flex-row md:space-x-8 md:mt-0 bg-gray-800 left-[0px] top-0 z-10 ${styles.tiltIn}`}
+                        className={`md:static text-center md:bg-transparent bg-white gap-3 fixed sm:w-full w-60 md:min-h-0 min-h-screen flex flex-col font-medium md:p-0 border border-gray-300 md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 dark:border-gray-700 left-[0px] top-0 z-10 ${styles.tiltIn}`}
                         role='menu'
                     >
                         {tabs.map((tab) => (
-                            <li key={tab.id}>
+                            <li key={tab.id} className=''>
                                 <Link href={`/${tab.id}`}>
                                     <p
                                         onClick={() => {
                                             setActiveTab(tab.id);
                                             closeMenuDropdown();
                                         }}
-                                        className={`block rounded dark:border-gray-700 ${
+                                        className={`block py-2 pl-3 pr-4 rounded md:p-0 dark:border-gray-700 ${
                                             activeTab === tab.id
-                                                ? "cursor-default" //text on hover while the motion is on it
-                                                : "hover:text-[#547543]" //text on hover while the motion is not on it
-                                        } relative rounded-full lg:text-[18px] md:text-[15px] font-medium text-white outline-sky-400 transition focus-visible:outline-2`}
+                                                ? "hover:text-green-600" //text on hover while the motion is on it
+                                                : "hover:text-red-600/60" //text on hover while the motion is not on it
+                                        } relative rounded-full px-3 py-1.5 text-sm font-medium text-green-400 outline-sky-400 transition focus-visible:outline-2`}
                                         style={{
                                             WebkitTapHighlightColor:
                                                 "transparent",
@@ -134,7 +153,7 @@ const Navbar = () => {
                                         {activeTab === tab.id && (
                                             <motion.span
                                                 layoutId='line'
-                                                className='absolute bottom-0 left-0 right-0 md:h-[2px] h-1 z-10 bg-[#547543]'
+                                                className='absolute bottom-0 left-0 right-0 h-1 z-10 bg-green-400 mix-blend-difference'
                                                 transition={{
                                                     type: "spring",
                                                     bounce: 0.3,
