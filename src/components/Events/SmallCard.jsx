@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
 import { CircularProgress } from "@mui/material";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
 
 const MobileCard = ({ eventId, title, type, image }) => {
     const [imageLoaded, setImageLoaded] = useState(false);

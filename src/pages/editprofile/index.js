@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import { db, auth, storage } from "../../util/firebase";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { doc, updateDoc, getDoc } from "firebase/firestore";
-import { getAuth, updatePassword, onAuthStateChanged } from "firebase/auth";
-import Image from "next/image";
-import { useTranslation } from "next-i18next";
-import Modal from "@/components/Popup/Modal";
-import PicturesLibrary from "./library";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { getAuth, onAuthStateChanged, updatePassword } from "firebase/auth";
 import { updateProfile } from "firebase/auth";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import React, { useEffect, useState } from "react";
+
 import MorphingSvg from "@/components/MorphingSvg";
+import Modal from "@/components/Popup/Modal";
+
+import PicturesLibrary from "./library";
+import { auth, db, storage } from "../../util/firebase";
 
 const ProfilePage = () => {
     const { t } = useTranslation();

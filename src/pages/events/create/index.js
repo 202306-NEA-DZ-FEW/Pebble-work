@@ -3,17 +3,18 @@ import {
     arrayUnion,
     collection,
     doc,
-    updateDoc,
     serverTimestamp,
+    updateDoc,
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-
-import React, { useEffect, useState } from "react";
 import { useTranslation } from "next-i18next";
-import { auth, db, storage } from "@/util/firebase";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import React, { useEffect, useState } from "react";
+
 import EventCreation from "@/components/Events/EventCreation";
 import PhoneVerify from "@/components/Events/PhoneVerify";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
+import { auth, db, storage } from "@/util/firebase";
 
 const EventCreationPage = () => {
     const { t } = useTranslation();

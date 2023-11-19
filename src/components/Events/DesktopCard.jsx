@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
-import styles from "@/styles/EventCard.module.css";
-import { useRouter } from "next/router";
-import { useTranslation } from "react-i18next";
 import { CircularProgress } from "@mui/material";
+import { useRouter } from "next/router";
+import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+
+import styles from "@/styles/EventCard.module.css";
 
 const DesktopCard = ({ eventId, title, type, image, description }) => {
     const router = useRouter();

@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import DesktopCard from "@/components/Events/DesktopCard";
 import Calendar from "@/components/Filter/Calendar";
 import FilterByType from "@/components/Filter/FilterByType";
-
-import DesktopCard from "@/components/Events/DesktopCard";
-import FirestoreLocation from "../Filter/FirestoreLocation";
 import { usePagination } from "@/components/Pagination/Pagination";
 
-const DesktopEvents = (user) => {
+import FirestoreLocation from "../Filter/FirestoreLocation";
+
+const DesktopEvents = (displayName) => {
     const { t } = useTranslation();
     // State variables
     const [selectedTypes, setSelectedTypes] = useState([]);
@@ -103,7 +103,7 @@ const DesktopEvents = (user) => {
                 className={` flex flex-col justify-center items-center`}
             >
                 <div>
-                    <h1>{t("events:welcome", { name: user.name })}</h1>
+                    <h1>{t("events:welcome", { name: displayName })}</h1>
                     <p>{t("events:eventsPage")}</p>
                 </div>
 

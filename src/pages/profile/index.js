@@ -1,13 +1,15 @@
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { db, auth } from "../../util/firebase";
-import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import Image from "next/image";
 import { useRouter } from "next/router";
-import { useTranslation } from "react-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import MorphingSvg from "@/components/MorphingSvg";
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import Loader from "@/components/Loader/Loader";
+import MorphingSvg from "@/components/MorphingSvg";
+
+import { auth, db } from "../../util/firebase";
 
 const ProfilePage = () => {
     const router = useRouter();

@@ -1,22 +1,23 @@
-import { BsFillShieldLockFill, BsTelephoneFill } from "react-icons/bs";
-import { CgSpinner } from "react-icons/cg";
-
-import { useState } from "react";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
-import { auth } from "@/util/firebase";
-import { getFirestore, doc, updateDoc } from "firebase/firestore";
 import {
-    RecaptchaVerifier,
     getAuth,
-    PhoneAuthProvider,
     linkWithCredential,
+    PhoneAuthProvider,
+    RecaptchaVerifier,
     signInWithPhoneNumber,
 } from "firebase/auth";
+import { doc, getFirestore, updateDoc } from "firebase/firestore";
+import { useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import { BsFillShieldLockFill, BsTelephoneFill } from "react-icons/bs";
+import { CgSpinner } from "react-icons/cg";
+import PhoneInput from "react-phone-input-2";
+
+import "react-phone-input-2/lib/style.css";
 
 import OtpInput from "@/components/OtpVerification";
+
+import { auth } from "@/util/firebase";
 const PhoneVerify = () => {
     const [otp, setOtp] = useState("");
     const [pn, setPn] = useState(""); //phone number

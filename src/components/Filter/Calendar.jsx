@@ -1,8 +1,8 @@
 import Image from "next/image";
-
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "@/styles/Events.module.css";
+
 import Dropdown from "./Dropdown";
 
 // Define the Calendar component

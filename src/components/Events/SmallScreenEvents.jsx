@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
-import Calendar from "@/components/Filter/Calendar";
-import SmallCard from "./SmallCard";
+import React, { useEffect, useRef, useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
 
 import styles from "@/styles/Events.module.css";
 
+import Calendar from "@/components/Filter/Calendar";
 import FilterByType from "@/components/Filter/FilterByType";
 import FirestoreLocation from "@/components/Filter/FirestoreLocation";
-
 import { usePagination } from "@/components/Pagination/Pagination";
-import { AiOutlineClose } from "react-icons/ai";
+
+import SmallCard from "./SmallCard";
 
 const SmallScreenEvents = (user) => {
     // State variables

@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-import Calendar from "@/components/Filter/Calendar";
-import MobileCard from "@/components/Events/MobileCard";
+import React, { useEffect, useState } from "react";
 
+import MobileCard from "@/components/Events/MobileCard";
+import Calendar from "@/components/Filter/Calendar";
 import FilterByType from "@/components/Filter/FilterByType";
 import FirestoreLocation from "@/components/Filter/FirestoreLocation";
-
 import { usePagination } from "@/components/Pagination/Pagination";
 
 const EventsPage = (user) => {

@@ -1,14 +1,14 @@
+import { motion } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import React, { useEffect, useState } from "react";
 
 import styles from "@/styles/Navbar.module.css";
-import { useRouter } from "next/router";
 
 import Dropdown from "../Dropdown";
 import Language from "../Language/Language";
 import Pebble from "../Pebble";
-import { motion } from "framer-motion";
 
 let tabs = [
     { id: "", label: "Home" },

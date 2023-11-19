@@ -1,14 +1,16 @@
-import { useState, useEffect } from "react";
+import Router from "next/router"; // import Router
 import { appWithTranslation } from "next-i18next";
-import "typeface-rubik";
 import { i18n } from "next-i18next.config";
+import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
+import "typeface-rubik";
+
 import "react-toastify/dist/ReactToastify.css";
 import "@/styles/globals.css";
-import Router from "next/router"; // import Router
+
+import Loader from "@/components/Loader/Loader"; // import your Loader component
 
 import Layout from "@/layout/Layout";
-import Loader from "@/components/Loader/Loader"; // import your Loader component
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     const [loading, setLoading] = useState(false);
@@ -32,9 +34,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 
     return (
         <>
+            {loading && <Loader />} {/* show Loader when loading */}
             <Layout>
                 <ToastContainer />
-                {loading && <Loader />} {/* show Loader when loading */}
                 <Component {...pageProps} />
             </Layout>
         </>

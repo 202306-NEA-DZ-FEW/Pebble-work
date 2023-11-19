@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import styles from "@/styles/EventCard.module.css";
-import { useRouter } from "next/router";
-import { useTranslation } from "react-i18next";
 import { CircularProgress } from "@mui/material";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+
+import styles from "@/styles/EventCard.module.css";
 
 const MobileCard = ({
     eventId,
