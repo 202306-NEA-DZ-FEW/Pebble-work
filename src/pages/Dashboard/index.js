@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { db, auth } from "../../util/firebase";
-import { collection, doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import DesktopCard from "@/components/Events/DesktopCard";
 import styles from "@/styles/Events.module.css";
@@ -11,6 +11,8 @@ import { IoIosGitBranch } from "react-icons/io";
 // import { useRouter } from "next/router";
 const Dashboarduser = () => {
     const [joinedEvents, setJoinedEvents] = useState([]);
+    const [interstEvents, setInterst] = useState([]);
+
     const [currentUser, setCurrentUser] = useState(null);
     const [createdEvent, setcreatedEvent] = useState([]);
     const [User, setUser] = useState(null);
@@ -25,6 +27,26 @@ const Dashboarduser = () => {
 
     const eventsToDisplay = displayCreatedEvents ? createdEvent : joinedEvents;
     const title = displayCreatedEvents ? "Evenets Created" : "Joined evnted";
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            const eventsCollectionRef = collection(db, "events");
+            const eventsSnapshot = await getDocs(eventsCollectionRef);
+            const eventsList = eventsSnapshot.docs.map((doc) => doc.data());
+
+            // Filter events based on user's interests
+            const userInterests = User?.interests; // User's interests
+            const eventsMatchingInterests = eventsList.filter((event) =>
+                userInterests.includes(event.type)
+            );
+
+            console.log(eventsMatchingInterests); // Log the filtered events
+            setInterst(eventsMatchingInterests);
+        };
+
+        fetchEvents();
+    }, []);
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (authUser) => {
             if (authUser) {
@@ -79,27 +101,6 @@ const Dashboarduser = () => {
                             }
                         });
                         setJoinedEvents(eventsDataJoined);
-
-                        const userInterests = userDoc.data().interests || [];
-
-                        const eventsBasedOnInterests = [];
-                        const eventsSnapshot = await collection(
-                            db,
-                            "events"
-                        ).get();
-                        eventsSnapshot.forEach((eventDoc) => {
-                            const eventData = eventDoc.data();
-                            const eventInterests = eventData.type || [];
-                            if (
-                                userInterests.some((interest) =>
-                                    eventInterests.includes(interest)
-                                )
-                            ) {
-                                eventsBasedOnInterests.push(eventData);
-                            }
-                        });
-
-                        console.log(eventsBasedOnInterests);
                     } else {
                         return;
                     }
@@ -245,7 +246,7 @@ const Dashboarduser = () => {
                 <div
                     className={`flex overflow-auto  ${styles.information} mb-4 ml-2`}
                 >
-                    {joinedEvents.map((event, index) => (
+                    {interstEvents.map((event, index) => (
                         <div
                             key={index}
                             className='flex-shrink-0 w-60 bg-white shadow-xl rounded-lg m-4'
@@ -258,11 +259,11 @@ const Dashboarduser = () => {
                                 />
                             </figure>
                             <div className='p-6'>
-                                <h2 className='text-xl font-bold mb-2'>
+                                <h2 className='text-xl font-bold mb-2 '>
                                     {event.title}
                                 </h2>
-                                <p className='text-base'>{event.description}</p>
-                                <div className='mt-4'>
+                                {/* <p className='text-base'>{event.description}</p> */}
+                                <div className='mt-8'>
                                     <button className='bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600'>
                                         Review
                                     </button>
