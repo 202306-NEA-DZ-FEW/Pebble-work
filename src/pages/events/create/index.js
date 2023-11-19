@@ -154,7 +154,7 @@ const EventCreationPage = () => {
 
     return (
         <>
-            <div className='container ml-auto mr-auto max-w-6xl mt-2 flex flex-col bg-white mx-auto'>
+            <div className='container ml-auto mr-auto max-w-6xl mt-2 flex flex-col mx-auto'>
                 {isAuthenticated ? (
                     <>
                         <div style={{ height: "6rem" }}></div>
@@ -273,7 +273,7 @@ const EventCreationPage = () => {
                                 )}
                                 <a
                                     href='#'
-                                    className='mt-2 underline text-md text-blue-600 font-bold decoration-inherit'
+                                    className='mt-2 underline text-md text-[#2E7EAA] hover:opacity-80 transition-opacity duration-[400ms] font-bold decoration-inherit'
                                 >
                                     {t("eventCreation:changeLocation")}
                                 </a>
@@ -309,7 +309,7 @@ const EventCreationPage = () => {
                                             buttons.forEach((button) => {
                                                 button.style.backgroundColor =
                                                     "#FFF";
-                                                button.style.color = "#FDA855";
+                                                button.style.color = "#2E7EAA";
                                             });
 
                                             setInput({
@@ -317,17 +317,17 @@ const EventCreationPage = () => {
                                                 type: e.target.value,
                                             });
                                             e.target.style.backgroundColor =
-                                                "#FDA855";
+                                                "#2E7EAA";
                                             e.target.style.color = "#fff";
                                         }}
                                         key={index}
                                         className='grid-item'
                                         style={{
                                             borderRadius: "8px",
-                                            border: "1px solid #FDA855",
+                                            border: "1px solid #2E7EAA",
                                             background: "#FFF",
                                             display: "flex",
-                                            color: "#FDA855",
+                                            color: "#2E7EAA",
                                             justifyContent: "center",
                                             alignItems: "center",
                                             padding: "6px 16px",
@@ -347,7 +347,7 @@ const EventCreationPage = () => {
                                 </span>
                             </h1>
                             <p className='max-w-4xl mt-2 tinyText text-gray-400 md:pl-2'>
-                                {t("eventCreation:eventTitleDescriptione")}
+                                {t("eventCreation:eventTitleDescription")}
                             </p>
                             <form className='pl-4'>
                                 <input
@@ -412,10 +412,10 @@ const EventCreationPage = () => {
                                 <li>{t("eventCreation:guideline3")}</li>
                             </ul>
                             <p className='max-w-4xl mt-1 tinyText text-gray-400'>
-                                {t("eventCreation:readMore")}
+                                {t("eventCreation:readMore")}{" "}
                                 <a
                                     href='#'
-                                    className='text-[#FDA855] no-underline hover:underline text-md'
+                                    className='text-[#2E7EAA] no-underline hover:underline text-md'
                                 >
                                     {t("eventCreation:communityGuidelines")}
                                 </a>
@@ -451,7 +451,7 @@ const EventCreationPage = () => {
                 )}
                 <dialog id='confirmcreate_modal' className='modal'>
                     <div className='modal-box'>
-                        <h3 className='font-bold text-lg text-[#FDA855]'>
+                        <h3 className='font-bold text-lg text-[#2E7EAA]'>
                             {t("eventCreation:confirmation")}
                         </h3>
                         <p className='py-4'>
@@ -479,7 +479,7 @@ const EventCreationPage = () => {
                                     className='btn'
                                     onClick={addAndGoToEvent}
                                     style={{
-                                        background: "#FDA855",
+                                        background: "#2E7EAA",
                                         color: "white",
                                         marginRight: "1rem",
                                     }}
