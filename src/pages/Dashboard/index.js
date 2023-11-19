@@ -34,21 +34,51 @@ const Dashboarduser = () => {
                     const userDoc = await getDoc(userDocRef);
                     if (userDoc.exists()) {
                         setUser(userDoc.data());
-
-                        // Set joined events
                         const userEvents = userDoc.data().eventsJoined || [];
-                        setJoinedEvents(userEvents);
                         const eventId = userEvents.map(
                             (event) => event.eventId
                         );
-                        console.log(eventId);
                         const userCreatedEvents =
                             userDoc.data().eventsCreated || [];
-                        setcreatedEvent(userCreatedEvents);
                         const eventIds = userCreatedEvents.map(
                             (event) => event.eventId
                         );
-                        console.log(eventIds);
+                        const eventsData = [];
+                        const eventsCollectionRef = collection(db, "events");
+                        eventIds.forEach(async (eventId) => {
+                            const eventDocRef = doc(
+                                eventsCollectionRef,
+                                eventId
+                            );
+                            const eventDocSnap = await getDoc(eventDocRef);
+                            if (eventDocSnap.exists()) {
+                                eventsData.push(eventDocSnap.data());
+                            } else {
+                                console.log(
+                                    `Event with ID ${eventId} does not exist`
+                                );
+                            }
+                        });
+
+                        setcreatedEvent(eventsData);
+                        const eventsDataJoined = [];
+                        const eventCollectionRef = collection(db, "events");
+                        eventId.forEach(async (eventId) => {
+                            const eventDocRef = doc(
+                                eventCollectionRef,
+                                eventId
+                            );
+                            const eventDocSnap = await getDoc(eventDocRef);
+
+                            if (eventDocSnap.exists()) {
+                                eventsDataJoined.push(eventDocSnap.data());
+                            } else {
+                                console.log(
+                                    `Event with ID ${eventId} does not exist`
+                                );
+                            }
+                        });
+                        setJoinedEvents(eventsDataJoined);
 
                         const userInterests = userDoc.data().interests || [];
 
@@ -188,7 +218,7 @@ const Dashboarduser = () => {
                                 type={event.type}
                                 image={event?.image || "/event_image.png"}
                                 location={event.location}
-                                description={"fhfhffgddassdsdfsddsd"}
+                                description={event.description}
                                 organizer={event.organizer}
                                 time={event.time}
                                 date={event.date}
