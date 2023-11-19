@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "@/styles/EventCard.module.css";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
+import { CircularProgress } from "@mui/material";
 
 const DesktopCard = ({ eventId, title, type, image, description }) => {
     const router = useRouter();
@@ -14,6 +15,7 @@ const DesktopCard = ({ eventId, title, type, image, description }) => {
     let reverseTimer;
     const [isHovered, setIsHovered] = useState(false);
     const { t } = useTranslation(); // Initialize useTranslation
+    const [imageLoaded, setImageLoaded] = useState(false);
 
     const handleHover = () => {
         clearTimeout(enterDelay); // clear the enter delay if the mouse enters again
@@ -53,12 +55,20 @@ const DesktopCard = ({ eventId, title, type, image, description }) => {
                 onMouseLeave={handleMouseLeave}
                 className={`${styles.contai} ${styles.card} ${styles.wideFading} shadow-inner w-[55vw] h-[200px] flex flex-row items-center justify-around gap-2`}
             >
+                <img
+                    src={image}
+                    alt='background'
+                    style={{ display: "none" }}
+                    onLoad={() => setImageLoaded(true)}
+                />
                 <div
                     style={{ backgroundImage: `url(${image})` }}
                     className={`${styles.backgroundImage} ${
                         hideBackground ? `${styles.backgroundImageHidden}` : ""
                     }`}
-                ></div>
+                >
+                    {!imageLoaded && <CircularProgress />}
+                </div>
                 <div className={`flex flex-col gap-1 sm:gap-4 text-start`}>
                     <h1
                         className='xl:text-[25.70px] sm:text-[15px] text-[10.55px]'

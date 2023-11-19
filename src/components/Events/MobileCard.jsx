@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "@/styles/EventCard.module.css";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
+import { CircularProgress } from "@mui/material";
+import Image from "next/image";
 
 const MobileCard = ({
     eventId,
@@ -15,6 +17,7 @@ const MobileCard = ({
 }) => {
     const router = useRouter();
     const { t } = useTranslation();
+    const [imageLoaded, setImageLoaded] = useState(false);
 
     const handleReviewClick = () => {
         router.push(`/events/${eventId}`);
@@ -62,10 +65,18 @@ const MobileCard = ({
                     </button>
                 </div>
                 <div className={`${styles.productImage} w-full h-full`}>
-                    <img
+                    {!imageLoaded && <CircularProgress />}
+                    <Image
+                        width={300}
+                        height={300}
                         className='w-full h-full'
                         src={image}
                         alt='Product Image'
+                        onLoad={() => setImageLoaded(true)}
+                        style={{
+                            opacity: imageLoaded ? 1 : 0,
+                            transition: "opacity 0.5s",
+                        }}
                     />
                     <div className={`${styles.info1}`}>
                         <h2 className='sm:text-[13px] text-[10px] underline'>
