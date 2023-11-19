@@ -15,6 +15,16 @@ const Dashboarduser = () => {
     const [createdEvent, setcreatedEvent] = useState([]);
     const [User, setUser] = useState(null);
     const [displayCreatedEvents, setDisplayCreatedEvents] = useState(false);
+    const handleDisplayEvents = (eventType) => {
+        if (eventType === "created") {
+            setDisplayCreatedEvents(true);
+        } else {
+            setDisplayCreatedEvents(false);
+        }
+    };
+
+    const eventsToDisplay = displayCreatedEvents ? createdEvent : joinedEvents;
+    const title = displayCreatedEvents ? "Evenets Created" : "Joined evnted";
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (authUser) => {
@@ -193,7 +203,7 @@ const Dashboarduser = () => {
     return (
         <>
             <nav
-                className='absolute top-20 bottom-0 h-full left-0 bg-[#e6f5e4] w-120 overflow-hidden transition-width duration-200 linear shadow-md mt-40'
+                className='absolute top-20 bottom-0 h-full left-0 bg-[#e6f5e4] w-120 overflow-hidden transition-width duration-200 linear shadow-md mt-30'
                 style={{
                     color: "#1A1A1A",
                     fontFamily: "Poppins",
@@ -212,7 +222,10 @@ const Dashboarduser = () => {
                         </a>
                     </li>
                     <li className=' hover:bg-[#BFEAD3] '>
-                        <button className='flex items-center mb-24'>
+                        <button
+                            className='flex items-center mb-24'
+                            onClick={() => handleDisplayEvents("created")}
+                        >
                             <IoIosGitBranch size={30} className='mr-1' />
                             <span class='my-2 block hover:bg-[#BFEAD3] cursor-pointer'>
                                 Created Events
@@ -220,7 +233,10 @@ const Dashboarduser = () => {
                         </button>
                     </li>
                     <li>
-                        <button className='flex items-center mb-24  hover:bg-[#BFEAD3] '>
+                        <button
+                            className='flex items-center mb-24  hover:bg-[#BFEAD3] '
+                            onClick={() => handleDisplayEvents("Joined")}
+                        >
                             <IoIosGitCompare size={30} className='mr-1' />
                             <span class='my-2 block hover:bg-[#BFEAD3] cursor-pointer'>
                                 Joined Evnets
@@ -270,13 +286,13 @@ const Dashboarduser = () => {
                             wordWrap: "break-word",
                         }}
                     >
-                        Evenets Joined:
+                        {title}
                     </h2>
                 </div>
                 <div
                     className={`flex flex-wrap max-h-40   ${styles.information} overflow-auto justify-center items-center`}
                 >
-                    {joinedEvents.map((event) => {
+                    {eventsToDisplay.map((event) => {
                         return (
                             <DesktopCard
                                 eventId={event.id}
@@ -294,41 +310,6 @@ const Dashboarduser = () => {
                     })}
                 </div>
 
-                <div>
-                    <h2
-                        className=' font-bold text-lg flex  ml-16 mb-4 mt-2'
-                        style={{
-                            color: "#1A1A1A",
-                            fontFamily: "Rubik",
-                            fontWeight: " 500",
-                            letterSpacing: "0.11px",
-                            wordWrap: "break-word",
-                        }}
-                    >
-                        Evenets Created:
-                    </h2>
-                </div>
-
-                <div
-                    className={`flex flex-wrap max-h-40   ${styles.information} overflow-auto justify-center items-center`}
-                >
-                    {createdEvent.map((event) => {
-                        return (
-                            <DesktopCard
-                                eventId={event.id}
-                                key={event.id}
-                                title={event.title}
-                                type={event.type}
-                                image={event?.image || "/event_image.png"}
-                                location={event.location}
-                                description={"fhfhffgddassdsdfsddsd"}
-                                organizer={event.organizer}
-                                time={event.time}
-                                date={event.date}
-                            />
-                        );
-                    })}
-                </div>
                 <div>
                     <h2
                         className=' font-bold text-lg flex  ml-16 mb-4 mt-2'
