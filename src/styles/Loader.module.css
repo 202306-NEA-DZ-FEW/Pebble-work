@@ -1,3 +1,9 @@
+.body {
+    height: 100vh;
+    position: relative;
+    background-color: #fff;
+    animation: changeBackground 3s infinite linear;
+}
 .wrapper {
     position: absolute;
     left: 50%;
@@ -11,7 +17,7 @@
     top: 50%;
     width: 350px;
     height: 5px;
-    background: #673c63;
+    background: #2e7eaa;
     transform: translate(-50%, -50%);
     box-shadow: 0px 2px 5px #111;
     z-index: 2;
@@ -34,7 +40,7 @@
     width: 35px;
     height: 100px;
     background: #fff;
-    border: 3px solid #673c63;
+    border: 3px solid #2e7eaa;
     border-bottom: 0px;
     border-radius: 3px;
     transform-origin: center right;
@@ -50,7 +56,7 @@
     top: 0%;
     width: 3px;
     height: 15px;
-    background: #673c63;
+    background: #2e7eaa;
     border-radius: 8px;
     transform: translate(-50%, -100%);
 }
@@ -78,7 +84,7 @@
     width: 5px;
     height: 5px;
     border-radius: 100%;
-    background: #673c63;
+    background: #2e7eaa;
     transform: translate(-70%, 0%);
     animation: blinkEyes 3s infinite linear;
 }
@@ -90,7 +96,7 @@
     width: 5px;
     height: 5px;
     border-radius: 100%;
-    background: #673c63;
+    background: #2e7eaa;
     transform: translate(-70%, 0%);
     animation: blinkEyes 3s infinite linear;
 }
@@ -102,7 +108,7 @@
     width: 0px;
     height: 0px;
     border-radius: 20px;
-    background: #673c63;
+    background: #2e7eaa;
     transform: translate(-50%, -50%);
     animation: uff 3s infinite linear;
 }
@@ -137,13 +143,13 @@
     width: 42px;
     height: 60px;
     background: #fff;
-    border: 3px solid #673c63;
+    border: 3px solid #2e7eaa;
     border-bottom: 0px;
     border-radius: 3px;
     transform: translate(60%, -15%);
     transform-origin: center right;
     box-shadow: -2px 0px 0px #95c6f2 inset;
-    animation: shakeLeft 2970ms infinite linear;
+    animation: shakeLeft 3s infinite linear;
 }
 
 .candle2EyesOne {
@@ -153,10 +159,10 @@
     width: 5px;
     height: 5px;
     display: inline-block;
-    border: 0px solid #673c63;
+    border: 0px solid #2e7eaa;
     border-radius: 100%;
     float: left;
-    background: #673c63;
+    background: #2e7eaa;
     transform: translate(-80%, 0%);
     animation: changetoLower 3s infinite linear;
 }
@@ -168,10 +174,10 @@
     width: 5px;
     height: 5px;
     display: inline-block;
-    border: 0px solid #673c63;
+    border: 0px solid #2e7eaa;
     border-radius: 100%;
     float: left;
-    background: #673c63;
+    background: #2e7eaa;
     transform: translate(-80%, 0%);
     animation: changetoGreater 3s infinite linear;
 }
@@ -200,7 +206,7 @@
     border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
     background: #ff9800;
     transform: translate(-85%, -100%);
-    animation: danceFire 3050ms infinite linear;
+    animation: danceFire 3000ms infinite linear;
 }
 
 @keyframes blinkEyes {
@@ -355,7 +361,7 @@
         left: 20%;
         transform: scale(1.15, 0.85) translate(60%, -15%);
         background: #fff;
-        border-color: #673c63;
+        border-color: #2e7eaa;
     }
     91% {
         left: 20%;
@@ -503,15 +509,15 @@
         padding: 0px;
         display: inline-block;
         border-radius: 100%;
-        background: #673c63;
+        background: #2e7eaa;
         border-width: 0 0 0 0;
-        border: 0px solid #673c63;
+        border: 0px solid #2e7eaa;
         transform: translate(-90%, 0%);
     }
     71%,
     89% {
         background: none;
-        border: solid #673c63;
+        border: solid #2e7eaa;
         border-radius: 0px;
         border-width: 0 2px 2px 0;
         display: inline-block;
@@ -530,16 +536,16 @@
         padding: 0px;
         display: inline-block;
         border-radius: 100%;
-        background: #673c63;
+        background: #2e7eaa;
         border-width: 0 0 0 0;
-        border: 0px solid #673c63;
+        border: 0px solid #2e7eaa;
         transform: translate(-80%, 0%);
     }
     71%,
     89% {
         top: 30%;
         background: none;
-        border: solid #673c63;
+        border: solid #2e7eaa;
         border-radius: 0px;
         border-width: 0 2px 2px 0;
         display: inline-block;

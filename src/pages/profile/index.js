@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import MorphingSvg from "@/components/MorphingSvg";
+import Loader from "@/components/Loader/Loader";
 
 const ProfilePage = () => {
     const router = useRouter();
@@ -67,7 +68,11 @@ const ProfilePage = () => {
     };
 
     if (!currentUser) {
-        return <p>Loading</p>;
+        return (
+            <div className='h-screen w-screen'>
+                <Loader />
+            </div>
+        );
     } else {
         return (
             <div className='pt-5 flex relative flex-col items-center justify-center sm-types'>
