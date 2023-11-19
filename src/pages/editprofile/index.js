@@ -294,7 +294,7 @@ const ProfilePage = () => {
                             </div>
 
                             {/* Change  Picture */}
-                            <div className='flex flex-row ml-4 -mt-4 w-full md:ml-10  md:mt-20 '>
+                            <div className='flex flex-row ml-4 -mt-4 w-full md:ml-10 md:mt-20 '>
                                 <input
                                     type='file'
                                     accept='image/*'
@@ -305,12 +305,12 @@ const ProfilePage = () => {
                                 {/* profilr pic input */}
                                 <label
                                     htmlFor='profilePictureInput'
-                                    className='bg-[#2E7EAA] mt-10 text-center h-8 w-4/12  py-2 text-xs text-white  shadow-md  md:w-3/12 md:h-12 cursor-pointer rounded md:text-2xl'
+                                    className='bg-[#2E7EAA] mt-10 text-center h-8 w-4/12 py-2 text-xs text-white shadow-md md:w-3/12 md:h-12 cursor-pointer rounded md:text-2xl'
                                 >
                                     {t("edit:uploadNew")}
                                 </label>
                                 <button
-                                    className='librarybtn mt-10 text-center h-8  ml-3 w-7/12  text-xs  outline outline-1 rounded shadow-md md:w-4/12 md:h-12 md:ml-8 sm:text-xl '
+                                    className='librarybtn mt-10 text-center h-8 ml-3 w-7/12 text-xs outline outline-1 rounded shadow-md md:w-4/12 md:h-12 md:ml-8 sm:text-xl '
                                     type='button'
                                     onClick={(e) => handleOpenLibrary(e)}
                                 >
@@ -332,7 +332,7 @@ const ProfilePage = () => {
 
                         {/* Edit  Inforation */}
 
-                        <div className='flex flex-col mt-4 w-70 sm:items-center  md:items-start md:mt-8 md:ml-10'>
+                        <div className='flex flex-col mt-4 w-70 sm:items-center md:items-start md:mt-8 md:ml-10'>
                             <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
                                 {t("edit:Name*")}
                             </h3>
@@ -411,7 +411,7 @@ const ProfilePage = () => {
                             <div className='mt-0 flex flex-col items-center md:mx-auto'>
                                 <button
                                     type='submit'
-                                    className='mt-7 bg-[#2E7EAA]  text-center h-10 w-30  px-4 py-2 text-xs text-white  shadow-md md:h-14 md:w-45 md:h-13 md:font-bold md:text-xl '
+                                    className='mt-7 bg-[#2E7EAA] text-center h-10 w-30 px-4 py-2 text-xs text-white shadow-md md:h-14 md:w-45 md:h-13 md:font-bold md:text-xl '
                                 >
                                     {t("edit:saveChanges")}
                                 </button>
@@ -419,7 +419,7 @@ const ProfilePage = () => {
                         </div>
                     </form>
                     {/* Change Password  */}
-                    <div className='mt-5 pt-0 mx-auto pb-5 flex flex-col  bg-[#B4CD93]  rounded mb-20 md:mx-auto md:mt-11 md:w-8/12 '>
+                    <div className='mt-5 pt-0 mx-auto pb-5 flex flex-col bg-[#B4CD93] rounded mb-20 md:mx-auto md:mt-11 md:w-8/12 '>
                         <h3 className='font-bold mt-5 ml-4 md:text-2xl'>
                             {t("edit:changePassword")}
                         </h3>
@@ -446,10 +446,10 @@ const ProfilePage = () => {
                                     required
                                 ></input>
                             </div>
-                            <div className='flex flex-row mt-4 pb-3 gap-4 items-end  ml-20  md:mt-8 md:ml-40'>
+                            <div className='flex flex-row mt-4 pb-3 gap-4 items-end ml-20 md:mt-8 md:ml-40'>
                                 <button
                                     type='submit'
-                                    className='bg-[#2E7EAA]  text-center h-8 w-3/12   text-xs text-white rounded shadow-md md:h-11 md:text-xl'
+                                    className='bg-[#2E7EAA] text-center h-8 w-3/12 text-xs text-white rounded shadow-md md:h-11 md:text-xl'
                                 >
                                     {t("edit:Submit")}
                                 </button>

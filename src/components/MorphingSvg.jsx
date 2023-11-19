@@ -1,19 +1,19 @@
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React from "react";
 
 const MorphingSvg = () => (
     <div>
         <svg
-            width='500'
-            height='500'
+            className='morphingSVG'
+            width='800'
+            height='800'
             xmlns='http://www.w3.org/2000/svg'
             x='0px'
             y='0px'
             viewBox='0 0 288 288'
         >
             <linearGradient id='PSgrad_0' x1='65%' x2='5%' y1='65%' y2='0%'>
-                <stop offset='0%' stop-color='#2E7EAA' stop-opacity='0.5' />
-                <stop offset='100%' stop-color='#e6f5e4' stop-opacity='0.5' />
+                <stop offset='0%' stop-color='#2E7EAA' stop-opacity='0.3' />
+                <stop offset='100%' stop-color='#e6f5e4' stop-opacity='0.3' />
             </linearGradient>
             <path fill='url(#PSgrad_0)'>
                 <animate
@@ -21,7 +21,7 @@ const MorphingSvg = () => (
                     repeatCount='indefinite'
                     fill='freeze'
                     attributeName='d'
-                    dur='50s'
+                    dur='30s'
                     values='M37.5,186c-12.1-10.5-11.8-32.3-7.2-46.7c4.8-15,13.1-17.8,30.1-36.7C91,68.8,83.5,56.7,103.4,45
     c22.2-13.1,51.1-9.5,69.6-1.6c18.1,7.8,15.7,15.3,43.3,33.2c28.8,18.8,37.2,14.3,46.7,27.9c15.6,22.3,6.4,53.3,4.4,60.2
     c-3.3,11.2-7.1,23.9-18.5,32c-16.3,11.5-29.5,0.7-48.6,11c-16.2,8.7-12.6,19.7-28.2,33.2c-22.7,19.7-63.8,25.7-79.9,9.7
@@ -41,12 +41,3 @@ const MorphingSvg = () => (
 );
 
 export default MorphingSvg;
-
-export async function getStaticProps({ locale }) {
-    return {
-        props: {
-            ...(await serverSideTranslations(locale, ["common", "about"])),
-            // Will be passed to the page component as props
-        },
-    };
-}
