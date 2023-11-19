@@ -4,6 +4,7 @@ import {
     collection,
     doc,
     updateDoc,
+    serverTimestamp,
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
@@ -29,6 +30,7 @@ const EventCreationPage = () => {
         attendees: [],
         organizer: auth?.currentUser?.uid,
         image: "",
+        timestamp: serverTimestamp(),
     });
 
     const [img, setImg] = useState("");

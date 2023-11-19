@@ -1,4 +1,4 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
 import { db } from "@/util/firebase";
 export default async function handler(req, res) {
     try {
@@ -18,6 +18,8 @@ export default async function handler(req, res) {
         if (location) {
             eventsQuery = query(eventsQuery, where("location", "==", location));
         }
+        // Order by timestamp in descending order
+        eventsQuery = query(eventsQuery, orderBy("timestamp", "desc"));
 
         const eventsSnapshot = await getDocs(eventsQuery);
         let eventsData = eventsSnapshot.docs.map((doc) => {
