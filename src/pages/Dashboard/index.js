@@ -25,39 +25,6 @@ const Dashboarduser = () => {
 
     const eventsToDisplay = displayCreatedEvents ? createdEvent : joinedEvents;
     const title = displayCreatedEvents ? "Evenets Created" : "Joined evnted";
-
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, async (authUser) => {
-            if (authUser) {
-                const userDocRef = doc(db, "users", authUser.uid);
-
-                try {
-                    const userDoc = await getDoc(userDocRef);
-                    if (userDoc.exists()) {
-                        setCurrentUser(userDoc.data());
-                        // setUserInterests(userDoc.data().interests);
-
-                        // Set joined events
-                        const userEvents = userDoc.data().eventsJoined || [];
-                        setJoinedEvents(userEvents);
-                        console.log(userEvents); // Check if this logs the expected events
-                    } else {
-                        return;
-                    }
-                } catch (error) {
-                    console.error("Error fetching user data:", error);
-                    return;
-                }
-            } else {
-                setCurrentUser(null);
-            }
-        });
-
-        return () => {
-            unsubscribe();
-        };
-    }, []);
-
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (authUser) => {
             if (authUser) {
@@ -67,14 +34,42 @@ const Dashboarduser = () => {
                     const userDoc = await getDoc(userDocRef);
                     if (userDoc.exists()) {
                         setUser(userDoc.data());
-                        // Assuming events created by user are stored in 'createdEvents' field
+
+                        // Set joined events
+                        const userEvents = userDoc.data().eventsJoined || [];
+                        setJoinedEvents(userEvents);
+                        const eventId = userEvents.map(
+                            (event) => event.eventId
+                        );
+                        console.log(eventId);
                         const userCreatedEvents =
                             userDoc.data().eventsCreated || [];
-                        // Now 'userCreatedEvents' should contain events the user has created
                         setcreatedEvent(userCreatedEvents);
-                        console.log(createdEvent);
+                        const eventIds = userCreatedEvents.map(
+                            (event) => event.eventId
+                        );
+                        console.log(eventIds);
 
-                        // Further handling of userCreatedEvents, set state, etc.
+                        const userInterests = userDoc.data().interests || [];
+
+                        const eventsBasedOnInterests = [];
+                        const eventsSnapshot = await collection(
+                            db,
+                            "events"
+                        ).get();
+                        eventsSnapshot.forEach((eventDoc) => {
+                            const eventData = eventDoc.data();
+                            const eventInterests = eventData.type || [];
+                            if (
+                                userInterests.some((interest) =>
+                                    eventInterests.includes(interest)
+                                )
+                            ) {
+                                eventsBasedOnInterests.push(eventData);
+                            }
+                        });
+
+                        console.log(eventsBasedOnInterests);
                     } else {
                         return;
                     }
@@ -84,114 +79,6 @@ const Dashboarduser = () => {
                 }
             } else {
                 setUser(null);
-            }
-        });
-
-        return () => {
-            unsubscribe();
-        };
-    }, []);
-
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, async (authUser) => {
-            if (authUser) {
-                const userDocRef = doc(db, "users", authUser.uid);
-
-                try {
-                    const userDoc = await getDoc(userDocRef);
-                    if (userDoc.exists()) {
-                        setCurrentUser(userDoc.data());
-
-                        // Assuming user's interests are stored in an array
-                        const userInterests = userDoc.data().interests || [];
-
-                        // Fetch events based on user interests
-                        const eventsBasedOnInterests = [];
-                        // Replace 'eventsCollection' with your actual events collection name
-                        const eventsSnapshot = await collection(
-                            db,
-                            "eventsCollection"
-                        ).get();
-                        eventsSnapshot.forEach((eventDoc) => {
-                            const eventData = eventDoc.data();
-                            const eventInterests = eventData.interests || []; // Replace 'interests' with your event interest field
-                            // Check if any user interests match event interests
-                            if (
-                                userInterests.some((interest) =>
-                                    eventInterests.includes(interest)
-                                )
-                            ) {
-                                eventsBasedOnInterests.push(eventData);
-                            }
-                        });
-
-                        // Now 'eventsBasedOnInterests' should contain events matching user interests
-                        console.log(eventsBasedOnInterests);
-
-                        // Further handling of eventsBasedOnInterests, set state, etc.
-                    } else {
-                        return;
-                    }
-                } catch (error) {
-                    console.error("Error fetching user data:", error);
-                    return;
-                }
-            } else {
-                setCurrentUser(null);
-            }
-        });
-
-        return () => {
-            unsubscribe();
-        };
-    }, []);
-
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, async (authUser) => {
-            if (authUser) {
-                const userDocRef = doc(db, "users", authUser.uid);
-
-                try {
-                    const userDoc = await getDoc(userDocRef);
-                    if (userDoc.exists()) {
-                        setCurrentUser(userDoc.data());
-
-                        // Assuming user's interests are stored in an array
-                        const userInterests = userDoc.data().interests || [];
-
-                        // Fetch events based on user interests
-                        const eventsBasedOnInterests = [];
-                        // Replace 'eventsCollection' with your actual events collection name
-                        const eventsSnapshot = await collection(
-                            db,
-                            "events"
-                        ).get();
-                        eventsSnapshot.forEach((eventDoc) => {
-                            const eventData = eventDoc.data();
-                            const eventInterests = eventData.type || []; // Replace 'interests' with your event interest field
-                            // Check if any user interests match event interests
-                            if (
-                                userInterests.some((interest) =>
-                                    eventInterests.includes(interest)
-                                )
-                            ) {
-                                eventsBasedOnInterests.push(eventData);
-                            }
-                        });
-
-                        // Now 'eventsBasedOnInterests' should contain events matching user interests
-                        console.log(eventsBasedOnInterests);
-
-                        // Further handling of eventsBasedOnInterests, set state, etc.
-                    } else {
-                        return;
-                    }
-                } catch (error) {
-                    console.error("Error fetching user data:", error);
-                    return;
-                }
-            } else {
-                setCurrentUser(null);
             }
         });
 
@@ -250,7 +137,7 @@ const Dashboarduser = () => {
                 <div className='flex justify-center items-center mt-0'>
                     <div className='absolute w-full flex justify-center'>
                         <div
-                            className='w-auto bg-blue-500 opacity-30 pt-20 pb-10 rounded-[20px] px-80'
+                            className='w-auto bg-blue-500 opacity-10 pt-20 pb-10 rounded-[20px] px-80'
                             style={{ width: "100%", maxWidth: "850px" }}
                         ></div>
                     </div>
