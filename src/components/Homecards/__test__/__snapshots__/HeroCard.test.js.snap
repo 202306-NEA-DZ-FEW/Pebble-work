@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeroCard renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="w-full shadow-md sm:h-[400px] flex justify-center items-center"
+  >
+    <div
+      class="text-center p-4"
+    >
+      <div
+        class="max-w-screen-xl mx-auto"
+      >
+        <div
+          class="text-4xl font-medium leading-10 tracking-tight text-zinc-900"
+        >
+          common:heroCard:title
+        </div>
+        <div
+          class="text-xl font-normal leading-10 tracking-tight text-zinc-500"
+        >
+          common:heroCard:description
+        </div>
+        <div
+          class=" flex flex-col sm:flex-row justify-center items-center gap-6"
+        >
+          <a
+            class="buttonTransition text-[22px] font-medium leading-10 tracking-tight text-white px-4 py-2 rounded-lg"
+            href="/signup"
+          >
+            common:heroCard:getStarted
+          </a>
+          <a
+            class="secondButton text-[2xl] font-medium leading-10 tracking-tight text-zinc-900"
+            href="/guidelines"
+          >
+            common:heroCard:whoWeAre
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
