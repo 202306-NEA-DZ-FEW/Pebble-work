@@ -247,7 +247,7 @@ const Dashboarduser = () => {
                     </h2>
                 </div>
                 <div
-                    className={`flex flex-wrap max-h-40   ${styles.information} overflow-auto justify-center items-center mb-16 mt-16`}
+                    className={`flex flex-wrap max-h-[400px] ${styles.information} overflow-auto justify-center items-center mb-16 mt-12 `}
                 >
                     {eventsToDisplay.map((event) => {
                         return (
@@ -308,7 +308,12 @@ export default Dashboarduser;
 export async function getStaticProps({ locale }) {
     return {
         props: {
-            ...(await serverSideTranslations(locale, ["common"])),
+            ...(await serverSideTranslations(locale, [
+                "common",
+                "about",
+                "events",
+                "eventCreation",
+            ])),
             // Will be passed to the page component as props
         },
     };
