@@ -152,20 +152,14 @@ const Dashboarduser = () => {
                 }}
             >
                 <ul>
-                    <li className='flex items-center mb-10 mt-40'>
-                        <p
-                            className='font-bold text-lg italic mr-2'
-                            style={{
-                                color: "#1A1A1A",
-                                fontFamily: "Rubik",
-                                fontWeight: " 500",
-                                letterSpacing: "0.11px",
-                                wordWrap: "break-word",
-                                // boxShadow: "0 4px 6px rgba(146, 227, 169, 0.6)",
-                            }}
-                        >
-                            {" "}
-                            Hi {Nameuser} welcome!
+                    <li className='flex items-center mb-2 mt-20 ml-2'>
+                        <p className='font-bold text-lg italic mr-2'>
+                            welcome! {Nameuser}
+                        </p>
+                    </li>
+                    <li className='flex items-center mb-10 mt-0 ml-1'>
+                        <p className='font-bold text-lg italic mr-2'>
+                            we re glad to see you
                         </p>
                     </li>
 
