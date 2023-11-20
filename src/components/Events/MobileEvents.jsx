@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import MobileCard from "@/components/Events/MobileCard";
 import Calendar from "@/components/Filter/Calendar";
@@ -6,8 +7,8 @@ import FilterByType from "@/components/Filter/FilterByType";
 import FirestoreLocation from "@/components/Filter/FirestoreLocation";
 import { usePagination } from "@/components/Pagination/Pagination";
 
-const EventsPage = (user) => {
-    // State variables
+const EventsPage = () => {
+    const { t } = useTranslation();
 
     const [selectedTypes, setSelectedTypes] = useState([]);
     const [inputValue1, setInputValue1] = useState("");
@@ -19,7 +20,7 @@ const EventsPage = (user) => {
     const [resetLocation, setResetLocation] = useState(false);
     const [resetDays, setResetDays] = useState(false);
     const { currentPage, totalPages, currentItems, setCurrentPage } =
-        usePagination(1, 5, filteredEvents);
+        usePagination(1, 6, filteredEvents);
 
     const handleLocationInputChange = (value) => {
         setInputValue1(value);
@@ -99,14 +100,11 @@ const EventsPage = (user) => {
                 }}
                 className={`flex flex-col justify-center items-center pb-12`}
             >
-                <div>
-                    <h1>Welcome, {user.name}!</h1>
-                    <p>This is the events page</p>
-                </div>
+                <div className='h-[40px]'></div>
                 <div
-                    className={`flex flex-col-reverse sm:flex sm:flex-row-reverse sm:items-center sm:justify-evenly sm:gap-8 sm:h-full sm:w-full`}
+                    className={`flex flex-col-reverse sm:flex sm:flex-row-reverse sm:items-center sm:justify-evenly sm:gap-8 `}
                 >
-                    <div className={`md:w-[480px] sm:h-[800px]`}>
+                    <div className={`md:w-[480px] sm:h-[1000px] pt-4`}>
                         <ul className={` flex flex-col items gap-2 `}>
                             {currentItems.map((event) => {
                                 return (
@@ -129,14 +127,13 @@ const EventsPage = (user) => {
                             {(inputValue1 || filteredTypes.length > 0) &&
                                 filteredEvents.length === 0 && (
                                     <p className='text-red-500 text-center'>
-                                        No events found for this date and
-                                        location
+                                        {t("events:noEventsFound")}
                                     </p>
                                 )}
 
                             {selectedDate && CalendarEvents.length === 0 && (
                                 <p className='text-red-500 text-center'>
-                                    No events found for this date
+                                    {t("events:noEventsFoundForDate")}
                                 </p>
                             )}
                             <div className='flex justify-center gap-8 text-black'>
@@ -157,7 +154,7 @@ const EventsPage = (user) => {
                             </div>
                         </ul>
                     </div>
-                    <div className='flex z-10 flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7'>
+                    <div className='flex z-10 sm:h-[1000px] flex-row items-center justify-between sm:flex sm:flex-col sm:items-center text-black sm:gap-7'>
                         <div className='sm:flex s:flex-col sm:items-center sm:justify-center'>
                             <div
                                 className={`shadow-md rounded-[8px] z-10 bg-[#B4CD93]`}

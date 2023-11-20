@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { AiOutlineClose } from "react-icons/ai";
 
 import styles from "@/styles/Events.module.css";
 
+import SmallCard from "@/components/Events/SmallCard";
 import Calendar from "@/components/Filter/Calendar";
 import FilterByType from "@/components/Filter/FilterByType";
 import FirestoreLocation from "@/components/Filter/FirestoreLocation";
 import { usePagination } from "@/components/Pagination/Pagination";
 
-import SmallCard from "@/components/Events/SmallCard";
-
-const SmallScreenEvents = (user) => {
+const SmallScreenEvents = () => {
     // State variables
 
     const [selectedTypes, setSelectedTypes] = useState([]);
     const [inputValue1, setInputValue1] = useState("");
     const [isCalendarOpen, setCalendarOpen] = useState(false);
+    const { t } = useTranslation();
 
     const [filteredTypes, setFilteredTypes] = useState([]);
     const [events, setEvents] = useState([]);
@@ -108,10 +109,7 @@ const SmallScreenEvents = (user) => {
             <main
                 className={` flex flex-col justify-center items-center overflow-scroll`}
             >
-                <div>
-                    <h1>Welcome, {user.name}!</h1>
-                    <p>This is the events page</p>
-                </div>
+                <div className='h-[40px]'></div>
                 <button
                     onClick={resetEvents}
                     className={` w-[52px] bg-[#2E7EAA] text-white text-[10px] rounded-[4px] h-[16px] ml-auto mr-2`}
@@ -144,14 +142,13 @@ const SmallScreenEvents = (user) => {
                             {(inputValue1 || filteredTypes.length > 0) &&
                                 filteredEvents.length === 0 && (
                                     <p className='text-red-500 text-center'>
-                                        No events found for this date and
-                                        location
+                                        {t("events:noEventsFound")}
                                     </p>
                                 )}
 
                             {selectedDate && CalendarEvents.length === 0 && (
                                 <p className='text-red-500 text-center'>
-                                    No events found for this date
+                                    {t("events:noEventsFoundForDate")}
                                 </p>
                             )}
                         </ul>

@@ -8,9 +8,9 @@ import { usePagination } from "@/components/Pagination/Pagination";
 
 import FirestoreLocation from "../Filter/FirestoreLocation";
 
-const DesktopEvents = (displayName) => {
+const DesktopEvents = () => {
     const { t } = useTranslation();
-    // State variables
+
     const [selectedTypes, setSelectedTypes] = useState([]);
     const [inputValue1, setInputValue1] = useState("");
     const [filteredTypes, setFilteredTypes] = useState([]);
@@ -102,10 +102,7 @@ const DesktopEvents = (displayName) => {
                 }}
                 className={` flex flex-col justify-center items-center`}
             >
-                <div>
-                    <h1>{t("events:welcome", { name: displayName })}</h1>
-                    <p>{t("events:eventsPage")}</p>
-                </div>
+                <div className='h-[40px]'></div>
 
                 <div
                     className={`flex flex-row-reverse items-center justify-evenly w-full`}
