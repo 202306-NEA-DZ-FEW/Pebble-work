@@ -144,7 +144,7 @@ const Dashboarduser = () => {
     }
     return (
         <>
-            <div
+            <nav
                 className='absolute top-30 bottom-0 h-full left-0 bg-[#e6f5e4] w-120 overflow-hidden transition-width duration-200 linear shadow-md mt-30'
                 style={{
                     color: "#1A1A1A",
@@ -203,7 +203,7 @@ const Dashboarduser = () => {
                         </button>
                     </li>
                 </ul>
-            </div>
+            </nav>
 
             <div className=' min-h-screen md:min-h-[100vh] ml-40 relative'>
                 <div className='flex justify-center items-center mt-0'>
