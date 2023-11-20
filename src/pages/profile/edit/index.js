@@ -186,6 +186,37 @@ const ProfilePage = () => {
         const file = e.target.files[0];
 
         if (file) {
+            // Check file extension
+            const allowedExtensions = ["jpg", "jpeg", "png"];
+            const fileExtension = file.name.split(".").pop().toLowerCase();
+            if (!allowedExtensions.includes(fileExtension)) {
+                setShowPopup(true);
+                setModalContent(
+                    "Invalid file extension. Allowed extensions are: jpg, jpeg, and png"
+                );
+                setModalClassName(
+                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                );
+                setTimeout(() => {
+                    setShowPopup(false);
+                }, 2000);
+                e.target.value = null;
+                return;
+            }
+            // Check file size
+            const maxSize = 4 * 1024 * 1024; // 4MB
+            if (file.size > maxSize) {
+                setShowPopup(true);
+                setModalContent("File size exceeds the allowed limit of 5MB");
+                setModalClassName(
+                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                );
+                setTimeout(() => {
+                    setShowPopup(false);
+                }, 2000);
+                e.target.value = null;
+                return;
+            }
             try {
                 const storageRef = ref(
                     storage,
