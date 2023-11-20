@@ -36,7 +36,7 @@ function FirestoreLocation({ onInputChange }) {
                 setLocationsArray(locationsArray);
             }
         } catch (error) {
-            console.error("Error fetching locations:", error);
+            console.log("Error fetching locations:", error);
         }
     };
 
