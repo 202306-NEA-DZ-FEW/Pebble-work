@@ -10,7 +10,7 @@ import { IoIosGitBranch } from "react-icons/io";
 import MobileCard from "@/components/Events/SmallCard";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
-
+import EventCreation from "@/components/Events/EventCreation";
 const Dashboarduser = () => {
     const [joinedEvents, setJoinedEvents] = useState([]);
     const [createdEvent, setCreatedEvent] = useState([]);
@@ -29,7 +29,6 @@ const Dashboarduser = () => {
                         const userData = doc.data();
                         const userName = userData.Name;
                         SetNameUser(userName);
-                        console.log(Nameuser);
                     } else {
                         console.log("User document does not exist");
                     }
@@ -140,10 +139,12 @@ const Dashboarduser = () => {
             unsubscribe();
         };
     }, []);
-
+    if (!auth.currentUser) {
+        return <EventCreation />;
+    }
     return (
         <>
-            <nav
+            <div
                 className='absolute top-30 bottom-0 h-full left-0 bg-[#e6f5e4] w-120 overflow-hidden transition-width duration-200 linear shadow-md mt-30'
                 style={{
                     color: "#1A1A1A",
@@ -156,7 +157,7 @@ const Dashboarduser = () => {
                 <ul>
                     <li className='flex items-center mb-2 mt-20 ml-2'>
                         <p className='font-bold text-lg italic mr-2'>
-                            Welcome,{" "}
+                            Welcome,
                             <span className='text-xl text-[#82a572]'>
                                 {Nameuser}!
                             </span>
@@ -202,7 +203,7 @@ const Dashboarduser = () => {
                         </button>
                     </li>
                 </ul>
-            </nav>
+            </div>
 
             <div className=' min-h-screen md:min-h-[100vh] ml-40 relative'>
                 <div className='flex justify-center items-center mt-0'>
