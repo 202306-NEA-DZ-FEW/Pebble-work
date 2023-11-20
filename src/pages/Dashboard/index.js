@@ -8,15 +8,17 @@ import { IoCreateOutline } from "react-icons/io5";
 import { IoIosGitCompare } from "react-icons/io";
 import { IoIosGitBranch } from "react-icons/io";
 import MobileCard from "@/components/Events/SmallCard";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 // import { useRouter } from "next/router";
 const Dashboarduser = () => {
     const [joinedEvents, setJoinedEvents] = useState([]);
-    const [currentUser, setCurrentUser] = useState(null);
-    const [createdEvent, setcreatedEvent] = useState([]);
-    const [upcamingEvent, setupcamingEvent] = useState([]);
+    const [createdEvent, setCreatedEvent] = useState([]);
     const [User, setUser] = useState(null);
     const [displayCreatedEvents, setDisplayCreatedEvents] = useState(false);
+    const [eventsMatchingInterests, setEventsMatchingInterests] = useState([]);
+
+    // Function to handle the display of created or joined events
     const handleDisplayEvents = (eventType) => {
         if (eventType === "created") {
             setDisplayCreatedEvents(true);
@@ -24,108 +26,99 @@ const Dashboarduser = () => {
             setDisplayCreatedEvents(false);
         }
     };
+
+    // Helper function to fetch event data based on an array of event IDs
+    const fetchEventData = async (eventIds) => {
+        const eventsCollectionRef = collection(db, "events");
+
+        // data for each event
+        const eventIdsPromises = eventIds.map(async (eventId) => {
+            const eventDocRef = doc(eventsCollectionRef, eventId);
+            const eventDocSnap = await getDoc(eventDocRef);
+            if (eventDocSnap.exists()) {
+                const eventData = eventDocSnap.data();
+                // Include the eventId in the event data
+                eventData.id = eventId;
+                return eventData;
+            } else {
+                console.log(`Event with ID ${eventId} does not exist`);
+                return null;
+            }
+        });
+
+        // Wait for all event data to be fetched
+        const eventsData = await Promise.all(eventIdsPromises);
+        // Filter out any null values (events that don't exist)
+        const validEventsData = eventsData.filter(
+            (eventData) => eventData !== null
+        );
+        return validEventsData;
+    };
+
+    // useEffect hook to fetch events from the database and filter them based on user's interests
     useEffect(() => {
-        //for interset based on user interst
         const fetchEvents = async () => {
+            // Fetch all events from the database
             const eventsCollectionRef = collection(db, "events");
             const eventsSnapshot = await getDocs(eventsCollectionRef);
-            const eventsList = eventsSnapshot?.docs?.map((doc) => doc.data());
+            const eventsList = eventsSnapshot?.docs?.map((doc) => ({
+                ...doc.data(),
+                id: doc.id, // Include the eventId in the event data
+            }));
 
             // Filter events based on user's interests
             const userInterests = User?.interests; // User's interests
             const eventsMatchingInterests = eventsList?.filter((event) =>
                 userInterests?.includes(event.type)
             );
-            console.log(eventsMatchingInterests); // Log the filtered events
-            setupcamingEvent(eventsMatchingInterests);
+
+            // Update the state with the filtered events
+            setEventsMatchingInterests(eventsMatchingInterests);
         };
 
-        fetchEvents();
-    }, []);
+        // Only fetch events if User is not null
+        if (User) {
+            fetchEvents();
+        }
+    }, [User]); // Run this effect whenever User changes
 
+    // Determine which events to display based on the displayCreatedEvents state
     const eventsToDisplay = displayCreatedEvents ? createdEvent : joinedEvents;
-    const title = displayCreatedEvents ? "Evenets Created" : "Joined evnted";
+    const title = displayCreatedEvents ? "Events Created" : "Joined Events";
+
+    //  user data and the events they've joined or created
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (authUser) => {
             if (authUser) {
+                // user data from the database
                 const userDocRef = doc(db, "users", authUser.uid);
 
                 try {
                     const userDoc = await getDoc(userDocRef);
                     if (userDoc.exists()) {
                         setUser(userDoc.data());
-                        console.log(userDoc.data());
 
-                        const userEvents = userDoc.data().eventsJoined || [];
-                        const eventId = userEvents.map(
-                            (event) => event.eventId
-                        );
-                        console.log(eventId);
+                        // events the user has created
                         const userCreatedEvents =
                             userDoc.data().eventsCreated || [];
                         const eventIds = userCreatedEvents.map(
                             (event) => event.eventId
                         );
-
-                        const eventsCollectionRef = collection(db, "events");
-
-                        const eventIdsPromises = eventIds.map(
-                            async (eventId) => {
-                                const eventDocRef = doc(
-                                    eventsCollectionRef,
-                                    eventId
-                                );
-                                const eventDocSnap = await getDoc(eventDocRef);
-                                if (eventDocSnap.exists()) {
-                                    const eventData = eventDocSnap.data();
-                                    // Include the eventId in the event data
-                                    eventData.id = eventId;
-                                    return eventData;
-                                } else {
-                                    console.log(
-                                        `Event with ID ${eventId} does not exist`
-                                    );
-                                    return null;
-                                }
-                            }
+                        const createdEventsData = await fetchEventData(
+                            eventIds
                         );
+                        setCreatedEvent(createdEventsData);
 
-                        const eventsData = await Promise.all(eventIdsPromises);
-                        // Filter out any null values
-                        const validEventsData = eventsData.filter(
-                            (eventData) => eventData !== null
+                        // events the user has joined
+                        const userJoinedEvents =
+                            userDoc.data().eventsJoined || [];
+                        const eventIdsJoined = userJoinedEvents.map(
+                            (event) => event.eventId
                         );
-                        setcreatedEvent(validEventsData);
-
-                        const eventsDataJoinedPromises = eventId.map(
-                            async (eventId) => {
-                                const eventDocRef = doc(
-                                    eventsCollectionRef,
-                                    eventId
-                                );
-                                const eventDocSnap = await getDoc(eventDocRef);
-                                if (eventDocSnap.exists()) {
-                                    const eventData = eventDocSnap.data();
-                                    // Include the eventId in the event data
-                                    eventData.id = eventId;
-                                    return eventData;
-                                } else {
-                                    console.log(
-                                        `Event with ID ${eventId} does not exist`
-                                    );
-                                    return null;
-                                }
-                            }
+                        const joinedEventsData = await fetchEventData(
+                            eventIdsJoined
                         );
-
-                        const eventsDataJoined = await Promise.all(
-                            eventsDataJoinedPromises
-                        );
-                        // Filter out any null values
-                        const validEventsDataJoined = eventsDataJoined.filter(
-                            (eventData) => eventData !== null
-                        );
-                        setJoinedEvents(validEventsDataJoined);
+                        setJoinedEvents(joinedEventsData);
                     } else {
                         return;
                     }
@@ -138,6 +131,7 @@ const Dashboarduser = () => {
             }
         });
 
+        // Unsubscribe from the auth listener when the component unmounts
         return () => {
             unsubscribe();
         };
@@ -146,7 +140,7 @@ const Dashboarduser = () => {
     return (
         <>
             <nav
-                className='absolute top-20 bottom-0 h-full left-0 bg-[#e6f5e4] w-120 overflow-hidden transition-width duration-200 linear shadow-md mt-30'
+                className='absolute top-30 bottom-0 h-full left-0 bg-[#e6f5e4] w-120 overflow-hidden transition-width duration-200 linear shadow-md mt-30'
                 style={{
                     color: "#1A1A1A",
                     fontFamily: "Poppins",
@@ -156,7 +150,7 @@ const Dashboarduser = () => {
                 }}
             >
                 <ul>
-                    <li className='flex items-center mb-24 mt-24  hover:bg-[#BFEAD3] '>
+                    <li className='flex items-center mb-24 mt-60  hover:bg-[#BFEAD3] '>
                         <a href='#' className='flex items-center'>
                             <IoCreateOutline size={30} className='mr-1 ' />
                             <span class='mr-2 block hover:bg-[#BFEAD3] cursor-pointer '>
@@ -177,7 +171,7 @@ const Dashboarduser = () => {
                     </li>
                     <li>
                         <button
-                            className='flex items-center mb-24  hover:bg-[#BFEAD3] '
+                            className='flex items-center mb-40  hover:bg-[#BFEAD3] '
                             onClick={() => handleDisplayEvents("Joined")}
                         >
                             <IoIosGitCompare size={30} className='mr-1' />
@@ -201,7 +195,7 @@ const Dashboarduser = () => {
                         className='font-bold text-lg italic '
                         style={{
                             color: "#1A1A1A",
-
+                            fontFamily: "Rubik",
                             fontWeight: " 500",
                             letterSpacing: "0.11px",
                             wordWrap: "break-word",
@@ -220,10 +214,10 @@ const Dashboarduser = () => {
                 </div>
                 <div>
                     <h2
-                        className='font-bold text-lg flex mb-4 ml-16'
+                        className='font-bold text-lg flex mb-4 ml-16 mt-4'
                         style={{
                             color: "#1A1A1A",
-
+                            fontFamily: "Rubik",
                             fontWeight: " 500",
                             letterSpacing: "0.11px",
                             wordWrap: "break-word",
@@ -233,7 +227,7 @@ const Dashboarduser = () => {
                     </h2>
                 </div>
                 <div
-                    className={`flex flex-wrap max-h-40   ${styles.information} overflow-auto justify-center items-center`}
+                    className={`flex flex-wrap max-h-40   ${styles.information} overflow-auto justify-center items-center mb-16 mt-16`}
                 >
                     {eventsToDisplay.map((event) => {
                         return (
@@ -255,10 +249,10 @@ const Dashboarduser = () => {
 
                 <div>
                     <h2
-                        className=' font-bold text-lg flex  ml-16 mb-4 mt-2'
+                        className=' font-bold text-lg flex  ml-16 mb-10 mt-8'
                         style={{
                             color: "#1A1A1A",
-
+                            fontFamily: "Rubik",
                             fontWeight: " 500",
                             letterSpacing: "0.11px",
                             wordWrap: "break-word",
@@ -269,15 +263,20 @@ const Dashboarduser = () => {
                 </div>
 
                 <div
-                    className={`flex overflow-auto gap-4 ${styles.information} mb-4 ml-2`}
+                    className={`flex overflow-auto gap-4 ${styles.information} mb-4 ml-10`}
                 >
-                    {upcamingEvent.map((event) => (
+                    {eventsMatchingInterests.map((event) => (
                         <MobileCard
                             key={event.id}
                             eventId={event.id}
                             title={event.title}
                             type={event.type}
-                            image={event.image}
+                            image={event?.image || "/event_image.png"}
+                            location={event.location}
+                            description={event.description}
+                            organizer={event.organizer}
+                            time={event.time}
+                            date={event.date}
                         />
                     ))}
                 </div>
@@ -286,3 +285,16 @@ const Dashboarduser = () => {
     );
 };
 export default Dashboarduser;
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, [
+                "common",
+                "about",
+                "eventCreation",
+                "events",
+            ])),
+            // Will be passed to the page component as props
+        },
+    };
+}
