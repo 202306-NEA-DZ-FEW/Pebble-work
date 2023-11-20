@@ -9,8 +9,8 @@ import { IoIosGitCompare } from "react-icons/io";
 import { IoIosGitBranch } from "react-icons/io";
 import MobileCard from "@/components/Events/SmallCard";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useRouter } from "next/router";
 
-// import { useRouter } from "next/router";
 const Dashboarduser = () => {
     const [joinedEvents, setJoinedEvents] = useState([]);
     const [createdEvent, setCreatedEvent] = useState([]);
@@ -18,24 +18,26 @@ const Dashboarduser = () => {
     const [displayCreatedEvents, setDisplayCreatedEvents] = useState(false);
     const [eventsMatchingInterests, setEventsMatchingInterests] = useState([]);
     const [Nameuser, SetNameUser] = useState("");
-
+    const router = useRouter();
     useEffect(() => {
-        const userDocRef = doc(db, "users", auth.currentUser.uid);
+        if (auth.currentUser) {
+            const userDocRef = doc(db, "users", auth.currentUser.uid);
 
-        getDoc(userDocRef)
-            .then((doc) => {
-                if (doc.exists()) {
-                    const userData = doc.data();
-                    const userName = userData.Name;
-                    SetNameUser(userName);
-                    console.log(Nameuser);
-                } else {
-                    console.log("User document does not exist");
-                }
-            })
-            .catch((error) => {
-                console.error("Error fetching user data:", error);
-            });
+            getDoc(userDocRef)
+                .then((doc) => {
+                    if (doc.exists()) {
+                        const userData = doc.data();
+                        const userName = userData.Name;
+                        SetNameUser(userName);
+                        console.log(Nameuser);
+                    } else {
+                        console.log("User document does not exist");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error fetching user data:", error);
+                });
+        }
     }, []);
 
     const handleDisplayEvents = (eventType) => {
@@ -58,7 +60,7 @@ const Dashboarduser = () => {
                 eventData.id = eventId;
                 return eventData;
             } else {
-                console.log(`Event with ID ${eventId} does not exist`);
+                // console.log(`Event with ID ${eventId} does not exist`);
                 return null;
             }
         });
@@ -166,13 +168,16 @@ const Dashboarduser = () => {
                         </p>
                     </li>
 
-                    <li className='flex items-center mb-20 mt-8  hover:bg-[#BFEAD3] '>
-                        <a href='#' className='flex items-center'>
-                            <IoCreateOutline size={30} className='mr-1 ' />
-                            <span class='mr-2 block hover:bg-[#BFEAD3] cursor-pointer '>
+                    <li
+                        className='flex items-center mb-20 mt-8 hover:bg-[#BFEAD3]'
+                        onClick={() => router.push("/events/create")}
+                    >
+                        <div className='flex items-center'>
+                            <IoCreateOutline size={30} className='mr-1' />
+                            <span className='mr-2 block hover:bg-[#BFEAD3] cursor-pointer'>
                                 Create New Event
                             </span>
-                        </a>
+                        </div>
                     </li>
                     <li className=' hover:bg-[#BFEAD3] '>
                         <button
@@ -192,7 +197,7 @@ const Dashboarduser = () => {
                         >
                             <IoIosGitCompare size={30} className='mr-1' />
                             <span class='my-2 block hover:bg-[#BFEAD3] cursor-pointer'>
-                                Evnets Joined
+                                Events Joined
                             </span>
                         </button>
                     </li>
@@ -215,7 +220,6 @@ const Dashboarduser = () => {
                             fontWeight: " 500",
                             letterSpacing: "0.11px",
                             wordWrap: "break-word",
-                            // boxShadow: "0 4px 6px rgba(146, 227, 169, 0.6)",
                         }}
                     >
                         “It s not enough to be compassionate, you must act.” -
@@ -274,7 +278,7 @@ const Dashboarduser = () => {
                             wordWrap: "break-word",
                         }}
                     >
-                        Upcoming events:
+                        Suggestion events :
                     </h2>
                 </div>
 
@@ -304,12 +308,7 @@ export default Dashboarduser;
 export async function getStaticProps({ locale }) {
     return {
         props: {
-            ...(await serverSideTranslations(locale, [
-                "common",
-                "about",
-                "eventCreation",
-                "events",
-            ])),
+            ...(await serverSideTranslations(locale, ["common"])),
             // Will be passed to the page component as props
         },
     };
