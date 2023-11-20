@@ -53,7 +53,6 @@ const SignUpPage = () => {
     const [hasSpecialChars, setHasSpecialChars] = useState(false);
     const [hasalphabetValid, setalphabetValid] = useState(false);
     const [isSignUpDisabled, setIsSignUpDisabled] = useState(true);
-    const [isAllconditionMet, setisAllconditionMet] = useState(true); // New state
 
     useEffect(() => {
         checkUserAuth(router);
@@ -86,7 +85,6 @@ const SignUpPage = () => {
         const allConditionsMet =
             lengthValid && specialCharsValid && alphabetValid;
         setIsSignUpDisabled(!allConditionsMet);
-        setisAllconditionMet(allConditionsMet);
     };
 
     const handleSignup = async (e) => {
@@ -138,7 +136,7 @@ const SignUpPage = () => {
                 "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4 "
             );
             setTimeout(() => {
-                router.push("/editprofile");
+                router.push("/profile/edit");
             }, 1500);
         } catch (error) {
             setShowPopup(true);
