@@ -6,13 +6,13 @@ function HeroCard() {
     const { t } = useTranslation();
 
     return (
-        <div className='w-full shadow-md sm:h-[400px] flex justify-center items-center'>
+        <div className='w-full  sm:h-[400px] flex justify-center items-center'>
             <div className='text-center p-4'>
                 <div className='max-w-screen-xl mx-auto'>
-                    <div className='text-4xl font-medium leading-10 tracking-tight text-zinc-900'>
+                    <div className='text-4xl font-medium leading-10 tracking-tight text-zinc-900 mb-5'>
                         {t("common:heroCard:title")}
                     </div>
-                    <div className='text-xl font-normal leading-10 tracking-tight text-zinc-500'>
+                    <div className='text-xl font-normal leading-10 tracking-tight text-zinc-500 mb-5'>
                         {t("common:heroCard:description")}
                     </div>
                     <div className=' flex flex-col sm:flex-row justify-center items-center gap-6'>
@@ -24,7 +24,7 @@ function HeroCard() {
                         </Link>
 
                         <Link
-                            href='/guidelines'
+                            href='/about'
                             className={`secondButton text-[2xl] font-medium leading-10 tracking-tight text-zinc-900`}
                         >
                             {t("common:heroCard:whoWeAre")}

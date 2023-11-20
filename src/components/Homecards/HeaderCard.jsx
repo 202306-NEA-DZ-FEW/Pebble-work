@@ -9,7 +9,7 @@ export default function HeaderCard() {
     return (
         <>
             <div
-                className={`${styles.change} flex flex-row shadow-md items-center justify-center gap-2 mb-8 xl:w-[1222px] xl:min-h-[750px] lg:w-[960px] lg:min-h-[500px] md:w-[777px] md:min-h-[370px] sm:w-[666px] sm:min-h-[330px] w-[466px] min-h-[300px] `}
+                className={`${styles.change} flex flex-row items-center justify-center gap-2 mb-8 xl:w-[1222px] xl:min-h-[750px] lg:w-[960px] lg:min-h-[500px] md:w-[777px] md:min-h-[370px] sm:w-[666px] sm:min-h-[330px] w-[466px] min-h-[300px] `}
             >
                 <div className={`${styles.text}`}>
                     <div

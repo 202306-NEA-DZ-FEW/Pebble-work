@@ -37,13 +37,13 @@ const HomeCards = () => {
             <p style={{ fontSize: "42px", color: "black" }}>
                 {t("common:homeCards:sustainableDevelopmentGoals")}
             </p>
-            <p>{t("common:homeCards:introductorySentence")}</p>
-            <div className='p-2 overflow-hidden'>
+
+            <div className='p-2 overflow-hidden mb-[5rem]'>
                 <GalleryCard />
             </div>
 
             <p></p>
-            <div className='xl:h-[420px] p-2 lg:h-[420px] '>
+            <div className='xl:h-[420px] p-2 lg:h-[420px] mb-[5rem]'>
                 <SocialCard />
             </div>
 
@@ -58,7 +58,7 @@ const HomeCards = () => {
                 <Wave height={850} />
                 {/* <div className={styles.blur}>
                 </div> */}
-                <div className='sm:w-[600px] shadow-inner w-[95vw]'>
+                <div className='sm:w-[600px] pt-5 w-[95vw]'>
                     {" "}
                     <ContactForm />
                 </div>
