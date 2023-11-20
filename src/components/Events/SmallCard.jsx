@@ -2,7 +2,7 @@ import { CircularProgress } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
-const MobileCard = ({ eventId, title, type, image }) => {
+const SmallCard = ({ eventId, title, type, image }) => {
     const [imageLoaded, setImageLoaded] = useState(false);
     const router = useRouter();
     const handleReviewClick = () => {
@@ -46,4 +46,4 @@ const MobileCard = ({ eventId, title, type, image }) => {
     );
 };
 
-export default MobileCard;
+export default SmallCard;

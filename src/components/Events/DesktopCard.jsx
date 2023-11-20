@@ -1,6 +1,6 @@
 import { CircularProgress } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import styles from "@/styles/EventCard.module.css";
@@ -62,14 +62,16 @@ const DesktopCard = ({ eventId, title, type, image, description }) => {
                     style={{ display: "none" }}
                     onLoad={() => setImageLoaded(true)}
                 />
+                {!imageLoaded && <CircularProgress />}
                 <div
-                    style={{ backgroundImage: `url(${image})` }}
-                    className={`${styles.backgroundImage} ${
+                    style={{
+                        backgroundImage: `url(${image})`,
+                        opacity: imageLoaded ? 1 : 0,
+                    }}
+                    className={`${styles.backgroundImage} relative ${
                         hideBackground ? `${styles.backgroundImageHidden}` : ""
                     }`}
-                >
-                    {!imageLoaded && <CircularProgress />}
-                </div>
+                ></div>
                 <div className={`flex flex-col gap-1 sm:gap-4 text-start`}>
                     <h1
                         className='xl:text-[25.70px] sm:text-[15px] text-[10.55px]'

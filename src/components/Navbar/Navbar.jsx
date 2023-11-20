@@ -49,17 +49,8 @@ const Navbar = () => {
 
         document.addEventListener("mousedown", handleClickOutside);
 
-        const logged = auth.onAuthStateChanged((user) => {
-            if (user) {
-                setUser(user);
-            } else {
-                setUser(null);
-            }
-        });
-
         setActiveTab(router.pathname.slice(1)); //so the motion will always stay on the current active tab
         return () => {
-            logged();
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [menuDropdownOpen]);
