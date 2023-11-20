@@ -230,7 +230,8 @@ const ProfilePage = () => {
     };
 
     const handleSaveSelectedImage = async () => {
-        // Create a Firestore document reference for the user
+
+      
         if (selectedImage == "") {
             return;
         }

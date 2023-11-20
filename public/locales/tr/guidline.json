@@ -1,0 +1,23 @@
+{
+    "communityGuidelines": "Topluluk Kuralları",
+    "eventCreation": "Etkinlik Oluşturma",
+    "transparency": "Şeffaflık",
+    "genuineInteraction": "Gerçek Etkileşim",
+    "host": "Etkinlik Sahibi",
+    "codeOfConduct": "Davranış Kuralları",
+    "hatefulContent": "Nefret Dolu İçerik",
+    "misinformation": "Bilgi Yanıltma",
+    "respectfulInteractions": "Saygılı İletişim",
+    "reportingViolations": "İhlalleri Bildirme",
+    "introText": "PebbleWork'te, sağlıklı ve refah bir dünya yaratmanın, güvenilir ve nazik bir topluluk oluşturmakla başladığına inanıyoruz. Politikalarımız, kullanıcılara geniş bir görüş ve deneyim yelpazesi paylaşma özgürlüğünü ve alanını sunarken güvenli bir platform oluşturmayı amaçlamaktadır.",
+    "guidelinesText": "Aşağıda, her kullanıcı için PebbleWork deneyimini güvence altına alan bir dizi kılavuz bulacaksınız. Bu Kılavuzların tekrarlayan ihlalleri hesabınızın kapatılmasına neden olur.",
+    "eventCreationText": "PebbleWork'te bir etkinlik oluştururken kullanıcıların takip etmesi gereken kılavuzlar aşağıda verilmiştir. Etkinliğin genel yapısı değişikliklere ve kullanıcıların yaratıcılığına açık olsa da, aşağıdakilere uyulmalıdır.",
+    "transparencyText": "Etkinliğin türü veya tipine bakılmaksızın, etkinlik oluşturulurken paylaşılan ayrıntılarda ve niyetlerde şeffaflığı öncelikli hale getirilmesi gerekmektedir. Şeffaflık, etkinliğin olası katılımcılarının amaçlarını anlamalarını sağlar ve etkinliğe küçük veya büyük olmasına bakılmaksızın aktif olarak katılmalarını ve amacına ulaşmalarını daha olası kılar.",
+    "genuineInteractionText": "Etkinlik çevrimiçi tabanlı veya kişisel olarak gerçekleştiriliyorsa her zaman gerçek, samimi insan etkileşimlerini teşvik etmeyi amaçlamalıdır. Anlamlı konuşmaları teşvik eden bir ortamın oluşturulması veya katılımcıların deneyimlerini paylaşmaya teşvik eden bir alanın oluşturulması ile bu amaçlanabilir. Katılımcıların tam katılımı, güven oluşturmak ve etkinliğin amacını yerine getirmek için önemlidir.",
+    "hostText": "Son olarak, etkinliğin merkezi figürü olarak organizatör her zaman mevcut olmalıdır. Organizatörün mevcudiyeti yalnızca tonu belirlemekle kalmaz, aynı zamanda katılımcıların deneyimini artırır ve tartışmaları kolaylaştırır. Organizatörün tüm etkinliklerde bulunması kritiktir.",
+    "codeOfConductText": "Davranış Kuralları, PebbleWork'ün Kılavuzlarının bir uzantısıdır. Kurallar, PebbleWork'ü kullanırken ve diğer kullanıcılarla etkileşim kurarken genel kullanıcı davranışını ele almaktadır.",
+    "hatefulContentText": "Sürdürülebilir Kalkınma hedeflerini engelleyen veya bir grup insana zarar veren etkinlikler yasaktır. PebbleWork, insanların kökenlerinden, cinsiyetlerinden, dinlerinden, milliyetlerinden, yönelimlerinden ve inançlarından bağımsız olarak bir alan sunmayı amaçlar. Ayrıca tehlikeli veya yasa dışı faaliyetleri teşvik eden etkinlikler izinsizdir ve silinecektir.",
+    "misinformationText": "Bilgi yanıltma, yanıltıcı veya aldatıcı içeriği içerir. Gerçek ve gerçek nedenleri yansıtmayan etkinlikler PebbleWork'te izin verilmez. Bu, yanlış bilgi içeren etkinlikleri, teknik olarak manipüle edilmiş içerik içeren etkinlikleri veya belirsiz amaçları olan etkinlikleri, gerçek organizasyonların ve insanların sahtekarca kullanımı veya taklit etmeyi içerir.",
+    "respectfulInteractionsText": "Açık tartışmaları ve çeşitli bakış açılarını değerli buluyoruz, ancak aynı zamanda olumlu ve yapıcı bir ortamın sürdürülmesinin önemini vurguluyoruz. Bu nedenle, diğer kullanıcılarla etkileşim kurarken nötr ve saygılı dil kullanımını sağlamak önemlidir. Kişisel saldırılar, taciz veya her türlü ayrımcılık tolere edilmeyecektir.",
+    "reportingViolationsText": "Bu kuralları ihlal eden davranışları deneyimlerseniz veya yaşarsanız, lütfen ekibimize bildirin. Saygılı ve nazik bir topluluğu sürdürmeye kararlıyız ve bu tür engelleyici davranışları ele almaya uygun önlemleri alacağız."
+}

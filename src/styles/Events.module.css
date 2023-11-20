@@ -6,6 +6,7 @@
         right: 0;
         height: 250px;
         z-index: 9999;
+        background-color: #b4cd93;
     }
 
     .locationChange {
@@ -44,10 +45,10 @@
     }
 }
 .selectedType {
-    background-color: #e53e3e;
+    background-color: #749d60;
 }
 .selectedDay {
-    background-color: #e53e3e;
+    background-color: #749d60;
 }
 
 .information {
@@ -67,4 +68,7 @@
 
 .information::-webkit-scrollbar-track {
     background-color: transparent;
+}
+.selectedRange {
+    color: black;
 }

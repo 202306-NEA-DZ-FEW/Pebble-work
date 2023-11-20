@@ -1,0 +1,14 @@
+{
+    "editProfile": "Profil bearbeiten",
+    "uploadNew": "Neu hochladen",
+    "chooseFromLibrary": "Aus der Bibliothek auswählen",
+    "nameRequired": "Name (Erforderlich)",
+    "surnameRequired": "Nachname (Erforderlich)",
+    "emailRequired": "E-Mail (Erforderlich)",
+    "locationRequired": "Ort (Erforderlich)",
+    "interests": "Interessen",
+    "saveChanges": "Änderungen speichern",
+    "changePassword": "Passwort ändern",
+    "submit": "Absenden",
+    "cancel": "Abbrechen"
+}

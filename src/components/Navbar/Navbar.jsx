@@ -1,20 +1,30 @@
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import { useTranslation } from "next-i18next";
+import React, { useEffect, useState, useRef } from "react";
 
 import styles from "@/styles/Navbar.module.css";
-
-import Signin from "@/components/Signin/Signin";
+import { useRouter } from "next/router";
 
 import { auth } from "@/util/firebase";
 
 import Dropdown from "../Dropdown";
 import Language from "../Language/Language";
 import Pebble from "../Pebble";
+import { motion } from "framer-motion";
 
+let tabs = [
+    { id: "", label: "Home" },
+    { id: "events", label: "Events" },
+    { id: "about", label: "About" },
+];
 const Navbar = () => {
+    const dropdownRef = useRef(null);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [menuDropdownOpen, setMenuDropdownOpen] = useState(false);
     const [user, setUser] = useState(null);
+    const [activeTab, setActiveTab] = useState(tabs[0].id);
+    const { t } = useTranslation();
+    const router = useRouter(); //so the motion will always stay on the current active tab
 
     const menuDropdown = () => {
         setMenuDropdownOpen(!menuDropdownOpen);
@@ -25,10 +35,22 @@ const Navbar = () => {
     };
 
     const closeMenuDropdown = () => {
-        setMenuDropdownOpen(false);
+        setMenuDropdownOpen(!menuDropdownOpen);
     };
 
     useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                menuDropdownOpen &&
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target)
+            ) {
+                closeMenuDropdown();
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
         const logged = auth.onAuthStateChanged((user) => {
             if (user) {
                 setUser(user);
@@ -36,13 +58,16 @@ const Navbar = () => {
                 setUser(null);
             }
         });
+
+        setActiveTab(router.pathname.slice(1)); //so the motion will always stay on the current active tab
         return () => {
             logged();
+            document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, []);
+    }, [menuDropdownOpen]);
 
     return (
-        <nav className='sticky z-[9999] md:mb-10 mb-4 bg-gray-200 top-0 xl:flex xl:flex-col xl:items-center'>
+        <nav className='sticky z-[9999] md:mb-10 mb-4 bg-[#B4CD93] top-0 xl:flex xl:flex-col xl:items-center'>
             <div
                 style={{
                     width: "100%",
@@ -99,50 +124,50 @@ const Navbar = () => {
                 <div
                     className={`${
                         menuDropdownOpen ? "block" : "hidden"
-                    } md:block md:flex md:items-center w-full md:w-auto`}
+                    }  md:flex md:items-center w-full md:w-auto navbar-content`}
                     id='navbar-language'
+                    ref={dropdownRef}
                 >
                     <ul
-                        style={{ fontFamily: "Rubik" }}
-                        className={`' md:static text-center md:bg-transparent bg-white gap-3 fixed sm:w-full w-60 md:min-h-0 min-h-screen flex flex-col font-medium  md:p-0 border border-gray-300  md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 dark:border-gray-700 left-[0px] top-0 z-10 ${styles.tiltIn}`}
+                        className={`md:static text-center md:bg-transparent gap-10 fixed sm:w-full w-60 md:min-h-0 min-h-screen flex flex-col font-medium md:p-0 md:flex-row md:space-x-8 md:mt-0 bg-gray-800 left-[0px] top-0 z-10 ${styles.tiltIn}`}
                         role='menu'
                     >
-                        <li>
-                            <Link
-                                href='/'
-                                onClick={closeMenuDropdown}
-                                className='block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700'
-                            >
-                                Home
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                href='/events'
-                                onClick={closeMenuDropdown}
-                                className='block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700'
-                            >
-                                Events
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                href='/about'
-                                onClick={closeMenuDropdown}
-                                className='block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700'
-                            >
-                                About
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                href='#'
-                                onClick={closeMenuDropdown}
-                                className='block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0  md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700'
-                            >
-                                Contact
-                            </Link>
-                        </li>
+                        {tabs.map((tab) => (
+                            <li key={tab.id}>
+                                <Link href={`/${tab.id}`}>
+                                    <p
+                                        onClick={() => {
+                                            setActiveTab(tab.id);
+                                            closeMenuDropdown();
+                                        }}
+                                        className={`block rounded dark:border-gray-700 ${
+                                            activeTab === tab.id
+                                                ? "cursor-default" //text on hover while the motion is on it
+                                                : "hover:text-[#547543]" //text on hover while the motion is not on it
+                                        } relative rounded-full lg:text-[18px] md:text-[15px] font-medium text-white outline-sky-400 transition focus-visible:outline-2`}
+                                        style={{
+                                            WebkitTapHighlightColor:
+                                                "transparent",
+                                        }}
+                                    >
+                                        {activeTab === tab.id && (
+                                            <motion.span
+                                                layoutId='line'
+                                                className='absolute bottom-0 left-0 right-0 md:h-[2px] h-1 z-10 bg-[#547543]'
+                                                transition={{
+                                                    type: "spring",
+                                                    bounce: 0.3,
+                                                    duration: 1.2,
+                                                }}
+                                            />
+                                        )}
+                                        {t(
+                                            `common:navbar:${tab.label.toLowerCase()}`
+                                        )}
+                                    </p>
+                                </Link>
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </div>

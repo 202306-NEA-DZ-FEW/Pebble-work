@@ -1,46 +1,60 @@
 import Image from "next/image";
-import Link from "next/link";
+
 import React, { useState, useEffect } from "react";
 
 import styles from "@/styles/Events.module.css";
+import Dropdown from "./Dropdown";
 
+// Define the Calendar component
 const Calendar = ({ checkEvents, resetDays }) => {
+    // State for the current date and selected days
     const [currentDate, setCurrentDate] = useState(new Date());
-    const [selectedDays, setSelectedDays] = useState({});
 
+    const [rangeStart, setRangeStart] = useState(null);
+    const [selectedRange, setSelectedRange] = useState([]);
+
+    // Function to handle date click
     const handleDateClick = (day) => {
         const selectedDate = new Date(
             currentDate.getFullYear(),
             currentDate.getMonth(),
-            day + 1
+            day
         );
-        const formattedDate = selectedDate.toISOString().split("T")[0];
-        const selectedMonthKey = `${currentDate.getFullYear()}-${currentDate.getMonth()}`;
+        selectedDate.setHours(12); //to solve the problem of having to chose a "day+1" so the event in "day" will show
 
-        setSelectedDays((prevSelectedDays) => {
-            const updatedSelectedDays = { ...prevSelectedDays };
-            const currentMonthDays =
-                updatedSelectedDays[selectedMonthKey] || [];
-            const dayIndex = currentMonthDays.indexOf(day);
+        if (rangeStart === null) {
+            setRangeStart(selectedDate);
+            setSelectedRange([selectedDate]);
+            checkEvents([selectedDate.toISOString().split("T")[0]]);
+        } else {
+            let startDate = new Date(rangeStart);
+            let endDate = new Date(selectedDate);
 
-            if (dayIndex !== -1) {
-                currentMonthDays.splice(dayIndex, 1);
-                checkEvents(null); // Show all events
-            } else {
-                currentMonthDays.push(day);
-                checkEvents(formattedDate); // Show events for the selected date
+            if (startDate > endDate) {
+                [startDate, endDate] = [endDate, startDate];
             }
 
-            if (currentMonthDays.length === 0) {
-                delete updatedSelectedDays[selectedMonthKey];
-            } else {
-                updatedSelectedDays[selectedMonthKey] = currentMonthDays;
+            const range = [];
+            let currentDate = new Date(startDate);
+
+            while (currentDate <= endDate) {
+                range.push(new Date(currentDate));
+                currentDate.setDate(currentDate.getDate() + 1);
             }
 
-            return updatedSelectedDays;
-        });
+            setSelectedRange(range);
+
+            checkEvents(
+                range.map((date) => {
+                    date.setHours(12); // Add 12 hours
+                    return date.toISOString().split("T")[0];
+                })
+            );
+            setRangeStart(null);
+        }
     };
 
+    // handle next month button click
     const handleNextMonth = () => {
         setCurrentDate((prevDate) => {
             const nextMonth = new Date(
@@ -51,6 +65,7 @@ const Calendar = ({ checkEvents, resetDays }) => {
         });
     };
 
+    // handle previous month button click
     const handlePreviousMonth = () => {
         setCurrentDate((prevDate) => {
             const previousMonth = new Date(
@@ -61,11 +76,13 @@ const Calendar = ({ checkEvents, resetDays }) => {
         });
     };
 
+    // get the name of the month
     const getMonthName = (date) => {
         const options = { month: "long" };
         return date.toLocaleDateString("en-US", options);
     };
 
+    // render the calendar
     const renderCalendar = () => {
         const currentMonth = currentDate.getMonth();
         const currentYear = currentDate.getFullYear();
@@ -78,14 +95,14 @@ const Calendar = ({ checkEvents, resetDays }) => {
         ).getDate();
 
         const calendarDays = [];
-        const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        const weekdays = ["S", "M", "T", "W", "T", "F", "S"];
 
         // Render weekdays
         for (let i = 0; i < 7; i++) {
             calendarDays.push(
                 <div
                     key={`weekday-${i}`}
-                    className={`${styles.weekday} md:text-[12px] xl:text-[17px]`}
+                    className={`sm:text-[12px] text-black font-[500] w-[25px] md:ml-1 sm:ml-2 xl:text-[17px]`}
                 >
                     {weekdays[i]}
                 </div>
@@ -101,70 +118,121 @@ const Calendar = ({ checkEvents, resetDays }) => {
 
         // Render day numbers
         for (let day = 1; day <= daysInMonth; day++) {
-            const selectedMonthKey = `${currentYear}-${currentMonth}`;
-            const isSelected =
-                selectedDays[selectedMonthKey] &&
-                selectedDays[selectedMonthKey].includes(day);
+            const thisDate = new Date(currentYear, currentMonth, day);
+            const isSelected = selectedRange.some(
+                (date) => date.toDateString() === thisDate.toDateString()
+            );
 
             calendarDays.push(
-                <Link
-                    href=''
+                <button
                     key={`day-${day}`}
                     className={`${styles.calendarDay} ${
-                        isSelected ? styles.selectedDay : ""
-                    } xl:text-[17px] md:w-[10px] xl:w-[18px] text-center md:text-[11px] rounded`}
+                        isSelected ? styles.selectedRange : ""
+                    } xl:text-[17px] md:w-[10px] text-white xl:w-[18px] text-center sm:text-[11px] rounded`}
                     onClick={() => handleDateClick(day)}
                 >
                     {day}
-                </Link>
+                </button>
             );
         }
 
         return calendarDays;
     };
+
+    //update selected days when resetDays changes
     useEffect(() => {
         if (resetDays) {
-            setSelectedDays(resetDays);
+            setRangeStart(null);
+            setSelectedRange([]);
         }
     }, [resetDays]);
 
+    // Render the Calendar component
     return (
         <>
-            <div className='flex flex-col-reverse items-center justify-center xl:w-[333px] xl:h-[243px] md:w-[222px] md:h-[180px]'>
-                <div className='flex justify-center items-center gap-2'>
-                    <button
-                        className='flex items-center'
-                        onClick={handlePreviousMonth}
-                    >
-                        <Image
-                            className='xl:w-[50px] xl:h-[50px] md:w-[35px] md:h-[35px]'
-                            src='/icons/previous.png'
-                            width={50}
-                            height={50}
-                            alt='Previous'
-                        />
-                    </button>
-                    <div className='flex flex-col items-center gap-3'>
-                        <div className='calendar grid grid-cols-7 gap-1'>
-                            {renderCalendar()}
+            <div className='flex flex-col items-center'>
+                <div className='flex flex-col-reverse items-center justify-center xl:w-[333px] xl:h-[243px] sm:w-[222px] sm:h-[180px]'>
+                    <div className='flex justify-center items-center gap-2'>
+                        <button
+                            className='flex items-center'
+                            onClick={handlePreviousMonth}
+                        >
+                            <Image
+                                className='xl:w-[40px] rotate-180 xl:h-[40px] w-[25px] md:h-[25px]'
+                                src='/icons/next.svg'
+                                width={50}
+                                height={50}
+                                alt='Previous'
+                            />
+                        </button>
+                        <div className='flex flex-col items-center gap-3'>
+                            <div className='calendar sm:h-[140px] xl:h-[200px] grid grid-cols-7 gap-1'>
+                                {renderCalendar()}
+                            </div>
+                            <h2 className='text-xl xl:w-[200px] sm:w-[165px] flex justify-center gap-4 font-bold sm:text-[14px] xl:text-[18px]'>
+                                <Dropdown
+                                    options={Array.from(
+                                        { length: 12 },
+                                        (_, i) => i
+                                    ).map((month) =>
+                                        new Date(
+                                            currentDate.getFullYear(),
+                                            month
+                                        ).toLocaleString("default", {
+                                            month: "long",
+                                        })
+                                    )}
+                                    selectedOption={getMonthName(currentDate)}
+                                    setSelectedOption={(monthName) => {
+                                        const month = new Date(
+                                            Date.parse(monthName + " 1, 2012")
+                                        ).getMonth();
+                                        setCurrentDate(
+                                            new Date(
+                                                currentDate.getFullYear(),
+                                                month
+                                            )
+                                        );
+                                    }}
+                                />
+
+                                <Dropdown
+                                    options={Array.from(
+                                        { length: 6 },
+                                        (_, i) =>
+                                            i +
+                                            Math.min(
+                                                currentDate.getFullYear(),
+                                                new Date().getFullYear()
+                                            )
+                                    )}
+                                    selectedOption={currentDate
+                                        .getFullYear()
+                                        .toString()}
+                                    setSelectedOption={(year) => {
+                                        setCurrentDate(
+                                            new Date(
+                                                year,
+                                                currentDate.getMonth()
+                                            )
+                                        );
+                                    }}
+                                />
+                            </h2>
                         </div>
-                        <h2 className='text-xl font-bold md:text-[14px] xl:text-[18px]'>
-                            {getMonthName(currentDate)}{" "}
-                            {currentDate.getFullYear()}
-                        </h2>
+                        <button
+                            className='flex items-center'
+                            onClick={handleNextMonth}
+                        >
+                            <Image
+                                className='xl:w-[40px] xl:h-[40px] w-[25px] md:h-[25px]'
+                                src='/icons/next.svg'
+                                width={50}
+                                height={50}
+                                alt='Next'
+                            />
+                        </button>
                     </div>
-                    <button
-                        className='flex items-center'
-                        onClick={handleNextMonth}
-                    >
-                        <Image
-                            className='xl:w-[50px] xl:h-[50px] md:w-[35px] md:h-[35px]'
-                            src='/icons/next.png'
-                            width={50}
-                            height={50}
-                            alt='Next'
-                        />
-                    </button>
                 </div>
             </div>
         </>

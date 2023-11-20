@@ -1,7 +1,10 @@
 import * as React from "react";
-
-import Layout from "@/layout/Layout";
+import Image from "next/image";
 
 export default function NotFoundPage() {
-    return <Layout>404</Layout>;
+    return (
+        <div className='flex justify-center'>
+            <Image src={"/images/404.png"} width={800} height={800} />
+        </div>
+    );
 }

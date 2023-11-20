@@ -1,10 +1,4 @@
-import {
-    createUserWithEmailAndPassword,
-    isSignInWithEmailLink,
-    sendSignInLinkToEmail,
-    signInWithEmailLink,
-    updateProfile,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import {
     GoogleAuthProvider,
     signInWithPopup,
@@ -18,7 +12,6 @@ import {
     setDoc,
     where,
 } from "firebase/firestore";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
@@ -26,11 +19,12 @@ import { useEffect, useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { GrStatusGood } from "react-icons/gr";
 import { TiDeleteOutline } from "react-icons/ti";
+import { useTranslation } from "next-i18next";
 
 import BtnGoogle from "@/components/BtnTwitter&Google/ButtonGoogle";
 import ButtonTwitter from "@/components/BtnTwitter&Google/ButtonTwitter";
 import Modal from "@/components/Popup/Modal";
-
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { auth } from "../../util/firebase";
 import { db } from "../../util/firebase";
 const checkUserAuth = (router) => {
@@ -42,6 +36,8 @@ const checkUserAuth = (router) => {
 };
 
 const SignUpPage = () => {
+    const { t } = useTranslation();
+
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
     const [Name, setName] = useState("");
@@ -105,14 +101,6 @@ const SignUpPage = () => {
             );
             return;
         }
-        // if (password.length < 6) {
-        //     setShowPopup(true);
-        //     setModalContent("6 characters needed for password.");
-        //     setModalClassName(
-        //         "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4   "
-        //     );
-        //     return;
-        // }
 
         const emailRegex = /^(.+)@(gmail|yahoo|outlook)\.(com|co\.uk|fr)$/;
         if (!emailRegex.test(email)) {
@@ -167,6 +155,7 @@ const SignUpPage = () => {
 
             // Extract first and last names from displayName
             const displayName = result.user.displayName;
+            const image = result.user.photoURL;
             const [firstName, lastName] = displayName.split(" ");
 
             // Create user object with name, surename, and email
@@ -177,6 +166,7 @@ const SignUpPage = () => {
                 interests: [],
                 eventsCreated: [],
                 eventsJoined: [],
+                imageURL: image,
             };
 
             // Get the user UID
@@ -213,6 +203,7 @@ const SignUpPage = () => {
 
             // Extract first and last names from displayName
             const displayName = result.user.displayName;
+            const image = result.user.photoURL;
             const [firstName, lastName] = displayName.split(" ");
 
             // Retrieve email from additionalUserInfo
@@ -226,10 +217,10 @@ const SignUpPage = () => {
                 interests: [],
                 eventsCreated: [],
                 eventsJoined: [],
+                imageURL: image,
             };
 
             const userUID = result.user.uid;
-
             // Get a reference to the "users" collection
             const usersCollectionRef = collection(db, "users");
 
@@ -254,32 +245,33 @@ const SignUpPage = () => {
     };
 
     return (
-        <div className='flex justify-center items-center h-screen'>
-            <div className='flex items-center w-1/2'>
+        <div className='flex justify-center items-center min-h-screen '>
+            <div className='flex flex-col items-center sm:flex-row sm:w-1/ h-fit'>
                 <div className='mr-10'>
-                    <Image
+                    <img
                         src='/images/Sitting.png'
                         alt='Sitting'
                         width={1920}
-                        height={1080}
+                        height={1081}
                         layout='responsive'
                         objectFit='cover'
+                        className='w-full sm:w-auto sm:h-auto h-[250px] md:w-[450px] md:h-[450px]'
                     />
                 </div>
                 <div>
-                    <h2 className="text-zinc-800 text-[32px] font-medium font-['Rubik'] mb-4">
-                        Sign Up
+                    <h2 className='text-zinc-800 text-[32px] font-medium mb-4 text-center mt-4'>
+                        {t("signUp:title")}
                     </h2>
                     <div className='mb-4'>
                         <ButtonTwitter onClick={handelTwitter} />
                         <BtnGoogle onClick={handelGoogle} />
 
                         <div className='flex items-center mb-4 mt-4'>
-                            <div className='   shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25 border-t flex-grow'></div>
-                            <div className="text-stone-500 text-lg font-normal font-['Rubik'] px-4">
-                                OR
+                            <div className='shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25 border-t flex-grow'></div>
+                            <div className='text-stone-500 text-lg font-normal px-4'>
+                                {t("signUp:or")}
                             </div>
-                            <div className='   shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25  border-t flex-grow'></div>
+                            <div className='shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25  border-t flex-grow'></div>
                         </div>
                     </div>
                     <form onSubmit={handleSignup}>
@@ -307,7 +299,6 @@ const SignUpPage = () => {
                                 onChange={(e) => setSurename(e.target.value)}
                             />
                         </div>
-
                         <div className='mb-4'>
                             <input
                                 className={`w-full px-3 py-2 border rounded ${
@@ -335,7 +326,6 @@ const SignUpPage = () => {
                                 value={password}
                                 onChange={handlePasswordChange}
                             />
-
                             <div
                                 className='absolute -bottom-1.5 right-1 m-4 cursor-pointer'
                                 onClick={togglePasswordVisibility}
@@ -366,7 +356,7 @@ const SignUpPage = () => {
                                         marginRight: "-0.2rem",
                                     }}
                                 >
-                                    At least 6 characters
+                                    {t("signUp:passwordInvalid")}
                                 </span>
                             </span>
                             <br />
@@ -394,7 +384,7 @@ const SignUpPage = () => {
                                         marginRight: "-0.2rem",
                                     }}
                                 >
-                                    Contains special characters
+                                    {t("signUp:specialCharsInvalid")}
                                 </span>
                             </span>
                             <br />
@@ -422,30 +412,32 @@ const SignUpPage = () => {
                                         marginRight: "-0.2rem",
                                     }}
                                 >
-                                    Contains alphabets
+                                    {t("signUp:alphabetInvalid")}
                                 </span>
                             </span>
                         </div>
 
                         <div>
-                            <div className="text-stone-500 text-sm font-normal font-['Rubik'] mt-4">
-                                Dont have an account?
+                            <div className='text-stone-500 text-sm font-normal mt-4'>
+                                {t("signUp:haveAccount")}
                                 <Link
                                     href='/signin'
-                                    className='text-orange-400 ml-1'
+                                    className='text-[#749D60] ml-1'
                                 >
-                                    Sign
+                                    {t("signUp:signIn")}
                                 </Link>
                             </div>
                         </div>
-                        <div className='flex justify-start'>
-                            <button
-                                className=' px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 '
-                                type='submit'
-                                disabled={isSignUpDisabled}
-                            >
-                                Sign Up
-                            </button>
+                        <div className='flex flex-col sm:flex-row sm:space-x-4 mt-4'>
+                            <div className='flex justify-start '>
+                                <button
+                                    className=' w-full px-4 py-2 cursor-pointer bg-[#749D60] text-white rounded  transform hover:scale-110 transition-transform duration-300   mb-4  '
+                                    type='submit'
+                                    disabled={isSignUpDisabled}
+                                >
+                                    {t("signUp:signUp")}
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -462,3 +454,16 @@ const SignUpPage = () => {
 };
 
 export default SignUpPage;
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, [
+                "common",
+                "about",
+                "signUp",
+            ])),
+            // Will be passed to the page component as props
+        },
+    };
+}

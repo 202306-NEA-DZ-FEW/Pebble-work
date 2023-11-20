@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import {
     signInWithEmailAndPassword,
     getAuth,
@@ -9,22 +10,23 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { sendPasswordResetEmail } from "firebase/auth";
 import BtnGoogle from "@/components/BtnTwitter&Google/ButtonGoogle";
 import ButtonTwitter from "@/components/BtnTwitter&Google/ButtonTwitter";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Modal from "@/components/Popup/Modal";
 import { collection, setDoc, doc } from "firebase/firestore";
 import { db } from "../../util/firebase";
-
 import { auth } from "../../util/firebase";
+
 const SignInPage = () => {
+    const { t } = useTranslation();
+
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
     const [RestEmail, setRestEmail] = useState("");
-
     const [password, setPassword] = useState("");
     const router = useRouter();
     const [showPopup, setShowPopup] = useState(false);
@@ -189,32 +191,34 @@ const SignInPage = () => {
     const toggleResetMode = () => {
         setResetMode(!resetMode);
     };
+
     return (
         <>
-            <div className='flex justify-center items-center h-screen'>
-                <div className='flex items-center w-1/2'>
-                    <div className='mr-10'>
-                        <Image
+            <div className='flex justify-center items-center min-w-screen min-h-screen'>
+                <div className='flex flex-col items-center sm:flex-row '>
+                    <div className='mb-4 sm:mb-0'>
+                        <img
                             src='/images/Sitting.png'
                             alt='Sitting'
                             width={1920}
                             height={1081}
                             layout='responsive'
                             objectFit='cover'
+                            className='w-full sm:w-auto sm:h-auto h-[250px] md:w-[450px] md:h-[450px]'
                         />
                     </div>
-                    <div>
-                        <h2 className="text-zinc-800 text-[32px] font-medium font-['Rubik'] mb-4">
-                            Sign In
+                    <div className='sm:ml-10'>
+                        <h2 className='text-zinc-800 text-[32px] font-medium mb-4 text-center mt-2'>
+                            {t("signin:signInTitle")}
                         </h2>
                         <div className='mb-4'>
                             <ButtonTwitter onClick={handelTwitter} />
                             <BtnGoogle onClick={handelGoogle} />
 
                             <div className='flex items-center mb-4 mt-4'>
-                                <div className='   shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25 border-t flex-grow'></div>
-                                <div className="text-stone-500 text-lg font-normal font-['Rubik'] px-4">
-                                    OR
+                                <div className='shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25 border-t flex-grow'></div>
+                                <div className='text-stone-500 text-lg font-normal px-4'>
+                                    {t("signin:or")}
                                 </div>
                                 <div className='shrink basis-0 h-0.5 bg-stone-500 bg-opacity-25  border-t flex-grow'></div>
                             </div>
@@ -223,10 +227,10 @@ const SignInPage = () => {
                             {resetMode ? (
                                 <div className='mb-4'>
                                     <label
-                                        className="block mb-2 text-stone-500 text-base font-normal font-['Rubik']"
+                                        className='block mb-2 text-stone-500 text-base font-normal'
                                         htmlFor='email'
                                     >
-                                        Email address
+                                        {t("signin:signInWith")}
                                     </label>
                                     <input
                                         className='w-full px-3 py-2 border rounded'
@@ -247,10 +251,10 @@ const SignInPage = () => {
                             ) : (
                                 <div>
                                     <label
-                                        className="block mb-2 text-stone-500 text-base font-normal font-['Rubik']"
+                                        className='block mb-2 text-stone-500 text-base font-normal'
                                         htmlFor='email'
                                     >
-                                        Email address
+                                        {t("signin:emailLabel")}
                                     </label>
                                     <input
                                         className='w-full px-3 py-2 border rounded'
@@ -272,10 +276,10 @@ const SignInPage = () => {
 
                             <div className='mb-4 relative'>
                                 <label
-                                    className="block mb-2 text-stone-500 text-base font-normal font-['Rubik']"
+                                    className='block mb-2 text-stone-500 text-base font-normal'
                                     htmlFor='password'
                                 >
-                                    Your password
+                                    {t("signin:passwordLabel")}
                                 </label>
                                 <input
                                     className='w-full px-3 py-2 border rounded'
@@ -300,47 +304,47 @@ const SignInPage = () => {
                             </div>
 
                             <div>
-                                <div className="text-stone-500 text-sm font-normal font-['Rubik'] mt-4">
+                                <div className='text-stone-500 text-sm font-normal mt-4'>
                                     <button onClick={toggleResetMode}>
-                                        Forgot your password?
+                                        {t("signin:forgotPassword")}
                                     </button>
                                     {resetMode ? (
-                                        <div className='text-orange-400 ml-1 cursor-pointer'></div>
+                                        <div className='text-[#749D60] ml-1 cursor-pointer'></div>
                                     ) : (
-                                        <div className="text-stone-500 text-sm font-normal font-['Rubik'] mt-4">
-                                            Dont have an account?
+                                        <div className='text-stone-500 text-sm font-normal mt-4'>
+                                            {t("signin:noAccount")}{" "}
                                             <Link
                                                 href='/signup'
-                                                className='text-orange-400 ml-1'
+                                                className='text-[#749D60] ml-1'
                                             >
-                                                Sign up
+                                                {t("signin:signUpLink")}
                                             </Link>
                                         </div>
                                     )}
                                 </div>
                             </div>
-
-                            {resetMode ? (
-                                <div className='flex justify-start'>
-                                    <button
-                                        className=' px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 '
-                                        type='button'
-                                        onClick={handleResetPassword}
-                                    >
-                                        Reset Password
-                                    </button>
-                                </div>
-                            ) : (
-                                <div className='flex justify-start'>
-                                    <button
-                                        className=' px-4 py-2 bg-orange-400 text-white rounded  transform hover:scale-110 transition-transform duration-300 '
-                                        type='submit'
-                                        // disabled={resetMode}
-                                    >
-                                        Sign in
-                                    </button>
-                                </div>
-                            )}
+                            <div className='flex flex-col sm:flex-row sm:space-x-4 mt-4'>
+                                {resetMode ? (
+                                    <div className='flex justify-start'>
+                                        <button
+                                            className=' px-4 py-2 bg-[#749D60] text-white rounded  transform hover:scale-110 transition-transform duration-300 mb-4'
+                                            type='button'
+                                            onClick={handleResetPassword}
+                                        >
+                                            {t("signin:resetPasswordButton")}
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <div className='flex justify-start '>
+                                        <button
+                                            className=' w-full px-4 py-2 bg-[#749D60] text-white rounded  transform hover:scale-110 transition-transform duration-300 mt-4 mb-2 '
+                                            type='submit'
+                                        >
+                                            {t("signin:signInButton")}
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -358,3 +362,16 @@ const SignInPage = () => {
 };
 
 export default SignInPage;
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, [
+                "common",
+                "about",
+                "signin",
+            ])),
+            // Will be passed to the page component as props
+        },
+    };
+}

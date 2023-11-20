@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/Homepage.module.css";
-import Image from "next/image";
 
 const GalleryCard = () => {
     const [isGallery, setIsGallery] = useState(false);
@@ -56,7 +55,7 @@ const GalleryCard = () => {
     }, []);
 
     return (
-        <div className='flex justify-center items-center shadow-md'>
+        <div className='flex justify-center items-center shadow-md p-4'>
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4'>
                 {images.map((image, index) => (
                     <div
@@ -69,9 +68,6 @@ const GalleryCard = () => {
                         }`}
                         style={{
                             animationDelay: `${index * 0.1}s`,
-                            backgroundImage: `url(/downscaled/${image})`,
-                            backgroundSize: "cover",
-                            backgroundPosition: "center",
                         }}
                     >
                         <img

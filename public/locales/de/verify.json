@@ -1,0 +1,12 @@
+{
+    "otpSent": "OTP erfolgreich gesendet!",
+    "noCurrentUser": "Kein aktueller Benutzer oder fehlende E-Mail/Name",
+    "phoneNumberLinked": "Telefonnummer mit aktuellem Benutzer verknüpft",
+    "verifyPhoneNumber": "Überprüfen Sie Ihre Telefonnummer, bevor Sie ein Ereignis erstellen können",
+    "enterOTP": "Geben Sie Ihre OTP ein",
+    "verifyOTP": "OTP überprüfen",
+    "verifyPhoneNumberLabel": "Überprüfen Sie Ihre Telefonnummer",
+    "sendCodeViaSMS": "Code per SMS senden",
+    "loginSuccess": "👍 Anmeldung erfolgreich",
+    "exists": "Bereits auf einem anderen Konto vorhanden ist"
+}

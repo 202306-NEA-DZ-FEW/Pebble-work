@@ -8,16 +8,15 @@ import {
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 import React, { useEffect, useState } from "react";
-
+import { useTranslation } from "next-i18next";
 import { auth, db, storage } from "@/util/firebase";
 import EventCreation from "@/components/Events/EventCreation";
 import PhoneVerify from "@/components/Events/PhoneVerify";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const EventCreationPage = () => {
+    const { t } = useTranslation();
     const formCollectionRef = collection(db, "events");
-
-    const userId = auth?.currentUser?.uid;
-    console.log(userId);
 
     //creates the event object to be sent to firestore
     const [input, setInput] = useState({
@@ -38,6 +37,14 @@ const EventCreationPage = () => {
         const docRef = await addDoc(formCollectionRef, input);
 
         return docRef.id;
+    };
+
+    const addLocation = async (input) => {
+        const locationsRef = doc(db, "database", "locations");
+
+        await updateDoc(locationsRef, {
+            data: arrayUnion(input.location),
+        });
     };
 
     const imgUpload = async (eventId) => {
@@ -71,6 +78,8 @@ const EventCreationPage = () => {
         }
 
         const eventId = await addEvent(input);
+
+        await addLocation(input);
 
         if (img) {
             await imgUpload(eventId);
@@ -133,7 +142,7 @@ const EventCreationPage = () => {
         // Don't forget to unsubscribe when your component unmounts.
         return () => unsubscribe();
     }, []);
-    if (!isAuthenticated || !isPhoneNumberVerified) {
+    if (isAuthenticated && !isPhoneNumberVerified) {
         return (
             <>
                 <PhoneVerify />
@@ -143,13 +152,11 @@ const EventCreationPage = () => {
 
     return (
         <>
-            <div
-                className='container ml-auto mr-auto max-w-6xl mt-2 flex flex-col bg-white mx-auto'
-                style={{ fontFamily: "Rubik" }}
-            >
+            <div className='container ml-auto mr-auto max-w-6xl mt-2 flex flex-col bg-white mx-auto'>
                 {isAuthenticated ? (
                     <>
                         <div style={{ height: "6rem" }}></div>
+
                         <div className='flex flex-col  md:space-x-20  md:flex-row md:center-content md:ml-4 pl-2 sm:ml-4'>
                             <div>
                                 <h3
@@ -161,14 +168,13 @@ const EventCreationPage = () => {
                                         wordWrap: "break-word",
                                     }}
                                 >
-                                    Choose Location:{" "}
+                                    {t("eventCreation:chooseLocation")}
                                     <span className='font-light text-xs align-left text-[red]'>
-                                        required
+                                        {t("eventCreation:required")}
                                     </span>
                                 </h3>
                                 <p className='max-w-sm mt-2 tinyText text-gray-400'>
-                                    Pebble events can be both local or online.
-                                    Choose where you want to host your event.
+                                    {t("eventCreation:locationDescription")}
                                 </p>
                                 <form className='max-w-1/2'>
                                     <input
@@ -198,14 +204,15 @@ const EventCreationPage = () => {
                                         wordWrap: "break-word",
                                     }}
                                 >
-                                    Choose Date & Time:{" "}
+                                    {t("eventCreation:chooseDateAndTime")}
                                     <span className='font-light text-xs align-left text-[red]'>
-                                        required
+                                        {t(
+                                            "eventCreation:chooseDateAndTimeRequired"
+                                        )}
                                     </span>
                                 </h3>
                                 <p className='max-w-sm mt-2 tinyText text-gray-400 mb-2'>
-                                    Select the day and starting time of the
-                                    event.
+                                    {t("eventCreation:dateAndTimeDescription")}
                                 </p>
                                 <input
                                     required
@@ -259,29 +266,26 @@ const EventCreationPage = () => {
                                     </p>
                                 ) : (
                                     <p className='italic mt-2'>
-                                        Location will appear here
+                                        {t("eventCreation:locationPlaceholder")}
                                     </p>
                                 )}
                                 <a
                                     href='#'
                                     className='mt-2 underline text-md text-blue-600 font-bold decoration-inherit'
                                 >
-                                    Change Location
+                                    {t("eventCreation:changeLocation")}
                                 </a>
                             </div>
                         </div>
                         <div className='my-3 flex flex-col items-center ml-3 flex-wrap sm:flex sm:flex-col  sm:ml-3 sm:items-center   md:flex md:flex-col md:ml-3 md:items-start lg:flex lg:flex-col lg:mt-3 lg:mx-0 lg:items-start '>
                             <h1 className='mt-5 text-xl font-semibold md:pl-2'>
-                                Choose Event Type:{" "}
+                                {t("eventCreation:eventType")}
                                 <span className='align-top font-light text-xs align-left text-[red]'>
-                                    required
+                                    {t("eventCreation:eventTypeRequired")}
                                 </span>
                             </h1>
                             <p className='max-w-4xl mt-2 md:pl-2 tinyText text-gray-400  mb-8'>
-                                Every pebble event should serve at least one of
-                                the sustainable development goals of United
-                                Nations. Which goal do you want to help in?
-                                Select all that apply.
+                                {t("eventCreation:eventTypeDescription")}
                             </p>
 
                             <div
@@ -303,7 +307,7 @@ const EventCreationPage = () => {
                                             buttons.forEach((button) => {
                                                 button.style.backgroundColor =
                                                     "#FFF";
-                                                button.style.color = "#FDA855"; // Change the text color back to the default color
+                                                button.style.color = "#FDA855";
                                             });
 
                                             setInput({
@@ -335,16 +339,13 @@ const EventCreationPage = () => {
 
                         <div className='my-3 flex l flex-col  mx-auto  items-center flex-wrap sm:flex sm:flex-col sm:ml-3 sm:items-center ml-2  md:flex md:flex-col md:ml-4 md:items-start lg:flex lg:flex-col lg:mt-3 lg:mx-0 lg:items-start'>
                             <h1 className='mt-5 text-xl font-semibold align-left md:pl-2'>
-                                Event Title:{" "}
+                                {t("eventCreation:eventTitle")}
                                 <span className='align-top font-light text-xs align-left text-[red]'>
-                                    required
+                                    {t("eventCreation:eventTitleRequired")}
                                 </span>
                             </h1>
                             <p className='max-w-4xl mt-2 tinyText text-gray-400 md:pl-2'>
-                                Choose a title that will give people a clear
-                                idea of what the event is about. Feel free to be
-                                creative! You can edit this later if you change
-                                your mind.
+                                {t("eventCreation:eventTitleDescriptione")}
                             </p>
                             <form className='pl-4'>
                                 <input
@@ -362,11 +363,10 @@ const EventCreationPage = () => {
 
                         <div className='my-3 md:pl-2 lg:pl-0 sm:pl-2  flex flex-col flex-wrap mt-2 w-screen sm:flex sm:flex-col sm:ml-3 '>
                             <h1 className='mt-5 text-xl font-semibold align-left md:text-left sm:text-center sm-center'>
-                                Event Description:
+                                {t("eventCreation:eventDescription")}
                             </h1>
                             <p className='max-w-4xl mt-2 tinyText text-gray-400 md:text-left sm:text-center sm-center'>
-                                Describe the purpose of your event. Who should
-                                join and what will you do at the event?
+                                {t("eventCreation:eventDescriptionDescription")}
                             </p>
                             <form
                                 id='eventdescription'
@@ -382,13 +382,12 @@ const EventCreationPage = () => {
                             </form>
                         </div>
 
-                        <div className='md:pl-2 flex flex-col  mx-auto  items-center flex-wrap sm:flex sm:flex-col sm:flex-wrap sm:items-center w-screen ml-2  md:flex md:flex-col md:ml-4 md:items-start lg:flex lg:flex-col lg:mt-3 lg:mx-0 lg:items-start my-3 px-2'>
+                        <div className='md:pl-2 flex flex-col  mx-auto  items-center flex-wrap sm:flex sm:flex-col sm:flex-wrap sm:items-center ml-2  md:flex md:flex-col md:ml-4 md:items-start lg:flex lg:flex-col lg:mt-3 lg:mx-0 lg:items-start my-3 px-2'>
                             <h1 className='mt-5 text-xl font-semibold align-left '>
-                                Event Image:
+                                {t("eventCreation:eventImage")}
                             </h1>
                             <p className='max-w-4xl mt-3 tinyText text-gray-400 ml-2'>
-                                We have found that listings with a photo attract
-                                more interest.
+                                {t("eventCreation:eventImageDescription")}
                             </p>
                             <input
                                 type='file'
@@ -398,33 +397,25 @@ const EventCreationPage = () => {
                             ></input>
                         </div>
 
-                        <div className='flex flex-col flex-wrap mt-8 w-screen md:ml-4 ml-2'>
+                        <div className='flex flex-col flex-wrap mt-8 md:ml-4 ml-2'>
                             <h1 className='mt-5 text-xl font-semibold align-left '>
-                                Almost Done! Just take a minute to review our
-                                guidlines.
+                                {t("eventCreation:guidelinesTitle")}
                             </h1>
                             <p className='max-w-4xl mt-1 tinyText text-gray-400'>
-                                Pebble is all about helping people with the help
-                                of volunteers like you. This means that all
-                                events should:
+                                {t("eventCreation:guidelinesDescription")}
                             </p>
                             <ul className='list-disc ml-6 mt-1 text-black text-sm font-semibold'>
-                                <li>
-                                    Be transparent about the events intentions
-                                </li>
-                                <li>
-                                    Encourage real human interactions in person
-                                    or online
-                                </li>
-                                <li>Have the host present in all events</li>
+                                <li>{t("eventCreation:guideline1")}</li>
+                                <li>{t("eventCreation:guideline2")}</li>
+                                <li>{t("eventCreation:guideline3")}</li>
                             </ul>
                             <p className='max-w-4xl mt-1 tinyText text-gray-400'>
-                                You can read more about all of this in our{" "}
+                                {t("eventCreation:readMore")}
                                 <a
                                     href='#'
                                     className='text-[#FDA855] no-underline hover:underline text-md'
                                 >
-                                    community guidelines
+                                    {t("eventCreation:communityGuidelines")}
                                 </a>
                                 .
                             </p>
@@ -448,7 +439,7 @@ const EventCreationPage = () => {
                                     boxShadow: "2px 2px 0px 0px #1A1A1A",
                                 }}
                             >
-                                Agree with terms and Create Event!
+                                {t("eventCreation:createEventButton")}
                             </button>
                         </div>
                         <div style={{ height: "4rem" }}></div>
@@ -459,24 +450,25 @@ const EventCreationPage = () => {
                 <dialog id='confirmcreate_modal' className='modal'>
                     <div className='modal-box'>
                         <h3 className='font-bold text-lg text-[#FDA855]'>
-                            Confirmation
+                            {t("eventCreation:confirmation")}
                         </h3>
                         <p className='py-4'>
-                            <span className='font-bold'>Event:</span>{" "}
+                            <span className='font-bold'>{t("event")}: </span>{" "}
                             {input.title}.
                             <br />{" "}
                             <span className='italic text-sm'>{input.type}</span>
                         </p>
                         <p>
-                            The following information cannot be changed later
-                            on:
+                            {t("eventCreation:infoChangeLater")}
                             <ul className='font-bold text-sm pt-2'>
-                                <li>Location</li>
-                                <li>Event type</li>
-                                <li>Day</li>
+                                <li>{t("eventCreation:location")}</li>
+                                <li>{t("eventCreation:eventType")}</li>
+                                <li>{t("eventCreation:day")}</li>
                             </ul>
                         </p>
-                        <p className='pt-2'>Do you wish to proceed?</p>
+                        <p className='pt-2'>
+                            {t("eventCreation:proceedQuestion")}
+                        </p>
 
                         <div className='modal-action'>
                             <form method='dialog'>
@@ -490,9 +482,11 @@ const EventCreationPage = () => {
                                         marginRight: "1rem",
                                     }}
                                 >
-                                    Create event
+                                    {t("eventCreation:createEvent")}
                                 </button>
-                                <button className='btn'>Return</button>
+                                <button className='btn'>
+                                    {t("eventCreation:return")}
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -503,3 +497,17 @@ const EventCreationPage = () => {
 };
 
 export default EventCreationPage;
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, [
+                "common",
+                "about",
+                "events",
+                "eventCreation",
+                "verify",
+            ])),
+            // Will be passed to the page component as props
+        },
+    };
+}

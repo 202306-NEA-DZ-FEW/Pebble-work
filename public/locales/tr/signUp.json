@@ -1,0 +1,13 @@
+{
+    "title": "Üye Ol",
+    "or": "VEYA",
+    "passwordValid": "Parola geçerli",
+    "passwordInvalid": "Parola en az 6 karakter olmalıdır",
+    "specialCharsValid": "Parola özel karakterler içeriyor",
+    "specialCharsInvalid": "Parola özel karakterler içermelidir",
+    "alphabetValid": "Parola harf içeriyor",
+    "alphabetInvalid": "Parola harf içermelidir",
+    "haveAccount": "Hesabınız yok mu?",
+    "signIn": "Giriş Yap",
+    "signUp": "Üye Ol"
+}

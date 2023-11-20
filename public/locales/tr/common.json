@@ -1,0 +1,119 @@
+{
+    "navbar": {
+        "home": "Ana Sayfa",
+        "events": "Etkinlikler",
+        "about": "Hakkımızda",
+        "contact": "İletişim"
+    },
+    "footer": {
+        "events": "Etkinlikler",
+        "about": "Hakkımızda",
+        "howItWorks": "Kuralları"
+    },
+    "headerCard": {
+        "title": "Bir Değişiklik Yapma, Birlikte",
+        "description": "Herkesin bir etki yaratma gücüne sahip olduğuna inanıyoruz: Bu platform aracılığıyla insanların bir araya gelip dünyayı değiştirmek için çalıştığı bir yer yaratmaya çalışıyoruz. Bu PebbleWork'tir.",
+        "button": "Başlayın"
+    },
+    "main": {
+        "joinCommunityTitle": "Topluluğa katıl!",
+        "joinCommunityDescription": "Birkaç saniye içinde bir hesap oluşturun ve motive olmuş bireyler ekibimize katılın. Ayrıca Gmail ve X/Twitter ile bağlantı kurabilirsiniz.",
+        "joinCommunityButtonText": "ÜYE OL",
+        "attendEventsTitle": "Etkinliklere katıl",
+        "attendEventsDescription": "Güçlerinizi birleştirin ve doğru değişiklikleri yapma konusunda sizin kadar tutkulu ve bağlı insanlarla işbirliği yapın.",
+        "attendEventsButtonText": "Etkinliklere göz at",
+        "hostEventTitle": "Kendi etkinliğinizi düzenleyin!",
+        "hostEventDescription": "Sizinle gerçekten rezonans olan bir sebep bulmakta zorluk mu çekiyorsunuz? Kendi etkinliğinizi oluşturarak inisiyatifi alın.",
+        "hostEventButtonText": "Başlayın"
+    },
+    "heroCard": {
+        "title": "Dünyada görmek istediğiniz değişimi kendiniz olun.",
+        "description": "Sadece anlamlı bir etki yaratmakla kalmayacak, aynı vizyona sahip bir topluluğun aktif bir üyesi olduğunuzu göreceksiniz. İyi bir dünya yaratma misyonumuzu destekleyen bir topluluğa katılın.",
+        "getStarted": "Başlayın",
+        "whoWeAre": "Biz kimiz"
+    },
+    "homeCards": {
+        "howItWorks": "Nasıl Çalışır",
+        "sustainableDevelopmentGoals": "Sürdürülebilir Kalkınma Hedefleri",
+        "introductorySentence": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
+    },
+    "sign": {
+        "signin": "Giriş Yap",
+        "signup": "ÜYE OL"
+    },
+    "contactForm": {
+        "title": "Bize Ulaşın",
+        "firstNamePlaceholder": "Ad",
+        "lastNamePlaceholder": "Soyad",
+        "emailPlaceholder": "E-posta",
+        "phonePlaceholder": "Telefon Numarası",
+        "messagePlaceholder": "Size nasıl yardımcı olabiliriz?",
+        "submitButton": "Gönder",
+        "subject": "Yeni Form Gönderimi",
+        "email": "E-posta",
+        "phone": "Telefon Numarası",
+        "success": "E-posta başarıyla gönderildi!",
+        "error": "E-posta gönderme başarısız oldu"
+    },
+    "dropdown": {
+        "signOut": "Çıkış Yap",
+        "signIn": "Giriş Yap",
+        "profile": "Profil",
+        "hostEvent": "Etkinlik Düzenle",
+        "myEvents": "Etkinliklerim",
+        "accountSettings": "Hesap Ayarları"
+    },
+    "language": {
+        "language": "Dil",
+        "english": "İngilizce",
+        "turkish": "Türkçe",
+        "german": "Almanca",
+        "chinese": "Çince"
+    },
+    "button": {
+        "continueWithTwitter": "Twitter ile Devam Et"
+    },
+    "buttons": {
+        "continueWithGoogle": "Google ile Devam Et"
+    },
+
+    "edit": {
+        "change": "Konum değiştirilemez",
+        "time": "Güncelleme Zamanı:",
+        "title": "Başlığı Güncelle:",
+        "titleDescription": "Etkinliğin amacını iletmek için daha iyi bir başlık mı gerekiyor? Biz sizin için buradayız",
+        "updateDescription": "Açıklamayı Güncelle:",
+        "updateDescriptionText": "Ekstra hedefleriniz veya aktiviteleriniz var mı?",
+        "eventImage": "Etkinlik Resmi:",
+        "eventImageText": "Bir resim yükleyin veya öncekini güncelleyin.",
+        "choseFile": "DOSYA SEÇ",
+        "noEdits": "Düzenleme yok",
+        "updateEvent": "Etkinliği Güncelle"
+    },
+    "review": {
+        "location": "Konum:",
+        "dateAndTime": "Tarih ve Saat:",
+        "undefined": "tanımsız",
+        "organizedBy": "Tarafından düzenlendi",
+        "dudeMcGee": "Dude McGee",
+        "editEvent": "Etkinliği Düzenle",
+        "cancelEvent": "Etkinliği İptal Et",
+        "cancelJoin": "Katılımı İptal Et",
+        "alreadyJoined": "Zaten Katılındı",
+        "joinNow": "Şimdi Katıl",
+        "joinNowText": "Bir etkinliğe katılmadan önce bir hesaba ihtiyacınız var.",
+        "signIn": "Giriş Yap",
+        "signUp": "Üye Ol",
+        "eventDescription": "Etkinlik Açıklaması:",
+        "loading": "Yükleniyor... belki etkinlik açıklaması yok",
+        "attendees": "Katılımcılar",
+        "noParticipant": "Henüz katılımcı yok. İlk katılan sen ol!",
+        "warning": "Uyarı",
+        "warningCancel": "Bu etkinliği iptal etmek üzeresiniz.",
+        "thisAction": "Bu işlem, kalıcı olarak ilişkilendirilmiş tüm verileri siler. Devam etmek istediğinizden emin misiniz?",
+        "close": "Kapat",
+        "warningLeave": "Bu etkinliği terk etmek üzeresiniz.",
+        "proceed": "Devam etmek istediğinizden emin misiniz?",
+        "leave": "Ayrıl"
+    }
+}

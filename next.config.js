@@ -1,20 +1,18 @@
-// next.config.js
-const path = require("path");
+/** @type {import('next').NextConfig} */
 const { i18n } = require("./next-i18next.config");
 
 module.exports = {
-    i18n: {
-        ...i18n,
-        // Add the additional properties here
-        localePath: path.resolve("./public/locales"),
-        defaultNS: "common",
-        serializeConfig: false,
-    },
+    i18n,
     eslint: {
         dirs: ["src"],
     },
     reactStrictMode: true,
     images: {
-        domains: ["firebasestorage.googleapis.com"],
+        domains: [
+            "images.unsplash.com",
+            "firebasestorage.googleapis.com",
+            "plus.unsplash.com",
+            "lh3.googleusercontent.com",
+        ],
     },
 };

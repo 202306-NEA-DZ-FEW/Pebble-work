@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from "react";
-import Link from "next/link";
 import styles from "@/styles/EventCreation.module.css";
 import Signup from "../Signup/Signup";
 import Signin from "../Signin/Signin";
+import { useTranslation } from "react-i18next";
 
 const EventCreation = () => {
+    const { t } = useTranslation();
     const canvasRef = useRef(null);
 
     useEffect(() => {
@@ -66,24 +67,20 @@ const EventCreation = () => {
 
     return (
         <>
-            <div className='flex items-left h-screen overflow-hidden z-10'>
-                <div className='absolute p-4 top-[50%] left-[34%] flex flex-col bg-white bg-opacity-50 border rounded-[8px]'>
-                    <p className='text-red-600'>
-                        Together for a Better World: Join Our Global
-                        Humanitarian Movement
-                    </p>
+            <div className='relative flex items-left h-full overflow-hidden z-10 mb-[4rem]'>
+                <div className='absolute w-full top-40 p-4 flex flex-col bg-white bg-opacity-70 border rounded-[8px]'>
+                    <p className='text-red-600'>{t("events:pageTitle")}</p>
 
                     <div className='flex flex-col'>
-                        <p className='text-red-400'>
-                            If you have an account please:{" "}
+                        <p className='text-green-400'>
+                            {t("events:joinDescription")}
                         </p>
-                        <Signin />
-                        <p className='text-red-400'>
-                            By joining our movement, you become an agent of hope
-                            and transformation.{" "}
-                        </p>
-
-                        <Signup />
+                        <div className='flex gap-12 justify-center items-center mx-auto mt-3'>
+                            <div>
+                                <Signin />
+                            </div>
+                            <Signup />
+                        </div>
                     </div>
                 </div>
                 <canvas

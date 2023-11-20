@@ -1,0 +1,249 @@
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+.container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+.svgContainer {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: spin 20s linear infinite;
+}
+.svgContainer1 {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: spin 20s linear infinite reverse;
+}
+@keyframes counterSpin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-1turn);
+    }
+}
+.svgContainer .svg {
+    animation: counterSpin 20s linear infinite;
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    background-color: transparent;
+    border-radius: 100%;
+}
+.svgContainer1 .svg {
+    animation: counterSpin 20s linear infinite reverse;
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    background-color: transparent;
+    border-radius: 100%;
+}
+
+/*tooltip*/
+.tooltip {
+    display: inline-block;
+    border-bottom: 1px dotted #666;
+    text-align: left;
+}
+
+.tooltip .right {
+    min-width: 200px;
+    max-width: 400px;
+    top: 50%;
+    left: 100%;
+    margin-left: 20px;
+    transform: translate(0, -50%);
+    padding: 0;
+    color: #eeeeee;
+    background-color: #444444;
+    font-weight: normal;
+    font-size: 13px;
+    border-radius: 8px;
+    position: absolute;
+    z-index: 20;
+    box-sizing: border-box;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.8s;
+}
+
+.tooltip:hover .right {
+    visibility: visible;
+    opacity: 1;
+}
+
+.tooltip .right i {
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -12px;
+    width: 12px;
+    height: 24px;
+    overflow: hidden;
+}
+.tooltip .right i::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    left: 0;
+    top: 50%;
+    transform: translate(50%, -50%) rotate(-45deg);
+    background-color: #444444;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+}
+
+.png {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    transform: translate(-50%, -50%);
+}
+
+.svgContainer .svg:nth-child(1):hover {
+    z-index: 10;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}
+
+.svgContainer .svg:nth-child(2):hover {
+    z-index: 10;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}
+.svgContainer .svg:nth-child(3):hover {
+    width: 60px;
+    height: 60px;
+    z-index: 10;
+    cursor: pointer;
+}
+.svgContainer .svg:nth-child(4):hover {
+    width: 60px;
+    height: 60px;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.svgContainer1 .svg:nth-child(1):hover {
+    z-index: 10;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+}
+
+.svgContainer1 .svg:nth-child(2):hover {
+    z-index: 10;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+}
+.svgContainer1 .svg:nth-child(3):hover {
+    width: 55px;
+    height: 55px;
+    z-index: 10;
+    cursor: pointer;
+}
+.svgContainer1 .svg:nth-child(4):hover {
+    width: 55px;
+    height: 55px;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.textContent {
+    padding: 8px;
+}
+.textContent ul {
+    list-style-type: none;
+}
+
+.textContent li::before {
+    content: "\2022";
+    color: rgb(0, 255, 85);
+    display: inline-block;
+    width: 1em;
+    margin-left: 0em;
+}
+
+.textContent h3 {
+    font-weight: bold;
+}
+.svgContainer .svg:nth-child(1) {
+    position: absolute;
+    top: 350px;
+    left: 120px;
+    transition: width 0.5s linear, height 0.5s linear;
+}
+.svgContainer .svg:nth-child(2) {
+    position: absolute;
+    top: 120px;
+    left: -110px;
+    transition: width 0.5s linear, height 0.5s linear;
+}
+.svgContainer .svg:nth-child(3) {
+    position: absolute;
+    top: 120px;
+    left: 350px;
+    transition: width 0.5s linear, height 0.5s linear;
+}
+.svgContainer .svg:nth-child(4) {
+    position: absolute;
+    top: -110px;
+    left: 120px;
+    transition: width 0.5s linear, height 0.5s linear;
+}
+.svgContainer1 .svg:nth-child(1) {
+    position: absolute;
+    top: 50px;
+    left: 200px;
+    width: 40px;
+    height: 40px;
+    transition: width 0.6s linear, height 0.6s linear;
+}
+.svgContainer1 .svg:nth-child(2) {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    bottom: 60px;
+    left: 50px;
+    transition: width 0.6s linear, height 0.6s linear;
+}
+.svgContainer1 .svg:nth-child(3) {
+    position: absolute;
+    top: 200px;
+    left: 200px;
+    width: 40px;
+    height: 40px;
+    transition: width 0.6s linear, height 0.6s linear;
+}
+.svgContainer1 .svg:nth-child(4) {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    width: 40px;
+    height: 40px;
+    transition: width 0.6s linear, height 0.6s linear;
+}

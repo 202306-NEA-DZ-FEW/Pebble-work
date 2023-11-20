@@ -7,7 +7,7 @@ import "@/styles/globals.css";
 
 import Layout from "@/layout/Layout";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     return (
         <Layout>
             <ToastContainer />

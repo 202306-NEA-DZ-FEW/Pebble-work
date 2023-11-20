@@ -1,0 +1,10 @@
+{
+    "about": {
+        "title": "Über Pebble Work",
+        "description": "Erleben Sie die Kraft von PebbleWork mit seiner modernsten Technologie. Wir haben eine reaktionsschnelle und interaktive Plattform entwickelt, die den Benutzer in den Mittelpunkt stellt. Navigieren Sie nahtlos durch die Seiten, erstellen, bearbeiten und löschen Sie Ereignisse. Treten Sie mit einem einfachen Klick bei oder verlassen Sie sie. PebbleWork bietet eine von Freiwilligen für Freiwillige entwickelte Plattform. Mit sicherer Benutzerauthentifizierung und Echtzeit-Datenspeicherung bieten wir eine benutzerfreundliche Erfahrung. Ob Sie Veranstaltungsorganisator oder Teilnehmer sind, PebbleWork ist hier, um Ihr Engagement in der Gemeinschaft zu vereinfachen. Treten Sie heute bei und erzielen Sie eine sinnvolle Wirkung in Ihrer Gemeinschaft.",
+        "ourTeam": "Unser Team",
+        "techStack": "Technologie-Stack",
+        "techStackTitle": "Verwendete Technologien und Projekt struktur",
+        "techStackDescription": "Für das PebbleWork-Projekt haben wir Next.js, Firebase, DaisyUI und Tailwind CSS verwendet, um eine reaktionsfähige und interaktive Plattform zu erstellen. Next.js ermöglicht serverseitiges Rendern und nahtlose Routenführung, während Firebase die Benutzerauthentifizierung und Echtzeit-Datenspeicherung behandelt. DaisyUI und Tailwind CSS sorgen für ein visuell ansprechendes und modernes Design. Die Projektstruktur folgte modularen Komponenten für einfache Wartung und Skalierbarkeit. Gemeinsam schaffen diese Technologien eine benutzerfreundliche und ansprechende Erfahrung, damit Freiwillige sich vernetzen und eine positive Wirkung erzielen können."
+    }
+}

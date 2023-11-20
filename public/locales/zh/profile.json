@@ -1,0 +1,12 @@
+{
+    "yourProfile": "您的个人资料",
+    "editProfile": "编辑个人资料",
+    "uploadNew": "上传新照片",
+    "chooseFromLibrary": "从图库选择",
+    "nameRequired": "姓名（必填）",
+    "surnameRequired": "姓氏（必填）",
+    "emailRequired": "电子邮件（必填）",
+    "locationRequired": "位置（必填）",
+    "interests": "兴趣爱好",
+    "joinedEvents": "已参加的活动"
+}

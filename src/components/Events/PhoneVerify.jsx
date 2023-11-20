@@ -14,6 +14,7 @@ import {
     signInWithPhoneNumber,
 } from "firebase/auth";
 import { toast, Toaster } from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 import OtpInput from "@/components/OtpVerification";
 const PhoneVerify = () => {
@@ -22,6 +23,7 @@ const PhoneVerify = () => {
     const [loading, setLoading] = useState(false);
     const [showOTP, setShowOTP] = useState(false);
     const [user, setUser] = useState(null);
+    const { t } = useTranslation("verify");
 
     function onCaptchaVerify() {
         if (!window.recaptchaVerifier) {
@@ -53,10 +55,9 @@ const PhoneVerify = () => {
                 window.confirmationResult = confirmationResult;
                 setLoading(false);
                 setShowOTP(true);
-                toast.success("OTP sent successfully!");
+                toast.success(t("verify:otpSent"));
             })
-            .catch((error) => {
-                console.log(error);
+            .catch(() => {
                 setLoading(false);
             });
     }
@@ -66,7 +67,7 @@ const PhoneVerify = () => {
         // Get current user before phone number verification
         const currentUser = getAuth().currentUser;
         if (!currentUser || !currentUser.email || !currentUser.displayName) {
-            console.log("No current user or missing email/name");
+            toast.error(t("verify:noCurrentUser"));
             return;
         }
 
@@ -80,7 +81,7 @@ const PhoneVerify = () => {
             // Link the phone credential to the current user
             await linkWithCredential(currentUser, phoneCredential);
 
-            console.log("Phone number linked to current user");
+            toast.success(t("verify:phoneNumberLinked"));
 
             // Get a reference to the user's document in the "users" collection
             const db = getFirestore();
@@ -95,7 +96,7 @@ const PhoneVerify = () => {
                 location.reload();
             }, 2000);
         } catch (err) {
-            console.log(err.message);
+            toast.error(t("verify:exists"));
         } finally {
             setLoading(false);
         }
@@ -117,13 +118,12 @@ const PhoneVerify = () => {
                     <div id='recaptcha-container'></div>
                     {user ? (
                         <h2 className='text-center text-white font-medium text-2xl'>
-                            👍 Login Success
+                            {t("verify:loginSuccess")}
                         </h2>
                     ) : (
                         <div className='w-80 flex flex-col gap-4 rounded-lg p-4'>
                             <h1 className='text-center leading-normal text-white font-medium text-3xl mb-6'>
-                                Verify your phone number before you can create
-                                an event
+                                {t("verify:verifyPhoneNumber")}
                             </h1>
                             {showOTP ? (
                                 <>
@@ -134,7 +134,7 @@ const PhoneVerify = () => {
                                         htmlFor='otp'
                                         className='font-bold text-xl text-white text-center'
                                     >
-                                        Enter your OTP
+                                        {t("verify:enterOTP")}
                                     </label>
 
                                     <OtpInput
@@ -153,7 +153,7 @@ const PhoneVerify = () => {
                                                 className='mt-1 animate-spin'
                                             />
                                         )}
-                                        <span>Verify OTP</span>
+                                        <span>{t("verify:verifyOTP")}</span>
                                     </button>
                                 </>
                             ) : (
@@ -165,7 +165,7 @@ const PhoneVerify = () => {
                                         htmlFor=''
                                         className='font-bold text-xl text-white text-center'
                                     >
-                                        Verify your phone number
+                                        {t("verify:verifyPhoneNumberLabel")}
                                     </label>
                                     <PhoneInput
                                         country={"dz"}
@@ -183,7 +183,9 @@ const PhoneVerify = () => {
                                                 className='mt-1 animate-spin'
                                             />
                                         )}
-                                        <span>Send code via SMS</span>
+                                        <span>
+                                            {t("verify:sendCodeViaSMS")}
+                                        </span>
                                     </button>
                                 </>
                             )}

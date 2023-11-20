@@ -1,0 +1,14 @@
+{
+    "editProfile": "Profili Düzenle",
+    "uploadNew": "Yeni Yükle",
+    "chooseFromLibrary": "Kütüphaneden Seç",
+    "nameRequired": "Ad (Gerekli)",
+    "surnameRequired": "Soyad (Gerekli)",
+    "emailRequired": "E-posta (Gerekli)",
+    "locationRequired": "Konum (Gerekli)",
+    "interests": "İlgi Alanları",
+    "saveChanges": "Değişiklikleri Kaydet",
+    "changePassword": "Şifre Değiştir",
+    "submit": "Gönder",
+    "cancel": "İptal"
+}
