@@ -17,8 +17,27 @@ const Dashboarduser = () => {
     const [User, setUser] = useState(null);
     const [displayCreatedEvents, setDisplayCreatedEvents] = useState(false);
     const [eventsMatchingInterests, setEventsMatchingInterests] = useState([]);
+    const [Nameuser, SetNameUser] = useState("");
 
-    // Function to handle the display of created or joined events
+    useEffect(() => {
+        const userDocRef = doc(db, "users", auth.currentUser.uid);
+
+        getDoc(userDocRef)
+            .then((doc) => {
+                if (doc.exists()) {
+                    const userData = doc.data();
+                    const userName = userData.Name;
+                    SetNameUser(userName);
+                    console.log(Nameuser);
+                } else {
+                    console.log("User document does not exist");
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching user data:", error);
+            });
+    }, []);
+
     const handleDisplayEvents = (eventType) => {
         if (eventType === "created") {
             setDisplayCreatedEvents(true);
@@ -27,7 +46,6 @@ const Dashboarduser = () => {
         }
     };
 
-    // Helper function to fetch event data based on an array of event IDs
     const fetchEventData = async (eventIds) => {
         const eventsCollectionRef = collection(db, "events");
 
@@ -37,7 +55,6 @@ const Dashboarduser = () => {
             const eventDocSnap = await getDoc(eventDocRef);
             if (eventDocSnap.exists()) {
                 const eventData = eventDocSnap.data();
-                // Include the eventId in the event data
                 eventData.id = eventId;
                 return eventData;
             } else {
@@ -46,59 +63,46 @@ const Dashboarduser = () => {
             }
         });
 
-        // Wait for all event data to be fetched
         const eventsData = await Promise.all(eventIdsPromises);
-        // Filter out any null values (events that don't exist)
         const validEventsData = eventsData.filter(
             (eventData) => eventData !== null
         );
         return validEventsData;
     };
 
-    // useEffect hook to fetch events from the database and filter them based on user's interests
     useEffect(() => {
         const fetchEvents = async () => {
-            // Fetch all events from the database
             const eventsCollectionRef = collection(db, "events");
             const eventsSnapshot = await getDocs(eventsCollectionRef);
             const eventsList = eventsSnapshot?.docs?.map((doc) => ({
                 ...doc.data(),
-                id: doc.id, // Include the eventId in the event data
+                id: doc.id,
             }));
 
-            // Filter events based on user's interests
             const userInterests = User?.interests; // User's interests
             const eventsMatchingInterests = eventsList?.filter((event) =>
                 userInterests?.includes(event.type)
             );
 
-            // Update the state with the filtered events
             setEventsMatchingInterests(eventsMatchingInterests);
         };
 
-        // Only fetch events if User is not null
         if (User) {
             fetchEvents();
         }
-    }, [User]); // Run this effect whenever User changes
-
-    // Determine which events to display based on the displayCreatedEvents state
+    }, [User]);
     const eventsToDisplay = displayCreatedEvents ? createdEvent : joinedEvents;
     const title = displayCreatedEvents ? "Events Created" : "Joined Events";
 
-    //  user data and the events they've joined or created
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (authUser) => {
             if (authUser) {
-                // user data from the database
                 const userDocRef = doc(db, "users", authUser.uid);
 
                 try {
                     const userDoc = await getDoc(userDocRef);
                     if (userDoc.exists()) {
                         setUser(userDoc.data());
-
-                        // events the user has created
                         const userCreatedEvents =
                             userDoc.data().eventsCreated || [];
                         const eventIds = userCreatedEvents.map(
@@ -130,8 +134,6 @@ const Dashboarduser = () => {
                 setUser(null);
             }
         });
-
-        // Unsubscribe from the auth listener when the component unmounts
         return () => {
             unsubscribe();
         };
@@ -150,7 +152,24 @@ const Dashboarduser = () => {
                 }}
             >
                 <ul>
-                    <li className='flex items-center mb-24 mt-60  hover:bg-[#BFEAD3] '>
+                    <li className='flex items-center mb-10 mt-40'>
+                        <p
+                            className='font-bold text-lg italic mr-2'
+                            style={{
+                                color: "#1A1A1A",
+                                fontFamily: "Rubik",
+                                fontWeight: " 500",
+                                letterSpacing: "0.11px",
+                                wordWrap: "break-word",
+                                // boxShadow: "0 4px 6px rgba(146, 227, 169, 0.6)",
+                            }}
+                        >
+                            {" "}
+                            Hi {Nameuser} welcome!
+                        </p>
+                    </li>
+
+                    <li className='flex items-center mb-20 mt-8  hover:bg-[#BFEAD3] '>
                         <a href='#' className='flex items-center'>
                             <IoCreateOutline size={30} className='mr-1 ' />
                             <span class='mr-2 block hover:bg-[#BFEAD3] cursor-pointer '>
@@ -169,7 +188,7 @@ const Dashboarduser = () => {
                             </span>
                         </button>
                     </li>
-                    <li>
+                    <li className='hover:bg-[#BFEAD3]'>
                         <button
                             className='flex items-center mb-40  hover:bg-[#BFEAD3] '
                             onClick={() => handleDisplayEvents("Joined")}
