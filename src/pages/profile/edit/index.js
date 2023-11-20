@@ -307,7 +307,7 @@ const ProfilePage = () => {
                             {/* Profile pic input */}
                             <label
                                 htmlFor='profilePictureInput'
-                                className='bg-[#2E7EAA] mt-2 text-center px-2 text-xs text-white shadow-md md:mt-4 md:h-12 cursor-pointer rounded md:text-lg'
+                                className='bg-[#2E7EAA] flex justify-center items-center mt-2 text-center px-2 text-xs text-white shadow-md md:mt-4 md:h-12 cursor-pointer rounded md:text-lg'
                             >
                                 {t("edit:uploadNew")}
                             </label>
@@ -383,53 +383,57 @@ const ProfilePage = () => {
                     <div className='mt-4 flex flex-col items-center md:mx-auto'>
                         <button
                             type='submit'
-                            className='mt-7 bg-[#2E7EAA]  text-center h-10 w-30  px-4 py-2 text-xs text-white  shadow-md md:h-14 md:w-45 md:h-13 md:font-bold md:text-xl '
+                            className='mt-7 bg-[#2E7EAA]  text-center h-10 w-30  px-4 py-2 text-xs text-white shadow-md md:h-14 md:w-45 md:h-13 md:font-bold md:text-xl '
                         >
                             {t("edit:saveChanges")}
                         </button>
                     </div>
                 </form>
                 {/* Change Password */}
-                <div className='md:w-[700px] sm:w-[500px] w-[300px] bg-[#B4CD93] h-[250px] sm:h-[200px] mb-6'>
-                    <h3 className='font-bold mt-5 text-center md:text-2xl'>
-                        {t("edit:changePassword")}
-                    </h3>
-                    <form
-                        onSubmit={handleChangePassword}
-                        className='w-full flex gap-6 flex-col items-center justify-center'
-                    >
-                        <div className='flex items-center sm:flex-row flex-col gap-3 w-full sm:justify-around sm:gap-14 sm:px-10'>
-                            <input
-                                type='password'
-                                placeholder='New Password'
-                                value={newPassword}
-                                onChange={(e) => setNewPassword(e.target.value)}
-                                className='w-[40vw] sm:w-[50vw] h-8 px-3 rounded md:h-10'
-                                required
-                            />
-                            <input
-                                type='password'
-                                placeholder='Confirm Password'
-                                value={confirmPassword}
-                                onChange={(e) =>
-                                    setConfirmPassword(e.target.value)
-                                }
-                                className='w-[40vw] sm:w-[50vw] h-8 px-3 rounded md:h-10'
-                                required
-                            />
-                        </div>
-                        <div className='flex sm:flex-row sm:justify-evenly flex-col gap-3 w-[80px] sm:w-full'>
-                            <button
-                                type='submit'
-                                className='bg-[#2E7EAA] text-center h-8 w-full md:w-32 text-xs text-white rounded shadow-md md:h-10 md:text-lg'
-                            >
-                                {t("edit:Submit")}
-                            </button>
-                            <button className='text-center h-8 w-full bg-white opacity-70 md:w-32 text-xs outline outline-1 rounded shadow-md md:h-10 md:text-lg'>
-                                {t("edit:Cancel")}
-                            </button>
-                        </div>
-                    </form>
+                <div className='flex mt-6 justify-center'>
+                    <div className='md:w-[700px] sm:w-[500px] w-[300px] bg-[#B4CD93] h-[250px] sm:h-[200px] mb-6'>
+                        <h3 className='font-bold mt-5 text-center md:text-2xl'>
+                            {t("edit:changePassword")}
+                        </h3>
+                        <form
+                            onSubmit={handleChangePassword}
+                            className='w-full flex gap-6 flex-col items-center justify-center'
+                        >
+                            <div className='flex items-center sm:flex-row flex-col gap-3 w-full sm:justify-around sm:gap-14 sm:px-10'>
+                                <input
+                                    type='password'
+                                    placeholder='New Password'
+                                    value={newPassword}
+                                    onChange={(e) =>
+                                        setNewPassword(e.target.value)
+                                    }
+                                    className='w-[40vw] sm:w-[50vw] h-8 px-3 rounded md:h-10'
+                                    required
+                                />
+                                <input
+                                    type='password'
+                                    placeholder='Confirm Password'
+                                    value={confirmPassword}
+                                    onChange={(e) =>
+                                        setConfirmPassword(e.target.value)
+                                    }
+                                    className='w-[40vw] sm:w-[50vw] h-8 px-3 rounded md:h-10'
+                                    required
+                                />
+                            </div>
+                            <div className='flex sm:flex-row sm:justify-evenly flex-col gap-3 w-[80px] sm:w-full'>
+                                <button
+                                    type='submit'
+                                    className='bg-[#2E7EAA] text-center h-8 w-full md:w-32 text-xs text-white rounded shadow-md md:h-10 md:text-lg'
+                                >
+                                    {t("edit:Submit")}
+                                </button>
+                                <button className='text-center h-8 w-full bg-white opacity-70 md:w-32 text-xs outline outline-1 rounded shadow-md md:h-10 md:text-lg'>
+                                    {t("edit:Cancel")}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
                 {showPopup && (
