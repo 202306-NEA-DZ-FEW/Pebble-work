@@ -158,7 +158,7 @@ const Dashboarduser = () => {
                         </p>
                     </li>
                     <li className='flex items-center mb-10 mt-0 ml-1'>
-                        <p className='font-bold text-lg italic mr-2'>
+                        <p className='font-semibold text-lg italic mr-2'>
                             we re glad to see you
                         </p>
                     </li>
