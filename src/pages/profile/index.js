@@ -66,7 +66,7 @@ const ProfilePage = () => {
     }, []);
 
     const handleEditProfile = () => {
-        router.push("/editprofile"); // Redirect to the Edit Profile page
+        router.push("/profile/edit"); // Redirect to the Edit Profile page
     };
 
     if (!currentUser) {

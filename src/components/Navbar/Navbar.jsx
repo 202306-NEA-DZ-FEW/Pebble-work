@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import styles from "@/styles/Navbar.module.css";
 
@@ -16,6 +16,8 @@ let tabs = [
     { id: "about", label: "About" },
 ];
 const Navbar = () => {
+    const dropdownRef = useRef(null);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [menuDropdownOpen, setMenuDropdownOpen] = useState(false);
 
     const [activeTab, setActiveTab] = useState(tabs[0].id);
@@ -26,13 +28,41 @@ const Navbar = () => {
         setMenuDropdownOpen(!menuDropdownOpen);
     };
 
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
     const closeMenuDropdown = () => {
-        setMenuDropdownOpen(false);
+        setMenuDropdownOpen(!menuDropdownOpen);
     };
 
     useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                menuDropdownOpen &&
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target)
+            ) {
+                closeMenuDropdown();
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        const logged = auth.onAuthStateChanged((user) => {
+            if (user) {
+                setUser(user);
+            } else {
+                setUser(null);
+            }
+        });
+
         setActiveTab(router.pathname.slice(1)); //so the motion will always stay on the current active tab
-    }, []);
+        return () => {
+            logged();
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [menuDropdownOpen]);
 
     return (
         <nav className='sticky z-[555] bg-[#B4CD93] top-0 xl:flex xl:flex-col xl:items-center'>
@@ -92,8 +122,9 @@ const Navbar = () => {
                 <div
                     className={`${
                         menuDropdownOpen ? "block" : "hidden"
-                    }  md:flex md:items-center w-full md:w-auto`}
+                    }  md:flex md:items-center w-full md:w-auto navbar-content`}
                     id='navbar-language'
+                    ref={dropdownRef}
                 >
                     <ul
                         className={`md:static text-center md:bg-transparent gap-10 fixed sm:w-full w-60 md:min-h-0 min-h-screen flex flex-col font-medium md:p-0 md:flex-row md:space-x-8 md:mt-0 bg-gray-800 left-[0px] top-0 z-10 ${styles.tiltIn}`}
