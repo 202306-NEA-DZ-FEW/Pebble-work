@@ -1,8 +1,10 @@
-import React, { useRef, useEffect, useCallback } from "react";
 import { useTranslation } from "next-i18next";
-import styles from "@/styles/about.module.css";
-import Members from "@/components/Cards/Aboutus/Members";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import React, { useCallback, useEffect, useRef } from "react";
+
+import styles from "@/styles/about.module.css";
+
+import Members from "@/components/Cards/Aboutus/Members";
 import TechStack from "@/components/Cards/Aboutus/TechStack";
 import Wave from "@/components/Wave";
 

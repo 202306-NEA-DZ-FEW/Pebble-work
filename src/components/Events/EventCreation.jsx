@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from "react";
-import styles from "@/styles/EventCreation.module.css";
-import Signup from "../Signup/Signup";
-import Signin from "../Signin/Signin";
 import { useTranslation } from "react-i18next";
+
+import styles from "@/styles/EventCreation.module.css";
+
+import Signin from "../Signin/Signin";
+import Signup from "../Signup/Signup";
 
 const EventCreation = () => {
     const { t } = useTranslation();

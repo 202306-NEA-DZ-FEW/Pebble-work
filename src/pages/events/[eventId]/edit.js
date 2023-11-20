@@ -1,11 +1,13 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import React, { useEffect, useState } from "react";
-import styles from "@/styles/EventDetails.module.css";
-import NoAccess from "@/components/Events/EditEvent";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import React, { useEffect, useState } from "react";
+
+import styles from "@/styles/EventDetails.module.css";
+
+import NoAccess from "@/components/Events/EditEvent";
 
 import { auth, db, storage } from "@/util/firebase";
 

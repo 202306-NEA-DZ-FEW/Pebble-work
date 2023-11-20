@@ -1,4 +1,5 @@
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
+
 import styles from "@/styles/EventCreation.module.css";
 
 const OtpInput = ({ onKeyDown, onChange, length }) => {

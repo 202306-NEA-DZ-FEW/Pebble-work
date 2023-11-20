@@ -10,6 +10,7 @@ import Modal from "@/components/Popup/Modal";
 import PicturesLibrary from "./library";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { updateProfile } from "firebase/auth";
+import Loader from "@/components/Loader/Loader";
 
 const ProfilePage = () => {
     const { t } = useTranslation();
@@ -268,7 +269,7 @@ const ProfilePage = () => {
         router.push("/profile");
     }
     if (!currentUser) {
-        return <p>loading</p>;
+        return <Loader />;
     } else {
         return (
             <div className='pt-5 flex flex-col items-center justify-center sm-types'>
