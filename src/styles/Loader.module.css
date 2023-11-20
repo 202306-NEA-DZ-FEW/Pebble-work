@@ -41,7 +41,7 @@
     top: 50%;
     width: 35px;
     height: 100px;
-    background: #fff;
+    background: transparent;
     border: 3px solid #2e7eaa;
     border-bottom: 0px;
     border-radius: 3px;
@@ -144,7 +144,7 @@
     top: 65%;
     width: 42px;
     height: 60px;
-    background: #fff;
+    background: transparent;
     border: 3px solid #2e7eaa;
     border-bottom: 0px;
     border-radius: 3px;
@@ -362,7 +362,7 @@
     75% {
         left: 20%;
         transform: scale(1.15, 0.85) translate(60%, -15%);
-        background: #fff;
+        background: transparent;
         border-color: #2e7eaa;
     }
     91% {
