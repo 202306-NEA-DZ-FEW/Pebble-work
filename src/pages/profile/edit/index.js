@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { db, auth, storage } from "../../util/firebase";
+import { db, auth, storage } from "@/util/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { getAuth, updatePassword, onAuthStateChanged } from "firebase/auth";
@@ -230,15 +230,15 @@ const ProfilePage = () => {
     };
 
     const handleSaveSelectedImage = async () => {
-        // Create a Firestore document reference for the user
-        const userRef = doc(db, "users", currentUserId);
         if (selectedImage == "") {
             return;
         }
-
         try {
             // Update the user's "Image" field in Firestore with the selected photo's URL
-            await updateDoc(userRef, { imageURL: selectedImage });
+            const auth = getAuth();
+            await updateProfile(auth.currentUser, {
+                photoURL: selectedImage,
+            });
 
             // Profile photo updated successfully
             setModalContent("Profile photo updated successfully");

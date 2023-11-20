@@ -1,0 +1,230 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GalleryCard renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="flex justify-center items-center shadow-md p-4"
+  >
+    <div
+      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"
+    >
+      <div
+        class="bg-gray-100 xl:w-[190px] xl:h-[172px] lg:w-[156px] lg:h-[154px] m-2 sm:w-[138px] sm:h-[132px] w-[112px] h-[106px]  flex items-center justify-center gallery invisible"
+        id="gallery"
+        style="animation-delay: 0s;"
+      >
+        <img
+          alt="Image 1"
+          loading="lazy"
+          src="/images/IMG1.png"
+          style="object-position: center; object-fit: cover; display: block; width: 100%;"
+        />
+      </div>
+      <div
+        class="bg-gray-100 xl:w-[190px] xl:h-[172px] lg:w-[156px] lg:h-[154px] m-2 sm:w-[138px] sm:h-[132px] w-[112px] h-[106px]  flex items-center justify-center gallery invisible"
+        id="gallery"
+        style="animation-delay: 0.1s;"
+      >
+        <img
+          alt="Image 2"
+          loading="lazy"
+          src="/images/IMG2.png"
+          style="object-position: center; object-fit: cover; display: block; width: 100%;"
+        />
+      </div>
+      <div
+        class="bg-gray-100 xl:w-[190px] xl:h-[172px] lg:w-[156px] lg:h-[154px] m-2 sm:w-[138px] sm:h-[132px] w-[112px] h-[106px]  flex items-center justify-center gallery invisible"
+        id="gallery"
+        style="animation-delay: 0.2s;"
+      >
+        <img
+          alt="Image 3"
+          loading="lazy"
+          src="/images/IMG3.png"
+          style="object-position: center; object-fit: cover; display: block; width: 100%;"
+        />
+      </div>
+      <div
+        class="bg-gray-100 xl:w-[190px] xl:h-[172px] lg:w-[156px] lg:h-[154px] m-2 sm:w-[138px] sm:h-[132px] w-[112px] h-[106px]  flex items-center justify-center gallery invisible"
+        id="gallery"
+        style="animation-delay: 0.30000000000000004s;"
+      >
+        <img
+          alt="Image 4"
+          loading="lazy"
+          src="/images/IMG4.png"
+          style="object-position: center; object-fit: cover; display: block; width: 100%;"
+        />
+      </div>
+      <div
+        class="bg-gray-100 xl:w-[190px] xl:h-[172px] lg:w-[156px] lg:h-[154px] m-2 sm:w-[138px] sm:h-[132px] w-[112px] h-[106px]  flex items-center justify-center gallery invisible"
+        id="gallery"
+        style="animation-delay: 0.4s;"
+      >
+        <img
+          alt="Image 5"
+          loading="lazy"
+          src="/images/IMG5.png"
+          style="object-position: center; object-fit: cover; display: block; width: 100%;"
+        />
+      </div>
+      <div
+        class="bg-gray-100 xl:w-[190px] xl:h-[172px] lg:w-[156px] lg:h-[154px] m-2 sm:w-[138px] sm:h-[132px] w-[112px] h-[106px]  flex items-center justify-center gallery invisible"
+        id="gallery"
+        style="animation-delay: 0.5s;"
+      >
+        <img
+          alt="Image 6"
+          loading="lazy"
+          src="/images/IMG6.png"
+          style="object-position: center; object-fit: cover; display: block; width: 100%;"
+        />
+      </div>
+      <div
+        class="bg-gray-100 xl:w-[190px] xl:h-[172px] lg:w-[156px] lg:h-[154px] m-2 sm:w-[138px] sm:h-[132px] w-[112px] h-[106px]  flex items-center justify-center gallery invisible"
+        id="gallery"
+        style="animation-delay: 0.6000000000000001s;"
+      >
+        <img
+          alt="Image 7"
+          loading="lazy"
+          src="/images/IMG7.png"
+          style="object-position: center; object-fit: cover; display: block; width: 100%;"
+        />
+      </div>
+      <div
+        class="bg-gray-100 xl:w-[190px] xl:h-[172px] lg:w-[156px] lg:h-[154px] m-2 sm:w-[138px] sm:h-[132px] w-[112px] h-[106px]  flex items-center justify-center gallery invisible"
+        id="gallery"
+        style="animation-delay: 0.7000000000000001s;"
+      >
+        <img
+          alt="Image 8"
+          loading="lazy"
+          src="/images/IMG8.png"
+          style="object-position: center; object-fit: cover; display: block; width: 100%;"
+        />
+      </div>
+      <div
+        class="bg-gray-100 xl:w-[190px] xl:h-[172px] lg:w-[156px] lg:h-[154px] m-2 sm:w-[138px] sm:h-[132px] w-[112px] h-[106px]  flex items-center justify-center gallery invisible"
+        id="gallery"
+        style="animation-delay: 0.8s;"
+      >
+        <img
+          alt="Image 9"
+          loading="lazy"
+          src="/images/IMG9.png"
+          style="object-position: center; object-fit: cover; display: block; width: 100%;"
+        />
+      </div>
+      <div
+        class="bg-gray-100 xl:w-[190px] xl:h-[172px] lg:w-[156px] lg:h-[154px] m-2 sm:w-[138px] sm:h-[132px] w-[112px] h-[106px]  flex items-center justify-center gallery invisible"
+        id="gallery"
+        style="animation-delay: 0.9s;"
+      >
+        <img
+          alt="Image 10"
+          loading="lazy"
+          src="/images/IMG10.png"
+          style="object-position: center; object-fit: cover; display: block; width: 100%;"
+        />
+      </div>
+      <div
+        class="bg-gray-100 xl:w-[190px] xl:h-[172px] lg:w-[156px] lg:h-[154px] m-2 sm:w-[138px] sm:h-[132px] w-[112px] h-[106px]  flex items-center justify-center gallery invisible"
+        id="gallery"
+        style="animation-delay: 1s;"
+      >
+        <img
+          alt="Image 11"
+          loading="lazy"
+          src="/images/IMG11.png"
+          style="object-position: center; object-fit: cover; display: block; width: 100%;"
+        />
+      </div>
+      <div
+        class="bg-gray-100 xl:w-[190px] xl:h-[172px] lg:w-[156px] lg:h-[154px] m-2 sm:w-[138px] sm:h-[132px] w-[112px] h-[106px]  flex items-center justify-center gallery invisible"
+        id="gallery"
+        style="animation-delay: 1.1s;"
+      >
+        <img
+          alt="Image 12"
+          loading="lazy"
+          src="/images/IMG12.png"
+          style="object-position: center; object-fit: cover; display: block; width: 100%;"
+        />
+      </div>
+      <div
+        class="bg-gray-100 xl:w-[190px] xl:h-[172px] lg:w-[156px] lg:h-[154px] m-2 sm:w-[138px] sm:h-[132px] w-[112px] h-[106px]  flex items-center justify-center gallery invisible"
+        id="gallery"
+        style="animation-delay: 1.2000000000000002s;"
+      >
+        <img
+          alt="Image 13"
+          loading="lazy"
+          src="/images/IMG13.png"
+          style="object-position: center; object-fit: cover; display: block; width: 100%;"
+        />
+      </div>
+      <div
+        class="bg-gray-100 xl:w-[190px] xl:h-[172px] lg:w-[156px] lg:h-[154px] m-2 sm:w-[138px] sm:h-[132px] w-[112px] h-[106px]  flex items-center justify-center gallery invisible"
+        id="gallery"
+        style="animation-delay: 1.3s;"
+      >
+        <img
+          alt="Image 14"
+          loading="lazy"
+          src="/images/IMG14.png"
+          style="object-position: center; object-fit: cover; display: block; width: 100%;"
+        />
+      </div>
+      <div
+        class="bg-gray-100 xl:w-[190px] xl:h-[172px] lg:w-[156px] lg:h-[154px] m-2 sm:w-[138px] sm:h-[132px] w-[112px] h-[106px]  flex items-center justify-center gallery invisible"
+        id="gallery"
+        style="animation-delay: 1.4000000000000001s;"
+      >
+        <img
+          alt="Image 15"
+          loading="lazy"
+          src="/images/IMG15.png"
+          style="object-position: center; object-fit: cover; display: block; width: 100%;"
+        />
+      </div>
+      <div
+        class="bg-gray-100 xl:w-[190px] xl:h-[172px] lg:w-[156px] lg:h-[154px] m-2 sm:w-[138px] sm:h-[132px] w-[112px] h-[106px]  flex items-center justify-center gallery invisible"
+        id="gallery"
+        style="animation-delay: 1.5s;"
+      >
+        <img
+          alt="Image 16"
+          loading="lazy"
+          src="/images/IMG16.png"
+          style="object-position: center; object-fit: cover; display: block; width: 100%;"
+        />
+      </div>
+      <div
+        class="bg-gray-100 xl:w-[190px] xl:h-[172px] lg:w-[156px] lg:h-[154px] m-2 sm:w-[138px] sm:h-[132px] w-[112px] h-[106px]  flex items-center justify-center gallery invisible"
+        id="gallery"
+        style="animation-delay: 1.6s;"
+      >
+        <img
+          alt="Image 17"
+          loading="lazy"
+          src="/images/IMG17.png"
+          style="object-position: center; object-fit: cover; display: block; width: 100%;"
+        />
+      </div>
+      <div
+        class="bg-gray-100 xl:w-[190px] xl:h-[172px] lg:w-[156px] lg:h-[154px] m-2 sm:w-[138px] sm:h-[132px] w-[112px] h-[106px]  flex items-center justify-center gallery invisible"
+        id="gallery"
+        style="animation-delay: 1.7000000000000002s;"
+      >
+        <img
+          alt="Image 18"
+          loading="lazy"
+          src="/images/IMG18.png"
+          style="object-position: center; object-fit: cover; display: block; width: 100%;"
+        />
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
