@@ -230,12 +230,9 @@ const ProfilePage = () => {
     };
 
     const handleSaveSelectedImage = async () => {
-
-      
         if (selectedImage == "") {
             return;
         }
-
         try {
             // Update the user's "Image" field in Firestore with the selected photo's URL
             const auth = getAuth();
