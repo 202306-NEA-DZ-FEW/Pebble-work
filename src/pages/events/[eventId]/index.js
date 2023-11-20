@@ -1,7 +1,4 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
-
 import {
     arrayRemove,
     arrayUnion,
@@ -16,11 +13,14 @@ import {
 } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React from "react";
 import { useEffect, useState } from "react";
 
-import NoEvent from "@/components/Events/NoEvent";
 import styles from "@/styles/EventDetails.module.css";
+
+import NoEvent from "@/components/Events/NoEvent";
 
 import { auth, db } from "@/util/firebase";
 
@@ -521,6 +521,9 @@ export async function getServerSideProps(context) {
 
     const event = eventDoc.data();
     const userId = event.organizer;
+
+    // Convert the timestamp to a string
+    event.timestamp = event.timestamp.toString();
 
     const organizerRef = doc(db, "users", userId);
     const organizerDoc = await getDoc(organizerRef);

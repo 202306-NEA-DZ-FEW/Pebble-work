@@ -1,7 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
-import styles from "@/styles/EventCard.module.css";
+import { CircularProgress } from "@mui/material";
 import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+
+import styles from "@/styles/EventCard.module.css";
 
 const DesktopCard = ({ eventId, title, type, image, description }) => {
     const router = useRouter();
@@ -14,6 +16,7 @@ const DesktopCard = ({ eventId, title, type, image, description }) => {
     let reverseTimer;
     const [isHovered, setIsHovered] = useState(false);
     const { t } = useTranslation(); // Initialize useTranslation
+    const [imageLoaded, setImageLoaded] = useState(false);
 
     const handleHover = () => {
         clearTimeout(enterDelay); // clear the enter delay if the mouse enters again
@@ -53,9 +56,19 @@ const DesktopCard = ({ eventId, title, type, image, description }) => {
                 onMouseLeave={handleMouseLeave}
                 className={`${styles.contai} ${styles.card} ${styles.wideFading} shadow-inner w-[55vw] h-[200px] flex flex-row items-center justify-around gap-2`}
             >
+                <img
+                    src={image}
+                    alt='background'
+                    style={{ display: "none" }}
+                    onLoad={() => setImageLoaded(true)}
+                />
+                {!imageLoaded && <CircularProgress />}
                 <div
-                    style={{ backgroundImage: `url(${image})` }}
-                    className={`${styles.backgroundImage} ${
+                    style={{
+                        backgroundImage: `url(${image})`,
+                        opacity: imageLoaded ? 1 : 0,
+                    }}
+                    className={`${styles.backgroundImage} relative ${
                         hideBackground ? `${styles.backgroundImageHidden}` : ""
                     }`}
                 ></div>

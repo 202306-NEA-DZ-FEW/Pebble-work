@@ -1,7 +1,9 @@
-import React from "react";
+import { CircularProgress } from "@mui/material";
 import { useRouter } from "next/router";
+import React, { useState } from "react";
 
-const MobileCard = ({ eventId, title, type, image }) => {
+const SmallCard = ({ eventId, title, type, image }) => {
+    const [imageLoaded, setImageLoaded] = useState(false);
     const router = useRouter();
     const handleReviewClick = () => {
         router.push(`/events/${eventId}`);
@@ -14,6 +16,12 @@ const MobileCard = ({ eventId, title, type, image }) => {
             className='flex flex-col justify-center text-black items-center'
         >
             <h1 className='font-[600]'>{title}</h1>
+            {!imageLoaded && <CircularProgress />}
+            <img
+                src={image}
+                style={{ display: "none" }}
+                onLoad={() => setImageLoaded(true)}
+            />
             <div
                 className='w-[250px] h-[250px] font-[300] rounded-t-[6px]'
                 style={{
@@ -21,6 +29,8 @@ const MobileCard = ({ eventId, title, type, image }) => {
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
+                    opacity: imageLoaded ? 1 : 0,
+                    transition: "opacity 0.5s",
                 }}
             ></div>
             <h2 className='w-[250px] bg-white h-[30px] text-center font-[400]'>
@@ -36,4 +46,4 @@ const MobileCard = ({ eventId, title, type, image }) => {
     );
 };
 
-export default MobileCard;
+export default SmallCard;

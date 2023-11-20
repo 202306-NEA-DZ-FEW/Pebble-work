@@ -1,14 +1,17 @@
-import React from "react";
 import { useTranslation } from "next-i18next";
+import React from "react";
+
+import styles from "@/styles/Homepage.module.css";
+
 import GalleryCard from "@/components/Homecards/GalleryCard";
 import HeaderCard from "@/components/Homecards/HeaderCard";
 import HeroCard from "@/components/Homecards/HeroCard";
 import ImageSquareCard from "@/components/Homecards/ImageSquareCard";
 import MainCard from "@/components/Homecards/MainCard";
 import SocialCard from "@/components/Homecards/SocialCard";
+
 import ContactForm from "./ContactUs";
 import Wave from "./Wave";
-import styles from "@/styles/Homepage.module.css";
 
 export const Heading = ({ text }) => {
     const { t } = useTranslation();
