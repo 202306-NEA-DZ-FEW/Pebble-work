@@ -36,8 +36,10 @@ const Dashboarduser = () => {
                 .catch((error) => {
                     console.error("Error fetching user data:", error);
                 });
+        } else {
+            SetNameUser(null);
         }
-    }, []);
+    }, [auth.currentUser]);
 
     const handleDisplayEvents = (eventType) => {
         if (eventType === "created") {
