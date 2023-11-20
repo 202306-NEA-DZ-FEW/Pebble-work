@@ -230,15 +230,15 @@ const ProfilePage = () => {
     };
 
     const handleSaveSelectedImage = async () => {
-        // Create a Firestore document reference for the user
-        const userRef = doc(db, "users", currentUserId);
         if (selectedImage == "") {
             return;
         }
-
         try {
             // Update the user's "Image" field in Firestore with the selected photo's URL
-            await updateDoc(userRef, { imageURL: selectedImage });
+            const auth = getAuth();
+            await updateProfile(auth.currentUser, {
+                photoURL: selectedImage,
+            });
 
             // Profile photo updated successfully
             setModalContent("Profile photo updated successfully");
