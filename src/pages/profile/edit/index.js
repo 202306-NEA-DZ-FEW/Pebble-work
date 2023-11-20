@@ -231,7 +231,6 @@ const ProfilePage = () => {
 
     const handleSaveSelectedImage = async () => {
         // Create a Firestore document reference for the user
-        const userRef = doc(db, "users", currentUserId);
         if (selectedImage == "") {
             return;
         }
