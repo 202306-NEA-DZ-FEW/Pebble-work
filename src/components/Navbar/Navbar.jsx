@@ -49,11 +49,14 @@ const Navbar = () => {
 
         document.addEventListener("mousedown", handleClickOutside);
 
-        setActiveTab(router.pathname.slice(1)); //so the motion will always stay on the current active tab
+        //so the motion will always stay on the current active tab
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [menuDropdownOpen]);
+    useEffect(() => {
+        setActiveTab(router.pathname.slice(1)); //so the motion will always stay on the current active tab
+    }, []);
 
     return (
         <nav className='sticky z-[555] bg-[#B4CD93] top-0 xl:flex xl:flex-col xl:items-center'>
