@@ -83,7 +83,7 @@ const DesktopCard = ({ eventId, title, type, image, description }) => {
                         <h2 className='italic sm:text-[13px] mb-2 text-[#749D60] text-[10px] xl:text-[22.22px] '>
                             {type}
                         </h2>
-                        {description.length > 110
+                        {description && description.length > 110
                             ? `${description.substring(0, 110)}...`
                             : description}
                     </p>
