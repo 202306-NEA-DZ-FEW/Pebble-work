@@ -7,14 +7,14 @@ import styles from "@/styles/Events.module.css";
 import { IoCreateOutline } from "react-icons/io5";
 import { IoIosGitCompare } from "react-icons/io";
 import { IoIosGitBranch } from "react-icons/io";
+import MobileCard from "@/components/Events/SmallCard";
 
 // import { useRouter } from "next/router";
 const Dashboarduser = () => {
     const [joinedEvents, setJoinedEvents] = useState([]);
-    const [interstEvents, setInterst] = useState([]);
-
     const [currentUser, setCurrentUser] = useState(null);
     const [createdEvent, setcreatedEvent] = useState([]);
+    const [upcamingEvent, setupcamingEvent] = useState([]);
     const [User, setUser] = useState(null);
     const [displayCreatedEvents, setDisplayCreatedEvents] = useState(false);
     const handleDisplayEvents = (eventType) => {
@@ -24,29 +24,27 @@ const Dashboarduser = () => {
             setDisplayCreatedEvents(false);
         }
     };
-
-    const eventsToDisplay = displayCreatedEvents ? createdEvent : joinedEvents;
-    const title = displayCreatedEvents ? "Evenets Created" : "Joined evnted";
-
     useEffect(() => {
+        //for interset based on user interst
         const fetchEvents = async () => {
             const eventsCollectionRef = collection(db, "events");
             const eventsSnapshot = await getDocs(eventsCollectionRef);
-            const eventsList = eventsSnapshot.docs.map((doc) => doc.data());
+            const eventsList = eventsSnapshot?.docs?.map((doc) => doc.data());
 
             // Filter events based on user's interests
             const userInterests = User?.interests; // User's interests
-            const eventsMatchingInterests = eventsList.filter((event) =>
-                userInterests.includes(event.type)
+            const eventsMatchingInterests = eventsList?.filter((event) =>
+                userInterests?.includes(event.type)
             );
-
             console.log(eventsMatchingInterests); // Log the filtered events
-            setInterst(eventsMatchingInterests);
+            setupcamingEvent(eventsMatchingInterests);
         };
 
         fetchEvents();
     }, []);
 
+    const eventsToDisplay = displayCreatedEvents ? createdEvent : joinedEvents;
+    const title = displayCreatedEvents ? "Evenets Created" : "Joined evnted";
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (authUser) => {
             if (authUser) {
@@ -56,51 +54,78 @@ const Dashboarduser = () => {
                     const userDoc = await getDoc(userDocRef);
                     if (userDoc.exists()) {
                         setUser(userDoc.data());
+                        console.log(userDoc.data());
+
                         const userEvents = userDoc.data().eventsJoined || [];
                         const eventId = userEvents.map(
                             (event) => event.eventId
                         );
+                        console.log(eventId);
                         const userCreatedEvents =
                             userDoc.data().eventsCreated || [];
                         const eventIds = userCreatedEvents.map(
                             (event) => event.eventId
                         );
-                        const eventsData = [];
+
                         const eventsCollectionRef = collection(db, "events");
-                        eventIds.forEach(async (eventId) => {
-                            const eventDocRef = doc(
-                                eventsCollectionRef,
-                                eventId
-                            );
-                            const eventDocSnap = await getDoc(eventDocRef);
-                            if (eventDocSnap.exists()) {
-                                eventsData.push(eventDocSnap.data());
-                            } else {
-                                console.log(
-                                    `Event with ID ${eventId} does not exist`
-                                );
-                            }
-                        });
 
-                        setcreatedEvent(eventsData);
-                        const eventsDataJoined = [];
-                        const eventCollectionRef = collection(db, "events");
-                        eventId.forEach(async (eventId) => {
-                            const eventDocRef = doc(
-                                eventCollectionRef,
-                                eventId
-                            );
-                            const eventDocSnap = await getDoc(eventDocRef);
-
-                            if (eventDocSnap.exists()) {
-                                eventsDataJoined.push(eventDocSnap.data());
-                            } else {
-                                console.log(
-                                    `Event with ID ${eventId} does not exist`
+                        const eventIdsPromises = eventIds.map(
+                            async (eventId) => {
+                                const eventDocRef = doc(
+                                    eventsCollectionRef,
+                                    eventId
                                 );
+                                const eventDocSnap = await getDoc(eventDocRef);
+                                if (eventDocSnap.exists()) {
+                                    const eventData = eventDocSnap.data();
+                                    // Include the eventId in the event data
+                                    eventData.id = eventId;
+                                    return eventData;
+                                } else {
+                                    console.log(
+                                        `Event with ID ${eventId} does not exist`
+                                    );
+                                    return null;
+                                }
                             }
-                        });
-                        setJoinedEvents(eventsDataJoined);
+                        );
+
+                        const eventsData = await Promise.all(eventIdsPromises);
+                        // Filter out any null values
+                        const validEventsData = eventsData.filter(
+                            (eventData) => eventData !== null
+                        );
+                        setcreatedEvent(validEventsData);
+
+                        const eventsDataJoinedPromises = eventId.map(
+                            async (eventId) => {
+                                const eventDocRef = doc(
+                                    eventsCollectionRef,
+                                    eventId
+                                );
+                                const eventDocSnap = await getDoc(eventDocRef);
+                                if (eventDocSnap.exists()) {
+                                    const eventData = eventDocSnap.data();
+                                    // Include the eventId in the event data
+                                    eventData.id = eventId;
+                                    return eventData;
+                                } else {
+                                    console.log(
+                                        `Event with ID ${eventId} does not exist`
+                                    );
+                                    return null;
+                                }
+                            }
+                        );
+
+                        const eventsDataJoined = await Promise.all(
+                            eventsDataJoinedPromises
+                        );
+                        // Filter out any null values
+                        const validEventsDataJoined = eventsDataJoined.filter(
+                            (eventData) => eventData !== null
+                        );
+                        setJoinedEvents(validEventsDataJoined);
                     } else {
                         return;
                     }
@@ -176,7 +201,7 @@ const Dashboarduser = () => {
                         className='font-bold text-lg italic '
                         style={{
                             color: "#1A1A1A",
-                            fontFamily: "Rubik",
+
                             fontWeight: " 500",
                             letterSpacing: "0.11px",
                             wordWrap: "break-word",
@@ -198,7 +223,7 @@ const Dashboarduser = () => {
                         className='font-bold text-lg flex mb-4 ml-16'
                         style={{
                             color: "#1A1A1A",
-                            fontFamily: "Rubik",
+
                             fontWeight: " 500",
                             letterSpacing: "0.11px",
                             wordWrap: "break-word",
@@ -233,7 +258,7 @@ const Dashboarduser = () => {
                         className=' font-bold text-lg flex  ml-16 mb-4 mt-2'
                         style={{
                             color: "#1A1A1A",
-                            fontFamily: "Rubik",
+
                             fontWeight: " 500",
                             letterSpacing: "0.11px",
                             wordWrap: "break-word",
@@ -244,32 +269,16 @@ const Dashboarduser = () => {
                 </div>
 
                 <div
-                    className={`flex overflow-auto  ${styles.information} mb-4 ml-2`}
+                    className={`flex overflow-auto gap-4 ${styles.information} mb-4 ml-2`}
                 >
-                    {interstEvents.map((event, index) => (
-                        <div
-                            key={index}
-                            className='flex-shrink-0 w-60 bg-white shadow-xl rounded-lg m-4'
-                        >
-                            <figure className='px-10 pt-10'>
-                                <img
-                                    src={event?.image || "/event_image.png"}
-                                    alt={event.title}
-                                    className='rounded-t-lg'
-                                />
-                            </figure>
-                            <div className='p-6'>
-                                <h2 className='text-xl font-bold mb-2 '>
-                                    {event.title}
-                                </h2>
-                                {/* <p className='text-base'>{event.description}</p> */}
-                                <div className='mt-8'>
-                                    <button className='bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600'>
-                                        Review
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                    {upcamingEvent.map((event) => (
+                        <MobileCard
+                            key={event.id}
+                            eventId={event.id}
+                            title={event.title}
+                            type={event.type}
+                            image={event.image}
+                        />
                     ))}
                 </div>
             </div>
