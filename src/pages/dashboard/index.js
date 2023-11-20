@@ -154,12 +154,15 @@ const Dashboarduser = () => {
                 <ul>
                     <li className='flex items-center mb-2 mt-20 ml-2'>
                         <p className='font-bold text-lg italic mr-2'>
-                            welcome! {Nameuser}
+                            Welcome,{" "}
+                            <span className='text-xl text-[#82a572]'>
+                                {Nameuser}!
+                            </span>
                         </p>
                     </li>
-                    <li className='flex items-center mb-10 mt-0 ml-1'>
+                    <li className='flex items-center mb-10 mt-4 ml-1'>
                         <p className='font-semibold text-lg italic mr-2'>
-                            we re glad to see you
+                            we re glad to see you.
                         </p>
                     </li>
 
@@ -178,7 +181,7 @@ const Dashboarduser = () => {
                         >
                             <IoIosGitBranch size={30} className='mr-1' />
                             <span class='my-2 block hover:bg-[#BFEAD3] cursor-pointer'>
-                                Created Events
+                                Events Created
                             </span>
                         </button>
                     </li>
@@ -189,7 +192,7 @@ const Dashboarduser = () => {
                         >
                             <IoIosGitCompare size={30} className='mr-1' />
                             <span class='my-2 block hover:bg-[#BFEAD3] cursor-pointer'>
-                                Joined Evnets
+                                Evnets Joined
                             </span>
                         </button>
                     </li>
@@ -236,7 +239,7 @@ const Dashboarduser = () => {
                             wordWrap: "break-word",
                         }}
                     >
-                        {title}
+                        {title}:
                     </h2>
                 </div>
                 <div
