@@ -272,202 +272,177 @@ const ProfilePage = () => {
         return <Loader />;
     } else {
         return (
-            <div className='container ml-8 mt-8 mx-0 w-80 justify-start sm:items-center md:ml-20 md:items-start md:text-2xl md:mx-auto md:w-auto '>
-                <div className='flex flex-col sm:items-center md:items-start md:w-12/12 '>
-                    <h1 className=' font-semibold text-lg md:text-4xl md:ml-10 md:mt-5'>
-                        {t("edit:editProfile")}
-                    </h1>
-                    {/* Profile  Picture /Change */}
-                    <form onSubmit={handleUpdateProfile}>
-                        <div className='ml-5 flex flex-row mt-4 md:w-full md:gap-10    '>
-                            <div className='flex items-center h-4/12 w-4/12 rounded-full outline outline-2  overflow-hidden md:w-3/12 h-4/12 md:mt-8'>
-                                <Image
-                                    src={
-                                        auth?.currentUser.photoURL !== null
-                                            ? auth?.currentUser.photoURL
-                                            : "/images/icon_default.png"
-                                    }
-                                    width={220}
-                                    height={200}
-                                    alt=''
-                                    className=''
-                                />
-                            </div>
+            <div className='pt-5 flex min-h-screen flex-col items-center justify-center sm-types '>
+                <h1 className='sm-text font-semibold text-lg md:text-4xl md:mt-5'>
+                    {t("edit:editProfile")}
+                </h1>
 
-                            {/* Change  Picture */}
-                            <div className='flex flex-row ml-4 -mt-4 w-full md:ml-10  md:mt-20 '>
-                                <input
-                                    type='file'
-                                    accept='image/*'
-                                    id='profilePictureInput'
-                                    style={{ display: "none" }}
-                                    onChange={handleUploadProfilePicture}
-                                />
-                                {/* profilr pic input */}
-                                <label
-                                    htmlFor='profilePictureInput'
-                                    className='bg-[#2E7EAA] mt-10 text-center h-8 w-4/12  py-2 text-xs text-white  shadow-md  md:w-3/12 md:h-12 cursor-pointer rounded md:text-2xl'
-                                >
-                                    {t("edit:uploadNew")}
-                                </label>
-                                <button
-                                    className='librarybtn mt-10 text-center h-8  ml-3 w-7/12  text-xs  outline outline-1 rounded shadow-md md:w-4/12 md:h-12 md:ml-8 sm:text-xl '
-                                    type='button'
-                                    onClick={(e) => handleOpenLibrary(e)}
-                                >
-                                    {t("edit:chooseFromLibrary")}
-                                </button>
-
-                                {isLibraryOpen && (
-                                    <PicturesLibrary
-                                        isLibraryOpen={isLibraryOpen}
-                                        selectedImage={selectedImage}
-                                        setSelectedImage={setSelectedImage}
-                                        onClose={handleCloseLibrary}
-                                        onHandleSave={handleSaveSelectedImage}
-                                        className='z-1000'
-                                    />
-                                )}
-                            </div>
+                {/* Profile Picture /Change */}
+                <form onSubmit={handleUpdateProfile} className='mt-4'>
+                    <div className='flex flex-col md:flex-row items-center md:items-start justify-around'>
+                        <div className='flex justify-center items-center h-2/12 w-4/12 rounded-full overflow-hidden md:w-4/12 h-5/12 mt-8 mb-6'>
+                            <Image
+                                src={
+                                    auth?.currentUser.photoURL !== null
+                                        ? auth?.currentUser.photoURL
+                                        : "/images/icon_default.png"
+                                }
+                                width={300}
+                                height={300}
+                                alt=''
+                                className='h-full w-full rounded-full'
+                            />
                         </div>
 
-                        {/* Edit  Inforation */}
+                        {/* Change Picture */}
+                        <div className='flex flex-col mt-4 md:flex-row md:ml-10 md:mt-40 '>
+                            <input
+                                type='file'
+                                accept='image/*'
+                                id='profilePictureInput'
+                                style={{ display: "none" }}
+                                onChange={handleUploadProfilePicture}
+                            />
 
-                        <div className='flex flex-col mt-4 w-70 sm:items-center  md:items-start md:mt-8 md:ml-10'>
-                            <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
-                                {t("edit:Name*")}
-                            </h3>
-                            <input
-                                type='text'
-                                placeholder='  Name'
-                                className='outline outline-1 mt-2 w-3/4 rounded md:mt-5'
-                                name='name'
-                                defaultValue={currentUser.Name}
-                                onChange={(e) => setEditedName(e.target.value)}
-                                required
-                            ></input>
-                            <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
-                                {t("edit:Surname*")}
-                            </h3>
-                            <input
-                                type='text'
-                                placeholder='  Surname'
-                                className='outline outline-1 mt-3 w-3/4 rounded md:mt-5'
-                                name='surname'
-                                defaultValue={currentUser.Surename}
-                                onChange={(e) =>
-                                    setEditedSurname(e.target.value)
-                                }
-                                required
-                            ></input>
-                            <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
-                                {t("edit:Email*")}
-                            </h3>
-                            <input
-                                type='email'
-                                placeholder='  Email'
-                                className='outline outline-1 mt-3 w-3/4 rounded md:mt-5'
-                                name='email'
-                                defaultValue={currentUser.email}
-                                onChange={(e) => setEditedEmail(e.target.value)}
-                                required
-                            ></input>
+                            {/* Profile pic input */}
+                            <label
+                                htmlFor='profilePictureInput'
+                                className='bg-[#2E7EAA] flex justify-center items-center mt-2 text-center px-2 text-xs text-white shadow-md md:mt-4 md:h-12 cursor-pointer rounded md:text-lg'
+                            >
+                                {t("edit:uploadNew")}
+                            </label>
 
-                            {/*  */}
-                            <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
-                                {t("edit:Location")}
-                            </h3>
-                            <input
-                                type='text'
-                                placeholder='  Location'
-                                className='outline outline-1 mt-3 w-3/4 rounded md:mt-5'
-                                name='location'
-                                defaultValue={currentUser.Location}
-                                onChange={(e) =>
-                                    setEditedLocation(e.target.value)
-                                }
-                            ></input>
-                            {/* Your Interests */}
-                            <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
-                                {t("edit:Interests")}
-                            </h3>
-                            <div className=' grid grid-container grid-cols-2 gap-8 -ml-15 mt-3 text-center justify-evenly  md:grid-cols-3 text-xs md:w-full md:h-auto  md:mt-8 md:text-3xl '>
-                                {EventTypes.map((type, index) => (
-                                    <button
-                                        key={index}
-                                        className={`outline outline-1 h-12 md:h-15 -mx-1 rounded outline-[#2E7EAA] font-semibold text-[#2E7EAA] whitespace-normal text-xs ${
-                                            userInterests.includes(type)
-                                                ? "text-white bg-[#2E7EAA]" // Change the background color for selected buttons
-                                                : ""
-                                        }`}
-                                        onClick={(e) =>
-                                            handleUpdateInterests(type, e)
-                                        }
-                                    >
-                                        {type}
-                                    </button>
-                                ))}{" "}
-                            </div>
-                            {/* Save Interests Button */}
-                            <div className='mt-0 flex flex-col items-center md:mx-auto'>
-                                <button
-                                    type='submit'
-                                    className='mt-7 bg-[#2E7EAA]  text-center h-10 w-30  px-4 py-2 text-xs text-white  shadow-md md:h-14 md:w-45 md:h-13 md:font-bold md:text-xl '
-                                >
-                                    {t("edit:saveChanges")}
-                                </button>
-                            </div>
+                            <button
+                                className='librarybtn mt-2 text-center px-2 text-xs outline outline-1 rounded shadow-md md:text-lg md:ml-2'
+                                type='button'
+                                onClick={(e) => handleOpenLibrary(e)}
+                            >
+                                {t("edit:chooseFromLibrary")}
+                            </button>
+
+                            {isLibraryOpen && (
+                                <PicturesLibrary
+                                    isLibraryOpen={isLibraryOpen}
+                                    selectedImage={selectedImage}
+                                    setSelectedImage={setSelectedImage}
+                                    onClose={handleCloseLibrary}
+                                    onHandleSave={handleSaveSelectedImage}
+                                    className='z-1000'
+                                />
+                            )}
                         </div>
-                    </form>
-                    {/* Change Password  */}
-                    <div className='mt-5 pt-0 mx-auto pb-5 flex flex-col  bg-[#B4CD93]  rounded mb-20 md:mx-auto md:mt-11 md:w-8/12 '>
-                        <h3 className='font-bold mt-5 ml-4 md:text-2xl'>
+                    </div>
+
+                    {/* Edit Information */}
+                    <div className='flex flex-col items-center mt-4 md:flex-row md:justify-around md:gap-x-5'>
+                        <div className='w-[100 px] text-center'>
+                            <h3 className='font-semibold text-lg text-gray-600'>
+                                {t("edit:Name")}:
+                            </h3>
+                            <p className='mt-2 mb-4'>{currentUser.Name}</p>
+                        </div>
+                        <div className='w-[100 px] text-center'>
+                            <h3 className='font-semibold text-lg text-gray-600'>
+                                {t("edit:Surname")}:
+                            </h3>
+                            <p className='mt-2 mb-4'>{currentUser.Surename}</p>
+                        </div>
+                        <div className='w-[100 px] text-center'>
+                            <h3 className='font-semibold text-lg text-gray-600'>
+                                {t("edit:Email")}:
+                            </h3>
+                            <p className='mt-2 mb-4'>{currentUser.email}</p>
+                        </div>
+                        <div className='w-[100 px] text-center '>
+                            <h3 className='font-semibold text-lg text-gray-600'>
+                                {t("edit:Location")}:
+                            </h3>
+                            <p className='mt-2 mb-4'>{currentUser.Location}</p>
+                        </div>
+                    </div>
+                    {/* Your Interests */}
+                    <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
+                        {t("edit:Interests")}
+                    </h3>
+                    <div className='grid grid-container grid-cols-1 gap-8 -ml-15 mt-3 text-center justify-evenly sm:grid-cols-2 sm:gap-4 md:grid-cols-3 text-xs md:w-full md:h-auto md:mt-8 md:text-3xl'>
+                        {EventTypes.map((type, index) => (
+                            <button
+                                key={index}
+                                className={`outline outline-1 h-12 md:h-15 -mx-1 rounded outline-[#2E7EAA] font-semibold text-[#2E7EAA] whitespace-normal text-xs ${
+                                    userInterests.includes(type)
+                                        ? "text-white bg-[#2E7EAA]"
+                                        : ""
+                                }`}
+                                onClick={(e) => handleUpdateInterests(type, e)}
+                            >
+                                {type}
+                            </button>
+                        ))}
+                    </div>
+                    {/* Save Interests Button */}
+                    <div className='mt-4 flex flex-col items-center md:mx-auto'>
+                        <button
+                            type='submit'
+                            className='mt-7 bg-[#2E7EAA]  text-center h-10 w-30  px-4 py-2 text-xs text-white shadow-md md:h-14 md:w-45 md:h-13 md:font-bold md:text-xl '
+                        >
+                            {t("edit:saveChanges")}
+                        </button>
+                    </div>
+                </form>
+                {/* Change Password */}
+                <div className='flex mt-6 justify-center'>
+                    <div className='md:w-[700px] sm:w-[500px] w-[250px] bg-[#B4CD93] h-[250px] sm:h-[200px] mb-4'>
+                        <h3 className='font-bold mt-5 text-center md:text-2xl'>
                             {t("edit:changePassword")}
                         </h3>
-                        <form onSubmit={handleChangePassword}>
-                            <div className='flex flex-row ml-6 mt-3 gap-x-5 items-center justify-items-center md:mt-5 '>
+                        <form
+                            onSubmit={handleChangePassword}
+                            className='w-full flex gap-6 flex-col items-center justify-center'
+                        >
+                            <div className='flex items-center sm:flex-row flex-col gap-3 w-full sm:justify-around sm:gap-14 sm:px-10'>
                                 <input
                                     type='password'
-                                    placeholder=' New Password'
+                                    placeholder='New Password'
                                     value={newPassword}
                                     onChange={(e) =>
                                         setNewPassword(e.target.value)
                                     }
-                                    className=' w-5/12 h-8 rounded md:h-10'
+                                    className='w-[40vw] sm:w-[50vw] h-8 px-3 rounded md:h-10'
                                     required
-                                ></input>
+                                />
                                 <input
                                     type='password'
-                                    placeholder=' Confirm Password'
+                                    placeholder='Confirm Password'
                                     value={confirmPassword}
                                     onChange={(e) =>
                                         setConfirmPassword(e.target.value)
                                     }
-                                    className=' w-5/12 h-8 rounded md:h-10'
+                                    className='w-[40vw] sm:w-[50vw] h-8 px-3 rounded md:h-10'
                                     required
-                                ></input>
+                                />
                             </div>
-                            <div className='flex flex-row mt-4 pb-3 gap-4 items-end  ml-20  md:mt-8 md:ml-40'>
+                            <div className='flex sm:flex-row sm:justify-evenly flex-col gap-3 w-[80px] sm:w-full'>
                                 <button
                                     type='submit'
-                                    className='bg-[#2E7EAA]  text-center h-8 w-3/12   text-xs text-white rounded shadow-md md:h-11 md:text-xl'
+                                    className='bg-[#2E7EAA] text-center h-8 w-full md:w-32 text-xs text-white rounded shadow-md md:h-10 md:text-lg'
                                 >
                                     {t("edit:Submit")}
                                 </button>
-                                <button className=' text-center h-8 w-3/12 text-xs  outline outline-1 rounded shadow-md md:h-11 md:text-xl'>
+                                <button className='text-center h-8 w-full bg-white opacity-70 md:w-32 text-xs outline outline-1 rounded shadow-md md:h-10 md:text-lg'>
                                     {t("edit:Cancel")}
                                 </button>
                             </div>
                         </form>
                     </div>
-                    {showPopup && (
-                        <Modal
-                            message={modalContent}
-                            onClose={handleSuccess}
-                            className={modalClassName}
-                        />
-                    )}
                 </div>
+
+                {showPopup && (
+                    <Modal
+                        message={modalContent}
+                        onClose={handleSuccess}
+                        className={modalClassName}
+                    />
+                )}
             </div>
         );
     }
