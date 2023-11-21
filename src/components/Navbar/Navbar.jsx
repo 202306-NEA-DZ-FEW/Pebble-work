@@ -61,7 +61,6 @@ const Navbar = () => {
                 style={{
                     width: "100%",
                     height: "8%",
-                    zIndex: "9999",
                 }}
                 className='flex flex-wrap items-center justify-between p-4 xl:gap-40'
             >

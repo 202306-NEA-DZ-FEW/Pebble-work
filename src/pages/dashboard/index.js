@@ -280,25 +280,28 @@ const Dashboarduser = () => {
                         </h2>
                     </div>
                     <div
-                        className={`flex flex-wrap space-x-1 space-y-2 max-w-[1500px] max-h-[600px] pb-1 ${styles.information} overflow-auto justify-center items-center mb-16 mt-12 `}
+                        className={`flex flex-wrap space-x-1 max-w-[1500px] max-h-[500px] pb-1 ${styles.information} overflow-auto justify-center items-center mb-16 mt-12 `}
                     >
                         {eventsToDisplay.map((event) => {
                             if (isSmallScreen) {
                                 return (
-                                    <SmallCard
-                                        eventId={event.id}
-                                        key={event.id}
-                                        title={event.title}
-                                        type={event.type}
-                                        image={
-                                            event?.image || "/event_image.png"
-                                        }
-                                        location={event.location}
-                                        description={event.description}
-                                        organizer={event.organizer}
-                                        time={event.time}
-                                        date={event.date}
-                                    />
+                                    <div className='mb-2' key={event.id}>
+                                        <SmallCard
+                                            eventId={event.id}
+                                            key={event.id}
+                                            title={event.title}
+                                            type={event.type}
+                                            image={
+                                                event?.image ||
+                                                "/event_image.png"
+                                            }
+                                            location={event.location}
+                                            description={event.description}
+                                            organizer={event.organizer}
+                                            time={event.time}
+                                            date={event.date}
+                                        />
+                                    </div>
                                 );
                             } else if (isMobile) {
                                 return (
@@ -384,7 +387,7 @@ const Dashboarduser = () => {
                     transform: ${
                         isNavVisible ? "translateX(0)" : "translateX(-100%)"
                     };
-                    transition: transform 0.3s ease-in-out;
+                    transition: transform 0.7s ease-in-out;
                     background-color: #e6f5e4;
                     z-index: 50;
                 }
