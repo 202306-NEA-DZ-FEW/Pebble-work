@@ -272,6 +272,7 @@ export async function getServerSideProps(context) {
     const event = eventDoc.data();
 
     const userId = event.organizer;
+    event.timestamp = event.timestamp.toString();
 
     const organizerRef = doc(db, "users", userId);
     const organizerDoc = await getDoc(organizerRef);

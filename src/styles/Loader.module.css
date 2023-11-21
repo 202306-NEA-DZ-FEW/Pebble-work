@@ -4,7 +4,7 @@
     position: fixed;
     background-color: #e6f5e4;
     z-index: 9999;
-    animation: changeBackground 3s infinite linear;
+    animation: changeBackground 2s infinite linear;
 }
 .wrapper {
     position: absolute;
@@ -48,7 +48,7 @@
     transform-origin: center right;
     transform: translate(60%, -25%);
     box-shadow: -2px 0px 0px #95c6f2 inset;
-    animation: expandBody 3s infinite linear;
+    animation: expandBody 2s infinite linear;
 }
 
 .candle1Stick,
@@ -66,7 +66,7 @@
 .candle2Stick {
     height: 12px;
     transform-origin: bottom center;
-    animation: stickAnimation 3s infinite linear;
+    animation: stickAnimation 2s infinite linear;
 }
 
 .candle1Eyes,
@@ -88,7 +88,7 @@
     border-radius: 100%;
     background: #2e7eaa;
     transform: translate(-70%, 0%);
-    animation: blinkEyes 3s infinite linear;
+    animation: blinkEyes 2s infinite linear;
 }
 
 .candle1EyesTwo {
@@ -100,7 +100,7 @@
     border-radius: 100%;
     background: #2e7eaa;
     transform: translate(-70%, 0%);
-    animation: blinkEyes 3s infinite linear;
+    animation: blinkEyes 2s infinite linear;
 }
 
 .candle1Mouth {
@@ -112,7 +112,7 @@
     border-radius: 20px;
     background: #2e7eaa;
     transform: translate(-50%, -50%);
-    animation: uff 3s infinite linear;
+    animation: uff 2s infinite linear;
 }
 
 .candleSmokeOne {
@@ -123,7 +123,7 @@
     height: 3px;
     background: grey;
     transform: translate(-50%, -50%);
-    animation: moveLeft 3s infinite linear;
+    animation: moveLeft 2s infinite linear;
 }
 
 .candleSmokeTwo {
@@ -135,7 +135,7 @@
     border-radius: 10px;
     background: grey;
     transform: translate(-50%, -50%);
-    animation: moveTop 3s infinite linear;
+    animation: moveTop 2s infinite linear;
 }
 
 .candle2 {
@@ -151,7 +151,7 @@
     transform: translate(60%, -15%);
     transform-origin: center right;
     box-shadow: -2px 0px 0px #95c6f2 inset;
-    animation: shakeLeft 3s infinite linear;
+    animation: shakeLeft 2s infinite linear;
 }
 
 .candle2EyesOne {
@@ -166,7 +166,7 @@
     float: left;
     background: #2e7eaa;
     transform: translate(-80%, 0%);
-    animation: changetoLower 3s infinite linear;
+    animation: changetoLower 2s infinite linear;
 }
 
 .candle2EyesTwo {
@@ -181,7 +181,7 @@
     float: left;
     background: #2e7eaa;
     transform: translate(-80%, 0%);
-    animation: changetoGreater 3s infinite linear;
+    animation: changetoGreater 2s infinite linear;
 }
 
 .lightWave {
@@ -194,7 +194,7 @@
     z-index: 0;
     transform: translate(-25%, -50%) scale(2.5, 2.5);
     border: 2px solid rgba(255, 255, 255, 0.2);
-    animation: expandLight 3s infinite linear;
+    animation: expandLight 2s infinite linear;
 }
 
 .candle2Fire {
@@ -208,7 +208,7 @@
     border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
     background: #ff9800;
     transform: translate(-85%, -100%);
-    animation: danceFire 3000ms infinite linear;
+    animation: danceFire 2000ms infinite linear;
 }
 
 @keyframes blinkEyes {

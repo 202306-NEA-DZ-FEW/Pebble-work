@@ -26,6 +26,16 @@ const Dashboarduser = () => {
     const router = useRouter();
     const isMobile = useMediaQuery("(max-width:1024px)");
     const isSmallScreen = useMediaQuery("(max-width:768px)");
+    const [isNavVisible, setIsNavVisible] = useState(false);
+
+    // Function to toggle the visibility of the nav bar
+    const toggleNav = () => {
+        setIsNavVisible(!isNavVisible);
+    };
+    const closeNav = () => {
+        setIsNavVisible(false);
+    };
+
     useEffect(() => {
         if (auth.currentUser) {
             const userDocRef = doc(db, "users", auth.currentUser.uid);
@@ -153,8 +163,16 @@ const Dashboarduser = () => {
     }
     return (
         <>
+            <button
+                className='button absolute bg-red-600 top-[80px] right-0'
+                onClick={toggleNav}
+            >
+                Toggle Nav
+            </button>
             <nav
-                className='absolute top-30 bottom-0 h-full left-0 bg-[#e6f5e4] w-120 overflow-hidden transition-width duration-200 linear shadow-md mt-30'
+                className={`absolute top-30 bottom-0 h-full left-0 bg-[#e6f5e4] overflow-hidden duration-200 linear shadow-md mt-30 ${
+                    isNavVisible ? "block" : "none"
+                }`}
                 style={{
                     color: "#1A1A1A",
                     fontFamily: "Poppins",
@@ -189,10 +207,13 @@ const Dashboarduser = () => {
                             </span>
                         </div>
                     </li>
-                    <li className=' hover:bg-[#BFEAD3] '>
+                    <li className='hover:bg-[#BFEAD3] '>
                         <button
                             className='flex items-center mb-24'
-                            onClick={() => handleDisplayEvents("created")}
+                            onClick={() => {
+                                handleDisplayEvents("created");
+                                closeNav();
+                            }}
                         >
                             <IoIosGitBranch size={30} className='mr-1' />
                             <span class='my-2 block hover:bg-[#BFEAD3] cursor-pointer'>
@@ -203,7 +224,10 @@ const Dashboarduser = () => {
                     <li className='hover:bg-[#BFEAD3]'>
                         <button
                             className='flex items-center mb-40  hover:bg-[#BFEAD3] '
-                            onClick={() => handleDisplayEvents("Joined")}
+                            onClick={() => {
+                                handleDisplayEvents("Joined");
+                                closeNav();
+                            }}
                         >
                             <IoIosGitCompare size={30} className='mr-1' />
                             <span class='my-2 block hover:bg-[#BFEAD3] cursor-pointer'>
@@ -214,133 +238,160 @@ const Dashboarduser = () => {
                 </ul>
             </nav>
 
-            <div className=' min-h-screen md:min-h-[100vh] lg:ml-40 ml-56 relative'>
-                <div className='flex justify-center items-center mt-10 md:mt-0'>
-                    <div className='absolute lg:w-full flex justify-center'>
-                        <div
-                            className='width lg:w-[800px] md:w-[500px] sm:w-[400px] w-[50vw] bg-blue-500 opacity-10 h-[130px] rounded-[20px]'
-                            style={{}}
-                        ></div>
-                    </div>
-                    <p
-                        className='width font-bold sm:static md:mr-[0px] sm:mr-[-80px] absolute lg:w-auto sm:w-[300px] w-[50vw] md:text-lg pl-4 italic '
-                        style={{
-                            color: "#1A1A1A",
-                            fontWeight: " 500",
-                            letterSpacing: "0.11px",
-                            wordWrap: "break-word",
-                        }}
-                    >
-                        “It s not enough to be compassionate, you must act.” -
-                        Dalai Lama
-                    </p>
+            <div onClick={closeNav}>
+                <div className=' min-h-screen md:min-h-[100vh] lg:ml-40 sm:ml-48 relative'>
+                    <div className='flex justify-center items-center mt-10 md:mt-0'>
+                        <div className='absolute lg:w-full flex justify-center'>
+                            <div
+                                className='width lg:w-[800px] md:w-[500px] sm:w-[400px] w-[50vw] bg-blue-500 opacity-10 h-[130px] rounded-[20px]'
+                                style={{}}
+                            ></div>
+                        </div>
+                        <p
+                            className='width font-bold sm:static md:mr-[0px] sm:mr-[-80px] absolute lg:w-auto sm:w-[300px] w-[50vw] md:text-lg pl-4 italic '
+                            style={{
+                                color: "#1A1A1A",
+                                fontWeight: " 500",
+                                letterSpacing: "0.11px",
+                                wordWrap: "break-word",
+                            }}
+                        >
+                            “It s not enough to be compassionate, you must act.”
+                            - Dalai Lama
+                        </p>
 
-                    <img
-                        src='/images/Volunteering-pana.png'
-                        alt='Sitting'
-                        className='w-auto sm:w-auto sm:h-[180px] h-[150px] md:w-[150px] md:h-[150px] rounded-full ml-0 sm:z-10'
-                    />
-                </div>
-                <div>
-                    <h2
-                        className='font-bold text-lg flex mb-4 ml-16 mt-4'
-                        style={{
-                            color: "#1A1A1A",
-                            fontWeight: " 500",
-                            letterSpacing: "0.11px",
-                            wordWrap: "break-word",
-                        }}
-                    >
-                        {title}:
-                    </h2>
-                </div>
-                <div
-                    className={`flex flex-wrap max-h-[400px] ${styles.information} overflow-auto justify-center items-center mb-16 mt-12 `}
-                >
-                    {eventsToDisplay.map((event) => {
-                        if (isSmallScreen) {
-                            return (
-                                <SmallCard
-                                    eventId={event.id}
-                                    key={event.id}
-                                    title={event.title}
-                                    type={event.type}
-                                    image={event?.image || "/event_image.png"}
-                                    location={event.location}
-                                    description={event.description}
-                                    organizer={event.organizer}
-                                    time={event.time}
-                                    date={event.date}
-                                />
-                            );
-                        } else if (isMobile) {
-                            return (
-                                <MobileCard
-                                    eventId={event.id}
-                                    key={event.id}
-                                    title={event.title}
-                                    type={event.type}
-                                    image={event?.image || "/event_image.png"}
-                                    location={event.location}
-                                    description={event.description}
-                                    organizer={event.organizer}
-                                    time={event.time}
-                                    date={event.date}
-                                />
-                            );
-                        } else {
-                            return (
-                                <DesktopCard
-                                    eventId={event.id}
-                                    key={event.id}
-                                    title={event.title}
-                                    type={event.type}
-                                    image={event?.image || "/event_image.png"}
-                                    location={event.location}
-                                    description={event.description}
-                                    organizer={event.organizer}
-                                    time={event.time}
-                                    date={event.date}
-                                />
-                            );
-                        }
-                    })}
-                </div>
-
-                <div>
-                    <h2
-                        className=' font-bold text-lg flex  ml-16 mb-10 mt-8'
-                        style={{
-                            color: "#1A1A1A",
-                            fontWeight: " 500",
-                            letterSpacing: "0.11px",
-                            wordWrap: "break-word",
-                        }}
-                    >
-                        Suggestion events :
-                    </h2>
-                </div>
-
-                <div
-                    className={`flex overflow-auto gap-4 ${styles.information} mb-4 ml-10`}
-                >
-                    {eventsMatchingInterests.map((event) => (
-                        <SmallCard
-                            key={event.id}
-                            eventId={event.id}
-                            title={event.title}
-                            type={event.type}
-                            image={event?.image || "/event_image.png"}
-                            location={event.location}
-                            description={event.description}
-                            organizer={event.organizer}
-                            time={event.time}
-                            date={event.date}
+                        <img
+                            src='/images/Volunteering-pana.png'
+                            alt='Sitting'
+                            className='w-auto sm:w-auto sm:h-[180px] h-[150px] md:w-[150px] md:h-[150px] rounded-full ml-0 sm:z-10'
                         />
-                    ))}
+                    </div>
+                    <div>
+                        <h2
+                            className='font-bold text-lg flex mb-4 ml-16 mt-4'
+                            style={{
+                                color: "#1A1A1A",
+                                fontWeight: " 500",
+                                letterSpacing: "0.11px",
+                                wordWrap: "break-word",
+                            }}
+                        >
+                            {title}:
+                        </h2>
+                    </div>
+                    <div
+                        className={`flex flex-wrap space-x-1 space-y-2 max-w-[1500px] max-h-[600px] pb-1 ${styles.information} overflow-auto justify-center items-center mb-16 mt-12 `}
+                    >
+                        {eventsToDisplay.map((event) => {
+                            if (isSmallScreen) {
+                                return (
+                                    <SmallCard
+                                        eventId={event.id}
+                                        key={event.id}
+                                        title={event.title}
+                                        type={event.type}
+                                        image={
+                                            event?.image || "/event_image.png"
+                                        }
+                                        location={event.location}
+                                        description={event.description}
+                                        organizer={event.organizer}
+                                        time={event.time}
+                                        date={event.date}
+                                    />
+                                );
+                            } else if (isMobile) {
+                                return (
+                                    <MobileCard
+                                        eventId={event.id}
+                                        key={event.id}
+                                        title={event.title}
+                                        type={event.type}
+                                        image={
+                                            event?.image || "/event_image.png"
+                                        }
+                                        location={event.location}
+                                        description={event.description}
+                                        organizer={event.organizer}
+                                        time={event.time}
+                                        date={event.date}
+                                    />
+                                );
+                            } else {
+                                return (
+                                    <DesktopCard
+                                        eventId={event.id}
+                                        key={event.id}
+                                        title={event.title}
+                                        type={event.type}
+                                        image={
+                                            event?.image || "/event_image.png"
+                                        }
+                                        location={event.location}
+                                        description={event.description}
+                                        organizer={event.organizer}
+                                        time={event.time}
+                                        date={event.date}
+                                    />
+                                );
+                            }
+                        })}
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <h2
+                            className=' font-bold text-lg flex ml-16 mb-10 mt-8'
+                            style={{
+                                color: "#1A1A1A",
+                                fontWeight: " 500",
+                                letterSpacing: "0.11px",
+                                wordWrap: "break-word",
+                            }}
+                        >
+                            Suggestion events :
+                        </h2>
+                    </div>
+
+                    <div
+                        className={`flex overflow-auto gap-4 ${styles.information} mb-4 md:ml-[20px]`}
+                    >
+                        {eventsMatchingInterests.map((event) => (
+                            <SmallCard
+                                key={event.id}
+                                eventId={event.id}
+                                title={event.title}
+                                type={event.type}
+                                image={event?.image || "/event_image.png"}
+                                location={event.location}
+                                description={event.description}
+                                organizer={event.organizer}
+                                time={event.time}
+                                date={event.date}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
             <style jsx>{`
+            @media (max-width: 640px) {
+                button {
+                    display: block;
+                }
+                nav {
+                    display: ${isNavVisible ? "block" : "none"};
+                    z-index: 50;
+                }
+            }
+            @media (min-width: 641px) {
+                .button {
+                    display: none;
+                }
+                nav {
+                    display: block;
+                }
+            }
                 @media (max-width: 460px) {
                     .width {
                         width: 40vw;

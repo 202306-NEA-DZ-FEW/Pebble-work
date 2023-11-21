@@ -163,7 +163,7 @@ const Dropdown = () => {
                                     </Link>
                                     <hr />
                                     <Link
-                                        href='/editprofile'
+                                        href='/profile/edit'
                                         className={`hover:text-red-600 ${styles.listItem}`}
                                     >
                                         {t("common:dropdown:accountSettings")}
