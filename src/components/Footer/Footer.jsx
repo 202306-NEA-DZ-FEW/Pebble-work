@@ -66,7 +66,7 @@ const Footer = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link href=''>
+                            <Link href='https://github.com/202306-NEA-DZ-FEW/Pebble-work'>
                                 <img
                                     src='/icons/Github.svg'
                                     className='md:w-[40px] w-[25px]'

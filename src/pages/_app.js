@@ -3,7 +3,6 @@ import { appWithTranslation } from "next-i18next";
 import { i18n } from "next-i18next.config";
 import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
-import "typeface-rubik";
 
 import "react-toastify/dist/ReactToastify.css";
 import "@/styles/globals.css";
