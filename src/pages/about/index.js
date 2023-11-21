@@ -14,7 +14,7 @@ const AboutPage = () => {
         {
             imageSrc: "https://avatars.githubusercontent.com/u/137820288?v=4",
             description:
-                "I solve problems with love and care I learn eagerly and always dare I observe keenly and find the flaws I am a person with a noble cause.",
+                "I'am a passionate Frontend Web Developer and freelance translator.I have a proven track record of building various websites that captivate users.   ",
             name: "Halla Hamidi",
             google: "https://mail.google.com/mail/u/0/?fs=1&to=aniabisso.16@gmail.com&tf=cm",
             linkedin: "https://www.linkedin.com/in/halla-hamidi-989197229/",
@@ -24,7 +24,7 @@ const AboutPage = () => {
             imageSrc: "https://avatars.githubusercontent.com/u/137835769?v=4",
             name: "Takieddine Dilmi",
             description:
-                "I solve problems with love and care I learn eagerly and always dare I observe keenly and find the flaws I am a person with a noble cause.",
+                "I am an aspiring Frontend Developer, passionate about honing my skills in frontend development and contributing to the ever-evolving digital landscape.",
             google: "https://mail.google.com/mail/u/0/?fs=1&to=angeldilmi@gmail.com&tf=cm",
             linkedin: "https://www.linkedin.com/in/takidilmi/",
             github: "https://github.com/takidilmi",
@@ -33,7 +33,7 @@ const AboutPage = () => {
             imageSrc: "https://avatars.githubusercontent.com/u/64746106?v=4",
             name: "Youssouf Sergma",
             description:
-                "I solve problems with love and care I learn eagerly and always dare I observe keenly and find the flaws I am a person with a noble cause.",
+                "I'm a front-end developer, problem-solving, organized, and detail-oriented professional with a proven track record of success in both web development and administrative roles. ",
             google: "https://mail.google.com/mail/u/0/?fs=1&to=sergmayoussouf@gmail.com&tf=cm",
             linkedin: "https://www.linkedin.com/in/sergma/",
             github: "https://github.com/ysergma",
@@ -42,7 +42,7 @@ const AboutPage = () => {
             imageSrc: "https://avatars.githubusercontent.com/u/95043080?v=4",
             name: "Manel H.Haddoud",
             description:
-                "I solve problems with love and care I learn eagerly and always dare I observe keenly and find the flaws I am a person with a noble cause.",
+                "I'm a front-end developer with a background in networking and computer science.I am very passionate about technology , organizing and encouraging teamwork.",
             google: "https://mail.google.com/mail/u/0/?fs=1&to=manelhasnahaddoud@gmail.com&tf=cm",
             linkedin:
                 "https://www.linkedin.com/in/manel-hasna-haddoud-aa5095278/",
@@ -52,7 +52,7 @@ const AboutPage = () => {
             imageSrc: "https://avatars.githubusercontent.com/u/138169337?v=4",
             name: "Louisa Hamrit",
             description:
-                "I solve problems with love and care I learn eagerly and always dare I observe keenly and find the flaws I am a person with a noble cause.",
+                "I'm a junior web developer with a certain interest for crafting engaging and appealing digital experiences.I've contributed to several web applications and i bring technical expertise and a strong work ethic to every pro  ",
             google: "https://mail.google.com/mail/u/0/?fs=1&to=l19.45.127.0@gmail.com&tf=cm",
             linkedin: "https://www.linkedin.com/in/louisa-h-958733294/",
             github: "https://github.com/Polichinell",
