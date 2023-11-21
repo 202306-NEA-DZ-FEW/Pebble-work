@@ -11,6 +11,7 @@ import PicturesLibrary from "./library";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { updateProfile } from "firebase/auth";
 import Loader from "@/components/Loader/Loader";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
 
 const ProfilePage = () => {
     const { t } = useTranslation();
@@ -142,6 +143,25 @@ const ProfilePage = () => {
 
     const handleChangePassword = async (e) => {
         e.preventDefault();
+        const minLength = 6;
+        const containsSpecialCharacter =
+            /[!@#$%^&*(),.?": '; = `{}|<>_ ~ \- +/ [\]]/;
+        const isValidLength = newPassword.length >= minLength;
+        const hasSpecialCharacter = containsSpecialCharacter.test(newPassword);
+
+        if (!isValidLength || !hasSpecialCharacter) {
+            setShowPopup(true);
+            setModalContent(
+                "Password must be at least 6 characters long and contain special characters"
+            );
+            setModalClassName(
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+            );
+            setTimeout(() => {
+                setShowPopup(false);
+            }, 2000);
+            return;
+        }
 
         if (newPassword !== confirmPassword) {
             setShowPopup(true);
