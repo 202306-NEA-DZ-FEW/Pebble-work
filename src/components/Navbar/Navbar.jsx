@@ -6,7 +6,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import styles from "@/styles/Navbar.module.css";
 
-import Dropdown from "../Dropdown";
+import DropMenu from "../DropMenu";
 import Language from "../Language/Language";
 import Pebble from "../Pebble";
 
@@ -74,7 +74,7 @@ const Navbar = () => {
                 </Link>
                 <div className='flex items-center md:order-2'>
                     <div className='flex gap-4'>
-                        <Dropdown />
+                        <DropMenu />
                     </div>
                     <Language />
                     <button

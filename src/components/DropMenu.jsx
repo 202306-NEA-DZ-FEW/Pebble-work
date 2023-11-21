@@ -12,7 +12,7 @@ import { auth } from "@/util/firebase";
 
 import Signup from "./Signup/Signup";
 
-const Dropdown = () => {
+const DropMenu = () => {
     const { t } = useTranslation("common");
     const isMobile = useMediaQuery({ maxWidth: 640 });
     const [isOpen, setIsOpen] = useState(false);
@@ -187,4 +187,4 @@ const Dropdown = () => {
     );
 };
 
-export default Dropdown;
+export default DropMenu;
