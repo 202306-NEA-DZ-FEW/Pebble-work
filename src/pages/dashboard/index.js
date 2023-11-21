@@ -358,7 +358,7 @@ const Dashboarduser = () => {
                     </div>
 
                     <div
-                        className={`flex overflow-auto gap-4 ${styles.information} mb-4 md:ml-[20px]`}
+                        className={`flex overflow-auto gap-4 ${styles.information} mb-4 ml-[20px]`}
                     >
                         {eventsMatchingInterests.map((event) => (
                             <SmallCard
