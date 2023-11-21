@@ -1,3 +1,4 @@
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { useRouter } from "next/router";
@@ -11,7 +12,8 @@ import styles from "@/styles/Events.module.css";
 
 import DesktopCard from "@/components/Events/DesktopCard";
 import EventCreation from "@/components/Events/EventCreation";
-import MobileCard from "@/components/Events/SmallCard";
+import MobileCard from "@/components/Events/MobileCard";
+import SmallCard from "@/components/Events/SmallCard";
 
 import { auth, db } from "../../util/firebase";
 const Dashboarduser = () => {
@@ -22,6 +24,8 @@ const Dashboarduser = () => {
     const [eventsMatchingInterests, setEventsMatchingInterests] = useState([]);
     const [Nameuser, SetNameUser] = useState("");
     const router = useRouter();
+    const isMobile = useMediaQuery("(max-width:1024px)");
+    const isSmallScreen = useMediaQuery("(max-width:768px)");
     useEffect(() => {
         if (auth.currentUser) {
             const userDocRef = doc(db, "users", auth.currentUser.uid);
@@ -210,19 +214,18 @@ const Dashboarduser = () => {
                 </ul>
             </nav>
 
-            <div className=' min-h-screen md:min-h-[100vh] ml-40 relative'>
-                <div className='flex justify-center items-center mt-0'>
-                    <div className='absolute w-full flex justify-center'>
+            <div className=' min-h-screen md:min-h-[100vh] lg:ml-40 ml-56 relative'>
+                <div className='flex justify-center items-center mt-10 md:mt-0'>
+                    <div className='absolute lg:w-full flex justify-center'>
                         <div
-                            className='w-auto bg-blue-500 opacity-10 pt-20 pb-10 rounded-[20px] px-80'
-                            style={{ width: "100%", maxWidth: "850px" }}
+                            className='width lg:w-[800px] md:w-[500px] sm:w-[400px] w-[50vw] bg-blue-500 opacity-10 h-[130px] rounded-[20px]'
+                            style={{}}
                         ></div>
                     </div>
                     <p
-                        className='font-bold text-lg italic '
+                        className='width font-bold sm:static md:mr-[0px] sm:mr-[-80px] absolute lg:w-auto sm:w-[300px] w-[50vw] md:text-lg pl-4 italic '
                         style={{
                             color: "#1A1A1A",
-                            fontFamily: "Rubik",
                             fontWeight: " 500",
                             letterSpacing: "0.11px",
                             wordWrap: "break-word",
@@ -235,7 +238,7 @@ const Dashboarduser = () => {
                     <img
                         src='/images/Volunteering-pana.png'
                         alt='Sitting'
-                        className='w-full sm:w-auto sm:h-auto h-[50px] md:w-[150px] md:h-[150px] rounded-full ml-0 z-10'
+                        className='w-auto sm:w-auto sm:h-[180px] h-[150px] md:w-[150px] md:h-[150px] rounded-full ml-0 sm:z-10'
                     />
                 </div>
                 <div>
@@ -243,7 +246,6 @@ const Dashboarduser = () => {
                         className='font-bold text-lg flex mb-4 ml-16 mt-4'
                         style={{
                             color: "#1A1A1A",
-                            fontFamily: "Rubik",
                             fontWeight: " 500",
                             letterSpacing: "0.11px",
                             wordWrap: "break-word",
@@ -256,20 +258,52 @@ const Dashboarduser = () => {
                     className={`flex flex-wrap max-h-[400px] ${styles.information} overflow-auto justify-center items-center mb-16 mt-12 `}
                 >
                     {eventsToDisplay.map((event) => {
-                        return (
-                            <DesktopCard
-                                eventId={event.id}
-                                key={event.id}
-                                title={event.title}
-                                type={event.type}
-                                image={event?.image || "/event_image.png"}
-                                location={event.location}
-                                description={event.description}
-                                organizer={event.organizer}
-                                time={event.time}
-                                date={event.date}
-                            />
-                        );
+                        if (isSmallScreen) {
+                            return (
+                                <SmallCard
+                                    eventId={event.id}
+                                    key={event.id}
+                                    title={event.title}
+                                    type={event.type}
+                                    image={event?.image || "/event_image.png"}
+                                    location={event.location}
+                                    description={event.description}
+                                    organizer={event.organizer}
+                                    time={event.time}
+                                    date={event.date}
+                                />
+                            );
+                        } else if (isMobile) {
+                            return (
+                                <MobileCard
+                                    eventId={event.id}
+                                    key={event.id}
+                                    title={event.title}
+                                    type={event.type}
+                                    image={event?.image || "/event_image.png"}
+                                    location={event.location}
+                                    description={event.description}
+                                    organizer={event.organizer}
+                                    time={event.time}
+                                    date={event.date}
+                                />
+                            );
+                        } else {
+                            return (
+                                <DesktopCard
+                                    eventId={event.id}
+                                    key={event.id}
+                                    title={event.title}
+                                    type={event.type}
+                                    image={event?.image || "/event_image.png"}
+                                    location={event.location}
+                                    description={event.description}
+                                    organizer={event.organizer}
+                                    time={event.time}
+                                    date={event.date}
+                                />
+                            );
+                        }
                     })}
                 </div>
 
@@ -278,7 +312,6 @@ const Dashboarduser = () => {
                         className=' font-bold text-lg flex  ml-16 mb-10 mt-8'
                         style={{
                             color: "#1A1A1A",
-                            fontFamily: "Rubik",
                             fontWeight: " 500",
                             letterSpacing: "0.11px",
                             wordWrap: "break-word",
@@ -292,7 +325,7 @@ const Dashboarduser = () => {
                     className={`flex overflow-auto gap-4 ${styles.information} mb-4 ml-10`}
                 >
                     {eventsMatchingInterests.map((event) => (
-                        <MobileCard
+                        <SmallCard
                             key={event.id}
                             eventId={event.id}
                             title={event.title}
@@ -307,6 +340,19 @@ const Dashboarduser = () => {
                     ))}
                 </div>
             </div>
+            <style jsx>{`
+                @media (max-width: 460px) {
+                    .width {
+                        width: 40vw;
+                        font-size: 11px;
+                    }
+                    @media (max-width: 375px) {
+                        .width {
+                            width: 30vw;
+                            font-size: 11px;
+                        }
+                }
+            `}</style>
         </>
     );
 };

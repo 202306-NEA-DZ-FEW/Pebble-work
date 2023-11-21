@@ -53,7 +53,7 @@ const Navbar = () => {
         setActiveTab(
             router.pathname === "/" ? "home" : router.pathname.slice(1)
         );
-    }, []);
+    }, [router.pathname]); //to mount when ever the route is change
 
     return (
         <nav className='sticky z-[555] bg-[#B4CD93] top-0 xl:flex xl:flex-col xl:items-center'>
