@@ -272,7 +272,7 @@ const ProfilePage = () => {
         return <Loader />;
     } else {
         return (
-            <div className='pt-5 flex flex-col items-center justify-center sm-types'>
+            <div className='pt-5 flex min-h-screen flex-col items-center justify-center sm-types '>
                 <h1 className='sm-text font-semibold text-lg md:text-4xl md:mt-5'>
                     {t("edit:editProfile")}
                 </h1>
@@ -361,10 +361,10 @@ const ProfilePage = () => {
                         </div>
                     </div>
                     {/* Your Interests */}
-                    <h3 className='font-semibold text-md mt-3 w-full md:w-1/2 md:mt-2 md:text-2xl'>
+                    <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
                         {t("edit:Interests")}
                     </h3>
-                    <div className='grid grid-container grid-cols-2 gap-4 mt-2 text-center justify-evenly md:grid-cols-3 text-xs md:w-full md:h-auto md:mt-2 md:text-lg'>
+                    <div className='grid grid-container grid-cols-1 gap-8 -ml-15 mt-3 text-center justify-evenly sm:grid-cols-2 sm:gap-4 md:grid-cols-3 text-xs md:w-full md:h-auto md:mt-8 md:text-3xl'>
                         {EventTypes.map((type, index) => (
                             <button
                                 key={index}
@@ -377,7 +377,7 @@ const ProfilePage = () => {
                             >
                                 {type}
                             </button>
-                        ))}{" "}
+                        ))}
                     </div>
                     {/* Save Interests Button */}
                     <div className='mt-4 flex flex-col items-center md:mx-auto'>
@@ -391,7 +391,7 @@ const ProfilePage = () => {
                 </form>
                 {/* Change Password */}
                 <div className='flex mt-6 justify-center'>
-                    <div className='md:w-[700px] sm:w-[500px] w-[300px] bg-[#B4CD93] h-[250px] sm:h-[200px] mb-6'>
+                    <div className='md:w-[700px] sm:w-[500px] w-[250px] bg-[#B4CD93] h-[250px] sm:h-[200px] mb-4'>
                         <h3 className='font-bold mt-5 text-center md:text-2xl'>
                             {t("edit:changePassword")}
                         </h3>
