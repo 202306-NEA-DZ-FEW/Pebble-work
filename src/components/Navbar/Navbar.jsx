@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import styles from "@/styles/Navbar.module.css";
 
@@ -11,13 +11,12 @@ import Language from "../Language/Language";
 import Pebble from "../Pebble";
 
 let tabs = [
-    { id: "", label: "Home" },
+    { id: "home", label: "Home" },
     { id: "events", label: "Events" },
     { id: "about", label: "About" },
 ];
 const Navbar = () => {
     const dropdownRef = useRef(null);
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [menuDropdownOpen, setMenuDropdownOpen] = useState(false);
 
     const [activeTab, setActiveTab] = useState(tabs[0].id);
@@ -26,10 +25,6 @@ const Navbar = () => {
 
     const menuDropdown = () => {
         setMenuDropdownOpen(!menuDropdownOpen);
-    };
-
-    const toggleDropdown = () => {
-        setIsDropdownOpen(!isDropdownOpen);
     };
 
     const closeMenuDropdown = () => {
@@ -55,7 +50,9 @@ const Navbar = () => {
         };
     }, [menuDropdownOpen]);
     useEffect(() => {
-        setActiveTab(router.pathname.slice(1)); //so the motion will always stay on the current active tab
+        setActiveTab(
+            router.pathname === "/" ? "home" : router.pathname.slice(1)
+        );
     }, []);
 
     return (
@@ -126,7 +123,11 @@ const Navbar = () => {
                     >
                         {tabs.map((tab) => (
                             <li key={tab.id}>
-                                <Link href={`/${tab.id}`}>
+                                <Link
+                                    href={
+                                        tab.id === "home" ? "/" : `/${tab.id}`
+                                    }
+                                >
                                     <p
                                         onClick={() => {
                                             setActiveTab(tab.id);
@@ -142,17 +143,18 @@ const Navbar = () => {
                                                 "transparent",
                                         }}
                                     >
-                                        {activeTab === tab.id && (
-                                            <motion.span
-                                                layoutId='line'
-                                                className='absolute bottom-0 left-0 right-0 md:h-[2px] h-1 z-10 bg-[#547543]'
-                                                transition={{
-                                                    type: "spring",
-                                                    bounce: 0.3,
-                                                    duration: 1.2,
-                                                }}
-                                            />
-                                        )}
+                                        {activeTab === tab.id &&
+                                            activeTab !== "" && (
+                                                <motion.span
+                                                    layoutId='line'
+                                                    className='absolute bottom-0 left-0 right-0 md:h-[2px] h-1 z-10 bg-[#547543]'
+                                                    transition={{
+                                                        type: "spring",
+                                                        bounce: 0.3,
+                                                        duration: 1.2,
+                                                    }}
+                                                />
+                                            )}
                                         {t(
                                             `common:navbar:${tab.label.toLowerCase()}`
                                         )}

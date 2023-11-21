@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { db, auth } from "../../util/firebase";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
-import DesktopCard from "@/components/Events/DesktopCard";
-import styles from "@/styles/Events.module.css";
-import { IoCreateOutline } from "react-icons/io5";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { useRouter } from "next/router";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import React, { useEffect, useState } from "react";
 import { IoIosGitCompare } from "react-icons/io";
 import { IoIosGitBranch } from "react-icons/io";
-import MobileCard from "@/components/Events/SmallCard";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useRouter } from "next/router";
+import { IoCreateOutline } from "react-icons/io5";
+
+import styles from "@/styles/Events.module.css";
+
+import DesktopCard from "@/components/Events/DesktopCard";
 import EventCreation from "@/components/Events/EventCreation";
+import MobileCard from "@/components/Events/SmallCard";
+
+import { auth, db } from "../../util/firebase";
 const Dashboarduser = () => {
     const [joinedEvents, setJoinedEvents] = useState([]);
     const [createdEvent, setCreatedEvent] = useState([]);
@@ -39,7 +42,7 @@ const Dashboarduser = () => {
         } else {
             SetNameUser(null);
         }
-    }, [auth.currentUser]);
+    }, [auth.currentUser]); // to show the user name in the welcome message
 
     const handleDisplayEvents = (eventType) => {
         if (eventType === "created") {
@@ -72,7 +75,7 @@ const Dashboarduser = () => {
         );
         return validEventsData;
     };
-
+    //using the "interests" from user's collection, to compare with the types from events, and get the right events
     useEffect(() => {
         const fetchEvents = async () => {
             const eventsCollectionRef = collection(db, "events");

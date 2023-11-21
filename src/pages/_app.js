@@ -34,8 +34,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 
     return (
         <>
-            {loading && <Loader />} {/* show Loader when loading */}
             <Layout>
+                {loading && <Loader />} {/* show Loader when loading */}
                 <ToastContainer />
                 <Component {...pageProps} />
             </Layout>

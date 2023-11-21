@@ -156,7 +156,7 @@ const Dropdown = () => {
                                         {t("common:dropdown:hostEvent")}
                                     </Link>
                                     <Link
-                                        href='/myevents'
+                                        href='/dashboard'
                                         className={`hover:text-red-600 ${styles.listItem}`}
                                     >
                                         {t("common:dropdown:myEvents")}
