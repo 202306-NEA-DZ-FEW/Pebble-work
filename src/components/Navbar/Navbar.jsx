@@ -1,16 +1,14 @@
+import { motion } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import styles from "@/styles/Navbar.module.css";
-import { useRouter } from "next/router";
-
-import { auth } from "@/util/firebase";
 
 import Dropdown from "../Dropdown";
 import Language from "../Language/Language";
 import Pebble from "../Pebble";
-import { motion } from "framer-motion";
 
 let tabs = [
     { id: "", label: "Home" },
@@ -18,8 +16,10 @@ let tabs = [
     { id: "about", label: "About" },
 ];
 const Navbar = () => {
+    const dropdownRef = useRef(null);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [menuDropdownOpen, setMenuDropdownOpen] = useState(false);
-    const [user, setUser] = useState(null);
+
     const [activeTab, setActiveTab] = useState(tabs[0].id);
     const { t } = useTranslation();
     const router = useRouter(); //so the motion will always stay on the current active tab
@@ -28,28 +28,38 @@ const Navbar = () => {
         setMenuDropdownOpen(!menuDropdownOpen);
     };
 
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
     const closeMenuDropdown = () => {
-        setMenuDropdownOpen(false);
+        setMenuDropdownOpen(!menuDropdownOpen);
     };
 
     useEffect(() => {
-        const logged = auth.onAuthStateChanged((user) => {
-            if (user) {
-                setUser(user);
-            } else {
-                setUser(null);
+        const handleClickOutside = (event) => {
+            if (
+                menuDropdownOpen &&
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target)
+            ) {
+                closeMenuDropdown();
             }
-        });
-
-        setActiveTab(router.pathname.slice(1)); //so the motion will always stay on the current active tab
-
-        return () => {
-            logged();
         };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        //so the motion will always stay on the current active tab
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [menuDropdownOpen]);
+    useEffect(() => {
+        setActiveTab(router.pathname.slice(1)); //so the motion will always stay on the current active tab
     }, []);
 
     return (
-        <nav className='sticky z-[9999] md:mb-10 mb-4 bg-[#B4CD93] top-0 xl:flex xl:flex-col xl:items-center'>
+        <nav className='sticky z-[555] bg-[#B4CD93] top-0 xl:flex xl:flex-col xl:items-center'>
             <div
                 style={{
                     width: "100%",
@@ -106,8 +116,9 @@ const Navbar = () => {
                 <div
                     className={`${
                         menuDropdownOpen ? "block" : "hidden"
-                    }  md:flex md:items-center w-full md:w-auto`}
+                    }  md:flex md:items-center w-full md:w-auto navbar-content`}
                     id='navbar-language'
+                    ref={dropdownRef}
                 >
                     <ul
                         className={`md:static text-center md:bg-transparent gap-10 fixed sm:w-full w-60 md:min-h-0 min-h-screen flex flex-col font-medium md:p-0 md:flex-row md:space-x-8 md:mt-0 bg-gray-800 left-[0px] top-0 z-10 ${styles.tiltIn}`}
@@ -123,7 +134,7 @@ const Navbar = () => {
                                         }}
                                         className={`block rounded dark:border-gray-700 ${
                                             activeTab === tab.id
-                                                ? "cursor-default" //text on hover while the motion is on it
+                                                ? "" //text on hover while the motion is on it
                                                 : "hover:text-[#547543]" //text on hover while the motion is not on it
                                         } relative rounded-full lg:text-[18px] md:text-[15px] font-medium text-white outline-sky-400 transition focus-visible:outline-2`}
                                         style={{

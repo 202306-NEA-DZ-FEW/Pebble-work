@@ -1,11 +1,15 @@
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { db, auth } from "../../util/firebase";
-import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import Image from "next/image";
 import { useRouter } from "next/router";
-import { useTranslation } from "react-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+
+import Loader from "@/components/Loader/Loader";
+import MorphingSvg from "@/components/MorphingSvg";
+
+import { auth, db } from "../../util/firebase";
 
 const ProfilePage = () => {
     const router = useRouter();
@@ -62,19 +66,32 @@ const ProfilePage = () => {
     }, []);
 
     const handleEditProfile = () => {
-        router.push("/editprofile"); // Redirect to the Edit Profile page
+        router.push("/profile/edit"); // Redirect to the Edit Profile page
     };
 
     if (!currentUser) {
-        return <p>Loading</p>;
+        return (
+            <div className='h-screen w-screen'>
+                <Loader />
+            </div>
+        );
     } else {
         return (
-            <div className='pt-5 flex flex-col items-center justify-center sm-types'>
+            <div className='pt-5 flex relative flex-col items-center justify-center sm-types'>
                 <h1 className='sm-text font-semibold text-lg md:text-4xl md:mt-5'>
                     {t("profile:yourProfile")}
                 </h1>
+                <div
+                    style={{
+                        position: "absolute",
+                        width: "screen",
+                        height: "screen",
+                    }}
+                >
+                    <MorphingSvg />
+                </div>
 
-                <div className='sm-col flex flex-row mt-4'>
+                <div className='sm-col relative flex flex-row mt-4'>
                     <div className='flex flex-col ml-4 mt-4 md:w-full md:gap-10'>
                         {/* Row to be changed Start */}
                         <div className='sm-col flex flex-col md:flex-row items-center justify-around'>
@@ -151,6 +168,17 @@ const ProfilePage = () => {
                             ))}
                         </div>
                     </div>
+                </div>
+                <div
+                    className='morphingSVGHidden'
+                    style={{
+                        position: "absolute",
+                        bottom: "140px",
+                        width: "screen",
+                        height: "screen",
+                    }}
+                >
+                    <MorphingSvg />
                 </div>
 
                 {/* Save Interests Button */}

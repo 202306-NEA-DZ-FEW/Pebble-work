@@ -1,6 +1,6 @@
-import React from "react";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
+import React from "react";
 
 const Signup = () => {
     const { t } = useTranslation("common");

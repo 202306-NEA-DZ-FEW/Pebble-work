@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
-import { db } from "@/util/firebase";
-import { doc, getDoc, collection } from "firebase/firestore";
-import styles from "@/styles/Events.module.css";
+import { doc, getDoc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+
+import styles from "@/styles/Events.module.css";
+
+import { db } from "@/util/firebase";
 
 function FirestoreLocation({ onInputChange }) {
     const [filteredLocations, setFilteredLocations] = useState([]);
@@ -34,7 +36,7 @@ function FirestoreLocation({ onInputChange }) {
                 setLocationsArray(locationsArray);
             }
         } catch (error) {
-            console.error("Error fetching locations:", error);
+            console.log("Error fetching locations:", error);
         }
     };
 

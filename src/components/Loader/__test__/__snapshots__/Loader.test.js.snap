@@ -3,78 +3,82 @@
 exports[`Loader renders correctly 1`] = `
 <DocumentFragment>
   <div
-    class="wrapper"
+    class="body"
   >
     <div
-      class="candles"
+      class="wrapper"
     >
       <div
-        class="lightWave"
-      />
-      <div
-        class="candle1"
+        class="candles"
       >
         <div
-          class="candle1Body"
+          class="lightWave"
+        />
+        <div
+          class="candle1"
         >
           <div
-            class="candle1Eyes"
+            class="candle1Body"
           >
-            <span
-              class="candle1EyesOne"
-            />
-            <span
-              class="candle1EyesTwo"
+            <div
+              class="candle1Eyes"
+            >
+              <span
+                class="candle1EyesOne"
+              />
+              <span
+                class="candle1EyesTwo"
+              />
+            </div>
+            <div
+              class="candle1Mouth"
             />
           </div>
           <div
-            class="candle1Mouth"
+            class="candle1Stick"
           />
         </div>
         <div
-          class="candle1Stick"
-        />
-      </div>
-      <div
-        class="candle2"
-      >
-        <div
-          class="candle2Body"
+          class="candle2"
         >
           <div
-            class="candle2Eyes"
+            class="candle2Body"
           >
             <div
-              class="candle2EyesOne"
-            />
-            <div
-              class="candle2EyesTwo"
-            />
+              class="candle2Eyes"
+            >
+              <div
+                class="candle2EyesOne"
+              />
+              <div
+                class="candle2EyesTwo"
+              />
+            </div>
           </div>
+          <div
+            class="candle2Stick"
+          />
         </div>
         <div
-          class="candle2Stick"
+          class="candle2Fire"
+        />
+        <div
+          class="sparklesOne"
+        />
+        <div
+          class="sparklesTwo"
+        />
+        <div
+          class="candleSmokeOne"
+        />
+        <div
+          class="candleSmokeTwo"
         />
       </div>
       <div
-        class="candle2Fire"
-      />
-      <div
-        class="sparklesOne"
-      />
-      <div
-        class="sparklesTwo"
-      />
-      <div
-        class="candleSmokeOne"
-      />
-      <div
-        class="candleSmokeTwo"
+        class="floor"
       />
     </div>
-    <div
-      class="floor"
-    />
   </div>
 </DocumentFragment>
 `;

@@ -1,8 +1,14 @@
 import React from "react";
-import renderer from "react-test-renderer";
-import SmallScreenEvents from "../SmallScreenEvents";
 
-test("SmallScreenEvents component renders correctly", () => {
-    const tree = renderer.create(<SmallScreenEvents />).toJSON();
-    expect(tree).toMatchSnapshot();
+import SmallScreenEvents from "../SmallScreenEvents";
+import { render, cleanup } from "@testing-library/react";
+afterEach(cleanup);
+describe("SmallScreenEvents", () => {
+    it("renders correctly", () => {
+        const user = { name: "Test User" };
+
+        const { asFragment } = render(<SmallScreenEvents user={user} />);
+
+        expect(asFragment()).toMatchSnapshot();
+    });
 });

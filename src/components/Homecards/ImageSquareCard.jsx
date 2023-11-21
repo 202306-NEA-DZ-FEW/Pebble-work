@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import styles from "@/styles/Homepage.module.css";
 import Image from "next/image";
+import React, { useEffect, useState } from "react";
+
+import styles from "@/styles/Homepage.module.css";
 
 const ImageSquareCard = () => {
     const [isImage, setIsImage] = useState(false);

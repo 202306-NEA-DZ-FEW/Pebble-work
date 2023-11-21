@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+
 import styles from "@/styles/Events.module.css";
 
 const FilterByType = ({

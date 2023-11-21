@@ -1,23 +1,24 @@
-import { useTranslation } from "next-i18next";
 import {
-    signInWithEmailAndPassword,
     getAuth,
-    linkWithPopup,
     GoogleAuthProvider,
+    linkWithPopup,
+    signInWithEmailAndPassword,
     signInWithPopup,
     TwitterAuthProvider,
 } from "firebase/auth";
-import Image from "next/image";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { collection, doc, setDoc } from "firebase/firestore";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState, useEffect, useRef } from "react";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import React, { useEffect, useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
-import { sendPasswordResetEmail } from "firebase/auth";
+
 import BtnGoogle from "@/components/BtnTwitter&Google/ButtonGoogle";
 import ButtonTwitter from "@/components/BtnTwitter&Google/ButtonTwitter";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Modal from "@/components/Popup/Modal";
-import { collection, setDoc, doc } from "firebase/firestore";
+
 import { db } from "../../util/firebase";
 import { auth } from "../../util/firebase";
 

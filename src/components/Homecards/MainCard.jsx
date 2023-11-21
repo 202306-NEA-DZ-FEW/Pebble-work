@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import styles from "@/styles/Homepage.module.css";
 import { useTranslation } from "next-i18next";
+import React, { useEffect, useState } from "react";
+
+import styles from "@/styles/Homepage.module.css";
 
 const FeatureCard = ({ title, description, buttonText, imageUrl, link }) => {
     const { t } = useTranslation();
