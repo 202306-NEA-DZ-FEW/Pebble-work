@@ -1,13 +1,16 @@
-import React, { useState, useEffect, useRef } from "react";
 import { signOut } from "firebase/auth";
-import { auth } from "@/util/firebase";
 import Link from "next/link";
-import Signup from "./Signup/Signup";
-import { useMediaQuery } from "react-responsive";
-import styles from "@/styles/DropMenu.module.css";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import React, { useEffect, useRef, useState } from "react";
+import { useMediaQuery } from "react-responsive";
 import { BeatLoader } from "react-spinners";
+
+import styles from "@/styles/DropMenu.module.css";
+
+import { auth } from "@/util/firebase";
+
+import Signup from "./Signup/Signup";
 
 const Dropdown = () => {
     const { t } = useTranslation("common");

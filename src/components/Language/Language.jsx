@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEarthEurope } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
+import React, { useEffect, useRef, useState } from "react";
 import Draggable from "react-draggable";
 
 const Language = () => {

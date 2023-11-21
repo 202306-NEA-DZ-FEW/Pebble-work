@@ -1,6 +1,4 @@
-import Link from "next/link";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-
 import * as React from "react";
 
 import HomeCards from "@/components/HomeCards";

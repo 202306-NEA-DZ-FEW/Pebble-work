@@ -1,16 +1,14 @@
+import { motion } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import React, { useEffect, useState, useRef } from "react";
 
 import styles from "@/styles/Navbar.module.css";
-import { useRouter } from "next/router";
-
-import { auth } from "@/util/firebase";
 
 import Dropdown from "../Dropdown";
 import Language from "../Language/Language";
 import Pebble from "../Pebble";
-import { motion } from "framer-motion";
 
 let tabs = [
     { id: "", label: "Home" },
@@ -21,7 +19,7 @@ const Navbar = () => {
     const dropdownRef = useRef(null);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [menuDropdownOpen, setMenuDropdownOpen] = useState(false);
-    const [user, setUser] = useState(null);
+
     const [activeTab, setActiveTab] = useState(tabs[0].id);
     const { t } = useTranslation();
     const router = useRouter(); //so the motion will always stay on the current active tab
@@ -51,23 +49,17 @@ const Navbar = () => {
 
         document.addEventListener("mousedown", handleClickOutside);
 
-        const logged = auth.onAuthStateChanged((user) => {
-            if (user) {
-                setUser(user);
-            } else {
-                setUser(null);
-            }
-        });
-
-        setActiveTab(router.pathname.slice(1)); //so the motion will always stay on the current active tab
+        //so the motion will always stay on the current active tab
         return () => {
-            logged();
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [menuDropdownOpen]);
+    useEffect(() => {
+        setActiveTab(router.pathname.slice(1)); //so the motion will always stay on the current active tab
+    }, []);
 
     return (
-        <nav className='sticky z-[9999] md:mb-10 mb-4 bg-[#B4CD93] top-0 xl:flex xl:flex-col xl:items-center'>
+        <nav className='sticky z-[555] bg-[#B4CD93] top-0 xl:flex xl:flex-col xl:items-center'>
             <div
                 style={{
                     width: "100%",
@@ -142,7 +134,7 @@ const Navbar = () => {
                                         }}
                                         className={`block rounded dark:border-gray-700 ${
                                             activeTab === tab.id
-                                                ? "cursor-default" //text on hover while the motion is on it
+                                                ? "" //text on hover while the motion is on it
                                                 : "hover:text-[#547543]" //text on hover while the motion is not on it
                                         } relative rounded-full lg:text-[18px] md:text-[15px] font-medium text-white outline-sky-400 transition focus-visible:outline-2`}
                                         style={{

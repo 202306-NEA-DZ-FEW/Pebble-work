@@ -2,11 +2,11 @@
 
 ## Project information
 
--   Project name: [Project name]
--   Project description: [Project description]
+-   Project name: [Pebble work]
+-   Project description: [A platform to organize diffrent types of volunteer events ]
 -   Technology used: Nextjs, TailwindCSS, i18next, Husky, Prettier, Eslint, Commitlinter (Conventional Commits)
--   Team members: Member1, Member2, etc,
--   Bootcamp: GIZ YE 2022
+-   Team members: Takieddine Dilmi , Youssouf Sergma, Manel Hasna Haddoud, Louisa Hamrit, Halla Hamidi
+-   Bootcamp: NEA DZ FEW 2023
 
 ## Installation
 
