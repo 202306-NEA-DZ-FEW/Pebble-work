@@ -55,7 +55,7 @@ function FirestoreLocation({ onInputChange }) {
                 Location
             </button>
             <dialog id='my_modal_1' className='modal rounded-tr rounded-br'>
-                <div className='modal-box bg-[#2E7EAA]'>
+                <div className='modal-box text-slate-200 bg-[#2E7EAA]'>
                     <div className='flex justify-center'>
                         <input
                             type='text'
