@@ -164,10 +164,10 @@ const Dashboarduser = () => {
     return (
         <>
             <button
-                className='button absolute bg-[#2E7EAA] text-white text-[12px] rounded-[4px] p-2 top-[80px] right-2'
+                className='button absolute bg-[#2E7EAA] text-white text-[12px] rounded-[4px] p-2 top-[80px] left-2'
                 onClick={toggleNav}
             >
-                SideBar
+                Get Started
             </button>
             <nav
                 className={`absolute top-30 bottom-0 h-full left-0 bg-[#e6f5e4] overflow-hidden duration-200 linear shadow-md mt-30 transform transition-transform ${
@@ -242,10 +242,7 @@ const Dashboarduser = () => {
                 <div className=' min-h-screen md:min-h-[100vh] lg:ml-40 sm:ml-48 relative'>
                     <div className='flex justify-center items-center mt-10 md:mt-0'>
                         <div className='absolute lg:w-full flex justify-center'>
-                            <div
-                                className='width lg:w-[800px] md:w-[500px] sm:w-[400px] w-[50vw] bg-blue-500 opacity-10 h-[130px] rounded-[20px]'
-                                style={{}}
-                            ></div>
+                            <div className='width lg:w-[800px] md:w-[500px] sm:w-[400px] w-[50vw] bg-blue-500 opacity-10 h-[130px] rounded-[20px]'></div>
                         </div>
                         <p
                             className='width font-bold sm:static md:mr-[0px] sm:mr-[-80px] absolute lg:w-auto sm:w-[300px] w-[50vw] md:text-lg pl-4 italic '
@@ -378,39 +375,34 @@ const Dashboarduser = () => {
                 </div>
             </div>
             <style jsx>{`
-            @media (max-width: 640px) {
-                button {
-                    display: block;
+                @media (max-width: 640px) {
+                    button {
+                        display: block;
+                    }
+                    nav {
+                        display: block;
+                        transform: ${isNavVisible
+                            ? "translateX(0)"
+                            : "translateX(-100%)"};
+                        transition: transform 0.7s ease-in-out;
+                        background-color: #e6f5e4;
+                        z-index: 50;
+                    }
                 }
-                nav {
-                    display: block;
-                    transform: ${
-                        isNavVisible ? "translateX(0)" : "translateX(-100%)"
-                    };
-                    transition: transform 0.7s ease-in-out;
-                    background-color: #e6f5e4;
-                    z-index: 50;
+                @media (min-width: 641px) {
+                    .button {
+                        display: none;
+                    }
+                    nav {
+                        display: block;
+                        transform: translateX(0);
+                    }
                 }
-            }
-            @media (min-width: 641px) {
-                .button {
-                    display: none;
-                }
-                nav {
-                    display: block;
-                    transform: translateX(0);
-                }
-            }
                 @media (max-width: 460px) {
                     .width {
-                        width: 40vw;
+                        width: 60vw;
                         font-size: 11px;
                     }
-                    @media (max-width: 375px) {
-                        .width {
-                            width: 30vw;
-                            font-size: 11px;
-                        }
                 }
             `}</style>
         </>
