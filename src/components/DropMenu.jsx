@@ -12,7 +12,7 @@ import { auth } from "@/util/firebase";
 
 import Signup from "./Signup/Signup";
 
-const Dropdown = () => {
+const DropMenu = () => {
     const { t } = useTranslation("common");
     const isMobile = useMediaQuery({ maxWidth: 640 });
     const [isOpen, setIsOpen] = useState(false);
@@ -156,14 +156,14 @@ const Dropdown = () => {
                                         {t("common:dropdown:hostEvent")}
                                     </Link>
                                     <Link
-                                        href='/myevents'
+                                        href='/dashboard'
                                         className={`hover:text-red-600 ${styles.listItem}`}
                                     >
                                         {t("common:dropdown:myEvents")}
                                     </Link>
                                     <hr />
                                     <Link
-                                        href='/editprofile'
+                                        href='/profile/edit'
                                         className={`hover:text-red-600 ${styles.listItem}`}
                                     >
                                         {t("common:dropdown:accountSettings")}
@@ -187,4 +187,4 @@ const Dropdown = () => {
     );
 };
 
-export default Dropdown;
+export default DropMenu;

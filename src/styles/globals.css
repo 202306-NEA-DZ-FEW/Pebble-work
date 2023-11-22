@@ -1,11 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap");
+@font-face {
+    font-family: "Restora ExtraLight";
+    src: url("/nasir-udin-restoraextralight.otf") format("opentype");
+}
 
 body {
     background-color: #e6f5e4;
-    font-family: "Rubik", sans-serif;
+    font-family: "Restora ExtraLight", "sans-serif";
     overflow-x: hidden;
 }
 
@@ -81,6 +84,16 @@ body {
 
     .sm-col-3 {
         margin-top: 10rem;
+    }
+}
+@media (min-width: 1014px) {
+    .gallery-lg {
+        margin-top: 12rem;
+    }
+}
+@media (max-width: 440px) {
+    .eventButtons {
+        width: 12rem;
     }
 }
 

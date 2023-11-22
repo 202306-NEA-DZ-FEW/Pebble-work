@@ -72,3 +72,8 @@
 .selectedRange {
     color: black;
 }
+/*calendar button*/
+.calendarButton {
+    clip-path: polygon(0 0, 100% 0, 100% 25%, 50% 50%, 0 25%);
+    background-color: blue;
+}

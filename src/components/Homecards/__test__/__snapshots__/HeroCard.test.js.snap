@@ -3,7 +3,7 @@
 exports[`HeroCard renders correctly 1`] = `
 <DocumentFragment>
   <div
-    class="w-full shadow-md sm:h-[400px] flex justify-center items-center"
+    class="w-full  sm:h-[400px] flex justify-center items-center"
   >
     <div
       class="text-center p-4"
@@ -12,14 +12,25 @@ exports[`HeroCard renders correctly 1`] = `
         class="max-w-screen-xl mx-auto"
       >
         <div
-          class="text-4xl font-medium leading-10 tracking-tight text-zinc-900"
+          class="text-4xl font-medium leading-10 tracking-tight text-zinc-900 mb-5"
         >
           common:heroCard:title
         </div>
         <div
-          class="text-xl font-normal leading-10 tracking-tight text-zinc-500"
+          class="text-xl font-normal leading-10 tracking-tight text-zinc-500 mb-5"
         >
           common:heroCard:description
+          <a
+            href="https://studentsstore.vercel.app"
+            target="_BLANK"
+          >
+            <span
+              class="font-semibold text-[#2E7EAA]"
+            >
+              common:heroCard:link
+            </span>
+          </a>
+          common:heroCard:description2
         </div>
         <div
           class=" flex flex-col sm:flex-row justify-center items-center gap-6"
@@ -32,7 +43,7 @@ exports[`HeroCard renders correctly 1`] = `
           </a>
           <a
             class="secondButton text-[2xl] font-medium leading-10 tracking-tight text-zinc-900"
-            href="/guidelines"
+            href="/about"
           >
             common:heroCard:whoWeAre
           </a>
