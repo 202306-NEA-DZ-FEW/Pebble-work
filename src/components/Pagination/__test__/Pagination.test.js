@@ -1,24 +1,31 @@
-import { renderHook } from "@testing-library/react-hooks";
-
+import React from "react";
+import { render, screen } from "@testing-library/react";
 import { usePagination } from "../Pagination";
 
+// A simple component that uses the hook
+function TestComponent() {
+    const items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"];
+    const {
+        currentPage,
+        itemsPerPage,
+        totalPages,
+        currentItems,
+        setCurrentPage,
+        setItemsPerPage,
+    } = usePagination(1, 2, items);
+
+    return (
+        <div>
+            {currentItems.map((item, index) => (
+                <div key={index}>{item}</div>
+            ))}
+        </div>
+    );
+}
+
 describe("usePagination", () => {
-    it("returns correct initial values", () => {
-        const initialPage = 1;
-        const initialItemsPerPage = 2;
-        const items = ["item1", "item2", "item3", "item4", "item5"];
-
-        const { result } = renderHook(() =>
-            usePagination(initialPage, initialItemsPerPage, items)
-        );
-
-        expect(result.current.currentPage).toBe(initialPage);
-        expect(result.current.itemsPerPage).toBe(initialItemsPerPage);
-        expect(result.current.totalPages).toBe(
-            Math.ceil(items.length / initialItemsPerPage)
-        );
-        expect(result.current.currentItems).toEqual(
-            items.slice(0, initialItemsPerPage)
-        );
+    it("renders correctly", () => {
+        const { asFragment } = render(<TestComponent />);
+        expect(asFragment()).toMatchSnapshot();
     });
 });

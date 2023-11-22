@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`usePagination renders correctly 1`] = `
+<DocumentFragment>
+  <div>
+    <div>
+      Item 1
+    </div>
+    <div>
+      Item 2
+    </div>
+  </div>
+</DocumentFragment>
+`;
