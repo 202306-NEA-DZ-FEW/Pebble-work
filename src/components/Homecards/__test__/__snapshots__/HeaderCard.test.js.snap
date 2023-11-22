@@ -3,7 +3,7 @@
 exports[`HeaderCard renders correctly 1`] = `
 <DocumentFragment>
   <div
-    class="change flex flex-row shadow-md items-center justify-center gap-2 mb-8 xl:w-[1222px] xl:min-h-[750px] lg:w-[960px] lg:min-h-[500px] md:w-[777px] md:min-h-[370px] sm:w-[666px] sm:min-h-[330px] w-[466px] min-h-[300px] "
+    class="change flex flex-row items-center justify-center gap-2 mb-8 xl:w-[1222px] xl:min-h-[750px] lg:w-[960px] lg:min-h-[500px] md:w-[777px] md:min-h-[370px] sm:w-[666px] sm:min-h-[330px] w-[466px] min-h-[300px] "
   >
     <div
       class="text"

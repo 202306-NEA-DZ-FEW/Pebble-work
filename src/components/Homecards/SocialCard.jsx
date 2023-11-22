@@ -14,9 +14,9 @@ const SocialCardData = [
         imageSrc: "./images/Aazar_BYC.png",
     },
     {
-        name: "Ali",
-        occupation: "occupation",
-        text: "This is the third testimonial. Yet another testimonial here.",
+        name: "Hiba M.",
+        occupation: "Volunteer",
+        text: "The tools they provide have turned our ideas into real actions, helping us make a difference. I'm grateful for the chance Pebble Work has given us to contribute meaningfully.",
         imageSrc: "./images/icon_default.png",
     },
 ];

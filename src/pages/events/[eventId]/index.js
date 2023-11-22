@@ -13,6 +13,7 @@ import {
 } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
+import { FaPeopleGroup } from "react-icons/fa6";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React from "react";
@@ -225,11 +226,39 @@ const EventsPage = ({ event, organizer, notFound }) => {
                             />
                         )}
                     </div>
+
                     <div
                         style={{ width: "100%" }}
                         className='lg:flex lg:flex-col md:flex md:flex-row md:justify-items-center md:gap-x-10'
                     >
                         <div>
+                            {/*
+                        <div className="card bg-base-100">
+                         <div className="flex items-center px-5">
+                                <div className="w-1/3">
+                                      <Image
+                                      src='/images/hybrid-event-icon.png'
+                                        width={75}
+                                        height={75}
+                                           alt='organizer pic' />
+                                 </div>
+
+                          <div className="w-2/3 card-body">
+                             <h2 className="card-title">{t("review.organizedBy")}{" "}</h2>
+                                <p>
+                                {organizer.Name ? (
+                                <b>
+                                    {organizer.Name} {organizer.Surename}
+                                </b>
+                                ) : (
+                                <b>{t("review.dudeMcGee")}</b>
+                                )}
+                               </p>
+                          </div>
+                          </div>
+
+                        </div> */}
+
                             <p>
                                 <b>{t("review.location")}</b> <br />
                                 {event.location}
@@ -253,17 +282,27 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                 <br />
                             </p>
                         </div>
+
                         <div>
-                            <p>
-                                {t("review.organizedBy")}{" "}
-                                {organizer.Name ? (
-                                    <b>
-                                        {organizer.Name} {organizer.Surename}
-                                    </b>
-                                ) : (
-                                    <b>{t("review.dudeMcGee")}</b>
-                                )}
-                            </p>
+                            <div className='flex bg-white rounded-lg w-fit p-3 gap-x-14'>
+                                <p className=' text-gray-800'>
+                                    <span className=' text-gray-500'>
+                                        {" "}
+                                        {t("review.organizedBy")}{" "}
+                                    </span>
+                                    <br />
+                                    {organizer.Name ? (
+                                        <b>
+                                            {organizer.Name}{" "}
+                                            {organizer.Surename}
+                                        </b>
+                                    ) : (
+                                        <b>{t("review.dudeMcGee")}</b>
+                                    )}
+                                </p>
+
+                                <FaPeopleGroup size={50} fill='#749d60' />
+                            </div>
 
                             {isAuthenticated ? (
                                 <>
