@@ -233,33 +233,6 @@ const EventsPage = ({ event, organizer, notFound }) => {
                         className='lg:flex lg:flex-col md:flex md:flex-row md:justify-items-center md:gap-x-10'
                     >
                         <div>
-                            {/*
-                        <div className="card bg-base-100">
-                         <div className="flex items-center px-5">
-                                <div className="w-1/3">
-                                      <Image
-                                      src='/images/hybrid-event-icon.png'
-                                        width={75}
-                                        height={75}
-                                           alt='organizer pic' />
-                                 </div>
-
-                          <div className="w-2/3 card-body">
-                             <h2 className="card-title">{t("review.organizedBy")}{" "}</h2>
-                                <p>
-                                {organizer.Name ? (
-                                <b>
-                                    {organizer.Name} {organizer.Surename}
-                                </b>
-                                ) : (
-                                <b>{t("review.dudeMcGee")}</b>
-                                )}
-                               </p>
-                          </div>
-                          </div>
-
-                        </div> */}
-
                             <p>
                                 <b>{t("review.location")}</b> <br />
                                 {event.location}

@@ -1,7 +1,5 @@
 import React from "react";
-{
-    /*Thanks to PebbleWork I'm able to make a positive impact on my community and the people around me. I'm thankful to have a website where we can all come together and TRULY change things. */
-}
+
 const SocialCardData = [
     {
         name: "Mubashir Aazar",

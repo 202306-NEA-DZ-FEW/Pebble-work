@@ -100,22 +100,6 @@ const AboutPage = () => {
                     }}
                     className='2xl:max-w-[1440px] xl:h-[780px] lg:max-w-[1233px] lg:h-[630px] md:min-h-[575px] mb-10 pb-4 w-[100vw] min-h-[363px] flex flex-col items-center justify-center'
                 >
-                    <div
-                        style={
-                            {
-                                /*
-                            position: "absolute", 
-                            top: 0,
-                            right: 0,
-                            bottom: 0,
-                            left: 0,
-                            zIndex: -1,
-                            backgroundColor: "rgba(230, 245, 228, 0.5)", 
-                */
-                            }
-                        }
-                    ></div>
-
                     <div className={`flex flex-col flex-wrap items-center`}>
                         <h1
                             className={`${styles.text0} ${styles.slideInFromRight1}`}

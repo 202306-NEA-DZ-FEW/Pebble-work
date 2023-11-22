@@ -59,8 +59,6 @@ const HomeCards = () => {
                 <HeroCard />
 
                 <Wave height={850} />
-                {/* <div className={styles.blur}>
-                </div> */}
                 <div className='sm:w-[600px] pt-5 w-[95vw]'>
                     {" "}
                     <ContactForm />
