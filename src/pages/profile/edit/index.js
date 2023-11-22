@@ -38,6 +38,7 @@ const ProfilePage = () => {
     const [editedLocation, setEditedLocation] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
     const EventTypes = [
         "No Poverty",
@@ -55,7 +56,9 @@ const ProfilePage = () => {
         "Life on Land",
         "Peace, Justice and Strong Institutions",
     ];
-
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
     const handleSuccess = () => {
         setShowPopup(true);
     };
@@ -141,27 +144,81 @@ const ProfilePage = () => {
 
     // handle Change Password Function
 
+    //     const handleChangePassword = async (e) => {
+    //         e.preventDefault();
+    //         const minLength = 6;
+    //         const containsSpecialCharacter =
+    //             /[!@#$%^&*(),.?": '; = `{}|<>_ ~ \- +/ [\]]/;
+    //         const isValidLength = newPassword.length >= minLength;
+    //         const hasSpecialCharacter = containsSpecialCharacter.test(newPassword);
+
+    //         if (!isValidLength || !hasSpecialCharacter) {
+    //             setShowPopup(true);
+    //             setModalContent(
+    //                 "Password must be at least 6 characters long and contain special characters"
+    //             );
+    //             setModalClassName(
+    //                 "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+    //             );
+    //             setTimeout(() => {
+    //                 setShowPopup(false);
+    //             }, 2000);
+    //             return;
+    //         }
+
+    //         if (newPassword !== confirmPassword) {
+    //             setShowPopup(true);
+    //             setModalContent("Passwords do not match. Please try again.");
+    //             setModalClassName(
+    //                 "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+    //             );
+    //             setTimeout(() => {
+    //                 setShowPopup(false);
+    //             }, 2000);
+    //             return;
+    //         }
+    // // console.log(newPassword);
+    // // console.log(confirmPassword);
+    //         try {
+    //             // Change the user's password
+    //             // await updatePassword(auth.currentUser, confirmPassword);
+    //             const user = auth.currentUser;
+
+    //             if (user != null) {
+    //                 await user.updatePassword(newPassword);
+    //               }
+    //             // console.log(user)
+    //             // const newPasswords = newPassword; // Replace this with the actual new password
+
+    //             // await user.updatePassword(newPasswords);
+
+    //         // console.log(newPassword);
+    //         // console.log(confirmPassword);
+    //             setShowPopup(true);
+    //             setModalContent("Your password has been successfully updated");
+    //             setModalClassName(
+    //                 "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+    //             );
+    //             setTimeout(() => {
+    //                 setShowPopup(false);
+    //             }, 2000);
+
+    //             setNewPassword("");
+    //             setConfirmPassword("");
+
+    //         } catch (error) {
+    //             setShowPopup(true);
+    //             setModalContent("Error changing password. Please try again.");
+    //             setModalClassName(
+    //                 "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+    //             );
+    //             setTimeout(() => {
+    //                 setShowPopup(false);
+    //             }, 2000);
+    //         }
+    //     };
     const handleChangePassword = async (e) => {
         e.preventDefault();
-        const minLength = 6;
-        const containsSpecialCharacter =
-            /[!@#$%^&*(),.?": '; = `{}|<>_ ~ \- +/ [\]]/;
-        const isValidLength = newPassword.length >= minLength;
-        const hasSpecialCharacter = containsSpecialCharacter.test(newPassword);
-
-        if (!isValidLength || !hasSpecialCharacter) {
-            setShowPopup(true);
-            setModalContent(
-                "Password must be at least 6 characters long and contain special characters"
-            );
-            setModalClassName(
-                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
-            );
-            setTimeout(() => {
-                setShowPopup(false);
-            }, 2000);
-            return;
-        }
 
         if (newPassword !== confirmPassword) {
             setShowPopup(true);
@@ -200,7 +257,6 @@ const ProfilePage = () => {
             }, 2000);
         }
     };
-
     /// handle Upload Profile Picture Function
 
     const handleUploadProfilePicture = async (e) => {
@@ -450,9 +506,9 @@ const ProfilePage = () => {
                             onSubmit={handleChangePassword}
                             className='w-full flex gap-6 flex-col items-center justify-center'
                         >
-                            <div className='flex items-center sm:flex-row flex-col gap-3 w-full sm:justify-around sm:gap-14 sm:px-10'>
+                            <div className='flex items-center sm:flex-row flex-col gap-3 w-full sm:justify-around sm:gap-14 sm:px-10 relative'>
                                 <input
-                                    type='password'
+                                    type={showPassword ? "text" : "password"}
                                     placeholder='New Password'
                                     value={newPassword}
                                     onChange={(e) =>
@@ -461,8 +517,14 @@ const ProfilePage = () => {
                                     className='w-[40vw] sm:w-[50vw] h-8 px-3 rounded md:h-10'
                                     required
                                 />
+                                <div
+                                    className='absolute -bottom-1.5 right-1 m-4 cursor-pointer'
+                                    onClick={togglePasswordVisibility}
+                                >
+                                    {showPassword ? <BsEye /> : <BsEyeSlash />}
+                                </div>
                                 <input
-                                    type='password'
+                                    type={showPassword ? "text" : "password"}
                                     placeholder='Confirm Password'
                                     value={confirmPassword}
                                     onChange={(e) =>
