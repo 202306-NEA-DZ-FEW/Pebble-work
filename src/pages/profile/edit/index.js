@@ -130,7 +130,6 @@ const ProfilePage = () => {
         await updateProfile(auth.currentUser, {
             displayName: `${nameDisplay} ${surnameDisplay}`,
         });
-        ///setIsSaved(true);
         setShowPopup(true);
         setModalContent(
             "Profile updated successfuly,you are being redirected to your profile"
@@ -143,81 +142,6 @@ const ProfilePage = () => {
         }, 3000);
     };
 
-    // handle Change Password Function
-
-    //     const handleChangePassword = async (e) => {
-    //         e.preventDefault();
-    //         const minLength = 6;
-    //         const containsSpecialCharacter =
-    //             /[!@#$%^&*(),.?": '; = `{}|<>_ ~ \- +/ [\]]/;
-    //         const isValidLength = newPassword.length >= minLength;
-    //         const hasSpecialCharacter = containsSpecialCharacter.test(newPassword);
-
-    //         if (!isValidLength || !hasSpecialCharacter) {
-    //             setShowPopup(true);
-    //             setModalContent(
-    //                 "Password must be at least 6 characters long and contain special characters"
-    //             );
-    //             setModalClassName(
-    //                 "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
-    //             );
-    //             setTimeout(() => {
-    //                 setShowPopup(false);
-    //             }, 2000);
-    //             return;
-    //         }
-
-    //         if (newPassword !== confirmPassword) {
-    //             setShowPopup(true);
-    //             setModalContent("Passwords do not match. Please try again.");
-    //             setModalClassName(
-    //                 "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
-    //             );
-    //             setTimeout(() => {
-    //                 setShowPopup(false);
-    //             }, 2000);
-    //             return;
-    //         }
-    // // console.log(newPassword);
-    // // console.log(confirmPassword);
-    //         try {
-    //             // Change the user's password
-    //             // await updatePassword(auth.currentUser, confirmPassword);
-    //             const user = auth.currentUser;
-
-    //             if (user != null) {
-    //                 await user.updatePassword(newPassword);
-    //               }
-    //             // console.log(user)
-    //             // const newPasswords = newPassword; // Replace this with the actual new password
-
-    //             // await user.updatePassword(newPasswords);
-
-    //         // console.log(newPassword);
-    //         // console.log(confirmPassword);
-    //             setShowPopup(true);
-    //             setModalContent("Your password has been successfully updated");
-    //             setModalClassName(
-    //                 "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
-    //             );
-    //             setTimeout(() => {
-    //                 setShowPopup(false);
-    //             }, 2000);
-
-    //             setNewPassword("");
-    //             setConfirmPassword("");
-
-    //         } catch (error) {
-    //             setShowPopup(true);
-    //             setModalContent("Error changing password. Please try again.");
-    //             setModalClassName(
-    //                 "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
-    //             );
-    //             setTimeout(() => {
-    //                 setShowPopup(false);
-    //             }, 2000);
-    //         }
-    //     };
     const handleChangePassword = async (e) => {
         e.preventDefault();
         const minLength = 6;
@@ -253,7 +177,7 @@ const ProfilePage = () => {
             // Change the user's password
             await reauthenticateWithCredential(user, credential);
             await updatePassword(user, confirmPassword);
-            console.log("Password updated successfully");
+
             setShowPopup(true);
             setModalContent("Password updated successfully");
             setModalClassName(
@@ -270,19 +194,14 @@ const ProfilePage = () => {
                 setModalContent(
                     "Password should be at least 6 characters long"
                 );
-                // Additional handling or message for weak password
             } else {
                 setShowPopup(true);
                 setModalContent("Error changing password. Please try again.");
-                // Default error message for other errors
             }
 
             setModalClassName(
                 "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
             );
-
-            console.log(error.code);
-            console.log(error.message);
 
             setTimeout(() => {
                 setShowPopup(false);
