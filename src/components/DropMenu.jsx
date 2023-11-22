@@ -11,6 +11,7 @@ import styles from "@/styles/DropMenu.module.css";
 import { auth } from "@/util/firebase";
 
 import Signup from "./Signup/Signup";
+import Bubble from "./Chat/Bubble";
 
 const DropMenu = () => {
     const { t } = useTranslation("common");
@@ -121,15 +122,18 @@ const DropMenu = () => {
                             : t("common:dropdown:signIn")}
                     </button>
                     {user ? (
-                        <img
-                            className='rounded-full md:w-8 md:h-8 w-6 h-6'
-                            src={
-                                auth?.currentUser.photoURL !== null
-                                    ? auth?.currentUser.photoURL
-                                    : "/images/icon_default.png"
-                            }
-                            alt='Profile'
-                        />
+                        <div>
+                            <Bubble />
+                            <img
+                                className='rounded-full md:w-8 md:h-8 w-6 h-6'
+                                src={
+                                    auth?.currentUser.photoURL !== null
+                                        ? auth?.currentUser.photoURL
+                                        : "/images/icon_default.png"
+                                }
+                                alt='Profile'
+                            />
+                        </div>
                     ) : (
                         ""
                     )}

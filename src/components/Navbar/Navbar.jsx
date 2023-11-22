@@ -58,7 +58,7 @@ const Navbar = () => {
 
     return (
         <nav className='sticky z-[555] bg-[#B4CD93] top-0 xl:flex xl:flex-col xl:items-center'>
-            <Bubble />
+            {/* <Bubble /> */}
             <div
                 style={{
                     width: "100%",
