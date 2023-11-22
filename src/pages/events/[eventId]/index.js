@@ -13,6 +13,7 @@ import {
 } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
+import { FaPeopleGroup } from "react-icons/fa6";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React from "react";
@@ -226,6 +227,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                             />
                         )}
                     </div>
+
                     <div
                         style={{ width: "100%" }}
                         className='lg:flex lg:flex-col md:flex md:flex-row md:justify-items-center md:gap-x-10'
@@ -254,17 +256,27 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                 <br />
                             </p>
                         </div>
+
                         <div>
-                            <p>
-                                {t("review.organizedBy")}{" "}
-                                {organizer.Name ? (
-                                    <b>
-                                        {organizer.Name} {organizer.Surename}
-                                    </b>
-                                ) : (
-                                    <b>{t("review.dudeMcGee")}</b>
-                                )}
-                            </p>
+                            <div className='flex bg-white rounded-lg w-fit p-3 gap-x-14'>
+                                <p className=' text-gray-800'>
+                                    <span className=' text-gray-500'>
+                                        {" "}
+                                        {t("review.organizedBy")}{" "}
+                                    </span>
+                                    <br />
+                                    {organizer.Name ? (
+                                        <b>
+                                            {organizer.Name}{" "}
+                                            {organizer.Surename}
+                                        </b>
+                                    ) : (
+                                        <b>{t("review.dudeMcGee")}</b>
+                                    )}
+                                </p>
+
+                                <FaPeopleGroup size={50} fill='#749d60' />
+                            </div>
 
                             {isAuthenticated ? (
                                 <>
@@ -275,7 +287,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                                 href={`/events/${event.eventId}/edit`}
                                             >
                                                 <button
-                                                    className='btn btn-sm btn-wide opacity-80 hover:opacity-100'
+                                                    className='btn btn-sm btn-wide eventButtons opacity-80 hover:opacity-100'
                                                     style={{
                                                         marginTop: "1rem",
                                                         borderRadius: "8px",
@@ -288,7 +300,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                                 </button>
                                             </Link>{" "}
                                             <button
-                                                className='btn btn-sm btn-wide hover:opacity-60'
+                                                className='btn btn-sm btn-wide eventButtons hover:opacity-60'
                                                 onClick={() =>
                                                     document
                                                         .getElementById(
@@ -309,7 +321,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                         </>
                                     ) : findUser ? (
                                         <button
-                                            className='btn btn-sm btn-wide opacity-50 hover:opacity-80 cursor-default hover:cursor-pointer'
+                                            className='btn btn-sm btn-wide eventButtons opacity-50 hover:opacity-80 cursor-default hover:cursor-pointer'
                                             style={{
                                                 marginTop: "1rem",
                                                 borderRadius: "8px",
@@ -339,7 +351,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                         </button>
                                     ) : (
                                         <button
-                                            className='btn btn-sm btn-wide'
+                                            className='btn btn-sm btn-wide eventButtons'
                                             onClick={() =>
                                                 joinEvent(event.eventId)
                                             }
@@ -360,7 +372,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                     <div className='italic text-red-400 mt-2'>
                                         {t("review.joinNowText")}
                                     </div>
-                                    <Link href={`/signin`}>
+                                    <Link href='/signin'>
                                         <button
                                             className='btn btn-sm  hover:opacity-80'
                                             style={{
@@ -374,7 +386,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                             {t("review.signIn")}
                                         </button>
                                     </Link>{" "}
-                                    <Link href={`/signup`}>
+                                    <Link href='/signup'>
                                         <button
                                             className='btn btn-sm  hover:opacity-80'
                                             style={{
@@ -476,9 +488,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
             </dialog>
             <dialog id='canceljoin_modal' className='modal'>
                 <div className='modal-box'>
-                    <h3 className='font-bold text-lg'>
-                        {t("review.noParticipant")}
-                    </h3>
+                    <h3 className='font-bold text-lg'>{t("review.warning")}</h3>
                     <p className='py-4'>{t("review.warningLeave")}</p>
                     <p>{t("review.proceed")}</p>
                     <div className='modal-action'>
