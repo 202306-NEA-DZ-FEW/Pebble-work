@@ -234,7 +234,7 @@ const ProfilePage = () => {
             await updatePassword(user, confirmPassword);
             console.log("Password updated successfully");
             setShowPopup(true);
-            setModalContent("Your password has been successfully updated");
+            setModalContent("Password updated successfully");
             setModalClassName(
                 "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
             );
@@ -244,13 +244,25 @@ const ProfilePage = () => {
 
             setConfirmPassword("");
         } catch (error) {
-            setShowPopup(true);
-            setModalContent("Error changing password. Please try again.");
+            if (error.code === "auth/weak-password") {
+                setShowPopup(true);
+                setModalContent(
+                    "Password should be at least 6 characters long"
+                );
+                // Additional handling or message for weak password
+            } else {
+                setShowPopup(true);
+                setModalContent("Error changing password. Please try again.");
+                // Default error message for other errors
+            }
+
             setModalClassName(
                 "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
             );
+
             console.log(error.code);
             console.log(error.message);
+
             setTimeout(() => {
                 setShowPopup(false);
             }, 2000);
