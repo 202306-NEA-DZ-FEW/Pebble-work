@@ -3,7 +3,7 @@ import { db, auth } from "../../util/firebase";
 import { doc, onSnapshot, getDoc } from "firebase/firestore";
 import Chat from "./Chat";
 
-const ChatDisplay = () => {
+const ChatDisplay = ({ onNewMessage }) => {
     const [messages, setMessages] = useState([]);
     const [currentTime, setCurrentTime] = useState(new Date().getTime());
     const getUserName = async (uid) => {
@@ -30,12 +30,16 @@ const ChatDisplay = () => {
                 message.userName = await getUserName(message.uid);
             }
 
+            // Check if there are new messages
+            if (validMessages.length > messages.length) {
+                onNewMessage(); // call the callback when a new message arrives
+            }
+
             setMessages(validMessages);
         });
 
-        // Clean up the listener when the component unmounts
         return () => unsubscribe();
-    }, [currentTime]);
+    }, [currentTime, messages.length]);
 
     // Update the current time every second
     useEffect(() => {

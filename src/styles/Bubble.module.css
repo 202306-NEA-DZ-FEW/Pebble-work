@@ -23,7 +23,9 @@
     clip-path: circle(0% at 50% 50%);
     transition: clip-path 0.8s, width 0.8s, height 0.8s;
 }
-
+.expandingButton.newMessage {
+    background-color: red;
+}
 .expanded {
     clip-path: circle(100% at 50% 50%);
     width: 400px;

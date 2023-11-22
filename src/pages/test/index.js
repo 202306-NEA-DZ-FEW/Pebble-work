@@ -1,11 +1,13 @@
-import Loader from "@/components/Loader/Loader";
+import Bubble from "@/components/Chat/Bubble";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React from "react";
 
 const MorphingSvg = () => (
-    // <div className="h-screen w-screen">
-    // </div>
-    <Loader />
+    <>
+        <div className='min-h-screen'>
+            <Bubble />
+        </div>
+    </>
 );
 
 export default MorphingSvg;
