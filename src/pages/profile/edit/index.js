@@ -220,6 +220,27 @@ const ProfilePage = () => {
     //     };
     const handleChangePassword = async (e) => {
         e.preventDefault();
+        const minLength = 6;
+        const containsSpecialCharacter =
+            /[!@#$%^&*(),.?": '; = `{}|<>_ ~ \- +/ [\]]/;
+        const isValidLength = confirmPassword.length >= minLength;
+        const hasSpecialCharacter =
+            containsSpecialCharacter.test(confirmPassword);
+
+        if (!isValidLength || !hasSpecialCharacter) {
+            setShowPopup(true);
+            setModalContent(
+                "Password must be at least 6 characters long and contain special characters"
+            );
+            setModalClassName(
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+            );
+            setTimeout(() => {
+                setShowPopup(false);
+            }, 2000);
+            return;
+        }
+
         const auth = getAuth();
         const user = auth.currentUser;
 
@@ -536,7 +557,7 @@ const ProfilePage = () => {
                                 </div>
                                 <input
                                     type={showPassword ? "text" : "password"}
-                                    placeholder='Confirm Password'
+                                    placeholder='New Password'
                                     value={confirmPassword}
                                     onChange={(e) =>
                                         setConfirmPassword(e.target.value)
