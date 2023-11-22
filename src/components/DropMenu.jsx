@@ -93,6 +93,7 @@ const DropMenu = () => {
 
     return (
         <div className='flex sm:flex-row flex-col gap-3 sm:gap-4'>
+            {user ? <Bubble /> : ""}
             <div className={user ? "hidden" : ""}>
                 <Signup />
             </div>
@@ -122,18 +123,15 @@ const DropMenu = () => {
                             : t("common:dropdown:signIn")}
                     </button>
                     {user ? (
-                        <div>
-                            <Bubble />
-                            <img
-                                className='rounded-full md:w-8 md:h-8 w-6 h-6'
-                                src={
-                                    auth?.currentUser.photoURL !== null
-                                        ? auth?.currentUser.photoURL
-                                        : "/images/icon_default.png"
-                                }
-                                alt='Profile'
-                            />
-                        </div>
+                        <img
+                            className='rounded-full md:w-8 md:h-8 w-6 h-6'
+                            src={
+                                auth?.currentUser.photoURL !== null
+                                    ? auth?.currentUser.photoURL
+                                    : "/images/icon_default.png"
+                            }
+                            alt='Profile'
+                        />
                     ) : (
                         ""
                     )}
