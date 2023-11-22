@@ -62,7 +62,7 @@ exports[`Language component matches snapshot 1`] = `
     >
       <li>
         <button
-          className="block text-sm text-gray-700 hover:border hover:rounded-sm w-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+          className="block text-sm text-black hover:border hover:rounded-sm w-full dark:text-black dark:hover:bg-gray-600 dark:hover:text-white"
           onClick={[Function]}
           onTouchStart={[Function]}
         >
@@ -81,7 +81,7 @@ exports[`Language component matches snapshot 1`] = `
       </li>
       <li>
         <button
-          className="block text-sm text-gray-700 hover:border hover:rounded-sm w-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+          className="block text-sm text-black hover:border hover:rounded-sm w-full dark:text-black dark:hover:bg-gray-600 dark:hover:text-white"
           onClick={[Function]}
           onTouchStart={[Function]}
         >
@@ -100,7 +100,7 @@ exports[`Language component matches snapshot 1`] = `
       </li>
       <li>
         <button
-          className="block text-sm text-gray-700 hover:border hover:rounded-sm w-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+          className="block text-sm text-black hover:border hover:rounded-sm w-full dark:text-black dark:hover:bg-gray-600 dark:hover:text-white"
           onClick={[Function]}
           onTouchStart={[Function]}
         >
@@ -119,7 +119,7 @@ exports[`Language component matches snapshot 1`] = `
       </li>
       <li>
         <button
-          className="block text-sm text-gray-700 hover:border hover:rounded-sm w-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+          className="block text-sm text-black hover:border hover:rounded-sm w-full dark:text-black dark:hover:bg-gray-600 dark:hover:text-white"
           onClick={[Function]}
           onTouchStart={[Function]}
         >
