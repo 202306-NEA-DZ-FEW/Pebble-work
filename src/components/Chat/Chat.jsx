@@ -75,7 +75,7 @@ const Chat = () => {
             >
                 <form onSubmit={sendMessage}>
                     <textarea
-                        className='min-w-full'
+                        className='min-w-full resize-none scrollBar'
                         value={newMessage}
                         onChange={(e) => setNewMessage(e.target.value)}
                         onKeyDown={(e) => {

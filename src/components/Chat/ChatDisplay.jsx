@@ -53,7 +53,7 @@ const ChatDisplay = ({ onNewMessage }) => {
 
     return (
         <>
-            <div className='flex justify-center max-h-full w-full overflow-y-scroll'>
+            <div className='flex relative pl-2 justify-center max-h-full w-full scrollBar overflow-y-scroll'>
                 <div className='w-full'>
                     {messages.map((message, i) => {
                         // Calculate the age of the message in seconds
