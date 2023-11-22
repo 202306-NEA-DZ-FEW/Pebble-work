@@ -1,7 +1,7 @@
+import { cleanup, render } from "@testing-library/react";
 import React from "react";
 
 import MobileEvents from "../MobileEvents";
-import { render, cleanup } from "@testing-library/react";
 afterEach(cleanup);
 describe("MobileEvents", () => {
     it("renders correctly", () => {

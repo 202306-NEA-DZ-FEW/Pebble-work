@@ -1,7 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
-import styles from "@/styles/Bubble.module.css";
-import ChatDisplay from "./ChatDisplay";
+import React, { useEffect, useRef, useState } from "react";
 import { IoChatbubblesOutline } from "react-icons/io5";
+
+import styles from "@/styles/Bubble.module.css";
+
+import ChatDisplay from "./ChatDisplay";
 
 const Bubble = () => {
     const [expanded, setExpanded] = useState(false);

@@ -1,6 +1,6 @@
+import { useTranslation } from "next-i18next"; // Import useTranslation
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
-import { useTranslation } from "next-i18next"; // Import useTranslation
 
 const BtnGoogle = ({ onClick }) => {
     const { t } = useTranslation();

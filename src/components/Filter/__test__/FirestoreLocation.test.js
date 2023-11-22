@@ -1,6 +1,7 @@
-import FirestoreLocation from "../FirestoreLocation";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
+
+import FirestoreLocation from "../FirestoreLocation";
 
 jest.mock("@/util/firebase", () => ({
     db: jest.fn(),

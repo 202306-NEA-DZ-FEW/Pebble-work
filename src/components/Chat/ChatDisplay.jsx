@@ -1,7 +1,8 @@
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { db, auth } from "../../util/firebase";
-import { doc, onSnapshot, getDoc } from "firebase/firestore";
+
 import Chat from "./Chat";
+import { auth, db } from "../../util/firebase";
 
 const ChatDisplay = ({ onNewMessage }) => {
     const [messages, setMessages] = useState([]);
