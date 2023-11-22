@@ -12,6 +12,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { updateProfile } from "firebase/auth";
 import Loader from "@/components/Loader/Loader";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
+import { reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
 
 const ProfilePage = () => {
     const { t } = useTranslation();
@@ -36,7 +37,7 @@ const ProfilePage = () => {
     const [editedSurname, setEditedSurname] = useState("");
     const [editedEmail, setEditedEmail] = useState("");
     const [editedLocation, setEditedLocation] = useState("");
-    const [newPassword, setNewPassword] = useState("");
+    const [CurrentPassword, setCurrentPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
 
@@ -219,22 +220,19 @@ const ProfilePage = () => {
     //     };
     const handleChangePassword = async (e) => {
         e.preventDefault();
+        const auth = getAuth();
+        const user = auth.currentUser;
 
-        if (newPassword !== confirmPassword) {
-            setShowPopup(true);
-            setModalContent("Passwords do not match. Please try again.");
-            setModalClassName(
-                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
-            );
-            setTimeout(() => {
-                setShowPopup(false);
-            }, 2000);
-            return;
-        }
+        const credential = EmailAuthProvider.credential(
+            user.email,
+            CurrentPassword
+        );
 
         try {
             // Change the user's password
-            await updatePassword(auth.currentUser, newPassword);
+            await reauthenticateWithCredential(user, credential);
+            await updatePassword(user, confirmPassword);
+            console.log("Password updated successfully");
             setShowPopup(true);
             setModalContent("Your password has been successfully updated");
             setModalClassName(
@@ -244,7 +242,6 @@ const ProfilePage = () => {
                 setShowPopup(false);
             }, 2000);
 
-            setNewPassword("");
             setConfirmPassword("");
         } catch (error) {
             setShowPopup(true);
@@ -252,6 +249,8 @@ const ProfilePage = () => {
             setModalClassName(
                 "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
             );
+            console.log(error.code);
+            console.log(error.message);
             setTimeout(() => {
                 setShowPopup(false);
             }, 2000);
@@ -509,10 +508,10 @@ const ProfilePage = () => {
                             <div className='flex items-center sm:flex-row flex-col gap-3 w-full sm:justify-around sm:gap-14 sm:px-10 relative'>
                                 <input
                                     type={showPassword ? "text" : "password"}
-                                    placeholder='New Password'
-                                    value={newPassword}
+                                    placeholder='Current Password'
+                                    value={CurrentPassword}
                                     onChange={(e) =>
-                                        setNewPassword(e.target.value)
+                                        setCurrentPassword(e.target.value)
                                     }
                                     className='w-[40vw] sm:w-[50vw] h-8 px-3 rounded md:h-10'
                                     required
