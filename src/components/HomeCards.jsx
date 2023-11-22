@@ -50,7 +50,7 @@ const HomeCards = () => {
                 <SocialCard />
             </div>
 
-            <div className='p-2'>
+            <div className='gallery-lg p-2'>
                 <ImageSquareCard />
             </div>
             <div

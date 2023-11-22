@@ -172,7 +172,7 @@ const Dashboarduser = () => {
             <nav
                 className={`absolute top-30 bottom-0 h-full left-0 bg-[#e6f5e4] overflow-hidden duration-200 linear shadow-md mt-30 transform transition-transform ${
                     isNavVisible ? "translate-x-0" : "-translate-x-full"
-                }`}
+                } pt-10 px-3`}
                 style={{
                     color: "#1A1A1A",
                     fontFamily: "Poppins",
@@ -184,7 +184,7 @@ const Dashboarduser = () => {
                 <ul>
                     <li className='flex items-center mb-2 mt-20 ml-2'>
                         <p className='font-bold text-lg italic mr-2'>
-                            Welcome,
+                            Welcome,{" "}
                             <span className='text-xl text-[#82a572]'>
                                 {Nameuser}!
                             </span>
@@ -192,7 +192,7 @@ const Dashboarduser = () => {
                     </li>
                     <li className='flex items-center mb-10 mt-4 ml-1'>
                         <p className='font-semibold text-lg italic mr-2'>
-                            we re glad to see you.
+                            we&apos;re glad to see you.
                         </p>
                     </li>
 
@@ -217,7 +217,7 @@ const Dashboarduser = () => {
                         >
                             <IoIosGitBranch size={30} className='mr-1' />
                             <span class='my-2 block hover:bg-[#BFEAD3] cursor-pointer'>
-                                Events Created
+                                Events Created ►
                             </span>
                         </button>
                     </li>
@@ -231,7 +231,7 @@ const Dashboarduser = () => {
                         >
                             <IoIosGitCompare size={30} className='mr-1' />
                             <span class='my-2 block hover:bg-[#BFEAD3] cursor-pointer'>
-                                Events Joined
+                                Events Joined ►
                             </span>
                         </button>
                     </li>
@@ -253,8 +253,8 @@ const Dashboarduser = () => {
                                 wordWrap: "break-word",
                             }}
                         >
-                            “It s not enough to be compassionate, you must act.”
-                            - Dalai Lama
+                            “It is not enough to be compassionate, you must
+                            act.” - Dalai Lama
                         </p>
 
                         <img
@@ -345,12 +345,12 @@ const Dashboarduser = () => {
                             className=' font-bold text-lg flex ml-16 mb-10 mt-8'
                             style={{
                                 color: "#1A1A1A",
-                                fontWeight: " 500",
+                                fontWeight: " 700",
                                 letterSpacing: "0.11px",
                                 wordWrap: "break-word",
                             }}
                         >
-                            Suggestion events :
+                            Suggested events:
                         </h2>
                     </div>
 

@@ -14,7 +14,7 @@ const AboutPage = () => {
         {
             imageSrc: "https://avatars.githubusercontent.com/u/137820288?v=4",
             description:
-                "I'am a passionate Frontend Web Developer and freelance translator.I have a proven track record of building various websites that captivate users.   ",
+                "I'am a passionate Frontend Web Developer and freelance translator. I have a proven track record of building various websites that captivate users.",
             name: "Halla Hamidi",
             google: "https://mail.google.com/mail/u/0/?fs=1&to=aniabisso.16@gmail.com&tf=cm",
             linkedin: "https://www.linkedin.com/in/halla-hamidi-989197229/",
@@ -42,7 +42,7 @@ const AboutPage = () => {
             imageSrc: "https://avatars.githubusercontent.com/u/95043080?v=4",
             name: "Manel H.Haddoud",
             description:
-                "I'm a front-end developer with a background in networking and computer science.I am very passionate about technology , organizing and encouraging teamwork.",
+                "I'm a front-end developer with a background in networking and computer science. I am very passionate about technology, organizing and encouraging teamwork.",
             google: "https://mail.google.com/mail/u/0/?fs=1&to=manelhasnahaddoud@gmail.com&tf=cm",
             linkedin:
                 "https://www.linkedin.com/in/manel-hasna-haddoud-aa5095278/",
@@ -52,7 +52,7 @@ const AboutPage = () => {
             imageSrc: "https://avatars.githubusercontent.com/u/138169337?v=4",
             name: "Louisa Hamrit",
             description:
-                "I'm a junior web developer with a certain interest for crafting engaging and appealing digital experiences.I've contributed to several web applications and i bring technical expertise and a strong work ethic to every pro  ",
+                "I'm a front-end developer with a certain interest for crafting engaging and appealing digital experiences.",
             google: "https://mail.google.com/mail/u/0/?fs=1&to=l19.45.127.0@gmail.com&tf=cm",
             linkedin: "https://www.linkedin.com/in/louisa-h-958733294/",
             github: "https://github.com/Polichinell",
@@ -95,9 +95,27 @@ const AboutPage = () => {
                         backgroundRepeat: "no-repeat",
                         backgroundSize: "cover",
                         backgroundPosition: "center",
+                        position: "relative",
+                        zIndex: 0,
                     }}
                     className='2xl:max-w-[1440px] xl:h-[780px] lg:max-w-[1233px] lg:h-[630px] md:min-h-[575px] mb-10 pb-4 w-[100vw] min-h-[363px] flex flex-col items-center justify-center'
                 >
+                    <div
+                        style={
+                            {
+                                /*
+                            position: "absolute", 
+                            top: 0,
+                            right: 0,
+                            bottom: 0,
+                            left: 0,
+                            zIndex: -1,
+                            backgroundColor: "rgba(230, 245, 228, 0.5)", 
+                */
+                            }
+                        }
+                    ></div>
+
                     <div className={`flex flex-col flex-wrap items-center`}>
                         <h1
                             className={`${styles.text0} ${styles.slideInFromRight1}`}
@@ -105,9 +123,12 @@ const AboutPage = () => {
                             {t("about:about:title")}
                         </h1>
                         <p
-                            className={`${styles.text1} ${styles.slideInFromRight1} flex text-[#878787] px-4`}
+                            className={`${styles.text1} ${styles.slideInFromRight1} flex px-4 mt-[2rem] bg-[#e6f5e4] bg-opacity-50 p-10 mx-5 rounded-xl`}
                         >
-                            {t("about:about.description")}
+                            <span className='text-black'>
+                                {" "}
+                                {t("about:about.description")}
+                            </span>
                         </p>
                     </div>
                 </div>
@@ -121,8 +142,8 @@ const AboutPage = () => {
                         {t("about:about:ourTeam")}
                     </h2>
                     <p className='text-center'>
-                        A team that is meant to make a difference, We thrive on
-                        working together to turn ideas into reality
+                        A team that is meant to make a difference, we thrive on
+                        working together to turn ideas into reality.
                     </p>
                     <Members
                         members={members}

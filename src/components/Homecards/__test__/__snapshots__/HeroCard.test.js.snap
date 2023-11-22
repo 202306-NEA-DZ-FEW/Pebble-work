@@ -20,6 +20,17 @@ exports[`HeroCard renders correctly 1`] = `
           class="text-xl font-normal leading-10 tracking-tight text-zinc-500 mb-5"
         >
           common:heroCard:description
+          <a
+            href="https://studentsstore.vercel.app"
+            target="_BLANK"
+          >
+            <span
+              class="font-semibold text-[#2E7EAA]"
+            >
+              common:heroCard:link
+            </span>
+          </a>
+          common:heroCard:description2
         </div>
         <div
           class=" flex flex-col sm:flex-row justify-center items-center gap-6"

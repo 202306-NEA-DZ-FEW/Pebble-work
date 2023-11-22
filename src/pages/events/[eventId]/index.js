@@ -314,7 +314,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                                 href={`/events/${event.eventId}/edit`}
                                             >
                                                 <button
-                                                    className='btn btn-sm btn-wide opacity-80 hover:opacity-100'
+                                                    className='btn btn-sm btn-wide eventButtons opacity-80 hover:opacity-100'
                                                     style={{
                                                         marginTop: "1rem",
                                                         borderRadius: "8px",
@@ -327,7 +327,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                                 </button>
                                             </Link>{" "}
                                             <button
-                                                className='btn btn-sm btn-wide hover:opacity-60'
+                                                className='btn btn-sm btn-wide eventButtons hover:opacity-60'
                                                 onClick={() =>
                                                     document
                                                         .getElementById(
@@ -348,7 +348,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                         </>
                                     ) : findUser ? (
                                         <button
-                                            className='btn btn-sm btn-wide opacity-50 hover:opacity-80 cursor-default hover:cursor-pointer'
+                                            className='btn btn-sm btn-wide eventButtons opacity-50 hover:opacity-80 cursor-default hover:cursor-pointer'
                                             style={{
                                                 marginTop: "1rem",
                                                 borderRadius: "8px",
@@ -378,7 +378,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                         </button>
                                     ) : (
                                         <button
-                                            className='btn btn-sm btn-wide'
+                                            className='btn btn-sm btn-wide eventButtons'
                                             onClick={() =>
                                                 joinEvent(event.eventId)
                                             }
@@ -399,7 +399,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                     <div className='italic text-red-400 mt-2'>
                                         {t("review.joinNowText")}
                                     </div>
-                                    <Link href={`/signin`}>
+                                    <Link href='/signin'>
                                         <button
                                             className='btn btn-sm  hover:opacity-80'
                                             style={{
@@ -413,7 +413,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                             {t("review.signIn")}
                                         </button>
                                     </Link>{" "}
-                                    <Link href={`/signup`}>
+                                    <Link href='/signup'>
                                         <button
                                             className='btn btn-sm  hover:opacity-80'
                                             style={{
@@ -515,9 +515,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
             </dialog>
             <dialog id='canceljoin_modal' className='modal'>
                 <div className='modal-box'>
-                    <h3 className='font-bold text-lg'>
-                        {t("review.noParticipant")}
-                    </h3>
+                    <h3 className='font-bold text-lg'>{t("review.warning")}</h3>
                     <p className='py-4'>{t("review.warningLeave")}</p>
                     <p>{t("review.proceed")}</p>
                     <div className='modal-action'>

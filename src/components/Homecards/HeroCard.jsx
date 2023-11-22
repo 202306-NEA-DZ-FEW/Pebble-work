@@ -14,6 +14,15 @@ function HeroCard() {
                     </div>
                     <div className='text-xl font-normal leading-10 tracking-tight text-zinc-500 mb-5'>
                         {t("common:heroCard:description")}
+                        <Link
+                            href={`https://studentsstore.vercel.app`}
+                            target='_BLANK'
+                        >
+                            <span className='font-semibold text-[#2E7EAA]'>
+                                {t("common:heroCard:link")}
+                            </span>
+                        </Link>
+                        {t("common:heroCard:description2")}
                     </div>
                     <div className=' flex flex-col sm:flex-row justify-center items-center gap-6'>
                         <Link

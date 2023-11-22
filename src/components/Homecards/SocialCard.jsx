@@ -1,22 +1,24 @@
 import React from "react";
-
+{
+    /*Thanks to PebbleWork I'm able to make a positive impact on my community and the people around me. I'm thankful to have a website where we can all come together and TRULY change things. */
+}
 const SocialCardData = [
-    {
-        name: "Emilia W.",
-        occupation: "Volunteer",
-        text: "Thanks to PebbleWork I'm able to make a positive impact on my community and the people around me. I'm thankful to have a website where we can all come together and TRULY change things.",
-        imageSrc: "./images/icon_default.png",
-    },
     {
         name: "Mubashir Aazar",
         occupation: "Beyrouth Youth Club rep.",
-        text: " I must commend Pebble Work for being a game-changer in our mission for positive community impact. Kudos to Pebble Work for providing us with the tools to transform our vision into meaningful actions.",
+        text: " I must commend Pebble Work for being a turning point in our mission for helping our community and making sustainable impact. Kudos to Pebble Work for providing us with a platform where we can all come together, turn our vision into actions, and TRULY change things.",
         imageSrc: "./images/Aazar_BYC.png",
+    },
+    {
+        name: "Menar S.",
+        occupation: "Volunteer",
+        text: "Pebble Work is a beacon of hope, using events to tackle humanitarian crises like poverty and water scarcity. Their impactful initiatives inspire change and prove that small actions can create significant ripples of positive impact. Proud to be part of a community dedicated to making the world a better place through meaningful events.",
+        imageSrc: "./images/NotQuby.png",
     },
     {
         name: "Hiba M.",
         occupation: "Volunteer",
-        text: "The tools they provide have turned our ideas into real actions, helping us make a difference. I'm grateful for the chance Pebble Work has given us to contribute meaningfully.",
+        text: "Pebble Work has been a total game-changer for me in making a positive impact on our community. The tools they provide have turned our ideas into real actions, helping us make a difference. I'm grateful for the chance Pebble Work has given us to contribute meaningfully.",
         imageSrc: "./images/icon_default.png",
     },
 ];
