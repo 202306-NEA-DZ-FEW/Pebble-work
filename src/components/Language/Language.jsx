@@ -94,8 +94,10 @@ const Language = () => {
                 </button>
                 <div
                     className={`z-50 ${
-                        isDropdownOpen ? "block" : "hidden"
-                    } text-base list-none divide-y divide-gray-100 fixed bottom-10 left-6 rounded-[4px] shadow bg-transparent`}
+                        isDropdownOpen
+                            ? "translate-y-0 opacity-100"
+                            : "translate-y-[200px] opacity-0"
+                    } text-base list-none divide-y transform transition-all duration-700 divide-gray-100 fixed bottom-10 left-6 rounded-[4px] shadow bg-transparent`}
                     id='language-dropdown-menu'
                 >
                     <ul

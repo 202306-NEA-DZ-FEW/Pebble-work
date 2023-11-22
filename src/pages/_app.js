@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
                 document.title = "PebbleWork";
                 return;
             }
-            window.setTimeout(scrolltitle, 300);
+            window.setTimeout(scrolltitle, 250);
         }
 
         scrolltitle();
