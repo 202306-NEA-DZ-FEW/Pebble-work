@@ -9,6 +9,7 @@ import styles from "@/styles/Navbar.module.css";
 import DropMenu from "../DropMenu";
 import Language from "../Language/Language";
 import Pebble from "../Pebble";
+import Bubble from "../Chat/Bubble";
 
 let tabs = [
     { id: "home", label: "Home" },
@@ -57,6 +58,7 @@ const Navbar = () => {
 
     return (
         <nav className='sticky z-[555] bg-[#B4CD93] top-0 xl:flex xl:flex-col xl:items-center'>
+            <Bubble />
             <div
                 style={{
                     width: "100%",
