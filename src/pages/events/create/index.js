@@ -15,6 +15,7 @@ import EventCreation from "@/components/Events/EventCreation";
 import PhoneVerify from "@/components/Events/PhoneVerify";
 
 import { auth, db, storage } from "@/util/firebase";
+import Modal from "@/components/Popup/Modal";
 
 const EventCreationPage = () => {
     const { t } = useTranslation();
@@ -33,6 +34,11 @@ const EventCreationPage = () => {
         image: "",
         timestamp: serverTimestamp(),
     });
+
+    /// Modal states
+    const [showPopup, setShowPopup] = useState(false);
+    const [modalContent, setModalContent] = useState("");
+    const [modalClassName, setModalClassName] = useState("");
 
     const [img, setImg] = useState("");
 
@@ -85,6 +91,36 @@ const EventCreationPage = () => {
         await addLocation(input);
 
         if (img) {
+            // Check image extension
+            const allowedExtensions = ["jpg", "jpeg", "png"];
+            const fileExtension = img.name.split(".").pop().toLowerCase();
+            if (!allowedExtensions.includes(fileExtension)) {
+                setShowPopup(true);
+                setModalContent(
+                    "Invalid file extension. Allowed extensions are: jpg, jpeg, and png"
+                );
+                setModalClassName(
+                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                );
+                setTimeout(() => {
+                    setShowPopup(false);
+                }, 2000);
+                return;
+            }
+            // Check file size
+            const maxSize = 4 * 1024 * 1024; // 4MB
+            if (img.size > maxSize) {
+                setShowPopup(true);
+                setModalContent("File size exceeds the allowed limit of 5MB");
+                setModalClassName(
+                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                );
+                setTimeout(() => {
+                    setShowPopup(false);
+                }, 2000);
+                return;
+            }
+
             await imgUpload(eventId);
         }
 
@@ -126,6 +162,9 @@ const EventCreationPage = () => {
 
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isPhoneNumberVerified, setIsPhoneNumberVerified] = useState(false);
+    const handleSuccess = () => {
+        setShowPopup(true);
+    };
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -494,6 +533,13 @@ const EventCreationPage = () => {
                         </div>
                     </div>
                 </dialog>
+                {showPopup && (
+                    <Modal
+                        message={modalContent}
+                        onClose={handleSuccess}
+                        className={modalClassName}
+                    />
+                )}
             </div>
         </>
     );

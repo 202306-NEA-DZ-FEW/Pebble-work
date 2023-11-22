@@ -10,6 +10,7 @@ import styles from "@/styles/EventDetails.module.css";
 import NoAccess from "@/components/Events/EditEvent";
 
 import { auth, db, storage } from "@/util/firebase";
+import Modal from "@/components/Popup/Modal";
 
 function EditEvent({ event, organizer }) {
     const { t } = useTranslation();
@@ -22,6 +23,11 @@ function EditEvent({ event, organizer }) {
         description: "",
         image: "",
     });
+
+    /// Modal states
+    const [showPopup, setShowPopup] = useState(false);
+    const [modalContent, setModalContent] = useState("");
+    const [modalClassName, setModalClassName] = useState("");
 
     const [img, setImg] = useState("");
 
@@ -62,6 +68,36 @@ function EditEvent({ event, organizer }) {
         await updateDoc(doc(db, "events", event.eventId), eventUpdateData);
 
         if (img) {
+            // Check image extension
+            const allowedExtensions = ["jpg", "jpeg", "png"];
+            const fileExtension = img.name.split(".").pop().toLowerCase();
+            if (!allowedExtensions.includes(fileExtension)) {
+                setShowPopup(true);
+                setModalContent(
+                    "Invalid file extension. Allowed extensions are: jpg, jpeg, and png"
+                );
+                setModalClassName(
+                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                );
+                setTimeout(() => {
+                    setShowPopup(false);
+                }, 2000);
+                return;
+            }
+            // Check file size
+            const maxSize = 4 * 1024 * 1024; // 4MB
+            if (img.size > maxSize) {
+                setShowPopup(true);
+                setModalContent("File size exceeds the allowed limit of 5MB");
+                setModalClassName(
+                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                );
+                setTimeout(() => {
+                    setShowPopup(false);
+                }, 2000);
+                return;
+            }
+
             await imgUpload(event.eventId);
         }
 
@@ -96,6 +132,9 @@ function EditEvent({ event, organizer }) {
     }, []);
 
     const [userMail, setUserMail] = useState(null);
+    const handleSuccess = () => {
+        setShowPopup(true);
+    };
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -261,6 +300,13 @@ function EditEvent({ event, organizer }) {
             ) : (
                 <NoAccess />
             )}
+            {showPopup && (
+                <Modal
+                    message={modalContent}
+                    onClose={handleSuccess}
+                    className={modalClassName}
+                />
+            )}
         </>
     );
 }
@@ -272,6 +318,7 @@ export async function getServerSideProps(context) {
     const event = eventDoc.data();
 
     const userId = event.organizer;
+    event.timestamp = event.timestamp.toString();
 
     const organizerRef = doc(db, "users", userId);
     const organizerDoc = await getDoc(organizerRef);

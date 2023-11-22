@@ -124,6 +124,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
 
         const eventInfo = {
             eventId: event.eventId,
+            title: docData.title,
         };
 
         // Update the user document to include the joined event

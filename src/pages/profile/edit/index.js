@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import { db, auth, storage } from "@/util/firebase";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { doc, updateDoc, getDoc } from "firebase/firestore";
-import { getAuth, updatePassword, onAuthStateChanged } from "firebase/auth";
-import Image from "next/image";
-import { useTranslation } from "next-i18next";
-import Modal from "@/components/Popup/Modal";
-import PicturesLibrary from "./library";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { getAuth, onAuthStateChanged, updatePassword } from "firebase/auth";
 import { updateProfile } from "firebase/auth";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import React, { useEffect, useState } from "react";
+
 import Loader from "@/components/Loader/Loader";
+import Modal from "@/components/Popup/Modal";
+
+import { auth, db, storage } from "@/util/firebase";
+
+import PicturesLibrary from "./library";
 
 const ProfilePage = () => {
     const { t } = useTranslation();
@@ -187,6 +190,37 @@ const ProfilePage = () => {
         const file = e.target.files[0];
 
         if (file) {
+            // Check file extension
+            const allowedExtensions = ["jpg", "jpeg", "png"];
+            const fileExtension = file.name.split(".").pop().toLowerCase();
+            if (!allowedExtensions.includes(fileExtension)) {
+                setShowPopup(true);
+                setModalContent(
+                    "Invalid file extension. Allowed extensions are: jpg, jpeg, and png"
+                );
+                setModalClassName(
+                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                );
+                setTimeout(() => {
+                    setShowPopup(false);
+                }, 2000);
+                e.target.value = null;
+                return;
+            }
+            // Check file size
+            const maxSize = 4 * 1024 * 1024; // 4MB
+            if (file.size > maxSize) {
+                setShowPopup(true);
+                setModalContent("File size exceeds the allowed limit of 5MB");
+                setModalClassName(
+                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                );
+                setTimeout(() => {
+                    setShowPopup(false);
+                }, 2000);
+                e.target.value = null;
+                return;
+            }
             try {
                 const storageRef = ref(
                     storage,
