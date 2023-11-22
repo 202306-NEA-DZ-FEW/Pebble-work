@@ -11,6 +11,7 @@ jest.mock("swiper/react", () => ({
 
 import React from "react";
 import renderer from "react-test-renderer";
+
 import Members from "../Members";
 
 describe("Test Component", () => {

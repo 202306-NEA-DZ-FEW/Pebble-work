@@ -11,6 +11,7 @@ export const usePagination = (initialPage, initialItemsPerPage, items) => {
 
     return {
         currentPage,
+        itemsPerPage,
         totalPages,
         currentItems,
         setCurrentPage,

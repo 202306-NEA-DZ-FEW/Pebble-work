@@ -6,6 +6,11 @@ import Backend from "i18next-fs-backend";
 jest.mock("next/router", () => ({
     useRouter: jest.fn(),
 }));
+jest.mock("firebase/auth", () => ({
+    getAuth: jest.fn(() => ({
+        onAuthStateChanged: jest.fn(),
+    })),
+}));
 
 jest.mock("next-i18next", () => ({
     useTranslation: () => ({

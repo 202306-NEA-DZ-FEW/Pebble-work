@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DropMenu snapshot 1`] = `
+<span
+  style={
+    {
+      "display": "inherit",
+    }
+  }
+>
+  <span
+    style={
+      {
+        "animation": "react-spinners-BeatLoader-beat 0.7s 0s infinite linear",
+        "animationFillMode": "both",
+        "backgroundColor": "#749D60",
+        "borderRadius": "100%",
+        "display": "inline-block",
+        "height": "10px",
+        "margin": "2px",
+        "width": "10px",
+      }
+    }
+  />
+  <span
+    style={
+      {
+        "animation": "react-spinners-BeatLoader-beat 0.7s 0.35s infinite linear",
+        "animationFillMode": "both",
+        "backgroundColor": "#749D60",
+        "borderRadius": "100%",
+        "display": "inline-block",
+        "height": "10px",
+        "margin": "2px",
+        "width": "10px",
+      }
+    }
+  />
+  <span
+    style={
+      {
+        "animation": "react-spinners-BeatLoader-beat 0.7s 0s infinite linear",
+        "animationFillMode": "both",
+        "backgroundColor": "#749D60",
+        "borderRadius": "100%",
+        "display": "inline-block",
+        "height": "10px",
+        "margin": "2px",
+        "width": "10px",
+      }
+    }
+  />
+</span>
+`;

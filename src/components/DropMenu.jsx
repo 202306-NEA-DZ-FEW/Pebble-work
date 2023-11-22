@@ -11,6 +11,7 @@ import styles from "@/styles/DropMenu.module.css";
 import { auth } from "@/util/firebase";
 
 import Signup from "./Signup/Signup";
+import Bubble from "./Chat/Bubble";
 
 const DropMenu = () => {
     const { t } = useTranslation("common");
@@ -92,6 +93,7 @@ const DropMenu = () => {
 
     return (
         <div className='flex sm:flex-row flex-col gap-3 sm:gap-4'>
+            {user ? <Bubble /> : ""}
             <div className={user ? "hidden" : ""}>
                 <Signup />
             </div>

@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChatDisplay renders correctly 1`] = `
+<div
+  className="flex relative pl-2 justify-center max-h-full w-full scrollBar overflow-y-scroll"
+>
+  <div
+    className="w-full"
+  >
+    <div
+      className="min-w-full"
+      style={
+        {
+          "display": "inline-block",
+          "position": "relative",
+        }
+      }
+    >
+      <form
+        onSubmit={[Function]}
+      >
+        <textarea
+          className="min-w-full resize-none scrollBar"
+          onChange={[Function]}
+          onKeyDown={[Function]}
+          style={
+            {
+              "height": "80px",
+              "paddingRight": "30px",
+            }
+          }
+          value=""
+        />
+        <button
+          className="w-6"
+          style={
+            {
+              "position": "absolute",
+              "right": "4px",
+              "top": "4px",
+            }
+          }
+          type="submit"
+        >
+          <img
+            alt="Send"
+            src="/icons/message.svg"
+          />
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+`;
