@@ -3,10 +3,10 @@
 exports[`MainCard renders correctly 1`] = `
 <DocumentFragment>
   <div
-    class="w-full lg:flex lg:flex-wrap lg:flex-row lg:gap-0 flex flex-col items-center gap-8 sm:gap-5 lg:justify-start lg:items-start"
+    class="w-full lg:flex lg:flex-wrap lg:flex-row lg:gap-0 flex flex-col items-center gap-8 sm:gap-5 lg:justify-start lg:items-start mb-[6rem]"
   >
     <div
-      class="w-1/2 p-2 sm:min-h-[320px] min-h-[200px] lg:min-h-[550px] lg:w-1/3 md:w-1/2 flex flex-col justify-evenly items-center shadow-md invisible"
+      class="bg-slate-50 bg-opacity-30 w-1/2 p-2 sm:min-h-[320px] min-h-[200px] lg:min-h-[550px] lg:w-1/3 md:w-1/2 flex flex-col justify-evenly items-center  invisible"
       id="featuredCard"
     >
       <div
@@ -33,14 +33,14 @@ exports[`MainCard renders correctly 1`] = `
         </div>
       </div>
       <a
-        class="xl:w-[163px] mb-5 xl:h-[52px] justify-center items-center gap-2.5 inline-flex text-zinc-900 lg:text-[22px] sm:text-[16px] font-medium leading-[30px] tracking-tight"
-        href=""
+        class="xl:w-[163px] mb-5 xl:h-[52px] justify-center items-center gap-2.5 inline-flex text-[#749D60] lg:text-[22px] sm:text-[16px] font-medium leading-[30px] tracking-tight"
+        href="/signup"
       >
         common:main:joinCommunityButtonText
       </a>
     </div>
     <div
-      class="w-1/2 p-2 sm:min-h-[320px] min-h-[200px] lg:min-h-[550px] lg:w-1/3 md:w-1/2 flex flex-col justify-evenly items-center shadow-md invisible"
+      class="bg-slate-50 bg-opacity-30 w-1/2 p-2 sm:min-h-[320px] min-h-[200px] lg:min-h-[550px] lg:w-1/3 md:w-1/2 flex flex-col justify-evenly items-center  invisible"
       id="featuredCard"
     >
       <div
@@ -67,14 +67,14 @@ exports[`MainCard renders correctly 1`] = `
         </div>
       </div>
       <a
-        class="xl:w-[163px] mb-5 xl:h-[52px] justify-center items-center gap-2.5 inline-flex text-zinc-900 lg:text-[22px] sm:text-[16px] font-medium leading-[30px] tracking-tight"
-        href=""
+        class="xl:w-[163px] mb-5 xl:h-[52px] justify-center items-center gap-2.5 inline-flex text-[#749D60] lg:text-[22px] sm:text-[16px] font-medium leading-[30px] tracking-tight"
+        href="/events"
       >
         common:main:attendEventsButtonText
       </a>
     </div>
     <div
-      class="w-1/2 p-2 sm:min-h-[320px] min-h-[200px] lg:min-h-[550px] lg:w-1/3 md:w-1/2 flex flex-col justify-evenly items-center shadow-md invisible"
+      class="bg-slate-50 bg-opacity-30 w-1/2 p-2 sm:min-h-[320px] min-h-[200px] lg:min-h-[550px] lg:w-1/3 md:w-1/2 flex flex-col justify-evenly items-center  invisible"
       id="featuredCard"
     >
       <div
@@ -101,8 +101,8 @@ exports[`MainCard renders correctly 1`] = `
         </div>
       </div>
       <a
-        class="xl:w-[163px] mb-5 xl:h-[52px] justify-center items-center gap-2.5 inline-flex text-zinc-900 lg:text-[22px] sm:text-[16px] font-medium leading-[30px] tracking-tight"
-        href=""
+        class="xl:w-[163px] mb-5 xl:h-[52px] justify-center items-center gap-2.5 inline-flex text-[#749D60] lg:text-[22px] sm:text-[16px] font-medium leading-[30px] tracking-tight"
+        href="/events/create"
       >
         common:main:hostEventButtonText
       </a>
