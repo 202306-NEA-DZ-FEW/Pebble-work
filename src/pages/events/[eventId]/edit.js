@@ -8,9 +8,9 @@ import React, { useEffect, useState } from "react";
 import styles from "@/styles/EventDetails.module.css";
 
 import NoAccess from "@/components/Events/EditEvent";
+import Modal from "@/components/Popup/Modal";
 
 import { auth, db, storage } from "@/util/firebase";
-import Modal from "@/components/Popup/Modal";
 
 function EditEvent({ event, organizer }) {
     const { t } = useTranslation();
@@ -43,6 +43,19 @@ function EditEvent({ event, organizer }) {
     };
 
     const updateEvent = async () => {
+        const minDescriptionLength = 100;
+
+        if (
+            !input.title ||
+            !input.time ||
+            input.description.length < minDescriptionLength
+        ) {
+            alert(
+                `Please fill in all required fields and ensure the description has at least ${minDescriptionLength} characters.`
+            );
+            return;
+        }
+
         const eventUpdateData = {};
 
         if (input.location) {
