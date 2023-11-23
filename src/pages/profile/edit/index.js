@@ -180,7 +180,7 @@ const ProfilePage = () => {
         if (!isValidLength || !hasSpecialCharacter) {
             setShowPopup(true);
             setModalContent(
-                "Password must be at least 6 characters long and contain special characters"
+                "Password must be at least 6 characters and contain special characters"
             );
             setModalClassName(
                 "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
@@ -217,9 +217,7 @@ const ProfilePage = () => {
         } catch (error) {
             if (error.code === "auth/weak-password") {
                 setShowPopup(true);
-                setModalContent(
-                    "Password should be at least 6 characters long"
-                );
+                setModalContent("Password should be at least 6 characters");
             } else {
                 setShowPopup(true);
                 setModalContent("Error changing password. Please try again.");
@@ -475,7 +473,7 @@ const ProfilePage = () => {
                 </form>
                 {/* Change Password */}
                 <div className='flex mt-6 justify-center'>
-                    <div className='  md:w-[700px] sm:w-[500px] w-[250px] bg-[#B4CD93] h-[250px] sm:h-[260px] mb-4'>
+                    <div className='  md:w-[700px] sm:w-[500px] w-[250px] bg-[#B4CD93]  h-[300px] md:h-[260px] mb-4'>
                         <h3 className='font-bold mt-5 text-center md:text-2xl'>
                             {t("edit:changePassword")}
                         </h3>
