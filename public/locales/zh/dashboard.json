@@ -1,0 +1,11 @@
+{
+    "dashboarduser": {
+      "button": "开始",
+      "welcome": "欢迎，",
+      "gladToSeeYou": "很高兴见到你。",
+      "createNewEvent": "创建新活动",
+      "eventsCreated": "创建的活动",
+      "eventsJoined": "参与的活动",
+      "suggestedEvents": "推荐的活动"
+    }
+  }

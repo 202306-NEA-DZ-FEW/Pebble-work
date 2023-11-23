@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import { IoIosGitCompare } from "react-icons/io";
 import { IoIosGitBranch } from "react-icons/io";
 import { IoCreateOutline } from "react-icons/io5";
-
+import { useTranslation } from "next-i18next";
 import styles from "@/styles/Events.module.css";
 
 import DesktopCard from "@/components/Events/DesktopCard";
@@ -17,6 +17,8 @@ import SmallCard from "@/components/Events/SmallCard";
 
 import { auth, db } from "../../util/firebase";
 const Dashboarduser = () => {
+    const { t } = useTranslation();
+
     const [joinedEvents, setJoinedEvents] = useState([]);
     const [createdEvent, setCreatedEvent] = useState([]);
     const [User, setUser] = useState(null);
@@ -167,7 +169,7 @@ const Dashboarduser = () => {
                 className='button absolute bg-[#2E7EAA] text-white text-[12px] rounded-[4px] p-2 top-[80px] left-2'
                 onClick={toggleNav}
             >
-                Get Started
+                {t("dashboard:dashboarduser:button")}
             </button>
             <nav
                 className={`absolute top-30 bottom-0 h-full left-0 bg-[#e6f5e4] overflow-hidden duration-200 linear shadow-md mt-30 transform transition-transform ${
@@ -184,7 +186,7 @@ const Dashboarduser = () => {
                 <ul>
                     <li className='flex items-center mb-2 mt-20 ml-2'>
                         <p className='font-bold text-lg italic mr-2'>
-                            Welcome,{" "}
+                            {t("dashboard:dashboarduser:welcome")}{" "}
                             <span className='text-xl text-[#82a572]'>
                                 {Nameuser}!
                             </span>
@@ -192,7 +194,7 @@ const Dashboarduser = () => {
                     </li>
                     <li className='flex items-center mb-10 mt-4 ml-1'>
                         <p className='font-semibold text-lg italic mr-2'>
-                            we&apos;re glad to see you.
+                            {t("dashboard:dashboarduser:gladToSeeYou")}
                         </p>
                     </li>
 
@@ -203,7 +205,7 @@ const Dashboarduser = () => {
                         <div className='flex items-center'>
                             <IoCreateOutline size={30} className='mr-1' />
                             <span className='mr-2 block hover:bg-[#BFEAD3] cursor-pointer'>
-                                Create New Event
+                                {t("dashboard:dashboarduser:createNewEvent")}
                             </span>
                         </div>
                     </li>
@@ -217,7 +219,7 @@ const Dashboarduser = () => {
                         >
                             <IoIosGitBranch size={30} className='mr-1' />
                             <span class='my-2 block hover:bg-[#BFEAD3] cursor-pointer'>
-                                Events Created ►
+                                {t("dashboard:dashboarduser:eventsCreated")} ►
                             </span>
                         </button>
                     </li>
@@ -231,7 +233,7 @@ const Dashboarduser = () => {
                         >
                             <IoIosGitCompare size={30} className='mr-1' />
                             <span class='my-2 block hover:bg-[#BFEAD3] cursor-pointer'>
-                                Events Joined ►
+                                {t("dashboard:dashboarduser:eventsJoined")} ►
                             </span>
                         </button>
                     </li>
@@ -350,7 +352,7 @@ const Dashboarduser = () => {
                                 wordWrap: "break-word",
                             }}
                         >
-                            Suggested events:
+                            {t("dashboard:dashboarduser:suggestedEvents")}
                         </h2>
                     </div>
 
@@ -417,6 +419,7 @@ export async function getStaticProps({ locale }) {
                 "about",
                 "events",
                 "eventCreation",
+                "dashboard",
             ])),
             // Will be passed to the page component as props
         },

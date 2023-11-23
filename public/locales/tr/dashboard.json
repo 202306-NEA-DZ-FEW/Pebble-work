@@ -1,0 +1,11 @@
+{
+    "dashboarduser": {
+      "button": "Başlayın",
+      "welcome": "Hoş geldin,",
+      "gladToSeeYou": "Seni gördüğümüze sevindik.",
+      "createNewEvent": "Yeni Etkinlik Oluştur",
+      "eventsCreated": "Oluşturulan Etkinlikler",
+      "eventsJoined": "Katılım Gösterilen Etkinlikler",
+      "suggestedEvents": "Tavsiye Edilen Etkinlikler"
+    }
+  }

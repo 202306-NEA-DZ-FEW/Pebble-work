@@ -1,0 +1,11 @@
+{
+    "dashboarduser": {
+      "button": "Get Started",
+      "welcome": "Welcome,",
+      "gladToSeeYou": "We're glad to see you.",
+      "createNewEvent": "Create New Event",
+      "eventsCreated": "Events Created",
+      "eventsJoined": "Joined Events",
+      "suggestedEvents": "Suggested Events"
+    }
+  }
