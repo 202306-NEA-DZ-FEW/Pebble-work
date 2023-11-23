@@ -105,7 +105,10 @@ const FilterByType = ({
                         : null
                 }
             >
-                <button className='sm:hidden' onClick={handleInterestClick}>
+                <button
+                    className='sm:hidden bg-[#749D60] rounded-lg px-3 py-2 text-white  font-[500] transition duration-300 ease-in-out hover:bg-opacity-70 w-30 h-15'
+                    onClick={handleInterestClick}
+                >
                     Interests
                 </button>
 
