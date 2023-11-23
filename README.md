@@ -5,8 +5,23 @@
 -   Project name: [Pebble work]
 -   Project description: [A platform to organize diffrent types of volunteer events ]
 -   Technology used: Nextjs, TailwindCSS, i18next, Husky, Prettier, Eslint, Commitlinter (Conventional Commits)
--   Team members: Takieddine Dilmi , Youssouf Sergma, Manel Hasna Haddoud, Louisa Hamrit, Halla Hamidi
+-   Team members:
+    -   @takidilmi
+    -   @Halla24
+    -   @hasnahadd
+    -   @ysergma
+    -   @Polichinell
 -   Bootcamp: NEA DZ FEW 2023
+
+## Special Thanks
+
+We would like to express our deepest appreciation to all our mentors and teachers at the Re:Coded NEA DZ FEW 2023 Bootcamp who provided us with the knowledge and resources to complete this project. Their dedication to teaching and commitment to nurturing our skills have been invaluable to our learning journey.
+
+-   @tech-chieftain
+-   @hiba-machfej
+-   @MenarSelamet
+
+Thank you for inspiring us to strive for excellence and for guiding us through the challenges we faced.
 
 ## Installation
 
