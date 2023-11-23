@@ -8,7 +8,7 @@
     "routes": [
         {
             "src": "/sitemap.xml",
-            "dest": "/.next/server/pages/api/sitemap.js"
+            "dest": "/api/sitemap"
         }
     ]
 }
