@@ -489,7 +489,7 @@ const ProfilePage = () => {
                                     onChange={(e) =>
                                         setCurrentPassword(e.target.value)
                                     }
-                                    className='w-[40vw] sm:w-[50vw] h-8 px-3 rounded md:h-10'
+                                    className='w-[40vw] md:w-[50vw]  sm:w-[30vw] h-8 px-3 rounded md:h-10'
                                     required
                                 />
                                 <div
@@ -506,7 +506,7 @@ const ProfilePage = () => {
                                         setConfirmPassword(e.target.value);
                                         handlePasswordChange(e);
                                     }}
-                                    className='w-[40vw] sm:w-[50vw] h-8 px-3 rounded md:h-10'
+                                    className='w-[40vw] md:w-[50vw]  sm:w-[30vw] h-8 px-3 rounded md:h-10'
                                     required
                                 />
                             </div>
@@ -531,7 +531,7 @@ const ProfilePage = () => {
                                     )}
                                     <span
                                         style={{
-                                            marginLeft: "0.5rem",
+                                            marginLeft: "0.6rem",
                                             marginRight: "-0.2rem",
                                         }}
                                     >
@@ -567,7 +567,7 @@ const ProfilePage = () => {
                                     </span>
                                 </span>
                             </div>
-                            <div className='flex sm:flex-row sm:justify-evenly flex-col gap-3 w-[80px] sm:w-full mt-0 mb-12'>
+                            <div className='flex sm:flex-row sm:justify-evenly flex-col gap-3 w-[80px] md:w-full sm:w-[180px] mt-0 mb-12'>
                                 <button
                                     type='submit'
                                     className='bg-[#2E7EAA] text-center h-8 w-full md:w-32 text-xs text-white rounded shadow-md md:h-10 md:text-lg'
