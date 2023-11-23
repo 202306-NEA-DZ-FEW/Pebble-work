@@ -27,12 +27,12 @@
         "hostEventButtonText": "Başlayın"
     },
     "heroCard": {
-        "title": "Dünyada görmek istediğiniz değişimi kendiniz olun.",
-        "description": "Sadece anlamlı bir etki yaratmakla kalmayacak, aynı vizyona sahip bir topluluğun aktif bir üyesi olduğunuzu göreceksiniz. İyi bir dünya yaratma misyonumuzu destekleyen bir topluluğa katılın.",
-        "link": " ",
-        "description2": " ",
-        "getStarted": "Başlayın",
-        "whoWeAre": "Biz kimiz"
+        "title": "Dünyada görmek istediğin değişim ol.",
+        "description": "Sadece anlamlı bir etki yaratmakla kalmayacak, aynı zamanda misyonumuzu destekleyen, gelişmekte olan, aynı düşüncede olan bir topluluk bulacaksın. Şimdi ilk adımı at. Deneyimini artırmak için heyecanla tanıttığımız Öğrenci Mağazası - Cezayir'de öğrencilerin ikinci el eşyalarını satıp, alıp ve takas edebileceği yenilikçi bir platform. Etkin bir şekilde sınırları aşabilir ve bu destek ve olumlu değişim hareketine katkıda bulunabilirsin. ",
+        "link": "Bağlantı ",
+        "description2": "ve ihtiyacınız olan şeye erişim sağlayabilen bir dünyanın kapılarını keşfedin.",
+        "getStarted": "Başla",
+        "whoWeAre": "Biz Kimiz"
     },
     "homeCards": {
         "howItWorks": "Nasıl Çalışır",

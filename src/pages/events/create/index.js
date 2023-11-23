@@ -426,7 +426,7 @@ const EventCreationPage = () => {
                                     id='description'
                                     value={input.description}
                                     onChange={handleInputChange}
-                                    placeholder='  Please write 50 characters at least'
+                                    placeholder='  Please write 100 characters at least'
                                     className='outline outline-1 mt-2 h-40 rounded w-7/12 font-semibold '
                                 ></textarea>
                             </form>
