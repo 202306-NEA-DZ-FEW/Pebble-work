@@ -134,5 +134,9 @@
         "peaceJustice": "和平、正义和强大的机构",
         "cleanWater": "清洁水源与卫生",
         "genderEquality": "性别平等"
+      },
+      "location": {
+        "location": "位置",
+        "cities": "城市"
       }
 }

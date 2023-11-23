@@ -134,5 +134,9 @@
         "peaceJustice": "Frieden, Gerechtigkeit und starke Institutionen",
         "cleanWater": "Sauberes Wasser und Sanitär",
         "genderEquality": "Geschlechtergleichstellung"
+      },
+      "location": {
+        "location": "Ort",
+        "cities": "Städte"
       }
 }

@@ -135,5 +135,9 @@
         "peaceJustice": "Barış, Adalet ve Güçlü Kurumlar",
         "cleanWater": "Temiz Su ve sanitasyon",
         "genderEquality": "Cinsiyet Eşitliği"
+      },
+      "location": {
+        "location": "Konum",
+        "cities": "Şehirler"
       }
 }

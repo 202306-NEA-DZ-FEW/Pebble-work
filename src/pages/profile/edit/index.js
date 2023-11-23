@@ -396,7 +396,7 @@ const ProfilePage = () => {
                     </div>
                     {/* Your Interests */}
                     <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
-                        {t("edit:Interests")}
+                        {t("edit:interests")}
                     </h3>
                     <div className='grid grid-container grid-cols-1 gap-8 -ml-15 mt-3 text-center justify-evenly sm:grid-cols-2 sm:gap-4 md:grid-cols-3 text-xs md:w-full md:h-auto md:mt-8 md:text-3xl'>
                         {EventTypes.map((type, index) => (
@@ -460,10 +460,10 @@ const ProfilePage = () => {
                                     type='submit'
                                     className='bg-[#2E7EAA] text-center h-8 w-full md:w-32 text-xs text-white rounded shadow-md md:h-10 md:text-lg'
                                 >
-                                    {t("edit:Submit")}
+                                    {t("edit:submit")}
                                 </button>
                                 <button className='text-center h-8 w-full bg-white opacity-70 md:w-32 text-xs outline outline-1 rounded shadow-md md:h-10 md:text-lg'>
-                                    {t("edit:Cancel")}
+                                    {t("edit:cancel")}
                                 </button>
                             </div>
                         </form>

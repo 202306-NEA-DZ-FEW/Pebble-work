@@ -81,10 +81,10 @@ const FilterByType = ({
 
     const types = [
         t("common:eventTypes:cleanEnergy"),
-        t("common:eventTypes:Clean Water and Sanitation"),
+        t("common:eventTypes:cleanWater"),
         t("common:eventTypes:climateAction"),
         t("common:eventTypes:decentWork"),
-        t("common:eventTypes:Gender Equality"),
+        t("common:eventTypes:genderEquality"),
         t("common:eventTypes:goodHealth"),
         t("common:eventTypes:innovationInfrastructure"),
         t("common:eventTypes:lifeBelowWater"),
