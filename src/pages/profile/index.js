@@ -19,20 +19,20 @@ const ProfilePage = () => {
     const [joinedEvents, setJoinedEvents] = useState([]);
 
     const EventTypes = [
-        "No Poverty",
-        "Zero Hunger",
-        "Good Health and Well-being",
-        "Quality Education",
-        "Affordable and Clean Energy",
-        "Decent Work and Economic Growth",
-        "Industry, Innovation, and Infrastructure",
-        "Reduced Inequalities",
-        "Responsible Consumption/Production",
-        "Sustainable Cities and Communities",
-        "Climate Action",
-        "Life Below Water",
-        "Life on Land",
-        "Peace, Justice and Strong Institutions",
+        t("eventTypes.noPoverty"),
+        t("common:eventTypes:zeroHunger"),
+        t("common:eventTypes:goodHealth"),
+        t("common:eventTypes:qualityEducation"),
+        t("common:eventTypes:cleanEnergy"),
+        t("common:eventTypes:decentWork"),
+        t("common:eventTypes:innovationInfrastructure"),
+        t("common:eventTypes:reducedInequalities"),
+        t("common:eventTypes:responsibleConsumption"),
+        t("common:eventTypes:sustainableCities"),
+        t("common:eventTypes:climateAction"),
+        t("common:eventTypes:lifeBelowWater"),
+        t("common:eventTypes:lifeOnLand"),
+        t("common:eventTypes:peaceJustice"),
     ];
 
     useEffect(() => {
@@ -114,13 +114,13 @@ const ProfilePage = () => {
                                 {/* Name and Surname */}
                                 <div className='sm-col-2 md:w-3/12 md:mt-10'>
                                     <h3 className='font-semibold text-lg text-gray-600'>
-                                        {t("profile:Name")}:
+                                        {t("profile:name")}:
                                     </h3>
                                     <p className='mt-2 mb-4'>
                                         {currentUser.Name}
                                     </p>
                                     <h3 className='font-semibold text-lg text-gray-600'>
-                                        {t("profile:Surname")}:
+                                        {t("profile:surname")}:
                                     </h3>
                                     <p className='mt-2 mb-4'>
                                         {currentUser.Surename}
@@ -130,13 +130,13 @@ const ProfilePage = () => {
                                 {/* Email and Location */}
                                 <div className='sm-col-3 md:w-3/12 md:mt-10 text-left'>
                                     <h3 className='font-semibold text-lg text-gray-600'>
-                                        {t("profile:Email")}:
+                                        {t("profile:email")}:
                                     </h3>
                                     <p className='mt-2 mb-4'>
                                         {currentUser.email}
                                     </p>
                                     <h3 className='font-semibold text-lg text-gray-600'>
-                                        {t("profile:Location")}:
+                                        {t("profile:location")}:
                                     </h3>
                                     <p className='mt-2 mb-4'>
                                         {currentUser.Location}
@@ -151,7 +151,7 @@ const ProfilePage = () => {
                             {t("profile:interests")}:
                         </h3>
                         <div
-                            className='grid grid-container grid-cols-2 gap-8 md:grid-cols-3 
+                            className='grid grid-container grid-cols-2 gap-8 md:grid-cols-3
                         text-center justify-evenly md:w-full md:h-auto md:mt-1 md:text-3xl px-3 sm-types'
                         >
                             {EventTypes.map((type, index) => (

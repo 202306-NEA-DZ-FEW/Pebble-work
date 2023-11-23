@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import React, { useEffect, useRef, useState } from "react";
 
 import styles from "@/styles/Events.module.css";
@@ -10,6 +11,7 @@ const FilterByType = ({
 }) => {
     const dropdownRef = useRef(null);
     const [isInterestOpen, setInterestOpen] = useState(false);
+    const { t } = useTranslation();
 
     // Handle click outside the dropdown to close it
     const handleClickOutside = (event) => {
@@ -78,22 +80,22 @@ const FilterByType = ({
     }, [selectedTypes]);
 
     const types = [
-        "Affordable and Clean Energy",
-        "Clean Water and Sanitation",
-        "Climate Action",
-        "Decent Work and Economic Growth",
-        "Gender Equality",
-        "Good Health and Well Being",
-        "Industry, Innovation and Infrastructure",
-        "Life Below Water",
-        "Life on Land",
-        "No Poverty",
-        "Peace, Justice and Strong Institutions",
-        "Quality Education",
-        "Reduced Inequalities",
-        "Responsible Consumption/Production",
-        "Sustainable Cities and Communities",
-        "Zero Hunger",
+        t("common:eventTypes:cleanEnergy"),
+        t("common:eventTypes:Clean Water and Sanitation"),
+        t("common:eventTypes:climateAction"),
+        t("common:eventTypes:decentWork"),
+        t("common:eventTypes:Gender Equality"),
+        t("common:eventTypes:goodHealth"),
+        t("common:eventTypes:innovationInfrastructure"),
+        t("common:eventTypes:lifeBelowWater"),
+        t("common:eventTypes:lifeOnLand"),
+        t("eventTypes.noPoverty"),
+        t("common:eventTypes:peaceJustice"),
+        t("common:eventTypes:qualityEducation"),
+        t("common:eventTypes:reducedInequalities"),
+        t("common:eventTypes:responsibleConsumption"),
+        t("common:eventTypes:sustainableCities"),
+        t("common:eventTypes:zeroHunger"),
     ];
 
     return (

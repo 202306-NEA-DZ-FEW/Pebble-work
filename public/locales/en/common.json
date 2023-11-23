@@ -117,5 +117,23 @@
         "warningLeave": "You are about to leave this event.",
         "proceed": "Are you sure you want to proceed?",
         "leave": "Leave"
-    }
+    },
+    "eventTypes": {
+        "noPoverty": "No Poverty",
+        "zeroHunger": "Zero Hunger",
+        "goodHealth": "Good Health and Well-being",
+        "qualityEducation": "Quality Education",
+        "cleanEnergy": "Affordable and Clean Energy",
+        "decentWork": "Decent Work and Economic Growth",
+        "innovationInfrastructure": "Industry, Innovation, and Infrastructure",
+        "reducedInequalities": "Reduced Inequalities",
+        "responsibleConsumption": "Responsible Consumption/Production",
+        "sustainableCities": "Sustainable Cities and Communities",
+        "climateAction": "Climate Action",
+        "lifeBelowWater": "Life Below Water",
+        "lifeOnLand": "Life on Land",
+        "peaceJustice": "Peace, Justice and Strong Institutions",
+        "cleanWater" :"Clean Water and Sanitation",
+        "genderEquality": "Gender Equality"
+      }
 }

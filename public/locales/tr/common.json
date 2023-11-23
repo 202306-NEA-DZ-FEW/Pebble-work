@@ -117,5 +117,23 @@
         "warningLeave": "Bu etkinliği terk etmek üzeresiniz.",
         "proceed": "Devam etmek istediğinizden emin misiniz?",
         "leave": "Ayrıl"
-    }
+    },
+    "eventTypes": {
+        "noPoverty": "Yoksulluğa Son",
+        "zeroHunger": "Açlığa Son",
+        "goodHealth": "İyi Sağlık ve İyi Yaşam",
+        "qualityEducation": "Kaliteli Eğitim",
+        "cleanEnergy": "Uygun ve Temiz Enerji",
+        "decentWork": "İnsana Yakışır İş ve Ekonomik Büyüme",
+        "innovationInfrastructure": "Sanayi, İnovasyon ve Altyapı",
+        "reducedInequalities": "Azaltılmış Eşitsizlikler",
+        "responsibleConsumption": "Sorumlu Tüketim/Üretim",
+        "sustainableCities": "Sürdürülebilir Şehirler ve Topluluklar",
+        "climateAction": "İklim Eylemi",
+        "lifeBelowWater": "Suda Yaşam",
+        "lifeOnLand": "Karada Yaşam",
+        "peaceJustice": "Barış, Adalet ve Güçlü Kurumlar",
+        "cleanWater": "Temiz Su ve sanitasyon",
+        "genderEquality": "Cinsiyet Eşitliği"
+      }
 }

@@ -42,20 +42,20 @@ const ProfilePage = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
 
     const EventTypes = [
-        "No Poverty",
-        "Zero Hunger",
-        "Good Health and Well-being",
-        "Quality Education",
-        "Affordable and Clean Energy",
-        "Decent Work and Economic Growth",
-        "Industry, Innovation, and Infrastructurey",
-        "Reduced Inequalities",
-        "Sustainable Cities and Communities",
-        "Responsible Consumption/Production",
-        "Climate Action",
-        "Life Below Water",
-        "Life on Land",
-        "Peace, Justice and Strong Institutions",
+        t("eventTypes.noPoverty"),
+        t("common:eventTypes:zeroHunger"),
+        t("common:eventTypes:goodHealth"),
+        t("common:eventTypes:qualityEducation"),
+        t("common:eventTypes:cleanEnergy"),
+        t("common:eventTypes:decentWork"),
+        t("common:eventTypes:innovationInfrastructure"),
+        t("common:eventTypes:reducedInequalities"),
+        t("common:eventTypes:responsibleConsumption"),
+        t("common:eventTypes:sustainableCities"),
+        t("common:eventTypes:climateAction"),
+        t("common:eventTypes:lifeBelowWater"),
+        t("common:eventTypes:lifeOnLand"),
+        t("common:eventTypes:peaceJustice"),
     ];
 
     const handleSuccess = () => {
@@ -371,25 +371,25 @@ const ProfilePage = () => {
                     <div className='flex flex-col items-center mt-4 md:flex-row md:justify-around md:gap-x-5'>
                         <div className='w-[100 px] text-center'>
                             <h3 className='font-semibold text-lg text-gray-600'>
-                                {t("edit:Name")}:
+                                {t("edit:name")}:
                             </h3>
                             <p className='mt-2 mb-4'>{currentUser.Name}</p>
                         </div>
                         <div className='w-[100 px] text-center'>
                             <h3 className='font-semibold text-lg text-gray-600'>
-                                {t("edit:Surname")}:
+                                {t("edit:surname")}:
                             </h3>
                             <p className='mt-2 mb-4'>{currentUser.Surename}</p>
                         </div>
                         <div className='w-[100 px] text-center'>
                             <h3 className='font-semibold text-lg text-gray-600'>
-                                {t("edit:Email")}:
+                                {t("edit:email")}:
                             </h3>
                             <p className='mt-2 mb-4'>{currentUser.email}</p>
                         </div>
                         <div className='w-[100 px] text-center '>
                             <h3 className='font-semibold text-lg text-gray-600'>
-                                {t("edit:Location")}:
+                                {t("edit:location")}:
                             </h3>
                             <p className='mt-2 mb-4'>{currentUser.Location}</p>
                         </div>
