@@ -106,7 +106,7 @@ const FilterByType = ({
                 }
             >
                 <button
-                    className='sm:hidden bg-[#2E7EAA] rounded-lg px-3 py-2 text-white  font-[500] transition duration-300 ease-in-out hover:bg-blue-700 w-30 h-15'
+                    className='sm:hidden bg-[#749D60] rounded-lg px-3 py-2 text-white  font-[500] transition duration-300 ease-in-out hover:bg-opacity-70 w-30 h-15'
                     onClick={handleInterestClick}
                 >
                     Interests
