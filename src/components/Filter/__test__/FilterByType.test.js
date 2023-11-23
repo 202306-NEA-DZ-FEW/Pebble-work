@@ -1,6 +1,7 @@
-import FilterByType from "../FilterByType";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
+
+import FilterByType from "../FilterByType";
 
 describe("FilterByType Component", () => {
     const mockProps = {

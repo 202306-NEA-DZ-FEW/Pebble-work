@@ -55,18 +55,18 @@ function FirestoreLocation({ onInputChange }) {
                 Location
             </button>
             <dialog id='my_modal_1' className='modal rounded-tr rounded-br'>
-                <div className='modal-box'>
+                <div className='modal-box text-slate-200 bg-[#2E7EAA]'>
                     <div className='flex justify-center'>
                         <input
                             type='text'
                             placeholder='Search city...'
                             value={searchTerm}
                             onChange={handleSearchChange}
-                            className='mt-2 p-2 border rounded'
+                            className='mt-2 p-2 border bg-[#2E7EAA] rounded'
                         />
                     </div>
                     <h3 className='font-bold text-lg mb-0'>cities </h3>
-                    <div className=' mt-2  '>
+                    <div className=' mt-2'>
                         <ul
                             className={`list-none ${styles.information} h-[200px]`}
                         >
@@ -74,7 +74,7 @@ function FirestoreLocation({ onInputChange }) {
                                 ([key, value], index) => (
                                     <li
                                         key={index}
-                                        className='my-2 block hover:bg-gray-400 cursor-pointer'
+                                        className='my-2 block hover:opacity-50 cursor-pointer'
                                         onClick={() => {
                                             handleLocationClick(value);
 

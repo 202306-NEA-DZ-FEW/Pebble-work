@@ -2,50 +2,51 @@ import React from "react";
 
 const SocialCardData = [
     {
-        name: "Quby",
-        occupation: "occupation",
-        text: "This is the first testimonial. It can be about anything.",
-        imageSrc:
-            "https://s3-alpha-sig.figma.com/img/c5db/07f5/e831b1a64ef23d6ce6baa81fbcf33e56?Expires=1698624000&Signature=ME0PjPYRWZJDhMo4ykxlAwRO~AxZpiHQvbSgONHGvYuj4zg7HnxgNi9oXEVcCWHZpmYteXjJ2jrPNdleu~MrphbU3MWGNCf2U~DR1rMOE7WIoFMBROkUj4P6CX9ffcSZoSTvdOUL2bI17RAVEknuPIIHeJeuC4YNptBmhmPVqIFR9A2UjHB~btkjTqPkxWuYZCjXo0Z1hzlCfbuCRN7REtvsS2k3N52u0b6Ku4ODbAuNvjaq7Ra1q7IiMPcnigMlxoZ3NVgVZ2hyfJKRyTVibPptohLY-68dLWgaufNU4U6Hx8zr9e~hKFNBxhfE2QG4hrJ5w6SC0KiXuX3uIbSIxg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4",
+        name: "Mubashir Aazar",
+        occupation: "Beyrouth Youth Club rep.",
+        text: " I must commend Pebble Work for being a turning point in our mission for helping our community and making sustainable impact. Kudos to Pebble Work for providing us with a platform where we can all come together, turn our vision into actions, and TRULY change things.",
+        imageSrc: "./images/Aazar_BYC.png",
     },
     {
-        name: "Taki",
-        occupation: "occupation",
-        text: "This is the second testimonial. It can be about anything else.",
-        imageSrc:
-            "https://s3-alpha-sig.figma.com/img/c5db/07f5/e831b1a64ef23d6ce6baa81fbcf33e56?Expires=1698624000&Signature=ME0PjPYRWZJDhMo4ykxlAwRO~AxZpiHQvbSgONHGvYuj4zg7HnxgNi9oXEVcCWHZpmYteXjJ2jrPNdleu~MrphbU3MWGNCf2U~DR1rMOE7WIoFMBROkUj4P6CX9ffcSZoSTvdOUL2bI17RAVEknuPIIHeJeuC4YNptBmhmPVqIFR9A2UjHB~btkjTqPkxWuYZCjXo0Z1hzlCfbuCRN7REtvsS2k3N52u0b6Ku4ODbAuNvjaq7Ra1q7IiMPcnigMlxoZ3NVgVZ2hyfJKRyTVibPptohLY-68dLWgaufNU4U6Hx8zr9e~hKFNBxhfE2QG4hrJ5w6SC0KiXuX3uIbSIxg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4",
+        name: "Menar S.",
+        occupation: "Volunteer",
+        text: "Pebble Work is a beacon of hope, using events to tackle humanitarian crises like poverty and water scarcity. Their impactful initiatives inspire change and prove that small actions can create significant ripples of positive impact. Proud to be part of a community dedicated to making the world a better place through meaningful events.",
+        imageSrc: "./images/NotQuby.png",
     },
     {
-        name: "Ali",
-        occupation: "occupation",
-        text: "This is the third testimonial. Yet another testimonial here.",
-        imageSrc:
-            "https://s3-alpha-sig.figma.com/img/c5db/07f5/e831b1a64ef23d6ce6baa81fbcf33e56?Expires=1698624000&Signature=ME0PjPYRWZJDhMo4ykxlAwRO~AxZpiHQvbSgONHGvYuj4zg7HnxgNi9oXEVcCWHZpmYteXjJ2jrPNdleu~MrphbU3MWGNCf2U~DR1rMOE7WIoFMBROkUj4P6CX9ffcSZoSTvdOUL2bI17RAVEknuPIIHeJeuC4YNptBmhmPVqIFR9A2UjHB~btkjTqPkxWuYZCjXo0Z1hzlCfbuCRN7REtvsS2k3N52u0b6Ku4ODbAuNvjaq7Ra1q7IiMPcnigMlxoZ3NVgVZ2hyfJKRyTVibPptohLY-68dLWgaufNU4U6Hx8zr9e~hKFNBxhfE2QG4hrJ5w6SC0KiXuX3uIbSIxg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4",
+        name: "Hiba M.",
+        occupation: "Volunteer",
+        text: "Pebble Work has been a total game-changer for me in making a positive impact on our community. The tools they provide have turned our ideas into real actions, helping us make a difference. I'm grateful for the chance Pebble Work has given us to contribute meaningfully.",
+        imageSrc: "./images/icon_default.png",
     },
 ];
 
 const SocialCardSection = () => {
     return (
-        <div className='shadow-md w-full max-w-[1440px] px-5 md:px-[123px] lg:px-[127px] bg-white flex flex-wrap justify-center items-center gap-10'>
-            <div className='w-full text-center text-zinc-900 text-4xl font-medium leading-[44px] tracking-tight'>
-                Hear it from volunteers
+        <div className=' w-full max-w-[1440px] px-5 md:px-[123px] lg:px-[127px] bg-white bg-opacity-50 flex flex-wrap justify-center items-center gap-10 py-8 rounded-md'>
+            <div className='w-full text-center text-[#2E72AA] text-4xl font-medium leading-[44px] tracking-tight'>
+                Hear it from our volunteers
             </div>
             {SocialCardData.map((SocialCard, index) => (
                 <div
                     key={index}
-                    className='w-full md:w-1/3 lg:w-1/4 flex flex-col items-center gap-5'
+                    className='bg-white p-3 rounded-xl w-full md:w-1/3 lg:w-1/4 flex flex-col items-center gap-5'
                 >
                     <img
                         loading='lazy'
-                        className='w-16 h-16 rounded-full'
+                        className='w-20 h-20 rounded-full'
                         src={SocialCard.imageSrc}
                         alt={`Image ${index}`}
                     />
                     <div className='w-full text-center'>
-                        <div className='text-zinc-900 text-xl md:text-2xl lg:text-3xl font-medium leading-[30px] tracking-tight'>
-                            {SocialCard.name}, {SocialCard.occupation}
+                        <div className='text-zinc-900 text-xl md:text-lg lg:text-xl font-medium leading-[30px] tracking-tight'>
+                            {SocialCard.name}
+                            <br />
+                            <span className='italic font-normal text-[#2E72AA]'>
+                                {SocialCard.occupation}
+                            </span>
                         </div>
-                        <div className='text-zinc-500 text-base md:text-xl lg:text-2xl font-normal leading-[30px] tracking-tight'>
+                        <div className='text-zinc-500 text-base md:text-md lg:text-lg font-normal leading-[30px] tracking-tight'>
                             {SocialCard.text}
                         </div>
                     </div>

@@ -47,7 +47,7 @@ const FeatureCard = ({ title, description, buttonText, imageUrl, link }) => {
     return (
         <div
             id='featuredCard'
-            className={`w-1/2 p-2 sm:min-h-[320px] min-h-[200px] lg:min-h-[550px] lg:w-1/3 md:w-1/2 flex flex-col justify-evenly items-center shadow-md ${
+            className={`bg-slate-50 bg-opacity-30 w-1/2 p-2 sm:min-h-[320px] min-h-[200px] lg:min-h-[550px] lg:w-1/3 md:w-1/2 flex flex-col justify-evenly items-center  ${
                 isVisible ? styles.visible : styles.invisible
             }`}
         >
@@ -69,8 +69,8 @@ const FeatureCard = ({ title, description, buttonText, imageUrl, link }) => {
                 </div>
             </div>
             <Link
-                href=''
-                className={`xl:w-[163px] mb-5 xl:h-[52px] justify-center items-center gap-2.5 inline-flex text-zinc-900 lg:text-[22px] sm:text-[16px] font-medium leading-[30px] tracking-tight`}
+                href={link}
+                className={`xl:w-[163px] mb-5 xl:h-[52px] justify-center items-center gap-2.5 inline-flex text-[#749D60] lg:text-[22px] sm:text-[16px] font-medium leading-[30px] tracking-tight`}
                 onClick={handleButtonClick}
             >
                 {buttonText}
@@ -83,7 +83,7 @@ const MainCard = () => {
     const { t } = useTranslation();
 
     return (
-        <div className='w-full lg:flex lg:flex-wrap lg:flex-row lg:gap-0 flex flex-col items-center gap-8 sm:gap-5 lg:justify-start lg:items-start'>
+        <div className='w-full lg:flex lg:flex-wrap lg:flex-row lg:gap-0 flex flex-col items-center gap-8 sm:gap-5 lg:justify-start lg:items-start mb-[6rem]'>
             <FeatureCard
                 title={t("common:main:joinCommunityTitle")}
                 description={t("common:main:joinCommunityDescription")}
@@ -103,7 +103,7 @@ const MainCard = () => {
                 description={t("common:main:hostEventDescription")}
                 buttonText={t("common:main:hostEventButtonText")}
                 imageUrl='/Homepage/Girl.png'
-                link='/get-started-page'
+                link='/events/create'
             />
         </div>
     );

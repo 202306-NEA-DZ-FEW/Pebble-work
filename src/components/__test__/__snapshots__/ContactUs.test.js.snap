@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContactForm snapshot 1`] = `
+<div
+  className="formHeight text-black sm:w-[450px] w-[90vw] h-[450px] flex flex-col items-center mx-auto gap-4"
+>
+  <h1
+    className="text-[26px]"
+  >
+    contactForm.title
+  </h1>
+  <form
+    className="jsx-3a4e3b968dd338f0 h-[40vh]"
+    onSubmit={[Function]}
+  >
+    <div
+      className="jsx-3a4e3b968dd338f0 input-row"
+    >
+      <input
+        className="jsx-3a4e3b968dd338f0 "
+        id="fname"
+        name="firstname"
+        onChange={[Function]}
+        placeholder="contactForm.firstNamePlaceholder"
+        style={
+          {
+            "background": "var(--fill-white, #FFF)",
+            "borderRadius": "4px",
+          }
+        }
+        type="text"
+        value=""
+      />
+      <input
+        className="jsx-3a4e3b968dd338f0 "
+        id="lname"
+        name="lastname"
+        onChange={[Function]}
+        placeholder="contactForm.lastNamePlaceholder"
+        style={
+          {
+            "background": "var(--fill-white, #FFF)",
+            "borderRadius": "4px",
+          }
+        }
+        type="text"
+        value=""
+      />
+    </div>
+    <input
+      className="jsx-3a4e3b968dd338f0"
+      id="email"
+      name="email"
+      onChange={[Function]}
+      placeholder="contactForm.emailPlaceholder"
+      style={
+        {
+          "background": "var(--fill-white, #FFF)",
+          "borderRadius": "4px",
+        }
+      }
+      type="email"
+      value=""
+    />
+    <br
+      className="jsx-3a4e3b968dd338f0"
+    />
+    <input
+      className="jsx-3a4e3b968dd338f0"
+      id="phone"
+      name="phone"
+      onChange={[Function]}
+      placeholder="contactForm.phonePlaceholder"
+      style={
+        {
+          "background": "var(--fill-white, #FFF)",
+          "borderRadius": "4px",
+        }
+      }
+      type="tel"
+      value=""
+    />
+    <br
+      className="jsx-3a4e3b968dd338f0"
+    />
+    <textarea
+      className="jsx-3a4e3b968dd338f0 "
+      id="message"
+      name="message"
+      onChange={[Function]}
+      placeholder="contactForm.messagePlaceholder"
+      style={
+        {
+          "background": "var(--fill-white, #FFF)",
+          "borderRadius": "4px",
+        }
+      }
+      value=""
+    />
+    <br
+      className="jsx-3a4e3b968dd338f0"
+    />
+    <input
+      className="jsx-3a4e3b968dd338f0"
+      type="submit"
+      value="contactForm.submitButton"
+    />
+  </form>
+</div>
+`;

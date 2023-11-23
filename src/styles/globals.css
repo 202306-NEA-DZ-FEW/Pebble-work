@@ -1,11 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap");
+@font-face {
+    font-family: "Restora ExtraLight";
+    src: url("/nasir-udin-restoraextralight.otf") format("opentype");
+}
 
 body {
     background-color: #e6f5e4;
-    font-family: "Rubik", sans-serif;
+    font-family: "Restora ExtraLight", "sans-serif";
     overflow-x: hidden;
 }
 
@@ -83,6 +86,16 @@ body {
         margin-top: 10rem;
     }
 }
+@media (min-width: 1014px) {
+    .gallery-lg {
+        margin-top: 12rem;
+    }
+}
+@media (max-width: 440px) {
+    .eventButtons {
+        width: 12rem;
+    }
+}
 
 .swiper {
     width: 100%;
@@ -154,4 +167,24 @@ body {
 
 .secondButton {
     transition: all 0.6s ease;
+}
+
+/*scroll bar*/
+.scrollBar {
+    overflow-y: scroll;
+    scrollbar-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Scrollbar color */
+.scrollBar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollBar::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.scrollBar::-webkit-scrollbar-track {
+    background-color: transparent;
 }

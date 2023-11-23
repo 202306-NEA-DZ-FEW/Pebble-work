@@ -1,6 +1,6 @@
+import { useTranslation } from "next-i18next"; // Import useTranslation
 import React from "react";
 import { RiTwitterXFill } from "react-icons/ri";
-import { useTranslation } from "next-i18next"; // Import useTranslation
 
 const ButtonTwitter = ({ onClick }) => {
     const { t } = useTranslation();

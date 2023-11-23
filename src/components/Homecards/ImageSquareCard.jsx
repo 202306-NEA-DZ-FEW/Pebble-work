@@ -48,7 +48,7 @@ const ImageSquareCard = () => {
     }, []);
 
     return (
-        <div className={`${styles.container} shadow-md`}>
+        <div className={`${styles.container} mt-[3rem]`}>
             <div className={`${styles.gridContainer}`}>
                 <div
                     id='imagecard1'
