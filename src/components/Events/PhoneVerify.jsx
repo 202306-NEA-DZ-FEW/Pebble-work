@@ -18,6 +18,7 @@ import "react-phone-input-2/lib/style.css";
 import OtpInput from "@/components/OtpVerification";
 
 import { auth } from "@/util/firebase";
+
 const PhoneVerify = () => {
     const [otp, setOtp] = useState("");
     const [pn, setPn] = useState(""); //phone number
@@ -113,27 +114,27 @@ const PhoneVerify = () => {
     }
     return (
         <>
-            <section className='bg-[#FDA855] bg-opacity-50 flex items-center justify-center h-screen'>
+            <section className='flex items-center justify-center h-screen'>
                 <div>
                     <Toaster toastOptions={{ duration: 4000 }} />
                     <div id='recaptcha-container'></div>
                     {user ? (
-                        <h2 className='text-center text-white font-medium text-2xl'>
+                        <h2 className='text-center text-black font-medium text-2xl'>
                             {t("verify:loginSuccess")}
                         </h2>
                     ) : (
                         <div className='w-80 flex flex-col gap-4 rounded-lg p-4'>
-                            <h1 className='text-center leading-normal text-white font-medium text-3xl mb-6'>
+                            <h1 className='text-center leading-normal text-black font-medium text-3xl mb-6'>
                                 {t("verify:verifyPhoneNumber")}
                             </h1>
                             {showOTP ? (
                                 <>
-                                    <div className='bg-white text-orange-500 w-fit mx-auto p-4 rounded-full'>
+                                    <div className='bg-white text-[#B4CD93] w-fit mx-auto p-4 rounded-full'>
                                         <BsFillShieldLockFill size={30} />
                                     </div>
                                     <label
                                         htmlFor='otp'
-                                        className='font-bold text-xl text-white text-center'
+                                        className='font-bold text-xl text-black text-center'
                                     >
                                         {t("verify:enterOTP")}
                                     </label>
@@ -146,7 +147,7 @@ const PhoneVerify = () => {
                                     />
                                     <button
                                         onClick={onOTPVerify}
-                                        className='bg-[#FDA855] hover:bg-orange-500 w-full flex gap-1 items-center justify-center py-2.5 text-white rounded'
+                                        className='bg-[#B4CD93] hover:opacity-70 w-full flex gap-1 items-center justify-center py-2.5 text-black rounded'
                                     >
                                         {loading && (
                                             <CgSpinner
@@ -159,12 +160,12 @@ const PhoneVerify = () => {
                                 </>
                             ) : (
                                 <>
-                                    <div className='bg-white text-orange-500 w-fit mx-auto p-4 rounded-full'>
+                                    <div className='bg-white text-[#B4CD93] w-fit mx-auto p-4 rounded-full'>
                                         <BsTelephoneFill size={30} />
                                     </div>
                                     <label
                                         htmlFor=''
-                                        className='font-bold text-xl text-white text-center'
+                                        className='font-bold text-xl text-black text-center'
                                     >
                                         {t("verify:verifyPhoneNumberLabel")}
                                     </label>
@@ -173,10 +174,11 @@ const PhoneVerify = () => {
                                         value={pn}
                                         onChange={setPn}
                                         onKeyDown={handleKeyDown}
+                                        className='text-black'
                                     />
                                     <button
                                         onClick={onSignup}
-                                        className='bg-[#FDA855] ml-[5px] hover:bg-orange-700 w-full flex gap-1 items-center justify-center py-2.5 text-white rounded'
+                                        className='bg-[#B4CD93] ml-[5px] hover:opacity-70 w-full flex gap-1 items-center justify-center py-2.5 text-black rounded'
                                     >
                                         {loading && (
                                             <CgSpinner
