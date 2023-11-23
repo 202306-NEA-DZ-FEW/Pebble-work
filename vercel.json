@@ -1,0 +1,14 @@
+{
+    "builds": [
+        {
+            "src": "package.json",
+            "use": "@vercel/next"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/sitemap.xml",
+            "dest": "/.next/server/pages/api/sitemap.js"
+        }
+    ]
+}
