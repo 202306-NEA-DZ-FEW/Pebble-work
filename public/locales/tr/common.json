@@ -134,7 +134,9 @@
         "lifeOnLand": "Karada Yaşam",
         "peaceJustice": "Barış, Adalet ve Güçlü Kurumlar",
         "cleanWater": "Temiz Su ve sanitasyon",
-        "genderEquality": "Cinsiyet Eşitliği"
+        "genderEquality": "Cinsiyet Eşitliği",
+        "resetFilter": "Filtreyi Sıfırla",
+        "interests": "İlgi Alanları"
       },
       "location": {
         "location": "Konum",

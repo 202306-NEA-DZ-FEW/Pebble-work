@@ -133,7 +133,9 @@
         "lifeOnLand": "陆地生活",
         "peaceJustice": "和平、正义和强大的机构",
         "cleanWater": "清洁水源与卫生",
-        "genderEquality": "性别平等"
+        "genderEquality": "性别平等",
+        "resetFilter": "重置过滤器",
+        "interests": "兴趣"
       },
       "location": {
         "location": "位置",

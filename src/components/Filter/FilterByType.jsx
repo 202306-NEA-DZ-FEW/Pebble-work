@@ -108,7 +108,7 @@ const FilterByType = ({
                 }
             >
                 <button className='sm:hidden' onClick={handleInterestClick}>
-                    Interests
+                    {t("common:eventTypes:interests")}
                 </button>
 
                 {isInterestOpen && (
@@ -121,7 +121,7 @@ const FilterByType = ({
                             onClick={resetEvents}
                             className={`sm:bg-[#749D60] sm:block hidden hover:bg-[#B4CD93] sm:text-center flex lg:items-center sm:gap-0 gap-2 sm:justify-center lg:w-[281px] lg:h-[52px] sm:w-[149px] items-center sm:min-h-[50px] text-white font-[500] lg:text-[18px] lg:tracking-[0.10px] sm:text-[12px] sm:px-4 sm:py-2 rounded-lg`}
                         >
-                            Reset Filter
+                            {t("common:eventTypes:resetFilter")}
                         </button>
                         {types.map((type) => (
                             <button

@@ -133,7 +133,9 @@
         "lifeOnLand": "Leben auf dem Land",
         "peaceJustice": "Frieden, Gerechtigkeit und starke Institutionen",
         "cleanWater": "Sauberes Wasser und Sanitär",
-        "genderEquality": "Geschlechtergleichstellung"
+        "genderEquality": "Geschlechtergleichstellung",
+        "resetFilter": "Filter zurücksetzen",
+        "interests": "Interessen"
       },
       "location": {
         "location": "Ort",
