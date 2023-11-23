@@ -140,5 +140,8 @@
       "location": {
         "location": "位置",
         "cities": "城市"
-      }
+      },
+      "social": {
+        "volunteerTestimony": "从我们的志愿者那里听来"
+    }
 }

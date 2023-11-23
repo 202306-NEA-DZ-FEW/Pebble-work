@@ -141,5 +141,8 @@
       "location": {
         "location": "Konum",
         "cities": "Şehirler"
-      }
+      },
+      "social": {
+        "volunteerTestimony": "Gönüllülerimizden duyun"
+    }
 }

@@ -7,15 +7,16 @@ import {
     updateDoc,
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React, { useEffect, useState } from "react";
 
 import EventCreation from "@/components/Events/EventCreation";
 import PhoneVerify from "@/components/Events/PhoneVerify";
+import Modal from "@/components/Popup/Modal";
 
 import { auth, db, storage } from "@/util/firebase";
-import Modal from "@/components/Popup/Modal";
 
 const EventCreationPage = () => {
     const { t } = useTranslation();
@@ -318,12 +319,12 @@ const EventCreationPage = () => {
                                         {t("eventCreation:locationPlaceholder")}
                                     </p>
                                 )}
-                                <a
-                                    href='#'
+                                <Link
+                                    href='/guidelines'
                                     className='mt-2 underline text-md text-[#2E7EAA] hover:opacity-80 transition-opacity duration-[400ms] font-bold decoration-inherit'
                                 >
                                     {t("eventCreation:changeLocation")}
-                                </a>
+                                </Link>
                             </div>
                         </div>
                         <div className='my-3 flex flex-col items-center ml-3 flex-wrap sm:flex sm:flex-col  sm:ml-3 sm:items-center   md:flex md:flex-col md:ml-3 md:items-start lg:flex lg:flex-col lg:mt-3 lg:mx-0 lg:items-start '>

@@ -5,6 +5,7 @@
         "ourTeam": "Unser Team",
         "techStack": "Technologie-Stack",
         "techStackTitle": "Verwendete Technologien und Projekt struktur",
-        "techStackDescription": "Für das PebbleWork-Projekt haben wir Next.js, Firebase, DaisyUI und Tailwind CSS verwendet, um eine reaktionsfähige und interaktive Plattform zu erstellen. Next.js ermöglicht serverseitiges Rendern und nahtlose Routenführung, während Firebase die Benutzerauthentifizierung und Echtzeit-Datenspeicherung behandelt. DaisyUI und Tailwind CSS sorgen für ein visuell ansprechendes und modernes Design. Die Projektstruktur folgte modularen Komponenten für einfache Wartung und Skalierbarkeit. Gemeinsam schaffen diese Technologien eine benutzerfreundliche und ansprechende Erfahrung, damit Freiwillige sich vernetzen und eine positive Wirkung erzielen können."
+        "techStackDescription": "Für das PebbleWork-Projekt haben wir Next.js, Firebase, DaisyUI und Tailwind CSS verwendet, um eine reaktionsfähige und interaktive Plattform zu erstellen. Next.js ermöglicht serverseitiges Rendern und nahtlose Routenführung, während Firebase die Benutzerauthentifizierung und Echtzeit-Datenspeicherung behandelt. DaisyUI und Tailwind CSS sorgen für ein visuell ansprechendes und modernes Design. Die Projektstruktur folgte modularen Komponenten für einfache Wartung und Skalierbarkeit. Gemeinsam schaffen diese Technologien eine benutzerfreundliche und ansprechende Erfahrung, damit Freiwillige sich vernetzen und eine positive Wirkung erzielen können.",
+        "teamIntro": "Ein Team, das einen Unterschied machen soll; wir gedeihen darauf, gemeinsam Ideen in die Realität umzusetzen."
     }
 }

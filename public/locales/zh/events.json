@@ -3,6 +3,7 @@
     "eventsPage": "这是活动页面",
     "noEventsFound": "找不到该日期和地点的活动",
     "noEventsFoundForDate": "找不到该日期的活动",
+    "dates":"日期们",
     "noPermissionsMessage": "您没有访问此页面所需的权限。",
     "homepageButton": "首页",
     "avatars": "头像",

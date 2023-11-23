@@ -171,7 +171,7 @@ const SmallScreenEvents = () => {
                                 className='sm:hidden bg-[#749D60] rounded-lg px-7 py-2 text-white transition duration-300 ease-in-out hover:bg-opacity-70 font-[500]  h-15'
                                 onClick={handleCalendarClick}
                             >
-                                Dates
+                                {t("events:dates")}
                             </button>
                             {isCalendarOpen && (
                                 <div

@@ -140,5 +140,8 @@
       "location": {
         "location": "Ort",
         "cities": "Städte"
-      }
+      },
+      "social": {
+        "volunteerTestimony": "Hören Sie es von unseren Freiwilligen"
+    }
 }

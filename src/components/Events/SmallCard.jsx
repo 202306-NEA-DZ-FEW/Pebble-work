@@ -1,10 +1,13 @@
 import { CircularProgress } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const SmallCard = ({ eventId, title, type, image }) => {
     const [imageLoaded, setImageLoaded] = useState(false);
     const router = useRouter();
+    const { t } = useTranslation(); // Initialize useTranslation
+
     const handleReviewClick = () => {
         router.push(`/events/${eventId}`);
     };
@@ -40,7 +43,7 @@ const SmallCard = ({ eventId, title, type, image }) => {
                 className={`w-[250px] h-[30px] bg-[#2E7EAA] text-white text-[14px] rounded-b-[6px]`}
                 onClick={handleReviewClick}
             >
-                Review
+                {t("events:reviewButton")}
             </button>
         </div>
     );
