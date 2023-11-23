@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React, { useEffect, useState } from "react";
+import { GrStatusGood } from "react-icons/gr";
+import { TiDeleteOutline } from "react-icons/ti";
 
 import Loader from "@/components/Loader/Loader";
 import Modal from "@/components/Popup/Modal";
@@ -14,6 +16,8 @@ import Modal from "@/components/Popup/Modal";
 import { auth, db, storage } from "@/util/firebase";
 
 import PicturesLibrary from "./library";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
+import { reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
 
 const ProfilePage = () => {
     const { t } = useTranslation();
@@ -38,8 +42,12 @@ const ProfilePage = () => {
     const [editedSurname, setEditedSurname] = useState("");
     const [editedEmail, setEditedEmail] = useState("");
     const [editedLocation, setEditedLocation] = useState("");
-    const [newPassword, setNewPassword] = useState("");
+    const [CurrentPassword, setCurrentPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [isLengthValid, setIsLengthValid] = useState(false);
+    const [hasSpecialChars, setHasSpecialChars] = useState(false);
+    const [isSignUpDisabled, setIsSignUpDisabled] = useState(true);
 
     const EventTypes = [
         t("eventTypes.noPoverty"),
@@ -57,7 +65,9 @@ const ProfilePage = () => {
         t("common:eventTypes:lifeOnLand"),
         t("common:eventTypes:peaceJustice"),
     ];
-
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
     const handleSuccess = () => {
         setShowPopup(true);
     };
@@ -128,7 +138,6 @@ const ProfilePage = () => {
         await updateProfile(auth.currentUser, {
             displayName: `${nameDisplay} ${surnameDisplay}`,
         });
-        ///setIsSaved(true);
         setShowPopup(true);
         setModalContent(
             "Profile updated successfuly,you are being redirected to your profile"
@@ -141,14 +150,38 @@ const ProfilePage = () => {
         }, 3000);
     };
 
-    // handle Change Password Function
+    const handlePasswordChange = (e) => {
+        const newPassword = e.target.value;
+
+        setConfirmPassword(newPassword);
+        const minLength = 6;
+        const containsSpecialCharacter =
+            /[!@#$%^&*(),.?": '; = `{}|<>_ ~ \- +/ [\]]/;
+        const isValidLength = confirmPassword.length >= minLength;
+        const hasSpecialCharacter =
+            containsSpecialCharacter.test(confirmPassword);
+        setIsLengthValid(isValidLength);
+        setHasSpecialChars(hasSpecialCharacter);
+
+        const allConditionsMet = isLengthValid && hasSpecialChars;
+        setIsSignUpDisabled(!allConditionsMet);
+    };
 
     const handleChangePassword = async (e) => {
         e.preventDefault();
 
-        if (newPassword !== confirmPassword) {
+        const minLength = 6;
+        const containsSpecialCharacter =
+            /[!@#$%^&*(),.?": '; = `{}|<>_ ~ \- +/ [\]]/;
+        const isValidLength = confirmPassword.length >= minLength;
+        const hasSpecialCharacter =
+            containsSpecialCharacter.test(confirmPassword);
+
+        if (!isValidLength || !hasSpecialCharacter) {
             setShowPopup(true);
-            setModalContent("Passwords do not match. Please try again.");
+            setModalContent(
+                "Password must be at least 6 characters and contain special characters"
+            );
             setModalClassName(
                 "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
             );
@@ -158,11 +191,21 @@ const ProfilePage = () => {
             return;
         }
 
+        const auth = getAuth();
+        const user = auth.currentUser;
+
+        const credential = EmailAuthProvider.credential(
+            user.email,
+            CurrentPassword
+        );
+
         try {
             // Change the user's password
-            await updatePassword(auth.currentUser, newPassword);
+            await reauthenticateWithCredential(user, credential);
+            await updatePassword(user, confirmPassword);
+
             setShowPopup(true);
-            setModalContent("Your password has been successfully updated");
+            setModalContent("Password updated successfully");
             setModalClassName(
                 "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
             );
@@ -170,20 +213,25 @@ const ProfilePage = () => {
                 setShowPopup(false);
             }, 2000);
 
-            setNewPassword("");
             setConfirmPassword("");
         } catch (error) {
-            setShowPopup(true);
-            setModalContent("Error changing password. Please try again.");
+            if (error.code === "auth/weak-password") {
+                setShowPopup(true);
+                setModalContent("Password should be at least 6 characters");
+            } else {
+                setShowPopup(true);
+                setModalContent("Error changing password. Please try again.");
+            }
+
             setModalClassName(
                 "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
             );
+
             setTimeout(() => {
                 setShowPopup(false);
             }, 2000);
         }
     };
-
     /// handle Upload Profile Picture Function
 
     const handleUploadProfilePicture = async (e) => {
@@ -425,7 +473,7 @@ const ProfilePage = () => {
                 </form>
                 {/* Change Password */}
                 <div className='flex mt-6 justify-center'>
-                    <div className='md:w-[700px] sm:w-[500px] w-[250px] bg-[#B4CD93] h-[250px] sm:h-[200px] mb-4'>
+                    <div className='  md:w-[700px] sm:w-[500px] w-[250px] bg-[#B4CD93]  h-[300px] md:h-[260px] mb-4'>
                         <h3 className='font-bold mt-5 text-center md:text-2xl'>
                             {t("edit:changePassword")}
                         </h3>
@@ -433,32 +481,97 @@ const ProfilePage = () => {
                             onSubmit={handleChangePassword}
                             className='w-full flex gap-6 flex-col items-center justify-center'
                         >
-                            <div className='flex items-center sm:flex-row flex-col gap-3 w-full sm:justify-around sm:gap-14 sm:px-10'>
+                            <div className='flex items-center sm:flex-row flex-col gap-3 w-full sm:justify-around sm:gap-14 sm:px-10 relative'>
                                 <input
-                                    type='password'
-                                    placeholder='New Password'
-                                    value={newPassword}
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder='Current Password'
+                                    value={CurrentPassword}
                                     onChange={(e) =>
-                                        setNewPassword(e.target.value)
+                                        setCurrentPassword(e.target.value)
                                     }
-                                    className='w-[40vw] sm:w-[50vw] h-8 px-3 rounded md:h-10'
+                                    className='w-[40vw] md:w-[50vw]  sm:w-[30vw] h-8 px-3 rounded md:h-10'
                                     required
                                 />
+                                <div
+                                    className='absolute -bottom-1.5 right-1 m-4 cursor-pointer'
+                                    onClick={togglePasswordVisibility}
+                                >
+                                    {showPassword ? <BsEye /> : <BsEyeSlash />}
+                                </div>
                                 <input
-                                    type='password'
-                                    placeholder='Confirm Password'
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder='New Password'
                                     value={confirmPassword}
-                                    onChange={(e) =>
-                                        setConfirmPassword(e.target.value)
-                                    }
-                                    className='w-[40vw] sm:w-[50vw] h-8 px-3 rounded md:h-10'
+                                    onChange={(e) => {
+                                        setConfirmPassword(e.target.value);
+                                        handlePasswordChange(e);
+                                    }}
+                                    className='w-[40vw] md:w-[50vw]  sm:w-[30vw] h-8 px-3 rounded md:h-10'
                                     required
                                 />
                             </div>
-                            <div className='flex sm:flex-row sm:justify-evenly flex-col gap-3 w-[80px] sm:w-full'>
+                            <div>
+                                <span
+                                    style={{
+                                        color: isLengthValid
+                                            ? "green"
+                                            : "#FB923C",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        margin: "0",
+                                        padding: "0",
+                                        lineHeight: "0.05",
+                                        fontSize: "0.9rem",
+                                    }}
+                                >
+                                    {isLengthValid ? (
+                                        <GrStatusGood size={20} />
+                                    ) : (
+                                        <TiDeleteOutline size={20} />
+                                    )}
+                                    <span
+                                        style={{
+                                            marginLeft: "0.6rem",
+                                            marginRight: "-0.2rem",
+                                        }}
+                                    >
+                                        Password must be at least 6 characters
+                                    </span>
+                                </span>
+
+                                <span
+                                    style={{
+                                        color: hasSpecialChars
+                                            ? "green"
+                                            : "#FB923C",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        margin: "0",
+                                        padding: "0",
+                                        lineHeight: "0.05",
+                                        fontSize: "0.9rem",
+                                    }}
+                                >
+                                    {hasSpecialChars ? (
+                                        <GrStatusGood size={20} />
+                                    ) : (
+                                        <TiDeleteOutline size={20} />
+                                    )}
+                                    <span
+                                        style={{
+                                            marginLeft: "0.5rem",
+                                            marginRight: "-0.2rem",
+                                        }}
+                                    >
+                                        Password must contain special characters
+                                    </span>
+                                </span>
+                            </div>
+                            <div className='flex sm:flex-row sm:justify-evenly flex-col gap-3 w-[80px] md:w-full sm:w-[180px] mt-0 mb-12'>
                                 <button
                                     type='submit'
                                     className='bg-[#2E7EAA] text-center h-8 w-full md:w-32 text-xs text-white rounded shadow-md md:h-10 md:text-lg'
+                                    disabled={isSignUpDisabled}
                                 >
                                     {t("edit:submit")}
                                 </button>

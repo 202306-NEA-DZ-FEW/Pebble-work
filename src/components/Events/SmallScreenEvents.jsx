@@ -165,10 +165,10 @@ const SmallScreenEvents = () => {
                             ))}
                         </div>
                     </div>
-                    <div className='flex bg-white z-10 flex-row items-center justify-evenly text-black'>
+                    <div className='flex z-10 flex-row items-center justify-evenly text-black'>
                         <div>
                             <button
-                                className='sm:hidden'
+                                className='sm:hidden bg-[#749D60] rounded-lg px-7 py-2 text-white transition duration-300 ease-in-out hover:bg-opacity-70 font-[500]  h-15'
                                 onClick={handleCalendarClick}
                             >
                                 Dates
