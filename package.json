@@ -16,7 +16,7 @@
         "release": "standard-version",
         "push-release": "git push --follow-tags origin main",
         "postbuild": "next-sitemap",
-        "generate-sitemap": "node sitemap.js",
+        "generate-sitemap": "node next-sitemap.config.js",
         "prepare": "husky install"
     },
     "dependencies": {
