@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React, { useEffect, useState } from "react";
+import { GrStatusGood } from "react-icons/gr";
+import { TiDeleteOutline } from "react-icons/ti";
 
 import Loader from "@/components/Loader/Loader";
 import Modal from "@/components/Popup/Modal";
@@ -43,6 +45,9 @@ const ProfilePage = () => {
     const [CurrentPassword, setCurrentPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [isLengthValid, setIsLengthValid] = useState(false);
+    const [hasSpecialChars, setHasSpecialChars] = useState(false);
+    const [isSignUpDisabled, setIsSignUpDisabled] = useState(true);
 
     const EventTypes = [
         "No Poverty",
@@ -145,8 +150,26 @@ const ProfilePage = () => {
         }, 3000);
     };
 
+    const handlePasswordChange = (e) => {
+        const newPassword = e.target.value;
+
+        setConfirmPassword(newPassword);
+        const minLength = 6;
+        const containsSpecialCharacter =
+            /[!@#$%^&*(),.?": '; = `{}|<>_ ~ \- +/ [\]]/;
+        const isValidLength = confirmPassword.length >= minLength;
+        const hasSpecialCharacter =
+            containsSpecialCharacter.test(confirmPassword);
+        setIsLengthValid(isValidLength);
+        setHasSpecialChars(hasSpecialCharacter);
+
+        const allConditionsMet = isLengthValid && hasSpecialChars;
+        setIsSignUpDisabled(!allConditionsMet);
+    };
+
     const handleChangePassword = async (e) => {
         e.preventDefault();
+
         const minLength = 6;
         const containsSpecialCharacter =
             /[!@#$%^&*(),.?": '; = `{}|<>_ ~ \- +/ [\]]/;
@@ -452,7 +475,7 @@ const ProfilePage = () => {
                 </form>
                 {/* Change Password */}
                 <div className='flex mt-6 justify-center'>
-                    <div className='md:w-[700px] sm:w-[500px] w-[250px] bg-[#B4CD93] h-[250px] sm:h-[200px] mb-4'>
+                    <div className='  md:w-[700px] sm:w-[500px] w-[250px] bg-[#B4CD93] h-[250px] sm:h-[260px] mb-4'>
                         <h3 className='font-bold mt-5 text-center md:text-2xl'>
                             {t("edit:changePassword")}
                         </h3>
@@ -481,17 +504,76 @@ const ProfilePage = () => {
                                     type={showPassword ? "text" : "password"}
                                     placeholder='New Password'
                                     value={confirmPassword}
-                                    onChange={(e) =>
-                                        setConfirmPassword(e.target.value)
-                                    }
+                                    onChange={(e) => {
+                                        setConfirmPassword(e.target.value);
+                                        handlePasswordChange(e);
+                                    }}
                                     className='w-[40vw] sm:w-[50vw] h-8 px-3 rounded md:h-10'
                                     required
                                 />
                             </div>
-                            <div className='flex sm:flex-row sm:justify-evenly flex-col gap-3 w-[80px] sm:w-full'>
+                            <div>
+                                <span
+                                    style={{
+                                        color: isLengthValid
+                                            ? "green"
+                                            : "#FB923C",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        margin: "0",
+                                        padding: "0",
+                                        lineHeight: "0.05",
+                                        fontSize: "0.9rem",
+                                    }}
+                                >
+                                    {isLengthValid ? (
+                                        <GrStatusGood size={20} />
+                                    ) : (
+                                        <TiDeleteOutline size={20} />
+                                    )}
+                                    <span
+                                        style={{
+                                            marginLeft: "0.5rem",
+                                            marginRight: "-0.2rem",
+                                        }}
+                                    >
+                                        Password must be at least 6 characters
+                                    </span>
+                                </span>
+
+                                <span
+                                    style={{
+                                        color: hasSpecialChars
+                                            ? "green"
+                                            : "#FB923C",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        margin: "0",
+                                        padding: "0",
+                                        lineHeight: "0.05",
+                                        fontSize: "0.9rem",
+                                    }}
+                                >
+                                    {hasSpecialChars ? (
+                                        <GrStatusGood size={20} />
+                                    ) : (
+                                        <TiDeleteOutline size={20} />
+                                    )}
+                                    <span
+                                        style={{
+                                            marginLeft: "0.5rem",
+                                            marginRight: "-0.2rem",
+                                        }}
+                                    >
+                                        Password must contain special characters
+                                    </span>
+                                </span>
+                            </div>
+                            <div className='flex sm:flex-row sm:justify-evenly flex-col gap-3 w-[80px] sm:w-full mt-0 mb-12'>
                                 <button
                                     type='submit'
                                     className='bg-[#2E7EAA] text-center h-8 w-full md:w-32 text-xs text-white rounded shadow-md md:h-10 md:text-lg'
+                                    disabled={isSignUpDisabled}
                                 >
                                     {t("edit:Submit")}
                                 </button>
