@@ -80,9 +80,17 @@ const EventCreationPage = () => {
         });
     };
     const addAndGoToEvent = async () => {
-        if (!input.location || !input.type || !input.title || !input.date) {
-            // Check if required fields are empty
-            alert("Please fill in all required fields.");
+        if (
+            !input.location ||
+            !input.type ||
+            !input.title ||
+            !input.date ||
+            input.description.length < 100
+        ) {
+            // Check if required fields are empty or description is less than 100 characters
+            alert(
+                "Please fill in all required fields and ensure the description has at least 100 characters."
+            );
             return;
         }
 

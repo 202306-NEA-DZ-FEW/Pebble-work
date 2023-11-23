@@ -94,8 +94,10 @@ const Language = () => {
                 </button>
                 <div
                     className={`z-50 ${
-                        isDropdownOpen ? "block" : "hidden"
-                    } text-base list-none divide-y divide-gray-100 fixed bottom-10 left-6 rounded-[4px] shadow bg-transparent`}
+                        isDropdownOpen
+                            ? "translate-y-0 opacity-100"
+                            : "translate-y-[200px] opacity-0"
+                    } text-base list-none divide-y transform transition-all duration-700 divide-gray-100 fixed bottom-10 left-6 rounded-[4px] shadow bg-transparent`}
                     id='language-dropdown-menu'
                 >
                     <ul
@@ -106,7 +108,7 @@ const Language = () => {
                             <button
                                 onTouchStart={() => changeLanguage("en")}
                                 onClick={() => changeLanguage("en")}
-                                className='block text-sm text-gray-700 hover:border hover:rounded-sm w-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
+                                className='block text-sm text-black hover:border hover:rounded-sm w-full dark:text-black dark:hover:bg-gray-600 dark:hover:text-white'
                             >
                                 <div className='inline-flex w-full items-center'>
                                     <img
@@ -123,7 +125,7 @@ const Language = () => {
                             <button
                                 onTouchStart={() => changeLanguage("tr")}
                                 onClick={() => changeLanguage("tr")}
-                                className='block text-sm text-gray-700 hover:border hover:rounded-sm w-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
+                                className='block text-sm text-black hover:border hover:rounded-sm w-full dark:text-black dark:hover:bg-gray-600 dark:hover:text-white'
                             >
                                 <div className='inline-flex w-full items-center'>
                                     <img
@@ -140,7 +142,7 @@ const Language = () => {
                             <button
                                 onTouchStart={() => changeLanguage("de")}
                                 onClick={() => changeLanguage("de")}
-                                className='block text-sm text-gray-700 hover:border hover:rounded-sm w-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
+                                className='block text-sm text-black hover:border hover:rounded-sm w-full dark:text-black dark:hover:bg-gray-600 dark:hover:text-white'
                             >
                                 <div className='inline-flex w-full items-center'>
                                     <img
@@ -158,7 +160,7 @@ const Language = () => {
                             <button
                                 onTouchStart={() => changeLanguage("zh")}
                                 onClick={() => changeLanguage("zh")}
-                                className='block text-sm text-gray-700 hover:border hover:rounded-sm w-full dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'
+                                className='block text-sm text-black hover:border hover:rounded-sm w-full dark:text-black dark:hover:bg-gray-600 dark:hover:text-white'
                             >
                                 <div className='inline-flex w-full items-center'>
                                     <img

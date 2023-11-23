@@ -1,9 +1,10 @@
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { db, auth } from "../../util/firebase";
-import { doc, onSnapshot, getDoc } from "firebase/firestore";
-import Chat from "./Chat";
 
-const ChatDisplay = () => {
+import Chat from "./Chat";
+import { auth, db } from "../../util/firebase";
+
+const ChatDisplay = ({ onNewMessage }) => {
     const [messages, setMessages] = useState([]);
     const [currentTime, setCurrentTime] = useState(new Date().getTime());
     const getUserName = async (uid) => {
@@ -30,12 +31,16 @@ const ChatDisplay = () => {
                 message.userName = await getUserName(message.uid);
             }
 
+            // Check if there are new messages
+            if (validMessages.length > messages.length) {
+                onNewMessage(); // call the callback when a new message arrives
+            }
+
             setMessages(validMessages);
         });
 
-        // Clean up the listener when the component unmounts
         return () => unsubscribe();
-    }, [currentTime]);
+    }, [currentTime, messages.length]);
 
     // Update the current time every second
     useEffect(() => {
@@ -49,7 +54,7 @@ const ChatDisplay = () => {
 
     return (
         <>
-            <div className='flex justify-center max-h-full w-full overflow-y-scroll'>
+            <div className='flex relative pl-2 justify-center max-h-full w-full scrollBar overflow-y-scroll'>
                 <div className='w-full'>
                     {messages.map((message, i) => {
                         // Calculate the age of the message in seconds

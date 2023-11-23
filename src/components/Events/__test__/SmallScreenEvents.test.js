@@ -1,7 +1,7 @@
+import { cleanup, render } from "@testing-library/react";
 import React from "react";
 
 import SmallScreenEvents from "../SmallScreenEvents";
-import { render, cleanup } from "@testing-library/react";
 afterEach(cleanup);
 describe("SmallScreenEvents", () => {
     it("renders correctly", () => {
