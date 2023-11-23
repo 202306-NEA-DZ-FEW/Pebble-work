@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { AiOutlineClose } from "react-icons/ai";
+import { RxEyeClosed } from "react-icons/rx";
 
 import styles from "@/styles/Events.module.css";
 
@@ -11,8 +11,6 @@ import FirestoreLocation from "@/components/Filter/FirestoreLocation";
 import { usePagination } from "@/components/Pagination/Pagination";
 
 const SmallScreenEvents = () => {
-    // State variables
-
     const [selectedTypes, setSelectedTypes] = useState([]);
     const [inputValue1, setInputValue1] = useState("");
     const [isCalendarOpen, setCalendarOpen] = useState(false);
@@ -170,7 +168,7 @@ const SmallScreenEvents = () => {
                     <div className='flex bg-white z-10 flex-row items-center justify-evenly text-black'>
                         <div>
                             <button
-                                className='sm:hidden'
+                                className='sm:hidden bg-[#2E7EAA] rounded-lg px-7 py-2 text-white transition duration-300 ease-in-out hover:bg-blue-700 font-[500]  h-15'
                                 onClick={handleCalendarClick}
                             >
                                 Dates
@@ -194,7 +192,7 @@ const SmallScreenEvents = () => {
                                         className='mb-3 rounded-[8px]'
                                         onClick={() => setCalendarOpen(false)}
                                     >
-                                        <AiOutlineClose size={20} />
+                                        <RxEyeClosed size={20} />
                                     </button>
                                     <Calendar
                                         resetDays={resetDays}
