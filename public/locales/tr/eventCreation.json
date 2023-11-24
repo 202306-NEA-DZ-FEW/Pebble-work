@@ -34,5 +34,7 @@
     "day": "Gün",
     "proceedQuestion": "Devam etmek istiyor musunuz?",
     "createEvent": "Etkinlik Oluştur",
-    "return": "Geri Dön"
+    "return": "Geri Dön",
+    "chooseTitlePlaceholder": "Bir başlık seçin",
+    "writeAtLeast100CharactersPlaceholder": "Lütfen en az 100 karakter yazın"
 }

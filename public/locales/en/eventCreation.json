@@ -34,5 +34,9 @@
     "day": "Day",
     "proceedQuestion": "Do you wish to proceed?",
     "createEvent": "Create event",
-    "return": "Return"
+    "return": "Return",
+    "chooseTitlePlaceholder": "Choose a title",
+    "writeAtLeast100CharactersPlaceholder": "Please write 100 characters at least"
+
+
 }

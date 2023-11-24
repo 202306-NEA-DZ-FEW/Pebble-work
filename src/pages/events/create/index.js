@@ -232,7 +232,9 @@ const EventCreationPage = () => {
                                         id='location'
                                         value={input.location}
                                         onChange={handleInputChange}
-                                        placeholder='Set Location'
+                                        placeholder={t(
+                                            "eventCreation:setLocation"
+                                        )}
                                         className='p-1  mt-4  rounded-md focus:outline-2 outline outline-1 w-2/4'
                                         style={{
                                             borderRadius: "8px",
@@ -403,7 +405,9 @@ const EventCreationPage = () => {
                                     id='title'
                                     value={input.title}
                                     onChange={handleInputChange}
-                                    placeholder='Choose a title'
+                                    placeholder={t(
+                                        "eventCreation:chooseTitlePlaceholder"
+                                    )}
                                     className={`p-1 font-semibold  mt-4 w-96 rounded-md focus:outline-2 outline outline-1 ${
                                         !input.title && "required"
                                     } `}
@@ -426,7 +430,9 @@ const EventCreationPage = () => {
                                     id='description'
                                     value={input.description}
                                     onChange={handleInputChange}
-                                    placeholder='  Please write 100 characters at least'
+                                    placeholder={t(
+                                        "eventCreation:writeAtLeast100CharactersPlaceholder"
+                                    )}
                                     className='outline outline-1 mt-2 h-40 rounded w-7/12 font-semibold '
                                 ></textarea>
                             </form>
