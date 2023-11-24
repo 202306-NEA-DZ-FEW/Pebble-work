@@ -484,7 +484,7 @@ const ProfilePage = () => {
                             <div className='flex items-center sm:flex-row flex-col gap-3 w-full sm:justify-around sm:gap-14 sm:px-10 relative'>
                                 <input
                                     type={showPassword ? "text" : "password"}
-                                    placeholder='Current Password'
+                                    placeholder={t("edit:currentPassword")}
                                     value={CurrentPassword}
                                     onChange={(e) =>
                                         setCurrentPassword(e.target.value)
@@ -500,7 +500,7 @@ const ProfilePage = () => {
                                 </div>
                                 <input
                                     type={showPassword ? "text" : "password"}
-                                    placeholder='New Password'
+                                    placeholder={t("edit:newPassword")}
                                     value={confirmPassword}
                                     onChange={(e) => {
                                         setConfirmPassword(e.target.value);
@@ -535,7 +535,7 @@ const ProfilePage = () => {
                                             marginRight: "-0.2rem",
                                         }}
                                     >
-                                        Password must be at least 6 characters
+                                        {t("edit:passwordLengthRequirement")}
                                     </span>
                                 </span>
 
@@ -563,7 +563,9 @@ const ProfilePage = () => {
                                             marginRight: "-0.2rem",
                                         }}
                                     >
-                                        Password must contain special characters
+                                        {t(
+                                            "edit:passwordSpecialCharacterRequirement"
+                                        )}
                                     </span>
                                 </span>
                             </div>

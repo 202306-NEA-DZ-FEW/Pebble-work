@@ -9,6 +9,11 @@
     "interests": "兴趣",
     "saveChanges": "保存更改",
     "changePassword": "修改密码",
+    "currentPassword": "当前密码",
+    "newPassword": "新密码",
     "submit": "提交",
-    "cancel": "取消"
+    "cancel": "取消",
+    "passwordLengthRequirement": "密码至少为6个字符",
+    "passwordSpecialCharacterRequirement": "密码必须包含特殊字符"
+
 }

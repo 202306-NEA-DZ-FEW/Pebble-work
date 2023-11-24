@@ -9,6 +9,11 @@
     "interests": "Interessen",
     "saveChanges": "Änderungen speichern",
     "changePassword": "Passwort ändern",
+    "currentPassword": "Aktuelles Passwort",
+    "newPassword": "Neues Passwort",
     "submit": "Absenden",
-    "cancel": "Abbrechen"
+    "cancel": "Abbrechen",
+    "passwordLengthRequirement": "Passwort muss mindestens 6 Zeichen lang sein",
+    "passwordSpecialCharacterRequirement": "Passwort muss Sonderzeichen enthalten"
+
 }
