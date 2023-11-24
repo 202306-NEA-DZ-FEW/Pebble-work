@@ -34,5 +34,7 @@
     "day": "日期",
     "proceedQuestion": "您想要继续吗？",
     "createEvent": "创建活动",
-    "return": "返回"
+    "return": "返回",
+    "chooseTitlePlaceholder": "选择标题",
+    "writeAtLeast100CharactersPlaceholder": "请至少写100个字符"
 }

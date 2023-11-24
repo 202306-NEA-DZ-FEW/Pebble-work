@@ -2,13 +2,17 @@
     "editProfile": "Profili Düzenle",
     "uploadNew": "Yeni Yükle",
     "chooseFromLibrary": "Kütüphaneden Seç",
-    "nameRequired": "Ad (Gerekli)",
-    "surnameRequired": "Soyad (Gerekli)",
-    "emailRequired": "E-posta (Gerekli)",
-    "locationRequired": "Konum (Gerekli)",
+    "name": "Ad ",
+    "surname": "Soyad ",
+    "email": "E-posta ",
+    "location": "Konum ",
     "interests": "İlgi Alanları",
     "saveChanges": "Değişiklikleri Kaydet",
     "changePassword": "Şifre Değiştir",
+    "currentPassword": "Mevcut Şifre",
+    "newPassword": "Yeni Şifre",
     "submit": "Gönder",
-    "cancel": "İptal"
+    "cancel": "İptal",
+    "passwordLengthRequirement": "Şifre en az 6 karakter olmalıdır",
+    "passwordSpecialCharacterRequirement": "Şifre özel karakter içermelidir"
 }

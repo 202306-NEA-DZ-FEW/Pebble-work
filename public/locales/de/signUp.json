@@ -9,5 +9,9 @@
     "alphabetInvalid": "Das Passwort muss Buchstaben enthalten",
     "haveAccount": "Noch kein Konto?",
     "signIn": "Anmelden",
-    "signUp": "Registrieren"
+    "signUp": "Registrieren",
+    "placeholderName": "Name",
+    "placeholderSurename": "Nachname",
+    "placeholderEmail": "E-Mail-Addresse",
+    "placeholderPassword": "Ihr Passwort"
 }

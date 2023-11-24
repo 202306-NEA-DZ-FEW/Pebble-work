@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import React, { useEffect, useRef, useState } from "react";
 
 import styles from "@/styles/Events.module.css";
@@ -10,6 +11,7 @@ const FilterByType = ({
 }) => {
     const dropdownRef = useRef(null);
     const [isInterestOpen, setInterestOpen] = useState(false);
+    const { t } = useTranslation();
 
     // Handle click outside the dropdown to close it
     const handleClickOutside = (event) => {
@@ -78,22 +80,22 @@ const FilterByType = ({
     }, [selectedTypes]);
 
     const types = [
-        "Affordable and Clean Energy",
-        "Clean Water and Sanitation",
-        "Climate Action",
-        "Decent Work and Economic Growth",
-        "Gender Equality",
-        "Good Health and Well Being",
-        "Industry, Innovation and Infrastructure",
-        "Life Below Water",
-        "Life on Land",
-        "No Poverty",
-        "Peace, Justice and Strong Institutions",
-        "Quality Education",
-        "Reduced Inequalities",
-        "Responsible Consumption/Production",
-        "Sustainable Cities and Communities",
-        "Zero Hunger",
+        t("common:eventTypes:cleanEnergy"),
+        t("common:eventTypes:cleanWater"),
+        t("common:eventTypes:climateAction"),
+        t("common:eventTypes:decentWork"),
+        t("common:eventTypes:genderEquality"),
+        t("common:eventTypes:goodHealth"),
+        t("common:eventTypes:innovationInfrastructure"),
+        t("common:eventTypes:lifeBelowWater"),
+        t("common:eventTypes:lifeOnLand"),
+        t("eventTypes.noPoverty"),
+        t("common:eventTypes:peaceJustice"),
+        t("common:eventTypes:qualityEducation"),
+        t("common:eventTypes:reducedInequalities"),
+        t("common:eventTypes:responsibleConsumption"),
+        t("common:eventTypes:sustainableCities"),
+        t("common:eventTypes:zeroHunger"),
     ];
 
     return (
@@ -109,7 +111,7 @@ const FilterByType = ({
                     className='sm:hidden bg-[#749D60] rounded-lg px-3 py-2 text-white  font-[500] transition duration-300 ease-in-out hover:bg-opacity-70 w-30 h-15'
                     onClick={handleInterestClick}
                 >
-                    Interests
+                    {t("common:eventTypes:interests")}
                 </button>
 
                 {isInterestOpen && (
@@ -122,7 +124,7 @@ const FilterByType = ({
                             onClick={resetEvents}
                             className={`sm:bg-[#749D60] sm:block hidden hover:bg-[#B4CD93] sm:text-center flex lg:items-center sm:gap-0 gap-2 sm:justify-center lg:w-[281px] lg:h-[52px] sm:w-[149px] items-center sm:min-h-[50px] text-white font-[500] lg:text-[18px] lg:tracking-[0.10px] sm:text-[12px] sm:px-4 sm:py-2 rounded-lg`}
                         >
-                            Reset Filter
+                            {t("common:eventTypes:resetFilter")}
                         </button>
                         {types.map((type) => (
                             <button

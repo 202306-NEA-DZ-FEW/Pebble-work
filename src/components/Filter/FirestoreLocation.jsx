@@ -1,12 +1,14 @@
 import { doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import { useTranslation } from "react-i18next";
 
 import styles from "@/styles/Events.module.css";
 
 import { db } from "@/util/firebase";
 
 function FirestoreLocation({ onInputChange }) {
+    const { t } = useTranslation();
     const [filteredLocations, setFilteredLocations] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [locationsArray, setLocationsArray] = useState([]);
@@ -52,7 +54,7 @@ function FirestoreLocation({ onInputChange }) {
                     document.getElementById("my_modal_1").showModal()
                 }
             >
-                Location
+                {t("common:location:location")}
             </button>
             <dialog id='my_modal_1' className='modal rounded-tr rounded-br'>
                 <div className='modal-box text-slate-200 bg-[#2E7EAA]'>
@@ -65,7 +67,9 @@ function FirestoreLocation({ onInputChange }) {
                             className='mt-2 p-2 border bg-[#2E7EAA] rounded'
                         />
                     </div>
-                    <h3 className='font-bold text-lg mb-0'>cities </h3>
+                    <h3 className='font-bold text-lg mb-0'>
+                        {t("common:location:cities")}{" "}
+                    </h3>
                     <div className=' mt-2'>
                         <ul
                             className={`list-none ${styles.information} h-[200px]`}

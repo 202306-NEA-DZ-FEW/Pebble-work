@@ -2,13 +2,17 @@
     "editProfile": "编辑个人资料",
     "uploadNew": "上传新照片",
     "chooseFromLibrary": "从图库选择",
-    "nameRequired": "姓名 (必填)",
-    "surnameRequired": "姓氏 (必填)",
-    "emailRequired": "电子邮件 (必填)",
-    "locationRequired": "地址 (必填)",
+    "name": "姓名 ",
+    "surname": "姓氏 ",
+    "email": "电子邮件 ",
+    "location": "地址 ",
     "interests": "兴趣",
     "saveChanges": "保存更改",
     "changePassword": "修改密码",
+    "currentPassword": "当前密码",
+    "newPassword": "新密码",
     "submit": "提交",
-    "cancel": "取消"
+    "cancel": "取消",
+    "passwordLengthRequirement": "密码至少为6个字符",
+    "passwordSpecialCharacterRequirement": "密码必须包含特殊字符"
 }

@@ -50,20 +50,20 @@ const ProfilePage = () => {
     const [isSignUpDisabled, setIsSignUpDisabled] = useState(true);
 
     const EventTypes = [
-        "No Poverty",
-        "Zero Hunger",
-        "Good Health and Well-being",
-        "Quality Education",
-        "Affordable and Clean Energy",
-        "Decent Work and Economic Growth",
-        "Industry, Innovation, and Infrastructurey",
-        "Reduced Inequalities",
-        "Sustainable Cities and Communities",
-        "Responsible Consumption/Production",
-        "Climate Action",
-        "Life Below Water",
-        "Life on Land",
-        "Peace, Justice and Strong Institutions",
+        t("eventTypes.noPoverty"),
+        t("common:eventTypes:zeroHunger"),
+        t("common:eventTypes:goodHealth"),
+        t("common:eventTypes:qualityEducation"),
+        t("common:eventTypes:cleanEnergy"),
+        t("common:eventTypes:decentWork"),
+        t("common:eventTypes:innovationInfrastructure"),
+        t("common:eventTypes:reducedInequalities"),
+        t("common:eventTypes:responsibleConsumption"),
+        t("common:eventTypes:sustainableCities"),
+        t("common:eventTypes:climateAction"),
+        t("common:eventTypes:lifeBelowWater"),
+        t("common:eventTypes:lifeOnLand"),
+        t("common:eventTypes:peaceJustice"),
     ];
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -419,32 +419,32 @@ const ProfilePage = () => {
                     <div className='flex flex-col items-center mt-4 md:flex-row md:justify-around md:gap-x-5'>
                         <div className='w-[100 px] text-center'>
                             <h3 className='font-semibold text-lg text-gray-600'>
-                                {t("edit:Name")}:
+                                {t("edit:name")}:
                             </h3>
                             <p className='mt-2 mb-4'>{currentUser.Name}</p>
                         </div>
                         <div className='w-[100 px] text-center'>
                             <h3 className='font-semibold text-lg text-gray-600'>
-                                {t("edit:Surname")}:
+                                {t("edit:surname")}:
                             </h3>
                             <p className='mt-2 mb-4'>{currentUser.Surename}</p>
                         </div>
                         <div className='w-[100 px] text-center'>
                             <h3 className='font-semibold text-lg text-gray-600'>
-                                {t("edit:Email")}:
+                                {t("edit:email")}:
                             </h3>
                             <p className='mt-2 mb-4'>{currentUser.email}</p>
                         </div>
                         <div className='w-[100 px] text-center '>
                             <h3 className='font-semibold text-lg text-gray-600'>
-                                {t("edit:Location")}:
+                                {t("edit:location")}:
                             </h3>
                             <p className='mt-2 mb-4'>{currentUser.Location}</p>
                         </div>
                     </div>
                     {/* Your Interests */}
                     <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
-                        {t("edit:Interests")}
+                        {t("edit:interests")}
                     </h3>
                     <div className='grid grid-container grid-cols-1 gap-8 -ml-15 mt-3 text-center justify-evenly sm:grid-cols-2 sm:gap-4 md:grid-cols-3 text-xs md:w-full md:h-auto md:mt-8 md:text-3xl'>
                         {EventTypes.map((type, index) => (
@@ -484,7 +484,7 @@ const ProfilePage = () => {
                             <div className='flex items-center sm:flex-row flex-col gap-3 w-full sm:justify-around sm:gap-14 sm:px-10 relative'>
                                 <input
                                     type={showPassword ? "text" : "password"}
-                                    placeholder='Current Password'
+                                    placeholder={t("edit:currentPassword")}
                                     value={CurrentPassword}
                                     onChange={(e) =>
                                         setCurrentPassword(e.target.value)
@@ -500,7 +500,7 @@ const ProfilePage = () => {
                                 </div>
                                 <input
                                     type={showPassword ? "text" : "password"}
-                                    placeholder='New Password'
+                                    placeholder={t("edit:newPassword")}
                                     value={confirmPassword}
                                     onChange={(e) => {
                                         setConfirmPassword(e.target.value);
@@ -535,7 +535,7 @@ const ProfilePage = () => {
                                             marginRight: "-0.2rem",
                                         }}
                                     >
-                                        Password must be at least 6 characters
+                                        {t("edit:passwordLengthRequirement")}
                                     </span>
                                 </span>
 
@@ -563,7 +563,9 @@ const ProfilePage = () => {
                                             marginRight: "-0.2rem",
                                         }}
                                     >
-                                        Password must contain special characters
+                                        {t(
+                                            "edit:passwordSpecialCharacterRequirement"
+                                        )}
                                     </span>
                                 </span>
                             </div>
@@ -573,10 +575,10 @@ const ProfilePage = () => {
                                     className='bg-[#2E7EAA] text-center h-8 w-full md:w-32 text-xs text-white rounded shadow-md md:h-10 md:text-lg'
                                     disabled={isSignUpDisabled}
                                 >
-                                    {t("edit:Submit")}
+                                    {t("edit:submit")}
                                 </button>
                                 <button className='text-center h-8 w-full bg-white opacity-70 md:w-32 text-xs outline outline-1 rounded shadow-md md:h-10 md:text-lg'>
-                                    {t("edit:Cancel")}
+                                    {t("edit:cancel")}
                                 </button>
                             </div>
                         </form>

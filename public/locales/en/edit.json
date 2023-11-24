@@ -2,13 +2,17 @@
     "editProfile": "Edit Profile",
     "uploadNew": "Upload New",
     "chooseFromLibrary": "Choose from Library",
-    "nameRequired": "Name (Required)",
-    "surnameRequired": "Surname (Required)",
-    "emailRequired": "Email (Required)",
-    "locationRequired": "Location (Required)",
+    "name": "Name ",
+    "surname": "Surname ",
+    "email": "Email ",
+    "location": "Location ",
     "interests": "Interests",
     "saveChanges": "Save changes",
     "changePassword": "Change Password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
     "submit": "Submit",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "passwordLengthRequirement": "Password must be at least 6 characters",
+    "passwordSpecialCharacterRequirement": "Password must contain special characters"
 }

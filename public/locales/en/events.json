@@ -3,6 +3,7 @@
     "eventsPage": "This is the events page",
     "noEventsFound": "No events found for this date and location",
     "noEventsFoundForDate": "No events found for this date",
+    "dates": "Dates",
     "noPermissionsMessage": "You don't have the necessary permissions to access this page.",
     "homepageButton": "Homepage",
     "avatars": "Avatars",

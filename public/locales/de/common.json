@@ -28,11 +28,11 @@
     },
     "heroCard": {
         "title": "Werde die Veränderung, die du in der Welt sehen möchtest.",
-        "description": "Nicht nur wirst du einen bedeutsamen Einfluss haben, sondern auch eine blühende, gleichgesinnte Gemeinschaft finden, die unsere Mission unterstützt, eine bessere Welt zu schaffen. Mach den ersten Schritt jetzt.",
-        "link": " ",
-        "description2": " ",
+        "description": "Nicht nur wirst du eine bedeutsame Wirkung erzielen, sondern du wirst auch eine blühende, gleichgesinnte Gemeinschaft finden, die unsere Mission unterstützt, eine bessere Welt zu schaffen. Mach den ersten Schritt jetzt. Um dein Erlebnis zu verbessern, freuen wir uns, Student Store vorzustellen – eine innovative algerische Plattform, auf der Studenten gebrauchte Besitztümer verkaufen, kaufen und tauschen. Deine Wirkung kann über Grenzen hinausgehen und zu dieser Bewegung der Unterstützung und positiven Veränderung beitragen. Folge dem ",
+        "link": "Link ",
+        "description2": "und entdecke eine Welt voller Möglichkeiten, in der jeder die Mittel hat, auf das zuzugreifen, was er braucht.",
         "getStarted": "Loslegen",
-        "whoWeAre": "Wer sind wir"
+        "whoWeAre": "Wer wir sind"
     },
     "homeCards": {
         "howItWorks": "Wie es funktioniert",
@@ -116,5 +116,32 @@
         "warningLeave": "Sie sind dabei, diese Veranstaltung zu verlassen.",
         "proceed": "Möchten Sie wirklich fortfahren?",
         "leave": "Verlassen"
+    },
+    "eventTypes": {
+        "noPoverty": "Keine Armut",
+        "zeroHunger": "Null Hunger",
+        "goodHealth": "Gesundheit und Wohlbefinden",
+        "qualityEducation": "Hochwertige Bildung",
+        "cleanEnergy": "Bezahlbare und saubere Energie",
+        "decentWork": "Anständige Arbeit und Wirtschaftswachstum",
+        "innovationInfrastructure": "Industrie, Innovation und Infrastruktur",
+        "reducedInequalities": "Verringerte Ungleichheiten",
+        "responsibleConsumption": "Verantwortungsvoller Konsum/Produktion",
+        "sustainableCities": "Nachhaltige Städte und Gemeinden",
+        "climateAction": "Maßnahmen zum Klimawandel",
+        "lifeBelowWater": "Leben unter Wasser",
+        "lifeOnLand": "Leben auf dem Land",
+        "peaceJustice": "Frieden, Gerechtigkeit und starke Institutionen",
+        "cleanWater": "Sauberes Wasser und Sanitär",
+        "genderEquality": "Geschlechtergleichstellung",
+        "resetFilter": "Filter zurücksetzen",
+        "interests": "Interessen"
+    },
+    "location": {
+        "location": "Ort",
+        "cities": "Städte"
+    },
+    "social": {
+        "volunteerTestimony": "Hören Sie es von unseren Freiwilligen"
     }
 }

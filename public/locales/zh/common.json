@@ -27,10 +27,10 @@
         "hostEventButtonText": "开始"
     },
     "heroCard": {
-        "title": "成为你希望在世界上看到的变化。",
-        "description": "你不仅将产生深远的影响，还将找到一个蓬勃发展的、志同道合的社群，支持我们创建一个更美好世界的使命。现在迈出第一步。",
-        "link": " ",
-        "description2": " ",
+        "title": "成为你想在世界上看到的改变。",
+        "description": "你不仅将产生深远的影响，还将发现一个蓬勃发展的、志同道合的社区，支持我们创造一个更美好的世界的使命。现在就迈出第一步。为了提升你的体验，我们很高兴介绍学生商店——这是一个创新的阿尔及利亚平台，学生可以在这里出售、购买和交换二手物品。你的影响可以超越国界，为这场支持和积极变革的运动做出贡献。关注",
+        "link": "链接 ",
+        "description2": "并发现一个充满可能性的世界，每个人都有能力获取他们所需的东西。",
         "getStarted": "开始",
         "whoWeAre": "我们是谁"
     },
@@ -116,5 +116,32 @@
         "warningLeave": "您即将离开此活动。",
         "proceed": "确定要继续吗？",
         "leave": "离开"
+    },
+    "eventTypes": {
+        "noPoverty": "消除贫困",
+        "zeroHunger": "零饥饿",
+        "goodHealth": "健康和福祉",
+        "qualityEducation": "优质教育",
+        "cleanEnergy": "负担得起的清洁能源",
+        "decentWork": "体面的工作和经济增长",
+        "innovationInfrastructure": "工业、创新和基础设施",
+        "reducedInequalities": "减少不平等",
+        "responsibleConsumption": "负责任的消费/生产",
+        "sustainableCities": "可持续的城市和社区",
+        "climateAction": "气候行动",
+        "lifeBelowWater": "水下生活",
+        "lifeOnLand": "陆地生活",
+        "peaceJustice": "和平、正义和强大的机构",
+        "cleanWater": "清洁水源与卫生",
+        "genderEquality": "性别平等",
+        "resetFilter": "重置过滤器",
+        "interests": "兴趣"
+    },
+    "location": {
+        "location": "位置",
+        "cities": "城市"
+    },
+    "social": {
+        "volunteerTestimony": "从我们的志愿者那里听来"
     }
 }

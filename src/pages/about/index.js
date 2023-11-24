@@ -125,10 +125,7 @@ const AboutPage = () => {
                     >
                         {t("about:about:ourTeam")}
                     </h2>
-                    <p className='text-center'>
-                        A team that is meant to make a difference, we thrive on
-                        working together to turn ideas into reality.
-                    </p>
+                    <p className='text-center'>{t("about:about:teamIntro")}</p>
                     <Members
                         members={members}
                         scrollContainerRef={scrollContainerRef}

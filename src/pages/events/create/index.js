@@ -7,15 +7,16 @@ import {
     updateDoc,
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React, { useEffect, useState } from "react";
 
 import EventCreation from "@/components/Events/EventCreation";
 import PhoneVerify from "@/components/Events/PhoneVerify";
+import Modal from "@/components/Popup/Modal";
 
 import { auth, db, storage } from "@/util/firebase";
-import Modal from "@/components/Popup/Modal";
 
 const EventCreationPage = () => {
     const { t } = useTranslation();
@@ -149,23 +150,22 @@ const EventCreationPage = () => {
     };
 
     const arrEventType = [
-        "No Poverty",
-        "Zero Hunger",
-        "Good Health and Well-being",
-        "Gender Equality",
-        "Clean Water and Sanitation",
-        "Affordable and Clean Energy",
-        "Decent Work and Economic Growth",
-        "Industry, Innovation, and Infrastructure",
-        "Reduced Inequalities",
-        "Sustainable Cities and Communitiese",
-        "Quality Education",
-        "Responsible Consumption/Production",
-        "Climate Action",
-        "Life Below Water",
-        "Life on Land",
-        "Peace, Justice and Strong Institutions",
-        "Other",
+        t("common:eventTypes:cleanEnergy"),
+        t("common:eventTypes:cleanWater"),
+        t("common:eventTypes:climateAction"),
+        t("common:eventTypes:decentWork"),
+        t("common:eventTypes:genderEquality"),
+        t("common:eventTypes:goodHealth"),
+        t("common:eventTypes:innovationInfrastructure"),
+        t("common:eventTypes:lifeBelowWater"),
+        t("common:eventTypes:lifeOnLand"),
+        t("eventTypes.noPoverty"),
+        t("common:eventTypes:peaceJustice"),
+        t("common:eventTypes:qualityEducation"),
+        t("common:eventTypes:reducedInequalities"),
+        t("common:eventTypes:responsibleConsumption"),
+        t("common:eventTypes:sustainableCities"),
+        t("common:eventTypes:zeroHunger"),
     ];
 
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -232,7 +232,9 @@ const EventCreationPage = () => {
                                         id='location'
                                         value={input.location}
                                         onChange={handleInputChange}
-                                        placeholder='Set Location'
+                                        placeholder={t(
+                                            "eventCreation:setLocation"
+                                        )}
                                         className='p-1  mt-4  rounded-md focus:outline-2 outline outline-1 w-2/4'
                                         style={{
                                             borderRadius: "8px",
@@ -319,12 +321,12 @@ const EventCreationPage = () => {
                                         {t("eventCreation:locationPlaceholder")}
                                     </p>
                                 )}
-                                <a
-                                    href='#'
+                                <Link
+                                    href='/guidelines'
                                     className='mt-2 underline text-md text-[#2E7EAA] hover:opacity-80 transition-opacity duration-[400ms] font-bold decoration-inherit'
                                 >
                                     {t("eventCreation:changeLocation")}
-                                </a>
+                                </Link>
                             </div>
                         </div>
                         <div className='my-3 flex flex-col items-center ml-3 flex-wrap sm:flex sm:flex-col  sm:ml-3 sm:items-center   md:flex md:flex-col md:ml-3 md:items-start lg:flex lg:flex-col lg:mt-3 lg:mx-0 lg:items-start '>
@@ -403,7 +405,9 @@ const EventCreationPage = () => {
                                     id='title'
                                     value={input.title}
                                     onChange={handleInputChange}
-                                    placeholder='Choose a title'
+                                    placeholder={t(
+                                        "eventCreation:chooseTitlePlaceholder"
+                                    )}
                                     className={`p-1 font-semibold  mt-4 w-96 rounded-md focus:outline-2 outline outline-1 ${
                                         !input.title && "required"
                                     } `}
@@ -426,7 +430,9 @@ const EventCreationPage = () => {
                                     id='description'
                                     value={input.description}
                                     onChange={handleInputChange}
-                                    placeholder='  Please write 50 characters at least'
+                                    placeholder={t(
+                                        "eventCreation:writeAtLeast100CharactersPlaceholder"
+                                    )}
                                     className='outline outline-1 mt-2 h-40 rounded w-7/12 font-semibold '
                                 ></textarea>
                             </form>

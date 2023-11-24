@@ -17,7 +17,9 @@ describe("FilterByType Component", () => {
 
     test("should render component", () => {
         renderComponent();
-        expect(screen.getByText("Interests")).toBeInTheDocument();
+        expect(
+            screen.getByText("common:eventTypes:interests")
+        ).toBeInTheDocument();
         expect(renderComponent()).toMatchSnapshot();
     });
 });

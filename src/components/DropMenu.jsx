@@ -11,9 +11,8 @@ import styles from "@/styles/DropMenu.module.css";
 import { auth } from "@/util/firebase";
 
 import Signup from "./Signup/Signup";
-import Bubble from "./Chat/Bubble";
 
-const DropMenu = () => {
+const DropMenu = ({ onUserChange }) => {
     const { t } = useTranslation("common");
     const isMobile = useMediaQuery({ maxWidth: 640 });
     const [isOpen, setIsOpen] = useState(false);
@@ -86,6 +85,9 @@ const DropMenu = () => {
             return () => clearInterval(interval);
         }
     }, [user]);
+    useEffect(() => {
+        onUserChange(user);
+    }, [user]);
 
     if (loading) {
         return spinner;
@@ -93,7 +95,6 @@ const DropMenu = () => {
 
     return (
         <div className='flex sm:flex-row flex-col gap-3 sm:gap-4'>
-            {user ? <Bubble /> : ""}
             <div className={user ? "hidden" : ""}>
                 <Signup />
             </div>
@@ -144,7 +145,7 @@ const DropMenu = () => {
                     >
                         <ul className='text-[10px] lg:text-[14px] xl:text-[16px] md:text-[12px] h-full flex items-center justify-center w-[90px] lg:w-[100px] xl:w-[110px]'>
                             {user ? (
-                                <div className='flex flex-col pl-1'>
+                                <div className='flex w-full flex-col pl-1'>
                                     <Link
                                         href='/profile'
                                         className={`hover:text-red-600 ${styles.listItem}`}

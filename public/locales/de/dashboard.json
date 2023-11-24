@@ -1,0 +1,11 @@
+{
+    "dashboarduser": {
+        "button": "Loslegen",
+        "welcome": "Willkommen,",
+        "gladToSeeYou": "Wir freuen uns, dich zu sehen.",
+        "createNewEvent": "Neues Veranstaltung erstellen",
+        "eventsCreated": "Erstellte Veranstaltungen",
+        "eventsJoined": "Beigetretene Veranstaltungen",
+        "suggestedEvents": "Vorgeschlagene Veranstaltungen"
+    }
+}

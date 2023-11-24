@@ -5,6 +5,7 @@
         "ourTeam": "Ekibimiz",
         "techStack": "Teknoloji Yığını",
         "techStackTitle": "Kullanılan Teknolojiler ve Proje Yapısı",
-        "techStackDescription": "Pebble Work projesi için Next.js, Firebase, DaisyUI ve Tailwind CSS kullanarak duyarlı ve etkileşimli bir platform oluşturduk. Next.js, sunucu tarafında işleme ve sorunsuz yönlendirme sağlarken, Firebase kullanıcı kimlik doğrulamayı ve gerçek zamanlı veri depolamayı ele aldı. DaisyUI ve Tailwind CSS, görsel olarak çekici ve modern bir tasarımı garanti etti. Proje yapısı, bakımı ve ölçeklendirmeyi kolaylaştırmak için modüler bileşenleri izledi. Bu teknolojiler, gönüllülerin bağlanmasını ve olumlu bir etki yaratmasını sağlamak için kullanıcı dostu ve etkileyici bir deneyim sundu."
+        "techStackDescription": "Pebble Work projesi için Next.js, Firebase, DaisyUI ve Tailwind CSS kullanarak duyarlı ve etkileşimli bir platform oluşturduk. Next.js, sunucu tarafında işleme ve sorunsuz yönlendirme sağlarken, Firebase kullanıcı kimlik doğrulamayı ve gerçek zamanlı veri depolamayı ele aldı. DaisyUI ve Tailwind CSS, görsel olarak çekici ve modern bir tasarımı garanti etti. Proje yapısı, bakımı ve ölçeklendirmeyi kolaylaştırmak için modüler bileşenleri izledi. Bu teknolojiler, gönüllülerin bağlanmasını ve olumlu bir etki yaratmasını sağlamak için kullanıcı dostu ve etkileyici bir deneyim sundu.",
+        "teamIntro": "Fark yaratmaya yönelik bir ekip; fikirleri gerçeğe dönüştürmek için birlikte çalışarak başarı elde ediyoruz."
     }
 }

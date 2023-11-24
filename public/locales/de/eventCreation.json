@@ -34,5 +34,7 @@
     "day": "Tag",
     "proceedQuestion": "Möchten Sie fortfahren?",
     "createEvent": "Veranstaltung erstellen",
-    "return": "Zurück"
+    "return": "Zurück",
+    "chooseTitlePlaceholder": "Titel auswählen",
+    "writeAtLeast100CharactersPlaceholder": "Bitte schreiben Sie mindestens 100 Zeichen"
 }
