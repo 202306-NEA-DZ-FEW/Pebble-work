@@ -6,20 +6,20 @@
 -   Project description: [A platform to organize diffrent types of volunteer events ]
 -   Technology used: Nextjs, TailwindCSS, i18next, Husky, Prettier, Eslint, Commitlinter (Conventional Commits)
 -   Team members:
-    -   @takidilmi
-    -   @Halla24
-    -   @hasnahadd
-    -   @ysergma
-    -   @Polichinell
+    -   [TakiDilmi](https://github.com/takidilmi)
+    -   [HallaHamidi](https://github.com/Halla24)
+    -   [Manel.H.Haddoud](https://github.com/hasnahadd)
+    -   [YoussoufSergma](https://github.com/ysergma)
+    -   [LouisaHamrit](https://github.com/Polichinell)
 -   Bootcamp: NEA DZ FEW 2023
 
 ## Special Thanks
 
 We would like to express our deepest appreciation to all our mentors and teachers at the Re:Coded NEA DZ FEW 2023 Bootcamp who provided us with the knowledge and resources to complete this project. Their dedication to teaching and commitment to nurturing our skills have been invaluable to our learning journey.
 
--   @tech-chieftain
--   @hiba-machfej
--   @MenarSelamet
+-   [Salah Al-Dhaferi](https://github.com/tech-chieftain)
+-   [HibaMachfej](https://github.com/hiba-machfej)
+-   [MenarSelamet](https://github.com/MenarSelamet)
 
 Thank you for inspiring us to strive for excellence and for guiding us through the challenges we faced.
 
