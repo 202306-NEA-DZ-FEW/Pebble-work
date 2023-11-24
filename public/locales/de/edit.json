@@ -14,5 +14,5 @@
     "submit": "Absenden",
     "cancel": "Abbrechen",
     "passwordLengthRequirement": "Passwort muss mindestens 6 Zeichen lang sein",
-    "passwordSpecialCharacterRequirement": "Passwort muss Sonderzeichen enthalten"
+    "passwordSpecialCharacterRequirement": "Passwort muss Sonderzeichen enthalten "
 }
