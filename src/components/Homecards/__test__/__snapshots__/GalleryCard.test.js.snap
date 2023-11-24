@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GalleryCard renders correctly 1`] = `
+exports[`GalleryCard should match snapshot 1`] = `
 <DocumentFragment>
   <div
     class="flex justify-center items-center p-4"
@@ -16,7 +16,7 @@ exports[`GalleryCard renders correctly 1`] = `
         <img
           alt="Image 1"
           loading="lazy"
-          src="/images/IMG1.png"
+          src="/images/en/IMG1.png"
           style="object-position: center; object-fit: cover; display: block; width: 100%;"
         />
       </div>
@@ -28,7 +28,7 @@ exports[`GalleryCard renders correctly 1`] = `
         <img
           alt="Image 2"
           loading="lazy"
-          src="/images/IMG2.png"
+          src="/images/en/IMG2.png"
           style="object-position: center; object-fit: cover; display: block; width: 100%;"
         />
       </div>
@@ -40,7 +40,7 @@ exports[`GalleryCard renders correctly 1`] = `
         <img
           alt="Image 3"
           loading="lazy"
-          src="/images/IMG3.png"
+          src="/images/en/IMG3.png"
           style="object-position: center; object-fit: cover; display: block; width: 100%;"
         />
       </div>
@@ -52,7 +52,7 @@ exports[`GalleryCard renders correctly 1`] = `
         <img
           alt="Image 4"
           loading="lazy"
-          src="/images/IMG4.png"
+          src="/images/en/IMG4.png"
           style="object-position: center; object-fit: cover; display: block; width: 100%;"
         />
       </div>
@@ -64,7 +64,7 @@ exports[`GalleryCard renders correctly 1`] = `
         <img
           alt="Image 5"
           loading="lazy"
-          src="/images/IMG5.png"
+          src="/images/en/IMG5.png"
           style="object-position: center; object-fit: cover; display: block; width: 100%;"
         />
       </div>
@@ -76,7 +76,7 @@ exports[`GalleryCard renders correctly 1`] = `
         <img
           alt="Image 6"
           loading="lazy"
-          src="/images/IMG6.png"
+          src="/images/en/IMG6.png"
           style="object-position: center; object-fit: cover; display: block; width: 100%;"
         />
       </div>
@@ -88,7 +88,7 @@ exports[`GalleryCard renders correctly 1`] = `
         <img
           alt="Image 7"
           loading="lazy"
-          src="/images/IMG7.png"
+          src="/images/en/IMG7.png"
           style="object-position: center; object-fit: cover; display: block; width: 100%;"
         />
       </div>
@@ -100,7 +100,7 @@ exports[`GalleryCard renders correctly 1`] = `
         <img
           alt="Image 8"
           loading="lazy"
-          src="/images/IMG8.png"
+          src="/images/en/IMG8.png"
           style="object-position: center; object-fit: cover; display: block; width: 100%;"
         />
       </div>
@@ -112,7 +112,7 @@ exports[`GalleryCard renders correctly 1`] = `
         <img
           alt="Image 9"
           loading="lazy"
-          src="/images/IMG9.png"
+          src="/images/en/IMG9.png"
           style="object-position: center; object-fit: cover; display: block; width: 100%;"
         />
       </div>
@@ -124,7 +124,7 @@ exports[`GalleryCard renders correctly 1`] = `
         <img
           alt="Image 10"
           loading="lazy"
-          src="/images/IMG10.png"
+          src="/images/en/IMG10.png"
           style="object-position: center; object-fit: cover; display: block; width: 100%;"
         />
       </div>
@@ -136,7 +136,7 @@ exports[`GalleryCard renders correctly 1`] = `
         <img
           alt="Image 11"
           loading="lazy"
-          src="/images/IMG11.png"
+          src="/images/en/IMG11.png"
           style="object-position: center; object-fit: cover; display: block; width: 100%;"
         />
       </div>
@@ -148,7 +148,7 @@ exports[`GalleryCard renders correctly 1`] = `
         <img
           alt="Image 12"
           loading="lazy"
-          src="/images/IMG12.png"
+          src="/images/en/IMG12.png"
           style="object-position: center; object-fit: cover; display: block; width: 100%;"
         />
       </div>
@@ -160,7 +160,7 @@ exports[`GalleryCard renders correctly 1`] = `
         <img
           alt="Image 13"
           loading="lazy"
-          src="/images/IMG13.png"
+          src="/images/en/IMG13.png"
           style="object-position: center; object-fit: cover; display: block; width: 100%;"
         />
       </div>
@@ -172,7 +172,7 @@ exports[`GalleryCard renders correctly 1`] = `
         <img
           alt="Image 14"
           loading="lazy"
-          src="/images/IMG14.png"
+          src="/images/en/IMG14.png"
           style="object-position: center; object-fit: cover; display: block; width: 100%;"
         />
       </div>
@@ -184,7 +184,7 @@ exports[`GalleryCard renders correctly 1`] = `
         <img
           alt="Image 15"
           loading="lazy"
-          src="/images/IMG15.png"
+          src="/images/en/IMG15.png"
           style="object-position: center; object-fit: cover; display: block; width: 100%;"
         />
       </div>
@@ -196,7 +196,7 @@ exports[`GalleryCard renders correctly 1`] = `
         <img
           alt="Image 16"
           loading="lazy"
-          src="/images/IMG16.png"
+          src="/images/en/IMG16.png"
           style="object-position: center; object-fit: cover; display: block; width: 100%;"
         />
       </div>
@@ -208,7 +208,7 @@ exports[`GalleryCard renders correctly 1`] = `
         <img
           alt="Image 17"
           loading="lazy"
-          src="/images/IMG17.png"
+          src="/images/en/IMG17.png"
           style="object-position: center; object-fit: cover; display: block; width: 100%;"
         />
       </div>
@@ -220,7 +220,7 @@ exports[`GalleryCard renders correctly 1`] = `
         <img
           alt="Image 18"
           loading="lazy"
-          src="/images/IMG18.png"
+          src="/images/en/IMG18.png"
           style="object-position: center; object-fit: cover; display: block; width: 100%;"
         />
       </div>

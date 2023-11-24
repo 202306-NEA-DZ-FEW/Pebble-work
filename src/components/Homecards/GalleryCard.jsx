@@ -1,29 +1,31 @@
+import { useTranslation } from "next-i18next";
 import React, { useEffect, useState } from "react";
 
 import styles from "@/styles/Homepage.module.css";
 
 const GalleryCard = () => {
     const [isGallery, setIsGallery] = useState(false);
+    const { t, i18n } = useTranslation();
     const images = [
-        "IMG1.png",
-        "IMG2.png",
-        "IMG3.png",
-        "IMG4.png",
-        "IMG5.png",
-        "IMG6.png",
-        "IMG7.png",
-        "IMG8.png",
-        "IMG9.png",
-        "IMG10.png",
-        "IMG11.png",
-        "IMG12.png",
-        "IMG13.png",
-        "IMG14.png",
-        "IMG15.png",
-        "IMG16.png",
-        "IMG17.png",
-        "IMG18.png",
-    ];
+        "IMG1",
+        "IMG2",
+        "IMG3",
+        "IMG4",
+        "IMG5",
+        "IMG6",
+        "IMG7",
+        "IMG8",
+        "IMG9",
+        "IMG10",
+        "IMG11",
+        "IMG12",
+        "IMG13",
+        "IMG14",
+        "IMG15",
+        "IMG16",
+        "IMG17",
+        "IMG18",
+    ].map((img) => `${img}.png`);
     useEffect(() => {
         const handleScroll = () => {
             // Get the current scroll position
@@ -80,7 +82,7 @@ const GalleryCard = () => {
                                 aspectRatio: "1/1",
                             }}
                             loading='lazy'
-                            src={`/images/${image}`}
+                            src={`/images/${i18n.language}/${image}`}
                             alt={`Image ${index + 1}`}
                         />
                     </div>
