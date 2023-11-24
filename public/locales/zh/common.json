@@ -136,12 +136,12 @@
         "genderEquality": "性别平等",
         "resetFilter": "重置过滤器",
         "interests": "兴趣"
-      },
-      "location": {
+    },
+    "location": {
         "location": "位置",
         "cities": "城市"
-      },
-      "social": {
+    },
+    "social": {
         "volunteerTestimony": "从我们的志愿者那里听来"
     }
 }

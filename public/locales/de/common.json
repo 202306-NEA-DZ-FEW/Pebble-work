@@ -136,12 +136,12 @@
         "genderEquality": "Geschlechtergleichstellung",
         "resetFilter": "Filter zurücksetzen",
         "interests": "Interessen"
-      },
-      "location": {
+    },
+    "location": {
         "location": "Ort",
         "cities": "Städte"
-      },
-      "social": {
+    },
+    "social": {
         "volunteerTestimony": "Hören Sie es von unseren Freiwilligen"
     }
 }

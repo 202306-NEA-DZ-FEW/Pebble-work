@@ -133,16 +133,16 @@
         "lifeBelowWater": "Life Below Water",
         "lifeOnLand": "Life on Land",
         "peaceJustice": "Peace, Justice and Strong Institutions",
-        "cleanWater" :"Clean Water and Sanitation",
+        "cleanWater": "Clean Water and Sanitation",
         "genderEquality": "Gender Equality",
         "resetFilter": "Reset Filter",
         "interests": "Interests"
-      },
-      "location": {
+    },
+    "location": {
         "location": "location",
         "cities": "Cities"
-      },
-      "social": {
+    },
+    "social": {
         "volunteerTestimony": " Hear it from our volunteers"
     }
 }

@@ -137,12 +137,12 @@
         "genderEquality": "Cinsiyet Eşitliği",
         "resetFilter": "Filtreyi Sıfırla",
         "interests": "İlgi Alanları"
-      },
-      "location": {
+    },
+    "location": {
         "location": "Konum",
         "cities": "Şehirler"
-      },
-      "social": {
+    },
+    "social": {
         "volunteerTestimony": "Gönüllülerimizden duyun"
     }
 }

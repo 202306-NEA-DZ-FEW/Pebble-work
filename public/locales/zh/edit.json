@@ -15,5 +15,4 @@
     "cancel": "取消",
     "passwordLengthRequirement": "密码至少为6个字符",
     "passwordSpecialCharacterRequirement": "密码必须包含特殊字符"
-
 }
