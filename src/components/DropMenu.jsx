@@ -145,7 +145,7 @@ const DropMenu = ({ onUserChange }) => {
                     >
                         <ul className='text-[10px] lg:text-[14px] xl:text-[16px] md:text-[12px] h-full flex items-center justify-center w-[90px] lg:w-[100px] xl:w-[110px]'>
                             {user ? (
-                                <div className='flex flex-col pl-1'>
+                                <div className='flex w-full flex-col pl-1'>
                                     <Link
                                         href='/profile'
                                         className={`hover:text-red-600 ${styles.listItem}`}

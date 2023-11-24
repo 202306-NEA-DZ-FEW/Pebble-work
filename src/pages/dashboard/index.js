@@ -114,7 +114,9 @@ const Dashboarduser = () => {
         }
     }, [User]);
     const eventsToDisplay = displayCreatedEvents ? createdEvent : joinedEvents;
-    const title = displayCreatedEvents ? "Events Created" : "Joined Events";
+    const title = displayCreatedEvents
+        ? "Events Created"
+        : t("dashboard:dashboarduser:eventsJoined");
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (authUser) => {
@@ -172,7 +174,7 @@ const Dashboarduser = () => {
                 {t("dashboard:dashboarduser:button")}
             </button>
             <nav
-                className={`absolute top-30 bottom-0 h-full left-0 bg-[#e6f5e4] overflow-hidden duration-200 linear shadow-md mt-30 transform transition-transform ${
+                className={`absolute w-[200px] top-30 bottom-0 h-full left-0 bg-[#e6f5e4] overflow-hidden duration-200 linear shadow-md mt-30 transform transition-transform ${
                     isNavVisible ? "translate-x-0" : "-translate-x-full"
                 } pt-10 px-3`}
                 style={{

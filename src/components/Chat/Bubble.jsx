@@ -37,7 +37,7 @@ const Bubble = () => {
     };
 
     return (
-        <div ref={bubbleRef} className='fixed right-2 bottom-2'>
+        <div ref={bubbleRef} className='fixed z-[454] right-2 bottom-2'>
             <button
                 className={`${styles.expandingButton} ${
                     newMessage ? styles.newMessage : ""

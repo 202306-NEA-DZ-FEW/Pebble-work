@@ -10,14 +10,14 @@ exports[`ContactForm snapshot 1`] = `
     contactForm.title
   </h1>
   <form
-    className="jsx-3a4e3b968dd338f0 h-[40vh]"
+    className="jsx-f939cb32bf8ff4c1 h-[40vh]"
     onSubmit={[Function]}
   >
     <div
-      className="jsx-3a4e3b968dd338f0 input-row"
+      className="jsx-f939cb32bf8ff4c1 input-row"
     >
       <input
-        className="jsx-3a4e3b968dd338f0 "
+        className="jsx-f939cb32bf8ff4c1 "
         id="fname"
         name="firstname"
         onChange={[Function]}
@@ -32,7 +32,7 @@ exports[`ContactForm snapshot 1`] = `
         value=""
       />
       <input
-        className="jsx-3a4e3b968dd338f0 "
+        className="jsx-f939cb32bf8ff4c1 "
         id="lname"
         name="lastname"
         onChange={[Function]}
@@ -48,7 +48,7 @@ exports[`ContactForm snapshot 1`] = `
       />
     </div>
     <input
-      className="jsx-3a4e3b968dd338f0"
+      className="jsx-f939cb32bf8ff4c1"
       id="email"
       name="email"
       onChange={[Function]}
@@ -63,10 +63,10 @@ exports[`ContactForm snapshot 1`] = `
       value=""
     />
     <br
-      className="jsx-3a4e3b968dd338f0"
+      className="jsx-f939cb32bf8ff4c1"
     />
     <input
-      className="jsx-3a4e3b968dd338f0"
+      className="jsx-f939cb32bf8ff4c1"
       id="phone"
       name="phone"
       onChange={[Function]}
@@ -81,10 +81,10 @@ exports[`ContactForm snapshot 1`] = `
       value=""
     />
     <br
-      className="jsx-3a4e3b968dd338f0"
+      className="jsx-f939cb32bf8ff4c1"
     />
     <textarea
-      className="jsx-3a4e3b968dd338f0 "
+      className="jsx-f939cb32bf8ff4c1 "
       id="message"
       name="message"
       onChange={[Function]}
@@ -98,10 +98,10 @@ exports[`ContactForm snapshot 1`] = `
       value=""
     />
     <br
-      className="jsx-3a4e3b968dd338f0"
+      className="jsx-f939cb32bf8ff4c1"
     />
     <input
-      className="jsx-3a4e3b968dd338f0"
+      className="jsx-f939cb32bf8ff4c1"
       type="submit"
       value="contactForm.submitButton"
     />
