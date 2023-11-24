@@ -280,7 +280,7 @@ const SignUpPage = () => {
                                 type='text'
                                 id='text'
                                 name='text'
-                                placeholder='Name'
+                                placeholder={t("signUp:placeholderName")}
                                 required
                                 style={{ height: "40px", width: "150px" }}
                                 value={Name}
@@ -291,7 +291,7 @@ const SignUpPage = () => {
                                 type='text'
                                 id='text'
                                 name='text'
-                                placeholder='Surename'
+                                placeholder={t("signUp:placeholderSurename")}
                                 required
                                 style={{ height: "40px", width: "150px" }}
                                 value={Surename}
@@ -306,7 +306,7 @@ const SignUpPage = () => {
                                 type='email'
                                 id='email'
                                 name='email'
-                                placeholder='Email address'
+                                placeholder={t("signUp:placeholderEmail")}
                                 value={email}
                                 required
                                 style={{ height: "40px", width: "320px" }}
@@ -319,7 +319,7 @@ const SignUpPage = () => {
                                 type={showPassword ? "text" : "password"}
                                 id='password'
                                 name='password'
-                                placeholder='Your password'
+                                placeholder={t("signUp:placeholderPassword")}
                                 required
                                 style={{ height: "40px", width: "320px" }}
                                 value={password}

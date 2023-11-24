@@ -9,5 +9,9 @@
     "alphabetInvalid": "Password must contain alphabets",
     "haveAccount": "Don't have an account?",
     "signIn": "Sign In",
-    "signUp": "Sign Up"
+    "signUp": "Sign Up",
+    "placeholderName": "Name",
+    "placeholderSurename": "Surename",
+    "placeholderEmail": "Email address",
+    "placeholderPassword": "Your password"
 }

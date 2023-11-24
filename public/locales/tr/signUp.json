@@ -9,5 +9,9 @@
     "alphabetInvalid": "Parola harf içermelidir",
     "haveAccount": "Hesabınız yok mu?",
     "signIn": "Giriş Yap",
-    "signUp": "Üye Ol"
+    "signUp": "Üye Ol",
+    "placeholderName": "Ad",
+    "placeholderSurename": "Soyad",
+    "placeholderEmail": "E-posta adresi",
+    "placeholderPassword": "Şifreniz"
 }
