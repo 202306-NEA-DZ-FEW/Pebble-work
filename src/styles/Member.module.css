@@ -11,9 +11,7 @@
     align-items: center;
     opacity: 1;
 
-    transition:
-        opacity 1s ease-out,
-        clip-path 1000ms ease-out;
+    transition: opacity 1s ease-out, clip-path 1000ms ease-out;
 }
 .clip {
     clip-path: polygon(
@@ -29,9 +27,7 @@
         0% 0%
     );
     opacity: 1;
-    transition:
-        opacity 1s linear,
-        clip-path 1000ms ease-out;
+    transition: opacity 1s linear, clip-path 1000ms ease-out;
 }
 
 .member.active {

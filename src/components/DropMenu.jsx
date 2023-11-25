@@ -11,6 +11,7 @@ import styles from "@/styles/DropMenu.module.css";
 import { auth } from "@/util/firebase";
 
 import Signup from "./Signup/Signup";
+import Image from "next/image";
 
 const DropMenu = ({ onUserChange }) => {
     const { t } = useTranslation("common");
@@ -114,18 +115,20 @@ const DropMenu = ({ onUserChange }) => {
                         {user && loadingName
                             ? spinner
                             : user
-                              ? isMobile
-                                  ? user.displayName?.length > 6
-                                      ? user.displayName.slice(0, 4) + ".."
-                                      : user.displayName
-                                  : user.displayName?.length > 10
-                                    ? user.displayName.slice(0, 10) + ".."
+                            ? isMobile
+                                ? user.displayName?.length > 6
+                                    ? user.displayName.slice(0, 4) + ".."
                                     : user.displayName
-                              : t("common:dropdown:signIn")}
+                                : user.displayName?.length > 10
+                                ? user.displayName.slice(0, 10) + ".."
+                                : user.displayName
+                            : t("common:dropdown:signIn")}
                     </button>
                     {user ? (
-                        <img
-                            className='rounded-full md:w-8 md:h-8 w-6 h-6'
+                        <Image
+                            width={32}
+                            height={32}
+                            className='rounded-full object-cover md:w-8 md:h-8 w-6 h-6'
                             src={
                                 auth?.currentUser.photoURL !== null
                                     ? auth?.currentUser.photoURL

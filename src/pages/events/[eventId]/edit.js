@@ -51,7 +51,7 @@ function EditEvent({ event, organizer }) {
             input.description.length < minDescriptionLength
         ) {
             alert(
-                `Please fill in all required fields and ensure the description has at least ${minDescriptionLength} characters.`,
+                `Please fill in all required fields and ensure the description has at least ${minDescriptionLength} characters.`
             );
             return;
         }
@@ -87,10 +87,10 @@ function EditEvent({ event, organizer }) {
             if (!allowedExtensions.includes(fileExtension)) {
                 setShowPopup(true);
                 setModalContent(
-                    "Invalid file extension. Allowed extensions are: jpg, jpeg, and png",
+                    "Invalid file extension. Allowed extensions are: jpg, jpeg, and png"
                 );
                 setModalClassName(
-                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
+                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
                 );
                 setTimeout(() => {
                     setShowPopup(false);
@@ -103,7 +103,7 @@ function EditEvent({ event, organizer }) {
                 setShowPopup(true);
                 setModalContent("File size exceeds the allowed limit of 5MB");
                 setModalClassName(
-                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
+                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
                 );
                 setTimeout(() => {
                     setShowPopup(false);

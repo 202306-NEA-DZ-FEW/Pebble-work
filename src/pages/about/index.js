@@ -76,7 +76,7 @@ const AboutPage = () => {
             if (scrollContainerRef.current) {
                 scrollContainerRef.current.removeEventListener(
                     "scroll",
-                    onScroll,
+                    onScroll
                 );
             }
         };

@@ -141,10 +141,10 @@ const ProfilePage = () => {
         });
         setShowPopup(true);
         setModalContent(
-            "Profile updated successfuly,you are being redirected to your profile",
+            "Profile updated successfuly,you are being redirected to your profile"
         );
         setModalClassName(
-            "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
+            "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
         );
         setTimeout(() => {
             router.push("/profile");
@@ -181,10 +181,10 @@ const ProfilePage = () => {
         if (!isValidLength || !hasSpecialCharacter) {
             setShowPopup(true);
             setModalContent(
-                "Password must be at least 6 characters and contain special characters",
+                "Password must be at least 6 characters and contain special characters"
             );
             setModalClassName(
-                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
             );
             setTimeout(() => {
                 setShowPopup(false);
@@ -197,7 +197,7 @@ const ProfilePage = () => {
 
         const credential = EmailAuthProvider.credential(
             user.email,
-            CurrentPassword,
+            CurrentPassword
         );
 
         try {
@@ -208,7 +208,7 @@ const ProfilePage = () => {
             setShowPopup(true);
             setModalContent("Password updated successfully");
             setModalClassName(
-                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
             );
             setTimeout(() => {
                 setShowPopup(false);
@@ -225,7 +225,7 @@ const ProfilePage = () => {
             }
 
             setModalClassName(
-                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
             );
 
             setTimeout(() => {
@@ -245,10 +245,10 @@ const ProfilePage = () => {
             if (!allowedExtensions.includes(fileExtension)) {
                 setShowPopup(true);
                 setModalContent(
-                    "Invalid file extension. Allowed extensions are: jpg, jpeg, and png",
+                    "Invalid file extension. Allowed extensions are: jpg, jpeg, and png"
                 );
                 setModalClassName(
-                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
+                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
                 );
                 setTimeout(() => {
                     setShowPopup(false);
@@ -262,7 +262,7 @@ const ProfilePage = () => {
                 setShowPopup(true);
                 setModalContent("File size exceeds the allowed limit of 5MB");
                 setModalClassName(
-                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
+                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
                 );
                 setTimeout(() => {
                     setShowPopup(false);
@@ -273,7 +273,7 @@ const ProfilePage = () => {
             try {
                 const storageRef = ref(
                     storage,
-                    `profilePictures/${currentUserId}`,
+                    `profilePictures/${currentUserId}`
                 );
                 await uploadBytes(storageRef, file);
 
@@ -292,10 +292,10 @@ const ProfilePage = () => {
             } catch (error) {
                 setShowPopup(true);
                 setModalContent(
-                    "Error uploading profile picture. Please try again.",
+                    "Error uploading profile picture. Please try again."
                 );
                 setModalClassName(
-                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
+                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
                 );
                 setTimeout(() => {
                     setShowPopup(false);
@@ -327,7 +327,7 @@ const ProfilePage = () => {
             // Profile photo updated successfully
             setModalContent("Profile photo updated successfully");
             setModalClassName(
-                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
             );
             setTimeout(() => {
                 setShowPopup(false);
@@ -336,10 +336,10 @@ const ProfilePage = () => {
         } catch (error) {
             setShowPopup(true);
             setModalContent(
-                "Error updating profile picture. Please try again.",
+                "Error updating profile picture. Please try again."
             );
             setModalClassName(
-                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
             );
             setTimeout(() => {
                 setShowPopup(false);
@@ -355,7 +355,7 @@ const ProfilePage = () => {
         return <Loader />;
     } else {
         return (
-            <div className='pt-5 flex min-h-screen flex-col items-center justify-center sm-types '>
+            <div className='pt-5 z-[555] flex min-h-screen flex-col items-center justify-center sm-types '>
                 <h1 className='sm-text font-semibold text-lg md:text-4xl md:mt-5'>
                     {t("edit:editProfile")}
                 </h1>
@@ -370,9 +370,9 @@ const ProfilePage = () => {
                 </div>
 
                 {/* Profile Picture /Change */}
-                <form onSubmit={handleUpdateProfile} className='mt-4'>
+                <form onSubmit={handleUpdateProfile} className='mt-4 z-10'>
                     <div className='flex flex-col md:flex-row items-center md:items-start justify-around'>
-                        <div className='flex justify-center items-center h-2/12 w-4/12 rounded-full overflow-hidden md:w-4/12 h-5/12 mt-8 mb-6'>
+                        <div className='flex justify-center items-center lg:h-[35vh] sm:h-[25vh] h-[20vh] w-[40vw] sm:w-[30vw] lg:w-[20vw] rounded-full overflow-hidden'>
                             <Image
                                 src={
                                     auth?.currentUser.photoURL !== null
@@ -382,12 +382,12 @@ const ProfilePage = () => {
                                 width={300}
                                 height={300}
                                 alt=''
-                                className='h-full w-full rounded-full'
+                                className='h-full z-[20] w-full object-cover rounded-full'
                             />
                         </div>
 
                         {/* Change Picture */}
-                        <div className='flex flex-col mt-4 md:flex-row md:ml-10 md:mt-40 '>
+                        <div className='flex z-[20] flex-col mt-4 md:flex-row md:ml-10 md:mt-40 '>
                             <input
                                 type='file'
                                 accept='image/*'
@@ -424,50 +424,88 @@ const ProfilePage = () => {
                             )}
                         </div>
                     </div>
-                    <div
-                        className='morphingSVGHidden'
-                        style={{
-                            position: "absolute",
-                            bottom: "140px",
-                            width: "screen",
-                            height: "screen",
-                        }}
-                    >
-                        <MorphingSvg />
-                    </div>
 
                     {/* Edit Information */}
-                    <div className='flex flex-col items-center mt-4 md:flex-row md:justify-around md:gap-x-5'>
-                        <div className='w-[100 px] text-center'>
-                            <h3 className='font-semibold text-lg text-gray-600'>
-                                {t("edit:name")}:
-                            </h3>
-                            <p className='mt-2 mb-4'>{currentUser.Name}</p>
+                    <div className='flex z-50 flex-col flex-wrap items-center mt-4 md:flex-row md:justify-around md:gap-x-5 px-5'>
+                        <div
+                            className='morphingSVGHidden'
+                            style={{
+                                position: "absolute",
+                                bottom: "140px",
+                                width: "screen",
+                                height: "screen",
+                            }}
+                        >
+                            <MorphingSvg />
                         </div>
-                        <div className='w-[100 px] text-center'>
-                            <h3 className='font-semibold text-lg text-gray-600'>
-                                {t("edit:surname")}:
+                        <div className='z-20'>
+                            <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
+                                {t("edit:Name*")}
                             </h3>
-                            <p className='mt-2 mb-4'>{currentUser.Surename}</p>
+                            <input
+                                type='text'
+                                placeholder='  Name'
+                                className='outline outline-1 mt-2 lg:w-3/4 rounded md:mt-5'
+                                name='name'
+                                defaultValue={currentUser.Name}
+                                onChange={(e) => setEditedName(e.target.value)}
+                                required
+                            ></input>
                         </div>
-                        <div className='w-[100 px] text-center'>
-                            <h3 className='font-semibold text-lg text-gray-600'>
-                                {t("edit:email")}:
+                        <div className='z-20'>
+                            {" "}
+                            <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
+                                {t("edit:Surname*")}
                             </h3>
-                            <p className='mt-2 mb-4'>{currentUser.email}</p>
+                            <input
+                                type='text'
+                                placeholder='  Surname'
+                                className='outline outline-1 mt-3 lg:w-3/4 rounded md:mt-5'
+                                name='surname'
+                                defaultValue={currentUser.Surename}
+                                onChange={(e) =>
+                                    setEditedSurname(e.target.value)
+                                }
+                                required
+                            ></input>
                         </div>
-                        <div className='w-[100 px] text-center '>
-                            <h3 className='font-semibold text-lg text-gray-600'>
-                                {t("edit:location")}:
+                        <div className='z-20'>
+                            <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
+                                {t("edit:Email*")}
                             </h3>
-                            <p className='mt-2 mb-4'>{currentUser.Location}</p>
+                            <input
+                                type='email'
+                                placeholder='  Email'
+                                className='outline outline-1 mt-3 lg:w-3/4 rounded md:mt-5'
+                                name='email'
+                                defaultValue={currentUser.email}
+                                onChange={(e) => setEditedEmail(e.target.value)}
+                                required
+                            ></input>
+                        </div>
+
+                        {/*  */}
+                        <div className='z-20'>
+                            <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
+                                {t("edit:Location")}
+                            </h3>
+                            <input
+                                type='text'
+                                placeholder='  Location'
+                                className='outline outline-1 mt-3 lg:w-3/4 rounded md:mt-5'
+                                name='location'
+                                defaultValue={currentUser.Location}
+                                onChange={(e) =>
+                                    setEditedLocation(e.target.value)
+                                }
+                            ></input>
                         </div>
                     </div>
                     {/* Your Interests */}
-                    <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
+                    <h3 className='font-semibold px-5 text-md mt-3 w-70 md:mt-5 md:text-3xl'>
                         {t("edit:interests")}
                     </h3>
-                    <div className='grid grid-container grid-cols-1 gap-8 -ml-15 mt-3 text-center justify-evenly sm:grid-cols-2 sm:gap-4 md:grid-cols-3 text-xs md:w-full md:h-auto md:mt-8 md:text-3xl'>
+                    <div className='grid px-5 grid-container grid-cols-1 gap-8 -ml-15 mt-3 text-center justify-evenly sm:grid-cols-2 sm:gap-4 md:grid-cols-3 text-xs md:w-full md:h-auto md:mt-8 md:text-3xl'>
                         {EventTypes.map((type, index) => (
                             <button
                                 key={index}
@@ -584,7 +622,7 @@ const ProfilePage = () => {
                                         }}
                                     >
                                         {t(
-                                            "edit:passwordSpecialCharacterRequirement",
+                                            "edit:passwordSpecialCharacterRequirement"
                                         )}
                                     </span>
                                 </span>

@@ -195,33 +195,25 @@
     position: absolute;
     top: 350px;
     left: 120px;
-    transition:
-        width 0.5s linear,
-        height 0.5s linear;
+    transition: width 0.5s linear, height 0.5s linear;
 }
 .svgContainer .svg:nth-child(2) {
     position: absolute;
     top: 120px;
     left: -110px;
-    transition:
-        width 0.5s linear,
-        height 0.5s linear;
+    transition: width 0.5s linear, height 0.5s linear;
 }
 .svgContainer .svg:nth-child(3) {
     position: absolute;
     top: 120px;
     left: 350px;
-    transition:
-        width 0.5s linear,
-        height 0.5s linear;
+    transition: width 0.5s linear, height 0.5s linear;
 }
 .svgContainer .svg:nth-child(4) {
     position: absolute;
     top: -110px;
     left: 120px;
-    transition:
-        width 0.5s linear,
-        height 0.5s linear;
+    transition: width 0.5s linear, height 0.5s linear;
 }
 .svgContainer1 .svg:nth-child(1) {
     position: absolute;
@@ -229,9 +221,7 @@
     left: 200px;
     width: 40px;
     height: 40px;
-    transition:
-        width 0.6s linear,
-        height 0.6s linear;
+    transition: width 0.6s linear, height 0.6s linear;
 }
 .svgContainer1 .svg:nth-child(2) {
     position: absolute;
@@ -239,9 +229,7 @@
     height: 40px;
     bottom: 60px;
     left: 50px;
-    transition:
-        width 0.6s linear,
-        height 0.6s linear;
+    transition: width 0.6s linear, height 0.6s linear;
 }
 .svgContainer1 .svg:nth-child(3) {
     position: absolute;
@@ -249,9 +237,7 @@
     left: 200px;
     width: 40px;
     height: 40px;
-    transition:
-        width 0.6s linear,
-        height 0.6s linear;
+    transition: width 0.6s linear, height 0.6s linear;
 }
 .svgContainer1 .svg:nth-child(4) {
     position: absolute;
@@ -259,7 +245,5 @@
     left: 50px;
     width: 40px;
     height: 40px;
-    transition:
-        width 0.6s linear,
-        height 0.6s linear;
+    transition: width 0.6s linear, height 0.6s linear;
 }

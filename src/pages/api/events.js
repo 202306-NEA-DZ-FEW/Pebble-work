@@ -32,7 +32,7 @@ export default async function handler(req, res) {
             const dateChunks = chunkArray(date, 30);
 
             eventsData = eventsData.filter((event) =>
-                dateChunks.some((dateChunk) => dateChunk.includes(event.date)),
+                dateChunks.some((dateChunk) => dateChunk.includes(event.date))
             );
         }
 

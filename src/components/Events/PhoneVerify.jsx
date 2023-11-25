@@ -39,7 +39,7 @@ const PhoneVerify = () => {
                     },
                     "expired-callback": () => {},
                 },
-                auth,
+                auth
             );
         }
     }
@@ -77,7 +77,7 @@ const PhoneVerify = () => {
             // Confirm the OTP and get the phone credential
             const phoneCredential = PhoneAuthProvider.credential(
                 window.confirmationResult.verificationId,
-                otp,
+                otp
             );
 
             // Link the phone credential to the current user

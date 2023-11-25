@@ -90,7 +90,7 @@ const EventCreationPage = () => {
         ) {
             // Check if required fields are empty or description is less than 100 characters
             alert(
-                "Please fill in all required fields and ensure the description has at least 100 characters.",
+                "Please fill in all required fields and ensure the description has at least 100 characters."
             );
             return;
         }
@@ -106,10 +106,10 @@ const EventCreationPage = () => {
             if (!allowedExtensions.includes(fileExtension)) {
                 setShowPopup(true);
                 setModalContent(
-                    "Invalid file extension. Allowed extensions are: jpg, jpeg, and png",
+                    "Invalid file extension. Allowed extensions are: jpg, jpeg, and png"
                 );
                 setModalClassName(
-                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
+                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
                 );
                 setTimeout(() => {
                     setShowPopup(false);
@@ -122,7 +122,7 @@ const EventCreationPage = () => {
                 setShowPopup(true);
                 setModalContent("File size exceeds the allowed limit of 5MB");
                 setModalClassName(
-                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
+                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
                 );
                 setTimeout(() => {
                     setShowPopup(false);
@@ -233,7 +233,7 @@ const EventCreationPage = () => {
                                         value={input.location}
                                         onChange={handleInputChange}
                                         placeholder={t(
-                                            "eventCreation:setLocation",
+                                            "eventCreation:setLocation"
                                         )}
                                         className='p-1  mt-4  rounded-md focus:outline-2 outline outline-1 w-2/4'
                                         style={{
@@ -259,7 +259,7 @@ const EventCreationPage = () => {
                                     {t("eventCreation:chooseDateAndTime")}
                                     <span className='font-light text-xs align-left text-[red]'>
                                         {t(
-                                            "eventCreation:chooseDateAndTimeRequired",
+                                            "eventCreation:chooseDateAndTimeRequired"
                                         )}
                                     </span>
                                 </h3>
@@ -354,7 +354,7 @@ const EventCreationPage = () => {
                                         onClick={(e) => {
                                             const buttons =
                                                 document.querySelectorAll(
-                                                    ".grid-item",
+                                                    ".grid-item"
                                                 );
                                             buttons.forEach((button) => {
                                                 button.style.backgroundColor =
@@ -406,7 +406,7 @@ const EventCreationPage = () => {
                                     value={input.title}
                                     onChange={handleInputChange}
                                     placeholder={t(
-                                        "eventCreation:chooseTitlePlaceholder",
+                                        "eventCreation:chooseTitlePlaceholder"
                                     )}
                                     className={`p-1 font-semibold  mt-4 w-96 rounded-md focus:outline-2 outline outline-1 ${
                                         !input.title && "required"
@@ -431,7 +431,7 @@ const EventCreationPage = () => {
                                     value={input.description}
                                     onChange={handleInputChange}
                                     placeholder={t(
-                                        "eventCreation:writeAtLeast100CharactersPlaceholder",
+                                        "eventCreation:writeAtLeast100CharactersPlaceholder"
                                     )}
                                     className='outline outline-1 mt-2 h-40 rounded w-7/12 font-semibold '
                                 ></textarea>

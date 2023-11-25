@@ -96,7 +96,7 @@ const SignUpPage = () => {
             setModalContent("Sign in/up failed.");
             setModalContent("This email is already in use.");
             setModalClassName(
-                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4   ",
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4   "
             );
             return;
         }
@@ -111,7 +111,7 @@ const SignUpPage = () => {
                 auth,
                 email,
                 password,
-                Name,
+                Name
             );
             const user = userCredential.user;
             const usersCollection = collection(db, "users");
@@ -133,7 +133,7 @@ const SignUpPage = () => {
             setShowPopup(true);
             setModalContent("Congrats! You signed in/up successfully.");
             setModalClassName(
-                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4 ",
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4 "
             );
             setTimeout(() => {
                 router.push("/profile/edit");
@@ -142,7 +142,7 @@ const SignUpPage = () => {
             setShowPopup(true);
             setModalContent("Sign in/up failed.");
             setModalClassName(
-                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4 ",
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4 "
             );
         }
     };
@@ -180,7 +180,7 @@ const SignUpPage = () => {
             setShowPopup(true);
             setModalContent("Congrats! Sign-in link sent to your email.");
             setModalClassName(
-                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  ",
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  "
             );
             setTimeout(() => {
                 router.push("/profile/edit");
@@ -189,7 +189,7 @@ const SignUpPage = () => {
             setShowPopup(true);
             setModalContent("Sign in/up failed.");
             setModalClassName(
-                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  ",
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  "
             );
         }
     };
@@ -229,7 +229,7 @@ const SignUpPage = () => {
             setShowPopup(true);
             setModalContent("Congrats! You signed in/up successfully.");
             setModalClassName(
-                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4",
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4"
             );
             setTimeout(() => {
                 router.push("/profile/edit");
@@ -238,7 +238,7 @@ const SignUpPage = () => {
             setShowPopup(true);
             setModalContent("Sign in/up failed.");
             setModalClassName(
-                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
             );
         }
     };

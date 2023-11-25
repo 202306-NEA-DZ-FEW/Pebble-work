@@ -21,7 +21,7 @@ function FirestoreLocation({ onInputChange }) {
     };
     useEffect(() => {
         const filtered = locationsArray.filter((location) =>
-            location.toLowerCase().includes(searchTerm),
+            location.toLowerCase().includes(searchTerm)
         );
         setFilteredLocations(filtered);
     }, [searchTerm, locationsArray]);
@@ -32,7 +32,7 @@ function FirestoreLocation({ onInputChange }) {
             if (locationsDoc.exists()) {
                 const locationData = locationsDoc.data();
                 const locationsArray = [].concat(
-                    ...Object.values(locationData),
+                    ...Object.values(locationData)
                 );
                 setFilteredLocations(locationsArray);
                 setLocationsArray(locationsArray);
@@ -89,7 +89,7 @@ function FirestoreLocation({ onInputChange }) {
                                     >
                                         {value}
                                     </li>
-                                ),
+                                )
                             )}
                         </ul>
 
