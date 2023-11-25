@@ -13,6 +13,7 @@ import { GrStatusGood } from "react-icons/gr";
 import { TiDeleteOutline } from "react-icons/ti";
 
 import Loader from "@/components/Loader/Loader";
+import MorphingSvg from "@/components/MorphingSvg";
 import Modal from "@/components/Popup/Modal";
 
 import { auth, db, storage } from "@/util/firebase";
@@ -358,6 +359,15 @@ const ProfilePage = () => {
                 <h1 className='sm-text font-semibold text-lg md:text-4xl md:mt-5'>
                     {t("edit:editProfile")}
                 </h1>
+                <div
+                    style={{
+                        position: "absolute",
+                        width: "screen",
+                        height: "screen",
+                    }}
+                >
+                    <MorphingSvg />
+                </div>
 
                 {/* Profile Picture /Change */}
                 <form onSubmit={handleUpdateProfile} className='mt-4'>
@@ -413,6 +423,17 @@ const ProfilePage = () => {
                                 />
                             )}
                         </div>
+                    </div>
+                    <div
+                        className='morphingSVGHidden'
+                        style={{
+                            position: "absolute",
+                            bottom: "140px",
+                            width: "screen",
+                            height: "screen",
+                        }}
+                    >
+                        <MorphingSvg />
                     </div>
 
                     {/* Edit Information */}
@@ -473,7 +494,7 @@ const ProfilePage = () => {
                 </form>
                 {/* Change Password */}
                 <div className='flex mt-6 justify-center'>
-                    <div className='  md:w-[700px] sm:w-[500px] w-[250px] bg-[#B4CD93]  h-[300px] md:h-[260px] mb-4'>
+                    <div className='  md:w-[700px] sm:w-[500px] w-[250px] bg-[#B4CD93] h-[360px] sm:h-[260px] mb-4'>
                         <h3 className='font-bold mt-5 text-center md:text-2xl'>
                             {t("edit:changePassword")}
                         </h3>
@@ -511,16 +532,16 @@ const ProfilePage = () => {
                                 />
                             </div>
                             <div>
-                                <span
+                                <p
                                     style={{
-                                        color: isLengthValid
+                                        color: hasSpecialChars
                                             ? "green"
                                             : "#FB923C",
                                         display: "flex",
                                         alignItems: "center",
                                         margin: "0",
                                         padding: "0",
-                                        lineHeight: "0.05",
+
                                         fontSize: "0.9rem",
                                     }}
                                 >
@@ -537,7 +558,7 @@ const ProfilePage = () => {
                                     >
                                         {t("edit:passwordLengthRequirement")}
                                     </span>
-                                </span>
+                                </p>
 
                                 <span
                                     style={{
@@ -548,7 +569,6 @@ const ProfilePage = () => {
                                         alignItems: "center",
                                         margin: "0",
                                         padding: "0",
-                                        lineHeight: "0.05",
                                         fontSize: "0.9rem",
                                     }}
                                 >

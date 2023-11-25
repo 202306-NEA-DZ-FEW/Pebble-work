@@ -167,7 +167,7 @@ const DesktopEvents = () => {
                                 />
                             </div>
                         </div>
-                        <div className='h-66 shadow-md'>
+                        <div className='h-66'>
                             <FirestoreLocation
                                 onInputChange={handleLocationInputChange}
                                 resetLocation={resetLocation}

@@ -416,7 +416,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                     className={`${styles.eventDesc} lg:flex lg:flex-row lg:justify-between md:flex md:flex-col md:gap-x-5 md:gap-y-8 sm:flex sm:gap-y-5`}
                 >
                     <div style={{ maxWidth: "400px" }} className='event-desc'>
-                        <h3 className='text-2xl font-bold'>
+                        <h3 className='text-2xl break-words font-bold'>
                             {t("review.eventDescription")}
                         </h3>
 

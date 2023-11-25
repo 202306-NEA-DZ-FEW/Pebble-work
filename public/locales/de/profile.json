@@ -3,9 +3,9 @@
     "editProfile": "Profil bearbeiten",
     "uploadNew": "Neu hochladen",
     "chooseFromLibrary": "Aus der Bibliothek auswählen",
-    "name": "Name",
-    "surname": "Nachname",
-    "email": "E-Mail",
+    "name": "Name ",
+    "surname": "Nachname ",
+    "email": "E-Mail ",
     "location": "Standort ",
     "interests": "Interessen",
     "joinedEvents": "Beigetretene Veranstaltungen"

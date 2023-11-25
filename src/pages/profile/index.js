@@ -119,7 +119,7 @@ const ProfilePage = () => {
                                     <p className='mt-2 mb-4'>
                                         {currentUser.Name}
                                     </p>
-                                    <h3 className='font-semibold text-lg text-gray-600'>
+                                    <h3 className='font-semibold w-[110px] text-lg text-gray-600'>
                                         {t("profile:surname")}:
                                     </h3>
                                     <p className='mt-2 mb-4'>
@@ -129,13 +129,13 @@ const ProfilePage = () => {
 
                                 {/* Email and Location */}
                                 <div className='sm-col-3 md:w-3/12 md:mt-10 text-left'>
-                                    <h3 className='font-semibold text-lg text-gray-600'>
+                                    <h3 className='font-semibold w-[110px] text-lg text-gray-600'>
                                         {t("profile:email")}:
                                     </h3>
                                     <p className='mt-2 mb-4'>
                                         {currentUser.email}
                                     </p>
-                                    <h3 className='font-semibold text-lg text-gray-600'>
+                                    <h3 className='font-semibold w-[110px] text-lg text-gray-600'>
                                         {t("profile:location")}:
                                     </h3>
                                     <p className='mt-2 mb-4'>

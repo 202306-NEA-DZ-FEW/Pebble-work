@@ -467,12 +467,12 @@ const EventCreationPage = () => {
                             </ul>
                             <p className='max-w-4xl mt-1 tinyText text-gray-400'>
                                 {t("eventCreation:readMore")}{" "}
-                                <a
-                                    href='#'
+                                <Link
+                                    href='/guidelines'
                                     className='text-[#2E7EAA] no-underline hover:underline text-md'
                                 >
                                     {t("eventCreation:communityGuidelines")}
-                                </a>
+                                </Link>
                                 .
                             </p>
                         </div>

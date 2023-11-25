@@ -22,9 +22,9 @@ const ChatDisplay = ({ onNewMessage }) => {
             const chatData = docSnapshot.data();
 
             const validMessages = chatData.messages.filter((message) => {
-                // Check if the message was sent more than 40 seconds ago
+                // Check if the message was sent more than 180 seconds ago
                 const messageAge = currentTime - message.timestamp;
-                return messageAge <= 40000;
+                return messageAge <= 180000;
             });
 
             for (let message of validMessages) {
@@ -63,8 +63,8 @@ const ChatDisplay = ({ onNewMessage }) => {
 
                         // Calculate the opacity based on the age of the message
                         let style = {};
-                        if (messageAge > 38) {
-                            const transitionDuration = 41 - messageAge;
+                        if (messageAge > 178) {
+                            const transitionDuration = 181 - messageAge;
                             style = {
                                 opacity: 0,
                                 transition: `opacity ${transitionDuration}s linear`,
@@ -82,7 +82,10 @@ const ChatDisplay = ({ onNewMessage }) => {
                                 key={i}
                                 className={`overflow-hidden ${alignment}`}
                             >
-                                <div className='chat-bubble' style={style}>
+                                <div
+                                    className='chat-bubble overflow-x-hidden break-words'
+                                    style={style}
+                                >
                                     <strong>{message.userName}</strong>:{" "}
                                     {message.text}
                                 </div>

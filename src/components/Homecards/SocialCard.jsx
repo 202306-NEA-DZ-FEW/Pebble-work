@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import React from "react";
 
 const SocialCardData = [
@@ -17,15 +18,17 @@ const SocialCardData = [
         name: "Hiba M.",
         occupation: "Volunteer",
         text: "Pebble Work has been a total game-changer for me in making a positive impact on our community. The tools they provide have turned our ideas into real actions, helping us make a difference. I'm grateful for the chance Pebble Work has given us to contribute meaningfully.",
-        imageSrc: "./images/icon_default.png",
+        imageSrc: "https://avatars.githubusercontent.com/u/58190902?v=4",
     },
 ];
 
 const SocialCardSection = () => {
+    const { t } = useTranslation();
+
     return (
         <div className=' w-full max-w-[1440px] px-5 md:px-[123px] lg:px-[127px] bg-white bg-opacity-50 flex flex-wrap justify-center items-center gap-10 py-8 rounded-md'>
             <div className='w-full text-center text-[#2E72AA] text-4xl font-medium leading-[44px] tracking-tight'>
-                Hear it from our volunteers
+                {t("social.volunteerTestimony")}
             </div>
             {SocialCardData.map((SocialCard, index) => (
                 <div

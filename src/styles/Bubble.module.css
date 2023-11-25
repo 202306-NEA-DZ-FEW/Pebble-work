@@ -2,7 +2,7 @@
 .expandingButton {
     padding: 10px 10px;
     background-color: #2e7eaa;
-    opacity: 80%;
+    /* opacity: 80%; */
     color: #fff;
     border: none;
     cursor: pointer;
@@ -12,13 +12,17 @@
 .expandingButton:hover {
     background-color: #a1bb7f;
 }
+@media (max-width: 432px) {
+    .expandingDiv {
+        max-width: 90vw;
+    }
+}
 
 .expandingDiv {
-    width: 100px;
     box-shadow: inset 0 0 8px 0px rgba(0, 0, 0, 0.3);
     height: 100px;
     background-color: #2e7eaa;
-    opacity: 70%;
+    opacity: 90%;
     clip-path: circle(0% at 50% 50%);
     transition:
         clip-path 0.8s,
