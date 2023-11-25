@@ -141,10 +141,10 @@ const ProfilePage = () => {
         });
         setShowPopup(true);
         setModalContent(
-            "Profile updated successfuly,you are being redirected to your profile"
+            "Profile updated successfuly,you are being redirected to your profile",
         );
         setModalClassName(
-            "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+            "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
         );
         setTimeout(() => {
             router.push("/profile");
@@ -181,10 +181,10 @@ const ProfilePage = () => {
         if (!isValidLength || !hasSpecialCharacter) {
             setShowPopup(true);
             setModalContent(
-                "Password must be at least 6 characters and contain special characters"
+                "Password must be at least 6 characters and contain special characters",
             );
             setModalClassName(
-                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
             );
             setTimeout(() => {
                 setShowPopup(false);
@@ -197,7 +197,7 @@ const ProfilePage = () => {
 
         const credential = EmailAuthProvider.credential(
             user.email,
-            CurrentPassword
+            CurrentPassword,
         );
 
         try {
@@ -208,7 +208,7 @@ const ProfilePage = () => {
             setShowPopup(true);
             setModalContent("Password updated successfully");
             setModalClassName(
-                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
             );
             setTimeout(() => {
                 setShowPopup(false);
@@ -225,7 +225,7 @@ const ProfilePage = () => {
             }
 
             setModalClassName(
-                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
             );
 
             setTimeout(() => {
@@ -245,10 +245,10 @@ const ProfilePage = () => {
             if (!allowedExtensions.includes(fileExtension)) {
                 setShowPopup(true);
                 setModalContent(
-                    "Invalid file extension. Allowed extensions are: jpg, jpeg, and png"
+                    "Invalid file extension. Allowed extensions are: jpg, jpeg, and png",
                 );
                 setModalClassName(
-                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
                 );
                 setTimeout(() => {
                     setShowPopup(false);
@@ -262,7 +262,7 @@ const ProfilePage = () => {
                 setShowPopup(true);
                 setModalContent("File size exceeds the allowed limit of 5MB");
                 setModalClassName(
-                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
                 );
                 setTimeout(() => {
                     setShowPopup(false);
@@ -273,7 +273,7 @@ const ProfilePage = () => {
             try {
                 const storageRef = ref(
                     storage,
-                    `profilePictures/${currentUserId}`
+                    `profilePictures/${currentUserId}`,
                 );
                 await uploadBytes(storageRef, file);
 
@@ -292,10 +292,10 @@ const ProfilePage = () => {
             } catch (error) {
                 setShowPopup(true);
                 setModalContent(
-                    "Error uploading profile picture. Please try again."
+                    "Error uploading profile picture. Please try again.",
                 );
                 setModalClassName(
-                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
                 );
                 setTimeout(() => {
                     setShowPopup(false);
@@ -327,7 +327,7 @@ const ProfilePage = () => {
             // Profile photo updated successfully
             setModalContent("Profile photo updated successfully");
             setModalClassName(
-                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
             );
             setTimeout(() => {
                 setShowPopup(false);
@@ -336,10 +336,10 @@ const ProfilePage = () => {
         } catch (error) {
             setShowPopup(true);
             setModalContent(
-                "Error updating profile picture. Please try again."
+                "Error updating profile picture. Please try again.",
             );
             setModalClassName(
-                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
             );
             setTimeout(() => {
                 setShowPopup(false);
@@ -622,7 +622,7 @@ const ProfilePage = () => {
                                         }}
                                     >
                                         {t(
-                                            "edit:passwordSpecialCharacterRequirement"
+                                            "edit:passwordSpecialCharacterRequirement",
                                         )}
                                     </span>
                                 </span>

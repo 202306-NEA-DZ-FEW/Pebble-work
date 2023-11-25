@@ -24,7 +24,7 @@ const DesktopCard = ({ eventId, title, type, image, description }) => {
             setTimeout(() => {
                 setHideBackground(true);
                 setIsHovered(true);
-            }, 1000)
+            }, 1000),
         ); // delay of 1 second before handleHover is executed
     };
 

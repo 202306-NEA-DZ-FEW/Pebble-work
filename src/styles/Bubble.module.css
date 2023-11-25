@@ -24,7 +24,10 @@
     background-color: #2e7eaa;
     opacity: 90%;
     clip-path: circle(0% at 50% 50%);
-    transition: clip-path 0.8s, width 0.8s, height 0.8s;
+    transition:
+        clip-path 0.8s,
+        width 0.8s,
+        height 0.8s;
 }
 @keyframes flash {
     0%,

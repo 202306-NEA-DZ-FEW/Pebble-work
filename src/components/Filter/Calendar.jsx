@@ -18,7 +18,7 @@ const Calendar = ({ checkEvents, resetDays }) => {
         const selectedDate = new Date(
             currentDate.getFullYear(),
             currentDate.getMonth(),
-            day
+            day,
         );
         selectedDate.setHours(12); //to solve the problem of having to chose a "day+1" so the event in "day" will show
 
@@ -48,7 +48,7 @@ const Calendar = ({ checkEvents, resetDays }) => {
                 range.map((date) => {
                     date.setHours(12); // Add 12 hours
                     return date.toISOString().split("T")[0];
-                })
+                }),
             );
             setRangeStart(null);
         }
@@ -59,7 +59,7 @@ const Calendar = ({ checkEvents, resetDays }) => {
         setCurrentDate((prevDate) => {
             const nextMonth = new Date(
                 prevDate.getFullYear(),
-                prevDate.getMonth() + 1
+                prevDate.getMonth() + 1,
             );
             return nextMonth;
         });
@@ -70,7 +70,7 @@ const Calendar = ({ checkEvents, resetDays }) => {
         setCurrentDate((prevDate) => {
             const previousMonth = new Date(
                 prevDate.getFullYear(),
-                prevDate.getMonth() - 1
+                prevDate.getMonth() - 1,
             );
             return previousMonth;
         });
@@ -91,7 +91,7 @@ const Calendar = ({ checkEvents, resetDays }) => {
         const daysInMonth = new Date(
             currentYear,
             currentMonth + 1,
-            0
+            0,
         ).getDate();
 
         const calendarDays = [];
@@ -105,14 +105,14 @@ const Calendar = ({ checkEvents, resetDays }) => {
                     className={`sm:text-[12px] text-black font-[500] w-[25px] md:ml-1 sm:ml-2 xl:text-[17px]`}
                 >
                     {weekdays[i]}
-                </div>
+                </div>,
             );
         }
 
         // Render empty days before the first day of the month
         for (let i = 0; i < firstDay; i++) {
             calendarDays.push(
-                <div key={`empty-${i}`} className={`${styles.emptyDay}`}></div>
+                <div key={`empty-${i}`} className={`${styles.emptyDay}`}></div>,
             );
         }
 
@@ -120,7 +120,7 @@ const Calendar = ({ checkEvents, resetDays }) => {
         for (let day = 1; day <= daysInMonth; day++) {
             const thisDate = new Date(currentYear, currentMonth, day);
             const isSelected = selectedRange.some(
-                (date) => date.toDateString() === thisDate.toDateString()
+                (date) => date.toDateString() === thisDate.toDateString(),
             );
 
             calendarDays.push(
@@ -132,7 +132,7 @@ const Calendar = ({ checkEvents, resetDays }) => {
                     onClick={() => handleDateClick(day)}
                 >
                     {day}
-                </button>
+                </button>,
             );
         }
 
@@ -173,25 +173,25 @@ const Calendar = ({ checkEvents, resetDays }) => {
                                 <Dropdown
                                     options={Array.from(
                                         { length: 12 },
-                                        (_, i) => i
+                                        (_, i) => i,
                                     ).map((month) =>
                                         new Date(
                                             currentDate.getFullYear(),
-                                            month
+                                            month,
                                         ).toLocaleString("default", {
                                             month: "long",
-                                        })
+                                        }),
                                     )}
                                     selectedOption={getMonthName(currentDate)}
                                     setSelectedOption={(monthName) => {
                                         const month = new Date(
-                                            Date.parse(monthName + " 1, 2012")
+                                            Date.parse(monthName + " 1, 2012"),
                                         ).getMonth();
                                         setCurrentDate(
                                             new Date(
                                                 currentDate.getFullYear(),
-                                                month
-                                            )
+                                                month,
+                                            ),
                                         );
                                     }}
                                 />
@@ -203,8 +203,8 @@ const Calendar = ({ checkEvents, resetDays }) => {
                                             i +
                                             Math.min(
                                                 currentDate.getFullYear(),
-                                                new Date().getFullYear()
-                                            )
+                                                new Date().getFullYear(),
+                                            ),
                                     )}
                                     selectedOption={currentDate
                                         .getFullYear()
@@ -213,8 +213,8 @@ const Calendar = ({ checkEvents, resetDays }) => {
                                         setCurrentDate(
                                             new Date(
                                                 year,
-                                                currentDate.getMonth()
-                                            )
+                                                currentDate.getMonth(),
+                                            ),
                                         );
                                     }}
                                 />

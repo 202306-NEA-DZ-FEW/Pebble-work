@@ -115,14 +115,14 @@ const DropMenu = ({ onUserChange }) => {
                         {user && loadingName
                             ? spinner
                             : user
-                            ? isMobile
-                                ? user.displayName?.length > 6
-                                    ? user.displayName.slice(0, 4) + ".."
+                              ? isMobile
+                                  ? user.displayName?.length > 6
+                                      ? user.displayName.slice(0, 4) + ".."
+                                      : user.displayName
+                                  : user.displayName?.length > 10
+                                    ? user.displayName.slice(0, 10) + ".."
                                     : user.displayName
-                                : user.displayName?.length > 10
-                                ? user.displayName.slice(0, 10) + ".."
-                                : user.displayName
-                            : t("common:dropdown:signIn")}
+                              : t("common:dropdown:signIn")}
                     </button>
                     {user ? (
                         <Image

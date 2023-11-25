@@ -93,7 +93,7 @@ const Navbar = () => {
     }, [menuDropdownOpen]);
     useEffect(() => {
         setActiveTab(
-            router.pathname === "/" ? "home" : router.pathname.slice(1)
+            router.pathname === "/" ? "home" : router.pathname.slice(1),
         );
     }, [router.pathname]); //to mount when ever the route is change
 
@@ -208,7 +208,7 @@ const Navbar = () => {
                                                     />
                                                 )}
                                             {t(
-                                                `common:navbar:${tab.label.toLowerCase()}`
+                                                `common:navbar:${tab.label.toLowerCase()}`,
                                             )}
                                         </p>
                                     </Link>
