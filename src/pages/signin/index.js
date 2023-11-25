@@ -59,7 +59,7 @@ const SignInPage = () => {
             setShowPopup(true);
             setModalContent("Congrats! You signed in/up successfully.");
             setModalClassName(
-                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
             );
             setTimeout(() => {
                 router.push("/events");
@@ -67,10 +67,10 @@ const SignInPage = () => {
         } catch (error) {
             setShowPopup(true);
             setModalContent(
-                "Error: Login failed. Invalid credentials or password requirements not met"
+                "Error: Login failed. Invalid credentials or password requirements not met",
             );
             setModalClassName(
-                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
             );
         }
     };
@@ -113,7 +113,7 @@ const SignInPage = () => {
                 setShowPopup(true);
                 setModalContent("Congrats! You signed in/up successfully.");
                 setModalClassName(
-                    "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                    "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
                 );
                 setTimeout(() => {
                     router.push("/events");
@@ -123,17 +123,17 @@ const SignInPage = () => {
                 // Display an error message
                 setShowPopup(true);
                 setModalContent(
-                    "Gmail account doesn't exist. Please sign up or use an existing account."
+                    "Gmail account doesn't exist. Please sign up or use an existing account.",
                 );
                 setModalClassName(
-                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                    "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
                 );
             }
         } catch (error) {
             setShowPopup(true);
             setModalContent("Sign in/up failed.");
             setModalClassName(
-                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
             );
         }
     };
@@ -145,7 +145,7 @@ const SignInPage = () => {
             setShowPopup(true);
             setModalContent("Congrats! You signed in/up successfully.");
             setModalClassName(
-                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  "
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  ",
             );
             setTimeout(() => {
                 router.push("/editprofile");
@@ -154,7 +154,7 @@ const SignInPage = () => {
             setShowPopup(true);
             setModalContent("Sign in/up failed.");
             setModalClassName(
-                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
             );
         }
     };
@@ -169,7 +169,7 @@ const SignInPage = () => {
             setShowPopup(true);
             setModalContent("Reset Email sent successfully .");
             setModalClassName(
-                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  "
+                "alert alert-success fixed bottom-0 left-0 right-0 p-4 text-center w-[400px] mb-4  ",
             );
 
             setTimeout(() => {
@@ -179,7 +179,7 @@ const SignInPage = () => {
             setShowPopup(true);
             setModalContent("Reset failed.");
             setModalClassName(
-                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]"
+                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
             );
         }
     };

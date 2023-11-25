@@ -25,10 +25,11 @@ exports[`Footer renders correctly 1`] = `
         class="flex flex-col items-center md:flex md:flex-col md:items-center md:gap-5"
       >
         <ul
-          class="flex sm:gap-[80px] gap-10 lg:text-[18px] md:text-[15px] text-[#749D60]"
+          class="flex sm:gap-[80px] gap-10 lg:text-[18px] md:text-[15px] text-black"
         >
           <li>
             <a
+              class="hover:opacity-70"
               href="/events"
             >
               footer.events
@@ -36,6 +37,7 @@ exports[`Footer renders correctly 1`] = `
           </li>
           <li>
             <a
+              class="hover:opacity-70"
               href="/about"
             >
               footer.about
@@ -43,6 +45,7 @@ exports[`Footer renders correctly 1`] = `
           </li>
           <li>
             <a
+              class="hover:opacity-70"
               href="/guidelines"
             >
               footer.howItWorks

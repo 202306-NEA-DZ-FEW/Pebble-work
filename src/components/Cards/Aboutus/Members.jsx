@@ -25,7 +25,7 @@ export default function Members({ members }) {
         const handleResize = () => {
             if (typeof window !== "undefined") {
                 setDirection(
-                    window.innerWidth < 640 ? "vertical" : "horizontal"
+                    window.innerWidth < 640 ? "vertical" : "horizontal",
                 );
             }
         };

@@ -13,11 +13,11 @@ import {
 } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
-import { FaPeopleGroup } from "react-icons/fa6";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React from "react";
 import { useEffect, useState } from "react";
+import { FaPeopleGroup } from "react-icons/fa6";
 
 import styles from "@/styles/EventDetails.module.css";
 
@@ -57,7 +57,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
 
         const organizerData = organizerDoc.data();
         const updatedEventsCreated = organizerData.eventsCreated.filter(
-            (eventInfo) => eventInfo.eventId !== event.eventId
+            (eventInfo) => eventInfo.eventId !== event.eventId,
         );
 
         await updateDoc(organizerDocRef, {
@@ -70,7 +70,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
             const attendeeEmail = attendee.email;
             const userQuery = query(
                 collection(db, "users"),
-                where("email", "==", attendeeEmail)
+                where("email", "==", attendeeEmail),
             );
             const userQuerySnapshot = await getDocs(userQuery);
 
@@ -78,7 +78,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                 const userData = userDoc.data();
                 if (userData.eventsJoined) {
                     const updatedEventsJoined = userData.eventsJoined.filter(
-                        (eventInfo) => eventInfo.eventId !== event.eventId
+                        (eventInfo) => eventInfo.eventId !== event.eventId,
                     );
 
                     await updateDoc(userDoc.ref, {
@@ -114,7 +114,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
 
         // Filter the array to remove the object where the email matches
         const updatedAttendees = docData.attendees.filter(
-            (attendee) => attendee.email !== userMail
+            (attendee) => attendee.email !== userMail,
         );
 
         // Update the document with the modified attendees array
@@ -196,7 +196,14 @@ const EventsPage = ({ event, organizer, notFound }) => {
 
     return (
         <>
-            <div style={{ margin: "auto", width: "60%", paddingTop: "6rem" }}>
+            <div
+                style={{
+                    margin: "auto",
+                    width: "60%",
+                    paddingTop: "6rem",
+                    color: "black",
+                }}
+            >
                 <h2
                     className='text-2xl font-bold'
                     style={{ marginBottom: "2rem" }}
@@ -304,7 +311,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                                 onClick={() =>
                                                     document
                                                         .getElementById(
-                                                            "cancel_modal"
+                                                            "cancel_modal",
                                                         )
                                                         .showModal()
                                                 }
@@ -340,7 +347,7 @@ const EventsPage = ({ event, organizer, notFound }) => {
                                             onClick={() =>
                                                 document
                                                     .getElementById(
-                                                        "canceljoin_modal"
+                                                        "canceljoin_modal",
                                                     )
                                                     .showModal()
                                             }
