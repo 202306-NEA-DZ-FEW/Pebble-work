@@ -44,7 +44,7 @@ const Bubble = () => {
                 }`}
                 onClick={handleButtonClick}
             >
-                <IoChatbubblesOutline size={15} />
+                <IoChatbubblesOutline size={30} />
             </button>
             <div
                 className={`flex items-end absolute bottom-[100%] right-2 ${

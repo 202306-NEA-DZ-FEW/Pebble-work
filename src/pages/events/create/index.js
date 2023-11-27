@@ -433,7 +433,7 @@ const EventCreationPage = () => {
                                     placeholder={t(
                                         "eventCreation:writeAtLeast100CharactersPlaceholder",
                                     )}
-                                    className='outline outline-1 mt-2 h-40 rounded w-7/12 font-semibold '
+                                    className='outline bg-white outline-1 mt-2 h-40 rounded w-7/12 font-semibold '
                                 ></textarea>
                             </form>
                         </div>
@@ -555,6 +555,11 @@ const EventCreationPage = () => {
                     />
                 )}
             </div>
+            <style jsx>{`
+                input {
+                    background-color: white;
+                }
+            `}</style>
         </>
     );
 };

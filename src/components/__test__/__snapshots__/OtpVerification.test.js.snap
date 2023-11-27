@@ -2,10 +2,11 @@
 
 exports[`OtpInput snapshot 1`] = `
 <div
-  className="otpContainer"
+  className="jsx-3471834882795ad6 otpContainer"
 >
   <input
     autoFocus={true}
+    className="jsx-3471834882795ad6"
     maxLength={1}
     onChange={[Function]}
     onKeyDown={[Function]}

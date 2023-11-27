@@ -158,39 +158,19 @@ const ProfilePage = () => {
         const minLength = 6;
         const containsSpecialCharacter =
             /[!@#$%^&*(),.?": '; = `{}|<>_ ~ \- +/ [\]]/;
-        const isValidLength = confirmPassword.length >= minLength;
-        const hasSpecialCharacter =
-            containsSpecialCharacter.test(confirmPassword);
+
+        const isValidLength = newPassword.length >= minLength;
+        const hasSpecialCharacter = containsSpecialCharacter.test(newPassword);
+
         setIsLengthValid(isValidLength);
         setHasSpecialChars(hasSpecialCharacter);
 
-        const allConditionsMet = isLengthValid && hasSpecialChars;
+        const allConditionsMet = isValidLength && hasSpecialCharacter;
         setIsSignUpDisabled(!allConditionsMet);
     };
 
     const handleChangePassword = async (e) => {
         e.preventDefault();
-
-        const minLength = 6;
-        const containsSpecialCharacter =
-            /[!@#$%^&*(),.?": '; = `{}|<>_ ~ \- +/ [\]]/;
-        const isValidLength = confirmPassword.length >= minLength;
-        const hasSpecialCharacter =
-            containsSpecialCharacter.test(confirmPassword);
-
-        if (!isValidLength || !hasSpecialCharacter) {
-            setShowPopup(true);
-            setModalContent(
-                "Password must be at least 6 characters and contain special characters",
-            );
-            setModalClassName(
-                "alert alert-error fixed bottom-0 left-0 right-0 p-4 text-center w-[400px]",
-            );
-            setTimeout(() => {
-                setShowPopup(false);
-            }, 2000);
-            return;
-        }
 
         const auth = getAuth();
         const user = auth.currentUser;
@@ -355,302 +335,325 @@ const ProfilePage = () => {
         return <Loader />;
     } else {
         return (
-            <div className='pt-5 z-[555] flex min-h-screen flex-col items-center justify-center sm-types '>
-                <h1 className='sm-text font-semibold text-lg md:text-4xl md:mt-5'>
-                    {t("edit:editProfile")}
-                </h1>
-                <div
-                    style={{
-                        position: "absolute",
-                        width: "screen",
-                        height: "screen",
-                    }}
-                >
-                    <MorphingSvg />
-                </div>
-
-                {/* Profile Picture /Change */}
-                <form onSubmit={handleUpdateProfile} className='mt-4 z-10'>
-                    <div className='flex flex-col md:flex-row items-center md:items-start justify-around'>
-                        <div className='flex justify-center items-center lg:h-[35vh] sm:h-[25vh] h-[20vh] w-[40vw] sm:w-[30vw] lg:w-[20vw] rounded-full overflow-hidden'>
-                            <Image
-                                src={
-                                    auth?.currentUser.photoURL !== null
-                                        ? auth?.currentUser.photoURL
-                                        : "/images/icon_default.png"
-                                }
-                                width={300}
-                                height={300}
-                                alt=''
-                                className='h-full z-[20] w-full object-cover rounded-full'
-                            />
-                        </div>
-
-                        {/* Change Picture */}
-                        <div className='flex z-[20] flex-col mt-4 md:flex-row md:ml-10 md:mt-40 '>
-                            <input
-                                type='file'
-                                accept='image/*'
-                                id='profilePictureInput'
-                                style={{ display: "none" }}
-                                onChange={handleUploadProfilePicture}
-                            />
-
-                            {/* Profile pic input */}
-                            <label
-                                htmlFor='profilePictureInput'
-                                className='bg-[#2E7EAA] flex justify-center items-center mt-2 text-center px-2 text-xs text-white shadow-md md:mt-4 md:h-12 cursor-pointer rounded md:text-lg'
-                            >
-                                {t("edit:uploadNew")}
-                            </label>
-
-                            <button
-                                className='librarybtn mt-2 text-center px-2 text-xs outline outline-1 rounded shadow-md md:text-lg md:ml-2'
-                                type='button'
-                                onClick={(e) => handleOpenLibrary(e)}
-                            >
-                                {t("edit:chooseFromLibrary")}
-                            </button>
-
-                            {isLibraryOpen && (
-                                <PicturesLibrary
-                                    isLibraryOpen={isLibraryOpen}
-                                    selectedImage={selectedImage}
-                                    setSelectedImage={setSelectedImage}
-                                    onClose={handleCloseLibrary}
-                                    onHandleSave={handleSaveSelectedImage}
-                                    className='z-1000'
-                                />
-                            )}
-                        </div>
+            <>
+                <div className='pt-5 z-[555] flex min-h-screen flex-col items-center justify-center sm-types '>
+                    <h1 className='sm-text font-semibold text-lg md:text-4xl md:mt-5'>
+                        {t("edit:editProfile")}
+                    </h1>
+                    <div
+                        style={{
+                            position: "absolute",
+                            width: "screen",
+                            height: "screen",
+                        }}
+                    >
+                        <MorphingSvg />
                     </div>
 
-                    {/* Edit Information */}
-                    <div className='flex z-50 flex-col flex-wrap items-center mt-4 md:flex-row md:justify-around md:gap-x-5 px-5'>
-                        <div
-                            className='morphingSVGHidden'
-                            style={{
-                                position: "absolute",
-                                bottom: "140px",
-                                width: "screen",
-                                height: "screen",
-                            }}
-                        >
-                            <MorphingSvg />
-                        </div>
-                        <div className='z-20'>
-                            <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
-                                {t("edit:Name*")}
-                            </h3>
-                            <input
-                                type='text'
-                                placeholder='  Name'
-                                className='outline outline-1 mt-2 lg:w-3/4 rounded md:mt-5'
-                                name='name'
-                                defaultValue={currentUser.Name}
-                                onChange={(e) => setEditedName(e.target.value)}
-                                required
-                            ></input>
-                        </div>
-                        <div className='z-20'>
-                            {" "}
-                            <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
-                                {t("edit:Surname*")}
-                            </h3>
-                            <input
-                                type='text'
-                                placeholder='  Surname'
-                                className='outline outline-1 mt-3 lg:w-3/4 rounded md:mt-5'
-                                name='surname'
-                                defaultValue={currentUser.Surename}
-                                onChange={(e) =>
-                                    setEditedSurname(e.target.value)
-                                }
-                                required
-                            ></input>
-                        </div>
-                        <div className='z-20'>
-                            <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
-                                {t("edit:Email*")}
-                            </h3>
-                            <input
-                                type='email'
-                                placeholder='  Email'
-                                className='outline outline-1 mt-3 lg:w-3/4 rounded md:mt-5'
-                                name='email'
-                                defaultValue={currentUser.email}
-                                onChange={(e) => setEditedEmail(e.target.value)}
-                                required
-                            ></input>
-                        </div>
-
-                        {/*  */}
-                        <div className='z-20'>
-                            <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
-                                {t("edit:Location")}
-                            </h3>
-                            <input
-                                type='text'
-                                placeholder='  Location'
-                                className='outline outline-1 mt-3 lg:w-3/4 rounded md:mt-5'
-                                name='location'
-                                defaultValue={currentUser.Location}
-                                onChange={(e) =>
-                                    setEditedLocation(e.target.value)
-                                }
-                            ></input>
-                        </div>
-                    </div>
-                    {/* Your Interests */}
-                    <h3 className='font-semibold px-5 text-md mt-3 w-70 md:mt-5 md:text-3xl'>
-                        {t("edit:interests")}
-                    </h3>
-                    <div className='grid px-5 grid-container grid-cols-1 gap-8 -ml-15 mt-3 text-center justify-evenly sm:grid-cols-2 sm:gap-4 md:grid-cols-3 text-xs md:w-full md:h-auto md:mt-8 md:text-3xl'>
-                        {EventTypes.map((type, index) => (
-                            <button
-                                key={index}
-                                className={`outline outline-1 h-12 md:h-15 -mx-1 rounded outline-[#2E7EAA] font-semibold text-[#2E7EAA] whitespace-normal text-xs ${
-                                    userInterests.includes(type)
-                                        ? "text-white bg-[#2E7EAA]"
-                                        : ""
-                                }`}
-                                onClick={(e) => handleUpdateInterests(type, e)}
-                            >
-                                {type}
-                            </button>
-                        ))}
-                    </div>
-                    {/* Save Interests Button */}
-                    <div className='mt-4 flex flex-col items-center md:mx-auto'>
-                        <button
-                            type='submit'
-                            className='mt-7 bg-[#2E7EAA]  text-center h-10 w-30  px-4 py-2 text-xs text-white shadow-md md:h-14 md:w-45 md:h-13 md:font-bold md:text-xl '
-                        >
-                            {t("edit:saveChanges")}
-                        </button>
-                    </div>
-                </form>
-                {/* Change Password */}
-                <div className='flex mt-6 justify-center'>
-                    <div className='  md:w-[700px] sm:w-[500px] w-[250px] bg-[#B4CD93] h-[360px] sm:h-[260px] mb-4'>
-                        <h3 className='font-bold mt-5 text-center md:text-2xl'>
-                            {t("edit:changePassword")}
-                        </h3>
-                        <form
-                            onSubmit={handleChangePassword}
-                            className='w-full flex gap-6 flex-col items-center justify-center'
-                        >
-                            <div className='flex items-center sm:flex-row flex-col gap-3 w-full sm:justify-around sm:gap-14 sm:px-10 relative'>
-                                <input
-                                    type={showPassword ? "text" : "password"}
-                                    placeholder={t("edit:currentPassword")}
-                                    value={CurrentPassword}
-                                    onChange={(e) =>
-                                        setCurrentPassword(e.target.value)
+                    {/* Profile Picture /Change */}
+                    <form onSubmit={handleUpdateProfile} className='mt-4 z-10'>
+                        <div className='flex flex-col md:flex-row items-center md:items-start justify-around'>
+                            <div className='flex justify-center items-center lg:h-[35vh] sm:h-[25vh] h-[20vh] w-[40vw] sm:w-[30vw] lg:w-[20vw] rounded-full overflow-hidden'>
+                                <Image
+                                    src={
+                                        auth?.currentUser?.photoURL !== null
+                                            ? auth?.currentUser?.photoURL
+                                            : "/images/icon_default.png"
                                     }
-                                    className='w-[40vw] md:w-[50vw]  sm:w-[30vw] h-8 px-3 rounded md:h-10'
-                                    required
+                                    width={300}
+                                    height={300}
+                                    alt=''
+                                    className='h-full z-[20] w-full object-cover rounded-full'
                                 />
-                                <div
-                                    className='absolute -bottom-1.5 right-1 m-4 cursor-pointer'
-                                    onClick={togglePasswordVisibility}
-                                >
-                                    {showPassword ? <BsEye /> : <BsEyeSlash />}
-                                </div>
+                            </div>
+
+                            {/* Change Picture */}
+                            <div className='flex z-[20] flex-col mt-4 md:flex-row md:ml-10 md:mt-40 '>
                                 <input
-                                    type={showPassword ? "text" : "password"}
-                                    placeholder={t("edit:newPassword")}
-                                    value={confirmPassword}
-                                    onChange={(e) => {
-                                        setConfirmPassword(e.target.value);
-                                        handlePasswordChange(e);
-                                    }}
-                                    className='w-[40vw] md:w-[50vw]  sm:w-[30vw] h-8 px-3 rounded md:h-10'
-                                    required
+                                    type='file'
+                                    accept='image/*'
+                                    id='profilePictureInput'
+                                    style={{ display: "none" }}
+                                    onChange={handleUploadProfilePicture}
                                 />
-                            </div>
-                            <div>
-                                <p
-                                    style={{
-                                        color: hasSpecialChars
-                                            ? "green"
-                                            : "#FB923C",
-                                        display: "flex",
-                                        alignItems: "center",
-                                        margin: "0",
-                                        padding: "0",
 
-                                        fontSize: "0.9rem",
-                                    }}
+                                {/* Profile pic input */}
+                                <label
+                                    htmlFor='profilePictureInput'
+                                    className='bg-[#2E7EAA] flex justify-center items-center mt-2 text-center px-2 text-xs text-white shadow-md md:mt-4 md:h-12 cursor-pointer rounded md:text-lg'
                                 >
-                                    {isLengthValid ? (
-                                        <GrStatusGood size={20} />
-                                    ) : (
-                                        <TiDeleteOutline size={20} />
-                                    )}
-                                    <span
-                                        style={{
-                                            marginLeft: "0.6rem",
-                                            marginRight: "-0.2rem",
-                                        }}
-                                    >
-                                        {t("edit:passwordLengthRequirement")}
-                                    </span>
-                                </p>
+                                    {t("edit:uploadNew")}
+                                </label>
 
-                                <span
-                                    style={{
-                                        color: hasSpecialChars
-                                            ? "green"
-                                            : "#FB923C",
-                                        display: "flex",
-                                        alignItems: "center",
-                                        margin: "0",
-                                        padding: "0",
-                                        fontSize: "0.9rem",
-                                    }}
-                                >
-                                    {hasSpecialChars ? (
-                                        <GrStatusGood size={20} />
-                                    ) : (
-                                        <TiDeleteOutline size={20} />
-                                    )}
-                                    <span
-                                        style={{
-                                            marginLeft: "0.5rem",
-                                            marginRight: "-0.2rem",
-                                        }}
-                                    >
-                                        {t(
-                                            "edit:passwordSpecialCharacterRequirement",
-                                        )}
-                                    </span>
-                                </span>
-                            </div>
-                            <div className='flex sm:flex-row sm:justify-evenly flex-col gap-3 w-[80px] md:w-full sm:w-[180px] mt-0 mb-12'>
                                 <button
-                                    type='submit'
-                                    className='bg-[#2E7EAA] text-center h-8 w-full md:w-32 text-xs text-white rounded shadow-md md:h-10 md:text-lg'
-                                    disabled={isSignUpDisabled}
+                                    className='librarybtn mt-2 text-center px-2 text-xs outline outline-1 rounded shadow-md md:text-lg md:ml-2'
+                                    type='button'
+                                    onClick={(e) => handleOpenLibrary(e)}
                                 >
-                                    {t("edit:submit")}
+                                    {t("edit:chooseFromLibrary")}
                                 </button>
-                                <button className='text-center h-8 w-full bg-white opacity-70 md:w-32 text-xs outline outline-1 rounded shadow-md md:h-10 md:text-lg'>
-                                    {t("edit:cancel")}
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
 
-                {showPopup && (
-                    <Modal
-                        message={modalContent}
-                        onClose={handleSuccess}
-                        className={modalClassName}
-                    />
-                )}
-            </div>
+                                {isLibraryOpen && (
+                                    <PicturesLibrary
+                                        isLibraryOpen={isLibraryOpen}
+                                        selectedImage={selectedImage}
+                                        setSelectedImage={setSelectedImage}
+                                        onClose={handleCloseLibrary}
+                                        onHandleSave={handleSaveSelectedImage}
+                                        className='z-1000'
+                                    />
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Edit Information */}
+                        <div className='flex z-50 flex-col flex-wrap items-center mt-4 md:flex-row md:justify-around md:gap-x-5 px-5'>
+                            <div
+                                className='morphingSVGHidden'
+                                style={{
+                                    position: "absolute",
+                                    bottom: "140px",
+                                    width: "screen",
+                                    height: "screen",
+                                }}
+                            >
+                                <MorphingSvg />
+                            </div>
+                            <div className='z-20'>
+                                <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
+                                    {t("edit:Name*")}
+                                </h3>
+                                <input
+                                    type='text'
+                                    placeholder='  Name'
+                                    className='outline outline-1 mt-2 lg:w-3/4 rounded md:mt-5'
+                                    name='name'
+                                    defaultValue={currentUser.Name}
+                                    onChange={(e) =>
+                                        setEditedName(e.target.value)
+                                    }
+                                    required
+                                ></input>
+                            </div>
+                            <div className='z-20'>
+                                {" "}
+                                <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
+                                    {t("edit:Surname*")}
+                                </h3>
+                                <input
+                                    type='text'
+                                    placeholder='  Surname'
+                                    className='outline outline-1 mt-3 lg:w-3/4 rounded md:mt-5'
+                                    name='surname'
+                                    defaultValue={currentUser.Surename}
+                                    onChange={(e) =>
+                                        setEditedSurname(e.target.value)
+                                    }
+                                    required
+                                ></input>
+                            </div>
+                            <div className='z-20'>
+                                <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
+                                    {t("edit:Email*")}
+                                </h3>
+                                <input
+                                    type='email'
+                                    placeholder='  Email'
+                                    className='outline outline-1 mt-3 lg:w-3/4 rounded md:mt-5'
+                                    name='email'
+                                    defaultValue={currentUser.email}
+                                    onChange={(e) =>
+                                        setEditedEmail(e.target.value)
+                                    }
+                                    required
+                                ></input>
+                            </div>
+
+                            {/*  */}
+                            <div className='z-20'>
+                                <h3 className='font-semibold text-md mt-3 w-70 md:mt-5 md:text-3xl'>
+                                    {t("edit:Location")}
+                                </h3>
+                                <input
+                                    type='text'
+                                    placeholder='  Location'
+                                    className='outline outline-1 mt-3 lg:w-3/4 rounded md:mt-5'
+                                    name='location'
+                                    defaultValue={currentUser.Location}
+                                    onChange={(e) =>
+                                        setEditedLocation(e.target.value)
+                                    }
+                                ></input>
+                            </div>
+                        </div>
+                        {/* Your Interests */}
+                        <h3 className='font-semibold px-5 text-md mt-3 w-70 md:mt-5 md:text-3xl'>
+                            {t("edit:interests")}
+                        </h3>
+                        <div className='grid px-5 grid-container grid-cols-1 gap-8 -ml-15 mt-3 text-center justify-evenly sm:grid-cols-2 sm:gap-4 md:grid-cols-3 text-xs md:w-full md:h-auto md:mt-8 md:text-3xl'>
+                            {EventTypes.map((type, index) => (
+                                <button
+                                    key={index}
+                                    className={`outline outline-1 h-12 md:h-15 -mx-1 rounded outline-[#2E7EAA] font-semibold text-[#2E7EAA] whitespace-normal text-xs ${
+                                        userInterests.includes(type)
+                                            ? "text-white bg-[#2E7EAA]"
+                                            : ""
+                                    }`}
+                                    onClick={(e) =>
+                                        handleUpdateInterests(type, e)
+                                    }
+                                >
+                                    {type}
+                                </button>
+                            ))}
+                        </div>
+                        {/* Save Interests Button */}
+                        <div className='mt-4 flex flex-col items-center md:mx-auto'>
+                            <button
+                                type='submit'
+                                className='mt-7 bg-[#2E7EAA]  text-center h-10 w-30  px-4 py-2 text-xs text-white shadow-md md:h-14 md:w-45 md:h-13 md:font-bold md:text-xl '
+                            >
+                                {t("edit:saveChanges")}
+                            </button>
+                        </div>
+                    </form>
+                    {/* Change Password */}
+                    <div className='flex mt-6 justify-center'>
+                        <div className='  md:w-[700px] sm:w-[500px] w-[250px] bg-[#B4CD93] h-[360px] sm:h-[260px] mb-4'>
+                            <h3 className='font-bold mt-5 text-center md:text-2xl'>
+                                {t("edit:changePassword")}
+                            </h3>
+                            <form
+                                onSubmit={handleChangePassword}
+                                className='w-full flex gap-6 flex-col items-center justify-center'
+                            >
+                                <div className='flex items-center sm:flex-row flex-col gap-3 w-full sm:justify-around sm:gap-14 sm:px-10 relative'>
+                                    <input
+                                        type={
+                                            showPassword ? "text" : "password"
+                                        }
+                                        placeholder={t("edit:currentPassword")}
+                                        value={CurrentPassword}
+                                        onChange={(e) =>
+                                            setCurrentPassword(e.target.value)
+                                        }
+                                        className='w-[40vw] md:w-[50vw]  sm:w-[30vw] h-8 px-3 rounded md:h-10'
+                                        required
+                                    />
+                                    <div
+                                        className='absolute -bottom-1.5 right-1 m-4 cursor-pointer'
+                                        onClick={togglePasswordVisibility}
+                                    >
+                                        {showPassword ? (
+                                            <BsEye />
+                                        ) : (
+                                            <BsEyeSlash />
+                                        )}
+                                    </div>
+                                    <input
+                                        type={
+                                            showPassword ? "text" : "password"
+                                        }
+                                        placeholder={t("edit:newPassword")}
+                                        value={confirmPassword}
+                                        onChange={(e) => {
+                                            setConfirmPassword(e.target.value);
+                                            handlePasswordChange(e);
+                                        }}
+                                        className='w-[40vw] md:w-[50vw]  sm:w-[30vw] h-8 px-3 rounded md:h-10'
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <p
+                                        style={{
+                                            color: hasSpecialChars
+                                                ? "green"
+                                                : "#FB923C",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            margin: "0",
+                                            padding: "0",
+
+                                            fontSize: "0.9rem",
+                                        }}
+                                    >
+                                        {isLengthValid ? (
+                                            <GrStatusGood size={20} />
+                                        ) : (
+                                            <TiDeleteOutline size={20} />
+                                        )}
+                                        <span
+                                            style={{
+                                                marginLeft: "0.6rem",
+                                                marginRight: "-0.2rem",
+                                            }}
+                                        >
+                                            {t(
+                                                "edit:passwordLengthRequirement",
+                                            )}
+                                        </span>
+                                    </p>
+
+                                    <span
+                                        style={{
+                                            color: hasSpecialChars
+                                                ? "green"
+                                                : "#FB923C",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            margin: "0",
+                                            padding: "0",
+                                            fontSize: "0.9rem",
+                                        }}
+                                    >
+                                        {hasSpecialChars ? (
+                                            <GrStatusGood size={20} />
+                                        ) : (
+                                            <TiDeleteOutline size={20} />
+                                        )}
+                                        <span
+                                            style={{
+                                                marginLeft: "0.5rem",
+                                                marginRight: "-0.2rem",
+                                            }}
+                                        >
+                                            {t(
+                                                "edit:passwordSpecialCharacterRequirement",
+                                            )}
+                                        </span>
+                                    </span>
+                                </div>
+                                <div className='flex sm:flex-row sm:justify-evenly flex-col gap-3 w-[80px] md:w-full sm:w-[180px] mt-0 mb-12'>
+                                    <button
+                                        type='submit'
+                                        className='bg-[#2E7EAA] text-center h-8 w-full md:w-32 text-xs text-white rounded shadow-md md:h-10 md:text-lg'
+                                        disabled={isSignUpDisabled}
+                                    >
+                                        {t("edit:submit")}
+                                    </button>
+                                    <button className='text-center h-8 w-full bg-white opacity-70 md:w-32 text-xs outline outline-1 rounded shadow-md md:h-10 md:text-lg'>
+                                        {t("edit:cancel")}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    {showPopup && (
+                        <Modal
+                            message={modalContent}
+                            onClose={handleSuccess}
+                            className={modalClassName}
+                        />
+                    )}
+                </div>
+                <style jsx>{`
+                    input {
+                        background-color: white;
+                    }
+                `}</style>
+            </>
         );
     }
 };
