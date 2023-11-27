@@ -29,9 +29,6 @@ const Chat = () => {
     }, []);
 
     // Send a new message
-    // Send a new message
-    // Send a new message
-    // Send a new message
     const sendMessage = async (e) => {
         e.preventDefault();
 
@@ -58,7 +55,7 @@ const Chat = () => {
             // Filter out messages that are older than 40 seconds
             const validMessages = chatData.messages.filter((message) => {
                 const messageAge = newMessageData.timestamp - message.timestamp;
-                return messageAge <= 40000;
+                return messageAge <= 183000;
             });
 
             // Update the database with the valid messages

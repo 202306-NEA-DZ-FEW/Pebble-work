@@ -63,7 +63,7 @@ const ContactForm = () => {
             to_name: "Pebble Team",
             subject: t("contactForm.subject"), // Translation here
             message: `${t("contactForm.email")}: ${email}\n${t(
-                "contactForm.phone"
+                "contactForm.phone",
             )}: ${phone}\n\n${message}`,
         };
 
@@ -73,7 +73,7 @@ const ContactForm = () => {
                 "service_0fjrhbf",
                 "template_h17hsb1",
                 emailParams,
-                "BYaRB-Pd4x_cssRgf"
+                "BYaRB-Pd4x_cssRgf",
             )
             .then(() => {
                 toast.success(t("contactForm.success"), {

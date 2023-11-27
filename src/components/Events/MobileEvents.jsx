@@ -32,7 +32,7 @@ const EventsPage = () => {
             const types = selectedTypes ? selectedTypes.join(",") : "";
             const dates = selectedDate ? selectedDate.join(",") : "";
             const response = await fetch(
-                `/api/events?type=${types}&location=${inputValue1}&date=${dates}`
+                `/api/events?type=${types}&location=${inputValue1}&date=${dates}`,
             );
             const eventsData = await response.json();
 
@@ -50,21 +50,21 @@ const EventsPage = () => {
             // Apply type filter
             if (filteredTypes.length > 0) {
                 filteredEvents = filteredEvents.filter((event) =>
-                    filteredTypes.includes(event.type)
+                    filteredTypes.includes(event.type),
                 );
             }
 
             // Apply location filter
             if (inputValue1) {
                 filteredEvents = filteredEvents.filter(
-                    (event) => event.location === inputValue1
+                    (event) => event.location === inputValue1,
                 );
             }
 
             // Apply date filter
             if (selectedDate && selectedDate.length > 0) {
                 filteredEvents = filteredEvents?.filter((event) =>
-                    selectedDate.includes(event.date)
+                    selectedDate.includes(event.date),
                 );
             }
 
@@ -89,7 +89,7 @@ const EventsPage = () => {
     };
     const handleDateChange = (dates) => {
         setSelectedDate(
-            dates.map((date) => new Date(date).toISOString().split("T")[0])
+            dates.map((date) => new Date(date).toISOString().split("T")[0]),
         );
     };
     return (
@@ -139,7 +139,7 @@ const EventsPage = () => {
                             <div className='flex justify-center gap-8 text-black'>
                                 {Array.from(
                                     { length: totalPages },
-                                    (_, i) => i + 1
+                                    (_, i) => i + 1,
                                 ).map((pageNumber) => (
                                     <button
                                         key={pageNumber}
@@ -165,7 +165,7 @@ const EventsPage = () => {
                                 />
                             </div>
                         </div>
-                        <div className='h-66 shadow-md'>
+                        <div className='h-66'>
                             <FirestoreLocation
                                 onInputChange={handleLocationInputChange}
                                 resetLocation={resetLocation}

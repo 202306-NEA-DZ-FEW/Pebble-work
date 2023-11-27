@@ -4,10 +4,13 @@ export const usePagination = (initialPage, initialItemsPerPage, items) => {
     const [currentPage, setCurrentPage] = useState(initialPage);
     const [itemsPerPage, setItemsPerPage] = useState(initialItemsPerPage);
 
-    const totalPages = Math.ceil(items.length / itemsPerPage);
+    const totalPages = items ? Math.ceil(items.length / itemsPerPage) : 0;
+
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
+    const currentItems = items
+        ? items.slice(indexOfFirstItem, indexOfLastItem)
+        : [];
 
     return {
         currentPage,

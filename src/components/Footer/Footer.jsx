@@ -26,15 +26,22 @@ const Footer = () => {
                     </Link>
                 </div>
                 <div className='flex flex-col items-center md:flex md:flex-col md:items-center md:gap-5'>
-                    <ul className='flex sm:gap-[80px] gap-10 lg:text-[18px] md:text-[15px] text-[#749D60]'>
+                    <ul className='flex sm:gap-[80px] gap-10 lg:text-[18px] md:text-[15px] text-black'>
                         <li>
-                            <Link href='/events'>{t("footer.events")}</Link>
+                            <Link className='hover:opacity-70' href='/events'>
+                                {t("footer.events")}
+                            </Link>
                         </li>
                         <li>
-                            <Link href='/about'>{t("footer.about")}</Link>
+                            <Link className='hover:opacity-70' href='/about'>
+                                {t("footer.about")}
+                            </Link>
                         </li>
                         <li>
-                            <Link href='/guidelines'>
+                            <Link
+                                className='hover:opacity-70'
+                                href='/guidelines'
+                            >
                                 {t("footer.howItWorks")}
                             </Link>
                         </li>

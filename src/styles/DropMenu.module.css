@@ -1,5 +1,7 @@
 .listItem {
-    animation: wave 3s linear, opacityChange 1s linear;
+    animation:
+        wave 3s linear,
+        opacityChange 1s linear;
 }
 
 @keyframes wave {

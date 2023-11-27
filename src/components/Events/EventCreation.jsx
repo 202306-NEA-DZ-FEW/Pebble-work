@@ -38,7 +38,7 @@ const EventCreation = () => {
                     raindrop.x,
                     raindrop.y,
                     raindrop.size,
-                    raindrop.size
+                    raindrop.size,
                 );
 
                 if (raindrop.y > canvas.height) {

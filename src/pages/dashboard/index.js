@@ -2,12 +2,13 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React, { useEffect, useState } from "react";
 import { IoIosGitCompare } from "react-icons/io";
 import { IoIosGitBranch } from "react-icons/io";
 import { IoCreateOutline } from "react-icons/io5";
-import { useTranslation } from "next-i18next";
+
 import styles from "@/styles/Events.module.css";
 
 import DesktopCard from "@/components/Events/DesktopCard";
@@ -87,7 +88,7 @@ const Dashboarduser = () => {
 
         const eventsData = await Promise.all(eventIdsPromises);
         const validEventsData = eventsData.filter(
-            (eventData) => eventData !== null
+            (eventData) => eventData !== null,
         );
         return validEventsData;
     };
@@ -103,7 +104,7 @@ const Dashboarduser = () => {
 
             const userInterests = User?.interests; // User's interests
             const eventsMatchingInterests = eventsList?.filter((event) =>
-                userInterests?.includes(event.type)
+                userInterests?.includes(event.type),
             );
 
             setEventsMatchingInterests(eventsMatchingInterests);
@@ -130,22 +131,20 @@ const Dashboarduser = () => {
                         const userCreatedEvents =
                             userDoc.data().eventsCreated || [];
                         const eventIds = userCreatedEvents.map(
-                            (event) => event.eventId
+                            (event) => event.eventId,
                         );
-                        const createdEventsData = await fetchEventData(
-                            eventIds
-                        );
+                        const createdEventsData =
+                            await fetchEventData(eventIds);
                         setCreatedEvent(createdEventsData);
 
                         // events the user has joined
                         const userJoinedEvents =
                             userDoc.data().eventsJoined || [];
                         const eventIdsJoined = userJoinedEvents.map(
-                            (event) => event.eventId
+                            (event) => event.eventId,
                         );
-                        const joinedEventsData = await fetchEventData(
-                            eventIdsJoined
-                        );
+                        const joinedEventsData =
+                            await fetchEventData(eventIdsJoined);
                         setJoinedEvents(joinedEventsData);
                     } else {
                         return;

@@ -18,7 +18,9 @@ const SmallCard = ({ eventId, title, type, image }) => {
             }}
             className='flex flex-col justify-center text-black items-center'
         >
-            <h1 className='font-[600]'>{title}</h1>
+            <h1 className='flex items-center text-center font-[600] pl-3 h-[50px]'>
+                {title}
+            </h1>
             {!imageLoaded && <CircularProgress />}
             <img
                 src={image}
