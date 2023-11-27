@@ -126,6 +126,7 @@ const SignUpPage = () => {
                 interests: [],
                 eventsCreated: [],
                 eventsJoined: [],
+                Location: "",
             });
 
             await updateProfile(user, { displayName: Name });
@@ -166,6 +167,7 @@ const SignUpPage = () => {
                 eventsCreated: [],
                 eventsJoined: [],
                 imageURL: image,
+                Location: "",
             };
 
             // Get the user UID
@@ -217,6 +219,7 @@ const SignUpPage = () => {
                 eventsCreated: [],
                 eventsJoined: [],
                 imageURL: image,
+                Location: "",
             };
 
             const userUID = result.user.uid;

@@ -94,6 +94,7 @@ const SignInPage = () => {
                 interests: [],
                 eventsCreated: [],
                 eventsJoined: [],
+                Location: "",
             };
 
             // Get the user UID
