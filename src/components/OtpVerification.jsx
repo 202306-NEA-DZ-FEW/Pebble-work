@@ -34,20 +34,29 @@ const OtpInput = ({ onKeyDown, onChange, length }) => {
     };
 
     return (
-        <div className={styles.otpContainer} onKeyDown={onKeyDown}>
-            {inputValues.map((inputValue, index) => (
-                <input
-                    key={index}
-                    type='text'
-                    value={inputValue}
-                    onChange={(e) => handleInputChange(index, e.target.value)}
-                    onKeyDown={(e) => handleKeyDown(e, index)}
-                    maxLength={1}
-                    autoFocus={index === 0}
-                    ref={(ref) => (inputRefs.current[index] = ref)}
-                />
-            ))}
-        </div>
+        <>
+            <div className={styles.otpContainer} onKeyDown={onKeyDown}>
+                {inputValues.map((inputValue, index) => (
+                    <input
+                        key={index}
+                        type='text'
+                        value={inputValue}
+                        onChange={(e) =>
+                            handleInputChange(index, e.target.value)
+                        }
+                        onKeyDown={(e) => handleKeyDown(e, index)}
+                        maxLength={1}
+                        autoFocus={index === 0}
+                        ref={(ref) => (inputRefs.current[index] = ref)}
+                    />
+                ))}
+            </div>
+            <style jsx>{`
+                input {
+                    background-color: white;
+                }
+            `}</style>
+        </>
     );
 };
 

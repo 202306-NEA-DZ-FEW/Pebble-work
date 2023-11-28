@@ -44,7 +44,11 @@ const EventCreationPage = () => {
     const [img, setImg] = useState("");
 
     const addEvent = async (input) => {
-        const docRef = await addDoc(formCollectionRef, input);
+        const newInput = {
+            ...input,
+            organizer: auth?.currentUser?.uid,
+        };
+        const docRef = await addDoc(formCollectionRef, newInput);
 
         return docRef.id;
     };
@@ -433,7 +437,7 @@ const EventCreationPage = () => {
                                     placeholder={t(
                                         "eventCreation:writeAtLeast100CharactersPlaceholder",
                                     )}
-                                    className='outline outline-1 mt-2 h-40 rounded w-7/12 font-semibold '
+                                    className='outline bg-white outline-1 mt-2 h-40 rounded w-7/12 font-semibold '
                                 ></textarea>
                             </form>
                         </div>
@@ -504,7 +508,7 @@ const EventCreationPage = () => {
                     <EventCreation />
                 )}
                 <dialog id='confirmcreate_modal' className='modal'>
-                    <div className='modal-box'>
+                    <div className='modal-box bg-white'>
                         <h3 className='font-bold text-lg text-[#2E7EAA]'>
                             {t("eventCreation:confirmation")}
                         </h3>
@@ -555,6 +559,11 @@ const EventCreationPage = () => {
                     />
                 )}
             </div>
+            <style jsx>{`
+                input {
+                    background-color: white;
+                }
+            `}</style>
         </>
     );
 };

@@ -320,6 +320,11 @@ function EditEvent({ event, organizer }) {
                     className={modalClassName}
                 />
             )}
+            <style jsx>{`
+                input {
+                    background-color: white;
+                }
+            `}</style>
         </>
     );
 }

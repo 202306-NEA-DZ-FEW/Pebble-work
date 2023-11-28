@@ -94,6 +94,7 @@ const SignInPage = () => {
                 interests: [],
                 eventsCreated: [],
                 eventsJoined: [],
+                Location: "",
             };
 
             // Get the user UID
@@ -235,7 +236,7 @@ const SignInPage = () => {
                                         {t("signin:signInWith")}
                                     </label>
                                     <input
-                                        className='w-full px-3 py-2 border rounded'
+                                        className='w-full px-3 bg-white py-2 border rounded'
                                         type='email'
                                         id='email'
                                         name='email'
@@ -259,7 +260,7 @@ const SignInPage = () => {
                                         {t("signin:emailLabel")}
                                     </label>
                                     <input
-                                        className='w-full px-3 py-2 border rounded'
+                                        className='w-full px-3 bg-white py-2 border rounded'
                                         type='email'
                                         id='email'
                                         name='email'
@@ -284,7 +285,7 @@ const SignInPage = () => {
                                     {t("signin:passwordLabel")}
                                 </label>
                                 <input
-                                    className='w-full px-3 py-2 border rounded'
+                                    className='w-full px-3 bg-white py-2 border rounded'
                                     type={showPassword ? "text" : "password"}
                                     id='password'
                                     name='password'
