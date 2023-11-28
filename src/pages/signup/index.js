@@ -279,7 +279,7 @@ const SignUpPage = () => {
                     <form onSubmit={handleSignup}>
                         <div className='mb-4'>
                             <input
-                                className='w-full px-3 py-2 border rounded'
+                                className='w-full px-3 bg-white py-2 border rounded'
                                 type='text'
                                 id='text'
                                 name='text'
@@ -290,7 +290,7 @@ const SignUpPage = () => {
                                 onChange={(e) => setName(e.target.value)}
                             />
                             <input
-                                className='w-full px-3 py-2 border rounded ml-4'
+                                className='w-full px-3 bg-white py-2 border rounded ml-4'
                                 type='text'
                                 id='text'
                                 name='text'
@@ -303,7 +303,7 @@ const SignUpPage = () => {
                         </div>
                         <div className='mb-4'>
                             <input
-                                className={`w-full px-3 py-2 border rounded ${
+                                className={`w-full px-3 bg-white py-2 border rounded ${
                                     formSubmitted ? "border-red-500" : ""
                                 }`}
                                 type='email'
@@ -318,7 +318,7 @@ const SignUpPage = () => {
                         </div>
                         <div className='mb-4 relative'>
                             <input
-                                className='w-full px-3 py-2 border rounded'
+                                className='w-full px-3 bg-white py-2 border rounded'
                                 type={showPassword ? "text" : "password"}
                                 id='password'
                                 name='password'

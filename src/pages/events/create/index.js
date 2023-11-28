@@ -44,7 +44,11 @@ const EventCreationPage = () => {
     const [img, setImg] = useState("");
 
     const addEvent = async (input) => {
-        const docRef = await addDoc(formCollectionRef, input);
+        const newInput = {
+            ...input,
+            organizer: auth?.currentUser?.uid,
+        };
+        const docRef = await addDoc(formCollectionRef, newInput);
 
         return docRef.id;
     };

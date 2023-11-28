@@ -6,7 +6,7 @@ const BtnGoogle = ({ onClick }) => {
     const { t } = useTranslation();
     return (
         <button
-            className=' border px-4 py-2 mb-2 rounded-md shadow-md flex items-center justify-center'
+            className=' border px-4 py-2 mb-2 rounded-md shadow-md hover:opacity-80 flex items-center justify-center'
             style={{ height: "40px", width: "300px" }}
             onClick={onClick}
         >
