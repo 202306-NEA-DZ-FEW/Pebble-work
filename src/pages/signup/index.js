@@ -129,7 +129,7 @@ const SignUpPage = () => {
                 Location: "",
             });
 
-            await updateProfile(user, { displayName: Name });
+            await updateProfile(user, { displayName: Name + Surename });
 
             setShowPopup(true);
             setModalContent("Congrats! You signed in/up successfully.");
