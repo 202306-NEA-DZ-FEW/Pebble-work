@@ -508,7 +508,7 @@ const EventCreationPage = () => {
                     <EventCreation />
                 )}
                 <dialog id='confirmcreate_modal' className='modal'>
-                    <div className='modal-box'>
+                    <div className='modal-box bg-white'>
                         <h3 className='font-bold text-lg text-[#2E7EAA]'>
                             {t("eventCreation:confirmation")}
                         </h3>
